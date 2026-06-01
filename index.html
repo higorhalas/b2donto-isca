@@ -232,11 +232,11 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
    LOGO RAIO-X 360 — marca decorativa
    ============================================================ */
 .logo-raiox{
-  display: flex; flex-direction: column; align-items: center; gap: 18px;
-  margin-bottom: 36px; position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+  margin-bottom: 48px; position: relative;
   filter: drop-shadow(0 0 24px rgba(0,225,195,.25));
 }
-.logo-raiox .mark{ width: 100px; height: 100px; position: relative }
+.logo-raiox .mark{ width: 116px; height: 116px; position: relative }
 .logo-raiox .mark svg{ width: 100%; height: 100%; display: block }
 .logo-raiox .mark::after{
   content:""; position:absolute; inset:0; border-radius:50%;
@@ -272,9 +272,9 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
   background: linear-gradient(90deg, transparent, rgba(0,225,195,.5), transparent);
 }
 
-.qintro h1{font-size:clamp(40px, 6vw, 72px); font-weight:800; letter-spacing:-.03em; line-height:1.02; margin-bottom:32px}
-.qintro p{font-size:clamp(20px, 2vw, 24px); color:var(--off-white); max-width:640px; margin-bottom:52px; line-height:1.5; font-weight:400}
-.qintro p b{color:#fff; font-weight:600; background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.qintro h1{font-size:clamp(40px, 6vw, 72px); font-weight:800; letter-spacing:-.03em; line-height:1.04; margin-bottom:36px}
+.qintro p{font-size:clamp(22px, 2.3vw, 28px); color:var(--off-white); max-width:680px; margin-bottom:60px; line-height:1.5; font-weight:400}
+.qintro p b{font-weight:700; background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
 .qintro .meta{display:flex; gap:30px; margin-bottom:48px; font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--cool-grey); text-transform:uppercase}
 .qintro .meta b{display:block; color:var(--white); font-family:var(--font); font-size:18px; font-weight:700; margin-top:4px; letter-spacing:-.01em}
 
@@ -306,11 +306,11 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
   .qlabel{margin-bottom:10px}
 
   /* intro compacta pro botão aparecer sem scroll */
-  .logo-raiox{margin-bottom:18px; gap:10px}
-  .logo-raiox .mark{width:56px; height:56px}
-  .logo-raiox .name{font-size:28px}
-  .qintro h1{font-size:clamp(26px, 7vw, 32px); margin-bottom:20px}
-  .qintro p{font-size:17px; margin-bottom:30px; line-height:1.5}
+  .logo-raiox{margin-bottom:24px; gap:12px}
+  .logo-raiox .mark{width:60px; height:60px}
+  .logo-raiox .name{font-size:30px}
+  .qintro h1{font-size:clamp(26px, 7vw, 32px); margin-bottom:22px}
+  .qintro p{font-size:19px; margin-bottom:34px; line-height:1.5}
 }
 </style>
 </head>
@@ -383,7 +383,7 @@ const QUESTIONS = [
   // INTRO
   { id:'intro', type:'intro', section:'Boas-vindas',
     title:'Um diagnóstico completo da sua <span class="grad-text">estrutura digital e comercial</span>',
-    body:'Receba um <b>plano de ação personalizado</b> com checklist para aplicar e acelerar seus resultados.'
+    body:'Receba um <b>plano de ação</b> personalizado com checklist para aplicar e acelerar seus resultados.'
   },
 
   // SEÇÃO 1
