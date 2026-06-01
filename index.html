@@ -292,10 +292,17 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
 .qcard.invalid .qerror{opacity:1}
 
 @media (max-width:768px){
-  .stage{padding:90px 20px 60px}
-  .qcard{padding:90px 20px 60px}
-  .qnav{margin-top:30px}
+  .stage{padding:0}
+  .qcard{
+    padding:80px 20px 110px;
+    justify-content:flex-start;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .qnav{margin-top:28px}
   .qopt{padding:14px 16px; font-size:14px}
+  .qhint{margin-bottom:24px}
+  .qlabel{margin-bottom:10px}
 }
 </style>
 </head>
@@ -729,8 +736,7 @@ stage.addEventListener('click', (e) => {
   if(opt){
     document.querySelectorAll('.qopt').forEach(o => o.classList.remove('selected'));
     opt.classList.add('selected');
-    // auto-advance para radio (delay pra ver a seleção)
-    setTimeout(() => next(), 350);
+    // sem auto-advance — usuário precisa clicar em OK ou Enter pra avançar
   }
 });
 
