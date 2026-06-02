@@ -742,13 +742,13 @@ footer{text-align:center; color:var(--dim-grey); font-size:11px; padding:30px 0 
 .fcard.ok{background:linear-gradient(180deg,rgba(0,225,195,.12),rgba(0,225,195,.025)); border-color:rgba(0,225,195,.24)}
 .fcard .ftop{align-items:flex-start}
 /* triângulo de alerta com degradê + brilho */
-.fcard.warn .tag{position:relative; width:34px; height:30px; font-size:0; flex:0 0 auto}
+.fcard.warn .tag{position:relative; width:34px; height:30px; font-size:0; flex:0 0 auto; border:0; padding:0; background:none; border-radius:0}
 .fcard.warn .tag::before{content:""; position:absolute; inset:0; clip-path:polygon(50% 2%,100% 100%,0 100%);
   background:linear-gradient(135deg,#FFD36B,#FF7090 65%,#FF4E79); filter:drop-shadow(0 0 9px rgba(255,112,144,.8))}
 .fcard.warn .tag::after{content:"!"; position:absolute; left:0; right:0; bottom:3px; text-align:center;
   color:#4a1b0c; font-weight:900; font-size:14px}
 /* check destacado */
-.fcard.ok .tag{position:relative; width:30px; height:30px; font-size:0; flex:0 0 auto}
+.fcard.ok .tag{position:relative; width:30px; height:30px; font-size:0; flex:0 0 auto; border:0; padding:0; background:none; border-radius:0}
 .fcard.ok .tag::before{content:"✓"; position:absolute; inset:0; display:grid; place-items:center; border-radius:50%;
   background:linear-gradient(135deg,#00E1C3,#4A6CF7); color:#04342c; font-size:16px; font-weight:900;
   filter:drop-shadow(0 0 9px rgba(0,225,195,.75))}
@@ -1670,7 +1670,7 @@ footer{text-align:center; color:var(--dim-grey); font-size:11px; padding:30px 0 
   opacity:0; transform:scale(.72);
   transition: opacity .55s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1);
 }
-.case.in .big-stat .value{
+.case.num-in .big-stat .value{
   animation: value-punch 1.3s cubic-bezier(.22,1.2,.36,1) .35s forwards;
 }
 @keyframes value-punch{
@@ -3654,6 +3654,22 @@ document.querySelectorAll('#seg1,#seg2,#seg3').forEach(c=>c.style.transition='st
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
   updateAll();
+
+  /* Punch do número: dispara só quando o NÚMERO em si está na tela
+     (não o card inteiro). No mobile o card é alto e a foto entra antes
+     do número, então o gatilho fica no .big-stat .value, não no .case.
+     Re-dispara toda vez que o número reentra na viewport. */
+  const numObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      const card = e.target.closest('.case');
+      if(!card) return;
+      card.classList.toggle('num-in', e.isIntersecting);
+    });
+  }, { threshold: 0.6 });
+  cards.forEach(card => {
+    const num = card.querySelector('.big-stat .value');
+    if(num) numObserver.observe(num);
+  });
 })();
 </script>
 </body>
