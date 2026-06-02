@@ -392,9 +392,11 @@ h2.title{font-size:27px; font-weight:700; line-height:1.15; letter-spacing:-.02e
   animation: muitoCriticoPulse 2s ease-in-out infinite;
 }
 .pill.muito-critico::before{
-  content:"⚠"; display:inline-block;
-  margin-right:6px; vertical-align:-1px;
-  font-size:11px; font-weight:900; line-height:1;
+  content:""; display:inline-block;
+  width:12px; height:12px; margin-right:6px; vertical-align:-2px;
+  background-color:var(--danger);
+  -webkit-mask:url("data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill-rule='evenodd'%20d='M12%201.8L22.6%2020.6A1.7%201.7%200%200%201%2021.1%2023.2L2.9%2023.2A1.7%201.7%200%200%201%201.4%2020.6Z%20M11%208h2v6h-2z%20M11%2016h2v2.2h-2z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill-rule='evenodd'%20d='M12%201.8L22.6%2020.6A1.7%201.7%200%200%201%2021.1%2023.2L2.9%2023.2A1.7%201.7%200%200%201%201.4%2020.6Z%20M11%208h2v6h-2z%20M11%2016h2v2.2h-2z'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 @keyframes muitoCriticoPulse{
   0%,100%{ box-shadow: 0 0 14px rgba(255,112,144,.35); }
@@ -3192,9 +3194,6 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 
 </div>
 
-<!-- sticky CTA -->
-<div class="sticky" id="sticky"><a class="btn" href="https://wa.me/5500000000000?text=QUERO">Quero Acelerar minhas vendas com a B2Donto</a></div>
-
 <script>
 // reveal on scroll
 const io = new IntersectionObserver((entries)=>{
@@ -3277,12 +3276,6 @@ const dEl=document.querySelector('.donut'); if(dEl) dio.observe(dEl);
 // set initial offsets
 document.querySelectorAll('#seg1,#seg2,#seg3').forEach(c=>c.style.transition='stroke-dasharray 1.2s cubic-bezier(.2,.7,.2,1)');
 
-// sticky CTA appears after hero
-const sticky=document.getElementById('sticky');
-const hero=document.querySelector('.hero');
-new IntersectionObserver((es)=>{
-  es.forEach(e=>{ sticky.classList.toggle('show', !e.isIntersecting); });
-},{threshold:0}).observe(hero);
 
 // ============== CASE MEDIA TOGGLES (botão expand inline) ==============
 (function caseMediaButtons(){
