@@ -1,0 +1,11 @@
+# Vídeos de depoimento — formato: slug=URL
+# Cole as URLs do YouTube ou Vimeo (link público ou unlisted)
+# Pode ser link "watch" normal (https://youtube.com/watch?v=XXX) ou já o embed
+
+thiago=
+thaina=
+lessa=
+kissila=
+marcelo=
+pedrocaio=
+douglas=
