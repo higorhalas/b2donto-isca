@@ -2917,7 +2917,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
         <div class="pilar-viz-col">
           <div class="pilar-viz-box r">
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <svg viewBox="0 0 620 540" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 -50 620 590" xmlns="http://www.w3.org/2000/svg">
 
               <!-- CÍRCULO MAIOR — Aumento da Base (purple, aparece POR ÚLTIMO) -->
               <g class="svg-seq-c">
@@ -2953,15 +2953,15 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
                 <polygon points="142,238 156,231 156,245" fill="#4A6CF7" class="svg-label-fade s2" style="filter:drop-shadow(0 0 8px rgba(74,108,247,.9))"/>
               </g>
 
-              <!-- ========== LABEL 1 — Aumento da Base (TOPO-DIREITA, encostando no topo) ========== -->
+              <!-- ========== LABEL 1 — Aumento da Base (ULTRA topo, usa espaço negativo do viewBox) ========== -->
               <g class="svg-label-fade s3">
-                <text x="610" y="22" text-anchor="end" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="36" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Aumento da Base</text>
-                <line x1="320" y1="36" x2="610" y2="36" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="610" y="60" text-anchor="end" fill="rgba(216,123,241,.85)" font-family="JetBrains Mono" font-weight="700" font-size="14" letter-spacing="2.5">PÚBLICO FRIO</text>
+                <text x="610" y="-12" text-anchor="end" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="36" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Aumento da Base</text>
+                <line x1="320" y1="2" x2="610" y2="2" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
+                <text x="610" y="26" text-anchor="end" fill="rgba(216,123,241,.85)" font-family="JetBrains Mono" font-weight="700" font-size="14" letter-spacing="2.5">PÚBLICO FRIO</text>
               </g>
-              <!-- Leader Aumento da Base → borda direita do MAIOR -->
+              <!-- Leader Aumento da Base → borda direita do MAIOR (path bem mais comprido) -->
               <g>
-                <path d="M 590 72 L 590 160 L 565 160" fill="none" stroke="#D87BF1" stroke-width="2.5" stroke-dasharray="113" stroke-dashoffset="113" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s3" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.6))"/>
+                <path d="M 590 40 L 590 160 L 565 160" fill="none" stroke="#D87BF1" stroke-width="2.5" stroke-dasharray="145" stroke-dashoffset="145" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s3" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.6))"/>
                 <polygon points="571,160 558,153 558,167" fill="#D87BF1" class="svg-label-fade s3" style="filter:drop-shadow(0 0 8px rgba(216,123,241,.9))"/>
               </g>
             </svg>
@@ -2997,28 +2997,66 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
         <div class="pilar-viz-col">
           <div class="pilar-viz-box r">
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 -50 600 560" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="pV3a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0F1A4F"/><stop offset="1" stop-color="#1A2659"/></linearGradient>
-                <linearGradient id="pV3b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset="1" stop-color="#3DDBC0"/></linearGradient>
-                <linearGradient id="pV3c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A2659"/><stop offset="1" stop-color="#0F1A4F"/></linearGradient>
+                <linearGradient id="pV3ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
+                <filter id="pV3glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
               </defs>
-              <g class="anim-fade d1">
-                <path d="M 160 160 L 160 50 A 110 110 0 0 1 264.5 124 Z" fill="url(#pV3b)" stroke="#0F1A4F" stroke-width="2"/>
-                <path d="M 160 160 L 264.5 124 A 110 110 0 0 1 224.7 254 Z" fill="url(#pV3c)" stroke="#0F1A4F" stroke-width="2"/>
-                <path d="M 160 160 L 224.7 254 A 110 110 0 0 1 95.3 254 Z" fill="url(#pV3b)" stroke="#0F1A4F" stroke-width="2"/>
-                <path d="M 160 160 L 95.3 254 A 110 110 0 0 1 55.5 124 Z" fill="url(#pV3c)" stroke="#0F1A4F" stroke-width="2"/>
-                <path d="M 160 160 L 55.5 124 A 110 110 0 0 1 160 50 Z" fill="url(#pV3a)" stroke="#0F1A4F" stroke-width="2"/>
+
+              <!-- Glow central -->
+              <circle cx="300" cy="290" r="80" fill="rgba(0,225,195,.16)" filter="url(#pV3glow)" class="svg-breathe"/>
+
+              <!-- Trilha pontilhada do flywheel -->
+              <circle cx="300" cy="290" r="178" fill="none" stroke="rgba(74,108,247,.18)" stroke-width="1" stroke-dasharray="2 7" class="anim-fade d1"/>
+
+              <!-- Anel do flywheel (desenha conforme entra) -->
+              <circle cx="300" cy="290" r="150" fill="none" stroke="url(#pV3ring)" stroke-width="3" stroke-linecap="round" stroke-dasharray="942" stroke-dashoffset="942" class="anim-stroke" style="filter:drop-shadow(0 0 6px rgba(0,225,195,.35))"/>
+
+              <!-- 5 nós numerados — roteiro de 5 etapas (entram em sequência + pulse contínuo) -->
+              <g class="anim-fade d3 svg-pulse-a"><circle cx="300" cy="140" r="20" fill="rgba(5,9,34,.96)" stroke="#00E1C3" stroke-width="2"/><text x="300" y="146" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">1</text></g>
+              <g class="anim-fade d4 svg-pulse-b"><circle cx="442.7" cy="243.6" r="20" fill="rgba(5,9,34,.96)" stroke="#3D9BE6" stroke-width="2"/><text x="442.7" y="249.6" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">2</text></g>
+              <g class="anim-fade d5 svg-pulse-c"><circle cx="388.2" cy="411.4" r="20" fill="rgba(5,9,34,.96)" stroke="#4A6CF7" stroke-width="2"/><text x="388.2" y="417.4" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">3</text></g>
+              <g class="anim-fade d6 svg-pulse-a"><circle cx="211.8" cy="411.4" r="20" fill="rgba(5,9,34,.96)" stroke="#7B5BE0" stroke-width="2"/><text x="211.8" y="417.4" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">4</text></g>
+              <g class="anim-fade d7 svg-pulse-b"><circle cx="157.3" cy="243.6" r="20" fill="rgba(5,9,34,.96)" stroke="#A713B9" stroke-width="2"/><text x="157.3" y="249.6" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">5</text></g>
+
+              <!-- Núcleo Maia -->
+              <circle cx="300" cy="290" r="62" fill="rgba(8,14,46,.97)" stroke="#00E1C3" stroke-width="2.2" class="anim-fade d2" style="filter:drop-shadow(0 0 16px rgba(0,225,195,.45))"/>
+              <g class="anim-fade d2">
+                <text x="300" y="286" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="30" letter-spacing="-.02em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 18px rgba(0,225,195,.6))">Maia</text>
+                <text x="300" y="310" text-anchor="middle" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="12" letter-spacing="2.5">ATENDE 24/7</text>
               </g>
-              <circle cx="160" cy="160" r="40" fill="#fff" class="anim-fade d2"/>
-              <text x="160" y="163" text-anchor="middle" fill="#050922" font-family="Sora" font-weight="800" font-size="13" letter-spacing="-.5" class="anim-fade d2">MAIA</text>
-              <text x="160" y="178" text-anchor="middle" fill="#050922" font-family="JetBrains Mono" font-size="7" letter-spacing="1.5" class="anim-fade d2">24/7</text>
-              <g font-family="Sora" font-weight="800" font-size="13" fill="#fff">
-                <g class="anim-fade d3"><circle cx="200" cy="80" r="11" fill="#fff"/><text x="200" y="85" text-anchor="middle" fill="#0F1A4F">1</text></g>
-                <g class="anim-fade d4"><circle cx="258" cy="178" r="11" fill="#fff"/><text x="258" y="183" text-anchor="middle" fill="#0F1A4F">2</text></g>
-                <g class="anim-fade d5"><circle cx="195" cy="254" r="11" fill="#fff"/><text x="195" y="259" text-anchor="middle" fill="#0F1A4F">3</text></g>
-                <g class="anim-fade d6"><circle cx="115" cy="245" r="11" fill="#fff"/><text x="115" y="250" text-anchor="middle" fill="#0F1A4F">4</text></g>
-                <g class="anim-fade d7"><circle cx="70" cy="155" r="11" fill="#fff"/><text x="70" y="160" text-anchor="middle" fill="#0F1A4F">5</text></g>
+
+              <!-- LABEL 1 — 4 minutos (cyan, topo-esquerda) → nó 1 (topo) -->
+              <g class="svg-label-fade s1">
+                <text x="14" y="8" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 20px rgba(0,225,195,.6))">4 minutos</text>
+                <line x1="14" y1="22" x2="210" y2="22" stroke="#00E1C3" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
+                <text x="14" y="46" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">TEMPO DE RESPOSTA</text>
+              </g>
+              <g>
+                <path d="M 95 58 L 95 140 L 278 140" fill="none" stroke="#00E1C3" stroke-width="2.5" stroke-dasharray="280" stroke-dashoffset="280" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s1" style="filter:drop-shadow(0 0 6px rgba(0,225,195,.6))"/>
+                <polygon points="286,140 278,135 278,145" fill="#00E1C3" class="svg-label-fade s1" style="filter:drop-shadow(0 0 8px rgba(0,225,195,.9))"/>
+              </g>
+
+              <!-- LABEL 2 — Roteiro (blue, direita) → nó 2 -->
+              <g class="svg-label-fade s2">
+                <text x="586" y="150" text-anchor="end" fill="#4A6CF7" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(74,108,247,.4)) drop-shadow(0 0 22px rgba(74,108,247,.7))">Roteiro</text>
+                <line x1="404" y1="164" x2="586" y2="164" stroke="#4A6CF7" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
+                <text x="586" y="188" text-anchor="end" fill="rgba(74,108,247,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">+300 CLÍNICAS</text>
+              </g>
+              <g>
+                <path d="M 540 200 L 540 244 L 470 244" fill="none" stroke="#4A6CF7" stroke-width="2.5" stroke-dasharray="125" stroke-dashoffset="125" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s2" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.6))"/>
+                <polygon points="462,244 470,239 470,249" fill="#4A6CF7" class="svg-label-fade s2" style="filter:drop-shadow(0 0 8px rgba(74,108,247,.9))"/>
+              </g>
+
+              <!-- LABEL 3 — Follow-up (purple, meio-esquerda) → nó 5 -->
+              <g class="svg-label-fade s3">
+                <text x="14" y="160" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Follow-up</text>
+                <line x1="14" y1="174" x2="220" y2="174" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
+                <text x="14" y="198" fill="rgba(216,123,241,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">5 TOQUES CADENCIADOS</text>
+              </g>
+              <g>
+                <path d="M 95 210 L 95 244 L 132 244" fill="none" stroke="#D87BF1" stroke-width="2.5" stroke-dasharray="80" stroke-dashoffset="80" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s3" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.6))"/>
+                <polygon points="140,244 132,239 132,249" fill="#D87BF1" class="svg-label-fade s3" style="filter:drop-shadow(0 0 8px rgba(216,123,241,.9))"/>
               </g>
             </svg>
           </div>
@@ -3053,46 +3091,87 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
         <div class="pilar-viz-col">
           <div class="pilar-viz-box r">
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 -50 600 560" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="pV4grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
-                <filter id="pV4glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+                <linearGradient id="pV4ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
+                <filter id="pV4glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
               </defs>
-              <ellipse cx="160" cy="140" rx="125" ry="100" fill="none" stroke="rgba(0,225,195,.18)" stroke-width="1" stroke-dasharray="2 4" class="anim-fade d1"/>
-              <ellipse cx="160" cy="140" rx="95" ry="70" fill="none" stroke="rgba(74,108,247,.20)" stroke-width="1" stroke-dasharray="2 4" class="anim-fade d2"/>
-              <g fill="none" stroke="url(#pV4grad)" stroke-width="1.8" stroke-linecap="round" class="anim-stroke">
-                <path d="M 160 40 A 125 100 0 0 1 285 140" stroke-dasharray="220" stroke-dashoffset="220"/>
-                <path d="M 285 140 A 125 100 0 0 1 160 240" stroke-dasharray="220" stroke-dashoffset="220"/>
-                <path d="M 160 240 A 125 100 0 0 1 35 140" stroke-dasharray="220" stroke-dashoffset="220"/>
-              </g>
-              <g fill="url(#pV4grad)" class="anim-fade d4">
-                <polygon points="280,134 290,142 282,150"/>
-                <polygon points="166,236 158,244 154,234"/>
-                <polygon points="40,144 32,138 38,128"/>
-              </g>
+
+              <!-- Glow central -->
+              <ellipse cx="300" cy="280" rx="74" ry="64" fill="rgba(0,225,195,.14)" filter="url(#pV4glow)" class="svg-breathe"/>
+
+              <!-- Órbita guia pontilhada -->
+              <ellipse cx="300" cy="280" rx="200" ry="150" fill="none" stroke="rgba(74,108,247,.16)" stroke-width="1" stroke-dasharray="2 7" class="anim-fade d1"/>
+
+              <!-- Órbita ativa de retomada (desenha conforme entra) -->
+              <path d="M 100 280 A 200 150 0 0 1 500 280 A 200 150 0 0 1 100 280" fill="none" stroke="url(#pV4ring)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1200" stroke-dashoffset="1200" class="anim-stroke" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.35))"/>
+
+              <!-- Setas de fluxo — sentido horário (ciclo girando) -->
+              <polygon points="479.3,212.9 466.0,205.5 475.5,198.2" fill="#3DDBC0" class="anim-fade d4" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.8))"/>
+              <polygon points="290,430 304,424 304,436" fill="#4A6CF7" class="anim-fade d5" style="filter:drop-shadow(0 0 7px rgba(74,108,247,.8))"/>
+              <polygon points="132.9,197.1 129.1,211.8 119.6,204.5" fill="#A713B9" class="anim-fade d6" style="filter:drop-shadow(0 0 7px rgba(167,19,185,.8))"/>
+
+              <!-- Banco de dados (CRM) central -->
               <g class="anim-fade d2">
-                <rect x="115" y="120" width="90" height="60" rx="8" fill="rgba(15,26,79,.95)" stroke="url(#pV4grad)" stroke-width="1.5"/>
-                <rect x="115" y="118" width="90" height="14" rx="7" fill="rgba(0,225,195,.18)" stroke="rgba(0,225,195,.5)" stroke-width="1"/>
-                <circle cx="160" cy="153" r="6" fill="rgba(0,225,195,.3)" stroke="#00E1C3" stroke-width="1.2"/>
-                <line x1="160" y1="153" x2="160" y2="170" stroke="#00E1C3" stroke-width="1.5"/>
+                <path d="M 242 235 L 242 325 A 58 16 0 0 0 358 325 L 358 235" fill="rgba(15,26,79,.96)" stroke="url(#pV4ring)" stroke-width="1.8"/>
+                <path d="M 242 265 A 58 16 0 0 0 358 265" fill="none" stroke="rgba(0,225,195,.4)" stroke-width="1.2"/>
+                <path d="M 242 295 A 58 16 0 0 0 358 295" fill="none" stroke="rgba(0,225,195,.4)" stroke-width="1.2"/>
+                <ellipse cx="300" cy="235" rx="58" ry="16" fill="rgba(0,225,195,.16)" stroke="#00E1C3" stroke-width="1.8"/>
               </g>
-              <circle cx="160" cy="150" r="36" fill="rgba(0,225,195,.18)" filter="url(#pV4glow)" class="anim-fade d3"/>
-              <g class="anim-fade d5">
-                <circle cx="160" cy="40" r="10" fill="rgba(5,9,34,.9)" stroke="#00E1C3" stroke-width="1.2"/>
-                <circle cx="160" cy="37" r="3" fill="#00E1C3"/>
-                <path d="M 154 44 Q 160 48, 166 44" fill="none" stroke="#00E1C3" stroke-width="1.2"/>
+              <g class="anim-fade d3">
+                <text x="300" y="292" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="26" letter-spacing="-.02em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 16px rgba(0,225,195,.6))">Base</text>
+                <text x="300" y="312" text-anchor="middle" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="11" letter-spacing="2.5">REATIVADA</text>
               </g>
-              <g class="anim-fade d6">
-                <circle cx="285" cy="140" r="10" fill="rgba(5,9,34,.9)" stroke="#4A6CF7" stroke-width="1.2"/>
-                <circle cx="285" cy="137" r="3" fill="#4A6CF7"/>
-                <path d="M 279 144 Q 285 148, 291 144" fill="none" stroke="#4A6CF7" stroke-width="1.2"/>
+
+              <!-- Pacientes na órbita (entram em sequência + pulse) -->
+              <g class="svg-seq-a">
+                <circle cx="300" cy="130" r="22" fill="rgba(5,9,34,.96)" stroke="#00E1C3" stroke-width="1.8" style="filter:drop-shadow(0 0 10px rgba(0,225,195,.5))"/>
+                <circle cx="300" cy="124" r="5" fill="#00E1C3"/>
+                <path d="M 289 142 Q 300 128 311 142" fill="none" stroke="#00E1C3" stroke-width="2.2" stroke-linecap="round"/>
               </g>
-              <g class="anim-fade d7">
-                <circle cx="35" cy="140" r="10" fill="rgba(5,9,34,.9)" stroke="#A713B9" stroke-width="1.2"/>
-                <circle cx="35" cy="137" r="3" fill="#A713B9"/>
-                <path d="M 29 144 Q 35 148, 41 144" fill="none" stroke="#A713B9" stroke-width="1.2"/>
+              <g class="svg-seq-b">
+                <circle cx="473.2" cy="355" r="22" fill="rgba(5,9,34,.96)" stroke="#A713B9" stroke-width="1.8" style="filter:drop-shadow(0 0 10px rgba(167,19,185,.5))"/>
+                <circle cx="473.2" cy="349" r="5" fill="#A713B9"/>
+                <path d="M 462.2 367 Q 473.2 353 484.2 367" fill="none" stroke="#A713B9" stroke-width="2.2" stroke-linecap="round"/>
               </g>
-              <text x="160" y="265" text-anchor="middle" fill="rgba(0,225,195,.7)" font-family="JetBrains Mono" font-size="8" letter-spacing="3" class="anim-fade d8">BASE ATIVA</text>
+              <g class="svg-seq-c">
+                <circle cx="126.8" cy="355" r="22" fill="rgba(5,9,34,.96)" stroke="#4A6CF7" stroke-width="1.8" style="filter:drop-shadow(0 0 10px rgba(74,108,247,.5))"/>
+                <circle cx="126.8" cy="349" r="5" fill="#4A6CF7"/>
+                <path d="M 115.8 367 Q 126.8 353 137.8 367" fill="none" stroke="#4A6CF7" stroke-width="2.2" stroke-linecap="round"/>
+              </g>
+
+              <!-- LABEL 1 — Cadência (cyan, topo-esquerda) → paciente do topo -->
+              <g class="svg-label-fade s1">
+                <text x="14" y="8" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 20px rgba(0,225,195,.6))">Cadência</text>
+                <line x1="14" y1="22" x2="200" y2="22" stroke="#00E1C3" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
+                <text x="14" y="46" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">DE RETOMADA</text>
+              </g>
+              <g>
+                <path d="M 95 58 L 95 130 L 270 130" fill="none" stroke="#00E1C3" stroke-width="2.5" stroke-dasharray="260" stroke-dashoffset="260" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s1" style="filter:drop-shadow(0 0 6px rgba(0,225,195,.6))"/>
+                <polygon points="278,130 270,125 270,135" fill="#00E1C3" class="svg-label-fade s1" style="filter:drop-shadow(0 0 8px rgba(0,225,195,.9))"/>
+              </g>
+
+              <!-- LABEL 2 — Indicações (purple, direita) → paciente direito -->
+              <g class="svg-label-fade s2">
+                <text x="586" y="150" text-anchor="end" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Indicações</text>
+                <line x1="380" y1="164" x2="586" y2="164" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
+                <text x="586" y="188" text-anchor="end" fill="rgba(216,123,241,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">FARMING ATIVO</text>
+              </g>
+              <g>
+                <path d="M 545 200 L 545 355 L 503 355" fill="none" stroke="#D87BF1" stroke-width="2.5" stroke-dasharray="210" stroke-dashoffset="210" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s2" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.6))"/>
+                <polygon points="495,355 503,350 503,360" fill="#D87BF1" class="svg-label-fade s2" style="filter:drop-shadow(0 0 8px rgba(216,123,241,.9))"/>
+              </g>
+
+              <!-- LABEL 3 — CRM (blue, base-esquerda) → banco central -->
+              <g class="svg-label-fade s3">
+                <text x="14" y="470" fill="#4A6CF7" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(74,108,247,.4)) drop-shadow(0 0 22px rgba(74,108,247,.7))">CRM</text>
+                <line x1="14" y1="484" x2="150" y2="484" stroke="#4A6CF7" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
+                <text x="14" y="508" fill="rgba(74,108,247,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">INTELIGENTE</text>
+              </g>
+              <g>
+                <path d="M 160 452 L 160 300 L 232 300" fill="none" stroke="#4A6CF7" stroke-width="2.5" stroke-dasharray="240" stroke-dashoffset="240" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s3" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.6))"/>
+                <polygon points="240,300 232,295 232,305" fill="#4A6CF7" class="svg-label-fade s3" style="filter:drop-shadow(0 0 8px rgba(74,108,247,.9))"/>
+              </g>
             </svg>
           </div>
         </div>
