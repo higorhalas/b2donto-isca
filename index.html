@@ -495,7 +495,7 @@ function renderQuestion(q, animClass){
     // progresso pela POSIÇÃO atual (não por respostas salvas — senão o localStorage falseia)
     const _vis = visibleQuestions();
     const _frac = _vis.length > 1 ? Math.min(1, state.index / (_vis.length - 1)) : 0;
-    const _pct = Math.max(3, Math.pow(_frac, 0.7) * 100);
+    const _pct = Math.max(2, Math.pow(_frac, 1) * 100);
     html += '<div class="qprogress"><div class="qprogress-fill" data-pct="'+ _pct +'" style="clip-path:inset(0 '+ (100 - lastPct) +'% 0 0)"></div></div>';
   }
   html += '<div class="qsection">'+ q.section +'</div>';
