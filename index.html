@@ -492,8 +492,10 @@ let lastPct = 0;
 function renderQuestion(q, animClass){
   let html = '<div class="qcard '+ (animClass || 'in') +'"><div class="qcard-inner">';
   if(q.type !== 'intro' && q.type !== 'outro'){
-    const _ans = getAnsweredCount(), _tot = getTotalVisibleQuestions();
-    const _pct = _tot > 0 ? Math.max(4, Math.pow(_ans / _tot, 0.5) * 100) : 4;
+    // progresso pela POSIÇÃO atual (não por respostas salvas — senão o localStorage falseia)
+    const _vis = visibleQuestions();
+    const _frac = _vis.length > 1 ? Math.min(1, state.index / (_vis.length - 1)) : 0;
+    const _pct = Math.max(4, Math.pow(_frac, 0.5) * 100);
     html += '<div class="qprogress"><div class="qprogress-fill" data-pct="'+ _pct +'" style="clip-path:inset(0 '+ (100 - lastPct) +'% 0 0)"></div></div>';
   }
   html += '<div class="qsection">'+ q.section +'</div>';
