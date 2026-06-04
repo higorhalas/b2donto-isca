@@ -360,7 +360,6 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
 <div class="topprogress" id="topProgress">
   <div class="section-label" id="sectionLabel">Boas-vindas</div>
   <div class="track"><div class="fill" id="progressFill"></div></div>
-  <div class="count" id="progressCount">0 / 29</div>
 </div>
 
 <!-- STAGE -->
@@ -621,8 +620,8 @@ function render(animClass){
   sectionLabel.textContent = q.section || '';
   const answered = getAnsweredCount();
   const total = getTotalVisibleQuestions();
-  progressFill.style.width = (answered / total * 100) + '%';
-  progressCount.textContent = answered + ' / ' + total;
+  // barra não-linear: avança rápido nas primeiras perguntas e desacelera no fim (estratégia de funil/VSL)
+  progressFill.style.width = (total > 0 ? Math.pow(answered / total, 0.5) * 100 : 0) + '%';
 }
 
 function transition(direction, callback){
