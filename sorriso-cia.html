@@ -1050,7 +1050,7 @@ footer{text-align:center; color:var(--dim-grey); font-size:11px; padding:30px 0 
 }
 .pilar-list li{
   display:flex; align-items:flex-start; gap:12px;
-  font-size:13.5px; color:var(--off-white); line-height:1.5;
+  font-size:16px; color:var(--off-white); line-height:1.5;
 }
 .pilar-list li .ic{
   flex:0 0 24px; height:24px; border-radius:50%;
@@ -1087,6 +1087,9 @@ footer{text-align:center; color:var(--dim-grey); font-size:11px; padding:30px 0 
   transition: stroke-dashoffset 1.4s cubic-bezier(.2,.7,.2,1) .2s;
 }
 .r.in .anim-stroke{stroke-dashoffset:0}
+/* loop-draw — desenha os laços do infinito (Pilar 04 / CRM que gira sozinho) */
+.r .loop-draw{stroke-dasharray:760; stroke-dashoffset:760; transition:stroke-dashoffset 1.9s cubic-bezier(.2,.7,.2,1) .3s}
+.r.in .loop-draw{stroke-dashoffset:0}
 
 /* Animações contínuas pros SVGs dos pilares (rodam infinitamente após entrar no viewport) */
 .r.in .svg-pulse-a,
@@ -1236,7 +1239,7 @@ footer{text-align:center; color:var(--dim-grey); font-size:11px; padding:30px 0 
 }
 
 .pilar-lead{
-  font-size:17px; color:var(--cool-grey); line-height:1.6;
+  font-size:21px; color:var(--cool-grey); line-height:1.6;
   margin-bottom:18px; max-width:540px;
 }
 .pilar-lead b{ color:var(--off-white); font-weight:600 }
@@ -2057,6 +2060,108 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
     transform:none; will-change:auto;
   }
 }
+
+/* ===== Pilar 01 — SEM card, ícone grande (Venn 3E).
+   Não-reverse: texto à esquerda, ícone à direita (igual o 03). ===== */
+.pilar-section[data-pilar="01"] .pilar-viz-col .pilar-viz-box{
+  background:none; border:none; padding:0; min-height:auto;
+  justify-content:flex-start; overflow:visible;
+}
+.pilar-section[data-pilar="01"] .pilar-viz-col .pilar-viz-box::before{ display:none; }
+.pilar-section[data-pilar="01"] .pilar-viz-box .corner{ display:none; }
+.pilar-section[data-pilar="01"]{ overflow:visible; }
+.pilar-section[data-pilar="01"] .pilar-viz-col{ overflow:visible; }
+@media (min-width:1024px){
+  .pilar-section[data-pilar="01"] .pilar-grid{
+    grid-template-columns:minmax(0,500px) minmax(0,1fr);
+    gap:20px; align-items:center;
+  }
+  .pilar-section[data-pilar="01"] .pilar-text-col{ transform:translateX(-52px); }
+  .pilar-section[data-pilar="01"] .pilar-viz-col svg{
+    width:clamp(360px, 30vw, 430px); max-width:none; margin:0;
+    flex-shrink:0;
+    transform:translateX(0px);
+  }
+}
+
+/* ===== Pilar 02 — SEM card, ícone grande (mesma proporção do Pilar 03).
+   Seção reverse: o ícone fica à esquerda e transborda pra margem esquerda. ===== */
+.pilar-section[data-pilar="02"] .pilar-viz-col .pilar-viz-box{
+  background:none; border:none; padding:0; min-height:auto;
+  justify-content:flex-end; overflow:visible;
+}
+.pilar-section[data-pilar="02"] .pilar-viz-col .pilar-viz-box::before{ display:none; }
+.pilar-section[data-pilar="02"] .pilar-viz-box .corner{ display:none; }
+.pilar-section[data-pilar="02"]{ overflow:visible; }
+.pilar-section[data-pilar="02"] .pilar-viz-col{ overflow:visible; }
+@media (min-width:1024px){
+  .pilar-section[data-pilar="02"] .pilar-grid{
+    grid-template-columns:minmax(0,1fr) minmax(0,500px);
+    gap:20px; align-items:center;
+  }
+  .pilar-section[data-pilar="02"] .pilar-text-col{ transform:translateX(56px); }
+  .pilar-section[data-pilar="02"] .pilar-viz-col svg{
+    width:clamp(380px, 32vw, 460px); max-width:none; margin:0;
+    flex-shrink:0;
+    transform:translateX(0px);
+  }
+}
+
+/* ===== Pilar 03 — SEM card, ícone grande transbordando pra direita.
+   A SEÇÃO continua contida no wrap (mesma largura/alinhamento do Pilar 02);
+   só o SVG vaza pra margem direita. Assim cresce sem desalinhar. ===== */
+.pilar-section[data-pilar="03"] .pilar-viz-col .pilar-viz-box{
+  background:none; border:none; padding:0; min-height:auto;
+  justify-content:flex-start; overflow:visible;
+}
+.pilar-section[data-pilar="03"] .pilar-viz-col .pilar-viz-box::before{ display:none; }
+.pilar-section[data-pilar="03"] .pilar-viz-box .corner{ display:none; }
+.pilar-section[data-pilar="03"]{ overflow:visible; }
+.pilar-section[data-pilar="03"] .pilar-viz-col{ overflow:visible; }
+/* lead/bullets dos pilares padronizados no tamanho do agendamento direto nas classes globais .pilar-lead / .pilar-list li (valem pros 4 pilares) */
+@media (min-width:1024px){
+  .pilar-section[data-pilar="03"] .pilar-grid{
+    grid-template-columns:minmax(0,500px) minmax(0,1fr);
+    gap:20px; align-items:center;
+  }
+  .pilar-section[data-pilar="03"] .pilar-viz-col svg{
+    width:clamp(460px, 40vw, 600px); max-width:none; margin:0;
+    flex-shrink:0;            /* trava: sem isso o flex container espreme o icone de volta pra largura da coluna */
+    transform:translateX(-72px);
+  }
+}
+/* ===== Pilar 04 — SEM card, ícone grande (mesmo tratamento do Pilar 02, também reverse).
+   Seção reverse: o ícone fica à esquerda e o texto é empurrado pra direita. ===== */
+.pilar-section[data-pilar="04"] .pilar-viz-col .pilar-viz-box{
+  background:none; border:none; padding:0; min-height:auto;
+  justify-content:flex-end; overflow:visible;
+}
+.pilar-section[data-pilar="04"] .pilar-viz-col .pilar-viz-box::before{ display:none; }
+.pilar-section[data-pilar="04"] .pilar-viz-box .corner{ display:none; }
+.pilar-section[data-pilar="04"]{ overflow:visible; }
+.pilar-section[data-pilar="04"] .pilar-viz-col{ overflow:visible; }
+@media (min-width:1024px){
+  .pilar-section[data-pilar="04"] .pilar-grid{
+    grid-template-columns:minmax(0,1fr) minmax(0,500px);
+    gap:20px; align-items:center;
+  }
+  .pilar-section[data-pilar="04"] .pilar-text-col{ transform:translateX(56px); }
+  .pilar-section[data-pilar="04"] .pilar-viz-col svg{
+    width:clamp(460px, 40vw, 580px); max-width:none; margin:0;
+    flex-shrink:0;
+    transform:translateX(0px);
+  }
+}
+.arr{ opacity:0; transform-box:fill-box; transform-origin:center; }
+.r.in .arr{ animation: arrowChase 3.2s ease-in-out infinite; }
+.r.in .arr-2{ animation-delay:.8s; }
+.r.in .arr-3{ animation-delay:1.6s; }
+.r.in .arr-4{ animation-delay:2.4s; }
+@keyframes arrowChase{
+  0%, 100%{ opacity:.28; transform:scale(.9); }
+  12%{ opacity:1; transform:scale(1.4); }
+  38%{ opacity:.28; transform:scale(.9); }
+}
 </style>
 </head>
 <body>
@@ -2870,16 +2975,19 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
                   <stop offset=".5" stop-color="#4A6CF7" stop-opacity=".035"/>
                   <stop offset="1" stop-color="#A713B9" stop-opacity=".045"/>
                 </linearGradient>
+                <marker id="arrowNucleo" markerWidth="9" markerHeight="9" refX="6" refY="2.5" orient="auto" markerUnits="userSpaceOnUse">
+                  <path d="M0,0 L6,2.5 L0,5 Z" fill="rgba(242,247,255,.85)"/>
+                </marker>
               </defs>
 
               <!-- 3E GIGANTE NO FUNDO (rente ao quadrado, bem transparente) -->
-              <text x="190" y="205" text-anchor="middle" dominant-baseline="central" fill="url(#pV1gradSoft)" font-family="Sora" font-weight="800" font-size="440" letter-spacing="-.1em" class="anim-fade d1">3E</text>
+              <text x="172" y="240" text-anchor="middle" dominant-baseline="central" fill="url(#pV1gradSoft)" font-family="Sora" font-weight="800" font-size="440" letter-spacing="-.1em" class="anim-fade d1">3E</text>
 
               <!-- Linhas radiais sutis (centro → labels) -->
               <g stroke="rgba(255,255,255,.10)" stroke-width=".7" fill="none" class="anim-stroke">
-                <line x1="190" y1="205" x2="60" y2="52" stroke-dasharray="240" stroke-dashoffset="240"/>
-                <line x1="190" y1="205" x2="320" y2="52" stroke-dasharray="240" stroke-dashoffset="240"/>
-                <line x1="190" y1="205" x2="190" y2="384" stroke-dasharray="240" stroke-dashoffset="240"/>
+                <line x1="190" y1="190" x2="60" y2="52" stroke-dasharray="240" stroke-dashoffset="240"/>
+                <line x1="190" y1="190" x2="320" y2="52" stroke-dasharray="240" stroke-dashoffset="240"/>
+                <line x1="190" y1="190" x2="190" y2="384" stroke-dasharray="240" stroke-dashoffset="240"/>
               </g>
 
               <!-- Círculo Cyan — Estratégia -->
@@ -2899,8 +3007,8 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 
               <!-- Centro — fusão (glow gradient + ponto branco) -->
               <g class="anim-fade d5">
-                <circle cx="190" cy="205" r="22" fill="url(#pV1grad)" filter="url(#pV1g)" opacity=".75" class="svg-breathe"/>
-                <circle cx="190" cy="205" r="8" fill="#fff" class="svg-breathe-inner"/>
+                <circle cx="190" cy="190" r="22" fill="url(#pV1grad)" filter="url(#pV1g)" opacity=".75" class="svg-breathe"/>
+                <circle cx="190" cy="190" r="8" fill="#fff" class="svg-breathe-inner"/>
               </g>
 
               <!-- Labels das 3 dimensões (acima/abaixo dos círculos, sem invadir) -->
@@ -2915,6 +3023,15 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
               <g class="anim-fade d8">
                 <text x="190" y="392" text-anchor="middle" fill="#4A6CF7" font-family="Sora" font-weight="700" font-size="22" letter-spacing=".01em">Estética</text>
                 <line x1="162" y1="402" x2="218" y2="402" stroke="#4A6CF7" stroke-width="1" opacity=".5"/>
+              </g>
+
+              <!-- NÚCLEO — legenda no círculo Estratégia + mini seta apontando pra bola central -->
+              <g class="anim-fade d8" font-family="Sora" text-anchor="middle" fill="rgba(242,247,255,.82)" style="filter:drop-shadow(0 0 8px rgba(0,225,195,.28))">
+                <text x="108" y="120" font-weight="600" font-size="11.5">Clínica</text>
+                <text x="108" y="135" font-weight="600" font-size="11.5">Referência</text>
+              </g>
+              <g class="anim-fade d8">
+                <line x1="133" y1="139" x2="174" y2="175" stroke="rgba(242,247,255,.55)" stroke-width="1.4" stroke-linecap="round" marker-end="url(#arrowNucleo)"/>
               </g>
             </svg>
           </div>
@@ -3007,21 +3124,22 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
          ============================================================ -->
     <section class="pilar-section" data-anim="slide-right" data-theme="blue" data-pilar="03" id="pilar-03">
       <div class="pilar-eyebrow r">
-        <span class="pe-tag">Conversão · IA + método</span>
+        <span class="pe-tag">Conversão · Método híbrido</span>
       </div>
       <div class="pilar-grid">
         <div class="pilar-text-col">
-          <h2 class="pilar-headline r d1">Converter cada lead em <span class="grad-text">paciente agendado</span></h2>
-          <p class="pilar-lead r d2">Velocidade + método em cada conversa. <b>Sem perder lead.</b></p>
+          <h2 class="pilar-headline r d1">Agendamento <span class="grad-text">Autoprogressivo</span></h2>
+          <p class="pilar-lead r d2">Sistema de agendamento <b>híbrido</b> para<br>converter cada lead em paciente agendado.</p>
           <ul class="pilar-list r d3">
-            <li><span class="ic">▸</span><div><b>IA Maia</b> atende em até 4 minutos, qualifica e agenda 24/7.</div></li>
-            <li><span class="ic">▸</span><div><b>Roteiro de atendimento comercial</b> validado em +300 clínicas.</div></li>
-            <li><span class="ic">▸</span><div><b>Follow-up cadenciado</b> de quem sumiu — 5 toques estruturados.</div></li>
+            <li><span class="ic">▸</span><div><b>Protocolo de aceleração comercial</b>,<br>validado com +300 clínicas.</div></li>
+            <li><span class="ic">▸</span><div><b>Ma<span class="grad-text">IA</span></b> atende em menos de 1 minuto,<br>qualifica e resgata, 24/7.</div></li>
+            <li><span class="ic">▸</span><div><b>5 follow-ups</b> cadenciados e estruturados<br>pra quem parou de responder.</div></li>
+            <li><span class="ic">▸</span><div><b>Acompanhamento e treinamento contínuo</b><br>para otimização e escala.</div></li>
           </ul>
           <div class="pilar-highlight r d4">Cada lead atendido como se fosse o único.</div>
           <div class="pilar-mini-stats r d5">
-            <div><span class="mv">4 min</span><span class="ml">tempo de resposta</span></div>
-            <div><span class="mv">24/7</span><span class="ml">com Maia</span></div>
+            <div><span class="mv">1 min</span><span class="ml">tempo de resposta</span></div>
+            <div><span class="mv">24 horas</span><span class="ml">7 dias por semana</span></div>
             <div><span class="mv">5</span><span class="ml">toques de follow-up</span></div>
           </div>
           <a href="#pilar-04" class="pilar-next r d6">Próximo · Recuperação e indicação <span class="pn-arrow">→</span></a>
@@ -3029,66 +3147,84 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
         <div class="pilar-viz-col">
           <div class="pilar-viz-box r">
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <svg viewBox="0 -50 600 560" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="-160 -90 900 820" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="pV3ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
-                <filter id="pV3glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
+                <linearGradient id="maiaGrad" gradientUnits="userSpaceOnUse" x1="622" y1="312" x2="664" y2="312"><stop offset="0" stop-color="#00E1C3"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
+                <filter id="pV3glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="10"/></filter>
+                <filter id="pV3ringGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
               </defs>
 
-              <!-- Glow central -->
-              <circle cx="300" cy="290" r="80" fill="rgba(0,225,195,.16)" filter="url(#pV3glow)" class="svg-breathe"/>
+              <!-- Anel externo + trilha pontilhada -->
+              <circle cx="300" cy="300" r="248" fill="none" stroke="rgba(0,225,195,.32)" stroke-width="1.6" class="anim-fade d2"/>
+              <circle cx="300" cy="300" r="237" fill="none" stroke="rgba(74,108,247,.18)" stroke-width="1" stroke-dasharray="2 7" class="anim-fade d2"/>
 
-              <!-- Trilha pontilhada do flywheel -->
-              <circle cx="300" cy="290" r="178" fill="none" stroke="rgba(74,108,247,.18)" stroke-width="1" stroke-dasharray="2 7" class="anim-fade d1"/>
+              <!-- Setas de fluxo — acendem em sequência horária (chase, repete infinito) -->
+              <polygon points="483.2,132.4 468.3,126.0 476.8,117.5" fill="#00E1C3" class="arr arr-1" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
+              <polygon points="467.6,483.2 474.0,468.3 482.5,476.8" fill="#00E1C3" class="arr arr-2" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
+              <polygon points="116.8,467.6 131.7,474.0 123.2,482.5" fill="#00E1C3" class="arr arr-3" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
+              <polygon points="132.4,116.8 126.0,131.7 117.5,123.2" fill="#00E1C3" class="arr arr-4" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
 
-              <!-- Anel do flywheel (desenha conforme entra) -->
-              <circle cx="300" cy="290" r="150" fill="none" stroke="url(#pV3ring)" stroke-width="3" stroke-linecap="round" stroke-dasharray="942" stroke-dashoffset="942" class="anim-stroke" style="filter:drop-shadow(0 0 6px rgba(0,225,195,.35))"/>
+              <!-- 4 segmentos (dark + traço em degradê cyan->roxo, revelam em sequência horária) -->
+              <path d="M 146.55 135.43 A 225 225 0 0 1 453.45 135.43 L 392.07 201.26 A 135 135 0 0 0 207.93 201.26 Z" fill="rgba(0,225,195,.07)" stroke="#00E1C3" stroke-width="2" class="anim-fade d2" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.5))"/>
+              <path d="M 464.57 146.55 A 225 225 0 0 1 464.57 453.45 L 398.74 392.07 A 135 135 0 0 0 398.74 207.93 Z" fill="rgba(61,165,230,.08)" stroke="#3DA5E6" stroke-width="2" class="anim-fade d3" style="filter:drop-shadow(0 0 7px rgba(61,165,230,.5))"/>
+              <path d="M 453.45 464.57 A 225 225 0 0 1 146.55 464.57 L 207.93 398.74 A 135 135 0 0 0 392.07 398.74 Z" fill="rgba(74,108,247,.09)" stroke="#4A6CF7" stroke-width="2" class="anim-fade d4" style="filter:drop-shadow(0 0 7px rgba(74,108,247,.5))"/>
+              <path d="M 135.43 453.45 A 225 225 0 0 1 135.43 146.55 L 201.26 207.93 A 135 135 0 0 0 201.26 392.07 Z" fill="rgba(167,19,185,.10)" stroke="#B23BC9" stroke-width="2" class="anim-fade d5" style="filter:drop-shadow(0 0 7px rgba(167,19,185,.55))"/>
 
-              <!-- 5 nós numerados — roteiro de 5 etapas (entram em sequência + pulse contínuo) -->
-              <g class="anim-fade d3 svg-pulse-a"><circle cx="300" cy="140" r="20" fill="rgba(5,9,34,.96)" stroke="#00E1C3" stroke-width="2"/><text x="300" y="146" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">1</text></g>
-              <g class="anim-fade d4 svg-pulse-b"><circle cx="442.7" cy="243.6" r="20" fill="rgba(5,9,34,.96)" stroke="#3D9BE6" stroke-width="2"/><text x="442.7" y="249.6" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">2</text></g>
-              <g class="anim-fade d5 svg-pulse-c"><circle cx="388.2" cy="411.4" r="20" fill="rgba(5,9,34,.96)" stroke="#4A6CF7" stroke-width="2"/><text x="388.2" y="417.4" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">3</text></g>
-              <g class="anim-fade d6 svg-pulse-a"><circle cx="211.8" cy="411.4" r="20" fill="rgba(5,9,34,.96)" stroke="#7B5BE0" stroke-width="2"/><text x="211.8" y="417.4" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">4</text></g>
-              <g class="anim-fade d7 svg-pulse-b"><circle cx="157.3" cy="243.6" r="20" fill="rgba(5,9,34,.96)" stroke="#A713B9" stroke-width="2"/><text x="157.3" y="249.6" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="16">5</text></g>
+              <!-- Glow de respiração no núcleo -->
+              <circle cx="300" cy="300" r="140" fill="rgba(0,225,195,.16)" filter="url(#pV3glow)" class="svg-breathe"/>
 
-              <!-- Núcleo Maia -->
-              <circle cx="300" cy="290" r="62" fill="rgba(8,14,46,.97)" stroke="#00E1C3" stroke-width="2.2" class="anim-fade d2" style="filter:drop-shadow(0 0 16px rgba(0,225,195,.45))"/>
-              <g class="anim-fade d2">
-                <text x="300" y="286" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="30" letter-spacing="-.02em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 18px rgba(0,225,195,.6))">Maia</text>
-                <text x="300" y="310" text-anchor="middle" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="12" letter-spacing="2.5">ATENDE 24/7</text>
+              <!-- Núcleo escuro + anel ciano + texto -->
+              <g class="anim-fade d1">
+                <circle cx="300" cy="300" r="116" fill="rgba(8,14,46,.98)"/>
+                <circle cx="300" cy="300" r="120" fill="none" stroke="#00E1C3" stroke-width="3.5" filter="url(#pV3ringGlow)"/>
+                <circle cx="300" cy="300" r="120" fill="none" stroke="#00E1C3" stroke-width="1.6"/>
+                <text x="300" y="292" text-anchor="middle" fill="#8fa6cc" font-family="Sora" font-weight="500" font-size="14" letter-spacing="3">AGENDAMENTO</text>
+                <text x="300" y="320" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="18" letter-spacing="-.01em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.3)) drop-shadow(0 0 16px rgba(0,225,195,.6))">AUTOPROGRESSIVO</text>
               </g>
 
-              <!-- LABEL 1 — 4 minutos (cyan, topo-esquerda) → nó 1 (topo) -->
-              <g class="svg-label-fade s1">
-                <text x="14" y="8" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 20px rgba(0,225,195,.6))">4 minutos</text>
-                <line x1="14" y1="22" x2="210" y2="22" stroke="#00E1C3" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="14" y="46" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">TEMPO DE RESPOSTA</text>
+              <!-- Badges navy com anel colorido (pop + pulse contínuo) -->
+              <g class="anim-fade d3 svg-pulse-a"><circle cx="300" cy="165" r="22" fill="rgba(5,9,34,.96)" stroke="#00E1C3" stroke-width="2.5" style="filter:drop-shadow(0 0 10px rgba(0,225,195,.7))"/><text x="300" y="172" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="18">1</text></g>
+              <g class="anim-fade d4 svg-pulse-b"><circle cx="435" cy="300" r="22" fill="rgba(5,9,34,.96)" stroke="#3DA5E6" stroke-width="2.5" style="filter:drop-shadow(0 0 10px rgba(61,165,230,.7))"/><text x="435" y="307" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="18">2</text></g>
+              <g class="anim-fade d5 svg-pulse-c"><circle cx="300" cy="435" r="22" fill="rgba(5,9,34,.96)" stroke="#4A6CF7" stroke-width="2.5" style="filter:drop-shadow(0 0 10px rgba(74,108,247,.7))"/><text x="300" y="442" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="18">3</text></g>
+              <g class="anim-fade d6 svg-pulse-a"><circle cx="165" cy="300" r="22" fill="rgba(5,9,34,.96)" stroke="#B23BC9" stroke-width="2.5" style="filter:drop-shadow(0 0 10px rgba(167,19,185,.7))"/><text x="165" y="307" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="18">4</text></g>
+
+              <!-- LABEL 1 (topo) — Aceleração comercial + conexão -->
+              <g class="anim-fade d4" font-family="Sora" fill="#F2F7FF" style="filter:drop-shadow(0 0 14px rgba(0,225,195,.4))">
+                <text x="300" y="-12" text-anchor="middle" font-weight="700" font-size="20">Aceleração</text>
+                <text x="300" y="16" text-anchor="middle" font-weight="700" font-size="20">comercial</text>
               </g>
-              <g>
-                <path d="M 95 58 L 95 140 L 278 140" fill="none" stroke="#00E1C3" stroke-width="2.5" stroke-dasharray="280" stroke-dashoffset="280" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s1" style="filter:drop-shadow(0 0 6px rgba(0,225,195,.6))"/>
-                <polygon points="286,140 278,135 278,145" fill="#00E1C3" class="svg-label-fade s1" style="filter:drop-shadow(0 0 8px rgba(0,225,195,.9))"/>
+              <g class="anim-fade d4">
+                <line x1="300" y1="30" x2="300" y2="57" stroke="#00E1C3" stroke-width="2" opacity=".6" stroke-linecap="round"/>
+                <circle cx="300" cy="60" r="4.5" fill="#00E1C3" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
               </g>
 
-              <!-- LABEL 2 — Roteiro (blue, direita) → nó 2 -->
-              <g class="svg-label-fade s2">
-                <text x="586" y="150" text-anchor="end" fill="#4A6CF7" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(74,108,247,.4)) drop-shadow(0 0 22px rgba(74,108,247,.7))">Roteiro</text>
-                <line x1="404" y1="164" x2="586" y2="164" stroke="#4A6CF7" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="586" y="188" text-anchor="end" fill="rgba(74,108,247,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">+300 CLÍNICAS</text>
+              <!-- LABEL 2 (direita) — MaIA + conexão -->
+              <g class="anim-fade d5" font-family="Sora" style="filter:drop-shadow(0 0 14px rgba(0,225,195,.4))">
+                <text x="586" y="312" font-weight="800" font-size="28" fill="#fff">Ma<tspan fill="url(#maiaGrad)">IA</tspan></text>
               </g>
-              <g>
-                <path d="M 540 200 L 540 244 L 470 244" fill="none" stroke="#4A6CF7" stroke-width="2.5" stroke-dasharray="125" stroke-dashoffset="125" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s2" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.6))"/>
-                <polygon points="462,244 470,239 470,249" fill="#4A6CF7" class="svg-label-fade s2" style="filter:drop-shadow(0 0 8px rgba(74,108,247,.9))"/>
+              <g class="anim-fade d5">
+                <line x1="572" y1="300" x2="543" y2="300" stroke="#3DA5E6" stroke-width="2" opacity=".6" stroke-linecap="round"/>
+                <circle cx="540" cy="300" r="4.5" fill="#3DA5E6" style="filter:drop-shadow(0 0 7px rgba(61,165,230,.95))"/>
               </g>
 
-              <!-- LABEL 3 — Follow-up (purple, meio-esquerda) → nó 5 -->
-              <g class="svg-label-fade s3">
-                <text x="14" y="160" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Follow-up</text>
-                <line x1="14" y1="174" x2="220" y2="174" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="14" y="198" fill="rgba(216,123,241,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">5 TOQUES CADENCIADOS</text>
+              <!-- LABEL 3 (base) — Resgate Automático + conexão -->
+              <g class="anim-fade d6" font-family="Sora" fill="#F2F7FF" style="filter:drop-shadow(0 0 14px rgba(74,108,247,.4))">
+                <text x="300" y="602" text-anchor="middle" font-weight="700" font-size="20">Resgate</text>
+                <text x="300" y="630" text-anchor="middle" font-weight="700" font-size="20">Automático</text>
               </g>
-              <g>
-                <path d="M 95 210 L 95 244 L 132 244" fill="none" stroke="#D87BF1" stroke-width="2.5" stroke-dasharray="80" stroke-dashoffset="80" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s3" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.6))"/>
-                <polygon points="140,244 132,239 132,249" fill="#D87BF1" class="svg-label-fade s3" style="filter:drop-shadow(0 0 8px rgba(216,123,241,.9))"/>
+              <g class="anim-fade d6">
+                <line x1="300" y1="570" x2="300" y2="543" stroke="#4A6CF7" stroke-width="2" opacity=".6" stroke-linecap="round"/>
+                <circle cx="300" cy="540" r="4.5" fill="#4A6CF7" style="filter:drop-shadow(0 0 7px rgba(74,108,247,.95))"/>
+              </g>
+
+              <!-- LABEL 4 (esquerda) — Otimização contínua + conexão -->
+              <g class="anim-fade d7" font-family="Sora" fill="#F2F7FF" style="filter:drop-shadow(0 0 14px rgba(167,19,185,.4))">
+                <text x="16" y="294" text-anchor="end" font-weight="700" font-size="20">Otimização</text>
+                <text x="16" y="322" text-anchor="end" font-weight="700" font-size="20">contínua</text>
+              </g>
+              <g class="anim-fade d7">
+                <line x1="30" y1="300" x2="57" y2="300" stroke="#B23BC9" stroke-width="2" opacity=".6" stroke-linecap="round"/>
+                <circle cx="60" cy="300" r="4.5" fill="#B23BC9" style="filter:drop-shadow(0 0 7px rgba(167,19,185,.95))"/>
               </g>
             </svg>
           </div>
@@ -3105,105 +3241,72 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       </div>
       <div class="pilar-grid">
         <div class="pilar-text-col">
-          <h2 class="pilar-headline r d1">Reativar sua base e gerar <span class="grad-text">indicações constantes</span></h2>
-          <p class="pilar-lead r d2">Seu maior tesouro está <b>sentado no banco de dados</b>.</p>
+          <h2 class="pilar-headline r d1">Farming <span class="grad-text">da Base</span></h2>
+          <p class="pilar-lead r d2">Sistema de <b>reativação de base</b> e <b>geração de indicações</b> de pacientes que fecharam.</p>
           <ul class="pilar-list r d3">
-            <li><span class="ic">▸</span><div><b>Cadência estruturada de retomada</b> — pacientes que sumiram, não compareceram ou não fecharam.</div></li>
-            <li><span class="ic">▸</span><div><b>Sistema de farming de indicações</b> ativando a base existente.</div></li>
-            <li><span class="ic">▸</span><div><b>CRM inteligente</b> — cada lead etiquetado e rastreado por etapa.</div></li>
+            <li><span class="ic">▸</span><div><b>Cadência de recuperação automática.</b> Quem sumiu recebe contato programado, no tempo certo, pra voltar à cadeira.</div></li>
+            <li><span class="ic">▸</span><div><b>Gatilho de indicação.</b> Quem fechou tratamento entra num fluxo que pede indicação na hora certa e traz gente nova já aquecida.</div></li>
+            <li><span class="ic">▸</span><div><b>CRM inteligente.</b> Cada lead rastreado, do primeiro oi ao orçamento fechado. Nada se perde.</div></li>
           </ul>
           <div class="pilar-highlight r d4">Paciente que já passou é nova receita.</div>
-          <div class="pilar-mini-stats r d5">
-            <div><span class="mv">Base</span><span class="ml">reativada</span></div>
-            <div><span class="mv">Cadência</span><span class="ml">estruturada</span></div>
-            <div><span class="mv">CRM</span><span class="ml">inteligente</span></div>
-          </div>
           <a href="#ctaFinal" class="pilar-next r d6">Pronto pra aplicar? <span class="pn-arrow">→</span></a>
         </div>
         <div class="pilar-viz-col">
           <div class="pilar-viz-box r">
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <svg viewBox="0 -50 600 560" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="100 -18 440 500" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="pV4ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
-                <filter id="pV4glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
+                <linearGradient id="fzBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#11204f"/><stop offset="1" stop-color="#070c28"/></linearGradient>
+                <linearGradient id="fzRing" gradientUnits="userSpaceOnUse" x1="266" y1="135" x2="374" y2="320"><stop offset="0" stop-color="#00E1C3"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
+                <filter id="fzGlow"><feGaussianBlur stdDeviation="10"/></filter>
+                <clipPath id="clipHero"><rect x="80" y="-20" width="186" height="560"/><rect x="374" y="-20" width="200" height="560"/><rect x="266" y="-20" width="108" height="170"/><rect x="266" y="302" width="108" height="260"/><ellipse cx="320" cy="151" rx="44" ry="12"/></clipPath>
+                <clipPath id="clipMouthHero"><ellipse cx="320" cy="151" rx="42" ry="11.5"/><path d="M266 150 A54 16.5 0 0 1 374 150 Z"/></clipPath>
               </defs>
 
-              <!-- Glow central -->
-              <ellipse cx="300" cy="280" rx="74" ry="64" fill="rgba(0,225,195,.14)" filter="url(#pV4glow)" class="svg-breathe"/>
+              <ellipse cx="320" cy="216" rx="74" ry="86" fill="rgba(0,225,195,.15)" filter="url(#fzGlow)" class="svg-breathe"/>
 
-              <!-- Órbita guia pontilhada -->
-              <ellipse cx="300" cy="280" rx="200" ry="150" fill="none" stroke="rgba(74,108,247,.16)" stroke-width="1" stroke-dasharray="2 7" class="anim-fade d1"/>
+              <path id="fzLeft" d="M162 218 A88 110 0 1 1 338 218 A88 110 0 1 1 162 218" fill="none" stroke="#4A6CF7" stroke-width="2.4" stroke-linecap="round" class="loop-draw" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.4))"/>
+              <path id="fzRight" d="M302 218 A88 110 0 1 1 478 218 A88 110 0 1 1 302 218" fill="none" stroke="#D87BF1" stroke-width="2.4" stroke-linecap="round" class="loop-draw" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.4))"/>
 
-              <!-- Órbita ativa de retomada (desenha conforme entra) -->
-              <path d="M 100 280 A 200 150 0 0 1 500 280 A 200 150 0 0 1 100 280" fill="none" stroke="url(#pV4ring)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1200" stroke-dashoffset="1200" class="anim-stroke" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.35))"/>
-
-              <!-- Setas de fluxo — sentido horário (ciclo girando) -->
-              <polygon points="479.3,212.9 466.0,205.5 475.5,198.2" fill="#3DDBC0" class="anim-fade d4" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.8))"/>
-              <polygon points="290,430 304,424 304,436" fill="#4A6CF7" class="anim-fade d5" style="filter:drop-shadow(0 0 7px rgba(74,108,247,.8))"/>
-              <polygon points="132.9,197.1 129.1,211.8 119.6,204.5" fill="#A713B9" class="anim-fade d6" style="filter:drop-shadow(0 0 7px rgba(167,19,185,.8))"/>
-
-              <!-- Banco de dados (CRM) central -->
               <g class="anim-fade d2">
-                <path d="M 242 235 L 242 325 A 58 16 0 0 0 358 325 L 358 235" fill="rgba(15,26,79,.96)" stroke="url(#pV4ring)" stroke-width="1.8"/>
-                <path d="M 242 265 A 58 16 0 0 0 358 265" fill="none" stroke="rgba(0,225,195,.4)" stroke-width="1.2"/>
-                <path d="M 242 295 A 58 16 0 0 0 358 295" fill="none" stroke="rgba(0,225,195,.4)" stroke-width="1.2"/>
-                <ellipse cx="300" cy="235" rx="58" ry="16" fill="rgba(0,225,195,.16)" stroke="#00E1C3" stroke-width="1.8"/>
+                <path d="M266 150 L266 286 A54 16 0 0 0 374 286 L374 150" fill="url(#fzBody)" stroke="url(#fzRing)" stroke-width="1.9"/>
+                <path d="M266 196 A54 16 0 0 0 374 196" fill="none" stroke="rgba(74,108,247,.4)" stroke-width="1.2"/>
+                <path d="M266 240 A54 16 0 0 0 374 240" fill="none" stroke="rgba(74,108,247,.4)" stroke-width="1.2"/>
+                <ellipse cx="320" cy="150" rx="54" ry="16.5" fill="#04071c" stroke="#00E1C3" stroke-width="2"/>
+                <ellipse cx="320" cy="151" rx="42" ry="11.5" fill="#01030d" stroke="rgba(0,225,195,.28)" stroke-width="1"/>
+                <path d="M268 151 A54 16.5 0 0 0 372 151" fill="none" stroke="rgba(150,255,242,.45)" stroke-width="1.5" stroke-linecap="round"/>
               </g>
-              <g class="anim-fade d3">
-                <text x="300" y="292" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="26" letter-spacing="-.02em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 16px rgba(0,225,195,.6))">Base</text>
-                <text x="300" y="312" text-anchor="middle" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="11" letter-spacing="2.5">REATIVADA</text>
+              <g clip-path="url(#clipMouthHero)">
+                <use href="#fzLeft"/>
+                <use href="#fzRight"/>
+              </g>
+              <ellipse cx="320" rx="46" ry="7" fill="rgba(0,225,195,.4)" style="mix-blend-mode:screen"><animate attributeName="cy" values="280;152" dur="2.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.8;0" dur="2.8s" repeatCount="indefinite"/></ellipse>
+              <g class="anim-fade d4"><g fill="#00E1C3" style="filter:drop-shadow(0 0 5px rgba(0,225,195,.7))"><circle cx="296" cy="184" r="3.6"/><circle cx="320" cy="187" r="3.6"/><circle cx="344" cy="184" r="3.6"/></g><g fill="#4A6CF7"><circle cx="296" cy="262" r="3.6"/><circle cx="320" cy="265" r="3.6"/><circle cx="344" cy="262" r="3.6"/></g></g>
+              <g class="anim-fade d3"><text x="320" y="228" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="21" letter-spacing="1" style="filter:drop-shadow(0 0 12px rgba(0,225,195,.6))">CRM</text></g>
+
+              <g clip-path="url(#clipHero)">
+                <circle r="6" fill="#4A6CF7" style="filter:drop-shadow(0 0 9px rgba(74,108,247,.95))"><animateMotion dur="5.5s" repeatCount="indefinite"><mpath href="#fzLeft"/></animateMotion></circle>
+                <circle r="4.6" fill="#7C9BFF" style="filter:drop-shadow(0 0 8px rgba(74,108,247,.8))"><animateMotion dur="5.5s" begin="2.7s" repeatCount="indefinite"><mpath href="#fzLeft"/></animateMotion></circle>
+                <circle r="6" fill="#D87BF1" style="filter:drop-shadow(0 0 9px rgba(216,123,241,.95))"><animateMotion dur="5.5s" begin="1.3s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#fzRight"/></animateMotion></circle>
+                <circle r="4.6" fill="#B23BC9" style="filter:drop-shadow(0 0 8px rgba(167,19,185,.8))"><animateMotion dur="5.5s" begin="4s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#fzRight"/></animateMotion></circle>
               </g>
 
-              <!-- Pacientes na órbita (entram em sequência + pulse) -->
-              <g class="svg-seq-a">
-                <circle cx="300" cy="130" r="22" fill="rgba(5,9,34,.96)" stroke="#00E1C3" stroke-width="1.8" style="filter:drop-shadow(0 0 10px rgba(0,225,195,.5))"/>
-                <circle cx="300" cy="124" r="5" fill="#00E1C3"/>
-                <path d="M 289 142 Q 300 128 311 142" fill="none" stroke="#00E1C3" stroke-width="2.2" stroke-linecap="round"/>
-              </g>
-              <g class="svg-seq-b">
-                <circle cx="473.2" cy="355" r="22" fill="rgba(5,9,34,.96)" stroke="#A713B9" stroke-width="1.8" style="filter:drop-shadow(0 0 10px rgba(167,19,185,.5))"/>
-                <circle cx="473.2" cy="349" r="5" fill="#A713B9"/>
-                <path d="M 462.2 367 Q 473.2 353 484.2 367" fill="none" stroke="#A713B9" stroke-width="2.2" stroke-linecap="round"/>
-              </g>
-              <g class="svg-seq-c">
-                <circle cx="126.8" cy="355" r="22" fill="rgba(5,9,34,.96)" stroke="#4A6CF7" stroke-width="1.8" style="filter:drop-shadow(0 0 10px rgba(74,108,247,.5))"/>
-                <circle cx="126.8" cy="349" r="5" fill="#4A6CF7"/>
-                <path d="M 115.8 367 Q 126.8 353 137.8 367" fill="none" stroke="#4A6CF7" stroke-width="2.2" stroke-linecap="round"/>
-              </g>
-
-              <!-- LABEL 1 — Cadência (cyan, topo-esquerda) → paciente do topo -->
+              <!-- rótulos sutis no topo, setinha fina pro círculo de cada um -->
               <g class="svg-label-fade s1">
-                <text x="14" y="8" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 20px rgba(0,225,195,.6))">Cadência</text>
-                <line x1="14" y1="22" x2="200" y2="22" stroke="#00E1C3" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="14" y="46" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">DE RETOMADA</text>
+                <text x="225" y="44" text-anchor="middle" fill="#4A6CF7" font-family="Sora" font-weight="700" font-size="13" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.35))">Base de pacientes</text>
+                <g transform="rotate(-18 225 53)">
+                  <line x1="225" y1="55" x2="225" y2="96" stroke="#4A6CF7" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+                  <polygon points="225,101 222,95 228,95" fill="#4A6CF7" opacity=".75"/>
+                </g>
               </g>
-              <g>
-                <path d="M 95 58 L 95 130 L 270 130" fill="none" stroke="#00E1C3" stroke-width="2.5" stroke-dasharray="260" stroke-dashoffset="260" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s1" style="filter:drop-shadow(0 0 6px rgba(0,225,195,.6))"/>
-                <polygon points="278,130 270,125 270,135" fill="#00E1C3" class="svg-label-fade s1" style="filter:drop-shadow(0 0 8px rgba(0,225,195,.9))"/>
-              </g>
-
-              <!-- LABEL 2 — Indicações (purple, direita) → paciente direito -->
               <g class="svg-label-fade s2">
-                <text x="586" y="150" text-anchor="end" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Indicações</text>
-                <line x1="380" y1="164" x2="586" y2="164" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="586" y="188" text-anchor="end" fill="rgba(216,123,241,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">FARMING ATIVO</text>
+                <text x="415" y="44" text-anchor="middle" fill="#D87BF1" font-family="Sora" font-weight="700" font-size="13" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.35))">Indicações</text>
+                <g transform="rotate(18 415 53)">
+                  <line x1="415" y1="55" x2="415" y2="96" stroke="#D87BF1" stroke-width="1" stroke-linecap="round" opacity=".5"/>
+                  <polygon points="415,101 412,95 418,95" fill="#D87BF1" opacity=".75"/>
+                </g>
               </g>
-              <g>
-                <path d="M 545 200 L 545 355 L 503 355" fill="none" stroke="#D87BF1" stroke-width="2.5" stroke-dasharray="210" stroke-dashoffset="210" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s2" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.6))"/>
-                <polygon points="495,355 503,350 503,360" fill="#D87BF1" class="svg-label-fade s2" style="filter:drop-shadow(0 0 8px rgba(216,123,241,.9))"/>
-              </g>
-
-              <!-- LABEL 3 — CRM (blue, base-esquerda) → banco central -->
-              <g class="svg-label-fade s3">
-                <text x="14" y="470" fill="#4A6CF7" font-family="Sora" font-weight="800" font-size="34" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(74,108,247,.4)) drop-shadow(0 0 22px rgba(74,108,247,.7))">CRM</text>
-                <line x1="14" y1="484" x2="150" y2="484" stroke="#4A6CF7" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="14" y="508" fill="rgba(74,108,247,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.5">INTELIGENTE</text>
-              </g>
-              <g>
-                <path d="M 160 452 L 160 300 L 232 300" fill="none" stroke="#4A6CF7" stroke-width="2.5" stroke-dasharray="240" stroke-dashoffset="240" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s3" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.6))"/>
-                <polygon points="240,300 232,295 232,305" fill="#4A6CF7" class="svg-label-fade s3" style="filter:drop-shadow(0 0 8px rgba(74,108,247,.9))"/>
-              </g>
+              <g class="anim-fade d6"><text x="320" y="405" text-anchor="middle" fill="#C8D2F0" font-family="Sora" font-weight="800" font-size="19" letter-spacing=".5" style="filter:drop-shadow(0 0 10px rgba(0,225,195,.5))">FARMING <tspan fill="#00E1C3">INFINITO</tspan></text></g>
             </svg>
           </div>
         </div>
