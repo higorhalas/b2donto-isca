@@ -1314,6 +1314,12 @@ footer{text-align:center; color:var(--dim-grey); font-size:11px; padding:30px 0 
 }
 .pilar-next .pn-arrow{ font-size:14px; transition: transform .3s }
 .pilar-next:hover .pn-arrow{ transform:translateX(4px) }
+/* pilar-04: no mobile, "Pronto pra aplicar" aparece abaixo do ícone */
+.pilar-section[data-pilar="04"] .cta-mob{ display:none }
+@media (max-width:1023px){
+  .pilar-section[data-pilar="04"] .cta-desk{ display:none }
+  .pilar-section[data-pilar="04"] .cta-mob{ display:inline-flex }
+}
 
 
 /* ============================================================
@@ -3249,7 +3255,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
             <li><span class="ic">▸</span><div><b>CRM inteligente.</b> Cada lead rastreado, do primeiro oi ao orçamento fechado. Nada se perde.</div></li>
           </ul>
           <div class="pilar-highlight r d4">Paciente que já passou é nova receita.</div>
-          <a href="#ctaFinal" class="pilar-next r d6">Pronto pra aplicar? <span class="pn-arrow">→</span></a>
+          <a href="#ctaFinal" class="pilar-next r d6 cta-desk">Pronto pra aplicar? <span class="pn-arrow">→</span></a>
         </div>
         <div class="pilar-viz-col">
           <div class="pilar-viz-box r">
@@ -3310,6 +3316,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
             </svg>
           </div>
         </div>
+        <a href="#ctaFinal" class="pilar-next r d6 cta-mob">Pronto pra aplicar? <span class="pn-arrow">→</span></a>
       </div>
     </section>
 
