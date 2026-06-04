@@ -101,11 +101,9 @@ body::before{
 @media (max-width:768px){.header{top:20px; left:20px}}
 
 /* ====================== TOP PROGRESS BAR ====================== */
-.topprogress{ position:fixed; top:0; left:0; width:100%; z-index:250 }
-.topprogress .track{position:relative; width:100%; height:6px; background:rgba(255,255,255,.06); overflow:hidden}
-.topprogress .fill{position:absolute; inset:0 auto 0 0; width:0%; background:var(--grad-brand); border-radius:0 6px 6px 0; box-shadow:0 0 16px rgba(0,225,195,.75), 0 0 5px rgba(0,225,195,.9); transition:width .6s cubic-bezier(.4,0,.2,1)}
-.topprogress .section-label{position:fixed; top:37px; right:32px; z-index:250; font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); text-shadow:0 0 10px rgba(0,225,195,.5)}
-@media (max-width:768px){.topprogress .track{height:5px} .topprogress .section-label{top:22px; right:18px; font-size:9px}}
+.qprogress{width:100%; height:8px; background:rgba(255,255,255,.07); border-radius:6px; overflow:hidden; margin:0 0 30px}
+.qprogress-fill{height:100%; width:0%; background:var(--grad-brand); border-radius:6px; box-shadow:0 0 14px rgba(0,225,195,.6), 0 0 4px rgba(0,225,195,.85); transition:width .6s cubic-bezier(.4,0,.2,1)}
+@media (max-width:768px){.qprogress{height:7px; margin:0 0 24px}}
 
 /* ====================== CONTAINER PERGUNTAS ====================== */
 .stage{
@@ -351,11 +349,7 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
   <span class="badge">DIAGNÓSTICO</span>
 </div>
 
-<!-- TOP PROGRESS -->
-<div class="topprogress" id="topProgress">
-  <div class="section-label" id="sectionLabel">Boas-vindas</div>
-  <div class="track"><div class="fill" id="progressFill"></div></div>
-</div>
+<!-- barra de progresso agora fica dentro do card da pergunta (.qprogress) -->
 
 <!-- STAGE -->
 <main class="stage" id="stage"></main>
@@ -493,12 +487,15 @@ function getTotalVisibleQuestions(){
 
 // ============== RENDER ==============
 const stage = document.getElementById('stage');
-const sectionLabel = document.getElementById('sectionLabel');
-const progressFill = document.getElementById('progressFill');
-const progressCount = document.getElementById('progressCount');
+let lastPct = 0;
 
 function renderQuestion(q, animClass){
   let html = '<div class="qcard '+ (animClass || 'in') +'"><div class="qcard-inner">';
+  if(q.type !== 'intro' && q.type !== 'outro'){
+    const _ans = getAnsweredCount(), _tot = getTotalVisibleQuestions();
+    const _pct = _tot > 0 ? Math.max(4, Math.pow(_ans / _tot, 0.5) * 100) : 4;
+    html += '<div class="qprogress"><div class="qprogress-fill" data-pct="'+ _pct +'" style="width:'+ lastPct +'%"></div></div>';
+  }
   html += '<div class="qsection">'+ q.section +'</div>';
 
   if(q.type === 'intro'){
@@ -611,12 +608,11 @@ function render(animClass){
     if(input && input.tagName !== 'DIV') input.focus();
   }, 100);
 
-  // atualiza progress
-  sectionLabel.textContent = q.section || '';
-  const answered = getAnsweredCount();
-  const total = getTotalVisibleQuestions();
-  // barra não-linear: avança rápido nas primeiras perguntas e desacelera no fim (estratégia de funil/VSL)
-  progressFill.style.width = (total > 0 ? Math.max(4, Math.pow(answered / total, 0.5) * 100) : 4) + '%';
+  // anima a barra de progresso (dentro do card) do valor anterior até o alvo (data-pct)
+  requestAnimationFrame(() => {
+    const f = document.querySelector('.qprogress-fill');
+    if(f){ f.style.width = f.dataset.pct + '%'; lastPct = parseFloat(f.dataset.pct) || 0; }
+  });
 }
 
 function transition(direction, callback){
