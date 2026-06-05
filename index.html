@@ -559,6 +559,10 @@ state.sessionId = localStorage.getItem('iscaSessionId')
   || ('s' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
 localStorage.setItem('iscaSessionId', state.sessionId);
 
+// rastreio de funil (topo de funil incluso): maior etapa já enviada nesta visita.
+// evita reenviar a mesma etapa e ignora "voltar"; o Apps Script ainda trava regressão.
+let funnelSentOrd = -1;
+
 let busy = false;            // trava durante transições / checkpoints
 let pendingReaction = null;  // reação a renderizar na próxima tela
 
@@ -861,6 +865,41 @@ function buildLeadPayload(status, event){
   };
 }
 
+// ===== Rastreio de FUNIL (anônimo) =====
+// Manda um ping leve (sem nome/contato) p/ medir até onde a pessoa vai, INCLUSIVE antes
+// do WhatsApp. Vai pra aba "Funil" do Sheets (separada da base de leads). Falha em silêncio.
+//   event 'open' = abriu a página · 'step' = avançou de pergunta
+function trackFunnel(event, reachedQ){
+  if(!SHEETS_ENDPOINT) return;
+  const reached = reachedQ || currentQuestion();
+  let ord = reached ? QUESTIONS.indexOf(reached) : 0;
+  if(ord < 0) ord = 0;
+  // só envia se avançou (dedup de reload/voltar); 'open' sempre marca presença
+  if(event !== 'open' && ord <= funnelSentOrd) return;
+  if(ord > funnelSentOrd) funnelSentOrd = ord;
+
+  const clean = (reached && reached.label) ? reached.label.replace(/<[^>]+>/g, '').trim().slice(0, 70) : '';
+  const label = event === 'open' ? 'Abriu a página'
+              : (reached && reached.type === 'outro') ? 'COMPLETO'
+              : ((reached && reached.num ? ('P' + reached.num + ' · ') : '') + clean);
+
+  const body = JSON.stringify({
+    kind: 'funnel',
+    sessionId: state.sessionId,
+    event: event,
+    ord: ord,
+    label: label,
+    source: 'isca-form'
+  });
+  try {
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(SHEETS_ENDPOINT, new Blob([body], { type:'text/plain;charset=utf-8' }));
+    } else {
+      fetch(SHEETS_ENDPOINT, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: body });
+    }
+  } catch(e){ /* silencioso */ }
+}
+
 // Salva o progresso atual mesmo que o lead abandone. useBeacon=true ao sair da aba.
 function savePartial(event, useBeacon){
   if(!SHEETS_ENDPOINT) return;
@@ -921,6 +960,7 @@ function next(){
 
   // Se a próxima é a tela 'outro' (Recebemos!), dispara o submit antes
   const nextQ = visibleQuestions()[state.index + 1];
+  trackFunnel('step', nextQ);   // rastreia até onde a pessoa foi (topo de funil incluso)
   if(nextQ && nextQ.type === 'outro' && !localStorage.getItem('iscaSubmitted')){
     submitToSheets();
   }
@@ -1017,6 +1057,7 @@ document.addEventListener('keydown', (e) => {
         document.body.classList.add('loaded');
         setTimeout(() => document.getElementById('loader').remove(), 800);
         render();
+        trackFunnel('open');   // marca o topo do funil: alguém abriu a página
       }, 300);
     }
   }, 70);
