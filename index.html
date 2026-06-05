@@ -554,6 +554,11 @@ const state = {
   answers: JSON.parse(localStorage.getItem('iscaAnswers') || '{}')
 };
 
+// ===== Captura parcial: id de sessão único por lead (persiste em reload) =====
+state.sessionId = localStorage.getItem('iscaSessionId')
+  || ('s' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
+localStorage.setItem('iscaSessionId', state.sessionId);
+
 let busy = false;            // trava durante transições / checkpoints
 let pendingReaction = null;  // reação a renderizar na próxima tela
 
@@ -839,27 +844,58 @@ function flashInvalid(msg){
   setTimeout(() => card.classList.remove('invalid'), 600);
 }
 
-// ============== SUBMIT PRA GOOGLE SHEETS ==============
-async function submitToSheets(){
-  if(!SHEETS_ENDPOINT){
-    console.warn('[isca] SHEETS_ENDPOINT vazio — respostas não enviadas. Configure em apps-script.gs');
-    return { ok:false, reason:'no-endpoint' };
-  }
-  const payload = {
+// ============== ENVIO PRA GOOGLE SHEETS (parcial + completo) ==============
+// Monta o payload do lead com sessão, status e em qual pergunta ele está.
+function buildLeadPayload(status, event){
+  let lastQ = '';
+  try { const cq = currentQuestion(); lastQ = (cq && (cq._dnum || cq.num)) || ''; } catch(e){}
+  if(status === 'completo') lastQ = 'COMPLETO';
+  return {
     ...state.answers,
+    sessionId: state.sessionId,
+    status: status,        // 'parcial' | 'completo'
+    event: event,          // 'progress' | 'abandon' | 'complete'
+    lastQuestion: lastQ,
     source: 'isca-form',
     userAgent: navigator.userAgent
   };
+}
+
+// Salva o progresso atual mesmo que o lead abandone. useBeacon=true ao sair da aba.
+function savePartial(event, useBeacon){
+  if(!SHEETS_ENDPOINT) return;
+  if(!state.answers.q3) return;                       // só vira lead quando já tem WhatsApp
+  if(localStorage.getItem('iscaSubmitted')) return;   // já completou, nada a fazer
+  const body = JSON.stringify(buildLeadPayload('parcial', event));
   try {
-    // Apps Script web app não retorna CORS headers → fetch em modo no-cors.
-    // O response é opaco (não conseguimos ler), mas o request chega.
+    if(useBeacon && navigator.sendBeacon){
+      navigator.sendBeacon(SHEETS_ENDPOINT, new Blob([body], { type:'text/plain;charset=utf-8' }));
+    } else {
+      fetch(SHEETS_ENDPOINT, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: body });
+    }
+  } catch(e){ /* silencioso */ }
+}
+
+// Quando o lead fecha/sai da aba no meio: grava onde parou.
+window.addEventListener('pagehide', function(){ savePartial('abandon', true); });
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState === 'hidden') savePartial('progress', true);
+});
+
+async function submitToSheets(){
+  if(!SHEETS_ENDPOINT){
+    console.warn('[isca] SHEETS_ENDPOINT vazio. Configure em apps-script.gs');
+    return { ok:false, reason:'no-endpoint' };
+  }
+  const body = JSON.stringify(buildLeadPayload('completo', 'complete'));
+  try {
+    // Apps Script web app nao retorna CORS headers; fetch em modo no-cors (response opaco, mas chega).
     await fetch(SHEETS_ENDPOINT, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
+      body: body
     });
-    // Sucesso assumido: se chegou aqui sem exception, a chamada foi disparada.
     localStorage.setItem('iscaSubmitted', new Date().toISOString());
     return { ok:true };
   } catch (err) {
@@ -875,6 +911,8 @@ function next(){
   if(q.type !== 'intro' && q.type !== 'outro'){
     if(!validateCurrent()) return;
   }
+  // captura o lead no instante em que o WhatsApp (q3) é preenchido
+  if(q.id === 'q3') savePartial('progress', false);
   if(state.index >= visibleQuestions().length - 1) return;
 
   // captura a reação contextual da pergunta que está saindo (#8/#10)
@@ -890,6 +928,7 @@ function next(){
   // marco de bloco (#7): mudou o número do bloco e o próximo é pergunta real
   const cur = blockNum(q), nxt = blockNum(nextQ);
   if(cur && nxt && nxt !== cur && nextQ.type !== 'outro'){
+    savePartial('progress', false);   // grava progresso a cada bloco concluído
     showCheckpoint(cur, () => { state.index++; render('in'); });
     return;
   }
