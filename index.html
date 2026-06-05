@@ -130,6 +130,7 @@ body::before{
 .qcard.in{opacity:1; transform:none; pointer-events:auto}
 .qcard.out-up{opacity:0; transform:translateY(-40px); pointer-events:none}
 .qcard.out-down{opacity:0; transform:translateY(40px); pointer-events:none}
+.qcard.qcard-center{justify-content:center}  /* checkpoint: centraliza vertical (inclusive no mobile) */
 
 .qcard-inner{width:100%; max-width:760px; margin:0 auto}
 
@@ -609,7 +610,7 @@ function getTotalVisibleQuestions(){
 const stage = document.getElementById('stage');
 
 function renderQuestion(q, animClass){
-  let html = '<div class="qcard '+ (animClass || 'in') +'"><div class="qcard-inner">';
+  let html = '<div class="qcard '+ (animClass || 'in') + (q && q.type === 'outro' ? ' qcard-center' : '') +'"><div class="qcard-inner">';
   html += '<div class="qsection">'+ q.section +'</div>';
 
   if(q.type === 'intro'){
@@ -783,7 +784,7 @@ function renderCheckpoint(n){
   const lines = {1:'Já temos você e a clínica.',2:'Negócio mapeado.',3:'Atendimento raio-x feito.',4:'Comercial destrinchado.',5:'Concorrência na mira.'};
   let dots = '';
   for(let i=1;i<=6;i++) dots += '<span class="qcheck-dot'+(i<=n?' on':'')+'"></span>';
-  let h = '<div class="qcard in"><div class="qcard-inner qcheck">';
+  let h = '<div class="qcard in qcard-center"><div class="qcard-inner qcheck">';
   h += '<div class="qcheck-badge">Bloco '+ n +' de 6 concluído</div>';
   h += '<div class="qcheck-title"><span class="qcheck-tick">✓</span> '+ names[n] +'</div>';
   if(lines[n]) h += '<div class="qcheck-line">'+ lines[n] +'</div>';
