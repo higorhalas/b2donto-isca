@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briggio Design — Estofados de alto padrão</title>
+<meta name="description" content="Estofados retráteis e reclináveis modulares de alto padrão. Fabricados em Arapongas, Paraná, desde 2013.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233E2C1E'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23F4EFE7' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<!-- Open Graph / redes -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Briggio Design — Estofados de alto padrão">
+<meta property="og:description" content="Estofados retráteis e reclináveis modulares. Fabricados em Arapongas, Paraná, desde 2013.">
+<meta property="og:url" content="https://proposta.b2donto.com/briggio/">
+<meta property="og:image" content="https://proposta.b2donto.com/briggio/assets/img/og-image.jpg">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Briggio Design — Estofados de alto padrão">
+<meta name="twitter:description" content="Conforto, mecanismo e durabilidade na mesma peça. Desde 2013, em Arapongas/PR.">
+<meta name="twitter:image" content="https://proposta.b2donto.com/briggio/assets/img/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/img/hero-v2.jpg" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#F4EFE7;
+  --sand-2:#E7DDCC;        /* contraste maior entre seções claras */
+  --cream:#FBF8F2;
+  --nogueira:#3E2C1E;
+  --madeira:#6B4F3A;
+  --caramelo:#B98A5E;
+  --capuccino:#C9A98A;
+  --grafite:#3A3C40;
+  --terracota:#A85C3B;
+  --line:rgba(62,44,30,.14);
+  --line-soft:rgba(62,44,30,.08);
+  --serif:'Cormorant Garamond', Georgia, serif;
+  --sans:'Inter', system-ui, -apple-system, sans-serif;
+  --ease:cubic-bezier(.5,0,.15,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{
+  font-family:var(--sans);background:var(--sand);color:var(--nogueira);
+  font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.no-scroll{overflow:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* foco de teclado acessível */
+:focus-visible{outline:2px solid var(--caramelo);outline-offset:3px;border-radius:2px}
+.materials :focus-visible,.location :focus-visible,.footer :focus-visible{outline-color:#EED9C2}
+
+/* skip link */
+.skip{position:absolute;left:-9999px;top:0;z-index:3000;background:var(--nogueira);color:var(--sand);padding:12px 18px;border-radius:0 0 6px 0;font-size:14px}
+.skip:focus{left:0}
+
+/* tipografia */
+.serif{font-family:var(--serif)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.01em}
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--caramelo)}
+.lead{font-size:clamp(18px,1.5vw,21px);color:var(--madeira);max-width:46ch;font-weight:400}
+em.accent{font-style:italic;color:var(--caramelo)}
+
+/* layout */
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+section{position:relative}
+.section-pad{padding:clamp(80px,12vh,160px) 0}
+
+/* loader */
+.loader{position:fixed;inset:0;z-index:2000;background:var(--sand);display:grid;place-items:center;transition:opacity .8s var(--ease),visibility .8s}
+.loader.done{opacity:0;visibility:hidden}
+.loader-inner{text-align:center;overflow:hidden}
+.loader-word{font-family:var(--serif);font-size:clamp(40px,7vw,84px);font-weight:500;letter-spacing:.18em;color:var(--nogueira);transform:translateY(110%);animation:loadUp 1s var(--ease) .15s forwards}
+.loader-bar{height:1px;width:0;background:var(--caramelo);margin:18px auto 0;animation:loadBar 1.2s var(--ease) .35s forwards}
+@keyframes loadUp{to{transform:translateY(0)}}
+@keyframes loadBar{to{width:180px}}
+
+/* cursor */
+.cursor,.cursor-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:1500;border-radius:50%}
+.cursor{width:34px;height:34px;border:1px solid rgba(62,44,30,.45);transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),background .3s,border-color .3s}
+.cursor-dot{width:5px;height:5px;background:var(--nogueira);transform:translate(-50%,-50%)}
+.cursor.hover{width:60px;height:60px;background:rgba(185,138,94,.14);border-color:rgba(185,138,94,.5)}
+@media (hover:none),(max-width:900px){.cursor,.cursor-dot{display:none}}
+
+/* header */
+.header{position:fixed;top:0;left:0;width:100%;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:22px 32px;transition:padding .4s var(--ease),background .4s,box-shadow .4s;opacity:0;transform:translateY(-12px)}
+body.loaded .header{opacity:1;transform:translateY(0);transition:opacity .8s .2s,transform .8s .2s,background .4s,box-shadow .4s,padding .4s}
+.header.scrolled{background:rgba(244,239,231,.82);backdrop-filter:blur(14px);padding:14px 32px;box-shadow:0 1px 0 var(--line-soft)}
+.brand{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.16em;transition:opacity .25s}
+.brand:hover{opacity:.62}
+.nav{display:flex;gap:34px;align-items:center}
+.nav a{font-size:13px;letter-spacing:.05em;font-weight:400;color:var(--madeira);transition:color .25s;position:relative}
+.nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--caramelo);transition:width .3s var(--ease)}
+.nav a:hover{color:var(--nogueira)}
+.nav a:hover::after{width:100%}
+.nav .nav-cta{border:1px solid var(--nogueira);border-radius:30px;padding:9px 18px;color:var(--nogueira);transition:background .3s,color .3s}
+.nav .nav-cta::after{display:none}
+.nav .nav-cta:hover{background:var(--nogueira);color:var(--sand)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;width:30px;height:24px;justify-content:center;background:none;border:none;padding:0}
+.burger span{height:1.5px;width:100%;background:var(--nogueira);transition:.3s;display:block}
+
+/* hero */
+.hero{height:100svh;min-height:600px;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:118%;object-fit:cover;will-change:transform}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 42%,rgba(40,28,18,.62) 100%)}
+.hero-content{position:relative;z-index:2;width:100%;padding-bottom:clamp(48px,8vh,96px);color:var(--cream)}
+.hero .eyebrow{color:#EED9C2}
+.hero h1{font-size:clamp(52px,9.5vw,148px);font-weight:500;color:#fff;margin:18px 0 22px;line-height:.92;letter-spacing:-.02em}
+.hero-sub{font-size:clamp(16px,1.5vw,20px);color:rgba(255,255,255,.92);max-width:44ch;font-weight:300}
+.hero-actions{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap}
+.scroll-hint{position:absolute;right:32px;bottom:38px;z-index:2;color:var(--cream);font-size:11px;letter-spacing:.2em;text-transform:uppercase;writing-mode:vertical-rl;opacity:.85;display:flex;align-items:center;gap:12px}
+.scroll-hint::after{content:"";width:1px;height:50px;background:rgba(255,255,255,.6);animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:500;letter-spacing:.02em;padding:15px 30px;border-radius:34px;cursor:pointer;transition:transform .4s var(--ease),background .3s,color .3s,border-color .3s}
+.btn-light{background:var(--cream);color:var(--nogueira)}
+.btn-light:hover{background:#fff}
+.btn-ghost{border:1px solid rgba(255,255,255,.55);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff}
+.btn-dark{background:var(--nogueira);color:var(--sand)}
+.btn-dark:hover{background:var(--madeira)}
+.btn-outline{border:1px solid var(--nogueira);color:var(--nogueira)}
+.btn-outline:hover{background:var(--nogueira);color:var(--sand)}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(5px)}
+
+/* reveals */
+.r{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.r.in{opacity:1;transform:none}
+.r.d1{transition-delay:.08s}.r.d2{transition-delay:.16s}.r.d3{transition-delay:.24s}.r.d4{transition-delay:.32s}.r.d5{transition-delay:.4s}
+
+/* section heading */
+.shead{display:flex;flex-direction:column;gap:16px;margin-bottom:clamp(40px,6vh,72px);max-width:760px}
+.shead h2{font-size:clamp(36px,5.2vw,74px);font-weight:500}
+.shead.center{margin-left:auto;margin-right:auto;text-align:center;align-items:center}
+
+/* manifesto */
+.manifesto{background:var(--sand);text-align:center}
+.manifesto .big{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4.6vw,62px);line-height:1.1;letter-spacing:-.01em;max-width:18ch;margin:0 auto}
+.manifesto p{margin:34px auto 0;max-width:54ch;color:var(--madeira);font-size:clamp(16px,1.4vw,19px)}
+.stats{display:flex;justify-content:center;gap:clamp(36px,8vw,110px);margin-top:64px;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;gap:8px}
+.stat .num{font-family:var(--serif);font-size:clamp(38px,4.6vw,60px);font-weight:500;color:var(--nogueira);line-height:1}
+.stat .lab{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--caramelo)}
+
+/* coleções */
+.collections{background:var(--sand-2)}
+.col-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center;margin-bottom:clamp(64px,9vh,120px)}
+.col-row:last-child{margin-bottom:0}
+.col-row.flip .col-media{order:2}
+.col-media{position:relative;overflow:hidden}
+.col-media img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform 1.4s var(--ease);will-change:transform}
+.col-media:hover img{transform:scale(1.04)}
+.col-index{font-family:var(--serif);font-size:15px;color:var(--caramelo);font-style:italic;margin-bottom:14px}
+.col-text h3{font-size:clamp(32px,4vw,52px);margin-bottom:18px}
+.col-text p{color:var(--madeira);max-width:42ch;margin-bottom:18px}
+.col-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--madeira);border-top:1px solid var(--line);padding-top:18px;margin-top:6px}
+.col-meta span b{color:var(--nogueira);font-weight:500}
+.col-link{display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-size:13px;letter-spacing:.04em;color:var(--nogueira);border-bottom:1px solid var(--line);padding-bottom:4px}
+.col-link .arrow{transition:transform .3s var(--ease)}
+.col-link:hover .arrow{transform:translateX(5px)}
+
+/* materiais */
+.materials{background:var(--nogueira);color:var(--cream)}
+.materials .eyebrow{color:var(--capuccino)}
+.mat-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center}
+.mat-media{overflow:hidden}
+.mat-media img{width:100%;aspect-ratio:1/1;object-fit:cover;transition:transform 1.4s var(--ease)}
+.mat-media:hover img{transform:scale(1.05)}
+.materials h2{font-size:clamp(34px,4.6vw,64px);color:#fff;margin-bottom:24px}
+.materials p{color:rgba(251,248,242,.78);max-width:46ch;margin-bottom:30px}
+.mat-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:40px}
+.mat-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:rgba(251,248,242,.9);border-top:1px solid rgba(251,248,242,.13);padding-top:14px}
+.mat-list li .k{color:var(--capuccino);font-family:var(--serif);font-size:18px;min-width:26px}
+.swatches{display:flex;gap:26px;flex-wrap:wrap}
+.swatch{display:flex;flex-direction:column;align-items:center;gap:11px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(251,248,242,.72)}
+.swatch i{width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.2);box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+
+/* galeria */
+.gallery{background:var(--sand)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
+.gal-grid figure{overflow:hidden;position:relative}
+.gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.gal-grid figure:hover img{transform:scale(1.05)}
+.g-a{grid-column:span 2;grid-row:span 2}
+.g-b{grid-column:span 2;grid-row:span 1}
+.g-c{grid-column:span 1;grid-row:span 2}
+.g-d{grid-column:span 1;grid-row:span 1}
+
+/* sobre */
+.about{background:var(--sand-2)}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,90px);align-items:center}
+.about-media{overflow:hidden}
+.about-media img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.about h2{font-size:clamp(34px,4.8vw,64px);margin-bottom:26px}
+.about p{color:var(--madeira);margin-bottom:18px;max-width:48ch}
+.about .sign{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--caramelo);margin-top:8px}
+
+/* parcerias */
+.partners{background:var(--sand)}
+.part-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.part-card{background:var(--cream);border:1px solid var(--line-soft);border-radius:8px;padding:clamp(32px,4vw,52px);display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.part-card:hover{transform:translateY(-5px);box-shadow:0 24px 50px -28px rgba(62,44,30,.35)}
+.part-card .pk{font-family:var(--serif);font-style:italic;color:var(--caramelo);font-size:17px;margin-bottom:14px}
+.part-card h3{font-size:clamp(26px,3vw,38px);margin-bottom:16px}
+.part-card p{color:var(--madeira);margin-bottom:24px;flex:1}
+.part-card .plist{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
+.part-card .plist li{font-size:14px;color:var(--madeira);display:flex;gap:11px;align-items:baseline}
+.part-card .plist li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--caramelo);flex:0 0 auto;transform:translateY(-1px)}
+
+/* localização */
+.location{background:var(--nogueira);color:var(--cream)}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px);align-items:center}
+.location .eyebrow{color:var(--capuccino)}
+.location h2{font-size:clamp(32px,4.4vw,58px);color:#fff;margin:16px 0 26px}
+.loc-info{display:flex;flex-direction:column;gap:22px}
+.loc-item .lt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--capuccino);margin-bottom:6px}
+.loc-item .lv{font-size:16px;color:rgba(251,248,242,.92)}
+.loc-note{font-size:12px;color:rgba(251,248,242,.5);margin-top:10px}
+
+/* footer (escuro, fecha a página) */
+.footer{background:#2C1E13;color:var(--cream);padding:74px 0 40px}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(251,248,242,.12)}
+.foot-brand .brand{font-size:40px;color:#fff}
+.foot-brand p{color:rgba(251,248,242,.66);font-size:14px;margin-top:12px;max-width:30ch}
+.foot-cols{display:flex;gap:clamp(40px,7vw,100px);flex-wrap:wrap}
+.foot-h{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--capuccino);margin-bottom:16px;font-family:var(--sans);font-weight:600}
+.foot-col a{display:block;font-size:14px;color:rgba(251,248,242,.78);margin-bottom:10px;transition:color .25s}
+.foot-col a:hover{color:#fff}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:30px;font-size:12px;color:rgba(251,248,242,.55)}
+
+/* mobile nav */
+.mnav{position:fixed;inset:0;z-index:999;background:var(--sand);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;transform:translateY(-100%);transition:transform .6s var(--ease)}
+.mnav.open{transform:translateY(0)}
+.mnav a{font-family:var(--serif);font-size:32px;color:var(--nogueira);padding:6px}
+.mnav a.mnav-cta{font-family:var(--sans);font-size:16px;border:1px solid var(--nogueira);border-radius:30px;padding:12px 28px;margin-top:18px}
+
+/* responsive */
+@media (max-width:900px){
+  .nav{display:none}
+  .burger{display:flex}
+  .col-row,.mat-grid,.about-grid,.part-grid,.loc-grid{grid-template-columns:1fr;gap:32px}
+  .col-row.flip .col-media{order:0}
+  .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
+  .gal-grid figure{grid-column:span 1;grid-row:span 1}
+  .hero{height:90svh}
+}
+@media (max-width:560px){
+  .wrap{padding:0 22px}
+  .header{padding:16px 22px}
+  .stats{gap:30px}
+  .scroll-hint{display:none}
+  .gal-grid{grid-template-columns:1fr;grid-auto-rows:240px}
+  .hero-actions{width:100%}
+  .hero-actions .btn{flex:1;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .r{opacity:1;transform:none}
+  .hero-bg img{height:100%}
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Pular para o conteúdo</a>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-word">BRIGGIO</div>
+    <div class="loader-bar"></div>
+  </div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <a href="#top" class="brand" aria-label="Briggio Design, voltar ao topo">BRIGGIO</a>
+  <nav class="nav" aria-label="Principal">
+    <a href="#colecoes">Coleções</a>
+    <a href="#materiais">Materiais</a>
+    <a href="#ambientes">Ambientes</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#lojistas">Lojistas e arquitetos</a>
+    <a href="#contato" class="nav-cta">Fale com a gente</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mnav" id="mnav" aria-hidden="true">
+  <a href="#colecoes">Coleções</a>
+  <a href="#materiais">Materiais</a>
+  <a href="#ambientes">Ambientes</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#lojistas">Lojistas e arquitetos</a>
+  <a href="#contato" class="mnav-cta">Fale com a gente</a>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="assets/img/hero-v2.jpg" alt="Sofá retrátil em veludo num ambiente sofisticado com luz quente" width="2000" height="1120" fetchpriority="high" decoding="async" data-parallax="0.16"></div>
+  <div class="wrap hero-content">
+    <p class="eyebrow r in">Fábrica de estofados · Arapongas / PR · desde 2013</p>
+    <h1 class="r in d1">O seu melhor<br>momento</h1>
+    <p class="hero-sub r in d2">Estofados retráteis e reclináveis modulares, onde conforto, mecanismo e durabilidade vivem na mesma peça.</p>
+    <div class="hero-actions r in d3">
+      <a href="#colecoes" class="btn btn-light" data-magnetic>Ver coleções <span class="arrow" aria-hidden="true">→</span></a>
+      <a href="#lojistas" class="btn btn-ghost" data-magnetic>Seja um lojista</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">Role para descobrir</div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto section-pad">
+  <div class="wrap">
+    <p class="eyebrow r">O que fazemos</p>
+    <h2 class="big r d1">Transformamos veludo, espuma e madeira no <em class="accent">lugar favorito</em> da casa.</h2>
+    <p class="r d2">Nascemos no maior polo moveleiro do Brasil com uma obsessão: o estofado retrátil e reclinável, a categoria mais técnica do setor. Cada peça é feita com controle rigoroso de processo e olhar constante nas tendências de design.</p>
+    <div class="stats">
+      <div class="stat r d2"><span class="num">2013</span><span class="lab">Desde</span></div>
+      <div class="stat r d3"><span class="num"><span data-count="3">0</span></span><span class="lab">Coleções autorais</span></div>
+      <div class="stat r d4"><span class="num">Arapongas</span><span class="lab">Paraná · Brasil</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COLEÇÕES -->
+<section class="collections section-pad" id="colecoes">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow r">Coleções</p>
+      <h2 class="r d1">Cada modelo<br>tem <em class="accent">nome próprio</em>.</h2>
+      <p class="lead r d2">Mesma engenharia de conforto, estéticas distintas. Você escolhe a personalidade que entra na sala.</p>
+    </div>
+
+    <article class="col-row">
+      <div class="col-media r"><img src="assets/img/tellaro.jpg" alt="Sofá modular Tellaro em veludo terracota" width="1600" height="1200" loading="lazy"></div>
+      <div class="col-text">
+        <div class="col-index r">01 / Coleção</div>
+        <h3 class="r d1">Tellaro</h3>
+        <p class="r d2">Modular e generoso. O retrátil que vira o coração da sala, com volumes acolhedores e revestimento em veludo de toque profundo.</p>
+        <div class="col-meta r d3"><span><b>Modular</b> em L</span><span><b>Retrátil</b> + reclinável</span><span><b>Veludo</b> premium</span></div>
+        <a href="#contato" class="col-link r d3">Solicitar ficha técnica <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </article>
+
+    <article class="col-row flip">
+      <div class="col-media r"><img src="assets/img/clean.jpg" alt="Sofá Clean reclinável em veludo grafite" width="1600" height="1200" loading="lazy"></div>
+      <div class="col-text">
+        <div class="col-index r">02 / Coleção</div>
+        <h3 class="r d1">Clean</h3>
+        <p class="r d2">Retrátil e reclinável de linhas limpas. Mecanismo com catracas reguláveis para encontrar o conforto exato de cada momento.</p>
+        <div class="col-meta r d3"><span><b>2,70m</b></span><span><b>Encosto</b> reclinável</span><span><b>Grafite</b> e mais cores</span></div>
+        <a href="#contato" class="col-link r d3">Solicitar ficha técnica <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </article>
+
+    <article class="col-row">
+      <div class="col-media r"><img src="assets/img/pamela.jpg" alt="Sofá Pamela em veludo capuccino" width="1600" height="1200" loading="lazy"></div>
+      <div class="col-text">
+        <div class="col-index r">03 / Coleção</div>
+        <h3 class="r d1">Pamela</h3>
+        <p class="r d2">Linhas contemporâneas e 2,50m de elegância. O aconchego em formato mais compacto, sem abrir mão da presença.</p>
+        <div class="col-meta r d3"><span><b>2,50m</b></span><span><b>Design</b> contemporâneo</span><span><b>Capuccino</b></span></div>
+        <a href="#contato" class="col-link r d3">Solicitar ficha técnica <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- MATERIAIS -->
+<section class="materials section-pad" id="materiais">
+  <div class="wrap">
+    <div class="mat-grid">
+      <div class="mat-media r"><img src="assets/img/veludo-macro.jpg" alt="Detalhe macro do veludo e da costura" width="1200" height="1200" loading="lazy"></div>
+      <div class="mat-text">
+        <p class="eyebrow r">Materiais &amp; Acabamentos</p>
+        <h2 class="r d1">Veludo que se<br>toca com os olhos.</h2>
+        <p class="r d2">A sensação de luxo começa na superfície e continua por dentro. Engenharia de conforto pensada para durar.</p>
+        <ul class="mat-list">
+          <li class="r d2"><span class="k">01</span><div><b>Veludo</b> de toque profundo, em tons sóbrios e quentes.</div></li>
+          <li class="r d3"><span class="k">02</span><div><b>Assento</b> em espuma com molas e percintas elásticas de sustentação.</div></li>
+          <li class="r d3"><span class="k">03</span><div><b>Mecanismo</b> retrátil e reclinável com catracas reguláveis.</div></li>
+          <li class="r d4"><span class="k">04</span><div><b>Estrutura</b> com predominância de madeira, feita para o uso diário.</div></li>
+        </ul>
+        <div class="swatches r d4">
+          <div class="swatch"><i style="background:#3A3C40"></i>Grafite</div>
+          <div class="swatch"><i style="background:#C9A98A"></i>Capuccino</div>
+          <div class="swatch"><i style="background:#B98A5E"></i>Caramelo</div>
+          <div class="swatch"><i style="background:#A85C3B"></i>Terracota</div>
+          <div class="swatch"><i style="background:#6B4F3A"></i>Nogueira</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMBIENTES / GALERIA -->
+<section class="gallery section-pad" id="ambientes">
+  <div class="wrap">
+    <div class="shead center">
+      <p class="eyebrow r">Ambientes</p>
+      <h2 class="r d1">Feitos para <em class="accent">viver</em>.</h2>
+    </div>
+    <div class="gal-grid">
+      <figure class="g-a r"><img src="assets/img/gallery-1.jpg" alt="Sala ampla de pé-direito alto com sofá modular em veludo" width="1600" height="1067" loading="lazy"></figure>
+      <figure class="g-c r d1"><img src="assets/img/ambiente-vertical.jpg" alt="Poltrona em veludo caramelo num canto aconchegante" width="1200" height="1600" loading="lazy"></figure>
+      <figure class="g-d r d2"><img src="assets/img/gallery-2.jpg" alt="Detalhe de manta de tricô sobre sofá de veludo" width="1500" height="1125" loading="lazy"></figure>
+      <figure class="g-b r d2"><img src="assets/img/gallery-3.jpg" alt="Sala ao entardecer com sofá de veludo caramelo e luz quente" width="1800" height="1012" loading="lazy"></figure>
+      <figure class="g-d r d3"><img src="assets/img/hero-v1.jpg" alt="Sala de estar ampla com sofá modular em L" width="1800" height="1004" loading="lazy"></figure>
+      <figure class="g-d r d3"><img src="assets/img/veludo-macro.jpg" alt="Textura do veludo em detalhe" width="1200" height="1200" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="about section-pad" id="sobre">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="eyebrow r">Nossa história</p>
+        <h2 class="r d1">Desde <em class="accent">2013</em>,<br>em Arapongas.</h2>
+        <p class="r d2">Começamos no coração do maior polo moveleiro do país, com um propósito simples e exigente: entregar à família o melhor momento de descanso dentro de casa.</p>
+        <p class="r d2">Escolhemos a categoria mais difícil, o estofado retrátil e reclinável, porque é nela que conforto, mecanismo e durabilidade precisam conviver na mesma peça. Mais de uma década depois, essa herança se traduz em coleções de design contemporâneo, feitas com fornecedores selecionados e controle de processo em cada etapa.</p>
+        <p class="sign r d3">Briggio Design</p>
+      </div>
+      <div class="about-media r d1"><img src="assets/img/atelie.jpg" alt="Artesão trabalhando o veludo no ateliê" width="1600" height="1067" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCERIAS -->
+<section class="partners section-pad" id="lojistas">
+  <div class="wrap">
+    <div class="shead">
+      <p class="eyebrow r">Parcerias</p>
+      <h2 class="r d1">Para quem leva<br>conforto adiante.</h2>
+    </div>
+    <div class="part-grid">
+      <div class="part-card r">
+        <div class="pk">Para lojistas</div>
+        <h3>Seja um revendedor Briggio.</h3>
+        <p>Um produto que conquista pelo conforto, com margem saudável e giro. Leve a Briggio para a sua loja.</p>
+        <ul class="plist">
+          <li>Catálogo de coleções com nomes próprios</li>
+          <li>Condições comerciais para revenda</li>
+          <li>Fábrica própria em Arapongas, Paraná</li>
+        </ul>
+        <a href="#contato" class="btn btn-dark" data-magnetic>Quero revender <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="part-card r d2" id="arquitetos">
+        <div class="pk">Para arquitetos</div>
+        <h3>Especifique com respaldo.</h3>
+        <p>Conforto que cabe no seu projeto, com a informação técnica que você precisa para indicar com segurança.</p>
+        <ul class="plist">
+          <li>Ficha técnica e medidas por modelo</li>
+          <li>Cartela de veludos e tons</li>
+          <li>Atendimento direto para projeto</li>
+        </ul>
+        <a href="#contato" class="btn btn-outline" data-magnetic>Falar com a fábrica <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO / CONTATO -->
+<section class="location section-pad" id="contato">
+  <div class="wrap">
+    <div class="loc-grid">
+      <div class="loc-left">
+        <p class="eyebrow r">Onde nascem os estofados</p>
+        <h2 class="r d1">Arapongas,<br>Paraná.</h2>
+        <p class="r d2" style="color:rgba(251,248,242,.78);max-width:42ch">Fale com a gente para conhecer as coleções, abrir uma revenda ou tirar dúvidas de projeto.</p>
+        <div class="hero-actions r d3" style="margin-top:30px">
+          <!-- TODO: quando tiver o número, trocar por href="https://wa.me/55DDDNUMERO" e label "WhatsApp" -->
+          <a href="https://www.instagram.com/briggiodesign/" target="_blank" rel="noopener" class="btn btn-light" data-magnetic>Fale com a gente <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="https://www.instagram.com/briggiodesign/" target="_blank" rel="noopener" class="btn btn-ghost" data-magnetic>@briggiodesign</a>
+        </div>
+      </div>
+      <div class="loc-info r d2">
+        <div class="loc-item"><div class="lt">Endereço</div><div class="lv">Rua Guaratinga, 955, Parque Industrial II<br>Arapongas, PR · CEP 86.703-010</div></div>
+        <div class="loc-item"><div class="lt">Atendimento</div><div class="lv">Segunda a sexta, 9h às 18h · Sábado, 9h às 12h</div></div>
+        <div class="loc-item"><div class="lt">Redes</div><div class="lv">Instagram @briggiodesign</div></div>
+        <p class="loc-note">* Contatos e endereço a confirmar com a equipe antes de publicar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand">BRIGGIO</div>
+        <p>Estofados retráteis e reclináveis de alto padrão. Arapongas, Paraná.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <p class="foot-h">Navegar</p>
+          <a href="#colecoes">Coleções</a>
+          <a href="#materiais">Materiais</a>
+          <a href="#ambientes">Ambientes</a>
+          <a href="#sobre">Sobre</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-h">Parcerias</p>
+          <a href="#lojistas">Seja um lojista</a>
+          <a href="#arquitetos">Para arquitetos</a>
+          <a href="#contato">Contato</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-h">Conectar</p>
+          <a href="https://www.instagram.com/briggiodesign/" target="_blank" rel="noopener">Instagram</a>
+          <a href="#contato">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Briggio Design. Todos os direitos reservados.</span>
+      <span>O seu melhor momento.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var loader = document.getElementById('loader');
+  var fallbackTimer;
+
+  function reveal(){
+    loader.classList.add('done');
+    document.body.classList.add('loaded');
+    if(fallbackTimer) clearTimeout(fallbackTimer);
+  }
+  window.addEventListener('load', function(){ setTimeout(reveal, 1300); });
+  fallbackTimer = setTimeout(reveal, 2600);
+
+  /* header scrolled */
+  var header = document.getElementById('header');
+  function onScrollHeader(){ header.classList.toggle('scrolled', window.scrollY > 40); }
+  onScrollHeader();
+
+  /* mobile nav */
+  var burger = document.getElementById('burger');
+  var mnav = document.getElementById('mnav');
+  function setMenu(open){
+    mnav.classList.toggle('open', open);
+    document.body.classList.toggle('no-scroll', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    mnav.setAttribute('aria-hidden', String(!open));
+  }
+  burger.addEventListener('click', function(){ setMenu(!mnav.classList.contains('open')); });
+  mnav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+
+  /* reveals — marca como visível o que já está acima/na tela (reload/âncora) */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  var vh0 = window.innerHeight;
+  document.querySelectorAll('.r').forEach(function(el){
+    if(el.classList.contains('in')) return;
+    if(el.getBoundingClientRect().top < vh0 * 0.92) el.classList.add('in');
+    else io.observe(el);
+  });
+
+  /* contadores */
+  function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+  function runCount(el){
+    var target = parseFloat(el.getAttribute('data-count')), dur = 1300, start = null;
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts - start)/dur, 1);
+      el.textContent = Math.round(target * easeOut(p));
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); cio.unobserve(e.target); } });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    if(reduce) el.textContent = el.getAttribute('data-count'); else cio.observe(el);
+  });
+
+  /* parallax do hero (derivado do scroll, sem drift) */
+  var pEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+  function parallax(){
+    var y = window.scrollY;
+    pEls.forEach(function(el){
+      var f = parseFloat(el.getAttribute('data-parallax'));
+      el.style.transform = 'translate3d(0,' + (y * f).toFixed(1) + 'px,0)';
+    });
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if(ticking) return; ticking = true;
+    requestAnimationFrame(function(){ onScrollHeader(); if(!reduce) parallax(); ticking = false; });
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  if(!reduce) parallax();
+
+  /* custom cursor */
+  if(window.matchMedia('(hover:hover)').matches && window.innerWidth > 900){
+    var cur = document.getElementById('cursor'), dot = document.getElementById('cursorDot');
+    var mx=0,my=0,cx=0,cy=0;
+    document.addEventListener('mousemove', function(e){
+      mx=e.clientX; my=e.clientY;
+      dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
+    });
+    (function loop(){ cx+=(mx-cx)*0.16; cy+=(my-cy)*0.16; cur.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
+    document.querySelectorAll('a, .btn, [data-magnetic]').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ cur.classList.add('hover'); });
+      el.addEventListener('mouseleave', function(){ cur.classList.remove('hover'); });
+    });
+  }
+
+  /* botões magnéticos (follow imediato, retorno suave) */
+  if(window.matchMedia('(hover:hover)').matches && !reduce){
+    document.querySelectorAll('[data-magnetic]').forEach(function(btn){
+      btn.addEventListener('mouseenter', function(){ btn.style.transition='transform .08s linear'; });
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - (r.left + r.width/2);
+        var y = e.clientY - (r.top + r.height/2);
+        btn.style.transform = 'translate('+(x*0.22)+'px,'+(y*0.28)+'px)';
+      });
+      btn.addEventListener('mouseleave', function(){ btn.style.transition='transform .4s var(--ease)'; btn.style.transform=''; });
+    });
+  }
+})();
+</script>
+</body>
+</html>
