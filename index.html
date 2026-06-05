@@ -283,6 +283,38 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
 .qerror{font-family:var(--mono); font-size:11px; color:var(--danger); margin-top:10px; letter-spacing:1px; opacity:0; transition:opacity .25s}
 .qcard.invalid .qerror{opacity:1}
 
+/* ===== GRUPO (perguntas na mesma tela) ===== */
+.qgroup{margin-top:6px; display:grid; gap:22px}
+.qgroup.row{grid-template-columns:1fr 1fr; gap:30px; align-items:end}
+.qgfield{display:flex; flex-direction:column; gap:8px}
+.qgfield .qsub{font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--cool-grey); text-transform:uppercase}
+.qgroup.row .qnumeric{margin-top:0}
+
+/* ===== CHIPS (atalhos rápidos) ===== */
+.qchips{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+.qchip{font-family:var(--font); font-size:13px; color:var(--cool-grey); background:rgba(255,255,255,.04); border:1px solid var(--line-strong); border-radius:24px; padding:9px 16px; cursor:pointer; transition:all .25s}
+.qchip:hover{border-color:rgba(0,225,195,.5); color:var(--white); background:rgba(0,225,195,.08)}
+
+/* ===== REAÇÃO / INSIGHT (aparece na tela seguinte) ===== */
+.qreaction{display:flex; align-items:flex-start; gap:10px; margin-bottom:22px; padding:12px 16px; border-radius:12px; font-size:14px; line-height:1.45; max-width:580px; animation:reactIn .5s cubic-bezier(.2,.7,.2,1) both}
+.qreaction-ic{flex:none; width:16px; height:16px; margin-top:2px; border-radius:50%}
+.qreaction.tone-good{background:rgba(0,225,195,.08); border:1px solid rgba(0,225,195,.25); color:var(--off-white)}
+.qreaction.tone-good .qreaction-ic{background:radial-gradient(circle at center, var(--cyan) 42%, transparent 44%); box-shadow:0 0 10px rgba(0,225,195,.5)}
+.qreaction.tone-pain{background:rgba(255,176,32,.07); border:1px solid rgba(255,176,32,.28); color:var(--off-white)}
+.qreaction.tone-pain .qreaction-ic{background:radial-gradient(circle at center, #FFB020 42%, transparent 44%); box-shadow:0 0 10px rgba(255,176,32,.45)}
+@keyframes reactIn{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
+
+/* ===== CHECKPOINT (marco de bloco) ===== */
+.qcheck{text-align:center; display:flex; flex-direction:column; align-items:center; gap:18px}
+.qcheck-badge{font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--cyan)}
+.qcheck-title{font-size:clamp(30px,5vw,52px); font-weight:700; letter-spacing:-.02em; display:flex; align-items:center; gap:14px}
+.qcheck-tick{display:inline-flex; align-items:center; justify-content:center; width:clamp(40px,6vw,58px); height:clamp(40px,6vw,58px); border-radius:50%; background:var(--grad-brand); color:var(--black-hole); font-size:.6em; box-shadow:0 12px 36px rgba(0,225,195,.35); animation:tickPop .5s cubic-bezier(.2,.9,.3,1.4) both}
+.qcheck-line{font-size:16px; color:var(--cool-grey)}
+.qcheck-dots{display:flex; gap:10px; margin-top:8px}
+.qcheck-dot{width:10px; height:10px; border-radius:50%; background:var(--line-strong); transition:all .3s}
+.qcheck-dot.on{background:var(--cyan); box-shadow:0 0 10px rgba(0,225,195,.6)}
+@keyframes tickPop{from{opacity:0; transform:scale(.4)} to{opacity:1; transform:scale(1)}}
+
 @media (max-width:768px){
   .stage{padding:0}
   .qcard{
@@ -295,6 +327,9 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
   .qopt{padding:14px 16px; font-size:14px}
   .qhint{margin-bottom:24px}
   .qlabel{margin-bottom:10px}
+  .qgroup.row{grid-template-columns:1fr; gap:18px}
+  .qreaction{font-size:13px; margin-bottom:18px}
+  .qcheck-title{gap:10px}
 
   /* intro compacta pro botão aparecer sem scroll */
   .logo-raiox{margin-bottom:32px; gap:14px}
@@ -347,15 +382,13 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
   <span class="badge">DIAGNÓSTICO</span>
 </div>
 
-<!-- barra de progresso agora fica dentro do card da pergunta (.qprogress) -->
-
 <!-- STAGE -->
 <main class="stage" id="stage"></main>
 
 <!-- FOOTER HINTS -->
 <div class="qfooter">
   <div><span>B2DONTO · ISCA · 2026</span></div>
-  <div><kbd>Enter</kbd> avançar · <kbd>↑</kbd> voltar</div>
+  <div><kbd>Enter</kbd> avançar · <kbd>Esc</kbd> voltar</div>
 </div>
 
 <script>
@@ -379,12 +412,17 @@ const QUESTIONS = [
   { id:'q4',  section:'1 · Quem é você',  num:4,  type:'email', label:'Seu melhor e-mail',           placeholder:'voce@clinica.com.br', required:true },
   { id:'q5',  section:'1 · Quem é você',  num:5,  type:'text',  label:'@ do Instagram da clínica',   placeholder:'@suaclinica', hint:'Obrigatório. É a <b>base da análise</b> de presença digital.', required:true, star:true },
   { id:'q6',  section:'1 · Quem é você',  num:6,  type:'text',  label:'Link do Google Meu Negócio',  placeholder:'Cole o link OU "nome + cidade"', hint:'Se não tiver o link, mande o nome da clínica e a cidade que a gente acha.', required:true, star:true },
-  { id:'q7',  section:'1 · Quem é você',  num:7,  type:'text',  label:'Tem site? Cole o link',      placeholder:'https://suaclinica.com.br (ou "não tenho")', hint:'Se não tiver site, escreve "não tenho" e seguimos.', required:true, star:true },
+  { id:'q7',  section:'1 · Quem é você',  num:7,  type:'text',  label:'Tem site? Cole o link',      placeholder:'https://suaclinica.com.br', hint:'Sem site? Toca no botão abaixo e seguimos.', chips:[{label:'Não tenho site →', value:'Não tenho', advance:true}], required:true, star:true },
   { id:'q8',  section:'1 · Quem é você',  num:8,  type:'text',  label:'Em que cidade ou região você atende?', placeholder:'Ex.: Curitiba, bairro Batel', required:true, star:true },
 
   // SEÇÃO 2
-  { id:'q9',  section:'2 · Sobre o negócio', num:9, type:'text', label:'Quais os <span class="grad-text">1 ou 2 procedimentos</span> que você mais quer vender?', placeholder:'Ex.: Implantes, Facetas, Invisalign', hint:'Os que dão mais ticket / margem.', required:true, star:true },
-  { id:'q10', section:'2 · Sobre o negócio', num:10, type:'text', label:'Qual o ticket médio desses procedimentos?', placeholder:'Ex.: R$ 4.500 a R$ 12.000', required:true, star:true },
+  { id:'g_proc', section:'2 · Sobre o negócio', num:9, type:'group', layout:'stack',
+    label:'{nome}, vamos aos números do que você vende',
+    hint:'Foca nos procedimentos que dão mais ticket / margem.',
+    fields:[
+      { id:'q9',  kind:'text', sub:'1 ou 2 procedimentos que você mais quer vender', placeholder:'Ex.: Implantes, Facetas, Invisalign' },
+      { id:'q10', kind:'text', sub:'Ticket médio desses procedimentos', placeholder:'Ex.: R$ 4.500 a R$ 12.000' }
+    ], required:true, star:true },
   { id:'q11', section:'2 · Sobre o negócio', num:11, type:'textarea', label:'Quais seus principais diferenciais em relação aos concorrentes?', placeholder:'O que você faz de verdade diferente?', hint:'<b>"Atendimento humanizado" não conta</b> como diferencial. Pensa: estrutura, formação, tecnologia, garantia, processo, especialização.', required:true, star:true },
 
   // SEÇÃO 3
@@ -394,10 +432,13 @@ const QUESTIONS = [
     options:['Menos de 4 minutos','Mais de 4 minutos','Algumas horas','No mesmo dia','Mais de 1 dia'], required:true },
   { id:'q14', section:'3 · Atendimento', num:14, type:'radio', label:'Como o paciente agenda?',
     options:['WhatsApp','Ligação','Site / online'], required:true },
-  { id:'q15', section:'3 · Atendimento', num:15, type:'numeric10', label:'Qual a taxa de <span class="grad-text">agendamento</span> dos leads?',
-    hint:'De cada 10 que falam com vocês, quantos agendam uma avaliação?', required:true },
-  { id:'q16', section:'3 · Atendimento', num:16, type:'numeric10', label:'E a taxa de <span class="grad-text">comparecimento</span>?',
-    hint:'De cada 10 que agendam, quantos realmente aparecem na consulta?', required:true },
+  { id:'g_taxas', section:'3 · Atendimento', num:15, type:'group', layout:'row',
+    label:'Suas taxas hoje <span class="grad-text">(de 0 a 10)</span>',
+    hint:'Agendamento: de cada 10 que falam com vocês, quantos agendam. Comparecimento: de cada 10 que agendam, quantos aparecem.',
+    fields:[
+      { id:'q15', kind:'numeric10', sub:'Agendamento' },
+      { id:'q16', kind:'numeric10', sub:'Comparecimento' }
+    ], required:true },
   { id:'q17', section:'3 · Atendimento', num:17, type:'radio', label:'Você sente que perde pacientes no atendimento?',
     hint:'Some, não responde, marca e não vem.',
     options:['Sim, bastante','Um pouco','Quase não'], required:true },
@@ -440,21 +481,69 @@ const QUESTIONS = [
     options:['Acompanhava as métricas','Só sentia o resultado no caixa','Não acompanhava nada'], required:true, conditional:'q25' },
   { id:'q26', section:'6 · Tráfego e momento', num:26, type:'radio', label:'Você está rodando anúncio agora?',
     options:['Sim','Não','Pausado'], required:true },
-  { id:'q27', section:'6 · Tráfego e momento', num:27, type:'radio', label:'Quanto você tem disponível, <span class="grad-text">hoje</span>, pra investir em anúncios por mês?',
+  { id:'q27', section:'6 · Tráfego e momento', num:27, type:'radio', label:'{nome}, quanto você tem disponível <span class="grad-text">hoje</span> pra investir em anúncios por mês?',
     hint:'Valor que você realmente consegue separar — não a média do que já gastou.',
     options:['R$ 1.000','R$ 1.500','R$ 2.000','R$ 3.000','R$ 5.000','Acima de R$ 5.000','Ainda não defini / preciso de orientação'], required:true, star:true },
-  { id:'q28', section:'6 · Tráfego e momento', num:28, type:'radio', label:'Qual seu principal objetivo agora?',
+  { id:'g_fat', section:'6 · Tráfego e momento', num:28, type:'group', layout:'stack',
+    label:'Faturamento: onde a {clinica} está e onde quer chegar',
+    hint:'Fica entre nós — é o que dimensiona o seu plano de aceleração.',
+    fields:[
+      { id:'q30', kind:'text', sub:'Faturamento médio HOJE (por mês)', placeholder:'Ex.: R$ 40.000 / mês' },
+      { id:'q31', kind:'text', sub:'Meta de faturamento consistente em 6 meses', placeholder:'Ex.: R$ 100.000 / mês' }
+    ], required:true, star:true },
+  { id:'q28', section:'6 · Tráfego e momento', num:29, type:'radio', label:'Qual seu principal objetivo agora?',
+    hint:'Penúltima etapa — seu raio-X já está quase montado.',
     options:['Atrair pacientes','Vender procedimentos de maior valor','Organizar o atendimento','Escalar com previsibilidade'], required:true },
-  { id:'q29', section:'6 · Tráfego e momento', num:29, type:'textarea', label:'Descreva, em poucas linhas, o <span class="grad-text">seu momento atual</span>',
+  { id:'q29', section:'6 · Tráfego e momento', num:30, type:'textarea', label:'Pra fechar, {nome}: descreva o <span class="grad-text">momento atual</span> da clínica',
     placeholder:'Como está sua clínica hoje? Quais as principais dores ou desafios?',
-    hint:'Quanto mais detalhe, melhor a análise.', required:true },
+    hint:'É essa resposta que transforma seus números num plano de ação — capricha. Em <b>poucas horas</b> seu raio-X cai no WhatsApp.', required:true },
 
   // OUTRO
   { id:'outro', type:'outro', section:'Pronto',
     title:'Recebemos seu briefing.',
-    body:'Em até <b>48 horas</b> você recebe no WhatsApp o diagnóstico completo da sua presença digital, com o plano de ação personalizado pra sua clínica.'
+    body:'Em <b>poucas horas</b> você recebe no WhatsApp o diagnóstico completo da sua presença digital, com o plano de ação personalizado pra sua clínica.'
   }
 ];
+
+// Números de exibição sequenciais (recalculados após os merges; condicionais herdam o nº do pai + letra)
+(function assignDisplayNums(){
+  let n = 0;
+  QUESTIONS.forEach(q => { if(!q.num || q.conditional) return; n++; q._dnum = n; });
+  QUESTIONS.forEach(q => {
+    if(q.conditional && q.num){
+      const parent = QUESTIONS.find(p => p.id === q.conditional);
+      const letter = String(q.num).replace(/[^a-z]/gi,'');
+      q._dnum = (parent && parent._dnum ? parent._dnum : '') + letter;
+    }
+  });
+})();
+
+// Reações contextuais (#8 insight + #10 validação da dor) — mostradas na tela seguinte
+const REACTIONS = {
+  q13(a){
+    const v = a.q13; if(!v) return null;
+    if(v === 'Menos de 4 minutos') return { tone:'good', text:'Resposta em menos de 4 min é seu maior trunfo — segura o lead no impulso de decidir.' };
+    return { tone:'pain', text:'78% dos pacientes fecham com quem responde primeiro. Dá pra virar isso rápido.' };
+  },
+  g_taxas(a){
+    const ag = parseInt(a.q15,10), comp = parseInt(a.q16,10);
+    if(isNaN(ag) || isNaN(comp)) return null;
+    const sit = Math.round(ag * comp / 10);
+    const base = 'Do jeito de hoje, de cada 10 leads ~' + sit + ' sentam na cadeira.';
+    if(sit <= 4) return { tone:'pain', text: base + ' Tem faturamento vazando aí — e é dos ajustes mais rápidos.' };
+    return { tone:'good', text: base + ' Boa base pra escalar.' };
+  },
+  q17(a){
+    if(a.q17 === 'Sim, bastante' || a.q17 === 'Um pouco')
+      return { tone:'pain', text:'Esse vazamento no atendimento costuma custar mais caro que o tráfego — e é dos mais fáceis de tampar.' };
+    return null;
+  },
+  q20(a){
+    if(a.q20 === 'Não faz' || a.q20 === 'Às vezes, quando lembra')
+      return { tone:'pain', text:'Quem parou de responder não está perdido: follow-up cadenciado recupera venda que você já achava morta.' };
+    return null;
+  }
+};
 
 // IDs condicionais (que podem ser puladas)
 const SKIP_IF_25_NUNCA = ['q25a','q25b','q25c'];
@@ -464,6 +553,22 @@ const state = {
   index: 0,
   answers: JSON.parse(localStorage.getItem('iscaAnswers') || '{}')
 };
+
+let busy = false;            // trava durante transições / checkpoints
+let pendingReaction = null;  // reação a renderizar na próxima tela
+
+// Substitui {nome} e {clinica} nos textos (#9). Some sem deixar vírgula órfã se ainda não tiver resposta.
+function interpolate(str){
+  if(!str) return str;
+  const nome = (state.answers.q1 || '').trim().split(/\s+/)[0] || '';
+  const clinica = (state.answers.q2 || '').trim();
+  if(nome) str = str.replace(/\{nome\}/g, nome);
+  else str = str.replace(/\{nome\},?\s*/g, '');
+  if(clinica) str = str.replace(/\{clinica\}/g, clinica);
+  else str = str.replace(/\s*\{clinica\}/g, '');
+  return str;
+}
+function blockNum(q){ const n = parseInt(q && q.section, 10); return isNaN(n) ? null : n; }
 
 // ============== UTILITÁRIOS ==============
 function totalAnswerable(){ return QUESTIONS.filter(q => q.num).length; }
@@ -535,15 +640,19 @@ function renderQuestion(q, animClass){
   }
 
   // pergunta normal
-  html += '<div class="qlabel"><span class="qnum">'+ String(q.num).padStart(2,'0') +'</span>'+ q.label;
+  if(pendingReaction){
+    html += '<div class="qreaction tone-'+ (pendingReaction.tone||'good') +'"><span class="qreaction-ic"></span><span>'+ pendingReaction.text +'</span></div>';
+  }
+  html += '<div class="qlabel"><span class="qnum">'+ String(q._dnum).padStart(2,'0') +'</span>'+ interpolate(q.label);
   if(q.star) html += '<span class="required">★</span>';
   html += '</div>';
-  if(q.hint) html += '<div class="qhint">'+ q.hint +'</div>';
+  if(q.hint) html += '<div class="qhint">'+ interpolate(q.hint) +'</div>';
 
   const prev = state.answers[q.id] || '';
 
   if(q.type === 'text' || q.type === 'tel' || q.type === 'email'){
-    html += '<input class="qinput" type="'+ q.type +'" id="ans" autocomplete="off" placeholder="'+ (q.placeholder||'') +'" value="'+ prev.replace(/"/g,'&quot;') +'">';
+    const v = prev || (q.prefill ? (q.prefill(state.answers) || '') : '');
+    html += '<input class="qinput" type="'+ q.type +'" id="ans" autocomplete="off" placeholder="'+ (q.placeholder||'') +'" value="'+ String(v).replace(/"/g,'&quot;') +'">';
   }
   else if(q.type === 'textarea'){
     html += '<textarea class="qinput" id="ans" placeholder="'+ (q.placeholder||'') +'" rows="3">'+ prev +'</textarea>';
@@ -578,6 +687,28 @@ function renderQuestion(q, animClass){
     });
     html += '</div>';
   }
+  else if(q.type === 'group'){
+    html += '<div class="qgroup '+ (q.layout==='row'?'row':'stack') +'" id="ans">';
+    q.fields.forEach(f => {
+      const pv = state.answers[f.id] || '';
+      html += '<label class="qgfield"><span class="qsub">'+ f.sub +'</span>';
+      if(f.kind === 'numeric10'){
+        html += '<span class="qnumeric"><input class="qinput" data-gid="'+ f.id +'" type="number" inputmode="numeric" min="0" max="10" placeholder="?" value="'+ pv +'"><span class="qof">de 10</span></span>';
+      } else {
+        html += '<input class="qinput" data-gid="'+ f.id +'" type="text" autocomplete="off" placeholder="'+ (f.placeholder||'') +'" value="'+ String(pv).replace(/"/g,'&quot;') +'">';
+      }
+      html += '</label>';
+    });
+    html += '</div>';
+  }
+
+  if(q.chips){
+    html += '<div class="qchips">';
+    q.chips.forEach(c => {
+      html += '<button type="button" class="qchip" data-chip-value="'+ String(c.value).replace(/"/g,'&quot;') +'" data-chip-advance="'+ (c.advance?'1':'0') +'">'+ c.label +'</button>';
+    });
+    html += '</div>';
+  }
 
   html += '<div class="qerror">Campo obrigatório</div>';
 
@@ -593,15 +724,20 @@ function renderQuestion(q, animClass){
 function render(animClass){
   const q = currentQuestion();
   stage.innerHTML = renderQuestion(q, animClass);
+  pendingReaction = null; // consome a reação (só aparece uma vez)
 
-  // foco no input
+  // foco no input (em grupos, foca o primeiro campo)
   setTimeout(() => {
-    const input = document.querySelector('.qcard #ans');
-    if(input && input.tagName !== 'DIV') input.focus();
+    const ans = document.querySelector('.qcard #ans');
+    if(!ans) return;
+    if(ans.tagName !== 'DIV'){ ans.focus(); return; }
+    const first = ans.querySelector('input, textarea');
+    if(first) first.focus();
   }, 100);
 }
 
 function transition(direction, callback){
+  busy = true;
   const card = document.querySelector('.qcard');
   if(card){
     card.classList.remove('in');
@@ -609,7 +745,36 @@ function transition(direction, callback){
   }
   setTimeout(() => {
     callback();
-    render(direction === 'next' ? 'in' : 'in');
+    render('in');
+    busy = false;
+  }, 350);
+}
+
+// ============== CHECKPOINT (marco de bloco · #7) ==============
+function renderCheckpoint(n){
+  const names = {1:'Quem é você',2:'Sobre o negócio',3:'Atendimento',4:'Comercial avançado',5:'Concorrentes',6:'Tráfego e momento'};
+  const lines = {1:'Já temos você e a clínica.',2:'Negócio mapeado.',3:'Atendimento raio-x feito.',4:'Comercial destrinchado.',5:'Concorrência na mira.'};
+  let dots = '';
+  for(let i=1;i<=6;i++) dots += '<span class="qcheck-dot'+(i<=n?' on':'')+'"></span>';
+  let h = '<div class="qcard in"><div class="qcard-inner qcheck">';
+  h += '<div class="qcheck-badge">Bloco '+ n +' de 6 concluído</div>';
+  h += '<div class="qcheck-title"><span class="qcheck-tick">✓</span> '+ names[n] +'</div>';
+  if(lines[n]) h += '<div class="qcheck-line">'+ lines[n] +'</div>';
+  h += '<div class="qcheck-dots">'+ dots +'</div>';
+  h += '</div></div>';
+  return h;
+}
+function showCheckpoint(blockDone, done){
+  busy = true;
+  const card = document.querySelector('.qcard');
+  if(card){ card.classList.remove('in'); card.classList.add('out-up'); }
+  setTimeout(() => {
+    stage.innerHTML = renderCheckpoint(blockDone);
+    setTimeout(() => {
+      const cc = document.querySelector('.qcard');
+      if(cc){ cc.classList.remove('in'); cc.classList.add('out-up'); }
+      setTimeout(() => { done(); busy = false; }, 350);
+    }, 1200);
   }, 350);
 }
 
@@ -631,6 +796,21 @@ function validateCurrent(){
     const b = input.querySelector('[data-pair="b"]').value.trim();
     if(!a || !b){ flashInvalid(); return false; }
     state.answers[q.id] = { a, b };
+  }
+  else if(q.type === 'group'){
+    let ok = true;
+    q.fields.forEach(f => {
+      const el = input.querySelector('[data-gid="'+ f.id +'"]');
+      const v = (el ? el.value : '').trim();
+      if(f.kind === 'numeric10'){
+        const nn = parseInt(v, 10);
+        if(isNaN(nn) || nn < 0 || nn > 10) ok = false;
+        else state.answers[f.id] = String(nn);
+      } else {
+        if(!v) ok = false; else state.answers[f.id] = v;
+      }
+    });
+    if(!ok){ flashInvalid(); return false; }
   }
   else if(q.type === 'numeric10'){
     const v = parseInt(input.value, 10);
@@ -690,11 +870,16 @@ async function submitToSheets(){
 
 // ============== NAVIGATION ==============
 function next(){
+  if(busy) return;
   const q = currentQuestion();
   if(q.type !== 'intro' && q.type !== 'outro'){
     if(!validateCurrent()) return;
   }
   if(state.index >= visibleQuestions().length - 1) return;
+
+  // captura a reação contextual da pergunta que está saindo (#8/#10)
+  const rfn = REACTIONS[q.id];
+  pendingReaction = rfn ? rfn(state.answers) : null;
 
   // Se a próxima é a tela 'outro' (Recebemos!), dispara o submit antes
   const nextQ = visibleQuestions()[state.index + 1];
@@ -702,24 +887,46 @@ function next(){
     submitToSheets();
   }
 
+  // marco de bloco (#7): mudou o número do bloco e o próximo é pergunta real
+  const cur = blockNum(q), nxt = blockNum(nextQ);
+  if(cur && nxt && nxt !== cur && nextQ.type !== 'outro'){
+    showCheckpoint(cur, () => { state.index++; render('in'); });
+    return;
+  }
+
   transition('next', () => state.index++);
 }
 function prev(){
+  if(busy) return;
   if(state.index <= 0) return;
+  pendingReaction = null;
   transition('prev', () => state.index--);
 }
 
 // ============== EVENT HANDLERS ==============
 stage.addEventListener('click', (e) => {
   const action = e.target.closest('[data-action]')?.dataset.action;
-  if(action === 'next') next();
-  if(action === 'prev') prev();
+  if(action === 'next'){ next(); return; }
+  if(action === 'prev'){ prev(); return; }
+
+  // chips (ex.: "Não tenho site") — preenche e, se marcado, avança (#13)
+  const chip = e.target.closest('.qchip');
+  if(chip){
+    const inp = document.querySelector('.qcard #ans');
+    if(inp && inp.tagName !== 'DIV') inp.value = chip.dataset.chipValue;
+    if(chip.dataset.chipAdvance === '1') next();
+    return;
+  }
 
   const opt = e.target.closest('.qopt');
   if(opt){
     document.querySelectorAll('.qopt').forEach(o => o.classList.remove('selected'));
     opt.classList.add('selected');
-    // sem auto-advance — usuário precisa clicar em OK ou Enter pra avançar
+    // auto-avanço nas perguntas de escolha única (#1) — o "← Voltar" segue disponível na próxima tela
+    const q = currentQuestion();
+    if(q && q.type === 'radio'){
+      setTimeout(() => { if(currentQuestion() === q) next(); }, 280);
+    }
   }
 });
 
@@ -729,7 +936,16 @@ document.addEventListener('keydown', (e) => {
   }
   if(e.target.tagName === 'TEXTAREA') return;
 
-  if(e.key === 'Enter'){ e.preventDefault(); next(); }
+  if(e.key === 'Enter'){
+    const cq = currentQuestion();
+    // em grupos, Enter pula pro próximo campo vazio antes de avançar
+    if(cq && cq.type === 'group' && e.target.dataset && e.target.dataset.gid){
+      const inputs = [].slice.call(document.querySelectorAll('.qcard #ans [data-gid]'));
+      const empty = inputs.find(i => !i.value.trim());
+      if(empty && empty !== e.target){ e.preventDefault(); empty.focus(); return; }
+    }
+    e.preventDefault(); next();
+  }
   if(e.key === 'ArrowUp' && e.ctrlKey){ e.preventDefault(); prev(); }
   if(e.key === 'Escape') prev();
 
