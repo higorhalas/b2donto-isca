@@ -747,9 +747,9 @@ function render(animClass){
   setTimeout(() => {
     const ans = document.querySelector('.qcard #ans');
     if(!ans) return;
-    if(ans.tagName !== 'DIV'){ ans.focus(); return; }
+    if(ans.tagName !== 'DIV'){ ans.focus({ preventScroll:true }); return; }
     const first = ans.querySelector('input, textarea');
-    if(first) first.focus();
+    if(first) first.focus({ preventScroll:true });
   }, 100);
 }
 
