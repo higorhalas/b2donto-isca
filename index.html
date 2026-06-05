@@ -743,7 +743,16 @@ function render(animClass){
   stage.innerHTML = renderQuestion(q, animClass);
   pendingReaction = null; // consome a reação (só aparece uma vez)
 
-  // foco no input (em grupos, foca o primeiro campo)
+  // Mobile: o teclado da pergunta anterior empurra a tela. Garante a nova no topo
+  // e NÃO dá foco automático (senão o teclado abre sozinho e esconde a pergunta).
+  const isTouch = matchMedia('(hover:none)').matches;
+  if(isTouch){
+    window.scrollTo(0, 0);
+    const c = document.querySelector('.qcard'); if(c) c.scrollTop = 0;
+    return;
+  }
+
+  // Desktop: foco no input (em grupos, foca o primeiro campo)
   setTimeout(() => {
     const ans = document.querySelector('.qcard #ans');
     if(!ans) return;
@@ -755,6 +764,7 @@ function render(animClass){
 
 function transition(direction, callback){
   busy = true;
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); // fecha o teclado antes de trocar (mobile)
   const card = document.querySelector('.qcard');
   if(card){
     card.classList.remove('in');
@@ -783,6 +793,7 @@ function renderCheckpoint(n){
 }
 function showCheckpoint(blockDone, done){
   busy = true;
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); // fecha o teclado (mobile)
   const card = document.querySelector('.qcard');
   if(card){ card.classList.remove('in'); card.classList.add('out-up'); }
   setTimeout(() => {
