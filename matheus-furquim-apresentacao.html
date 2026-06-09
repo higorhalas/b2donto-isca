@@ -164,10 +164,13 @@ section{position:relative; padding:88px 28px}
 /* ===== MOBILE: texto no topo, sem filete ===== */
 @media(max-width:759px){
   .hero{justify-content:flex-start; padding:108px 0 44px}
-  .hero-photo::after{background:linear-gradient(180deg, rgba(20,10,17,.92) 0%, rgba(20,10,17,.6) 26%, rgba(20,10,17,.14) 48%, rgba(42,22,38,.4) 82%, var(--ink) 100%)}
+  .hero-photo{inset:auto 0 0 0; height:82%}
+  .hero-photo img{object-position:50% 16%}
+  .hero-photo::after{background:linear-gradient(180deg, var(--ink) 0%, rgba(20,10,17,.72) 13%, rgba(20,10,17,.2) 34%, transparent 56%, rgba(42,22,38,.3) 86%, var(--ink) 100%)}
   .hero .casos{border-top:none; padding-top:4px}
 }
 @media(min-width:760px){
+  .hero-photo img{object-position:50% 42%}
   .hero h1{font-size:84px}
   section{padding:120px 40px}
   .wrap, .hero-inner{max-width:640px}
