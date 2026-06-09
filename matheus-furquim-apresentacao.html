@@ -70,7 +70,7 @@ h1,h2,h3{font-family:var(--serif); font-weight:300; line-height:1.04; letter-spa
   padding:26px 24px}
 .hero-top .sig{font-family:var(--script); font-size:34px; color:var(--cream); line-height:1; opacity:.96}
 .hero-inner{position:relative; z-index:2; padding:0 28px; max-width:600px; margin:0 auto; width:100%}
-.hero .eyebrow{margin-bottom:18px}
+.hero .eyebrow{margin-bottom:18px; letter-spacing:.34em; line-height:1.7}
 .hero h1{font-size:clamp(46px,15vw,72px); color:var(--cream); margin-bottom:6px}
 .hero h1 .first{display:block; font-style:italic; font-weight:300; color:var(--gold-soft); font-size:.42em; letter-spacing:.06em; margin-bottom:6px}
 .hero .tag{font-family:var(--serif); font-size:clamp(19px,5.2vw,24px); font-weight:300; color:var(--muted);
@@ -80,9 +80,9 @@ h1,h2,h3{font-family:var(--serif); font-weight:300; line-height:1.04; letter-spa
 .hero .casos .num{font-family:var(--serif); font-size:40px; color:var(--gold); line-height:1}
 .hero .casos .cap{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
 .scroll-hint{position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:2;
-  width:1px; height:40px; background:linear-gradient(var(--gold), transparent); opacity:.6;
-  animation:hintPulse 2.4s ease-in-out infinite}
-@keyframes hintPulse{0%,100%{opacity:.2; height:24px} 50%{opacity:.7; height:42px}}
+  width:1px; height:40px; background:linear-gradient(var(--gold), transparent); opacity:.4;
+  animation:hintPulse 4s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{height:26px} 50%{height:40px}}
 
 /* ===== SECTIONS ===== */
 section{position:relative; padding:88px 28px}
@@ -108,6 +108,9 @@ section{position:relative; padding:88px 28px}
   background:linear-gradient(180deg, rgba(110,58,94,.08), transparent)}
 .stat .v{font-family:var(--serif); font-size:30px; color:var(--gold); line-height:1}
 .stat .k{font-family:var(--sans); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:8px; line-height:1.3}
+.stat-hero{text-align:center; margin-top:40px; padding-top:34px; border-top:1px solid var(--line)}
+.stat-hero .sh-num{font-family:var(--serif); font-weight:300; font-size:clamp(58px,17vw,98px); line-height:.95}
+.stat-hero .sh-label{font-family:var(--sans); font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--muted); margin-top:12px}
 
 /* FILOSOFIA */
 .filo{background:linear-gradient(180deg, transparent, rgba(42,22,38,.5), transparent)}
@@ -120,17 +123,17 @@ section{position:relative; padding:88px 28px}
 .pillar h3{font-size:25px; color:var(--cream); margin-bottom:5px; font-weight:400}
 .pillar p{font-size:14px; color:var(--muted); font-family:var(--sans); line-height:1.6}
 
+/* FRASE AUTORAL (voz do médico) */
+.autoral{text-align:center; padding:92px 30px}
+.autoral .aq{font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(28px,8vw,44px); line-height:1.18; color:var(--cream); max-width:15ch; margin:0 auto}
+.autoral .aq em{font-style:italic; color:var(--gold-soft)}
+.autoral .aq-sig{font-family:var(--script); font-size:38px; color:var(--gold-soft); margin-top:22px; line-height:1}
+
 /* ANTES E DEPOIS */
 .ad h2{font-size:clamp(32px,8.5vw,46px); color:var(--cream); text-align:center; margin-bottom:8px}
 .ad .lead{text-align:center; font-size:18px; margin-bottom:34px}
 .ad-grid{display:flex; flex-direction:column; gap:16px}
-.ad-grid .figure{margin:0}
-
-/* ONDA · respiro scroll-driven */
-.wavesec{position:relative; height:185vh; padding:0; background:var(--ink)}
-.wave-sticky{position:sticky; top:0; height:100svh; overflow:hidden}
-.wave-sticky canvas{display:block; width:100%; height:100%}
-@media(prefers-reduced-motion:reduce){.wavesec{height:100svh}}
+.ad-grid .figure{margin:0; border-color:var(--line-strong)}
 
 /* CTA */
 .cta{text-align:center; padding:100px 30px 130px;
@@ -155,10 +158,10 @@ section{position:relative; padding:88px 28px}
 
 /* botão WhatsApp flutuante */
 .wpp-float{position:fixed; right:18px; bottom:18px; z-index:40; width:56px; height:56px;
-  border-radius:50%; background:#25D366; display:grid; place-items:center; text-decoration:none;
-  box-shadow:0 8px 30px rgba(37,211,102,.45); transition:transform .3s; animation:floatIn .6s .8s both}
+  border-radius:50%; background:var(--gold); display:grid; place-items:center; text-decoration:none;
+  box-shadow:0 8px 30px rgba(202,169,107,.4); transition:transform .3s; animation:floatIn .6s .8s both}
 .wpp-float:hover{transform:scale(1.08)}
-.wpp-float svg{width:30px; height:30px; fill:#fff}
+.wpp-float svg{width:30px; height:30px; fill:var(--ink-soft)}
 @keyframes floatIn{from{transform:scale(0); opacity:0} to{transform:scale(1); opacity:1}}
 
 /* ===== REVEALS ===== */
@@ -177,13 +180,14 @@ section{position:relative; padding:88px 28px}
   .hero-photo{inset:auto 0 0 0; height:80%; overflow:hidden}
   .hero-photo img{object-position:50% 50%; transform:translate(9%,8%) scale(1.24)}
   .hero-photo::after{background:linear-gradient(180deg, var(--ink) 0%, rgba(20,10,17,.22) 12%, transparent 40%, transparent 64%, rgba(20,10,17,.4) 86%, var(--ink) 100%)}
-  .hero .casos{border-top:none; padding-top:4px}
+  .hero .eyebrow{letter-spacing:.24em; font-size:10px}
+  .hero .casos{border-top:none; padding-top:4px; flex-direction:column; align-items:flex-start; gap:5px}
 }
 @media(min-width:760px){
   .hero{justify-content:center; align-items:flex-end; padding:0}
   .hero-photo img{object-position:48% 50%}
   .hero-photo::after{background:radial-gradient(58% 44% at 78% 53%, rgba(0,0,0,.6), transparent 72%), radial-gradient(86% 76% at 76% 30%, rgba(0,0,0,.92), rgba(0,0,0,.28) 52%, transparent 72%), linear-gradient(265deg, rgba(20,10,17,.78) 0%, rgba(20,10,17,.34) 32%, transparent 60%), linear-gradient(180deg, transparent 74%, var(--ink))}
-  .hero-inner{margin:0; max-width:50%; padding:0 7vw 0 3vw; align-self:center; transform:translateY(-14vh)}
+  .hero-inner{margin:0; max-width:54%; padding:0 7vw 0 3vw; align-self:center; transform:translateY(-14vh)}
   .hero-top{justify-content:flex-end; padding-right:7vw}
   .hero h1{font-size:80px}
   .scroll-hint{display:none}
@@ -192,21 +196,114 @@ section{position:relative; padding:88px 28px}
   .manifesto h2{font-size:60px}
   .ad-grid{display:grid; grid-template-columns:1fr; gap:20px; max-width:680px; margin:0 auto}
 }
+/* ============ CAMADA PREMIUM ============ */
+
+/* title mask reveal (sobe sob máscara) */
+.r-title{opacity:1 !important; transform:none !important}
+.r-mask{display:block; clip-path:inset(-3% 0 112% 0);
+  transition:clip-path .9s cubic-bezier(.22,1,.36,1); transition-delay:var(--mask-delay,0s); will-change:clip-path}
+.r-title.in .r-mask{clip-path:inset(-3% 0 -14% 0)}
+
+/* texto com gradient dourado (joalheria) */
+.grad-gold{background:linear-gradient(105deg,var(--gold-soft) 0%,var(--gold) 42%,#b6904c 60%,var(--gold-soft) 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent}
+
+/* sheen passando no botão dourado */
+.btn-wpp{position:relative; overflow:hidden}
+.btn-wpp::before{content:""; position:absolute; top:-12%; bottom:-12%; left:-45%; width:26%;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.4), transparent);
+  transform:skewX(-18deg); pointer-events:none}
+.btn-wpp.in::before{animation:sheen 4.5s ease-in-out .25s 2}
+.btn-wpp:hover::before{animation:sheen 1s ease-out 1}
+@keyframes sheen{0%{left:-45%} 18%{left:145%} 100%{left:145%}}
+
+/* glow dourado no hover dos cards (desktop) */
+.stat{transition:border-color .45s ease, box-shadow .45s ease, transform .45s ease}
+.figure{transition:box-shadow .55s ease, border-color .55s ease}
+@media(hover:hover) and (pointer:fine){
+  .stat:hover{border-color:var(--line-strong); box-shadow:0 0 26px rgba(202,169,107,.16); transform:translateY(-2px)}
+  .figure:hover{border-color:var(--line-strong); box-shadow:0 0 32px rgba(202,169,107,.14)}
+  .pillar{transition:padding-left .4s ease, border-color .4s ease}
+  .pillar:hover{padding-left:11px; border-top-color:var(--line-strong)}
+}
+
+/* Ken Burns no hero (só desktop; mobile usa transform de enquadramento) */
+@media(min-width:760px) and (prefers-reduced-motion:no-preference){
+  .hero-photo img{animation:kenburns 28s ease-in-out infinite alternate}
+}
+@keyframes kenburns{from{transform:scale(1.02)} to{transform:scale(1.1) translate(-1.5%,-1%)}}
+
+/* loading screen vinho/ouro */
+.loader{position:fixed; inset:0; z-index:120}
+.loader .panel{position:absolute; left:0; right:0; height:50.4%; background:var(--ink-soft);
+  transition:transform 1s cubic-bezier(.76,0,.24,1) .15s}
+.loader .panel.top{top:0}
+.loader .panel.bot{bottom:0}
+.loader .lsig{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  font-family:var(--script); font-size:46px; color:var(--gold-soft); transition:opacity .45s}
+.loader .lbar{position:absolute; left:50%; top:calc(50% + 44px); transform:translateX(-50%);
+  width:120px; height:1px; background:var(--line); overflow:hidden; transition:opacity .45s}
+.loader .lbar i{position:absolute; inset:0 auto 0 0; width:0; background:var(--gold)}
+.loader .lpct{position:absolute; left:50%; top:calc(50% + 58px); transform:translateX(-50%);
+  font-family:var(--sans); font-size:10px; letter-spacing:.3em; color:var(--dim); transition:opacity .45s}
+body.loaded .loader .panel.top{transform:translateY(-100%)}
+body.loaded .loader .panel.bot{transform:translateY(100%)}
+body.loaded .loader .lsig, body.loaded .loader .lbar, body.loaded .loader .lpct{opacity:0}
+body.loaded .loader{visibility:hidden; transition:visibility 0s 1.15s}
+
+/* custom cursor (desktop fine pointer) */
+.cursor,.cursor-dot{position:fixed; top:0; left:0; z-index:200; pointer-events:none; border-radius:50%;
+  mix-blend-mode:difference; will-change:transform; opacity:0}
+.cursor{width:30px; height:30px; border:1px solid #fff; margin:-15px 0 0 -15px;
+  transition:width .25s, height .25s, margin .25s, background .25s, opacity .35s}
+.cursor-dot{width:5px; height:5px; background:#fff; margin:-2.5px 0 0 -2.5px; transition:opacity .35s}
+.cursor.hover{width:54px; height:54px; margin:-27px 0 0 -27px; background:rgba(255,255,255,.14)}
+body.loaded .cursor, body.loaded .cursor-dot{opacity:1}
+body.cursor-on, body.cursor-on a, body.cursor-on .btn-wpp{cursor:none}
+@media(hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none}}
+
+/* CTA intermediário (pico de desejo) */
+.cta-mid{text-align:center; padding:74px 28px 80px}
+.cta-mid p{font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(24px,6.5vw,30px); color:var(--cream); margin-bottom:26px}
+.btn-wpp.sm{padding:15px 30px; font-size:14px}
+
 @media(prefers-reduced-motion:reduce){
   .r{transition:none; opacity:1; transform:none}
   body::before{animation:none}
+  .r-mask{transition:none; clip-path:none}
+  .btn-wpp::before{display:none}
+  .loader{display:none}
+  .cursor,.cursor-dot{display:none}
 }
 </style>
 </head>
 <body>
 
+<!-- ===================== LOADER ===================== -->
+<div class="loader" aria-hidden="true">
+  <div class="panel top"></div>
+  <div class="panel bot"></div>
+  <div class="lsig">Dr. Furquim</div>
+  <div class="lbar"><i></i></div>
+  <div class="lpct">0%</div>
+</div>
+
+<!-- custom cursor (desktop) -->
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
 <!-- ===================== HERO ===================== -->
 <header class="hero">
-  <div class="hero-photo"><img src="matheus-apresentacao/foto-1-vinho2.jpg?v=4" alt="Dr. Matheus Furquim"></div>
+  <div class="hero-photo">
+    <picture>
+      <source media="(max-width:759px)" srcset="matheus-apresentacao/foto-1-vinho2-mobile.jpg?v=1">
+      <img src="matheus-apresentacao/foto-1-vinho2.jpg?v=4" alt="Dr. Matheus Furquim" width="1696" height="2528" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
   <div class="hero-top"><span class="sig">Dr. Furquim</span></div>
   <div class="hero-inner">
-    <div class="eyebrow r">Odontologia Estética · Lentes em Resina</div>
-    <h1 class="r d1"><span class="first">Dr.</span>Matheus<br>Furquim</h1>
+    <div class="eyebrow r">Odontologia Estética<br>Lentes em Resina</div>
+    <h1 class="r d1 r-title"><span class="first">Dr.</span>Matheus<br>Furquim</h1>
     <p class="tag r d2">Referência mundial em lentes em resina.</p>
     <div class="casos r d3">
       <span class="num"><span data-count="5000">0</span>+</span>
@@ -219,7 +316,7 @@ section{position:relative; padding:88px 28px}
 <!-- ===================== MANIFESTO ===================== -->
 <section class="manifesto">
   <div class="wrap">
-    <h2 class="r">A <em>naturalidade</em> é a nossa filosofia.</h2>
+    <h2 class="r r-title">A <em class="grad-gold">naturalidade</em> é a nossa filosofia.</h2>
     <p class="r d2">Cada sorriso é planejado individualmente, sem aspecto artificial, com materiais premium.</p>
   </div>
 </section>
@@ -228,16 +325,15 @@ section{position:relative; padding:88px 28px}
 <section class="aut">
   <div class="wrap">
     <div class="sec-eyebrow r"><span class="ln"></span><span class="eyebrow">Autoridade</span></div>
-    <h2 class="r d1">Palestrante nos maiores congressos da América Latina.</h2>
+    <h2 class="r d1 r-title">Palestrante nos maiores congressos da América Latina.</h2>
     <p class="lead r d2">Uma referência reconhecida, levando técnica e ensino aos maiores palcos da odontologia.</p>
     <div class="figure r d2">
-      <img src="matheus-apresentacao/congressos.jpg" alt="Dr. Matheus Furquim palestrando em congressos">
+      <img src="matheus-apresentacao/congressos.jpg" alt="Dr. Matheus Furquim palestrando em congressos" width="1400" height="785" loading="lazy" decoding="async">
       <span class="cap">Congressos · América Latina</span>
     </div>
-    <div class="stats3">
-      <div class="stat r d1"><div class="v"><span data-count="5000">0</span>+</div><div class="k">Casos<br>realizados</div></div>
-      <div class="stat r d2"><div class="v">Mundial</div><div class="k">Referência<br>em resina</div></div>
-      <div class="stat r d3"><div class="v">Premium</div><div class="k">Materiais<br>de ponta</div></div>
+    <div class="stat-hero r d2">
+      <div class="sh-num grad-gold"><span data-count="5000">0</span>+</div>
+      <div class="sh-label">Casos realizados</div>
     </div>
   </div>
 </section>
@@ -246,7 +342,7 @@ section{position:relative; padding:88px 28px}
 <section class="filo">
   <div class="wrap">
     <div class="sec-eyebrow r"><span class="ln"></span><span class="eyebrow">A nossa filosofia</span></div>
-    <h2 class="r d1">Cada sorriso é <em>planejado individualmente</em>.</h2>
+    <h2 class="r d1 r-title">Cada sorriso é <em class="grad-gold">planejado individualmente</em>.</h2>
     <div class="pillars">
       <div class="pillar r d1"><span class="no">01</span><div><h3>Naturalidade</h3><p>Resultados que respeitam o seu rosto. Sem aspecto artificial, um sorriso que parece (e é) seu.</p></div></div>
       <div class="pillar r d2"><span class="no">02</span><div><h3>Materiais premium</h3><p>Uso exclusivo de materiais de alta performance, que garantem beleza, resistência e durabilidade.</p></div></div>
@@ -256,20 +352,34 @@ section{position:relative; padding:88px 28px}
   </div>
 </section>
 
-<!-- ===================== ONDA · respiro (scroll-driven) ===================== -->
-<section class="wavesec" id="wavesec" aria-label="Cada sorriso é único">
-  <div class="wave-sticky"><canvas id="waveCanvas"></canvas></div>
+<!-- ===================== FRASE AUTORAL ===================== -->
+<section class="autoral">
+  <div class="wrap">
+    <p class="aq r r-title">Eu não copio sorrisos. <em>Revelo o seu.</em></p>
+    <div class="aq-sig r d1">Dr. Furquim</div>
+  </div>
 </section>
 
 <!-- ===================== ANTES E DEPOIS ===================== -->
 <section class="ad">
   <div class="wrap">
-    <h2 class="r">Antes <span class="script" style="font-size:.9em">&amp;</span> depois</h2>
+    <h2 class="r r-title">Antes <span class="script" style="font-size:.9em">&amp;</span> depois</h2>
     <p class="lead r d1">Resultados reais de quem confiou o sorriso ao Dr. Furquim.</p>
     <div class="ad-grid">
-      <div class="figure r d1"><img src="matheus-apresentacao/antes-depois-1.jpg" alt="Antes e depois, lentes em resina"></div>
-      <div class="figure r d2"><img src="matheus-apresentacao/antes-depois-2.jpg" alt="Antes e depois, transformação de sorriso"></div>
+      <div class="figure r d1"><img src="matheus-apresentacao/antes-depois-1.jpg" alt="Antes e depois, lentes em resina" width="1400" height="788" loading="lazy" decoding="async"></div>
+      <div class="figure r d2"><img src="matheus-apresentacao/antes-depois-2.jpg" alt="Antes e depois, transformação de sorriso" width="1400" height="786" loading="lazy" decoding="async"></div>
     </div>
+  </div>
+</section>
+
+<!-- ===================== CTA INTERMEDIÁRIO ===================== -->
+<section class="cta-mid">
+  <div class="wrap">
+    <p class="r">Pronto para o seu?</p>
+    <a class="btn-wpp sm r d1" href="https://wa.me/5562991583094?text=Ol%C3%A1%21%20Vim%20pelo%20Instagram%20do%20Dr.%20Matheus%20Furquim%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20lentes">
+      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
+      Agendar avaliação
+    </a>
   </div>
 </section>
 
@@ -277,7 +387,7 @@ section{position:relative; padding:88px 28px}
 <section class="cta">
   <div class="wrap">
     <div class="sig r">Dr. Furquim</div>
-    <h2 class="r d1">Agende já a sua consulta.</h2>
+    <h2 class="r d1 r-title">Agende já a sua consulta.</h2>
     <p class="r d2">O seu sorriso merece o cuidado de quem é referência mundial.</p>
     <a class="btn-wpp r d3" href="https://wa.me/5562991583094?text=Ol%C3%A1%21%20Vim%20pelo%20Instagram%20do%20Dr.%20Matheus%20Furquim%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20lentes">
       <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
@@ -297,80 +407,90 @@ section{position:relative; padding:88px 28px}
   <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
 </a>
 
+<script src="matheus-apresentacao/lenis.min.js"></script>
 <script>
-// Reveals
-const io = new IntersectionObserver((es)=>{
-  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in');
-    e.target.querySelectorAll('[data-count]').forEach(runCount); io.unobserve(e.target);} });
-},{threshold:.16, rootMargin:'0px 0px -8% 0px'});
-document.querySelectorAll('.r').forEach(el=>io.observe(el));
-
-// Counters
-function runCount(el){
-  if(el.dataset.done) return; el.dataset.done=1;
-  const target=+el.dataset.count, dur=1400, t0=performance.now();
-  (function tick(t){
-    const p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
-    el.textContent=Math.round(target*e).toLocaleString('pt-BR');
-    if(p<1) requestAnimationFrame(tick);
-  })(t0);
-}
-
-// ===== ONDA · tipografia scroll-driven =====
 (function(){
-  const sec=document.getElementById('wavesec');
-  const cv=document.getElementById('waveCanvas');
-  if(!sec||!cv) return;
-  const ctx=cv.getContext('2d');
-  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const TWO_PI=Math.PI*2;
-  const PHRASE='CADA SORRISO É ÚNICO     ';
-  const CYCLES=1.5, TRAVEL=2.0, TRAIL=0.4;
-  let W,H,dpr,cols,cellW,fs,lineH,amp,N,vh, target=0, cur=0;
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  function size(){
-    dpr=Math.min(window.devicePixelRatio||1,2);
-    W=cv.clientWidth; H=cv.clientHeight; vh=window.innerHeight;
-    cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-    fs=Math.max(15,Math.min(26,W/42));
-    cellW=fs*0.62; lineH=fs*1.0; cols=Math.ceil(W/cellW)+2;
-    amp=H*0.21; N=Math.max(3,Math.min(6,Math.round(H*0.085/lineH)));
-    ctx.font=`500 ${fs}px ui-monospace,"SF Mono",Menlo,monospace`;
-    ctx.textAlign='center'; ctx.textBaseline='middle';
+  // títulos → linhas sob máscara
+  document.querySelectorAll('.r-title').forEach(el=>{
+    const parts = el.innerHTML.split(/<br\s*\/?>/i);
+    el.innerHTML = parts.map((p,i)=>`<span class="r-mask" style="--mask-delay:${(i*0.12).toFixed(2)}s">${p}</span>`).join('');
+  });
+
+  // contadores
+  function runCount(el){
+    if(el.dataset.done) return; el.dataset.done=1;
+    const target=+el.dataset.count, dur=1100;
+    setTimeout(()=>{
+      const t0=performance.now();
+      (function tick(t){
+        const p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
+        el.textContent=Math.round(target*e).toLocaleString('pt-BR');
+        if(p<1) requestAnimationFrame(tick);
+      })(performance.now());
+    }, 150);
   }
-  function envelope(p){ return Math.max(0,Math.min(1,p/0.12))*Math.max(0,Math.min(1,(1-p)/0.12)); }
-  function draw(p){
-    ctx.clearRect(0,0,W,H);
-    const e=envelope(p), len=PHRASE.length, offset=(W-cols*cellW)/2, travel=p*TWO_PI*TRAVEL;
-    for(let c=0;c<cols;c++){
-      const ch=PHRASE[c%len]; if(ch===' ') continue;
-      const x=offset+c*cellW+cellW/2;
-      const ph=TWO_PI*CYCLES*(c/cols)-travel;
-      const yc=H/2+amp*Math.sin(ph), v=Math.cos(ph);
-      for(let i=-N;i<=N;i++){
-        const y=yc+i*lineH;
-        if(y<-lineH||y>H+lineH) continue;
-        let f=1-Math.abs(i)/(N+1); f=f*f*(3-2*f); f*=1+TRAIL*v*(i/N);
-        if(f<=0.01) continue;
-        ctx.fillStyle=`rgba(247,244,242,${Math.min(1,f)*0.98*e})`;
-        ctx.fillText(ch,x,y);
-      }
-    }
+
+  // reveals on scroll
+  function initReveals(){
+    const io = new IntersectionObserver((es)=>{
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in');
+        e.target.querySelectorAll('[data-count]').forEach(runCount); io.unobserve(e.target);} });
+    },{threshold:.16, rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.r').forEach(el=>io.observe(el));
   }
-  function progressNow(){
-    const r=sec.getBoundingClientRect(), d=sec.offsetHeight-vh;
-    return d>0 ? Math.max(0,Math.min(1,-r.top/d)) : 0;
+
+  // loading screen → libera os reveals ao terminar
+  (function(){
+    const loader = document.querySelector('.loader');
+    if(reduce || !loader){ if(loader) loader.remove(); document.body.classList.add('loaded'); initReveals(); return; }
+    const bar=loader.querySelector('.lbar i'), pct=loader.querySelector('.lpct');
+    const t0=performance.now(), dur=700;
+    (function tick(t){
+      const p=Math.min((t-t0)/dur,1);
+      if(bar) bar.style.width=(p*100)+'%';
+      if(pct) pct.textContent=Math.round(p*100)+'%';
+      if(p<1){ requestAnimationFrame(tick); }
+      else { document.body.classList.add('loaded'); initReveals(); }
+    })(t0);
+  })();
+
+  // custom cursor + CTA magnético (só desktop com mouse)
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.body.classList.add('cursor-on');
+    const ring=document.querySelector('.cursor'), dot=document.querySelector('.cursor-dot');
+    let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my;
+    addEventListener('mousemove', e=>{
+      mx=e.clientX; my=e.clientY;
+      if(dot) dot.style.transform=`translate(${mx}px,${my}px)`;
+    });
+    (function raf(){
+      rx+=(mx-rx)*0.15; ry+=(my-ry)*0.15;
+      if(ring) ring.style.transform=`translate(${rx}px,${ry}px)`;
+      requestAnimationFrame(raf);
+    })();
+    document.querySelectorAll('a, .stat, .figure, .pillar, .btn-wpp').forEach(el=>{
+      el.addEventListener('mouseenter', ()=>ring&&ring.classList.add('hover'));
+      el.addEventListener('mouseleave', ()=>ring&&ring.classList.remove('hover'));
+    });
+    document.querySelectorAll('.btn-wpp').forEach(btn=>{
+      btn.addEventListener('mousemove', e=>{
+        const r=btn.getBoundingClientRect();
+        const x=e.clientX-(r.left+r.width/2), y=e.clientY-(r.top+r.height/2);
+        btn.style.transform=`translate(${(x*0.18).toFixed(1)}px,${(y*0.18).toFixed(1)}px)`;
+      });
+      btn.addEventListener('mouseleave', ()=>{ btn.style.transform=''; });
+    });
   }
-  function loop(){
-    target=progressNow();
-    cur+=(target-cur)*0.14;
-    const r=sec.getBoundingClientRect();
-    if(r.bottom>0 && r.top<vh) draw(cur);
-    requestAnimationFrame(loop);
+
+  // Lenis smooth scroll (se o CDN carregou)
+  if(window.Lenis && !reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
+    const lenis=new Lenis({lerp:.1, smoothWheel:true});
+    function lraf(t){ lenis.raf(t); requestAnimationFrame(lraf); }
+    requestAnimationFrame(lraf);
+    document.documentElement.style.scrollBehavior='auto';
   }
-  size();
-  window.addEventListener('resize',size);
-  if(reduce) draw(0.5); else requestAnimationFrame(loop);
 })();
 </script>
 </body>
