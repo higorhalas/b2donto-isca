@@ -172,10 +172,10 @@ section{position:relative; padding:88px 28px}
   .hero{padding-top:58px}
   .hero-top{padding:15px 24px}
   .hero-top .sig{font-size:27px}
-  .hero::before{content:""; position:absolute; left:0; right:0; top:0; height:78%; z-index:1; pointer-events:none;
-    background:linear-gradient(180deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.7) 26%, rgba(0,0,0,.5) 46%, rgba(0,0,0,.3) 66%, rgba(0,0,0,.1) 86%, transparent 100%)}
-  .hero-photo{inset:auto 0 0 0; height:80%}
-  .hero-photo img{object-position:50% 62%}
+  .hero::before{content:""; position:absolute; left:0; right:0; top:0; height:82%; z-index:1; pointer-events:none;
+    background:linear-gradient(180deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.8) 22%, rgba(0,0,0,.66) 40%, rgba(0,0,0,.5) 56%, rgba(0,0,0,.28) 78%, transparent 100%)}
+  .hero-photo{inset:auto 0 0 0; height:80%; overflow:hidden}
+  .hero-photo img{object-position:50% 50%; transform:translate(9%,8%) scale(1.24)}
   .hero-photo::after{background:linear-gradient(180deg, var(--ink) 0%, rgba(20,10,17,.22) 12%, transparent 40%, transparent 64%, rgba(20,10,17,.4) 86%, var(--ink) 100%)}
   .hero .casos{border-top:none; padding-top:4px}
 }
