@@ -186,12 +186,15 @@ section{position:relative; padding:88px 28px}
   .hero .casos{border-top:none; padding-top:4px; flex-direction:column; align-items:flex-start; gap:5px}
 }
 @media(min-width:760px){
-  .hero{justify-content:center; align-items:flex-end; padding:0}
-  .hero-photo img{object-position:48% 50%}
-  .hero-photo::after{background:radial-gradient(58% 44% at 78% 53%, rgba(0,0,0,.6), transparent 72%), radial-gradient(86% 76% at 76% 30%, rgba(0,0,0,.92), rgba(0,0,0,.28) 52%, transparent 72%), linear-gradient(265deg, rgba(20,10,17,.78) 0%, rgba(20,10,17,.34) 32%, transparent 60%), linear-gradient(180deg, transparent 74%, var(--ink))}
-  .hero-inner{margin:0; max-width:54%; padding:0 7vw 0 3vw; align-self:center; transform:translateY(-14vh)}
-  .hero-top{justify-content:flex-end; padding-right:7vw}
-  .hero h1{font-size:80px}
+  .hero{justify-content:center; align-items:flex-start; padding:0}
+  .hero::before{content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(95deg, var(--ink) 0%, rgba(20,10,17,.9) 22%, rgba(20,10,17,.45) 42%, rgba(20,10,17,.12) 56%, transparent 68%)}
+  .hero-photo{left:auto; right:0; width:62%; top:auto; bottom:0; height:92%; overflow:hidden}
+  .hero-photo img{object-position:50% 14%}
+  .hero-photo::after{background:linear-gradient(90deg, var(--ink) 0%, rgba(20,10,17,.55) 14%, transparent 40%), linear-gradient(180deg, transparent 80%, var(--ink) 100%)}
+  .hero-inner{margin:0; max-width:46%; padding:0 4vw 0 5vw; align-self:flex-start; transform:translateY(-2vh)}
+  .hero-top{justify-content:flex-end; padding-right:5vw}
+  .hero h1{font-size:76px}
   .scroll-hint{display:none}
   section{padding:120px 40px}
   .wrap{max-width:640px}
