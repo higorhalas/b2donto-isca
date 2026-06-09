@@ -7,7 +7,7 @@
 <meta name="description" content="Dr. Matheus Furquim, referência mundial em lentes em resina. Mais de 5.000 casos realizados. Odontologia estética com naturalidade.">
 <meta property="og:title" content="Dr. Matheus Furquim · Lentes em Resina">
 <meta property="og:description" content="Referência mundial em lentes em resina. +5.000 casos realizados.">
-<meta property="og:image" content="matheus-apresentacao/foto-1.jpg">
+<meta property="og:image" content="matheus-apresentacao/foto-1-vinho.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
@@ -60,12 +60,12 @@ h1,h2,h3{font-family:var(--serif); font-weight:300; line-height:1.04; letter-spa
 .script{font-family:var(--script); color:var(--gold-soft); font-weight:400}
 
 /* ===== HERO ===== */
-.hero{position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end;
-  padding:0 0 44px; overflow:hidden}
+.hero{position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-start;
+  padding:104px 0 44px; overflow:hidden}
 .hero-photo{position:absolute; inset:0; z-index:0}
-.hero-photo img{width:100%; height:100%; object-fit:cover; object-position:50% 22%}
+.hero-photo img{width:100%; height:100%; object-fit:cover; object-position:50% 26%}
 .hero-photo::after{content:""; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(20,10,17,.55) 0%, rgba(20,10,17,.05) 28%, rgba(42,22,38,.55) 64%, var(--ink) 99%)}
+  background:linear-gradient(180deg, rgba(20,10,17,.62) 0%, rgba(20,10,17,.28) 19%, transparent 40%, transparent 64%, rgba(20,10,17,.4) 84%, var(--ink) 100%)}
 .hero-top{position:absolute; top:0; left:0; right:0; z-index:2; display:flex; justify-content:center;
   padding:26px 24px}
 .hero-top .sig{font-family:var(--script); font-size:34px; color:var(--cream); line-height:1; opacity:.96}
@@ -163,17 +163,19 @@ section{position:relative; padding:88px 28px}
 /* ===== DESKTOP ===== */
 /* ===== MOBILE: texto no topo, sem filete ===== */
 @media(max-width:759px){
-  .hero{justify-content:flex-start; padding:108px 0 44px}
-  .hero-photo{inset:auto 0 0 0; height:82%}
-  .hero-photo img{object-position:50% 16%}
-  .hero-photo::after{background:linear-gradient(180deg, var(--ink) 0%, rgba(20,10,17,.72) 13%, rgba(20,10,17,.2) 34%, transparent 56%, rgba(42,22,38,.3) 86%, var(--ink) 100%)}
+  .hero-photo img{object-position:50% 20%}
   .hero .casos{border-top:none; padding-top:4px}
 }
 @media(min-width:760px){
-  .hero-photo img{object-position:50% 42%}
-  .hero h1{font-size:84px}
+  .hero{justify-content:center; align-items:flex-start; padding:0}
+  .hero-photo img{object-position:58% 33%}
+  .hero-photo::after{background:radial-gradient(58% 44% at 22% 53%, rgba(0,0,0,.6), transparent 72%), radial-gradient(86% 76% at 24% 30%, rgba(0,0,0,.92), rgba(0,0,0,.28) 52%, transparent 72%), linear-gradient(95deg, rgba(20,10,17,.78) 0%, rgba(20,10,17,.34) 32%, transparent 60%), linear-gradient(180deg, transparent 74%, var(--ink))}
+  .hero-inner{margin:0; max-width:50%; padding:0 3vw 0 7vw; align-self:center; transform:translateY(-14vh)}
+  .hero-top{justify-content:flex-start; padding-left:7vw}
+  .hero h1{font-size:80px}
+  .scroll-hint{display:none}
   section{padding:120px 40px}
-  .wrap, .hero-inner{max-width:640px}
+  .wrap{max-width:640px}
   .manifesto h2{font-size:60px}
   .ad-grid{display:grid; grid-template-columns:1fr; gap:20px; max-width:680px; margin:0 auto}
 }
@@ -187,7 +189,7 @@ section{position:relative; padding:88px 28px}
 
 <!-- ===================== HERO ===================== -->
 <header class="hero">
-  <div class="hero-photo"><img src="matheus-apresentacao/foto-1.jpg?v=2" alt="Dr. Matheus Furquim"></div>
+  <div class="hero-photo"><img src="matheus-apresentacao/foto-1-vinho.jpg?v=3" alt="Dr. Matheus Furquim"></div>
   <div class="hero-top"><span class="sig">Dr. Furquim</span></div>
   <div class="hero-inner">
     <div class="eyebrow r">Odontologia Estética · Lentes em Resina</div>
@@ -259,7 +261,7 @@ section{position:relative; padding:88px 28px}
     <div class="sig r">Dr. Furquim</div>
     <h2 class="r d1">Agende já a sua consulta.</h2>
     <p class="r d2">O seu sorriso merece o cuidado de quem é referência mundial.</p>
-    <a class="btn-wpp r d3" href="https://wa.me/5534999161130?text=Ol%C3%A1!%20Vim%20pela%20apresenta%C3%A7%C3%A3o%20do%20Dr.%20Matheus%20Furquim%20e%20quero%20agendar%20uma%20avalia%C3%A7%C3%A3o.">
+    <a class="btn-wpp r d3" href="https://wa.me/5562991583094?text=Ol%C3%A1%21%20Vim%20pelo%20Instagram%20do%20Dr.%20Matheus%20Furquim%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20lentes">
       <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
       Agendar avaliação
     </a>
@@ -273,7 +275,7 @@ section{position:relative; padding:88px 28px}
 </div>
 
 <!-- WhatsApp flutuante -->
-<a class="wpp-float" href="https://wa.me/5534999161130?text=Ol%C3%A1!%20Vim%20pela%20apresenta%C3%A7%C3%A3o%20do%20Dr.%20Matheus%20Furquim%20e%20quero%20agendar%20uma%20avalia%C3%A7%C3%A3o." aria-label="WhatsApp">
+<a class="wpp-float" href="https://wa.me/5562991583094?text=Ol%C3%A1%21%20Vim%20pelo%20Instagram%20do%20Dr.%20Matheus%20Furquim%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20lentes" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
 </a>
 
