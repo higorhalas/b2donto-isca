@@ -70,7 +70,7 @@ h1,h2,h3{font-family:var(--serif); font-weight:300; line-height:1.04; letter-spa
   padding:26px 24px}
 .hero-top .sig{font-family:var(--script); font-size:34px; color:var(--cream); line-height:1; opacity:.96}
 .hero-inner{position:relative; z-index:2; padding:0 28px; max-width:600px; margin:0 auto; width:100%}
-.hero .eyebrow{margin-bottom:18px; letter-spacing:.34em; line-height:1.7}
+.hero .eyebrow{margin-bottom:18px; letter-spacing:.42em}
 .hero h1{font-size:clamp(46px,15vw,72px); color:var(--cream); margin-bottom:6px}
 .hero h1 .first{display:block; font-style:italic; font-weight:300; color:var(--gold-soft); font-size:.42em; letter-spacing:.06em; margin-bottom:6px}
 .hero .tag{font-family:var(--serif); font-size:clamp(19px,5.2vw,24px); font-weight:300; color:var(--muted);
@@ -180,7 +180,9 @@ section{position:relative; padding:88px 28px}
   .hero-photo{inset:auto 0 0 0; height:80%; overflow:hidden}
   .hero-photo img{object-position:50% 50%; transform:translate(9%,8%) scale(1.24)}
   .hero-photo::after{background:linear-gradient(180deg, var(--ink) 0%, rgba(20,10,17,.22) 12%, transparent 40%, transparent 64%, rgba(20,10,17,.4) 86%, var(--ink) 100%)}
-  .hero .eyebrow{letter-spacing:.24em; font-size:10px}
+  .hero .eyebrow{letter-spacing:.24em; font-size:10px; line-height:1.7}
+  .hero .eyebrow .eb-sep{display:none}
+  .hero .eyebrow .eb-l{display:block}
   .hero .casos{border-top:none; padding-top:4px; flex-direction:column; align-items:flex-start; gap:5px}
 }
 @media(min-width:760px){
@@ -302,7 +304,7 @@ body.cursor-on, body.cursor-on a, body.cursor-on .btn-wpp{cursor:none}
   </div>
   <div class="hero-top"><span class="sig">Dr. Furquim</span></div>
   <div class="hero-inner">
-    <div class="eyebrow r">Odontologia Estética<br>Lentes em Resina</div>
+    <div class="eyebrow r"><span class="eb-l">Odontologia Estética</span><span class="eb-sep"> · </span><span class="eb-l">Lentes em Resina</span></div>
     <h1 class="r d1 r-title"><span class="first">Dr.</span>Matheus<br>Furquim</h1>
     <p class="tag r d2">Referência mundial em lentes em resina.</p>
     <div class="casos r d3">
