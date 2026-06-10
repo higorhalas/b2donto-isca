@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=527, height=1090">
+<title>Feed Instagram - Dr. Rafael Andrade</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 527px;
+    height: 1090px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .feed {
+    width: 527px;
+    height: 1090px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 2px;
+    background: #ffffff;
+    overflow: hidden;
+  }
+  .cell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #f0f0f0;
+  }
+  .cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <div class="feed">
+    <!-- Row 1 -->
+    <div class="cell"><img src="../feed-01.png" alt=""></div>
+    <div class="cell"><img src="../feed-02.png" alt=""></div>
+    <div class="cell"><img src="../feed-04.png" alt=""></div>
+    <!-- Row 2 -->
+    <div class="cell"><img src="../feed-05.png" alt=""></div>
+    <div class="cell"><img src="../feed-03.png" alt=""></div>
+    <div class="cell"><img src="../feed-08.png" alt=""></div>
+    <!-- Row 3 -->
+    <div class="cell"><img src="../google-clinica-1.png" alt=""></div>
+    <div class="cell"><img src="../feed-07.png" alt=""></div>
+    <div class="cell"><img src="../feed-06.png" alt=""></div>
+    <!-- Row 4 -->
+    <div class="cell"><img src="../feed-09.png" alt=""></div>
+    <div class="cell"><img src="../feed-04.png" alt=""></div>
+    <div class="cell"><img src="../feed-01.png" alt=""></div>
+    <!-- Row 5 -->
+    <div class="cell"><img src="../feed-06.png" alt=""></div>
+    <div class="cell"><img src="../google-clinica-2.png" alt=""></div>
+    <div class="cell"><img src="../feed-02.png" alt=""></div>
+    <!-- Row 6 -->
+    <div class="cell"><img src="../feed-03.png" alt=""></div>
+    <div class="cell"><img src="../feed-08.png" alt=""></div>
+    <div class="cell"><img src="../feed-07.png" alt=""></div>
+  </div>
+</body>
+</html>

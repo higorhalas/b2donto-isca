@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=398, initial-scale=1">
+<title>Dr. Rafael Andrade - Google</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 398px;
+    height: 969px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #202124;
+  }
+  .panel {
+    width: 398px;
+    height: 969px;
+    overflow: hidden;
+    background: #ffffff;
+    position: relative;
+  }
+
+  /* Topo: faixa de fotos */
+  .photos {
+    display: flex;
+    gap: 2px;
+    width: 100%;
+    height: 132px;
+  }
+  .photo {
+    position: relative;
+    flex: 1;
+    height: 132px;
+    overflow: hidden;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo .label {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 14px 10px 8px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+
+  /* Bloco título */
+  .head {
+    padding: 14px 16px 4px;
+  }
+  .title {
+    font-size: 19px;
+    line-height: 1.28;
+    font-weight: 400;
+    color: #202124;
+  }
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 7px;
+    font-size: 13px;
+    color: #70757a;
+  }
+  .rating .num {
+    color: #70757a;
+    font-weight: 400;
+  }
+  .stars {
+    display: inline-flex;
+    gap: 1px;
+    color: #fbbc04;
+    font-size: 12px;
+    letter-spacing: -0.5px;
+  }
+  .rating .reviews {
+    color: #1a73e8;
+  }
+  .subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #70757a;
+  }
+
+  /* Botões pílula */
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 16px 12px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 16px;
+    border: 1px solid #dadce0;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a73e8;
+    background: #ffffff;
+    white-space: nowrap;
+  }
+  .pill .ic {
+    width: 16px;
+    height: 16px;
+    fill: #1a73e8;
+    flex: 0 0 auto;
+  }
+  .pill.more {
+    color: #5f6368;
+  }
+  .pill.more .ic { fill: #5f6368; }
+
+  /* Divisor */
+  .divider {
+    height: 1px;
+    background: #ececec;
+    margin: 0 16px;
+  }
+
+  /* Bloco de info */
+  .info {
+    padding: 14px 16px 12px;
+  }
+  .info-row {
+    display: flex;
+    gap: 14px;
+    padding: 9px 0;
+    align-items: flex-start;
+  }
+  .info-row .ic {
+    width: 18px;
+    height: 18px;
+    fill: #5f6368;
+    flex: 0 0 auto;
+    margin-top: 1px;
+  }
+  .info-row .txt {
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: #3c4043;
+  }
+  .info-row .txt .blue { color: #1a73e8; }
+  .closed { color: #d93025; font-weight: 500; }
+  .sep { color: #70757a; }
+  .open-time { color: #3c4043; }
+  .suggest {
+    font-size: 12.5px;
+    color: #70757a;
+    padding: 10px 0 0;
+    line-height: 1.5;
+  }
+  .suggest .blue { color: #1a73e8; }
+
+  /* Avaliações */
+  .reviews-sec {
+    padding: 14px 16px 0;
+  }
+  .reviews-sec h2 {
+    font-size: 17px;
+    font-weight: 400;
+    color: #202124;
+    margin-bottom: 12px;
+  }
+  .rev-tabs {
+    display: flex;
+    gap: 9px;
+    margin-bottom: 14px;
+  }
+  .rev-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid #dadce0;
+    border-radius: 18px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #1a73e8;
+  }
+  .rev-tab .ic { width: 15px; height: 15px; fill: #1a73e8; }
+
+  .review {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+  }
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .a1 { background: #db4437; }
+  .a2 { background: #9c27b0; }
+  .a3 { background: #0f9d58; }
+  .review .body { flex: 1; }
+  .review .mini-stars {
+    color: #fbbc04;
+    font-size: 11px;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .review .comment {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #3c4043;
+  }
+  .review .comment b { font-weight: 700; color: #202124; }
+
+  .all-link {
+    padding: 12px 16px 0;
+    font-size: 13.5px;
+    color: #1a73e8;
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+  <div class="panel">
+
+    <!-- Fotos -->
+    <div class="photos">
+      <div class="photo">
+        <img src="../google-clinica-1.png" alt="Clínica">
+        <div class="label">Ver fotos</div>
+      </div>
+      <div class="photo">
+        <img src="../google-clinica-2.png" alt="Consultório">
+        <div class="label">Ver por fora</div>
+      </div>
+    </div>
+
+    <!-- Título -->
+    <div class="head">
+      <div class="title">Dr. Rafael Andrade | Lentes em Resina em Goiânia e São Paulo</div>
+      <div class="rating">
+        <span class="num">4,8</span>
+        <span class="stars">★★★★★</span>
+        <span class="reviews">57 avaliações no Google</span>
+      </div>
+      <div class="subtitle">Cirurgião dentista em Goiânia, Goiás</div>
+    </div>
+
+    <!-- Botões pílula -->
+    <div class="actions">
+      <span class="pill">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+        Site
+      </span>
+      <span class="pill">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M21.71 11.29l-9-9a.996.996 0 0 0-1.41 0l-9 9a.996.996 0 0 0 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 0 0 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>
+        Rotas
+      </span>
+      <span class="pill more">+4</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Info -->
+    <div class="info">
+      <div class="info-row">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+        <div class="txt"><span class="blue">Endereço:</span> Av. Portugal, 1148 — Setor Marista, Goiânia - GO, 74150-030</div>
+      </div>
+      <div class="info-row">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.18z"/></svg>
+        <div class="txt"><span class="blue">Telefone:</span> (62) 99624-7088</div>
+      </div>
+      <div class="info-row">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        <div class="txt">
+          <span class="blue">Horário de funcionamento:</span><br>
+          <span class="closed">Fechado</span> <span class="sep">·</span> <span class="open-time">Abre às 08:00</span>
+        </div>
+      </div>
+      <div class="suggest">Sugerir uma alteração · <span class="blue">É proprietário desta empresa?</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Avaliações -->
+    <div class="reviews-sec">
+      <h2>Avaliações</h2>
+
+      <div class="rev-tabs">
+        <span class="rev-tab">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+          Comentar
+        </span>
+        <span class="rev-tab">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M14.12 4l1.83 2H20v12H4V6h4.05l1.83-2h4.24M15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2zm-3 7c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg>
+          Adicionar fotos
+        </span>
+      </div>
+
+      <div class="review">
+        <div class="avatar a1">F</div>
+        <div class="body">
+          <div class="mini-stars">★★★★★</div>
+          <div class="comment">"Atendimento <b>humanizado</b>, ambiente acolhedor e <b>profissionais</b> muito competentes."</div>
+        </div>
+      </div>
+
+      <div class="review">
+        <div class="avatar a2">G</div>
+        <div class="body">
+          <div class="mini-stars">★★★★★</div>
+          <div class="comment">"Ótimo profissional, <b>equipe</b> impecável, recomendo de olhos fechados."</div>
+        </div>
+      </div>
+
+      <div class="review">
+        <div class="avatar a3">T</div>
+        <div class="body">
+          <div class="mini-stars">★★★★★</div>
+          <div class="comment">"<b>Todos</b> são muito atenciosos desde o primeiro atendimento via <b>WhatsApp</b>."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="all-link">Ver todos os comentários do Google</div>
+
+  </div>
+</body>
+</html>

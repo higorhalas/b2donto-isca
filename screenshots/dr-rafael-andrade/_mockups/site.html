@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=526, initial-scale=1">
+<title>Dr. Rafael Andrade — Odontologia Estética de Alto Padrão</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 526px;
+    height: 1204px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #111111;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    position: relative;
+    width: 526px;
+    height: 1204px;
+    overflow: hidden;
+    background: #111111;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    position: relative;
+    z-index: 30;
+    flex: 0 0 auto;
+    height: 80px;
+    background: #131313;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+  .logo {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    white-space: nowrap;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .nav a {
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .menu-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 4px;
+  }
+  .menu-icon span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(15,15,15,0.92) 0%,
+        rgba(15,15,15,0.78) 24%,
+        rgba(15,15,15,0.58) 46%,
+        rgba(15,15,15,0.55) 70%,
+        rgba(15,15,15,0.85) 100%);
+  }
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    padding: 56px 36px 0 36px;
+    display: flex;
+    flex-direction: column;
+  }
+  .eyebrow {
+    color: #C9A227;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3.4px;
+    margin-bottom: 26px;
+  }
+  .hero-title {
+    color: #ffffff;
+    font-size: 47px;
+    line-height: 1.06;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 26px;
+  }
+  .hero-title .accent {
+    color: #C9A227;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.84);
+    font-size: 17px;
+    line-height: 1.55;
+    font-weight: 400;
+    max-width: 430px;
+    margin-bottom: 38px;
+  }
+  .btn-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 420px;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 60px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: #C9A227;
+    color: #1a1a1a;
+  }
+  .btn-primary .arrow {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .btn-outline {
+    background: rgba(255,255,255,0.02);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.45);
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo">DR. RAFAEL ANDRADE</div>
+      <div class="nav">
+        <a href="#">Tratamentos</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <div class="menu-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <img class="hero-bg" src="../site-hero.png" alt="">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="eyebrow">GOIÂNIA · SÃO PAULO · BRASIL</div>
+        <h1 class="hero-title">Odontologia Estética de <span class="accent">Alto Padrão</span></h1>
+        <p class="hero-sub">Lentes de Resina, Lentes de Porcelana e Mentoria em Odontologia Estética com naturalidade e excelência.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#">AGENDAR AVALIAÇÃO <span class="arrow">→</span></a>
+          <a class="btn btn-outline" href="#">CONHECER TRATAMENTOS</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
