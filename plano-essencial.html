@@ -194,13 +194,14 @@ section.pilar{position:relative; padding:74px 0}
 .cre-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:13px}
 .cre-head .t{font-size:13px; font-weight:600} .cre-head .c{font-family:var(--mono); font-size:11px; color:var(--cyan)}
 .cre-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:9px}
-.cre{aspect-ratio:3/4; border-radius:10px; position:relative; overflow:hidden; border:1px solid var(--line)}
-.cre.v1{background:linear-gradient(150deg, rgba(0,225,195,.32), rgba(74,108,247,.18))}
-.cre.v2{background:linear-gradient(150deg, rgba(74,108,247,.30), rgba(167,19,185,.20))}
-.cre.v3{background:linear-gradient(150deg, rgba(167,19,185,.30), rgba(0,225,195,.18))}
+.cre{aspect-ratio:3/4; border-radius:10px; position:relative; overflow:hidden; border:1px solid var(--line); background:#0A0E2E}
+.cre img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.cre:hover img{transform:scale(1.05)}
+.cre .scrim{position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,9,34,.05) 45%, rgba(5,9,34,.6) 100%); pointer-events:none}
 .cre .play{position:absolute; inset:0; display:grid; place-items:center}
-.cre .play svg{width:30px; height:30px; fill:rgba(255,255,255,.92); filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
-.cre .tagk{position:absolute; left:7px; bottom:7px; font-family:var(--mono); font-size:8px; letter-spacing:1px; text-transform:uppercase; color:#fff; background:rgba(5,9,34,.5); border-radius:5px; padding:3px 6px; backdrop-filter:blur(4px)}
+.cre .play::before{content:""; position:absolute; width:42px; height:42px; border-radius:50%; background:rgba(5,9,34,.4); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,.35)}
+.cre .play svg{position:relative; width:17px; height:17px; fill:#fff; margin-left:2px; filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))}
+.cre .tagk{position:absolute; left:7px; bottom:7px; z-index:2; font-family:var(--mono); font-size:8px; letter-spacing:1px; text-transform:uppercase; color:#fff; background:rgba(5,9,34,.55); border-radius:5px; padding:3px 6px; backdrop-filter:blur(4px)}
 
 /* Course list (pilar 4) */
 .course{padding:16px; display:flex; flex-direction:column; gap:10px}
@@ -519,12 +520,12 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
         <div class="mock cre-wrap">
           <div class="cre-head"><span class="t">Criativos do mês</span><span class="c">6 / 6 entregues</span></div>
           <div class="cre-grid">
-            <div class="cre v1"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tagk">Vídeo</span></div>
-            <div class="cre v2"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tagk">Vídeo</span></div>
-            <div class="cre v3"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tagk">Vídeo</span></div>
-            <div class="cre v2"><span class="tagk">Arte</span></div>
-            <div class="cre v3"><span class="tagk">Arte</span></div>
-            <div class="cre v1"><span class="tagk">Arte</span></div>
+            <div class="cre"><img src="assets/criativos/video-1.jpg" alt="Criativo em vídeo" loading="lazy" style="object-position:70% center"><span class="scrim"></span><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tagk">Vídeo</span></div>
+            <div class="cre"><img src="assets/criativos/video-2.jpg" alt="Criativo em vídeo" loading="lazy"><span class="scrim"></span><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tagk">Vídeo</span></div>
+            <div class="cre"><img src="assets/criativos/video-3.jpg" alt="Criativo em vídeo" loading="lazy"><span class="scrim"></span><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="tagk">Vídeo</span></div>
+            <div class="cre"><img src="assets/criativos/arte-1.jpg" alt="Arte estática" loading="lazy"><span class="scrim"></span><span class="tagk">Arte</span></div>
+            <div class="cre"><img src="assets/criativos/arte-2.jpg" alt="Arte estática" loading="lazy" style="object-position:65% center"><span class="scrim"></span><span class="tagk">Arte</span></div>
+            <div class="cre"><img src="assets/criativos/arte-3.jpg" alt="Arte estática" loading="lazy" style="object-position:center top"><span class="scrim"></span><span class="tagk">Arte</span></div>
           </div>
         </div>
       </div>
@@ -931,7 +932,7 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
     if(!card) return;
     const name=card.querySelector('.case-name')?.textContent?.trim()||'';
     const handle=card.querySelector('.handle')?.textContent?.trim()||'';
-    body.innerHTML='<div style="display:grid;place-items:center;height:100%;gap:14px;text-align:center;padding:24px"><div style="font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--cyan)">DEPOIMENTO EM VÍDEO</div><div style="font-size:11px;color:rgba(255,255,255,.4);max-width:340px;line-height:1.6">O vídeo do depoimento entra aqui.</div></div>';
+    body.innerHTML='<div style="position:absolute;inset:0"><img src="assets/criativos/depoimento.jpg" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,9,34,.15),rgba(5,9,34,.55))"></div><div style="position:absolute;inset:0;display:grid;place-items:center"><div style="width:72px;height:72px;border-radius:50%;background:rgba(0,225,195,.94);display:grid;place-items:center;box-shadow:0 10px 40px rgba(0,225,195,.5)"><svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:#050922;margin-left:3px"><path d="M8 5v14l11-7z"/></svg></div></div></div>';
     cap.textContent=name+(handle?' · '+handle:'');
     lb.classList.add('open');
   }
