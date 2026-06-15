@@ -180,7 +180,8 @@ section.pilar{position:relative; padding:74px 0}
 .ad-top{display:flex; align-items:center; gap:10px; padding:13px 14px}
 .ad-av{width:38px; height:38px; border-radius:50%; background:var(--grad-brand); flex:none}
 .ad-top .who{font-size:13px; font-weight:700} .ad-top .spo{font-family:var(--mono); font-size:10px; color:var(--dim-grey); letter-spacing:.5px}
-.ad-img{height:186px; background:linear-gradient(135deg, rgba(0,225,195,.30), rgba(74,108,247,.22) 50%, rgba(167,19,185,.30)); position:relative; display:grid; place-items:center}
+.ad-img{height:186px; background:linear-gradient(135deg, rgba(0,225,195,.30), rgba(74,108,247,.22) 50%, rgba(167,19,185,.30)); position:relative; display:grid; place-items:center; overflow:hidden}
+.ad-img img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center}
 .ad-img .smile{width:96px; height:96px; opacity:.85}
 .ad-img .smile svg{width:100%;height:100%;stroke:#fff;fill:none;stroke-width:1.4;opacity:.8}
 .ad-cta{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 14px; background:rgba(255,255,255,.03); border-top:1px solid var(--line)}
@@ -490,7 +491,7 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
       <div class="pilar-viz r d2">
         <div class="mock ad">
           <div class="ad-top"><span class="ad-av"></span><div><div class="who">Clínica Sorriso & Cia</div><div class="spo">Patrocinado</div></div></div>
-          <div class="ad-img"><span class="smile"><svg viewBox="0 0 24 24"><path d="M3 11a9 9 0 0 1 18 0"/><path d="M7 11c0 3 2.2 5 5 5s5-2 5-5"/><path d="M9 11v1M15 11v1"/></svg></span></div>
+          <div class="ad-img"><img src="assets/criativos/depoimento.jpg?v=2" alt="Anúncio da clínica no feed" loading="lazy"></div>
           <div class="ad-cta"><div class="t">clinicasorriso.com.br<b>Avaliação com horário esta semana</b></div><span class="bt">Agendar</span></div>
           <div class="ad-act">
             <svg viewBox="0 0 24 24"><path d="M7 10v11M2 13v6a2 2 0 0 0 2 2h13l3-9h-7V5a2 2 0 0 0-4 0c0 2-3 5-3 5z"/></svg>
