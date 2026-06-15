@@ -914,7 +914,7 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
     if(!card) return;
     const name=card.querySelector('.case-name')?.textContent?.trim()||'';
     const handle=card.querySelector('.handle')?.textContent?.trim()||'';
-    body.innerHTML='<div style="position:absolute;inset:0"><img src="assets/criativos/depoimento.jpg" alt="" style="width:100%;height:100%;object-fit:contain"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,9,34,.15),rgba(5,9,34,.55))"></div><div style="position:absolute;inset:0;display:grid;place-items:center"><div style="width:72px;height:72px;border-radius:50%;background:rgba(0,225,195,.94);display:grid;place-items:center;box-shadow:0 10px 40px rgba(0,225,195,.5)"><svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:#050922;margin-left:3px"><path d="M8 5v14l11-7z"/></svg></div></div></div>';
+    body.innerHTML='<div style="position:absolute;inset:0"><img src="assets/criativos/depoimento.jpg?v=2" alt="" style="width:100%;height:100%;object-fit:contain"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,9,34,.15),rgba(5,9,34,.55))"></div><div style="position:absolute;inset:0;display:grid;place-items:center"><div style="width:72px;height:72px;border-radius:50%;background:rgba(0,225,195,.94);display:grid;place-items:center;box-shadow:0 10px 40px rgba(0,225,195,.5)"><svg viewBox="0 0 24 24" style="width:26px;height:26px;fill:#050922;margin-left:3px"><path d="M8 5v14l11-7z"/></svg></div></div></div>';
     cap.textContent=name+(handle?' · '+handle:'');
     lb.classList.add('open');
   }
