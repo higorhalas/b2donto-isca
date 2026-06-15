@@ -190,6 +190,24 @@ section.pilar{position:relative; padding:74px 0}
 .ad-act{display:flex; gap:20px; padding:11px 14px; color:var(--dim-grey)}
 .ad-act svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7}
 
+/* Anúncio em Stories (9:16) */
+.story-ad{position:relative; width:100%; max-width:296px; margin:0 auto; aspect-ratio:9/16; border-radius:22px; overflow:hidden; background:#0A0E2E; border:1px solid var(--line-strong); box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.story-ad .story-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center}
+.story-ad .scrim-top{position:absolute; top:0; left:0; right:0; height:120px; background:linear-gradient(180deg, rgba(5,9,34,.6), transparent); pointer-events:none}
+.story-ad .scrim-bot{position:absolute; bottom:0; left:0; right:0; height:190px; background:linear-gradient(0deg, rgba(5,9,34,.9), rgba(5,9,34,.4) 45%, transparent); pointer-events:none}
+.story-bars{position:absolute; top:10px; left:10px; right:10px; display:flex; gap:4px; z-index:2}
+.story-bars i{flex:1; height:2.5px; border-radius:2px; background:rgba(255,255,255,.4)}
+.story-bars i.on{background:#fff}
+.story-head{position:absolute; top:22px; left:12px; right:12px; display:flex; align-items:center; gap:9px; z-index:2}
+.story-head .av{width:30px; height:30px; border-radius:50%; background:var(--grad-brand); border:1.5px solid rgba(255,255,255,.9); flex:none}
+.story-head .nm{font-size:12px; font-weight:700; color:#fff; line-height:1.15}
+.story-head .sp{font-family:var(--mono); font-size:9px; color:rgba(255,255,255,.75); letter-spacing:.5px}
+.story-head .x{margin-left:auto; color:#fff; opacity:.85; font-size:14px}
+.story-cta{position:absolute; bottom:16px; left:14px; right:14px; z-index:2; text-align:center}
+.story-cta .hl{font-size:14px; font-weight:700; color:#fff; line-height:1.3; margin-bottom:12px; text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.story-cta .btn-s{display:flex; align-items:center; justify-content:center; gap:7px; width:100%; padding:11px; border-radius:11px; background:#fff; color:var(--black-hole); font-weight:700; font-size:13px}
+.story-cta .btn-s svg{width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round}
+
 /* Criativos grid (pilar 2) */
 .cre-wrap{padding:18px}
 .cre-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:13px}
@@ -489,14 +507,19 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
         </ul>
       </div>
       <div class="pilar-viz r d2">
-        <div class="mock ad">
-          <div class="ad-top"><span class="ad-av"></span><div><div class="who">Clínica Sorriso & Cia</div><div class="spo">Patrocinado</div></div></div>
-          <div class="ad-img"><img src="assets/criativos/depoimento.jpg?v=2" alt="Anúncio da clínica no feed" loading="lazy"></div>
-          <div class="ad-cta"><div class="t">clinicasorriso.com.br<b>Avaliação com horário esta semana</b></div><span class="bt">Agendar</span></div>
-          <div class="ad-act">
-            <svg viewBox="0 0 24 24"><path d="M7 10v11M2 13v6a2 2 0 0 0 2 2h13l3-9h-7V5a2 2 0 0 0-4 0c0 2-3 5-3 5z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12 7.5L3 21l1.9-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
-            <svg viewBox="0 0 24 24"><path d="M4 12v8h16v-8M12 3v13M7 8l5-5 5 5"/></svg>
+        <div class="story-ad">
+          <img class="story-bg" src="assets/criativos/depoimento.jpg?v=2" alt="Anúncio em stories da clínica" loading="lazy">
+          <div class="scrim-top"></div>
+          <div class="scrim-bot"></div>
+          <div class="story-bars"><i class="on"></i><i></i><i></i></div>
+          <div class="story-head">
+            <span class="av"></span>
+            <div><div class="nm">Clínica Sorriso &amp; Cia</div><div class="sp">Patrocinado</div></div>
+            <span class="x">✕</span>
+          </div>
+          <div class="story-cta">
+            <div class="hl">Avaliação com horário esta semana</div>
+            <span class="btn-s"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Agendar avaliação</span>
           </div>
         </div>
       </div>
