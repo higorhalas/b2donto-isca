@@ -232,6 +232,7 @@ section.pilar{position:relative; padding:74px 0}
 .bcard p{font-size:13.5px; color:var(--cool-grey); line-height:1.55}
 .bcard p b{color:var(--off-white); font-weight:600}
 .bviz{margin-top:16px}
+.bviz img{display:block; width:100%; aspect-ratio:16/10; object-fit:cover; object-position:center; border-radius:10px; border:1px solid var(--line)}
 @media (max-width:880px){.bento{grid-template-columns:1fr 1fr} .bcard,.bcard.lg,.bcard.xl{grid-column:span 1}}
 @media (max-width:560px){.bento{grid-template-columns:1fr}}
 
@@ -543,55 +544,36 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
         <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
         Acesso individual com login e senha
       </div>
-      <div class="portal-shot r d2">
-        <div class="glow"></div>
-        <div class="mock">
-          <div class="mock-bar"><span class="mock-dots"><i></i><i></i><i></i></span>
-            <span class="mock-url"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>portal.b2donto.com / comercial</span>
-          </div>
-          <img class="shot" src="portal-prints/crm.png" alt="Planilha Comercial (CRM) do portal, leads organizados por etapa do funil" loading="lazy">
-        </div>
-      </div>
       <div class="bento">
         <div class="bcard lg r d1">
           <span class="tagk">Área Criativa</span>
           <h3>Onde você aprende e envia seu conteúdo</h3>
           <p>Videoaulas de <b>como enviar materiais</b> (celular e computador), guia do que enviar e o que não enviar, <b>pasta exclusiva no Google Drive</b> e banco de referências de conteúdo B2donto.</p>
-          <div class="bviz mv-tiles"><i></i><i></i><i></i></div>
+          <div class="bviz"><img src="assets/portal/area-criativa.jpg" alt="Tela Area Criativa do portal" loading="lazy" style="object-position:top"></div>
         </div>
         <div class="bcard lg r d2">
           <span class="tagk">Planilha Comercial · CRM</span>
           <h3>Gestão completa de leads</h3>
           <p>Registro, status, origem e valores de cada lead, com <b>exportação em CSV</b>.</p>
-          <div class="bviz mv-rows">
-            <div class="rw"><span class="st g"></span><span class="ln" style="width:80%"></span></div>
-            <div class="rw"><span class="st y"></span><span class="ln" style="width:62%"></span></div>
-            <div class="rw"><span class="st p"></span><span class="ln" style="width:90%"></span></div>
-          </div>
+          <div class="bviz"><img src="assets/portal/crm.jpg" alt="CRM do portal, leads por etapa do funil" loading="lazy"></div>
         </div>
         <div class="bcard r d1">
           <span class="tagk">Agenda Clínica</span>
           <h3>Controle de agendamentos</h3>
           <p><b>3 lembretes</b>, confirmação, comparecimento e fechamento.</p>
-          <div class="bviz mv-cal"><i></i><i class="on"></i><i></i><i class="dot"></i><i></i><i class="on"></i><i></i><i></i><i class="dot"></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+          <div class="bviz"><img src="assets/portal/agenda.jpg" alt="Agenda Clinica do portal, agendamentos por etapa" loading="lazy"></div>
         </div>
         <div class="bcard r d2">
           <span class="tagk">Dashboard Comercial</span>
           <h3>Seu funil visual</h3>
-          <p>Conversão de <b>lead → agendamento → comparecimento → fechamento</b>.</p>
-          <div class="bviz mv-funnel"><i style="width:100%"></i><i style="width:70%"></i><i style="width:48%"></i><i style="width:30%"></i></div>
+          <p>Conversão de <b>lead, agendamento, comparecimento, fechamento</b>.</p>
+          <div class="bviz"><img src="assets/portal/funil.jpg" alt="Dashboard, funil de vendas do portal" loading="lazy"></div>
         </div>
         <div class="bcard r d3">
           <span class="tagk">Relatórios de Marketing</span>
           <h3>Resultados na mão</h3>
           <p>Relatórios <b>automáticos</b> das campanhas com análise.</p>
-          <div class="bviz mv-chart">
-            <svg viewBox="0 0 200 60" preserveAspectRatio="none">
-              <defs><linearGradient id="mvg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(0,225,195,.35)"/><stop offset="1" stop-color="rgba(0,225,195,0)"/></linearGradient></defs>
-              <path class="ar" d="M0 48 L30 42 L60 46 L90 30 L120 34 L150 18 L200 8 L200 60 L0 60 Z"/>
-              <path class="ln" d="M0 48 L30 42 L60 46 L90 30 L120 34 L150 18 L200 8"/>
-            </svg>
-          </div>
+          <div class="bviz"><img src="assets/portal/relatorios.jpg" alt="Relatorio de trafego pago do portal" loading="lazy"></div>
         </div>
       </div>
     </div>
