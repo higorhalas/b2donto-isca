@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>B2Donto · Plano Essencial, O que está incluso</title>
+<title>B2Donto · Plano de Aceleração Essencial, o que está incluso</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -415,6 +415,31 @@ section.cta-final p{color:var(--cool-grey); max-width:540px; margin:0 auto 32px;
 .cta-foot{margin-top:20px; font-family:var(--mono); font-size:11px; letter-spacing:1px; color:var(--dim-grey); position:relative}
 
 footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); font-family:var(--mono); font-size:10px; letter-spacing:1.5px}
+/* FAQ */
+.faq-list{display:flex; flex-direction:column; gap:12px; margin-top:42px; max-width:840px}
+.faq-item{border:1px solid var(--line); border-radius:16px; background:rgba(255,255,255,.022); overflow:hidden; transition:border-color .35s ease, background .35s ease}
+.faq-item.open{border-color:rgba(0,225,195,.35); background:rgba(0,225,195,.04)}
+.faq-q{width:100%; display:flex; align-items:center; justify-content:space-between; gap:18px; text-align:left; padding:20px 22px; background:none; border:none; cursor:pointer; font-family:var(--font); color:var(--off-white); font-size:clamp(15px,2vw,17px); font-weight:600; line-height:1.4}
+@media (hover:hover){.faq-q{cursor:none} .faq-q:hover{color:#fff}}
+.faq-ic{flex:none; width:26px; height:26px; border-radius:50%; border:1px solid var(--line-strong); position:relative; transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s}
+.faq-ic::before,.faq-ic::after{content:""; position:absolute; top:50%; left:50%; width:11px; height:1.6px; background:var(--cyan); transform:translate(-50%,-50%); transition:transform .35s cubic-bezier(.2,.7,.2,1), opacity .35s}
+.faq-ic::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq-item.open .faq-ic{transform:rotate(180deg); border-color:var(--cyan)}
+.faq-item.open .faq-ic::after{transform:translate(-50%,-50%) rotate(0deg); opacity:0}
+.faq-a{max-height:0; overflow:hidden; transition:max-height .45s cubic-bezier(.2,.7,.2,1)}
+.faq-a-in{padding:0 22px 22px}
+.faq-a p{color:var(--cool-grey); font-size:15px; line-height:1.65; max-width:70ch}
+.faq-a p b{color:var(--off-white); font-weight:600}
+@media (max-width:560px){.faq-q{padding:16px; gap:12px} .faq-a-in{padding:0 16px 18px}}
+
+/* Botão flutuante de dúvidas (WhatsApp) */
+.fab-help{position:fixed; right:20px; bottom:20px; z-index:300; display:inline-flex; align-items:center; gap:10px; padding:13px 18px 13px 15px; border-radius:40px; background:var(--grad-brand); color:var(--black-hole); font-family:var(--font); font-weight:700; font-size:14px; text-decoration:none; box-shadow:0 10px 34px rgba(0,225,195,.4); opacity:0; transform:translateY(14px); transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .3s, opacity .4s; will-change:transform}
+.loaded .fab-help{opacity:1; transform:none}
+.fab-help:hover{transform:translateY(-3px); box-shadow:0 16px 46px rgba(0,225,195,.55)}
+.fab-help .fab-ic{width:22px; height:22px; flex:none; fill:currentColor}
+.fab-help .fab-label{white-space:nowrap}
+@media (hover:hover){.fab-help{cursor:none}}
+@media (max-width:560px){.fab-help{right:14px; bottom:14px; padding:14px} .fab-help .fab-label{display:none}}
 </style>
 </head>
 <body>
@@ -446,7 +471,7 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
 
 <div class="fixed-header">
   <div class="logo">B2<span>donto</span></div>
-  <span class="badge">Plano Essencial</span>
+  <span class="badge">Aceleração Essencial</span>
 </div>
 
 <div class="scrollbar"><div class="track"><div class="thumb" id="scrollThumb"></div></div><span class="pct" id="scrollPct">0%</span></div>
@@ -455,7 +480,7 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
 
   <!-- HERO -->
   <header class="hero">
-    <div class="eyebrow r">Gestão de tráfego para clínicas · Plano enxuto</div>
+    <div class="eyebrow r">Gestão de tráfego para clínicas · Direto ao ponto</div>
     <h1 class="r d1">Sua clínica pronta pra
       <span class="rot">
         <span>atrair mais pacientes</span>
@@ -463,12 +488,12 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
         <span>fechar mais vendas</span>
       </span>
     </h1>
-    <p class="sub r d2">Gestão de anúncios, criativos todo mês e um portal completo de gestão comercial. Operação enxuta, direto ao ponto, sem reunião de venda e sem amarração de contrato.</p>
+    <p class="sub r d2">Gestão de anúncios, criativos todo mês e um portal completo de gestão comercial. Operação direta ao ponto, sem reunião de venda e sem amarração de contrato.</p>
     <div class="price-row r d3">
       <div class="price-tag"><span class="cur">R$</span><span class="val" data-count="997">0</span><span class="per">/ mês</span></div>
       <div class="price-note">Verba de anúncios à parte (a partir de R$500/mês)</div>
     </div>
-    <a class="btn r d4" href="#contratar" style="margin-top:26px">Quero começar
+    <a class="btn r d4" href="https://wa.me/5541996992198?text=Ol%C3%A1%2C%20desejo%20contratar%20o%20Plano%20de%20Acelera%C3%A7%C3%A3o%20Essencial" target="_blank" rel="noopener" style="margin-top:26px">Quero começar
       <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 
     <div class="hero-mock r d5">
@@ -848,12 +873,79 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
     </div>
   </div>
 
+  <!-- FAQ -->
+  <section data-anim="slide-up">
+    <div class="r eyebrow">Perguntas frequentes</div>
+    <h2 class="title r d1">Ainda com <span class="grad-text">dúvida?</span></h2>
+    <p class="lead r d2">As perguntas que todo dentista faz antes de começar, respondidas direto ao ponto.</p>
+
+    <div class="faq-list">
+
+      <div class="faq-item r">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>Como funciona se não tem reunião de vendas nem onboarding demorado?</span>
+          <span class="faq-ic" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in"><p>Essa é justamente a nossa proposta. Em vez de te prender em calls longas, a gente colocou todo o processo dentro do portal: você assiste a vídeos curtos no seu ritmo, envia seus materiais por uma pasta exclusiva e nossa equipe já começa a produzir. O que em outras agências leva semanas de reuniões, aqui acontece em minutos, quando for conveniente pra você. <b>Menos burocracia, mais clínica rodando.</b></p></div></div>
+      </div>
+
+      <div class="faq-item r">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>Preciso entender de tráfego ou de marketing pra contratar?</span>
+          <span class="faq-ic" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in"><p><b>Não.</b> A parte técnica (campanhas, segmentação, otimização) é toda com a equipe B2donto. Seu papel é simples: gravar os materiais seguindo os roteiros prontos que entregamos e acompanhar os resultados pelo portal. Inclusive, os treinamentos inclusos te ensinam o passo a passo de tudo, do que gravar até como atender melhor os pacientes que chegam. E se você travar em qualquer etapa, nossa equipe de suporte está disponível pra ajudar.</p></div></div>
+      </div>
+
+      <div class="faq-item r">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>O que está incluso no valor e o que pago à parte?</span>
+          <span class="faq-ic" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in"><p>No valor mensal está <b>tudo da operação</b>: gestão das campanhas, 3 vídeos e 3 artes por mês, o portal completo de gestão e os treinamentos. A única coisa paga à parte é a verba dos anúncios, o dinheiro que vai direto pro Meta (Facebook/Instagram) exibir seus anúncios. Recomendamos a partir de R$500/mês, e esse valor é pago por você diretamente à plataforma, com total transparência. <b>Não cobramos comissão sobre a verba.</b></p></div></div>
+      </div>
+
+      <div class="faq-item r">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>Por que não tem fidelidade nem multa?</span>
+          <span class="faq-ic" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in"><p>Porque a estrutura desse plano foi desenhada pra ser ágil e eficiente, o que nos permite trabalhar sem amarrar você a um contrato longo. A gente prefere te manter mês a mês pela entrega e pelo resultado, não por uma cláusula. Na prática, isso coloca a responsabilidade do nosso lado: <b>cabe a nós continuar entregando pra você querer continuar.</b> Se em algum momento não fizer sentido, você não está preso a nada.</p></div></div>
+      </div>
+
+      <div class="faq-item r">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>As contas de anúncio e os materiais ficam comigo?</span>
+          <span class="faq-ic" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in"><p><b>Sim, sempre.</b> As campanhas rodam na sua própria conta de anúncios, no seu nome, você nunca perde o acesso, mesmo que decida encerrar. Os leads ficam registrados no seu portal e podem ser exportados quando quiser. Tudo é seu: a conta, os dados e os resultados.</p></div></div>
+      </div>
+
+      <div class="faq-item r">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>Em quanto tempo vejo resultado?</span>
+          <span class="faq-ic" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in"><p>Os anúncios começam a rodar logo nos primeiros dias após o envio dos materiais. Agora, sinceridade: <b>tráfego pago é consistência, não loteria.</b> Os primeiros leads costumam aparecer rápido, mas o resultado sólido vem da combinação de bons anúncios + bom atendimento da sua equipe (por isso os treinamentos são parte do pacote). Os cases que você viu acima não aconteceram da noite pro dia, aconteceram com método aplicado ao longo do tempo.</p></div></div>
+      </div>
+
+      <div class="faq-item r">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>Esse plano serve pra qualquer clínica?</span>
+          <span class="faq-ic" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in"><p>Ele é pensado pra clínicas odontológicas que querem uma operação ágil e eficiente, sem pagar o preço de uma agência tradicional. Funciona muito bem pra quem está começando a investir em tráfego de forma estruturada ou pra quem já investe mas está cansado de enrolação e quer algo direto ao ponto. <b>Se a sua clínica tem capacidade de atender novos pacientes e quer crescer com previsibilidade, esse plano foi feito pra você.</b></p></div></div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- CTA FINAL -->
   <section class="cta-final" id="contratar">
     <div class="eyebrow r" style="justify-content:center">Pronto pra começar?</div>
     <h2 class="r d1">Sua clínica rodando <span class="grad-text">por R$997/mês</span></h2>
     <p class="r d2">Tráfego, criativos, portal de gestão e treinamentos, a estrutura de uma agência, no preço que cabe na clínica.</p>
-    <a class="btn r d3" href="#">Falar com a B2donto
+    <a class="btn r d3" href="https://wa.me/5541996992198?text=Ol%C3%A1%2C%20desejo%20contratar%20o%20Plano%20de%20Acelera%C3%A7%C3%A3o%20Essencial" target="_blank" rel="noopener">Falar com a B2donto
       <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <div class="cta-foot r d4">Verba de anúncios à parte · recomendado a partir de R$500/mês</div>
   </section>
@@ -861,6 +953,12 @@ footer.legal{text-align:center; padding:46px 20px 12px; color:var(--dim-grey); f
 </div>
 
 <footer class="legal">B2DONTO · ACELERAÇÃO COMERCIAL PARA CLÍNICAS</footer>
+
+<!-- Botão flutuante de dúvidas (WhatsApp) -->
+<a class="fab-help" href="https://wa.me/5541996992198?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Plano%20de%20Acelera%C3%A7%C3%A3o%20Essencial" target="_blank" rel="noopener" aria-label="Tirar dúvidas no WhatsApp">
+  <svg class="fab-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l4.9-1.4A10 10 0 1 0 12 2zm0 18.3c-1.5 0-3-.4-4.3-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.3 8.3 0 1 1 12 20.3zm4.6-6.2c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.4-1.3-3.4-3-.3-.5.3-.5.8-1.3.1-.2 0-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.2 3.4 5.3 4.7 2 .9 2.8.9 3.8.8.6-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/></svg>
+  <span class="fab-label">Tirar dúvidas</span>
+</a>
 
 <script>
 (function loader(){
@@ -1010,6 +1108,23 @@ function animFunnel(){
   const thumb=document.getElementById('scrollThumb'), pct=document.getElementById('scrollPct');
   function upd(){const h=document.documentElement.scrollHeight-innerHeight; const p=h>0?scrollY/h:0; thumb.style.transform=`translateY(${p*(170*.76)}px)`; pct.textContent=Math.round(p*100)+'%';}
   addEventListener('scroll',upd,{passive:true}); upd();
+})();
+
+// FAQ accordion (single-open)
+(function faq(){
+  const items=Array.from(document.querySelectorAll('.faq-item'));
+  if(!items.length) return;
+  items.forEach(item=>{
+    const q=item.querySelector('.faq-q'), a=item.querySelector('.faq-a');
+    if(!q||!a) return;
+    q.addEventListener('click',()=>{
+      const isOpen=item.classList.contains('open');
+      items.forEach(o=>{ if(o!==item){ o.classList.remove('open'); const oa=o.querySelector('.faq-a'), oq=o.querySelector('.faq-q'); if(oa)oa.style.maxHeight=null; if(oq)oq.setAttribute('aria-expanded','false'); }});
+      if(isOpen){ item.classList.remove('open'); a.style.maxHeight=null; q.setAttribute('aria-expanded','false'); }
+      else { item.classList.add('open'); a.style.maxHeight=a.scrollHeight+'px'; q.setAttribute('aria-expanded','true'); }
+    });
+  });
+  addEventListener('resize',()=>{ const open=document.querySelector('.faq-item.open .faq-a'); if(open) open.style.maxHeight=open.scrollHeight+'px'; });
 })();
 </script>
 </body>
