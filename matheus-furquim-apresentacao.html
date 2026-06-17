@@ -1,501 +1,690 @@
 <!DOCTYPE html>
+<!--
+  DR. MATHEUS FURQUIM, LENTES EM RESINA · Página para PACIENTES
+  Standalone. Abre direto no navegador. Vanilla HTML/CSS/JS.
+  Contato: WhatsApp 5562991583094 (agendar avaliação)
+-->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dr. Matheus Furquim · Lentes em Resina</title>
-<meta name="description" content="Dr. Matheus Furquim, referência mundial em lentes em resina. Mais de 5.000 casos realizados. Odontologia estética com naturalidade.">
-<meta property="og:title" content="Dr. Matheus Furquim · Lentes em Resina">
-<meta property="og:description" content="Referência mundial em lentes em resina. +5.000 casos realizados.">
-<meta property="og:image" content="matheus-apresentacao/foto-1-vinho2.jpg">
+<title>Dr. Matheus Furquim | Lentes em Resina, sorriso natural</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&family=Allura&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('boot-loading');</script>
 <style>
 :root{
-  --wine:#4a2942; --wine-deep:#2a1626; --wine-glow:#6e3a5e;
-  --ink:#140a11; --ink-soft:#1c0f18;
-  --cream:#f4ece7; --muted:#c7adba; --dim:#8d7280;
-  --gold:#caa96b; --gold-soft:#e3cd9e;
-  --line:rgba(244,236,231,.14); --line-strong:rgba(202,169,107,.35);
-  --serif:'Cormorant Garamond', Georgia, serif;
-  --sans:'Jost', system-ui, -apple-system, sans-serif;
-  --script:'Allura', cursive;
+  --gold:#C9A24B; --gold-soft:#E6CF95; --gold-bright:#F1DCA4; --gold-deep:#8A6A2E;
+  --ink:#0C0A07; --ink-2:#14110C; --panel:#171309;
+  --ivory:#F4EFE4; --warm-grey:#BCB09A; --dim:#8A8270;
+  --line:rgba(231,205,149,.12); --line-strong:rgba(231,205,149,.24);
+  --grad-gold:linear-gradient(135deg,#E6CF95 0%,#C9A24B 48%,#9C7327 100%);
+  --font:'Jost',system-ui,-apple-system,sans-serif;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --mono:'Jost',system-ui,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
-body{
-  font-family:var(--sans); background:var(--ink); color:var(--cream);
-  line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased;
-  font-weight:300;
-}
-img{display:block; max-width:100%}
+html{background:#140a11; scroll-behavior:smooth; overflow-x:hidden}
+body{font-family:var(--font); background:#140a11; color:var(--ivory); line-height:1.55; min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased}
+h2,h3{font-family:var(--serif)!important; font-weight:400!important; letter-spacing:.005em}
+@media (hover:hover){ body{cursor:none} }
 
-/* ===== AURORA VINHO (sutil, estática c/ leve respiro) ===== */
-body::before{
-  content:""; position:fixed; inset:-30vh -10vw; z-index:0; pointer-events:none;
+/* Aurora dourada */
+#amb{position:fixed; inset:0; z-index:0; pointer-events:none}
+body::before{content:""; position:fixed; inset:-22vh -12vw; z-index:0; pointer-events:none;
   background:
-    radial-gradient(60% 50% at 20% 12%, rgba(110,58,94,.40), transparent 60%),
-    radial-gradient(55% 45% at 85% 70%, rgba(74,41,66,.45), transparent 62%),
-    radial-gradient(50% 40% at 50% 100%, rgba(42,22,38,.6), transparent 60%);
-  animation: breathe 24s ease-in-out infinite; opacity:.85;
-}
-@keyframes breathe{0%,100%{transform:scale(1) translateY(0)} 50%{transform:scale(1.08) translateY(-2%)}}
+    radial-gradient(46% 40% at 16% 12%, rgba(110,58,94,.52), transparent 60%),
+    radial-gradient(44% 38% at 88% 30%, rgba(74,41,66,.50), transparent 62%),
+    radial-gradient(52% 46% at 74% 90%, rgba(110,58,94,.42), transparent 60%),
+    radial-gradient(40% 36% at 28% 102%, rgba(42,22,38,.62), transparent 60%);
+  animation:auroraMove 28s ease-in-out infinite alternate; will-change:transform; opacity:.92}
+@keyframes auroraMove{
+  0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+  50%{transform:translate3d(-3vw,2.5vh,0) scale(1.14) rotate(2.5deg)}
+  100%{transform:translate3d(2.5vw,-2vh,0) scale(1.07) rotate(-1.5deg)}}
+@media(prefers-reduced-motion:reduce){ body::before{animation:none} }
 
-/* film grain bem leve */
-body::after{
-  content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.04;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+/* Loader */
+.loader{position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; overflow:hidden}
+.boot-loading .loader{background:var(--ink)}
+.loader-screen{position:absolute; left:0; right:0; height:50%; background:var(--ink); z-index:1; transition:transform .9s cubic-bezier(.7,0,.2,1)}
+.loader-screen.top{top:0} .loader-screen.bot{bottom:0}
+.loader.done .loader-screen.top{transform:translateY(-100%)} .loader.done .loader-screen.bot{transform:translateY(100%)}
+.loader.done{pointer-events:none} .loader.done .loader-content{opacity:0}
+.loader-content{position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:22px; transition:opacity .3s ease}
+.loader-mark{font-family:var(--serif); font-size:34px; letter-spacing:.18em; color:var(--gold-soft); text-transform:uppercase; filter:drop-shadow(0 0 18px rgba(201,162,75,.35))}
+.loader-mark-img{height:48px; width:auto; mix-blend-mode:screen; filter:drop-shadow(0 0 18px rgba(201,162,75,.3))}
+.loadline{position:relative; width:240px; height:1px; background:rgba(231,205,149,.14); overflow:hidden}
+.loading-bar{position:absolute; inset:0 auto 0 0; width:0%; height:1px; background:var(--gold); box-shadow:0 0 8px var(--gold)}
+.loadpercent{font-family:var(--mono); font-size:11px; letter-spacing:3px; color:var(--dim)}
+.boot-loading body > :not(.loader){opacity:0 !important; visibility:hidden !important}
 
-.wrap{position:relative; z-index:2; max-width:600px; margin:0 auto}
+/* Cursor */
+.cursor,.cursor-dot{position:fixed; top:0; left:0; pointer-events:none; z-index:9000; transform:translate(-50%,-50%); border-radius:50%; mix-blend-mode:difference}
+.cursor{width:32px; height:32px; border:1px solid rgba(255,255,255,.6); transition:width .25s, height .25s, border-color .25s}
+.cursor-dot{width:4px; height:4px; background:#fff}
+.cursor.hover{width:56px; height:56px; border-color:var(--gold-soft); background:rgba(201,162,75,.10)}
+@media (hover:none){.cursor,.cursor-dot{display:none} body{cursor:auto}}
 
-/* ===== TIPOGRAFIA ===== */
-.eyebrow{
-  font-family:var(--sans); font-weight:400; font-size:11px;
-  letter-spacing:.42em; text-transform:uppercase; color:var(--gold);
-}
-h1,h2,h3{font-family:var(--serif); font-weight:300; line-height:1.04; letter-spacing:.01em}
-.lead{font-family:var(--serif); font-weight:300; color:var(--muted)}
-.script{font-family:var(--script); color:var(--gold-soft); font-weight:400}
+/* Noise */
+.noise{position:fixed; inset:-50%; z-index:8000; pointer-events:none; opacity:.04; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); animation:noise 1s steps(8) infinite; mix-blend-mode:overlay}
+@keyframes noise{0%{transform:translate(0,0)} 12%{transform:translate(-5%,-5%)} 25%{transform:translate(5%,-3%)} 37%{transform:translate(-3%,5%)} 50%{transform:translate(3%,3%)} 62%{transform:translate(-5%,3%)} 75%{transform:translate(5%,-5%)} 87%{transform:translate(-3%,-3%)} 100%{transform:translate(0,0)}}
 
-/* ===== HERO ===== */
-.hero{position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-start;
-  padding:104px 0 44px; overflow:hidden}
+/* Edge blur */
+.edge-blur{position:fixed; left:0; right:0; height:90px; pointer-events:none; z-index:50}
+.edge-blur.top{top:0; background:linear-gradient(180deg,var(--ink) 0%, transparent 100%); -webkit-mask-image:linear-gradient(180deg,#000 0%, transparent 100%)}
+.edge-blur.bot{bottom:0; background:linear-gradient(0deg,var(--ink) 0%, transparent 100%); -webkit-mask-image:linear-gradient(0deg,#000 0%, transparent 100%)}
+
+/* Frame UI */
+.frame{position:fixed; inset:16px; z-index:100; pointer-events:none}
+.frame .corner{position:absolute; width:14px; height:14px; opacity:.8}
+.frame .corner.tl{top:0; left:0} .frame .corner.tr{top:0; right:0}
+.frame .corner.bl{bottom:0; left:0} .frame .corner.br{bottom:0; right:0}
+
+/* Header */
+.fixed-header{position:fixed; top:30px; left:32px; z-index:200; display:flex; align-items:center; gap:14px; opacity:0; transform:translateY(-10px); transition:opacity .5s .3s, transform .5s .3s}
+.loaded .fixed-header{opacity:1; transform:none}
+.fixed-header .logo{font-family:var(--serif); font-weight:600; font-size:22px; letter-spacing:.12em; color:var(--ivory); text-transform:uppercase; line-height:1}
+.fixed-header .logo-img{height:26px; width:auto; display:block; mix-blend-mode:screen}
+.fixed-header .badge{font-family:var(--mono); font-size:10px; letter-spacing:2px; color:var(--gold-soft); text-transform:uppercase; border:1px solid var(--line-strong); padding:4px 9px; border-radius:4px}
+@media (max-width:768px){.fixed-header{top:20px; left:20px}}
+@media (max-width:520px){.fixed-header .badge{display:none}}
+
+/* Wrap */
+.wrap{position:relative; z-index:1; max-width:520px; margin:0 auto; padding:0 20px 120px}
+@media (min-width:768px){.wrap{max-width:760px; padding:0 32px 140px}}
+@media (min-width:1024px){.wrap{max-width:1000px; padding:0 40px 160px}}
+
+/* Tipografia */
+.eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-soft); font-weight:600; margin-bottom:18px}
+.grad-text{background:var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent}
+.lead{color:var(--warm-grey); font-size:clamp(16px,1.5vw,19px); line-height:1.65}
+.kicker{font-family:var(--serif); font-style:italic; font-size:clamp(20px,2.4vw,30px); color:var(--gold-soft); letter-spacing:.01em}
+
+/* Hero */
+.frame,.fixed-header,.edge-blur{display:none}
+.hero{position:relative; min-height:100vh; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-start; padding:104px 0 44px; overflow:hidden; background:#140a11}
 .hero-photo{position:absolute; inset:0; z-index:0}
-.hero-photo img{width:100%; height:100%; object-fit:cover; object-position:50% 26%}
-.hero-photo::after{content:""; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(20,10,17,.62) 0%, rgba(20,10,17,.28) 19%, transparent 40%, transparent 64%, rgba(20,10,17,.4) 84%, var(--ink) 100%)}
-.hero-top{position:absolute; top:0; left:0; right:0; z-index:2; display:flex; justify-content:center;
-  padding:26px 24px}
-.hero-top .sig{font-family:var(--script); font-size:34px; color:var(--cream); line-height:1; opacity:.96}
+.hero-photo img{width:100%; height:100%; object-fit:cover; object-position:50% 22%; display:block}
+.hero-photo::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,10,17,.6) 0%, rgba(20,10,17,.26) 19%, transparent 40%, transparent 60%, rgba(20,10,17,.5) 82%, #140a11 100%)}
+.hero-top{position:absolute; top:0; left:0; right:0; z-index:3; display:flex; justify-content:center; padding:26px 24px}
+.hero-top .hsig{font-family:'Allura',cursive; font-size:34px; color:#f4ece7; line-height:1; opacity:.96}
 .hero-inner{position:relative; z-index:2; padding:0 28px; max-width:600px; margin:0 auto; width:100%}
-.hero .eyebrow{margin-bottom:18px; letter-spacing:.42em}
-.hero h1{font-size:clamp(46px,15vw,72px); color:var(--cream); margin-bottom:6px}
-.hero h1 .first{display:block; font-style:italic; font-weight:300; color:var(--gold-soft); font-size:.42em; letter-spacing:.06em; margin-bottom:6px}
-.hero .tag{font-family:var(--serif); font-size:clamp(19px,5.2vw,24px); font-weight:300; color:var(--muted);
-  margin-top:14px; max-width:18ch}
-.hero .casos{display:flex; align-items:baseline; gap:10px; margin-top:26px;
-  padding-top:20px; border-top:1px solid var(--line)}
-.hero .casos .num{font-family:var(--serif); font-size:40px; color:var(--gold); line-height:1}
-.hero .casos .cap{font-family:var(--sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
-.scroll-hint{position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:2;
-  width:1px; height:40px; background:linear-gradient(var(--gold), transparent); opacity:.4;
-  animation:hintPulse 4s ease-in-out infinite}
+.hero .eyebrow{font-family:'Jost',sans-serif; font-weight:400; font-size:11px; letter-spacing:.42em; text-transform:uppercase; color:#caa96b; margin-bottom:18px}
+.hero h1{font-family:'Cormorant Garamond',serif; font-weight:300; line-height:1.02; letter-spacing:.01em; font-size:clamp(44px,14vw,72px); color:#f4ece7; margin-bottom:6px}
+.hero h1 .first{display:block; font-style:italic; font-weight:300; color:#e3cd9e; font-size:.4em; letter-spacing:.06em; margin-bottom:8px}
+.hero .htag{font-family:'Cormorant Garamond',serif; font-size:clamp(19px,5vw,24px); font-weight:300; color:#c7adba; margin-top:16px; max-width:24ch}
+.hero .hmeta{display:flex; gap:30px; margin-top:26px; padding-top:20px; border-top:1px solid rgba(244,236,231,.14)}
+.hero .hmeta .hm{display:flex; align-items:baseline; gap:9px}
+.hero .hmeta .num{font-family:'Cormorant Garamond',serif; font-size:36px; color:#caa96b; line-height:1; font-weight:400}
+.hero .hmeta .cap{font-family:'Jost',sans-serif; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#c7adba; line-height:1.35}
+.hero .hcta{display:inline-flex; align-items:center; gap:11px; margin-top:30px; text-decoration:none; background:#caa96b; color:#1c0f18; font-family:'Jost',sans-serif; font-weight:500; font-size:15px; letter-spacing:.04em; padding:16px 30px; border-radius:50px; box-shadow:0 10px 40px rgba(202,169,107,.28); transition:transform .3s, box-shadow .3s}
+.hero .hcta:hover{transform:translateY(-2px); box-shadow:0 14px 48px rgba(202,169,107,.42)}
+.hero .hcta svg{width:19px; height:19px; fill:#1c0f18}
+.scroll-hint{position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:2; width:1px; height:40px; background:linear-gradient(#caa96b, transparent); opacity:.4; animation:hintPulse 4s ease-in-out infinite}
 @keyframes hintPulse{0%,100%{height:26px} 50%{height:40px}}
+@keyframes kenburns{from{transform:scale(1.02)} to{transform:scale(1.1) translate(-1.5%,-1%)}}
+@media (min-width:760px){
+  .hero{justify-content:center; align-items:flex-end; padding:0}
+  .hero::before{content:""; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(95deg, #140a11 0%, rgba(20,10,17,.92) 30%, rgba(20,10,17,.55) 48%, rgba(20,10,17,.15) 62%, transparent 74%)}
+  .hero-photo img{object-position:50% 24%; animation:kenburns 28s ease-in-out infinite alternate}
+  .hero-photo::after{background:linear-gradient(180deg, transparent 74%, #140a11 100%)}
+  .hero-inner{margin:0; max-width:56%; padding:0 4vw 0 6vw; align-self:center; transform:translateY(-6vh)}
+  .hero-top{justify-content:flex-end; padding-right:7vw}
+  .hero h1{font-size:76px}
+  .scroll-hint{display:none}
+}
+@media (max-width:759px){
+  .hero{padding-top:60px}
+  .hero-top .hsig{font-size:27px}
+  .hero::before{content:""; position:absolute; left:0; right:0; top:0; height:84%; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.74) 22%, rgba(0,0,0,.54) 44%, rgba(0,0,0,.3) 70%, transparent 100%)}
+  .hero-photo{inset:auto 0 0 0; height:82%}
+  .hero-photo img{object-position:center; transform:translate(13%, 19%) scale(1.28)}
+  .hero-photo::after{background:linear-gradient(180deg, #140a11 0%, rgba(20,10,17,.2) 12%, transparent 42%, transparent 64%, rgba(20,10,17,.5) 86%, #140a11 100%)}
+  .hero .hmeta{flex-direction:column; gap:10px; border-top:none; padding-top:4px}
+}
 
-/* ===== SECTIONS ===== */
-section{position:relative; padding:88px 28px}
-.sec-eyebrow{display:flex; align-items:center; gap:14px; margin-bottom:26px}
-.sec-eyebrow .ln{height:1px; width:34px; background:var(--gold); opacity:.7}
+/* Placeholders de imagem com fallback (some quando o arquivo existe) */
+.ph{position:relative; overflow:hidden; border-radius:18px; border:1px solid var(--line-strong); background:linear-gradient(135deg,#1b160c,#0e0b06)}
+.ph::after{content:attr(data-label); position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:18px; font-family:var(--mono); font-size:10.5px; letter-spacing:1.5px; color:var(--dim)}
+.ph img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; z-index:1}
+.ph-16x9{aspect-ratio:16/9} .ph-4x5{aspect-ratio:4/5} .ph-3x2{aspect-ratio:3/2}
 
-/* MANIFESTO */
-.manifesto{text-align:center; padding:96px 30px}
-.manifesto h2{font-size:clamp(34px,9.5vw,52px); font-style:italic; color:var(--cream)}
-.manifesto h2 em{font-style:normal; color:var(--gold)}
-.manifesto p{font-family:var(--serif); font-size:19px; color:var(--muted); margin-top:22px; max-width:30ch; margin-inline:auto}
+/* Credenciais (pills) */
+.creds{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:4px 0}
+.cred{display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-soft); border:1px solid var(--line-strong); border-radius:30px; padding:7px 14px}
+.cred::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px var(--gold)}
 
-/* AUTORIDADE */
-.aut h2{font-size:clamp(30px,8vw,44px); color:var(--cream); margin-bottom:8px}
-.aut .lead{font-size:20px; margin-bottom:30px}
-.figure{position:relative; border:1px solid var(--line); border-radius:4px; overflow:hidden; margin:30px 0}
-.figure img{width:100%; height:auto}
-.figure .cap{position:absolute; left:0; right:0; bottom:0; padding:16px 18px;
-  background:linear-gradient(transparent, rgba(20,10,17,.9)); font-family:var(--sans);
-  font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-soft)}
-.stats3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:28px}
-.stat{text-align:center; padding:22px 6px; border:1px solid var(--line); border-radius:4px;
-  background:linear-gradient(180deg, rgba(110,58,94,.08), transparent)}
-.stat .v{font-family:var(--serif); font-size:30px; color:var(--gold); line-height:1}
-.stat .k{font-family:var(--sans); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:8px; line-height:1.3}
-.stat-hero{text-align:center; margin-top:40px; padding-top:34px; border-top:1px solid var(--line)}
-.stat-hero .sh-num{font-family:var(--serif); font-weight:300; font-size:clamp(58px,17vw,98px); line-height:.95}
-.stat-hero .sh-label{font-family:var(--sans); font-size:10.5px; letter-spacing:.26em; text-transform:uppercase; color:var(--muted); margin-top:12px}
+/* Galeria de palestras */
+.gallery{display:grid; grid-template-columns:1fr; gap:12px; margin-top:32px}
+@media (min-width:768px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gallery .cap{grid-column:1/-1; font-family:var(--mono); font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-soft); text-align:center; margin-bottom:4px}
 
-/* FILOSOFIA */
-.filo{background:linear-gradient(180deg, transparent, rgba(42,22,38,.5), transparent)}
-.filo h2{font-size:clamp(32px,8.5vw,46px); color:var(--cream); margin-bottom:34px}
-.filo h2 em{font-style:italic; color:var(--gold-soft)}
-.pillars{display:flex; flex-direction:column; gap:2px}
-.pillar{padding:24px 4px; border-top:1px solid var(--line); display:flex; gap:18px; align-items:flex-start}
-.pillar:last-child{border-bottom:1px solid var(--line)}
-.pillar .no{font-family:var(--serif); font-size:15px; color:var(--gold); font-style:italic; flex:0 0 auto; padding-top:3px; opacity:.8}
-.pillar h3{font-size:25px; color:var(--cream); margin-bottom:5px; font-weight:400}
-.pillar p{font-size:14px; color:var(--muted); font-family:var(--sans); line-height:1.6}
+/* Seção aspiracional (narrativa de sucesso) */
+.aspire{display:grid; gap:32px; align-items:center}
+@media (min-width:900px){.aspire{grid-template-columns:1fr 1fr}}
+.aspire h2{font-size:clamp(26px,3.8vw,46px); font-weight:700; letter-spacing:-.02em; line-height:1.12; margin-bottom:16px}
+.aspire p{color:var(--warm-grey); font-size:16px; line-height:1.65; margin-bottom:24px}
+.aspire-list{list-style:none; display:flex; flex-direction:column; gap:15px}
+.aspire-list li{display:flex; gap:12px; align-items:flex-start; font-size:15.5px; color:var(--ivory); line-height:1.5}
+.aspire-list li b{color:var(--gold-soft); font-weight:600}
+.aspire-list .ic{color:var(--gold); flex:0 0 auto; margin-top:1px}
 
-/* FRASE AUTORAL (voz do médico) */
-.autoral{text-align:center; padding:92px 30px}
-.autoral .aq{font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(28px,8vw,44px); line-height:1.18; color:var(--cream); max-width:15ch; margin:0 auto}
-.autoral .aq em{font-style:italic; color:var(--gold-soft)}
-.autoral .aq-sig{font-family:var(--script); font-size:38px; color:var(--gold-soft); margin-top:22px; line-height:1}
+/* Reveal */
+.r{opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1)}
+.r.in{opacity:1; transform:none}
+.r.d1{transition-delay:.08s} .r.d2{transition-delay:.16s} .r.d3{transition-delay:.24s} .r.d4{transition-delay:.32s} .r.d5{transition-delay:.40s}
 
-/* ANTES E DEPOIS */
-.ad h2{font-size:clamp(32px,8.5vw,46px); color:var(--cream); text-align:center; margin-bottom:8px}
-.ad .lead{text-align:center; font-size:18px; margin-bottom:34px}
-.ad-grid{display:flex; flex-direction:column; gap:16px}
-.ad-grid .figure{margin:0; border-color:var(--line-strong)}
+/* Section transitions */
+section{--tx:0;--ty:0;--sc:1; transform:translate3d(var(--tx),var(--ty),0) scale(var(--sc));
+  transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1), filter .8s ease; opacity:1; will-change:opacity,transform; padding:64px 0}
+section:not(.entered){opacity:0}
+section:not(.entered)[data-anim="slide-up"]{--ty:70px}
+section:not(.entered)[data-anim="slide-left"]{--tx:-90px}
+section:not(.entered)[data-anim="zoom-in"]{--sc:.9}
+section:not(.entered)[data-anim="zoom-glow"]{--sc:.9; filter:brightness(.5)}
+.sec-head{text-align:center; margin-bottom:44px}
+.sec-head h2{font-size:clamp(28px,4.4vw,50px); font-weight:700; letter-spacing:-.02em; line-height:1.08; margin-bottom:14px}
+
+/* Facts strip */
+.facts{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media (min-width:768px){.facts{grid-template-columns:repeat(4,1fr)}}
+.fact{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:14px; padding:22px 18px; background:rgba(231,205,149,.02); text-align:center; transition:transform .55s cubic-bezier(.2,.7,.2,1), border-color .55s, box-shadow .55s}
+.fact::after{content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .55s; background:radial-gradient(120% 100% at 50% 0%, rgba(201,162,75,.18), transparent 72%)}
+.fact .fl{font-family:var(--mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:8px; transition:color .55s; position:relative; z-index:1}
+.fact .fv{font-family:var(--serif); font-size:clamp(20px,2.4vw,26px); color:var(--gold-soft); font-weight:600; transition:color .55s, text-shadow .55s; position:relative; z-index:1}
+.fact.active, .fact:hover{transform:translateY(-4px); border-color:var(--line-strong); box-shadow:0 16px 38px rgba(0,0,0,.45), 0 0 0 1px rgba(201,162,75,.22)}
+.fact.active::after, .fact:hover::after{opacity:1}
+.fact.active .fl, .fact:hover .fl{color:var(--gold-soft)}
+.fact.active .fv, .fact:hover .fv{color:var(--gold-bright); text-shadow:0 0 18px rgba(201,162,75,.45)}
+@media(prefers-reduced-motion:reduce){.fact{transition:none}}
+
+/* Cards (o que ganha) */
+.grid3{display:grid; gap:16px; grid-template-columns:1fr}
+@media (min-width:768px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.card{position:relative; overflow:hidden; border:1px solid var(--line); border-radius:18px; padding:30px 26px; background:linear-gradient(180deg,rgba(231,205,149,.04),rgba(231,205,149,.01));
+  transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .35s}
+.card::after{content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit; opacity:0; transition:opacity .35s;
+  background:radial-gradient(220px circle at var(--cx,50%) var(--cy,50%), rgba(201,162,75,.12), transparent 60%)}
+.card:hover{transform:translateY(-3px); border-color:var(--line-strong); box-shadow:0 14px 36px rgba(0,0,0,.4), 0 0 0 1px rgba(201,162,75,.18)}
+.card:hover::after{opacity:1}
+.card .cnum{font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--gold); margin-bottom:16px}
+.card h3{font-size:20px; font-weight:700; margin-bottom:10px; letter-spacing:-.01em}
+.card p{color:var(--warm-grey); font-size:15px; line-height:1.6}
+
+/* Autoridade + stats */
+.auth{display:grid; gap:34px; align-items:center}
+@media (min-width:900px){.auth{grid-template-columns:1.05fr .95fr}}
+.auth-media{aspect-ratio:4/5; border-radius:18px; border:1px solid var(--line-strong); background:linear-gradient(135deg,#1b160c,#0e0b06); position:relative; overflow:hidden; min-height:320px}
+.auth-media::after{content:"[ foto do Dr. Matheus Furquim ]"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--dim)}
+.auth h2{font-size:clamp(26px,3.6vw,42px); font-weight:700; letter-spacing:-.02em; line-height:1.1; margin-bottom:16px}
+.auth p{color:var(--warm-grey); font-size:16px; line-height:1.65; margin-bottom:14px}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:26px}
+.stat{border:1px solid var(--line); border-radius:14px; padding:18px 12px; text-align:center; background:rgba(231,205,149,.02)}
+.stat .sv{font-family:var(--serif); font-size:clamp(26px,4vw,38px); font-weight:600; color:var(--gold-soft); line-height:1}
+.stat .sl{font-family:var(--mono); font-size:9.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); margin-top:8px}
+
+/* Escassez */
+.scarcity{text-align:center; border:1px solid var(--line-strong); border-radius:22px; padding:48px 28px;
+  background:linear-gradient(180deg,rgba(201,162,75,.06),rgba(231,205,149,.01))}
+.scarcity .big{font-family:var(--serif); font-size:clamp(40px,9vw,92px); font-weight:600; line-height:1; color:var(--gold-bright); letter-spacing:.01em}
+.scarcity .lbl{font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--warm-grey); margin-top:14px}
+.scarcity .dt{margin-top:26px; font-size:clamp(16px,2vw,20px); color:var(--ivory)}
 
 /* CTA */
-.cta{text-align:center; padding:100px 30px 130px;
-  background:radial-gradient(70% 60% at 50% 40%, rgba(110,58,94,.3), transparent 70%)}
-.cta .sig{font-family:var(--script); font-size:46px; color:var(--gold-soft); margin-bottom:18px; line-height:1}
-.cta h2{font-size:clamp(36px,10vw,56px); color:var(--cream); font-style:italic; margin-bottom:16px}
-.cta p{font-family:var(--serif); font-size:19px; color:var(--muted); max-width:26ch; margin:0 auto 36px}
-.btn-wpp{display:inline-flex; align-items:center; gap:12px; text-decoration:none;
-  background:var(--gold); color:var(--ink-soft); font-family:var(--sans); font-weight:500;
-  font-size:15px; letter-spacing:.04em; padding:18px 34px; border-radius:50px;
-  box-shadow:0 10px 40px rgba(202,169,107,.28); transition:transform .3s, box-shadow .3s}
-.btn-wpp:hover{transform:translateY(-2px); box-shadow:0 14px 48px rgba(202,169,107,.42)}
-.btn-wpp svg{width:20px; height:20px; fill:var(--ink-soft)}
-.cta .loc{margin-top:34px; font-family:var(--sans); font-size:11px; letter-spacing:.24em;
-  text-transform:uppercase; color:var(--dim)}
+.btn{display:inline-flex; align-items:center; gap:11px; background:var(--grad-gold); color:#1a1305; font-weight:700; font-size:16px; padding:17px 32px; border-radius:44px; text-decoration:none; border:none; cursor:pointer; font-family:var(--font); box-shadow:0 12px 40px rgba(201,162,75,.30); transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, filter .35s}
+.btn:hover{transform:translateY(-2px); filter:brightness(1.06); box-shadow:0 18px 52px rgba(201,162,75,.45)}
+.btn .wa{width:19px; height:19px; display:block}
+.cta-final{text-align:center; padding:96px 0 40px}
+.cta-final h2{font-size:clamp(30px,5vw,60px); font-weight:800; letter-spacing:-.025em; line-height:1.05; margin-bottom:26px; max-width:18ch; margin-inline:auto}
+.cta-note{margin-top:18px; font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--dim); text-transform:uppercase}
 
-/* rodapé fino */
-.foot{text-align:center; padding:30px; border-top:1px solid var(--line)}
-.foot .sig{font-family:var(--script); font-size:30px; color:var(--muted)}
-.foot small{display:block; font-family:var(--sans); font-size:10px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--dim); margin-top:6px}
+footer{position:relative; z-index:1; text-align:center; padding:40px 20px 60px; color:var(--dim); font-size:12px; border-top:1px solid var(--line)}
+footer .sig{font-family:var(--serif); font-style:italic; color:var(--warm-grey); font-size:15px; margin-bottom:8px}
 
-/* botão WhatsApp flutuante */
-.wpp-float{position:fixed; right:18px; bottom:18px; z-index:40; width:56px; height:56px;
-  border-radius:50%; background:var(--gold); display:grid; place-items:center; text-decoration:none;
-  box-shadow:0 8px 30px rgba(202,169,107,.4); transition:transform .3s; animation:floatIn .6s .8s both}
-.wpp-float:hover{transform:scale(1.08)}
-.wpp-float svg{width:30px; height:30px; fill:var(--ink-soft)}
-@keyframes floatIn{from{transform:scale(0); opacity:0} to{transform:scale(1); opacity:1}}
+@media (max-width:600px){ section{padding:48px 0} }
 
-/* ===== REVEALS ===== */
-.r{opacity:0; transform:translateY(34px); transition:opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1)}
-.r.in{opacity:1; transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+.caso-destaque{position:relative; max-width:900px; margin:0 auto; aspect-ratio:16/10; border-radius:20px; overflow:hidden; border:1px solid var(--line-strong); box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.caso-destaque img{width:100%; height:100%; object-fit:cover; object-position:center; display:block; transform:scale(1.06); transition:transform 1.8s cubic-bezier(.2,.7,.2,1)}
+.caso-destaque.in img{transform:scale(1)}
+.casos-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:14px}
+@media (min-width:768px){.casos-grid{grid-template-columns:repeat(4,1fr)}}
+.casos-grid .ph{aspect-ratio:1/1}
+.depo-video{max-width:540px; margin:0 auto; border-radius:18px; overflow:hidden; border:1px solid var(--line-strong); background:#000; box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.depo-video video{width:100%; height:auto; max-height:80vh; display:block}
+@media (max-width:899px){ .auth .ph{order:2} }
+/* ===== Comparador Antes & Depois ===== */
+.ba{position:relative; width:100%; max-width:640px; margin:0 auto; aspect-ratio:1154/470; border-radius:18px; overflow:hidden; border:1px solid var(--line-strong); box-shadow:0 30px 70px rgba(0,0,0,.55); background:var(--ink-2); cursor:ew-resize; touch-action:none; user-select:none; -webkit-user-select:none}
+.ba img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; -webkit-user-drag:none}
+.ba-after{z-index:1}
+.ba-before{z-index:2; clip-path:inset(0 50% 0 0)}
+.ba-label{position:absolute; bottom:16px; z-index:4; font-family:var(--font); font-weight:500; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ivory); padding:7px 14px; border-radius:30px; background:rgba(20,10,17,.55); backdrop-filter:blur(6px); border:1px solid rgba(244,236,231,.16)}
+.ba-label.before{left:16px} .ba-label.after{right:16px; color:var(--gold-soft)}
+.ba-handle{position:absolute; top:0; bottom:0; left:50%; z-index:3; width:2px; transform:translateX(-50%); background:linear-gradient(var(--gold-soft), var(--gold)); box-shadow:0 0 14px rgba(201,162,75,.6); pointer-events:none}
+.ba-knob{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:46px; height:46px; border-radius:50%; background:rgba(20,10,17,.65); backdrop-filter:blur(8px); border:1.5px solid var(--gold); display:grid; place-items:center; box-shadow:0 6px 24px rgba(0,0,0,.5), 0 0 18px rgba(201,162,75,.4); color:var(--gold-soft)}
+.ba-knob svg{width:23px; height:23px; fill:none; stroke:currentColor; stroke-width:1.6}
+.ba-hint{margin-top:18px; text-align:center; font-family:var(--mono); font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--dim)}
+/* ===== Carrossel de resultados ===== */
+.carousel{position:relative; max-width:520px; margin:0 auto}
+.car-viewport{position:relative; overflow:hidden; border-radius:20px; border:1px solid var(--line-strong); box-shadow:0 30px 70px rgba(0,0,0,.5); background:#0e0b06; touch-action:pan-y; cursor:grab}
+.car-viewport:active{cursor:grabbing}
+.car-track{display:flex; will-change:transform; transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.car-track.dragging{transition:none}
+.car-slide{position:relative; flex:0 0 100%; aspect-ratio:1/1; background:#0e0b06}
+.car-slide img{width:100%; height:100%; object-fit:cover; object-position:center; display:block; -webkit-user-drag:none; user-select:none; pointer-events:none}
+.car-tag{position:absolute; left:14px; z-index:2; font-family:var(--font); font-weight:500; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ivory); padding:6px 13px; border-radius:30px; background:rgba(20,10,17,.5); backdrop-filter:blur(6px); border:1px solid rgba(244,236,231,.16); pointer-events:none}
+.car-tag.top{top:14px} .car-tag.bot{bottom:14px; color:var(--gold-soft)}
+.car-arrow{position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:46px; height:46px; border-radius:50%; display:grid; place-items:center; cursor:pointer; border:1px solid var(--line-strong); background:rgba(20,10,17,.55); backdrop-filter:blur(8px); color:var(--gold-soft); transition:background .25s, color .25s}
+.car-arrow svg{width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
+.car-arrow:hover{background:rgba(201,162,75,.18); color:var(--gold-bright)}
+.car-arrow.prev{left:14px} .car-arrow.next{right:14px}
+.car-dots{display:flex; gap:9px; justify-content:center; margin-top:20px}
+.car-dot{width:8px; height:8px; border-radius:50%; border:none; padding:0; cursor:pointer; background:rgba(231,205,149,.22); transition:background .3s, width .3s, box-shadow .3s}
+.car-dot.active{background:var(--gold); width:26px; border-radius:5px; box-shadow:0 0 12px rgba(201,162,75,.6)}
+@media (hover:none){.car-arrow{width:40px; height:40px}}
+@media (max-width:600px){.car-arrow.prev{left:8px} .car-arrow.next{right:8px}}
 
-/* ===== DESKTOP ===== */
-/* ===== MOBILE: texto no topo, sem filete ===== */
-@media(max-width:759px){
-  .hero{padding-top:58px}
-  .hero-top{padding:15px 24px}
-  .hero-top .sig{font-size:27px}
-  .hero::before{content:""; position:absolute; left:0; right:0; top:0; height:82%; z-index:1; pointer-events:none;
-    background:linear-gradient(180deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.8) 22%, rgba(0,0,0,.66) 40%, rgba(0,0,0,.5) 56%, rgba(0,0,0,.28) 78%, transparent 100%)}
-  .hero-photo{inset:auto 0 0 0; height:80%; overflow:hidden}
-  .hero-photo img{object-position:50% 50%; transform:translate(9%,8%) scale(1.24)}
-  .hero-photo::after{background:linear-gradient(180deg, var(--ink) 0%, rgba(20,10,17,.22) 12%, transparent 40%, transparent 64%, rgba(20,10,17,.4) 86%, var(--ink) 100%)}
-  .hero .eyebrow{letter-spacing:.24em; font-size:10px; line-height:1.7}
-  .hero .eyebrow .eb-sep{display:none}
-  .hero .eyebrow .eb-l{display:block}
-  .hero .casos{border-top:none; padding-top:4px; flex-direction:column; align-items:flex-start; gap:5px}
-}
-@media(min-width:760px){
-  .hero{justify-content:center; align-items:flex-end; padding:0}
-  .hero::before{content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:linear-gradient(95deg, var(--ink) 0%, rgba(20,10,17,.92) 30%, rgba(20,10,17,.58) 48%, rgba(20,10,17,.18) 62%, transparent 74%)}
-  .hero-photo img{object-position:50% 26%}
-  .hero-photo::after{background:linear-gradient(180deg, transparent 74%, var(--ink) 100%)}
-  .hero-inner{margin:0; max-width:54%; padding:0 4vw 0 6vw; align-self:center; transform:translateY(-9vh)}
-  .hero-top{justify-content:flex-end; padding-right:7vw}
-  .hero h1{font-size:80px}
-  .scroll-hint{display:none}
-  section{padding:120px 40px}
-  .wrap{max-width:640px}
-  .manifesto h2{font-size:60px}
-  .ad-grid{display:grid; grid-template-columns:1fr; gap:20px; max-width:680px; margin:0 auto}
-}
-/* ============ CAMADA PREMIUM ============ */
-
-/* title mask reveal (sobe sob máscara) */
-.r-title{opacity:1 !important; transform:none !important}
-.r-mask{display:block; clip-path:inset(-3% 0 112% 0);
-  transition:clip-path .9s cubic-bezier(.22,1,.36,1); transition-delay:var(--mask-delay,0s); will-change:clip-path}
-.r-title.in .r-mask{clip-path:inset(-3% 0 -14% 0)}
-
-/* texto com gradient dourado (joalheria) */
-.grad-gold{background:linear-gradient(105deg,var(--gold-soft) 0%,var(--gold) 42%,#b6904c 60%,var(--gold-soft) 100%);
-  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent}
-
-/* sheen passando no botão dourado */
-.btn-wpp{position:relative; overflow:hidden}
-.btn-wpp::before{content:""; position:absolute; top:-12%; bottom:-12%; left:-45%; width:26%;
-  background:linear-gradient(100deg, transparent, rgba(255,255,255,.4), transparent);
-  transform:skewX(-18deg); pointer-events:none}
-.btn-wpp.in::before{animation:sheen 4.5s ease-in-out .25s 2}
-.btn-wpp:hover::before{animation:sheen 1s ease-out 1}
-@keyframes sheen{0%{left:-45%} 18%{left:145%} 100%{left:145%}}
-
-/* glow dourado no hover dos cards (desktop) */
-.stat{transition:border-color .45s ease, box-shadow .45s ease, transform .45s ease}
-.figure{transition:box-shadow .55s ease, border-color .55s ease}
-@media(hover:hover) and (pointer:fine){
-  .stat:hover{border-color:var(--line-strong); box-shadow:0 0 26px rgba(202,169,107,.16); transform:translateY(-2px)}
-  .figure:hover{border-color:var(--line-strong); box-shadow:0 0 32px rgba(202,169,107,.14)}
-  .pillar{transition:padding-left .4s ease, border-color .4s ease}
-  .pillar:hover{padding-left:11px; border-top-color:var(--line-strong)}
-}
-
-/* Ken Burns no hero (só desktop; mobile usa transform de enquadramento) */
-@media(min-width:760px) and (prefers-reduced-motion:no-preference){
-  .hero-photo img{animation:kenburns 28s ease-in-out infinite alternate}
-}
-@keyframes kenburns{from{transform:scale(1.02)} to{transform:scale(1.1) translate(-1.5%,-1%)}}
-
-/* loading screen vinho/ouro */
-.loader{position:fixed; inset:0; z-index:120}
-.loader .panel{position:absolute; left:0; right:0; height:50.4%; background:var(--ink-soft);
-  transition:transform 1s cubic-bezier(.76,0,.24,1) .15s}
-.loader .panel.top{top:0}
-.loader .panel.bot{bottom:0}
-.loader .lsig{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  font-family:var(--script); font-size:46px; color:var(--gold-soft); transition:opacity .45s}
-.loader .lbar{position:absolute; left:50%; top:calc(50% + 44px); transform:translateX(-50%);
-  width:120px; height:1px; background:var(--line); overflow:hidden; transition:opacity .45s}
-.loader .lbar i{position:absolute; inset:0 auto 0 0; width:0; background:var(--gold)}
-.loader .lpct{position:absolute; left:50%; top:calc(50% + 58px); transform:translateX(-50%);
-  font-family:var(--sans); font-size:10px; letter-spacing:.3em; color:var(--dim); transition:opacity .45s}
-body.loaded .loader .panel.top{transform:translateY(-100%)}
-body.loaded .loader .panel.bot{transform:translateY(100%)}
-body.loaded .loader .lsig, body.loaded .loader .lbar, body.loaded .loader .lpct{opacity:0}
-body.loaded .loader{visibility:hidden; transition:visibility 0s 1.15s}
-
-/* custom cursor (desktop fine pointer) */
-.cursor,.cursor-dot{position:fixed; top:0; left:0; z-index:200; pointer-events:none; border-radius:50%;
-  mix-blend-mode:difference; will-change:transform; opacity:0}
-.cursor{width:30px; height:30px; border:1px solid #fff; margin:-15px 0 0 -15px;
-  transition:width .25s, height .25s, margin .25s, background .25s, opacity .35s}
-.cursor-dot{width:5px; height:5px; background:#fff; margin:-2.5px 0 0 -2.5px; transition:opacity .35s}
-.cursor.hover{width:54px; height:54px; margin:-27px 0 0 -27px; background:rgba(255,255,255,.14)}
-body.loaded .cursor, body.loaded .cursor-dot{opacity:1}
-body.cursor-on, body.cursor-on a, body.cursor-on .btn-wpp{cursor:none}
-@media(hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none}}
-
-/* CTA intermediário (pico de desejo) */
-.cta-mid{text-align:center; padding:74px 28px 80px}
-.cta-mid p{font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(24px,6.5vw,30px); color:var(--cream); margin-bottom:26px}
-.btn-wpp.sm{padding:15px 30px; font-size:14px}
-
-@media(prefers-reduced-motion:reduce){
-  .r{transition:none; opacity:1; transform:none}
-  body::before{animation:none}
-  .r-mask{transition:none; clip-path:none}
-  .btn-wpp::before{display:none}
-  .loader{display:none}
-  .cursor,.cursor-dot{display:none}
-}
+/* CTA sheen + magnetico, e mask reveal nos titulos (consistencia com a apresentacao) */
+.hcta, .btn{position:relative; overflow:hidden}
+.hcta::before, .btn::before{content:""; position:absolute; top:-20%; bottom:-20%; left:-60%; width:24%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent); transform:skewX(-18deg); pointer-events:none}
+.hcta.in::before, .btn.in::before{animation:sheen 4.5s ease-in-out .3s 2}
+.hcta:hover::before, .btn:hover::before{animation:sheen 1s ease-out 1}
+@keyframes sheen{0%{left:-60%} 24%{left:150%} 100%{left:150%}}
+.r-title{opacity:1!important; transform:none!important}
+.r-mask{display:block; clip-path:inset(-6% 0 110% 0); transition:clip-path .95s cubic-bezier(.22,1,.36,1); transition-delay:var(--mask-delay,0s); will-change:clip-path}
+.r-title.in .r-mask{clip-path:inset(-6% 0 -12% 0)}
+@media(prefers-reduced-motion:reduce){ .r-mask{clip-path:none; transition:none} .hcta.in::before,.btn.in::before{animation:none} }
 </style>
 </head>
 <body>
 
-<!-- ===================== LOADER ===================== -->
-<div class="loader" aria-hidden="true">
-  <div class="panel top"></div>
-  <div class="panel bot"></div>
-  <div class="lsig">Dr. Furquim</div>
-  <div class="lbar"><i></i></div>
-  <div class="lpct">0%</div>
+<div class="loader" id="loader">
+  <div class="loader-screen top"></div>
+  <div class="loader-screen bot"></div>
+  <div class="loader-content">
+    <img class="loader-mark-img" src="imersao-furquim-assets/LOGO.jpg" alt="Dr. Furquim">
+    <div class="loadline"><div class="loading-bar" id="loadingBar"></div></div>
+    <span class="loadpercent" id="loadPercent">0%</span>
+  </div>
 </div>
 
-<!-- custom cursor (desktop) -->
-<div class="cursor" aria-hidden="true"></div>
-<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="noise"></div>
+<canvas id="amb" aria-hidden="true"></canvas>
+<div class="edge-blur top"></div>
+<div class="edge-blur bot"></div>
 
-<!-- ===================== HERO ===================== -->
-<header class="hero">
-  <div class="hero-photo">
-    <picture>
-      <source media="(max-width:759px)" srcset="matheus-apresentacao/foto-1-vinho2-mobile.jpg?v=1">
-      <img src="matheus-apresentacao/foto-1-vinho2.jpg?v=4" alt="Dr. Matheus Furquim" width="1696" height="2528" fetchpriority="high" decoding="async">
-    </picture>
-  </div>
-  <div class="hero-top"><span class="sig">Dr. Furquim</span></div>
-  <div class="hero-inner">
-    <div class="eyebrow r"><span class="eb-l">Odontologia Estética</span><span class="eb-sep"> · </span><span class="eb-l">Lentes em Resina</span></div>
-    <h1 class="r d1 r-title"><span class="first">Dr.</span>Matheus<br>Furquim</h1>
-    <p class="tag r d2">Referência mundial em lentes em resina.</p>
-    <div class="casos r d3">
-      <span class="num"><span data-count="5000">0</span>+</span>
-      <span class="cap">casos<br>realizados</span>
-    </div>
-  </div>
-  <div class="scroll-hint"></div>
-</header>
-
-<!-- ===================== MANIFESTO ===================== -->
-<section class="manifesto">
-  <div class="wrap">
-    <h2 class="r r-title">A <em class="grad-gold">naturalidade</em> é a nossa filosofia.</h2>
-    <p class="r d2">Cada sorriso é planejado individualmente, sem aspecto artificial, com materiais premium.</p>
-  </div>
-</section>
-
-<!-- ===================== AUTORIDADE ===================== -->
-<section class="aut">
-  <div class="wrap">
-    <div class="sec-eyebrow r"><span class="ln"></span><span class="eyebrow">Autoridade</span></div>
-    <h2 class="r d1 r-title">Palestrante nos maiores congressos da América Latina.</h2>
-    <p class="lead r d2">Uma referência reconhecida, levando técnica e ensino aos maiores palcos da odontologia.</p>
-    <div class="figure r d2">
-      <img src="matheus-apresentacao/congressos.jpg" alt="Dr. Matheus Furquim palestrando em congressos" width="1400" height="785" loading="lazy" decoding="async">
-      <span class="cap">Congressos · América Latina</span>
-    </div>
-    <div class="stat-hero r d2">
-      <div class="sh-num grad-gold"><span data-count="5000">0</span>+</div>
-      <div class="sh-label">Casos realizados</div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== FILOSOFIA ===================== -->
-<section class="filo">
-  <div class="wrap">
-    <div class="sec-eyebrow r"><span class="ln"></span><span class="eyebrow">A nossa filosofia</span></div>
-    <h2 class="r d1 r-title">Cada sorriso é <em class="grad-gold">planejado individualmente</em>.</h2>
-    <div class="pillars">
-      <div class="pillar r d1"><span class="no">01</span><div><h3>Naturalidade</h3><p>Resultados que respeitam o seu rosto. Sem aspecto artificial, um sorriso que parece (e é) seu.</p></div></div>
-      <div class="pillar r d2"><span class="no">02</span><div><h3>Materiais premium</h3><p>Uso exclusivo de materiais de alta performance, que garantem beleza, resistência e durabilidade.</p></div></div>
-      <div class="pillar r d3"><span class="no">03</span><div><h3>Cuidado além da estética</h3><p>Saúde em primeiro lugar. Cada caso une o belo ao funcional, preservando o seu dente.</p></div></div>
-      <div class="pillar r d4"><span class="no">04</span><div><h3>Planejamento individual</h3><p>Nenhum sorriso é igual. O seu é desenhado sob medida, do estudo do caso ao acabamento final.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== FRASE AUTORAL ===================== -->
-<section class="autoral">
-  <div class="wrap">
-    <p class="aq r r-title">Eu não copio sorrisos. <em>Revelo o seu.</em></p>
-    <div class="aq-sig r d1">Dr. Furquim</div>
-  </div>
-</section>
-
-<!-- ===================== ANTES E DEPOIS ===================== -->
-<section class="ad">
-  <div class="wrap">
-    <h2 class="r r-title">Antes <span class="script" style="font-size:.9em">&amp;</span> depois</h2>
-    <p class="lead r d1">Resultados reais de quem confiou o sorriso ao Dr. Furquim.</p>
-    <div class="ad-grid">
-      <div class="figure r d1"><img src="matheus-apresentacao/antes-depois-1.jpg" alt="Antes e depois, lentes em resina" width="1400" height="788" loading="lazy" decoding="async"></div>
-      <div class="figure r d2"><img src="matheus-apresentacao/antes-depois-2.jpg" alt="Antes e depois, transformação de sorriso" width="1400" height="786" loading="lazy" decoding="async"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== CTA INTERMEDIÁRIO ===================== -->
-<section class="cta-mid">
-  <div class="wrap">
-    <p class="r">Pronto para o seu?</p>
-    <a class="btn-wpp sm r d1" href="https://wa.me/5562991583094?text=Ol%C3%A1%21%20Vim%20pelo%20Instagram%20do%20Dr.%20Matheus%20Furquim%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20lentes">
-      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
-      Agendar avaliação
-    </a>
-  </div>
-</section>
-
-<!-- ===================== CTA ===================== -->
-<section class="cta">
-  <div class="wrap">
-    <div class="sig r">Dr. Furquim</div>
-    <h2 class="r d1 r-title">Agende já a sua consulta.</h2>
-    <p class="r d2">O seu sorriso merece o cuidado de quem é referência mundial.</p>
-    <a class="btn-wpp r d3" href="https://wa.me/5562991583094?text=Ol%C3%A1%21%20Vim%20pelo%20Instagram%20do%20Dr.%20Matheus%20Furquim%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20lentes">
-      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
-      Agendar avaliação
-    </a>
-    <div class="loc r d4">Goiânia · São Paulo</div>
-  </div>
-</section>
-
-<div class="foot">
-  <div class="sig">Dr. Furquim</div>
-  <small>Odontologia Estética · Lentes em Resina</small>
+<div class="frame">
+  <div class="corner tl"><svg viewBox="0 0 14 14" fill="none"><path d="M0 0H6V1H1V6H0V0Z" fill="#C9A24B"/></svg></div>
+  <div class="corner tr"><svg viewBox="0 0 14 14" fill="none"><path d="M14 0H8V1H13V6H14V0Z" fill="#C9A24B"/></svg></div>
+  <div class="corner bl"><svg viewBox="0 0 14 14" fill="none"><path d="M0 14H6V13H1V8H0V14Z" fill="#C9A24B"/></svg></div>
+  <div class="corner br"><svg viewBox="0 0 14 14" fill="none"><path d="M14 14H8V13H13V8H14V14Z" fill="#C9A24B"/></svg></div>
 </div>
 
-<!-- WhatsApp flutuante -->
-<a class="wpp-float" href="https://wa.me/5562991583094?text=Ol%C3%A1%21%20Vim%20pelo%20Instagram%20do%20Dr.%20Matheus%20Furquim%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20lentes" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
-</a>
+<div class="fixed-header">
+  <img class="logo-img" src="imersao-furquim-assets/LOGO.jpg" alt="Dr. Furquim">
+  <span class="badge">Lentes em Resina</span>
+</div>
 
-<script src="matheus-apresentacao/lenis.min.js"></script>
+  <!-- HERO, estilo apresentação (vinho/serifa) -->
+  <header class="hero">
+    <div class="hero-photo">
+      <picture>
+        <source media="(max-width:759px)" srcset="imersao-furquim-assets/hero-vinho-mobile.jpg">
+        <img src="imersao-furquim-assets/hero-vinho.jpg" alt="Dr. Matheus Furquim" fetchpriority="high">
+      </picture>
+    </div>
+    <div class="hero-top"><span class="hsig">Dr. Furquim</span></div>
+    <div class="hero-inner">
+      <div class="eyebrow r">Lentes em Resina · Dentística estética</div>
+      <h1 class="r d1 r-title"><span class="first">Lentes em Resina</span>O seu sorriso,<br>só que natural</h1>
+      <p class="htag r d2">Lentes feitas à mão, dente por dente, com a naturalidade de quem nasceu com aquele sorriso. Sem desgastar seus dentes saudáveis.</p>
+      <div class="hmeta r d3">
+        <div class="hm"><span class="num">+5.000</span><span class="cap">sorrisos<br>transformados</span></div>
+        <div class="hm"><span class="num">100%</span><span class="cap">feito<br>à mão</span></div>
+      </div>
+      <a class="hcta r d4" href="https://wa.me/5562991583094?text=Ol%C3%A1!%20Quero%20agendar%20minha%20avalia%C3%A7%C3%A3o%20de%20lentes%20em%20resina%20com%20o%20Dr.%20Matheus%20Furquim." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.982z"/></svg>
+        Agendar minha avaliação
+      </a>
+    </div>
+    <div class="scroll-hint"></div>
+  </header>
+
+<div class="wrap">
+
+  <!-- FILOSOFIA / NATURALIDADE -->
+  <section data-anim="slide-up">
+    <div class="sec-head">
+      <p class="kicker r">Eu não copio sorrisos.</p>
+      <h2 class="r d1 r-title">Revelo o sorriso que já era seu.</h2>
+      <p class="lead r d2" style="max-width:620px;margin:0 auto">Cada sorriso é único, e a sua lente também precisa ser. Nada de molde pronto, dente grande e branco demais que entrega de longe que é lente. Aqui o trabalho é feito à mão, dente por dente, respeitando o seu rosto, a sua idade e o seu jeito de sorrir. O resultado fica tão natural que <b style="color:var(--ivory)">ninguém percebe que você fez</b>, só percebem que você está diferente.</p>
+    </div>
+    <div class="facts">
+      <div class="fact r d1"><div class="fl">Técnica</div><div class="fv">Feito à mão</div></div>
+      <div class="fact r d2"><div class="fl">Seus dentes</div><div class="fv">Sem desgaste</div></div>
+      <div class="fact r d3"><div class="fl">Resultado</div><div class="fv">Natural</div></div>
+      <div class="fact r d4"><div class="fl">Acabamento</div><div class="fv">Sob medida</div></div>
+    </div>
+  </section>
+
+  <!-- ASPIRACIONAL / EMOCIONAL -->
+  <section data-anim="slide-up">
+    <div class="sec-head">
+      <div class="eyebrow r">Não é só estética</div>
+      <h2 class="r d1 r-title">Um sorriso novo muda <span class="grad-text">como você se sente.</span></h2>
+      <p class="lead r d2" style="max-width:600px;margin:0 auto">Quem esconde o sorriso na foto, ri com a mão na frente da boca ou evita aparecer sabe bem do que a gente está falando. Mudar o sorriso é mudar a forma como você se mostra pro mundo.</p>
+    </div>
+    <ul class="aspire-list r d3" style="max-width:560px;margin:0 auto 40px">
+      <li><span class="ic">◆</span><div><b>Autoestima de volta</b>, pra sorrir sem pensar duas vezes, em qualquer foto.</div></li>
+      <li><span class="ic">◆</span><div><b>Segurança no dia a dia</b>, numa reunião, num encontro, falando em público.</div></li>
+      <li><span class="ic">◆</span><div><b>A sua melhor versão</b>, o mesmo rosto, com o sorriso que combina com ele.</div></li>
+    </ul>
+    <div class="carousel r" id="carousel">
+      <div class="car-viewport" id="carViewport">
+        <div class="car-track" id="carTrack">
+          <div class="car-slide"><img src="imersao-furquim-assets/carrossel/snapinsta.com.br-6a2dc8573abb8.jpg" alt="Antes e depois de lentes em resina" loading="lazy"></div>
+          <div class="car-slide"><img src="imersao-furquim-assets/carrossel/SnapInsta.to_505502898_18513999925018427_9153293377759058174_n.jpg" alt="Antes e depois de lentes em resina" loading="lazy"></div>
+          <div class="car-slide"><img src="imersao-furquim-assets/carrossel/snapinsta.com.br-6a2dc834c6ac9.jpg" alt="Antes e depois de lentes em resina" loading="lazy"></div>
+          <div class="car-slide"><img src="imersao-furquim-assets/carrossel/SnapInsta.to_491442265_18504205057018427_4522542840899815622_n.jpg" alt="Antes e depois de lentes em resina" loading="lazy"></div>
+          <div class="car-slide"><img src="imersao-furquim-assets/carrossel/snapinsta.com.br-6a2dc5e95f4a4.jpg" alt="Antes e depois de lentes em resina" loading="lazy"></div>
+          <div class="car-slide"><img src="imersao-furquim-assets/carrossel/snapinsta.com.br-6a2dc509ccac6.jpg" alt="Antes e depois de lentes em resina" loading="lazy"></div>
+        </div>
+        <span class="car-tag top">Antes</span>
+        <span class="car-tag bot">Depois</span>
+      </div>
+      <button class="car-arrow prev" id="carPrev" aria-label="Resultado anterior"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="car-arrow next" id="carNext" aria-label="Próximo resultado"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="car-dots" id="carDots"></div>
+    </div>
+  </section>
+
+  <!-- RESULTADOS / CASOS (acabamento) -->
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow r">Resultados reais</div>
+      <h2 class="r d1 r-title">O acabamento que <span class="grad-text">ninguém percebe que é lente.</span></h2>
+    </div>
+    <div class="caso-destaque r">
+      <img src="imersao-furquim-assets/caso-1.jpg" alt="Lente em resina, Dr. Matheus Furquim">
+    </div>
+    <div class="casos-grid">
+      <div class="ph r d1"><img src="imersao-furquim-assets/caso-2.jpg" alt="Caso de lente em resina"></div>
+      <div class="ph r d2"><img src="imersao-furquim-assets/caso-3.jpg" alt="Caso de lente em resina"></div>
+      <div class="ph r d3"><img src="imersao-furquim-assets/caso-4.jpg" alt="Caso de lente em resina"></div>
+      <div class="ph r d4"><img src="imersao-furquim-assets/caso-5.jpg" alt="Caso de lente em resina"></div>
+    </div>
+  </section>
+
+  <!-- ANTES & DEPOIS (comparador interativo) -->
+  <section data-anim="slide-up">
+    <div class="sec-head">
+      <div class="eyebrow r">Antes &amp; Depois</div>
+      <h2 class="r d1 r-title">Lente <span class="grad-text">mal feita</span> tem <span class="grad-text">conserto</span>.</h2>
+      <p class="lead r d2" style="max-width:600px;margin:14px auto 0">À esquerda, uma resina mal feita por outro profissional. À direita, o retrabalho do Dr. Matheus. Arraste e compare.</p>
+    </div>
+    <div class="ba" id="ba">
+      <img class="ba-after"  src="imersao-furquim-assets/antes-depois/depois-final.png" alt="Depois, lente em resina">
+      <img class="ba-before" src="imersao-furquim-assets/antes-depois/antes-final.png"  alt="Antes">
+      <span class="ba-label before">Antes</span>
+      <span class="ba-label after">Depois</span>
+      <div class="ba-handle" id="baHandle"><div class="ba-knob"><svg viewBox="0 0 24 24"><path d="M10 8l-4 4 4 4M14 8l4 4-4 4"/></svg></div></div>
+    </div>
+    <p class="ba-hint r">← arraste →</p>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section data-anim="slide-left">
+    <div class="sec-head">
+      <div class="eyebrow r">Como funciona</div>
+      <h2 class="r d1 r-title">Do primeiro contato ao <span class="grad-text">seu novo sorriso.</span></h2>
+    </div>
+    <div class="grid3">
+      <div class="card r d1"><div class="cnum">01</div><h3>Avaliação</h3><p>A gente conversa, entende o que te incomoda no seu sorriso e avalia se as lentes em resina são o melhor caminho pra você.</p></div>
+      <div class="card r d2"><div class="cnum">02</div><h3>Planejamento do sorriso</h3><p>Você vê uma prévia de como vai ficar antes de qualquer coisa. Cada detalhe é desenhado pro seu rosto e pro seu jeito.</p></div>
+      <div class="card r d3"><div class="cnum">03</div><h3>Seu novo sorriso</h3><p>As lentes são feitas à mão, dente por dente, no seu tempo. Você sai com o sorriso natural que combina com você.</p></div>
+    </div>
+  </section>
+
+  <!-- POR QUE O DR -->
+  <section data-anim="zoom-in">
+    <div class="sec-head">
+      <div class="eyebrow r">Por que o Dr. Matheus</div>
+      <h2 class="r d1 r-title">Seu sorriso nas mãos de <span class="grad-text">uma referência mundial.</span></h2>
+    </div>
+    <div class="creds r d1">
+      <span class="cred">Referência mundial em resina</span>
+      <span class="cred">Palestrante no CIOSP</span>
+      <span class="cred">Mentor de dentistas</span>
+    </div>
+    <div class="gallery">
+      <div class="cap r">Nos maiores congressos da América Latina</div>
+      <div class="ph ph-3x2 r d1" data-label="[ palestra, arquivo: ciosp-1.jpg ]"><img src="imersao-furquim-assets/ciosp-1.jpg" alt="Dr. Matheus Furquim palestrando no CIOSP" onerror="this.style.display='none'"></div>
+      <div class="ph ph-3x2 r d2" data-label="[ palestra, arquivo: ciosp-2.jpg ]"><img src="imersao-furquim-assets/ciosp-2.jpg" alt="Dr. Matheus Furquim palestrando no CIOSP" onerror="this.style.display='none'"></div>
+    </div>
+    <div class="auth" style="margin-top:32px">
+      <div class="ph ph-4x5 r" data-label="[ foto do Dr. Matheus, arquivo: dr-furquim.jpg ]"><img src="imersao-furquim-assets/dr-furquim.jpg" alt="Dr. Matheus Furquim" onerror="this.style.display='none'"></div>
+      <div>
+        <p class="r d2">O Dr. Matheus Furquim é <b style="color:var(--ivory)">referência mundial em lentes de resina</b> e palestrante no CIOSP, o maior congresso de odontologia da América Latina. Mais do que atender pacientes, ele forma e orienta outros dentistas Brasil afora na mesma técnica.</p>
+        <p class="r d3">São <b style="color:var(--ivory)">mais de 5.000 sorrisos transformados</b>, com a segurança de quem domina a técnica de ponta a ponta. No seu caso não é diferente: planejamento cuidadoso, a mão de quem já fez isso milhares de vezes e um resultado pensado pra durar.</p>
+        <div class="stats">
+          <div class="stat r d1"><div class="sv">+5.000</div><div class="sl">sorrisos transformados</div></div>
+          <div class="stat r d2"><div class="sv">CIOSP</div><div class="sl">palestrante</div></div>
+          <div class="stat r d3"><div class="sv">Mundial</div><div class="sl">referência em resina</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section data-anim="slide-up">
+    <div class="sec-head">
+      <div class="eyebrow r">Quem já sorri diferente</div>
+      <h2 class="r d1 r-title">Não é promessa, é <span class="grad-text">quem já passou por aqui.</span></h2>
+    </div>
+    <div class="depo-video r d1">
+      <video src="imersao-furquim-assets/depoimento.mp4" controls playsinline preload="metadata"></video>
+    </div>
+    <p class="r d2" style="max-width:560px;margin:18px auto 0;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)">Depoimento · paciente internacional</p>
+  </section>
+
+  <!-- FRASE / FILOSOFIA -->
+  <section data-anim="zoom-in">
+    <div class="scarcity">
+      <div class="r" style="font-family:var(--serif);font-style:italic;font-size:clamp(26px,4.6vw,46px);color:var(--gold-bright);line-height:1.22;max-width:16ch;margin:0 auto">Eu não copio sorrisos. Revelo o seu.</div>
+      <div class="lbl r d1" style="margin-top:20px">Dr. Matheus Furquim</div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final" data-anim="zoom-glow">
+    <h2 class="r r-title">Seu novo sorriso começa com uma avaliação.</h2>
+    <a class="btn r d1" href="https://wa.me/5562991583094?text=Ol%C3%A1!%20Quero%20agendar%20minha%20avalia%C3%A7%C3%A3o%20de%20lentes%20em%20resina%20com%20o%20Dr.%20Matheus%20Furquim." target="_blank" rel="noopener">
+      <svg class="wa" viewBox="0 0 24 24" fill="#1a1305"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.1-4.6-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5.2.6.8 2 .9 2.1.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.7.8 2 1 .3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+      Agendar minha avaliação
+    </a>
+    <div class="cta-note r d2">Atendimento pelo WhatsApp</div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="sig">Dr. Matheus Furquim · Lentes em Resina</div>
+  Sorriso natural, feito à mão · Atendimento pelo WhatsApp
+</footer>
+
 <script>
+// Loader
 (function(){
-  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const bar=document.getElementById('loadingBar'), pct=document.getElementById('loadPercent');
+  if(!bar){document.documentElement.classList.remove('boot-loading');return;}
+  let p=0;
+  const t=setInterval(()=>{
+    p+=Math.random()*15+6; if(p>=100)p=100;
+    bar.style.width=p+'%'; pct.textContent=Math.floor(p)+'%';
+    if(p>=100){clearInterval(t); setTimeout(()=>{
+      document.documentElement.classList.remove('boot-loading');
+      document.getElementById('loader').classList.add('done');
+      document.body.classList.add('loaded');
+      kickReveals();
+      setTimeout(()=>document.getElementById('loader').remove(),800);
+    },280);}
+  },70);
+})();
 
-  // títulos → linhas sob máscara
-  document.querySelectorAll('.r-title').forEach(el=>{
-    const parts = el.innerHTML.split(/<br\s*\/?>/i);
-    el.innerHTML = parts.map((p,i)=>`<span class="r-mask" style="--mask-delay:${(i*0.12).toFixed(2)}s">${p}</span>`).join('');
+// Cursor
+(function(){
+  if(matchMedia('(hover:none)').matches)return;
+  const c=document.getElementById('cursor'), d=document.getElementById('cursorDot');
+  let cx=0,cy=0,tx=0,ty=0;
+  addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
+  (function tick(){cx+=(tx-cx)*.18; cy+=(ty-cy)*.18;
+    c.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    d.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`;
+    requestAnimationFrame(tick);})();
+  document.body.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.btn,.card,.fact,.stat'))c.classList.add('hover');});
+  document.body.addEventListener('mouseout',e=>{if(e.target.closest('a,button,.btn,.card,.fact,.stat'))c.classList.remove('hover');});
+})();
+
+// Card spotlight
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();
+    card.style.setProperty('--cx',(e.clientX-r.left)+'px');
+    card.style.setProperty('--cy',(e.clientY-r.top)+'px');});
+});
+
+// Reveal + section enter
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16});
+const so=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('entered'); countUp(e.target);}});},{threshold:.18});
+function kickReveals(){document.querySelectorAll('.r').forEach(el=>io.observe(el)); document.querySelectorAll('section').forEach(el=>so.observe(el));}
+
+// Number counters
+function countUp(scope){
+  scope.querySelectorAll('.statnum:not(.done)').forEach(el=>{
+    el.classList.add('done');
+    const target=+el.dataset.count, suf=el.dataset.suffix||''; const dur=1100, t0=performance.now();
+    (function step(now){const k=Math.min((now-t0)/dur,1); const v=Math.round(target*(1-Math.pow(1-k,3)));
+      el.textContent=v+suf; if(k<1)requestAnimationFrame(step);})(t0);
   });
+}
+// Fallback caso o loader já tenha saído
+if(!document.documentElement.classList.contains('boot-loading')) kickReveals();
 
-  // contadores
-  function runCount(el){
-    if(el.dataset.done) return; el.dataset.done=1;
-    const target=+el.dataset.count, dur=1100;
-    setTimeout(()=>{
-      const t0=performance.now();
-      (function tick(t){
-        const p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
-        el.textContent=Math.round(target*e).toLocaleString('pt-BR');
-        if(p<1) requestAnimationFrame(tick);
-      })(performance.now());
-    }, 150);
+// Ambiência: poeira dourada flutuando
+(function ambient(){
+  const cv=document.getElementById('amb');
+  if(!cv || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const ctx=cv.getContext('2d'); let w=0,h=0,parts=[];
+  function resize(){ w=cv.width=innerWidth; h=cv.height=innerHeight; }
+  function make(){ const n=Math.min(54, Math.round(innerWidth/26));
+    parts=Array.from({length:n}, function(){ return {x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.5+0.4, sp:Math.random()*0.22+0.04, dr:(Math.random()-0.5)*0.22, ph:Math.random()*6.28, op:Math.random()*0.35+0.12}; }); }
+  function tick(){ ctx.clearRect(0,0,w,h);
+    for(let i=0;i<parts.length;i++){ const p=parts[i];
+      p.y-=p.sp; p.x+=Math.sin(p.ph)*0.14+p.dr; p.ph+=0.012;
+      if(p.y<-6){ p.y=h+6; p.x=Math.random()*w; }
+      if(p.x<-6) p.x=w+6; else if(p.x>w+6) p.x=-6;
+      const fl=0.55+0.45*Math.sin(p.ph*1.2);
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.2832);
+      ctx.fillStyle='rgba(214,183,123,'+(p.op*fl).toFixed(3)+')'; ctx.fill();
+    }
+    requestAnimationFrame(tick);
   }
+  resize(); make(); tick();
+  addEventListener('resize', function(){ resize(); make(); }, {passive:true});
+})();
 
-  // reveals on scroll
-  function initReveals(){
-    const io = new IntersectionObserver((es)=>{
-      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in');
-        e.target.querySelectorAll('[data-count]').forEach(runCount); io.unobserve(e.target);} });
-    },{threshold:.16, rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.r').forEach(el=>io.observe(el));
-  }
 
-  // loading screen → libera os reveals ao terminar
-  (function(){
-    const loader = document.querySelector('.loader');
-    if(reduce || !loader){ if(loader) loader.remove(); document.body.classList.add('loaded'); initReveals(); return; }
-    const bar=loader.querySelector('.lbar i'), pct=loader.querySelector('.lpct');
-    const t0=performance.now(), dur=700;
-    (function tick(t){
-      const p=Math.min((t-t0)/dur,1);
-      if(bar) bar.style.width=(p*100)+'%';
-      if(pct) pct.textContent=Math.round(p*100)+'%';
-      if(p<1){ requestAnimationFrame(tick); }
-      else { document.body.classList.add('loaded'); initReveals(); }
-    })(t0);
-  })();
+// Comparador Antes & Depois (drag + auto-demo ao entrar na tela)
+(function(){
+  const ba=document.getElementById('ba'); if(!ba) return;
+  const before=ba.querySelector('.ba-before'), handle=document.getElementById('baHandle');
+  let dragging=false, cur=68, userActed=false, started=false;
+  function setP(p){ p=Math.max(0,Math.min(100,p)); cur=p; before.style.clipPath='inset(0 '+(100-p)+'% 0 0)'; handle.style.left=p+'%'; }
+  function fromEvent(e){ const r=ba.getBoundingClientRect(); setP(((e.clientX-r.left)/r.width)*100); }
+  ba.addEventListener('pointerdown',e=>{ dragging=true; userActed=true; ba.setPointerCapture(e.pointerId); fromEvent(e); });
+  ba.addEventListener('pointermove',e=>{ if(dragging) fromEvent(e); });
+  ba.addEventListener('pointerup',()=>dragging=false);
+  ba.addEventListener('pointercancel',()=>dragging=false);
+  setP(68);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ease=t=> t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  function animateTo(target,dur){ return new Promise(res=>{ const s=cur,t0=performance.now();
+    (function step(now){ if(userActed)return res(); const k=Math.min((now-t0)/dur,1); setP(s+(target-s)*ease(k)); k<1?requestAnimationFrame(step):res(); })(performance.now()); }); }
+  async function demo(){ if(reduce||userActed)return; await wait(450); if(userActed)return;
+    await animateTo(82,1100); if(userActed)return; await animateTo(38,1500); if(userActed)return; await animateTo(68,1000); }
+  const io=new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting && !started){ started=true; demo(); io.disconnect(); } }); },{threshold:.5});
+  io.observe(ba);
+})();
 
-  // custom cursor + CTA magnético (só desktop com mouse)
+// Carrossel de resultados (setas + bolinhas + autoplay + swipe)
+(function(){
+  const car=document.getElementById('carousel'); if(!car) return;
+  const vp=document.getElementById('carViewport'), track=document.getElementById('carTrack');
+  const dotsWrap=document.getElementById('carDots');
+  const prev=document.getElementById('carPrev'), next=document.getElementById('carNext');
+  const slides=Array.from(track.children); const n=slides.length;
+  let i=0, autoT=null, dragging=false, startX=0, dx=0, w=0;
+  slides.forEach((_,k)=>{ const b=document.createElement('button'); b.className='car-dot'+(k===0?' active':''); b.setAttribute('aria-label','Resultado '+(k+1)); b.addEventListener('click',()=>{ go(k); restart(); }); dotsWrap.appendChild(b); });
+  const dots=Array.from(dotsWrap.children);
+  function render(){ track.style.transform='translateX('+(-i*100)+'%)'; dots.forEach((d,k)=>d.classList.toggle('active',k===i)); }
+  function go(k){ i=(k%n+n)%n; render(); }
+  const nextS=()=>go(i+1), prevS=()=>go(i-1);
+  prev.addEventListener('click',()=>{ prevS(); restart(); });
+  next.addEventListener('click',()=>{ nextS(); restart(); });
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let visible=false;
+  function start(){ stop(); if(reduce||n<2||!visible) return; autoT=setInterval(nextS,4800); }
+  function stop(){ if(autoT){ clearInterval(autoT); autoT=null; } }
+  function restart(){ stop(); start(); }
+  car.addEventListener('mouseenter',stop); car.addEventListener('mouseleave',start);
+  vp.addEventListener('pointerdown',e=>{ dragging=true; startX=e.clientX; dx=0; w=vp.clientWidth||1; track.classList.add('dragging'); vp.setPointerCapture(e.pointerId); stop(); });
+  vp.addEventListener('pointermove',e=>{ if(!dragging) return; dx=e.clientX-startX; track.style.transform='translateX(calc('+(-i*100)+'% + '+dx+'px))'; });
+  function endDrag(){ if(!dragging) return; dragging=false; track.classList.remove('dragging'); if(Math.abs(dx)>w*0.16){ dx<0?nextS():prevS(); } else { render(); } start(); }
+  vp.addEventListener('pointerup',endDrag); vp.addEventListener('pointercancel',endDrag);
+  const vio=new IntersectionObserver((es)=>{ es.forEach(e=>{ visible=e.isIntersecting; visible?start():stop(); }); },{threshold:.35});
+  vio.observe(car);
+  addEventListener('resize',()=>{ w=vp.clientWidth; },{passive:true});
+  render();
+})();
+
+// Cards "facts": destaque rotativo (acende um de cada vez, em loop)
+(function(){
+  const wrap=document.querySelector('.facts');
+  if(!wrap || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const facts=Array.from(wrap.querySelectorAll('.fact'));
+  if(!facts.length) return;
+  let i=-1, timer=null, paused=false, visible=false;
+  function clear(){ facts.forEach(f=>f.classList.remove('active')); }
+  function tick(){ if(paused) return; clear(); i=(i+1)%facts.length; facts[i].classList.add('active'); }
+  function start(){ if(timer||!visible) return; tick(); timer=setInterval(tick,1500); }
+  function stop(){ if(timer){ clearInterval(timer); timer=null; } clear(); i=-1; }
+  wrap.addEventListener('mouseenter',()=>{ paused=true; clear(); });
+  wrap.addEventListener('mouseleave',()=>{ paused=false; });
+  const io=new IntersectionObserver((es)=>{ es.forEach(e=>{ visible=e.isIntersecting; visible?start():stop(); }); },{threshold:.4});
+  io.observe(wrap);
+})();
+
+// CTAs magneticos + mask reveal nos titulos
+(function(){
+  document.querySelectorAll('.r-title').forEach(function(el){
+    var parts=el.innerHTML.split(/<br\s*\/?>/i);
+    el.innerHTML=parts.map(function(p,i){return '<span class="r-mask" style="--mask-delay:'+(i*0.1).toFixed(2)+'s">'+p+'</span>';}).join('');
+  });
   if(matchMedia('(hover:hover) and (pointer:fine)').matches){
-    document.body.classList.add('cursor-on');
-    const ring=document.querySelector('.cursor'), dot=document.querySelector('.cursor-dot');
-    let mx=innerWidth/2, my=innerHeight/2, rx=mx, ry=my;
-    addEventListener('mousemove', e=>{
-      mx=e.clientX; my=e.clientY;
-      if(dot) dot.style.transform=`translate(${mx}px,${my}px)`;
-    });
-    (function raf(){
-      rx+=(mx-rx)*0.15; ry+=(my-ry)*0.15;
-      if(ring) ring.style.transform=`translate(${rx}px,${ry}px)`;
-      requestAnimationFrame(raf);
-    })();
-    document.querySelectorAll('a, .stat, .figure, .pillar, .btn-wpp').forEach(el=>{
-      el.addEventListener('mouseenter', ()=>ring&&ring.classList.add('hover'));
-      el.addEventListener('mouseleave', ()=>ring&&ring.classList.remove('hover'));
-    });
-    document.querySelectorAll('.btn-wpp').forEach(btn=>{
-      btn.addEventListener('mousemove', e=>{
-        const r=btn.getBoundingClientRect();
-        const x=e.clientX-(r.left+r.width/2), y=e.clientY-(r.top+r.height/2);
-        btn.style.transform=`translate(${(x*0.18).toFixed(1)}px,${(y*0.18).toFixed(1)}px)`;
+    document.querySelectorAll('.hcta, .btn').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r=btn.getBoundingClientRect();
+        var x=e.clientX-(r.left+r.width/2), y=e.clientY-(r.top+r.height/2);
+        btn.style.transform='translate('+(x*0.2).toFixed(1)+'px,'+(y*0.2).toFixed(1)+'px)';
       });
-      btn.addEventListener('mouseleave', ()=>{ btn.style.transform=''; });
+      btn.addEventListener('mouseleave', function(){ btn.style.transform=''; });
     });
-  }
-
-  // Lenis smooth scroll (se o CDN carregou)
-  if(window.Lenis && !reduce && matchMedia('(hover:hover) and (pointer:fine)').matches){
-    const lenis=new Lenis({lerp:.1, smoothWheel:true});
-    function lraf(t){ lenis.raf(t); requestAnimationFrame(lraf); }
-    requestAnimationFrame(lraf);
-    document.documentElement.style.scrollBehavior='auto';
   }
 })();
+
 </script>
 </body>
 </html>
