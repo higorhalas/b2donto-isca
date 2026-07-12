@@ -649,13 +649,14 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 .scroll-progress i{ display:block; height:100%; width:0; background:var(--grad-brand); box-shadow:0 0 8px rgba(0,225,195,.5); transition:width .1s linear }
 /* chips "jogados na tela" um de cada vez, de lados alternados */
 .hero-chips .chip{ opacity:0 }
-.loaded .hero-chips .chip{ animation-duration:1s; animation-timing-function:cubic-bezier(.16,1,.3,1); animation-fill-mode:both }
-.loaded .hero-chips .chip:nth-child(odd){ animation-name:chip-toss-l }
-.loaded .hero-chips .chip:nth-child(even){ animation-name:chip-toss-r }
-.loaded .hero-chips .chip:nth-child(1){ animation-delay:2.3s }
-.loaded .hero-chips .chip:nth-child(2){ animation-delay:3.5s }
-.loaded .hero-chips .chip:nth-child(3){ animation-delay:4.7s }
-.loaded .hero-chips .chip:nth-child(4){ animation-delay:5.9s }
+.sem-strip{ text-align:center }
+.hero-chips.in .chip{ animation-duration:1s; animation-timing-function:cubic-bezier(.16,1,.3,1); animation-fill-mode:both }
+.hero-chips.in .chip:nth-child(odd){ animation-name:chip-toss-l }
+.hero-chips.in .chip:nth-child(even){ animation-name:chip-toss-r }
+.hero-chips.in .chip:nth-child(1){ animation-delay:.15s }
+.hero-chips.in .chip:nth-child(2){ animation-delay:.5s }
+.hero-chips.in .chip:nth-child(3){ animation-delay:.85s }
+.hero-chips.in .chip:nth-child(4){ animation-delay:1.2s }
 @keyframes chip-toss-l{
   0%   { opacity:0; transform:translateX(-72px) scale(.9); box-shadow:0 0 0 rgba(0,225,195,0) }
   55%  { opacity:1 }
@@ -790,35 +791,9 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       </svg>
     </div>
 
-    <div class="hero-mark" aria-hidden="true">
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="rxGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#A713B9"/></linearGradient></defs>
-        <circle cx="50" cy="50" r="46" stroke="url(#rxGrad)" stroke-width="1.2" fill="none" opacity=".8"/>
-        <circle cx="50" cy="50" r="32" stroke="rgba(0,225,195,.4)" stroke-width="1" fill="none" stroke-dasharray="2 3"/>
-        <circle cx="50" cy="50" r="18" stroke="rgba(0,225,195,.5)" stroke-width="1" fill="none"/>
-        <circle cx="50" cy="50" r="3" fill="#00E1C3"/>
-        <line x1="50" y1="2" x2="50" y2="10" stroke="rgba(0,225,195,.7)" stroke-width="1.2"/>
-        <line x1="50" y1="90" x2="50" y2="98" stroke="rgba(0,225,195,.7)" stroke-width="1.2"/>
-        <line x1="2" y1="50" x2="10" y2="50" stroke="rgba(0,225,195,.7)" stroke-width="1.2"/>
-        <line x1="90" y1="50" x2="98" y2="50" stroke="rgba(0,225,195,.7)" stroke-width="1.2"/>
-      </svg>
-    </div>
-
     <div class="eyebrow">Congresso ao vivo e gratuito · <span data-date-label>a definir</span></div>
     <h1>Conheça o sistema de agendamentos que gera<br><span class="grad-text">de 3 a 5 pacientes por semana</span></h1>
-    <div class="hero-chips">
-      <span class="chip">Sem depender de agências de marketing</span>
-      <span class="chip">Sem ficar refém da boa vontade da secretária</span>
-      <span class="chip">Sem encher o WhatsApp de leads curiosos</span>
-      <span class="chip">Sem fazer promoções para movimentar a agenda</span>
-    </div>
     <p class="sub">Em 60 minutos você vê por onde o dinheiro vaza e sai com o primeiro passo. Sem virar influencer.</p>
-    <div class="agenda-meter" aria-hidden="true">
-      <div class="am-days">
-        <span class="am-day on"></span><span class="am-day on"></span><span class="am-day"></span><span class="am-day on"></span><span class="am-day on"></span><span class="am-day"></span><span class="am-day"></span>
-      </div>
-      <span class="am-cap">de 3 a 5 pacientes por semana</span>
-    </div>
 
     <div class="countdown" data-countdown>
       <span class="cd-top">Começa em</span>
@@ -833,9 +808,19 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 
     <a href="#inscricao" class="btn btn-primary hero-cta" data-cta>Quero garantir minha vaga</a>
     <div class="proof-row"><span><b>+<span data-count="300">0</span></b> clínicas aceleradas</span><span><b><span data-count="23">0</span>x</b> de retorno médio</span></div>
-    <p class="meta-line">Ao vivo · Grupo fechado · Vagas limitadas</p>
     <div class="scroll-hint"></div>
   </header>
+
+  <!-- ============ FAIXA "SEM..." (movida do hero, anima no scroll) ============ -->
+  <section class="sem-strip" data-anim="slide-up" data-theme="blue">
+    <div class="eyebrow">Pra encher a agenda de lentes</div>
+    <div class="hero-chips" id="semChips">
+      <span class="chip">Sem depender de agências de marketing</span>
+      <span class="chip">Sem ficar refém da boa vontade da secretária</span>
+      <span class="chip">Sem encher o WhatsApp de leads curiosos</span>
+      <span class="chip">Sem fazer promoções para movimentar a agenda</span>
+    </div>
+  </section>
 
   <!-- ============ 1 · O PROBLEMA ============ -->
   <section data-anim="slide-up" data-theme="blue">
@@ -1501,6 +1486,16 @@ function runCount(el){
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', () => { vh = window.innerHeight; onScroll(); });
   updateAll();
+})();
+
+/* ---------- faixa "sem...": chips entram quando a faixa aparece ---------- */
+(function semChips(){
+  const el = document.getElementById('semChips');
+  if(!el) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ el.classList.add('in'); io.unobserve(el); } });
+  }, { threshold: .3 });
+  io.observe(el);
 })();
 
 /* ---------- funil: cada card anima quando ELE entra na tela (fix mobile) ---------- */
