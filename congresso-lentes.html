@@ -580,10 +580,10 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
   background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012)); border:1px solid var(--line);
   opacity:0; transform-origin:50% 0; transform-style:preserve-3d;
   transition: border-color .3s ease }
-.funnel.in .fn-stage{ animation:fn-ratchet 1.35s cubic-bezier(.2,.75,.28,1) both }
-.funnel.in .fn-stage.s1{ animation-delay:.3s }
-.funnel.in .fn-stage.s2{ animation-delay:1.4s }
-.funnel.in .fn-stage.s3{ animation-delay:2.5s }
+.fn-stage.on{ animation:fn-ratchet 1.35s cubic-bezier(.2,.75,.28,1) both }
+.fn-stage.s1.on{ animation-delay:0s }
+.fn-stage.s2.on{ animation-delay:.18s }
+.fn-stage.s3.on{ animation-delay:.36s }
 @keyframes fn-ratchet{
   0%   { opacity:0; transform:translateY(-40px) rotateX(-90deg) scale(.9) }
   14%  { opacity:1 }
@@ -601,16 +601,15 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 .fn-leak{ position:relative; margin-left:auto; flex:0 0 auto; font-family:var(--mono); font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--danger);
   border:1px solid rgba(255,112,144,.35); background:rgba(255,112,144,.08); border-radius:999px; padding:5px 9px; display:inline-flex; align-items:center;
   opacity:0; transform:scale(.5); transition:opacity .4s ease, transform .45s cubic-bezier(.34,1.56,.64,1) }
-.funnel.in .fn-leak{ opacity:1; transform:none }
-.funnel.in .fn-stage.s1 .fn-leak{ transition-delay:.34s } .funnel.in .fn-stage.s2 .fn-leak{ transition-delay:.54s } .funnel.in .fn-stage.s3 .fn-leak{ transition-delay:.74s }
+.fn-stage.on .fn-leak{ opacity:1; transform:none; transition-delay:.45s }
 /* fio de gotas: só do 1º vazamento, escorrendo suave até o final do funil */
 .fn-leak .drip{ position:absolute; bottom:-3px; left:50%; width:5px; height:8px;
   border-radius:50% 50% 50% 50% / 62% 62% 38% 38%; background:rgba(255,112,144,.8); box-shadow:0 0 6px rgba(255,112,144,.4); opacity:0; pointer-events:none; z-index:3 }
-.funnel.in .leak-stream .drip{ animation: fn-stream 3.4s ease-in infinite both }
-.funnel.in .leak-stream i:nth-of-type(1){ animation-delay:1s }
-.funnel.in .leak-stream i:nth-of-type(2){ animation-delay:1.85s }
-.funnel.in .leak-stream i:nth-of-type(3){ animation-delay:2.7s }
-.funnel.in .leak-stream i:nth-of-type(4){ animation-delay:3.55s }
+.fn-stage.on .leak-stream .drip{ animation: fn-stream 3.4s ease-in infinite both }
+.fn-stage.on .leak-stream i:nth-of-type(1){ animation-delay:1s }
+.fn-stage.on .leak-stream i:nth-of-type(2){ animation-delay:1.85s }
+.fn-stage.on .leak-stream i:nth-of-type(3){ animation-delay:2.7s }
+.fn-stage.on .leak-stream i:nth-of-type(4){ animation-delay:3.55s }
 @keyframes fn-stream{
   0%   { opacity:0; transform:translate(-50%,0) scale(.6,.7) }
   10%  { opacity:.68; transform:translate(-50%,6px) scale(1,1.15) }
@@ -914,7 +913,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       <div>
         <div class="pname">Higor Henrique</div>
         <div class="prole">Fundador e CEO da B2Donto</div>
-        <p class="pbio"><b>Fundador e CEO da B2Donto</b>, aceleradora comercial focada em clínicas de odontologia. <!-- COMPLETAR: 1 ou 2 frases sobre sua trajetória e resultados com clínicas de lente. -->[complete aqui com sua trajetória e um resultado concreto]. Aqui a conversa é de dono pra dono: você não precisa virar influencer, precisa de método.</p>
+        <p class="pbio"><b>Fundador e CEO da B2Donto</b>, aceleradora comercial focada em clínicas de odontologia. Há 5 anos entregando ROI de 23x para mais de 300 clínicas.</p>
       </div>
     </div>
 
@@ -1471,6 +1470,16 @@ function runCount(el){
     entries.forEach(e=>{ const card = e.target.closest('.case'); if(card) card.classList.toggle('num-in', e.isIntersecting); });
   }, { threshold: 0.6 });
   cards.forEach(card => { const num = card.querySelector('.big-stat .value'); if(num) numObserver.observe(num); });
+})();
+
+/* ---------- funil: cada card anima quando ELE entra na tela (fix mobile) ---------- */
+(function funnelStages(){
+  const stages = document.querySelectorAll('.funnel .fn-stage');
+  if(!stages.length) return;
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+  }, { threshold: 0, rootMargin: '0px 0px -22% 0px' });
+  stages.forEach(s => obs.observe(s));
 })();
 
 /* ---------- cases: lightbox de depoimento (video vertical) ---------- */
