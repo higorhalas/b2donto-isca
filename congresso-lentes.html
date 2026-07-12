@@ -332,6 +332,13 @@ h2.title{font-size:27px; font-weight:700; line-height:1.15; letter-spacing:-.02e
 .field input::placeholder{color:var(--dim-grey)}
 .field input:focus{outline:none; border-color:rgba(0,225,195,.5); box-shadow:0 0 0 3px rgba(0,225,195,.12)}
 .field.error input{border-color:var(--danger); box-shadow:0 0 0 3px rgba(255,112,144,.10)}
+.field select{ width:100%; background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid var(--line); border-radius:12px; padding:14px 42px 14px 16px; color:var(--off-white); font-family:var(--font); font-size:15px; cursor:pointer; transition:border-color .25s ease, box-shadow .25s ease;
+  -webkit-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239AA0C4' stroke-width='2' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>"); background-repeat:no-repeat; background-position:right 14px center; background-size:18px }
+.field select:focus{ outline:none; border-color:rgba(0,225,195,.5); box-shadow:0 0 0 3px rgba(0,225,195,.12) }
+.field select.placeholder{ color:var(--dim-grey) }
+.field.error select{ border-color:var(--danger); box-shadow:0 0 0 3px rgba(255,112,144,.10) }
+.field select option{ color:#111; background:#fff }
 .field-msg{display:none; margin-top:7px; font-size:12px; color:var(--danger)}
 .field.error .field-msg{display:block}
 .form-note{text-align:center; font-size:12px; color:var(--dim-grey); margin-top:14px; line-height:1.6}
@@ -1093,6 +1100,18 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
           <input id="f-insta" name="instagram" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@seuperfil">
           <div class="field-msg">Digite seu @ do Instagram.</div>
         </div>
+        <div class="field" data-field="faturamento">
+          <label class="field-label" for="f-fat">Faturamento do consultório (por mês)</label>
+          <select id="f-fat" name="faturamento" class="placeholder">
+            <option value="" disabled selected>Selecione uma faixa</option>
+            <option>Abaixo de R$ 20 mil</option>
+            <option>Entre R$ 20 mil e R$ 40 mil</option>
+            <option>Entre R$ 40 mil e R$ 60 mil</option>
+            <option>Entre R$ 60 mil e R$ 100 mil</option>
+            <option>Acima de R$ 100 mil</option>
+          </select>
+          <div class="field-msg">Selecione sua faixa de faturamento.</div>
+        </div>
         <button type="submit" class="btn btn-primary btn-block">Quero minha vaga no grupo</button>
         <p class="form-note">Seus dados são usados só pra te avisar sobre o congresso. Nada de spam.</p>
       </form>
@@ -1371,6 +1390,9 @@ function runCount(el){
     else wa.value = '';
   });
 
+  const fatSel = form.faturamento;
+  if(fatSel) fatSel.addEventListener('change', function(){ fatSel.classList.toggle('placeholder', !fatSel.value); });
+
   function setErr(name, on){ const f = form.querySelector(`[data-field="${name}"]`); if(f) f.classList.toggle('error', on); }
 
   form.addEventListener('submit', e=>{
@@ -1378,21 +1400,23 @@ function runCount(el){
     const email = form.email.value.trim();
     const whats = form.whatsapp.value.replace(/\D/g,'');
     const insta = form.instagram.value.trim().replace(/^@+/, '');
+    const fat   = form.faturamento.value;
 
     const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);           setErr('email', !okEmail);
     const okWhats = whats.length >= 10 && whats.length <= 11;           setErr('whatsapp', !okWhats);
     const okInsta = insta.length >= 2;                                  setErr('instagram', !okInsta);
-    if(!(okEmail && okWhats && okInsta)){
-      const first = form.querySelector('.field.error input'); if(first) first.focus();
+    const okFat   = !!fat;                                              setErr('faturamento', !okFat);
+    if(!(okEmail && okWhats && okInsta && okFat)){
+      const first = form.querySelector('.field.error input, .field.error select'); if(first) first.focus();
       return;
     }
 
-    if(window.fbq) fbq('track', 'Lead', { content_name: 'Congresso Lentes' });
+    if(window.fbq) fbq('track', 'Lead', { content_name: 'Congresso Lentes', content_category: fat });
 
     const btn = form.querySelector('button[type=submit]');
     btn.disabled = true; btn.textContent = 'Enviando...';
 
-    const payload = { email, whatsapp: whats, instagram: insta ? '@' + insta : '', data_inscricao: new Date().toISOString(), origem: 'webinar-lentes' };
+    const payload = { email, whatsapp: whats, instagram: insta ? '@' + insta : '', faturamento: fat, data_inscricao: new Date().toISOString(), origem: 'webinar-lentes' };
 
     // rede de segurança local
     try{ const arr = JSON.parse(localStorage.getItem('b2d_webinar_leads') || '[]'); arr.push(payload); localStorage.setItem('b2d_webinar_leads', JSON.stringify(arr)); }catch(_){}
