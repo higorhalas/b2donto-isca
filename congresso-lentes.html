@@ -312,8 +312,8 @@ h2.title{font-size:27px; font-weight:700; line-height:1.15; letter-spacing:-.02e
 
 /* PRESENTER */
 .presenter{display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center; background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012)); border:1px solid var(--line); border-radius:20px; padding:26px 22px}
-.presenter-avatar{position:relative; width:112px; height:112px; flex:0 0 auto; border-radius:50%; padding:3px; background:var(--grad-brand)}
-.presenter-avatar .pa-inner{width:100%; height:100%; border-radius:50%; overflow:hidden; background:var(--deep-navy); display:grid; place-items:center; position:relative}
+.presenter-avatar{position:relative; width:112px; height:112px; flex:0 0 auto; border-radius:50%}
+.presenter-avatar .pa-inner{width:100%; height:100%; border-radius:50%; overflow:hidden; background:var(--deep-navy); display:grid; place-items:center; position:relative; border:1px solid var(--line-strong)}
 .pa-initials{font-size:36px; font-weight:800; color:#fff; letter-spacing:.02em}
 .presenter-avatar img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
 .presenter .pname{font-size:22px; font-weight:700; color:#fff; margin-bottom:6px; letter-spacing:-.01em}
@@ -722,6 +722,10 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
   .frame{ display:none } .edge-blur{ display:none } .noise{ display:none } .particles{ display:none }
   body::before{ top:0; bottom:0; left:0; right:0; animation:none; transform:none; will-change:auto; }
   body::after{ top:0; bottom:0; left:0; right:0; transform:none; will-change:auto; }
+  /* mobile: sem transform por frame (performance no toque) */
+  .sfloat{ transform:none !important }
+  .case.r, .case.r[data-dir]{ opacity:0 !important; transform:translateY(28px) !important; transition:opacity .55s ease, transform .55s ease !important }
+  .case.r.in, .case.r.in[data-dir]{ opacity:1 !important; transform:none !important }
 }
 </style>
 </head>
@@ -1155,6 +1159,10 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 /* ============================================================
    CONFIG · troque estas linhas e a página fica pronta
    ============================================================ */
+// abre sempre no topo (evita o navegador restaurar a rolagem pro form)
+if('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 const CONFIG = {
   // 1. DATA E HORA DO CONGRESSO (fuso de Brasília). Formato: 'AAAA-MM-DDTHH:mm:ss-03:00'
   WEBINAR_DATE: '2026-07-19T20:00:00-03:00',        // 19 de julho, 20h
@@ -1223,6 +1231,7 @@ function runCount(el){
 (function scrollFloat(){
   const els = Array.from(document.querySelectorAll('.sfloat'));
   if(!els.length) return;
+  if(window.matchMedia('(hover: none)').matches || window.matchMedia('(max-width: 768px)').matches) return;
   let vh = window.innerHeight, ticking = false;
   function update(){
     const c = vh / 2, range = vh * 0.85;
@@ -1439,6 +1448,24 @@ function runCount(el){
 (function casesScroll(){
   const cards = Array.from(document.querySelectorAll('.cases-list .case.r'));
   if(!cards.length) return;
+
+  // punch do numero (leve, IntersectionObserver), vale pros dois modos
+  const numObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ const card = e.target.closest('.case'); if(card) card.classList.toggle('num-in', e.isIntersecting); });
+  }, { threshold: 0.6 });
+  cards.forEach(card => { const num = card.querySelector('.big-stat .value'); if(num) numObserver.observe(num); });
+
+  const heavy = window.matchMedia('(min-width: 769px)').matches && !window.matchMedia('(hover: none)').matches;
+  if(!heavy){
+    // MOBILE: reveal simples (uma vez), sem transform por frame = fluido no toque
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); e.target.classList.add('has-entered'); io.unobserve(e.target); } });
+    }, { threshold: .12 });
+    cards.forEach(c => io.observe(c));
+    return;
+  }
+
+  // DESKTOP: scroll-driven completo (janela de 2)
   let ticking = false, vh = window.innerHeight;
   const ACTIVE_COUNT = 2;
   function updateAll(){
@@ -1466,10 +1493,6 @@ function runCount(el){
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', () => { vh = window.innerHeight; onScroll(); });
   updateAll();
-  const numObserver = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ const card = e.target.closest('.case'); if(card) card.classList.toggle('num-in', e.isIntersecting); });
-  }, { threshold: 0.6 });
-  cards.forEach(card => { const num = card.querySelector('.big-stat .value'); if(num) numObserver.observe(num); });
 })();
 
 /* ---------- funil: cada card anima quando ELE entra na tela (fix mobile) ---------- */
