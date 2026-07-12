@@ -1398,7 +1398,7 @@ function runCount(el){
     try{ const arr = JSON.parse(localStorage.getItem('b2d_webinar_leads') || '[]'); arr.push(payload); localStorage.setItem('b2d_webinar_leads', JSON.stringify(arr)); }catch(_){}
 
     let redirectDone = false;
-    function goThanks(){ if(redirectDone) return; redirectDone = true; window.location.href = 'obrigado.html'; }
+    function goThanks(){ if(redirectDone) return; redirectDone = true; window.location.href = 'obrigado-congresso-w1.html'; }
     // vai pra página de obrigado de qualquer jeito, mesmo se algo travar
     setTimeout(goThanks, CONFIG.REDIRECT_SAFETY_MS);
 
