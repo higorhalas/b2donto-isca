@@ -649,14 +649,13 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 .scroll-progress i{ display:block; height:100%; width:0; background:var(--grad-brand); box-shadow:0 0 8px rgba(0,225,195,.5); transition:width .1s linear }
 /* chips "jogados na tela" um de cada vez, de lados alternados */
 .hero-chips .chip{ opacity:0 }
-.sem-strip{ text-align:center }
-.hero-chips.in .chip{ animation-duration:1s; animation-timing-function:cubic-bezier(.16,1,.3,1); animation-fill-mode:both }
-.hero-chips.in .chip:nth-child(odd){ animation-name:chip-toss-l }
-.hero-chips.in .chip:nth-child(even){ animation-name:chip-toss-r }
-.hero-chips.in .chip:nth-child(1){ animation-delay:.15s }
-.hero-chips.in .chip:nth-child(2){ animation-delay:.5s }
-.hero-chips.in .chip:nth-child(3){ animation-delay:.85s }
-.hero-chips.in .chip:nth-child(4){ animation-delay:1.2s }
+.loaded .hero-chips .chip{ animation-duration:1s; animation-timing-function:cubic-bezier(.16,1,.3,1); animation-fill-mode:both }
+.loaded .hero-chips .chip:nth-child(odd){ animation-name:chip-toss-l }
+.loaded .hero-chips .chip:nth-child(even){ animation-name:chip-toss-r }
+.loaded .hero-chips .chip:nth-child(1){ animation-delay:2.3s }
+.loaded .hero-chips .chip:nth-child(2){ animation-delay:3.5s }
+.loaded .hero-chips .chip:nth-child(3){ animation-delay:4.7s }
+.loaded .hero-chips .chip:nth-child(4){ animation-delay:5.9s }
 @keyframes chip-toss-l{
   0%   { opacity:0; transform:translateX(-72px) scale(.9); box-shadow:0 0 0 rgba(0,225,195,0) }
   55%  { opacity:1 }
@@ -793,6 +792,12 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 
     <div class="eyebrow">Congresso ao vivo e gratuito · <span data-date-label>a definir</span></div>
     <h1>Conheça o sistema de agendamentos que gera<br><span class="grad-text">de 3 a 5 pacientes por semana</span></h1>
+    <div class="hero-chips">
+      <span class="chip">Sem depender de agências de marketing</span>
+      <span class="chip">Sem ficar refém da boa vontade da secretária</span>
+      <span class="chip">Sem encher o WhatsApp de leads curiosos</span>
+      <span class="chip">Sem fazer promoções para movimentar a agenda</span>
+    </div>
 
     <div class="countdown" data-countdown>
       <span class="cd-top">Começa em</span>
@@ -809,17 +814,6 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
     <div class="proof-row"><span><b>+<span data-count="300">0</span></b> clínicas aceleradas</span><span><b><span data-count="23">0</span>x</b> de retorno médio</span></div>
     <div class="scroll-hint"></div>
   </header>
-
-  <!-- ============ FAIXA "SEM..." (movida do hero, anima no scroll) ============ -->
-  <section class="sem-strip" data-anim="slide-up" data-theme="blue">
-    <div class="eyebrow">Pra encher a agenda de lentes</div>
-    <div class="hero-chips" id="semChips">
-      <span class="chip">Sem depender de agências de marketing</span>
-      <span class="chip">Sem ficar refém da boa vontade da secretária</span>
-      <span class="chip">Sem encher o WhatsApp de leads curiosos</span>
-      <span class="chip">Sem fazer promoções para movimentar a agenda</span>
-    </div>
-  </section>
 
   <!-- ============ 1 · O PROBLEMA ============ -->
   <section data-anim="slide-up" data-theme="blue">
