@@ -126,27 +126,20 @@ h1 .grad{ background:var(--grad-brand); -webkit-background-clip:text; background
 
   <div class="eyebrow">Inscrição confirmada</div>
   <h1>Sua vaga no congresso<br><span class="grad">está garantida</span></h1>
-  <p class="lead">Falta um passo: <b>entre no grupo fechado do WhatsApp</b>. É lá que você recebe o link de acesso e os lembretes na hora certa.</p>
+  <p class="lead">Recebemos sua inscrição. Nos próximos dias a gente te chama no <b>WhatsApp que você cadastrou</b> com o acesso ao grupo do congresso e os detalhes.</p>
 
   <div class="date-pill"><span class="dot"></span>Ao vivo · <span data-date-label>a definir</span></div>
 
-  <a class="btn" data-group-link href="#">
-    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.6-6c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-.8-1-1.1-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5v-.4c0-.2-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.5 1 2.6c.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
-    Entrar no grupo do WhatsApp
-  </a>
-
-  <p class="note">Se o grupo não abrir, chame no WhatsApp que a gente te adiciona. Guarde a data, o link do dia cai no grupo.</p>
+  <p class="note">Fique de olho no seu WhatsApp, e confere se o número que você digitou está certo: é por lá que a gente vai te adicionar.</p>
 </div>
 
 <div class="footer">B2Donto · Aceleradora comercial · Congresso ao vivo · 2026</div>
 
 <script>
 const CONFIG = {
-  WHATSAPP_GROUP_URL: 'https://chat.whatsapp.com/XXXXXXXXXXXXX', // <-- MESMO link da página principal
-  WEBINAR_DATE_LABEL: '19 de julho, 20h'                          // <-- MESMA data
+  WEBINAR_DATE_LABEL: '19 de julho, 20h'
 };
 document.querySelectorAll('[data-date-label]').forEach(el => el.textContent = CONFIG.WEBINAR_DATE_LABEL);
-document.querySelectorAll('[data-group-link]').forEach(el => el.href = CONFIG.WHATSAPP_GROUP_URL);
 </script>
 </body>
 </html>
