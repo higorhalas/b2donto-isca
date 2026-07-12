@@ -1146,6 +1146,16 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 // abre sempre no topo (evita o navegador restaurar a rolagem pro form)
 if('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
+window.addEventListener('load', function(){ window.scrollTo(0, 0); });
+// navegador de anuncio (webview) restaura a rolagem depois do conteudo carregar;
+// forcamos o topo enquanto o loader cobre a tela (invisivel), e paramos logo apos o reveal.
+(function keepTop(){
+  var id = setInterval(function(){ window.scrollTo(0, 0); }, 50);
+  var watch = setInterval(function(){
+    if(document.body.classList.contains('loaded')){ clearInterval(watch); setTimeout(function(){ clearInterval(id); }, 250); }
+  }, 50);
+  setTimeout(function(){ clearInterval(watch); clearInterval(id); }, 3000);
+})();
 
 const CONFIG = {
   // 1. DATA E HORA DO CONGRESSO (fuso de Brasília). Formato: 'AAAA-MM-DDTHH:mm:ss-03:00'
