@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Inscrição confirmada · Congresso B2Donto</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Inscrição confirmada. Entre no grupo do WhatsApp para receber o link e os lembretes do congresso.">
+
+<!--
+  ============================================================
+  CHECKLIST (mesmo do webinar-lentes-v2.html):
+  [ ] CONFIG.WHATSAPP_GROUP_URL  (o MESMO link do grupo da página principal)
+  [ ] CONFIG.WEBINAR_DATE_LABEL  (a MESMA data)
+  Os pixels da Meta já estão instalados (PageView + CompleteRegistration).
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1343670886401420');
+fbq('init', '200416962337288');
+fbq('track', 'PageView');
+fbq('track', 'CompleteRegistration', { content_name: 'Congresso Lentes' });
+</script>
+<noscript>
+<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1343670886401420&ev=PageView&noscript=1"/>
+<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=200416962337288&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+:root{
+  --cyan:#00E1C3; --purple:#A713B9; --blue:#4A6CF7;
+  --black-hole:#050922; --deep-navy:#0A0E2E;
+  --white:#fff; --off-white:#E8EAF5; --cool-grey:#9AA0C4; --dim-grey:#6B7299;
+  --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.16);
+  --grad-brand:linear-gradient(135deg,#00E1C3 0%,#4A6CF7 45%,#A713B9 100%);
+  --font:'Sora',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--black-hole); min-height:100%; overflow-x:hidden}
+body{ font-family:var(--font); background:var(--black-hole); color:var(--off-white); min-height:100vh; -webkit-font-smoothing:antialiased;
+  display:flex; align-items:center; justify-content:center; padding:24px; overflow-x:hidden; position:relative }
+body::before{
+  content:""; position:fixed; inset:-30%; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(900px 700px at 80% 15%, rgba(0,225,195,.18), transparent 60%),
+    radial-gradient(800px 700px at 10% 85%, rgba(167,19,185,.18), transparent 60%),
+    radial-gradient(900px 700px at 50% 50%, rgba(74,108,247,.12), transparent 60%);
+  animation: aurora 24s ease-in-out infinite alternate;
+}
+@keyframes aurora{ 0%{transform:translate(0,0) scale(1)} 50%{transform:translate(-18px,14px) scale(1.04)} 100%{transform:translate(12px,-10px) scale(1.01)} }
+body::after{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:linear-gradient(rgba(0,225,195,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,225,195,.06) 1px, transparent 1px);
+  background-size:70px 70px; mask-image:radial-gradient(circle at 50% 45%, #000 0%, transparent 68%);
+  -webkit-mask-image:radial-gradient(circle at 50% 45%, #000 0%, transparent 68%);
+}
+
+.card{ position:relative; z-index:1; width:100%; max-width:520px; text-align:center;
+  display:flex; flex-direction:column; align-items:center; gap:0 }
+
+.logo{ font-weight:800; font-size:18px; color:#fff; letter-spacing:-.02em; margin-bottom:34px; opacity:0; animation:fade .7s ease .1s forwards }
+.logo span{ font-weight:400; opacity:.7 }
+
+/* check animado */
+.check{ width:96px; height:96px; margin-bottom:26px; opacity:0; transform:scale(.6); animation:pop .7s cubic-bezier(.34,1.56,.64,1) .2s forwards }
+.check svg{ width:100%; height:100% }
+.check .ring{ stroke:var(--cyan); stroke-width:3; fill:none; stroke-dasharray:289; stroke-dashoffset:289; animation:draw 1s ease .5s forwards }
+.check .tick{ stroke:var(--cyan); stroke-width:5; fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:60; stroke-dashoffset:60; animation:draw .5s ease 1.1s forwards; filter:drop-shadow(0 0 8px rgba(0,225,195,.6)) }
+@keyframes draw{ to{ stroke-dashoffset:0 } }
+@keyframes pop{ to{ opacity:1; transform:scale(1) } }
+@keyframes fade{ to{ opacity:1 } }
+
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--cyan); font-weight:600; margin-bottom:14px; opacity:0; animation:rise .7s ease .9s forwards }
+h1{ font-size:34px; line-height:1.1; font-weight:800; letter-spacing:-.03em; margin-bottom:16px; opacity:0; animation:rise .8s ease 1.05s forwards }
+h1 .grad{ background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent }
+.lead{ font-size:15.5px; color:var(--cool-grey); line-height:1.6; max-width:400px; margin-bottom:26px; opacity:0; animation:rise .8s ease 1.2s forwards }
+.lead b{ color:var(--off-white); font-weight:600 }
+@keyframes rise{ from{ opacity:0; transform:translateY(16px) } to{ opacity:1; transform:none } }
+
+.date-pill{ display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:12px; letter-spacing:1px; color:var(--off-white);
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid var(--line); border-radius:999px; padding:9px 16px; margin-bottom:30px;
+  opacity:0; animation:rise .8s ease 1.35s forwards }
+.date-pill .dot{ width:8px; height:8px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan) }
+
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:var(--font); font-weight:700; font-size:16px; letter-spacing:-.01em;
+  background:var(--grad-brand); color:var(--black-hole); border:0; border-radius:12px; padding:17px 30px; cursor:pointer; text-decoration:none;
+  box-shadow:0 10px 30px rgba(0,225,195,.22); transition:transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease;
+  opacity:0; animation:rise .8s ease 1.5s forwards }
+.btn:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(0,225,195,.34) }
+.btn svg{ width:20px; height:20px; fill:var(--black-hole) }
+.note{ margin-top:16px; font-size:12.5px; color:var(--dim-grey); line-height:1.6; max-width:360px; opacity:0; animation:rise .8s ease 1.65s forwards }
+
+.footer{ position:fixed; bottom:18px; left:0; right:0; text-align:center; z-index:1; font-size:11px; color:var(--dim-grey); letter-spacing:.04em }
+
+@media (max-width:520px){ h1{ font-size:28px } .check{ width:82px; height:82px } }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; opacity:1 !important; transform:none !important } .check .ring,.check .tick{ stroke-dashoffset:0 !important } }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">B2<span>donto</span></div>
+
+  <div class="check">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle class="ring" cx="50" cy="50" r="46"/>
+      <path class="tick" d="M30 52 L44 66 L72 36"/>
+    </svg>
+  </div>
+
+  <div class="eyebrow">Inscrição confirmada</div>
+  <h1>Sua vaga no congresso<br><span class="grad">está garantida</span></h1>
+  <p class="lead">Falta um passo: <b>entre no grupo fechado do WhatsApp</b>. É lá que você recebe o link de acesso e os lembretes na hora certa.</p>
+
+  <div class="date-pill"><span class="dot"></span>Ao vivo · <span data-date-label>a definir</span></div>
+
+  <a class="btn" data-group-link href="#">
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.6-6c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-.8-1-1.1-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5v-.4c0-.2-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.5 1 2.6c.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+    Entrar no grupo do WhatsApp
+  </a>
+
+  <p class="note">Se o grupo não abrir, chame no WhatsApp que a gente te adiciona. Guarde a data, o link do dia cai no grupo.</p>
+</div>
+
+<div class="footer">B2Donto · Aceleradora comercial · Congresso ao vivo · 2026</div>
+
+<script>
+const CONFIG = {
+  WHATSAPP_GROUP_URL: 'https://chat.whatsapp.com/XXXXXXXXXXXXX', // <-- MESMO link da página principal
+  WEBINAR_DATE_LABEL: '19 de julho, 20h'                          // <-- MESMA data
+};
+document.querySelectorAll('[data-date-label]').forEach(el => el.textContent = CONFIG.WEBINAR_DATE_LABEL);
+document.querySelectorAll('[data-group-link]').forEach(el => el.href = CONFIG.WHATSAPP_GROUP_URL);
+</script>
+</body>
+</html>
