@@ -1423,7 +1423,16 @@ function runCount(el){
     const btn = form.querySelector('button[type=submit]');
     btn.disabled = true; btn.textContent = 'Enviando...';
 
-    const payload = { email, whatsapp: whats, instagram: insta ? '@' + insta : '', faturamento: fat, data_inscricao: new Date().toISOString(), origem: 'webinar-lentes' };
+    const _p = new URLSearchParams(location.search);
+    const _g = k => (_p.get(k) || '').slice(0, 200);
+    const payload = {
+      email, whatsapp: whats, instagram: insta ? '@' + insta : '', faturamento: fat,
+      campanha: _g('utm_campaign'),
+      conjunto: _g('utm_adset') || _g('utm_medium'),
+      anuncio: _g('utm_ad') || _g('utm_content'),
+      origem_trafego: _g('utm_source'),
+      data_inscricao: new Date().toISOString(), origem: 'webinar-lentes'
+    };
 
     // rede de segurança local
     try{ const arr = JSON.parse(localStorage.getItem('b2d_webinar_leads') || '[]'); arr.push(payload); localStorage.setItem('b2d_webinar_leads', JSON.stringify(arr)); }catch(_){}
