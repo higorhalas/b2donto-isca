@@ -1425,18 +1425,18 @@ function runCount(el){
     // rede de segurança local
     try{ const arr = JSON.parse(localStorage.getItem('b2d_webinar_leads') || '[]'); arr.push(payload); localStorage.setItem('b2d_webinar_leads', JSON.stringify(arr)); }catch(_){}
 
-    let redirectDone = false;
-    function goThanks(){ if(redirectDone) return; redirectDone = true; window.location.href = 'obrigado-congresso-w1.html'; }
-    // vai pra página de obrigado de qualquer jeito, mesmo se algo travar
-    setTimeout(goThanks, CONFIG.REDIRECT_SAFETY_MS);
-
-    const endpoint = CONFIG.SHEETS_ENDPOINT;
+    // ENVIO GARANTIDO: sendBeacon sobrevive ao redirect (o fetch normal era cancelado no mobile)
+    var endpoint = CONFIG.SHEETS_ENDPOINT;
     if(endpoint && endpoint.indexOf('http') === 0){
-      fetch(endpoint, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
-        .catch(()=>{}).finally(() => setTimeout(goThanks, CONFIG.REDIRECT_DELAY_MS));
-    } else {
-      setTimeout(goThanks, CONFIG.REDIRECT_DELAY_MS);
+      var body = JSON.stringify(payload);
+      var enviado = false;
+      try { if(navigator.sendBeacon){ enviado = navigator.sendBeacon(endpoint, new Blob([body], { type:'text/plain;charset=utf-8' })); } } catch(_){}
+      if(!enviado){
+        try { fetch(endpoint, { method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'text/plain;charset=utf-8'}, body: body }).catch(function(){}); } catch(_){}
+      }
     }
+    // vai pra pagina de obrigado (o envio ja foi disparado de forma garantida)
+    setTimeout(function(){ window.location.href = 'obrigado-congresso-w1.html'; }, 600);
   });
 })();
 
