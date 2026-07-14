@@ -94,6 +94,13 @@ h1 .grad{ color:var(--gold-deep) }
   opacity:0; animation:rise .8s ease 1.5s forwards }
 .btn-cal:hover{ transform:translateY(-2px); background:var(--gold-dark); box-shadow:0 18px 40px rgba(168,147,77,.4) }
 .btn-cal svg{ width:19px; height:19px; fill:none; stroke:var(--btn-text); stroke-width:2; stroke-linecap:round }
+.btns{ display:flex; flex-direction:column; align-items:center; gap:12px; width:100% }
+.btn-wpp{ display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:var(--font); font-weight:700; font-size:15.5px; letter-spacing:-.01em;
+  color:#fff; background:#25D366; border:0; border-radius:12px; padding:16px 30px; cursor:pointer; text-decoration:none;
+  box-shadow:0 12px 28px rgba(37,211,102,.34); transition:transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, background .25s ease;
+  opacity:0; animation:rise .8s ease 1.5s forwards }
+.btn-wpp:hover{ transform:translateY(-2px); background:#1EBE5A; box-shadow:0 18px 40px rgba(37,211,102,.42) }
+.btn-wpp svg{ width:20px; height:20px; fill:#fff }
 .note{ margin-top:16px; font-size:12.5px; color:var(--muted-2); line-height:1.6; max-width:370px; opacity:0; animation:rise .8s ease 1.65s forwards }
 
 .footer{ position:fixed; bottom:18px; left:0; right:0; text-align:center; z-index:1; font-size:11px; color:var(--muted-2); letter-spacing:.04em }
@@ -122,16 +129,22 @@ h1 .grad{ color:var(--gold-deep) }
 
   <div class="eyebrow">Inscrição confirmada</div>
   <h1>Sua vaga no congresso<br><span class="grad">está garantida</span></h1>
-  <p class="lead">Recebemos sua inscrição. Logo você será adicionado no nosso <b>grupo do WhatsApp</b>, onde vamos enviar mais informações sobre o evento.</p>
+  <p class="lead">Recebemos sua inscrição. <b>Entre agora no nosso grupo do WhatsApp</b> pra receber o link de acesso e os lembretes do evento.</p>
 
   <div class="date-pill"><span class="dot"></span>Ao vivo · <span data-date-label>a definir</span></div>
 
-  <a class="btn-cal" id="gcalBtn" target="_blank" rel="noopener" href="#">
-    <svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
-    Adicionar ao Google Agenda
-  </a>
+  <div class="btns">
+    <a class="btn-wpp" id="wppBtn" target="_blank" rel="noopener" href="#">
+      <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.2 4.79 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.5 12.16c-.24-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.53.06-.24-.12-1.03-.38-1.97-1.21-.73-.65-1.22-1.45-1.36-1.69-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z"/></svg>
+      Entrar no grupo do WhatsApp
+    </a>
+    <a class="btn-cal" id="gcalBtn" target="_blank" rel="noopener" href="#">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+      Adicionar ao Google Agenda
+    </a>
+  </div>
 
-  <p class="note">Fique de olho no seu WhatsApp, e confere se o número que você digitou está certo: é por lá que a gente vai te adicionar.</p>
+  <p class="note">É pelo grupo que enviamos o link de acesso e os lembretes do congresso. Confere se o número que você digitou está certo.</p>
 </div>
 
 <div class="footer">B2Donto · Aceleradora comercial · Congresso ao vivo · 2026</div>
@@ -140,11 +153,21 @@ h1 .grad{ color:var(--gold-deep) }
 const CONFIG = {
   WEBINAR_DATE: '2026-07-19T20:00:00-03:00',   // inicio (mesma data da pagina principal)
   WEBINAR_DATE_LABEL: '19 de julho, 20h',
+  WHATSAPP_GROUP_URL: 'https://chat.whatsapp.com/CsGmCPFSxWTEgENjHsLdTI',  // grupo Leads B2
   WEBINAR_DURATION_MIN: 90,
   WEBINAR_TITULO: 'Congresso ao vivo · B2Donto',
   WEBINAR_DETALHES: 'Congresso ao vivo e gratuito. O link de acesso e enviado no grupo do WhatsApp da sua inscricao.'
 };
 document.querySelectorAll('[data-date-label]').forEach(el => el.textContent = CONFIG.WEBINAR_DATE_LABEL);
+
+// botao "Entrar no grupo do WhatsApp" (aparece so quando o link estiver preenchido)
+(function wppGroup(){
+  var btn = document.getElementById('wppBtn');
+  if(!btn) return;
+  var url = (CONFIG.WHATSAPP_GROUP_URL || '').trim();
+  if(url.indexOf('http') === 0){ btn.href = url; }
+  else { btn.style.display = 'none'; }
+})();
 
 // botao "Adicionar ao Google Agenda" (evento pre-preenchido)
 (function googleCalendar(){
