@@ -550,6 +550,11 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
       <p>Preencha pra entrar na lista do congresso. As vagas do grupo são limitadas.</p>
     </div>
     <form id="leadForm" novalidate>
+      <div class="field" data-field="nome">
+        <label class="field-label" for="f-nome">Seu nome completo</label>
+        <input id="f-nome" name="nome" type="text" autocomplete="name" autocapitalize="words" placeholder="Nome e sobrenome">
+        <div class="field-msg">Digite seu nome.</div>
+      </div>
       <div class="field" data-field="email">
         <label class="field-label" for="f-email">Seu melhor e-mail</label>
         <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com">
@@ -737,6 +742,7 @@ function runCount(el){
 
   form.addEventListener('submit', e=>{
     e.preventDefault();
+    const nome  = form.nome.value.trim();
     const email = form.email.value.trim();
     const whats = form.whatsapp.value.replace(/\D/g,'');
     const insta = form.instagram.value.trim().replace(/^@+/, '');
@@ -744,13 +750,14 @@ function runCount(el){
     const area = form.area_atuacao.value;
     const fat  = form.faturamento.value;
 
+    const okNome  = nome.length >= 2;                               setErr('nome', !okNome);
     const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);        setErr('email', !okEmail);
     const okWhats = whats.length >= 10 && whats.length <= 11;        setErr('whatsapp', !okWhats);
     const okInsta = insta.length >= 2;                              setErr('instagram', !okInsta);
     const okCro   = (croVal.replace(/\D/g,'').length >= 3);          setErr('cro', !okCro);
     const okArea  = !!area;                                          setErr('area', !okArea);
     const okFat   = !!fat;                                           setErr('faturamento', !okFat);
-    if(!(okEmail && okWhats && okInsta && okCro && okArea && okFat)){
+    if(!(okNome && okEmail && okWhats && okInsta && okCro && okArea && okFat)){
       const first = form.querySelector('.field.error input, .field.error select'); if(first) first.focus();
       return;
     }
@@ -763,7 +770,7 @@ function runCount(el){
     const _p = new URLSearchParams(location.search);
     const _g = k => (_p.get(k) || '').slice(0, 200);
     const payload = {
-      email, whatsapp: whats, instagram: insta ? '@' + insta : '', cro: croVal, area_atuacao: area, faturamento: fat,
+      nome, email, whatsapp: whats, instagram: insta ? '@' + insta : '', cro: croVal, area_atuacao: area, faturamento: fat,
       campanha: _g('utm_campaign'),
       conjunto: _g('utm_adset') || _g('utm_medium'),
       anuncio: _g('utm_ad') || _g('utm_content'),
