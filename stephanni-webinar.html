@@ -2,32 +2,26 @@
 <!--
   ============================================================
   MÉTODO 3ᵉ · Stephanni Wolski · WEBINÁRIO ao vivo e gratuito
-  Landing de captura (identidade P&B quente dela + motor de captura B2Donto)
+  Estrutura enxuta modelada na pagina dela (letsbephanni.com) + motor de captura B2Donto.
 
-  CHECKLIST PRO HIGOR (troque e a página fica pronta):
-  [ ] CONFIG.PIXEL_ID          -> o Pixel real da conta dela (procurar no Gerenciador de Eventos)
-  [ ] CONFIG.SHEETS_ENDPOINT   -> URL do Apps Script publicado (ver stephanni-apps-script.gs)
-  [ ] CONFIG.WEBINAR_DATE/LABEL-> confirmar data e hora
-  [ ] obrigado-stephanni.html  -> colar o link do grupo do WhatsApp lá (WHATSAPP_GROUP_URL)
-
-  Os 3 problemas que isso resolve:
-   1. Sem página de obrigado -> o form redireciona pra obrigado-stephanni.html
-   2. Não ia pro grupo do zap -> a página de obrigado tem botão + redirect pro grupo
-   3. Lead fantasma no tráfego -> Pixel + evento Lead disparado só no cadastro real
+  CHECKLIST PRO HIGOR (troque e a pagina fica pronta):
+  [ ] CONFIG.SHEETS_ENDPOINT   -> URL do Apps Script publicado (ver stephanni-wolski/apps-script.gs)
+  [ ] obrigado-stephanni.html  -> colar o link do grupo do WhatsApp la (WHATSAPP_GROUP_URL)
+  Pixel real dela ja plugado: 2512893639129403
   ============================================================
 -->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Aula ao vivo e gratuita · Posicionamento &amp; Percepção de Valor · Stephanni Wolski</title>
-<meta name="description" content="Aula online, ao vivo e gratuita: por que algumas profissionais atraem clientes melhores e cobram mais pelo Instagram, enquanto outras vivem justificando preço. 20 de julho, 19h.">
+<title>Webinário gratuito · Posicionamento &amp; Percepção de Valor · Stephanni Wolski</title>
+<meta name="description" content="Encontro online, ao vivo e gratuito: como algumas empresárias atraem clientes melhores e cobram mais pelo Instagram, enquanto outras vivem justificando preço. 20 de julho, 19h.">
 <link rel="icon" href="assets/stephanni/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- ===== Meta Pixel Code (troque SEU_PIXEL_ID pelo Pixel real dela) ===== -->
+<!-- ===== Meta Pixel Code ===== -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -47,18 +41,10 @@ fbq('track', 'PageView');
 
 <script>document.documentElement.classList.add('boot-loading');</script>
 <style>
-/* === GILROY real: descomentar quando tiver os arquivos em assets/fonts ===
-@font-face{font-family:'Gilroy';src:url('assets/fonts/Gilroy-Light.woff2') format('woff2');font-weight:300;font-display:swap}
-@font-face{font-family:'Gilroy';src:url('assets/fonts/Gilroy-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:'Gilroy';src:url('assets/fonts/Gilroy-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:'Gilroy';src:url('assets/fonts/Gilroy-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
-:root{--display:'Gilroy',sans-serif!important;--sans:'Gilroy',sans-serif!important}
-=========================================================================== */
 :root{
   --bg:#F9F5F0; --bg-warm:#F3E8D5; --bg-soft:#EFEAE1;
   --ink:#262626; --ink-soft:#7C776F; --ink-faint:#B4AFA7;
   --bg-ink:#262626; --ink-onDark:#F9F5F0; --soft-onDark:rgba(249,245,240,.60);
-  --grey-1:#BFBFBD; --grey-2:#8C8C8C;
   --line:rgba(38,38,38,.14); --line-strong:rgba(38,38,38,.32); --line-onDark:rgba(249,245,240,.16);
   --display:'Poppins', system-ui, sans-serif; --sans:'Poppins', system-ui, sans-serif;
   --danger:#B23A2E;
@@ -125,13 +111,13 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 
 .r{opacity:0;transform:translateY(26px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}
 .r.in{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}.d6{transition-delay:.48s}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
 .r-mask{display:inline-block;clip-path:inset(0 0 112% 0);transition:clip-path 1.05s cubic-bezier(.5,0,.25,1);transition-delay:var(--mask-delay,0s)}
 .in .r-mask{clip-path:inset(0 0 -12% 0)}
 
 .photo{filter:grayscale(1) contrast(1.04);object-fit:cover;width:100%;height:100%}
 
-/* ===== COUNTDOWN (paleta dela) ===== */
+/* ===== COUNTDOWN ===== */
 .countdown{display:flex;flex-direction:column;gap:14px;margin-top:40px}
 .cd-top{font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
 .cd-grid{display:flex;gap:10px;flex-wrap:wrap}
@@ -145,22 +131,21 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 .countdown.live .cd-live{display:inline-flex}
 .countdown.nodate .cd-grid{display:none}
 .countdown.nodate .cd-top{font-size:13px;color:var(--ink)}
-/* countdown sobre fundo escuro */
 .on-dark .cd-top{color:var(--soft-onDark)}
 .on-dark .cd-block{background:rgba(249,245,240,.07);border-color:var(--line-onDark)}
 .on-dark .cd-block b{color:#fff}
 .on-dark .cd-block span{color:var(--soft-onDark)}
 .on-dark .cd-live{color:#fff;border-color:var(--line-onDark);background:rgba(249,245,240,.08)}
 
-/* ===== HERO (split com foto) ===== */
+/* ===== HERO ===== */
 .hero{min-height:100svh;display:flex;align-items:center;padding-top:118px;padding-bottom:54px}
 .hero-inner{display:grid;grid-template-columns:1fr;gap:clamp(34px,5vw,56px);align-items:center;width:100%}
 @media(min-width:920px){.hero-inner{grid-template-columns:1.06fr .94fr}}
 .hero .eee{position:absolute;top:14%;left:max(4vw,22px);color:var(--ink);opacity:.06;z-index:0}
-.hero-eyebrow{font-family:var(--display);font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;margin-bottom:28px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.hero-eyebrow{font-family:var(--display);font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;margin-bottom:28px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
 .hero-eyebrow .lvdot{width:7px;height:7px;border-radius:50%;background:var(--danger);flex-shrink:0}
 .hero-eyebrow b{color:var(--ink);font-weight:600}
-.hero h1{font-size:clamp(46px,8.4vw,104px);line-height:.92;letter-spacing:-.04em;max-width:12ch;font-weight:400}
+.hero h1{font-size:clamp(44px,7.6vw,92px);line-height:.94;letter-spacing:-.04em;max-width:14ch;font-weight:400}
 .hero-sub{margin-top:32px;font-size:clamp(16px,1.9vw,21px);color:var(--ink-soft);max-width:46ch;font-weight:300;line-height:1.55}
 .hero-sub b{color:var(--ink);font-weight:500}
 .hero-actions{margin-top:38px;display:flex;flex-wrap:wrap;gap:18px;align-items:center}
@@ -173,46 +158,16 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 .hero-photo .frame-c.bl{left:14px;bottom:14px;border-bottom:1px solid;border-left:1px solid}
 @media(max-width:919px){.hero{min-height:auto}.hero-photo{aspect-ratio:3/4;max-height:62vh}}
 
-.marquee{width:100vw;margin-left:calc(-50vw + 50%);overflow:hidden;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-.marquee-track{display:flex;width:max-content;animation:marquee 42s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-.marquee-item{display:inline-flex;align-items:baseline;font-family:var(--display);font-weight:300;font-size:clamp(20px,2.6vw,30px);color:var(--ink);white-space:nowrap;padding:0 36px;text-transform:lowercase}
-.marquee-item i{font-style:normal;font-weight:600;margin-right:12px}
-.marquee-item::after{content:"3ᵉ";margin-left:36px;color:var(--ink-faint);font-weight:600;font-size:.66em}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 .sec-head{max-width:64ch}
 .sec-head h2{font-size:clamp(34px,5.6vw,72px);line-height:1.0;margin-top:4px;font-weight:400}
-.pains{margin-top:60px;border-top:1px solid var(--line)}
-.pain{display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,46px);align-items:baseline;padding:30px 4px;border-bottom:1px solid var(--line);transition:padding-left .4s,background .4s}
-.pain:hover{padding-left:16px;background:var(--bg-soft)}
-.pain .pn{font-family:var(--display);font-size:13px;font-weight:500;letter-spacing:.10em;color:var(--ink-faint);padding-top:8px}
-.pain .pt{font-family:var(--sans);font-size:clamp(18px,2.4vw,27px);line-height:1.34;color:var(--ink);font-weight:300}
-.pain .pt b{font-weight:600;color:var(--ink)}
-.pain-foot{margin-top:48px;font-family:var(--display);font-size:clamp(24px,3.4vw,40px);color:var(--ink);max-width:22ch;line-height:1.14;font-weight:300;text-transform:lowercase}
-.pain-foot .h-em{font-weight:600}
 
+/* ===== DARK ===== */
 .dark{background:var(--bg-ink);color:var(--ink-onDark)}
 .dark .eyebrow{color:var(--soft-onDark)}.dark .eyebrow::before{background:var(--ink-onDark)}
 .dark h2{color:var(--ink-onDark)}.dark .lead{color:var(--soft-onDark)}.dark .lead b{color:#fff}
 .dark .eee{position:absolute;top:8%;right:max(4vw,24px);color:var(--ink-onDark);opacity:.10}
-.myths{margin-top:58px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line-onDark);border:1px solid var(--line-onDark);position:relative;z-index:1}
-.myth{background:var(--bg-ink);padding:34px 30px;transition:background .4s}
-.myth:hover{background:#161616}
-.myth .x{font-family:var(--display);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px;font-weight:500}
-.myth .x s{text-decoration-thickness:1px;text-decoration-color:rgba(180,175,167,.5)}
-.myth .mt{font-family:var(--sans);font-size:19px;line-height:1.38;color:var(--ink-onDark);font-weight:300}
-.myth .mt b{color:#fff;font-weight:600}
-.myth-quote{margin-top:68px;text-align:center;max-width:26ch;margin-left:auto;margin-right:auto;position:relative;z-index:1}
-.myth-quote p{font-family:var(--display);font-size:clamp(26px,4.2vw,52px);line-height:1.1;color:var(--ink-onDark);font-weight:300;text-transform:lowercase}
-.myth-quote p b{font-weight:600}
 
-.manifesto{background:var(--bg-warm)}
-.manifesto p{font-family:var(--display);font-size:clamp(26px,4.4vw,56px);line-height:1.08;color:var(--ink);font-weight:300;max-width:20ch;text-transform:lowercase;letter-spacing:-.02em}
-.manifesto p b{font-weight:600}
-.manifesto .sig{margin-top:30px;font-family:var(--display);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
-
-/* ===== HISTÓRIA ===== */
+/* ===== HISTÓRIA / BIO ===== */
 .story-grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,6vw,84px);align-items:center}
 @media(min-width:920px){.story-grid{grid-template-columns:0.82fr 1.18fr}}
 .story-photo{position:relative}
@@ -221,84 +176,12 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 .story-photo .tag{position:absolute;left:16px;bottom:16px;z-index:1;font-family:var(--display);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#262626;background:rgba(249,245,240,.88);padding:8px 16px;font-weight:500}
 .story-text h2{font-size:clamp(30px,4.8vw,58px);line-height:1.02;margin-bottom:8px;font-weight:400}
 .story-text .lead{margin-top:26px}.story-text .lead + .lead{margin-top:18px}
-.story-quote{margin-top:36px;padding-left:24px;border-left:2px solid #262626;font-family:var(--display);font-size:clamp(20px,2.7vw,29px);line-height:1.24;color:var(--ink);font-weight:300;text-transform:lowercase}
 .story-creds{margin-top:36px;display:flex;flex-wrap:wrap;border-top:1px solid var(--line)}
 .cred{font-family:var(--display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);padding:16px 22px 0 0;margin-right:22px;border-right:1px solid var(--line);font-weight:500}
 .cred:last-child{border-right:none;margin-right:0}
 .cred b{display:block;color:var(--ink);font-weight:600;font-size:15px;letter-spacing:.02em;margin-top:3px}
 
-/* ===== MÉTODO ===== */
-.method-intro{max-width:34ch;position:relative;z-index:1}
-.method-badge{display:inline-flex;align-items:baseline;gap:9px;font-family:var(--display);font-size:12px;letter-spacing:.20em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:24px;font-weight:500}
-.method-intro h2{font-size:clamp(36px,6vw,76px);line-height:.98;font-weight:400}
-.method-intro .lead{margin-top:28px;max-width:52ch}
-.block-label{font-family:var(--display);font-size:12px;font-weight:500;letter-spacing:.20em;text-transform:uppercase;color:var(--ink-soft);margin:78px 0 28px;display:flex;align-items:center;gap:16px;position:relative;z-index:1}
-.block-label .bn{color:var(--ink);font-weight:600}
-.block-label::after{content:"";flex:1;height:1px;background:var(--line)}
-.steps{display:grid;gap:0;grid-template-columns:1fr;border:1px solid var(--line);position:relative;z-index:1;background:var(--bg)}
-@media(min-width:780px){.steps{grid-template-columns:repeat(3,1fr)}}
-.step{position:relative;padding:38px 32px 40px;overflow:hidden;transition:background .4s;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.step:last-child{border-right:none}
-@media(min-width:780px){.step{border-bottom:none}}
-.step:hover{background:var(--bg-soft)}
-.step .sn{font-family:var(--display);font-size:42px;font-weight:300;color:var(--ink-faint);line-height:1;letter-spacing:-.02em}
-.step h3{font-size:22px;line-height:1.12;margin:18px 0 12px;font-weight:500;text-transform:lowercase;letter-spacing:-.01em}
-.step p{font-family:var(--sans);font-size:14.5px;color:var(--ink-soft);line-height:1.62;font-weight:300}
-.step p b{color:var(--ink);font-weight:600}
-.step .sline{position:absolute;left:0;bottom:0;height:2px;width:0;background:#262626;transition:width .7s cubic-bezier(.2,.7,.2,1)}
-.step.in .sline{width:100%}
-@media(min-width:780px){.step .sline{top:0;bottom:auto}}
-.es{display:grid;gap:18px;grid-template-columns:1fr;position:relative;z-index:1}
-@media(min-width:820px){.es{grid-template-columns:repeat(3,1fr)}}
-.e{position:relative;padding:40px 34px 42px;background:var(--bg-ink);color:var(--ink-onDark);overflow:hidden;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-.e:hover{transform:translateY(-6px)}
-.e .e-mark{font-family:var(--display);font-weight:700;font-size:84px;line-height:.8;color:var(--ink-onDark);opacity:.16;letter-spacing:-.04em}
-.e .e-step{position:absolute;top:34px;right:34px;font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft-onDark);font-weight:500}
-.e h3{font-size:26px;margin:22px 0 12px;font-weight:600;color:#fff;text-transform:lowercase}
-.e p{font-family:var(--sans);font-size:14.5px;color:var(--soft-onDark);line-height:1.62;font-weight:300}
-.e p b{color:#fff;font-weight:600}
-.method-truth{margin-top:70px;text-align:center;max-width:34ch;margin-left:auto;margin-right:auto;font-family:var(--display);font-size:clamp(23px,3.4vw,40px);line-height:1.16;color:var(--ink);font-weight:300;text-transform:lowercase;position:relative;z-index:1}
-.method-truth b{font-weight:600}
-
-/* ===== CASOS ===== */
-.cases{margin-top:60px;display:grid;gap:20px;grid-template-columns:1fr}
-@media(min-width:860px){.cases{grid-template-columns:1fr 1fr}}
-.case{position:relative;overflow:hidden;border:1px solid var(--line);min-height:440px;display:flex;flex-direction:column;justify-content:flex-end;padding:38px;color:#F9F5F0;isolation:isolate;background:#262626}
-.case::before{content:"";position:absolute;inset:0;z-index:-2;opacity:.5;filter:grayscale(1) contrast(1.05)}
-.case::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,20,20,.1) 0%,rgba(20,20,20,.5) 55%,rgba(20,20,20,.93) 100%)}
-.case.marina::before{background:radial-gradient(120% 100% at 30% 15%,#7a766f,#34322e 60%,#1d1c1a)}
-.case.thais::before{background:radial-gradient(120% 100% at 70% 15%,#837e76,#3a3833 60%,#1d1c1a)}
-.case .ctag{font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:rgba(249,245,240,.7);margin-bottom:14px}
-.case h3{font-family:var(--display);font-size:clamp(26px,3.4vw,40px);line-height:1.04;color:#F9F5F0;margin-bottom:16px;font-weight:400;text-transform:lowercase}
-.case h3 b{font-weight:600}
-.case p{font-family:var(--sans);font-size:14.5px;line-height:1.62;color:rgba(249,245,240,.8);max-width:40ch;font-weight:300}
-.case .pin{position:absolute;top:32px;right:32px;font-family:var(--display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(249,245,240,.85);border:1px solid rgba(249,245,240,.3);padding:6px 14px}
-.cases-foot{margin-top:48px;text-align:center;font-family:var(--display);font-size:clamp(24px,3.4vw,40px);line-height:1.14;color:var(--ink);max-width:24ch;margin-left:auto;margin-right:auto;font-weight:300;text-transform:lowercase}
-.cases-foot b{font-weight:600}
-
-/* ===== FEEDS DE CLIENTES (vitrine) ===== */
-.feeds .sec-head{margin-bottom:0}
-.feeds-strip{width:100vw;margin-left:calc(-50vw + 50%);margin-top:clamp(42px,5vw,62px);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.feeds-track{display:flex;width:max-content;animation:feedscroll 78s linear infinite;will-change:transform}
-.feeds-strip:hover .feeds-track{animation-play-state:paused}
-.feed-card{flex:0 0 auto;width:clamp(156px,42vw,214px);aspect-ratio:9/16;margin:0 9px;object-fit:cover;object-position:top center;background:var(--bg-soft);border:1px solid var(--line);box-shadow:0 12px 34px rgba(38,38,38,.10)}
-@keyframes feedscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.feeds-foot{margin-top:clamp(40px,5vw,58px);text-align:center;font-family:var(--display);font-size:clamp(20px,3vw,34px);line-height:1.16;color:var(--ink);max-width:28ch;margin-left:auto;margin-right:auto;font-weight:300;text-transform:lowercase}
-.feeds-foot b{font-weight:600}
-@media (prefers-reduced-motion:reduce){.feeds-track{animation:none}.feeds-strip{overflow-x:auto}}
-
-/* ===== RESULTADOS ===== */
-.results{background:var(--bg-warm)}
-.stats{margin-top:54px;display:grid;gap:1px;grid-template-columns:1fr 1fr;background:var(--line)}
-@media(min-width:780px){.stats{grid-template-columns:repeat(4,1fr)}}
-.stat{background:var(--bg-warm);padding:44px 26px;text-align:center}
-.stat .sv{font-family:var(--display);font-size:clamp(46px,6.2vw,74px);line-height:1;color:var(--ink);font-weight:500;letter-spacing:-.03em}
-.stat .sv .u{font-size:.46em;vertical-align:super;color:var(--ink-soft);font-weight:300}
-.stat .sl{margin-top:16px;font-family:var(--sans);font-size:13px;color:var(--ink-soft);line-height:1.5;font-weight:300}
-.stat .sl b{color:var(--ink);font-weight:600;display:block}
-.results .attr{margin-top:34px;text-align:center;font-family:var(--display);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:400}
-
-/* ===== AUDIÊNCIA (pra quem é / não é) ===== */
+/* ===== AUDIÊNCIA ===== */
 .aud{display:grid;grid-template-columns:1fr;gap:1px;margin-top:54px;background:var(--line);border:1px solid var(--line)}
 @media(min-width:820px){.aud{grid-template-columns:1fr 1fr}}
 .aud-col{background:var(--bg);padding:42px 36px}
@@ -311,55 +194,26 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 .aud-col li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;background:#262626}
 .aud-col.no li{color:var(--ink-soft)}.aud-col.no li::before{background:var(--ink-faint)}
 
-/* ===== O QUE VOCÊ VAI VER NA AULA ===== */
-.discover .disc-grid{display:grid;grid-template-columns:1fr;gap:clamp(38px,6vw,72px);align-items:center}
-@media(min-width:920px){.discover .disc-grid{grid-template-columns:1.15fr .85fr}}
-.disc-items{display:grid;gap:0;margin-top:46px;border-top:1px solid var(--line)}
-.disc-item{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:26px 4px;border-bottom:1px solid var(--line);align-items:start}
-.disc-item .di-e{font-family:var(--display);font-weight:700;font-size:34px;line-height:1;color:var(--ink-faint)}
-.disc-item .di-tx{font-family:var(--sans);font-size:clamp(15px,1.8vw,18px);line-height:1.5;color:var(--ink);font-weight:300}
-.disc-item .di-tx b{font-weight:600}
-.disc-item .di-tx .di-tag{display:block;font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;font-weight:500}
-.disc-foot{margin-top:34px;font-family:var(--display);font-size:clamp(18px,2.3vw,26px);line-height:1.22;color:var(--ink);font-weight:300;text-transform:lowercase;max-width:36ch}
-.disc-foot b{font-weight:600}
-.disc-photo{position:relative;aspect-ratio:4/5;max-height:64vh;overflow:hidden;background:var(--bg-soft);border:1px solid var(--line)}
+/* ===== FEEDS / PORTFÓLIO ===== */
+.feeds .sec-head{margin-bottom:0}
+.feeds-strip{width:100vw;margin-left:calc(-50vw + 50%);margin-top:clamp(42px,5vw,62px);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.feeds-track{display:flex;width:max-content;animation:feedscroll 78s linear infinite;will-change:transform}
+.feeds-strip:hover .feeds-track{animation-play-state:paused}
+.feed-card{flex:0 0 auto;width:clamp(156px,42vw,214px);aspect-ratio:9/16;margin:0 9px;object-fit:cover;object-position:top center;background:var(--bg-soft);border:1px solid var(--line);box-shadow:0 12px 34px rgba(38,38,38,.10)}
+@keyframes feedscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.feeds-track{animation:none}.feeds-strip{overflow-x:auto}}
 
-/* ===== CTA / INSCRIÇÃO ===== */
+/* ===== CTA / CONVITE FINAL ===== */
 .cta{background:var(--bg-ink);color:var(--ink-onDark)}
 .cta .eyebrow{color:var(--soft-onDark)}.cta .eyebrow::before{background:var(--ink-onDark)}
 .cta .wm-3e{bottom:-8%;left:-6%;opacity:.06;filter:invert(1)}
-.cta-grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,6vw,76px);align-items:center;position:relative;z-index:1}
-@media(min-width:920px){.cta-grid{grid-template-columns:1.08fr .92fr}}
-.cta h2{font-size:clamp(36px,5.6vw,68px);line-height:1.0;color:var(--ink-onDark);font-weight:400}
-.cta-sub{margin-top:26px;font-size:18px;line-height:1.62;color:var(--soft-onDark);max-width:44ch;font-weight:300}
-.cta-actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
-.cta-scarcity{margin-top:28px;display:flex;flex-direction:column;gap:12px}
-.scar{display:flex;align-items:center;gap:13px;font-family:var(--sans);font-size:14px;color:var(--soft-onDark);font-weight:300}
-.scar .si{width:20px;height:20px;border:1px solid var(--ink-onDark);display:grid;place-items:center;color:var(--ink-onDark);font-size:10px;flex-shrink:0}
-.scar b{color:#fff;font-weight:600}
-.offer{background:transparent;border:1px solid var(--line-onDark);padding:42px 36px;position:relative}
-.offer .o-rib{position:absolute;top:0;right:0;background:#F9F5F0;color:#262626;font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.10em;text-transform:uppercase;padding:7px 16px}
-.offer .o-name{font-family:var(--display);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft-onDark);font-weight:500}
-.offer .o-title{font-family:var(--display);font-size:28px;line-height:1.08;color:#fff;margin:10px 0 28px;font-weight:400;text-transform:lowercase}
-.offer ul{list-style:none;display:grid;gap:18px;margin-bottom:30px}
-.offer li{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;font-family:var(--sans);font-size:14.5px;color:var(--soft-onDark);line-height:1.5;font-weight:300}
-.offer li .ci{width:26px;height:26px;border:1px solid var(--line-onDark);color:var(--ink-onDark);display:grid;place-items:center;font-size:12px;font-family:var(--display);font-weight:500;flex-shrink:0;margin-top:1px}
-.offer li b{color:#fff;font-weight:600}
-.offer .o-price{display:flex;align-items:baseline;gap:14px;padding-top:24px;border-top:1px solid var(--line-onDark);flex-wrap:wrap}
-.offer .o-price .now{font-family:var(--display);font-size:20px;color:#fff;font-weight:500;text-transform:lowercase}
-
-/* ===== FAQ ===== */
-.faq-list{margin-top:54px;border-top:1px solid var(--line)}
-.faq-item{border-bottom:1px solid var(--line)}
-.faq-item summary{list-style:none;cursor:pointer;padding:26px 4px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-family:var(--display);font-size:clamp(17px,2.1vw,22px);font-weight:400;color:var(--ink);text-transform:lowercase}
-.faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary .pl{flex-shrink:0;width:22px;height:22px;position:relative;transition:transform .4s}
-.faq-item summary .pl::before,.faq-item summary .pl::after{content:"";position:absolute;background:var(--ink);transition:opacity .3s}
-.faq-item summary .pl::before{left:0;top:50%;width:100%;height:1px;transform:translateY(-50%)}
-.faq-item summary .pl::after{top:0;left:50%;height:100%;width:1px;transform:translateX(-50%)}
-.faq-item[open] summary .pl{transform:rotate(135deg)}
-.faq-item .faq-a{padding:0 4px 28px;font-family:var(--sans);font-size:15.5px;line-height:1.62;color:var(--ink-soft);font-weight:300;max-width:70ch}
-.faq-item .faq-a b{color:var(--ink);font-weight:600}
+.cta-close{max-width:700px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.cta-close .eyebrow{justify-content:center}
+.cta-close h2{font-size:clamp(34px,5.2vw,64px);line-height:1.02;color:var(--ink-onDark);font-weight:400}
+.cta-close .cta-sub{margin:26px auto 0;font-size:18px;line-height:1.62;color:var(--soft-onDark);max-width:46ch;font-weight:300}
+.cta-close .countdown{align-items:center;margin-top:36px}
+.cta-close .btn{margin-top:36px}
+.cta-close .fine{margin-top:18px;font-family:var(--display);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft-onDark)}
 
 /* ===== FOOTER ===== */
 .foot{background:var(--bg-ink);color:var(--soft-onDark);padding:56px 0 64px;border-top:1px solid var(--line-onDark)}
@@ -376,7 +230,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 .sec-ind .si-dot.on{background:#fff;border-color:#fff;transform:scale(1.6)}
 @media(max-width:900px){.sec-ind{display:none}}
 
-/* ===== MODAL / FORMULÁRIO (pop-up) ===== */
+/* ===== MODAL / FORMULÁRIO ===== */
 .modal-overlay{position:fixed;inset:0;z-index:3000;background:rgba(20,18,16,.58);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-start;justify-content:center;padding:24px 18px;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
 .modal-overlay.open{opacity:1;visibility:visible}
 .modal-overlay,.modal-overlay *{cursor:auto}
@@ -402,14 +256,13 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 .form-note{text-align:center;font-family:var(--sans);font-size:11.5px;color:var(--ink-faint);margin-top:14px;line-height:1.55;font-weight:300}
 
 @media (max-width:560px){
-  .hero h1{font-size:clamp(42px,12vw,58px)}
-  .pain{grid-template-columns:1fr;gap:6px}.pain .pn{padding-top:0}
+  .hero h1{font-size:clamp(40px,11vw,54px)}
   .modal{padding:28px 22px 24px}
 }
 @media (prefers-reduced-motion:reduce){
-  .r,.r-mask,.step .sline,.h-em::after{transition:none!important}
+  .r,.r-mask,.h-em::after{transition:none!important}
   .r{opacity:1!important;transform:none!important}
-  .cd-live-dot,.marquee-track,.grain,.feeds-track{animation:none!important}
+  .cd-live-dot,.grain,.feeds-track{animation:none!important}
   .loader-screen{transition:none!important}
   .cursor,.cursor-dot{display:none!important}
   body{cursor:auto!important}
@@ -431,7 +284,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 
 <header class="fixed-header" id="header">
   <a href="#top" class="brand"><img src="assets/stephanni/logo-horizontal.png" alt="método 3ᵉ"></a>
-  <span class="header-tag">Aula ao vivo · <span data-date-label>a definir</span></span>
+  <span class="header-tag">Encontro online · <span data-date-label>a definir</span></span>
   <button type="button" class="header-cta" data-open-form>Garantir vaga</button>
 </header>
 
@@ -444,15 +297,15 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
   <div class="wrap">
     <div class="hero-inner">
       <div class="hero-text">
-        <div class="hero-eyebrow r"><span class="lvdot"></span> Aula online, ao vivo e gratuita · <b><span data-date-label>a definir</span></b></div>
-        <h1 class="r d1">pare de ser<br><span class="h-em">só mais uma.</span></h1>
-        <p class="hero-sub r d2">Numa aula ao vivo, vou te mostrar por que algumas profissionais <b>atraem clientes melhores e cobram mais</b> pelo Instagram, enquanto outras vivem justificando preço. E o que muda quando você posiciona com intenção.</p>
+        <div class="hero-eyebrow r"><span class="lvdot"></span> Encontro online, ao vivo e gratuito · <b><span data-date-label>a definir</span></b></div>
+        <h1 class="r d1">posicionamento &amp;<br><span class="h-em">percepção de valor.</span></h1>
+        <p class="hero-sub r d2">como algumas empresárias atraem clientes melhores pelo instagram e cobram mais, enquanto outras vivem justificando preço? <b>você vai entender o que faz uma profissional ser percebida como referência.</b></p>
         <div class="hero-actions r d3">
-          <button type="button" class="btn" data-magnetic data-open-form>Quero garantir minha vaga <span class="arr">→</span></button>
-          <span class="hero-note"><span class="dot"></span> vaga gratuita · ao vivo</span>
+          <button type="button" class="btn" data-magnetic data-open-form>Quero descobrir como fazer isso <span class="arr">→</span></button>
+          <span class="hero-note"><span class="dot"></span> vagas limitadas</span>
         </div>
         <div class="countdown r d4" data-countdown>
-          <span class="cd-top">A aula começa em</span>
+          <span class="cd-top">O encontro começa em</span>
           <div class="cd-grid">
             <div class="cd-block"><b data-cd-d>00</b><span>dias</span></div>
             <div class="cd-block"><b data-cd-h>00</b><span>horas</span></div>
@@ -471,74 +324,66 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
   </div>
 </section>
 
-<!-- ======== MARQUEE ======== -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="marquee-item"><i>3×</i> o faturamento</span>
-    <span class="marquee-item"><i>6×</i> o ticket médio</span>
-    <span class="marquee-item"><i>+410%</i> de alcance</span>
-    <span class="marquee-item"><i>100%</i> pelo digital</span>
-    <span class="marquee-item"><i>0</i> dependência de indicação</span>
-    <span class="marquee-item"><i>3×</i> o faturamento</span>
-    <span class="marquee-item"><i>6×</i> o ticket médio</span>
-    <span class="marquee-item"><i>+410%</i> de alcance</span>
-    <span class="marquee-item"><i>100%</i> pelo digital</span>
-    <span class="marquee-item"><i>0</i> dependência de indicação</span>
-  </div>
-</div>
-
-<!-- ======== DORES ======== -->
-<section data-ind="Pra quem é">
+<!-- ======== O PROBLEMA ======== -->
+<section data-ind="O problema">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow r">Pra quem é</span>
-      <h2 class="r d1">você faz tudo certo e mesmo assim sente que <span class="h-em">trava?</span></h2>
+      <span class="eyebrow r">O problema que ninguém fala</span>
+      <h2 class="r d1">o problema não é quanto você posta. é o que o mercado <span class="h-em">enxerga.</span></h2>
+      <p class="lead r d2" style="margin-top:28px">conteúdo sem posicionamento gera atenção sem percepção de valor. por isso profissionais excelentes acabam sendo percebidas como só mais uma opção, lidando com pedido de desconto e cliente que não entende o valor do trabalho. antes de comprar, o cliente cria uma percepção, e é ela que decide se ele compara preço ou enxerga valor.</p>
     </div>
-    <div class="pains">
-      <div class="pain r"><span class="pn">01</span><p class="pt">Por mais que você grave vídeo, apareça nos stories e se dedique, o <b>faturamento não muda.</b></p></div>
-      <div class="pain r"><span class="pn">02</span><p class="pt">Você depende de <b>indicação</b> e vive na montanha-russa: um mês bom, outro mês não.</p></div>
-      <div class="pain r"><span class="pn">03</span><p class="pt">Posta, posta, posta. Mas <b>sem estratégia</b> e sem clareza do que postar.</p></div>
-      <div class="pain r"><span class="pn">04</span><p class="pt">Contratou social media e recebeu um <b>pacote genérico</b> que qualquer um faria.</p></div>
-      <div class="pain r"><span class="pn">05</span><p class="pt">Investiu em tráfego e só atraiu <b>curioso e lead desqualificado.</b></p></div>
-      <div class="pain r"><span class="pn">06</span><p class="pt">Faz a call, a pessoa ama, diz que é única, e some no <b>"depois eu me organizo e te chamo".</b></p></div>
-    </div>
-    <p class="pain-foot r">se você se reconheceu, o problema não é esforço. é <span class="h-em">posicionamento.</span></p>
   </div>
 </section>
 
-<!-- ======== MANIFESTO ======== -->
-<section class="manifesto" data-ind="Manifesto">
-  <div class="wrap">
-    <p class="r">não é só sobre criar conteúdo. é sobre <b>posicionar</b> com intenção, alma e impacto visual.</p>
-    <div class="sig r d1">método 3ᵉ · posicionamento com intenção</div>
-  </div>
-</section>
-
-<!-- ======== MITOS ======== -->
-<section class="dark" data-ind="A verdade">
+<!-- ======== A REVELAÇÃO ======== -->
+<section class="dark" data-ind="A revelação">
   <div class="eee" aria-hidden="true"><span>e</span><span>e</span><span>e</span></div>
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow r">A verdade incômoda</span>
-      <h2 class="r d1">o que te trava não é falta de <span class="h-em">seguidor.</span></h2>
-      <p class="lead r d2" style="margin-top:26px">Você foi ensinada a perseguir as coisas erradas. Nenhuma delas atrai quem está disposto a pagar mais caro. É disso que a gente fala na aula.</p>
+      <span class="eyebrow r">A revelação</span>
+      <h2 class="r d1">não é mais experiência. é <span class="h-em">percepção de valor.</span></h2>
+      <p class="lead r d2" style="margin-top:28px">o que faz algumas profissionais serem a escolha óbvia não é trabalhar mais horas, nem depender de indicação ou da sorte. é a forma como são percebidas. nesse encontro, você vai ver os princípios por trás das marcas pessoais que são lembradas, desejadas e escolhidas. sem fórmula pronta, sem promessa irreal.</p>
     </div>
-    <div class="myths">
-      <div class="myth r"><div class="x"><s>Mais diplomas</s></div><p class="mt">Vários diplomas na parede <b>não fazem você ser diferente.</b></p></div>
-      <div class="myth r d1"><div class="x"><s>Mais seguidores</s></div><p class="mt">Curtida, engajamento e seguidor são <b>métricas de perfumaria.</b></p></div>
-      <div class="myth r d2"><div class="x"><s>Viralizar</s></div><p class="mt">Já tive conteúdo com <b>+1 milhão de views</b> que não fechou uma única venda.</p></div>
-      <div class="myth r d3"><div class="x"><s>Feed bonito</s></div><p class="mt">Sem personalidade, você é <b>só mais uma.</b> A pessoa não se conecta.</p></div>
-    </div>
-    <div class="myth-quote r">
-      <p>"não é o conteúdo que faz você faturar. é o <b>valor agregado</b> a ele."</p>
+    <div class="r d3" style="margin-top:44px">
+      <button type="button" class="btn btn-inv" data-magnetic data-open-form>Quero garantir minha vaga <span class="arr">→</span></button>
     </div>
   </div>
 </section>
 
-<!-- ======== HISTÓRIA ======== -->
-<section data-ind="Quem é">
+<!-- ======== PRA QUEM É ======== -->
+<section data-ind="Pra quem é">
   <div class="wrap">
-    <span class="eyebrow r" style="margin-bottom:42px">Quem conduz a aula</span>
+    <div class="sec-head">
+      <span class="eyebrow r">Pra quem é, pra quem não é</span>
+      <h2 class="r d1">esse encontro é <span class="h-em">pra você?</span></h2>
+    </div>
+    <div class="aud">
+      <div class="aud-col yes r">
+        <h3><span class="mk">✓</span> é pra você se</h3>
+        <ul>
+          <li>já tem experiência ou um negócio consolidado, mas o mercado ainda não reconhece seu valor.</li>
+          <li>está cansada de competir por preço e quer ser escolhida pela autoridade que transmite.</li>
+          <li>quer atrair clientes mais qualificados e construir uma marca pessoal forte.</li>
+          <li>quer crescer sem depender só de indicação ou da sorte.</li>
+        </ul>
+      </div>
+      <div class="aud-col no r d1">
+        <h3><span class="mk">✕</span> não é pra você se</h3>
+        <ul>
+          <li>procura fórmula rápida ou atalho pra resultado imediato.</li>
+          <li>acha que basta postar mais conteúdo pra resolver posicionamento.</li>
+          <li>não está disposta a rever como é percebida pelo mercado.</li>
+          <li>busca só técnica de venda, sem construir autoridade.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== QUEM APRESENTA ======== -->
+<section data-ind="Quem apresenta">
+  <div class="wrap">
+    <span class="eyebrow r" style="margin-bottom:42px">Quem vai apresentar</span>
     <div class="story-grid">
       <div class="story-photo r">
         <div class="deco"></div>
@@ -546,92 +391,26 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
         <span class="tag">Stephanni Wolski</span>
       </div>
       <div class="story-text">
-        <h2 class="r d1">de <span class="h-em">r$ 500</span> por mês a uma marca impossível de ignorar.</h2>
-        <p class="lead r d2">Comecei como social media. Estudei design no Brasil, na <b>Alemanha</b>, e me especializei em personal branding em <b>Londres.</b> Tive conteúdos que viralizaram, bateram mais de um milhão de views, viraram trend.</p>
-        <p class="lead r d3">Mesmo assim, eu cobrava <b>R$ 500 por mês</b>, dependia de indicação e vivia na instabilidade. Era "a menina que faz post". Até entender que o problema nunca foi o meu conteúdo. Era a forma como eu me posicionava.</p>
-        <p class="story-quote r d4">"me posicionar de forma assertiva transformou a minha vida."</p>
-        <div class="story-creds r d5">
+        <h2 class="r d1">stephanni <span class="h-em">wolski.</span></h2>
+        <p class="lead r d2">CEO da <b>let's be phanni</b>, posicionamento e conteúdo estético. criadora do <b>método 3ᵉ</b>, a fusão entre estratégia, essência e estética.</p>
+        <div class="story-creds r d3">
+          <span class="cred">Negócios atendidos<b>+ de 200</b></span>
           <span class="cred">Design<b>Brasil &amp; Alemanha</b></span>
           <span class="cred">Personal Branding<b>Londres</b></span>
-          <span class="cred">Marca pessoal<b>5 anos</b></span>
+          <span class="cred">Atuação<b>+ de 40 países</b></span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== MÉTODO ======== -->
-<section data-ind="O método">
-  <img src="assets/stephanni/logo-icon.png" class="wm wm-3e" style="top:6%;right:-4%" aria-hidden="true" alt="">
-  <div class="wrap">
-    <div class="method-intro">
-      <span class="method-badge r">método 3ᵉ · o caminho</span>
-      <h2 class="r d1">posicione <span class="h-em">quem você é.</span> não a sua profissão.</h2>
-      <p class="lead r d2">Quando você foca na profissão, sempre vai ser só mais uma dentista, mais uma nutri, mais uma arquiteta. O que te torna impossível de copiar é quem você é como pessoa. Na aula, eu abro o método por dentro.</p>
-    </div>
-
-    <div class="block-label r"><span class="bn">antes</span> · os 3 erros que te mantêm invisível</div>
-    <div class="steps">
-      <div class="step err r"><div class="sline"></div><div class="sn">01</div><h3>copiar referência</h3><p>Postar o que dá certo pros outros te transforma em <b>mais uma do mercado.</b> O cliente compara as três opções e vai na mais barata.</p></div>
-      <div class="step err r d1"><div class="sline"></div><div class="sn">02</div><h3>correr atrás de viral</h3><p>Métrica de vaidade atrai <b>volume sem poder de compra</b> e ainda suja sua base. O Instagram passa a te entregar pra quem não compra.</p></div>
-      <div class="step err r d2"><div class="sline"></div><div class="sn">03</div><h3>perfil bonito e vazio</h3><p>Estética sem personalidade <b>não gera conexão.</b> Bonito todo mundo é. Inesquecível, não.</p></div>
-    </div>
-
-    <div class="block-label r"><span class="bn">o método 3ᵉ</span> · a fusão entre estratégia, essência e estética</div>
-    <div class="es">
-      <div class="e r">
-        <span class="e-step">passo 01</span><div class="e-mark">e</div>
-        <h3>essência</h3>
-        <p>Qual é o seu <b>diferencial real</b> e como você quer ser percebida. Não é criar um personagem: é usar quem você é como a vantagem que ninguém copia.</p>
-      </div>
-      <div class="e r d1">
-        <span class="e-step">passo 02</span><div class="e-mark">e</div>
-        <h3>estética</h3>
-        <p>Cada cor, textura e imagem escolhida pra <b>tornar esse diferencial visível.</b> Elementos que representam você, não a sua profissão.</p>
-      </div>
-      <div class="e r d2">
-        <span class="e-step">passo 03</span><div class="e-mark">e</div>
-        <h3>estratégia</h3>
-        <p>Conhecer seu <b>cliente ideal</b> a fundo e produzir pro que ele precisa ouvir. Conteúdo que posiciona, encanta e conecta.</p>
-      </div>
-    </div>
-
-    <p class="method-truth r">estratégia, essência e estética não funcionam separadas. seu conteúdo nasce <b>no encontro das três</b>. é aí que ele comunica valor antes de você falar o preço.</p>
-  </div>
-</section>
-
-<!-- ======== CASOS ======== -->
-<section data-ind="Na prática">
+<!-- ======== PORTFÓLIO (FEEDS) ======== -->
+<section class="feeds" data-ind="Portfólio">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow r">Na prática</span>
-      <h2 class="r d1">mesma profissão. posicionamentos <span class="h-em">opostos.</span></h2>
-    </div>
-    <div class="cases">
-      <div class="case marina r">
-        <span class="pin">Harmonização facial</span>
-        <span class="ctag">Dra. Marina</span>
-        <h3>a naturalidade da <b>arte</b> com a precisão da medicina.</h3>
-        <p>Apaixonada por pintura desde criança. Construímos o posicionamento com luz e sombra de museu, texturas de quadro e a paleta da era renascentista. O conceito chegou até os espelhos do consultório.</p>
-      </div>
-      <div class="case thais r d1">
-        <span class="pin">Odontologia · HOF</span>
-        <span class="ctag">Dra. Thaís</span>
-        <h3>as curvas de <b>barcelona</b> no sorriso.</h3>
-        <p>Apaixonada pela Casa Batlló e por Gaudí. A assimetria que torna o prédio único virou a metáfora do rosto: nenhum é perfeitamente simétrico, e é isso que o torna belo. Cores, fluidez e narrativa só dela.</p>
-      </div>
-    </div>
-    <p class="cases-foot r">duas profissionais da mesma área. <b>impossível confundir uma com a outra.</b> isso é posicionamento.</p>
-  </div>
-</section>
-
-<!-- ======== FEEDS DE CLIENTES ======== -->
-<section class="feeds" data-ind="Feeds reais">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow r">Feeds reais · clientes reais</span>
-      <h2 class="r d1">cada feed, um mundo. nenhum <span class="h-em">igual ao outro.</span></h2>
-      <p class="lead r d2" style="margin-top:24px">não é template. é posicionamento traduzido em imagem: cada cliente com a própria cor, textura e narrativa. estética a serviço da essência.</p>
+      <span class="eyebrow r">Portfólio</span>
+      <h2 class="r d1">o trabalho fala <span class="h-em">por si só.</span></h2>
+      <p class="lead r d2" style="margin-top:24px">uma seleção de trabalhos que mostram como posicionamento e estética viram resultado real.</p>
     </div>
   </div>
   <div class="feeds-strip r d2" aria-label="Feeds de clientes construídos pela Stephanni">
@@ -662,132 +441,28 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
   </div>
 </section>
 
-<!-- ======== RESULTADOS ======== -->
-<section class="results" data-ind="Resultados">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow r">O que muda</span>
-      <h2 class="r d1">em 3 meses, depois da <span class="h-em">virada.</span></h2>
-    </div>
-    <div class="stats">
-      <div class="stat r"><div class="sv"><span data-count="3">0</span><span class="u">×</span></div><div class="sl"><b>o faturamento</b>sem atender mais clientes</div></div>
-      <div class="stat r d1"><div class="sv"><span data-count="6">0</span><span class="u">×</span></div><div class="sl"><b>o ticket médio</b>cobrando o que merece</div></div>
-      <div class="stat r d2"><div class="sv"><span class="u" style="vertical-align:baseline">+</span><span data-count="410">0</span><span class="u">%</span></div><div class="sl"><b>de alcance</b>crescimento intencional</div></div>
-      <div class="stat r d3"><div class="sv"><span data-count="100">0</span><span class="u">%</span></div><div class="sl"><b>novos clientes</b>vindos do digital</div></div>
-    </div>
-    <p class="attr r">resultados da própria Stephanni após aplicar o método 3ᵉ em si mesma.</p>
-  </div>
-</section>
-
-<!-- ======== AUDIÊNCIA ======== -->
-<section data-ind="Essa aula é pra você?">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow r">Pra quem é · pra quem não é</span>
-      <h2 class="r d1">essa aula é <span class="h-em">pra você?</span></h2>
-    </div>
-    <div class="aud">
-      <div class="aud-col yes r">
-        <h3><span class="mk">✓</span> é pra você se</h3>
-        <ul>
-          <li>já entendeu que conteúdo sozinho não resolve.</li>
-          <li>quer uma marca forte, autoral e diferente de todo mundo.</li>
-          <li>está disposta a investir na própria imagem pra cobrar mais.</li>
-          <li>cansou de competir por preço.</li>
-        </ul>
-      </div>
-      <div class="aud-col no r d1">
-        <h3><span class="mk">✕</span> não é pra você se</h3>
-        <ul>
-          <li>prefere continuar dependendo de indicação e da sorte.</li>
-          <li>não quer investir em posicionamento.</li>
-          <li>quer fórmula mágica sem se expor de verdade.</li>
-          <li>acha que mais um curso de edição resolve.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== O QUE VOCÊ VAI VER NA AULA ======== -->
-<section class="discover" data-ind="O que você vai ver">
-  <div class="wrap">
-    <div class="disc-grid">
-      <div>
-        <span class="eyebrow r">O que você leva da aula</span>
-        <h2 class="r d1" style="font-size:clamp(30px,4.4vw,52px)">60 minutos que mudam como o mercado <span class="h-em">te enxerga.</span></h2>
-        <div class="disc-items r d2">
-          <div class="disc-item"><span class="di-e">e</span><p class="di-tx"><span class="di-tag">essência</span>onde está o seu <b>diferencial real</b>, o que ninguém consegue copiar de você.</p></div>
-          <div class="disc-item"><span class="di-e">e</span><p class="di-tx"><span class="di-tag">estética</span>por que o seu perfil hoje <b>ainda não comunica esse valor</b> antes de você falar o preço.</p></div>
-          <div class="disc-item"><span class="di-e">e</span><p class="di-tx"><span class="di-tag">estratégia</span>o <b>primeiro passo prático</b> pra você cobrar mais sem virar objeção.</p></div>
-        </div>
-        <p class="disc-foot r d3">no fim da aula, você sai sabendo <b>exatamente o que ajustar</b> pra parar de competir por preço.</p>
-      </div>
-      <div class="disc-photo r d2">
-        <img class="photo" src="assets/stephanni/DSC_4330.jpg" alt="Stephanni Wolski">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== CTA / INSCRIÇÃO ======== -->
+<!-- ======== CONVITE FINAL ======== -->
 <section class="cta" id="inscricao" data-ind="Garanta sua vaga">
   <img src="assets/stephanni/logo-icon.png" class="wm wm-3e" aria-hidden="true" alt="">
   <div class="wrap">
-    <div class="cta-grid">
-      <div>
-        <span class="eyebrow r">Garanta sua vaga</span>
-        <h2 class="r d1">a aula é ao vivo e as vagas do grupo são <span class="h-em">limitadas.</span></h2>
-        <p class="cta-sub r d2">Preencha, entre no grupo do WhatsApp e receba o link de acesso e os lembretes na hora certa. Sem custo.</p>
-        <div class="countdown on-dark r d2" data-countdown>
-          <span class="cd-top">A aula começa em</span>
-          <div class="cd-grid">
-            <div class="cd-block"><b data-cd-d>00</b><span>dias</span></div>
-            <div class="cd-block"><b data-cd-h>00</b><span>horas</span></div>
-            <div class="cd-block"><b data-cd-m>00</b><span>min</span></div>
-            <div class="cd-block"><b data-cd-s>00</b><span>seg</span></div>
-          </div>
-          <div class="cd-live"><span class="cd-live-dot"></span>Ao vivo agora</div>
+    <div class="cta-close">
+      <span class="eyebrow r">Convite final</span>
+      <h2 class="r d1">está na hora de comunicar sua <span class="h-em">verdadeira essência.</span></h2>
+      <p class="cta-sub r d2">se você quer construir uma presença digital impossível de ignorar, reserve sua vaga agora. é online, ao vivo e gratuito.</p>
+      <div class="countdown on-dark r d2" data-countdown>
+        <span class="cd-top">O encontro começa em</span>
+        <div class="cd-grid">
+          <div class="cd-block"><b data-cd-d>00</b><span>dias</span></div>
+          <div class="cd-block"><b data-cd-h>00</b><span>horas</span></div>
+          <div class="cd-block"><b data-cd-m>00</b><span>min</span></div>
+          <div class="cd-block"><b data-cd-s>00</b><span>seg</span></div>
         </div>
-        <div class="cta-actions r d3">
-          <button type="button" class="btn btn-inv" data-magnetic data-open-form>Quero garantir minha vaga <span class="arr">→</span></button>
-        </div>
-        <div class="cta-scarcity r d4">
-          <div class="scar"><span class="si">✓</span> <span>a aula é <b>ao vivo, sem reprise gravada.</b></span></div>
-          <div class="scar"><span class="si">✓</span> <span>o link de acesso vai <b>só pro grupo</b> de quem se inscreveu.</span></div>
-        </div>
+        <div class="cd-live"><span class="cd-live-dot"></span>Ao vivo agora</div>
       </div>
-      <div class="offer r d2">
-        <span class="o-rib">Gratuita</span>
-        <span class="o-name">Aula ao vivo · método 3ᵉ</span>
-        <h2 class="o-title">posicionamento &amp; percepção de valor</h2>
-        <ul>
-          <li><span class="ci">›</span><div><b><span data-date-label>a definir</span></b>, ao vivo pela internet.</div></li>
-          <li><span class="ci">›</span><div>Cerca de <b>60 minutos</b> comigo, com espaço pra perguntas.</div></li>
-          <li><span class="ci">›</span><div>O acesso é enviado <b>no grupo do WhatsApp</b> da sua inscrição.</div></li>
-          <li><span class="ci">›</span><div>Você sai com um <b>direcionamento prático</b> pra aplicar no seu perfil.</div></li>
-        </ul>
-        <div class="o-price">
-          <span class="now">investimento: gratuito · vagas limitadas</span>
-        </div>
+      <div class="r d3">
+        <button type="button" class="btn btn-inv" data-magnetic data-open-form>Quero garantir minha vaga <span class="arr">→</span></button>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== FAQ ======== -->
-<section data-ind="Dúvidas">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow r">Dúvidas frequentes</span>
-      <h2 class="r d1">antes de você <span class="h-em">se inscrever.</span></h2>
-    </div>
-    <div class="faq-list r d1">
-      <details class="faq-item"><summary>a aula é gravada ou ao vivo?<span class="pl"></span></summary><div class="faq-a">É <b>ao vivo</b>, sem reprise gravada. Por isso vale reservar o horário na agenda e entrar no grupo pra não perder o link.</div></details>
-      <details class="faq-item"><summary>onde eu vou assistir?<span class="pl"></span></summary><div class="faq-a">O link de acesso é enviado <b>no grupo do WhatsApp</b> da sua inscrição, junto com os lembretes. Depois de se inscrever, você é levada direto pro grupo.</div></details>
-      <details class="faq-item"><summary>preciso ser dentista ou da área da estética?<span class="pl"></span></summary><div class="faq-a">Não. A aula é pra <b>qualquer profissional ou empresária</b> que vende pela própria imagem e quer ser escolhida por autoridade, não por preço.</div></details>
-      <details class="faq-item"><summary>preciso viralizar ou ter muitos seguidores?<span class="pl"></span></summary><div class="faq-a">Não. Viral atrai volume, não comprador, e ainda suja a sua base. O que faz faturar mais é o <b>valor agregado</b> ao conteúdo, não o número de seguidores.</div></details>
-      <details class="faq-item"><summary>a aula é paga?<span class="pl"></span></summary><div class="faq-a">Não. A aula é <b>gratuita</b>. As vagas do grupo são limitadas, por isso vale garantir a sua agora.</div></details>
+      <p class="fine r d3">segunda, <span data-date-label>a definir</span> · vagas limitadas</p>
     </div>
   </div>
 </section>
@@ -802,7 +477,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
         <a href="#inscricao">Garantir vaga</a>
       </div>
     </div>
-    <p class="foot-fine">método 3ᵉ · Stephanni Wolski · posicionamento &amp; percepção de valor</p>
+    <p class="foot-fine">© 2026 método 3ᵉ · Stephanni Wolski · todos os direitos reservados</p>
   </div>
 </footer>
 
@@ -811,55 +486,57 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
   <div class="modal">
     <button class="modal-close" id="formModalClose" aria-label="Fechar" type="button">✕</button>
     <div class="modal-head">
-      <span class="eyebrow">Garanta sua vaga</span>
-      <h3 id="formModalTitle">falta pouco pra sua vaga.</h3>
-      <p>Preencha pra entrar na lista da aula. Em seguida você vai pro grupo do WhatsApp, onde enviamos o link de acesso.</p>
+      <span class="eyebrow">Encontro online · gratuito</span>
+      <h3 id="formModalTitle">reserve sua vaga.</h3>
+      <p>preencha os dados abaixo e garanta seu lugar no encontro. em seguida você vai pro grupo do WhatsApp, onde enviamos o acesso. as vagas são limitadas.</p>
     </div>
     <form id="leadForm" novalidate>
       <div class="field" data-field="nome">
-        <label class="field-label" for="f-nome">Seu nome completo</label>
+        <label class="field-label" for="f-nome">Nome completo</label>
         <input id="f-nome" name="nome" type="text" autocomplete="name" autocapitalize="words" placeholder="Nome e sobrenome">
         <div class="field-msg">Digite seu nome.</div>
       </div>
       <div class="field" data-field="email">
-        <label class="field-label" for="f-email">Seu melhor e-mail</label>
+        <label class="field-label" for="f-email">E-mail</label>
         <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com">
         <div class="field-msg">Digite um e-mail válido.</div>
       </div>
       <div class="field" data-field="whatsapp">
-        <label class="field-label" for="f-whats">Seu WhatsApp</label>
+        <label class="field-label" for="f-whats">WhatsApp</label>
         <input id="f-whats" name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" placeholder="(00) 00000-0000">
-        <div class="field-msg">Digite um WhatsApp válido com DDD.</div>
+        <div class="field-msg">Digite um número válido com DDD.</div>
       </div>
       <div class="field" data-field="area">
-        <label class="field-label" for="f-area">Sua área de atuação</label>
+        <label class="field-label" for="f-area">Área de atuação</label>
         <select id="f-area" name="area_atuacao" class="placeholder">
           <option value="" disabled selected>Selecione</option>
-          <option>Estética / Beleza</option>
-          <option>Odontologia</option>
-          <option>Saúde / Nutrição / Medicina</option>
-          <option>Arquitetura / Design / Interiores</option>
-          <option>Advocacia / Contabilidade</option>
-          <option>Consultoria / Mentoria / Coach</option>
-          <option>Moda / Varejo</option>
-          <option>Outra</option>
+          <option>Consultorias / Mentorias</option>
+          <option>Dono de agência</option>
+          <option>Dono de SaaS</option>
+          <option>Dono de agência de IA</option>
+          <option>Escritório de advocacia</option>
+          <option>Escritório de contabilidade</option>
+          <option>Área da saúde / estética</option>
+          <option>Infoprodutor</option>
+          <option>Outro</option>
         </select>
         <div class="field-msg">Selecione sua área de atuação.</div>
       </div>
       <div class="field" data-field="faturamento">
-        <label class="field-label" for="f-fat">Seu faturamento (por mês)</label>
+        <label class="field-label" for="f-fat">Faturamento mensal</label>
         <select id="f-fat" name="faturamento" class="placeholder">
-          <option value="" disabled selected>Selecione uma faixa</option>
-          <option>Ainda não faturo / começando</option>
-          <option>Até R$ 10 mil</option>
-          <option>Entre R$ 10 mil e R$ 30 mil</option>
-          <option>Entre R$ 30 mil e R$ 50 mil</option>
-          <option>Acima de R$ 50 mil</option>
+          <option value="" disabled selected>Selecione</option>
+          <option>Entre R$ 0 e R$ 5.000</option>
+          <option>Entre R$ 5.000 e R$ 10.000</option>
+          <option>Entre R$ 10.000 e R$ 20.000</option>
+          <option>Entre R$ 20.000 e R$ 40.000</option>
+          <option>Entre R$ 40.000 e R$ 100.000</option>
+          <option>Mais de R$ 100.000</option>
         </select>
         <div class="field-msg">Selecione sua faixa de faturamento.</div>
       </div>
-      <button type="submit" class="btn">Quero garantir minha vaga</button>
-      <p class="form-note">Seus dados são usados só pra te avisar sobre a aula. Nada de spam.</p>
+      <button type="submit" class="btn">Garantir minha vaga agora</button>
+      <p class="form-note">Ao se inscrever, você concorda em receber comunicações sobre o evento. Seus dados estão seguros.</p>
     </form>
   </div>
 </div>
@@ -877,7 +554,6 @@ const CONFIG = {
   REDIRECT_URL: 'obrigado-stephanni.html'
 };
 
-/* aplica o label de data em todo lugar */
 document.querySelectorAll('[data-date-label]').forEach(el => el.textContent = CONFIG.WEBINAR_DATE_LABEL);
 
 /* LOADER */
@@ -896,8 +572,8 @@ document.querySelectorAll('[data-date-label]').forEach(el => el.textContent = CO
   addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;});
   (function tick(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;c.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
     d.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`;requestAnimationFrame(tick);})();
-  document.body.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.btn,.step,.e,.case,.pain,.faq-item summary,.si-dot'))c.classList.add('hover');});
-  document.body.addEventListener('mouseout',e=>{if(e.target.closest('a,button,.btn,.step,.e,.case,.pain,.faq-item summary,.si-dot'))c.classList.remove('hover');});
+  document.body.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.btn,.aud-col,.feed-card,.si-dot'))c.classList.add('hover');});
+  document.body.addEventListener('mouseout',e=>{if(e.target.closest('a,button,.btn,.aud-col,.feed-card,.si-dot'))c.classList.remove('hover');});
 })();
 /* HEADER */
 (function(){const h=document.getElementById('header');addEventListener('scroll',()=>h.classList.toggle('scrolled',scrollY>40),{passive:true});})();
@@ -906,13 +582,7 @@ document.querySelectorAll('[data-date-label]').forEach(el => el.textContent = CO
   const lines=el.innerHTML.split('<br>');el.innerHTML=lines.map((ln,i)=>`<span class="r-mask" style="--mask-delay:${i*0.10}s">${ln}</span>`).join('<br>');});})();
 /* REVEAL */
 (function(){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.16,rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.r, .step').forEach(el=>io.observe(el));})();
-/* COUNTERS */
-(function(){const ease=t=>1-Math.pow(1-t,3);
-  function run(el){const target=+el.dataset.count,dur=1300,t0=performance.now();
-    (function frame(now){const p=Math.min((now-t0)/dur,1);el.textContent=Math.round(ease(p)*target);if(p<1)requestAnimationFrame(frame);})(performance.now());}
-  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){run(e.target);io.unobserve(e.target);}});},{threshold:0.6});
-  document.querySelectorAll('[data-count]').forEach(el=>io.observe(el));})();
+  document.querySelectorAll('.r').forEach(el=>io.observe(el));})();
 /* MAGNETIC */
 (function(){if(matchMedia('(hover:none)').matches)return;
   document.querySelectorAll('[data-magnetic]').forEach(btn=>{
@@ -936,9 +606,7 @@ document.querySelectorAll('[data-date-label]').forEach(el => el.textContent = CO
     cds.forEach(c=>{ c.classList.add('nodate'); const t=c.querySelector('.cd-top'); if(t) t.textContent = CONFIG.WEBINAR_DATE_LABEL; });
     return;
   }
-  function setLive(){
-    cds.forEach(c=>c.classList.add('live'));
-  }
+  function setLive(){ cds.forEach(c=>c.classList.add('live')); }
   function tick(){
     const diff = target - Date.now();
     if(diff <= 0){ setLive(); clearInterval(timer); return; }
