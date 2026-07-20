@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Aplicação recebida · Congresso B2Donto</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Aplicacao recebida. Nossa equipe vai analisar seu perfil e entrar em contato pelo WhatsApp para agendar sua conversa.">
+
+<!--
+  ============================================================
+  Pagina de OBRIGADO do fundo do funil: aparece depois que o lead
+  APLICA (pos-apresentacao do congresso). Mensagem: aguarde o contato.
+  [ ] CONFIG.WHATSAPP_CONTATO  (opcional: link wa.me pra "falar com a equipe";
+      se ficar vazio, o link some sozinho e nao quebra a pagina)
+  Pixels da Meta ja instalados (PageView + SubmitApplication).
+  Tema Dourado, igual congresso-lentes.html.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1343670886401420');
+fbq('init', '200416962337288');
+fbq('track', 'PageView');
+fbq('track', 'SubmitApplication', { content_name: 'Congresso Lentes - Aplicacao' });
+</script>
+<noscript>
+<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1343670886401420&ev=PageView&noscript=1"/>
+<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=200416962337288&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+:root{
+  --bg:#FDFCF8; --bg-2:#F6F1E6;
+  --text:#3F3A32; --muted:#7F7F80; --muted-2:#9A9084;
+  --gold:#C2B067; --gold-dark:#A8934D; --gold-deep:#8A6A17;
+  --soft:#F3EFE1; --line:#E8E2D2;
+  --btn-text:#2B2519;
+  --font:'Sora',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--bg); min-height:100%; overflow-x:hidden}
+body{ font-family:var(--font); background:var(--bg); color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased;
+  display:flex; align-items:center; justify-content:center; padding:40px 24px; overflow-x:hidden; position:relative }
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(760px 440px at 50% 10%, var(--soft), transparent 66%),
+    radial-gradient(700px 500px at 50% 100%, var(--bg-2), transparent 70%);
+}
+
+.card{ position:relative; z-index:1; width:100%; max-width:540px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:0 }
+
+.logo{ font-weight:800; font-size:18px; color:var(--text); letter-spacing:-.02em; margin-bottom:30px; opacity:0; animation:fade .7s ease .1s forwards }
+.logo span{ font-weight:500; color:var(--muted) }
+
+/* check dourado */
+.check{ width:88px; height:88px; margin-bottom:24px; opacity:0; transform:scale(.6);
+  animation:pop .7s cubic-bezier(.34,1.56,.64,1) .2s forwards; filter:drop-shadow(0 12px 26px rgba(168,147,77,.4)) }
+.check svg{ width:100%; height:100% }
+.check .tick{ stroke:#fff; stroke-width:6; fill:none; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:60; stroke-dashoffset:60; animation:draw .5s ease .9s forwards }
+@keyframes draw{ to{ stroke-dashoffset:0 } }
+@keyframes pop{ to{ opacity:1; transform:scale(1) } }
+@keyframes fade{ to{ opacity:1 } }
+
+.eyebrow{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-dark); font-weight:700; margin-bottom:14px; opacity:0; animation:rise .7s ease .9s forwards }
+h1{ font-size:33px; line-height:1.1; font-weight:800; letter-spacing:-.03em; margin-bottom:16px; opacity:0; animation:rise .8s ease 1.05s forwards }
+h1 .grad{ color:var(--gold-deep) }
+.lead{ font-size:15.5px; color:var(--muted); line-height:1.62; max-width:430px; margin-bottom:30px; opacity:0; animation:rise .8s ease 1.2s forwards }
+.lead b{ color:var(--text); font-weight:600 }
+@keyframes rise{ from{ opacity:0; transform:translateY(16px) } to{ opacity:1; transform:none } }
+
+/* proximos passos */
+.steps-label{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-2); font-weight:600; margin-bottom:14px; opacity:0; animation:rise .8s ease 1.3s forwards }
+.steps{ display:flex; flex-direction:column; gap:14px; text-align:left; width:100%; max-width:430px; margin-bottom:28px; opacity:0; animation:rise .8s ease 1.4s forwards }
+.step{ display:flex; gap:14px; align-items:flex-start; background:#fff; border:1px solid var(--line); border-radius:14px; padding:15px 16px; box-shadow:0 2px 10px rgba(80,64,20,.05) }
+.step .n{ flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--soft); border:1px solid var(--line); color:var(--gold-deep); font-weight:800; font-size:14px; display:grid; place-items:center }
+.step .t b{ display:block; font-size:15px; font-weight:700; color:var(--text); margin-bottom:3px; letter-spacing:-.01em }
+.step .t span{ font-size:13.5px; color:var(--muted); line-height:1.5 }
+
+.note{ font-size:13px; color:var(--muted-2); line-height:1.6; max-width:400px; opacity:0; animation:rise .8s ease 1.55s forwards }
+.contato{ margin-top:18px; opacity:0; animation:rise .8s ease 1.65s forwards }
+.contato a{ display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:700; color:var(--gold-deep); text-decoration:none; border-bottom:1.5px solid var(--line); padding-bottom:2px; transition:border-color .25s ease }
+.contato a:hover{ border-color:var(--gold-deep) }
+
+.footer{ position:fixed; bottom:16px; left:0; right:0; text-align:center; z-index:1; font-size:11px; color:var(--muted-2); letter-spacing:.04em }
+
+@media (max-width:520px){ h1{ font-size:28px } .check{ width:78px; height:78px } body{ padding:32px 20px 60px } }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; opacity:1 !important; transform:none !important } .check .tick{ stroke-dashoffset:0 !important } }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">B2<span>donto</span></div>
+
+  <div class="check">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#CDBE7A"/>
+          <stop offset="1" stop-color="#A8934D"/>
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="46" fill="url(#gold)"/>
+      <path class="tick" d="M30 52 L44 66 L72 36"/>
+    </svg>
+  </div>
+
+  <div class="eyebrow">Aplicação recebida</div>
+  <h1>Recebemos a sua <span class="grad">aplicação</span></h1>
+  <p class="lead">Boa decisão. Agora a nossa equipe vai analisar o seu perfil e <b>entrar em contato pelo WhatsApp</b> que você informou, pra agendar a sua conversa. Fique de olho no seu celular.</p>
+
+  <div class="steps-label">O que acontece agora</div>
+  <div class="steps">
+    <div class="step">
+      <div class="n">1</div>
+      <div class="t"><b>Análise do seu perfil</b><span>A gente confere as informações que você enviou na aplicação.</span></div>
+    </div>
+    <div class="step">
+      <div class="n">2</div>
+      <div class="t"><b>Contato pelo WhatsApp</b><span>Nossa equipe te chama no número que você informou pra alinhar os detalhes.</span></div>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <div class="t"><b>Sua conversa estratégica</b><span>Você agenda a conversa onde a gente monta o plano pra sua clínica de lentes.</span></div>
+    </div>
+  </div>
+
+  <p class="note">Confere se o WhatsApp que você informou está certo, é por lá que a gente fala com você. Deixa o número por perto pra não perder a nossa mensagem.</p>
+
+  <div class="contato" id="contatoWrap" hidden>
+    <a id="contatoBtn" target="_blank" rel="noopener" href="#">Quer adiantar? Fale com a nossa equipe</a>
+  </div>
+</div>
+
+<div class="footer">B2Donto · Aceleradora comercial · 2026</div>
+
+<script>
+const CONFIG = {
+  // Opcional: link wa.me pra "falar com a equipe" (ex: 'https://wa.me/5541999999999').
+  // Deixe '' que o link some sozinho.
+  WHATSAPP_CONTATO: ''
+};
+
+(function contato(){
+  var wrap = document.getElementById('contatoWrap');
+  var btn = document.getElementById('contatoBtn');
+  var url = (CONFIG.WHATSAPP_CONTATO || '').trim();
+  if(url.indexOf('http') === 0){ btn.href = url; wrap.hidden = false; }
+})();
+</script>
+</body>
+</html>
