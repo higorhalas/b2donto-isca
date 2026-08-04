@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Webinário gratuito · Posicionamento &amp; Percepção de Valor · Stephanni Wolski</title>
-<meta name="description" content="Encontro online, ao vivo e gratuito: como algumas empresárias atraem clientes melhores e cobram mais pelo Instagram, enquanto outras vivem justificando preço. 03 de agosto, 19h.">
+<meta name="description" content="Encontro online, ao vivo e gratuito: como algumas empresárias atraem clientes melhores e cobram mais pelo Instagram, enquanto outras vivem justificando preço.">
 <link rel="icon" href="assets/stephanni/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -129,6 +129,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(178,58,46,.5)}70%{box-shadow:0 0 0 10px rgba(178,58,46,0)}100%{box-shadow:0 0 0 0 rgba(178,58,46,0)}}
 .countdown.live .cd-grid,.countdown.live .cd-top{display:none}
 .countdown.live .cd-live{display:inline-flex}
+.countdown.nodate{display:none}
 .countdown.nodate .cd-grid{display:none}
 .countdown.nodate .cd-top{font-size:13px;color:var(--ink)}
 .on-dark .cd-top{color:var(--soft-onDark)}
@@ -456,7 +457,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
       <div class="r d3">
         <button type="button" class="btn btn-inv" data-magnetic data-open-form>Quero garantir minha vaga <span class="arr">→</span></button>
       </div>
-      <p class="fine r d3">segunda, <span data-date-label>a definir</span> · vagas limitadas</p>
+      <p class="fine r d3"><span data-date-label>data em breve</span> · vagas limitadas</p>
     </div>
   </div>
 </section>
@@ -542,8 +543,8 @@ h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;line-
 if('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 const CONFIG = {
-  WEBINAR_DATE: '2026-08-03T19:00:00-03:00',
-  WEBINAR_DATE_LABEL: '03 de agosto, 19h',
+  WEBINAR_DATE: '',
+  WEBINAR_DATE_LABEL: 'data em breve',
   SHEETS_ENDPOINT: 'https://script.google.com/macros/s/AKfycbw0fFVXis7a_w4CfxSDwYGNS78unD5WVWcx-tUSAeS_pMcvBx8yZtPgHhJe3aigGVsckQ/exec',
   REDIRECT_URL: 'obrigado-stephanni.html'
 };
