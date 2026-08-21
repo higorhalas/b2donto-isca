@@ -205,8 +205,8 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
 
 /* cases (claro) */
 .cases{padding:74px 0; background:var(--tint-2)}
-.cases-wide{width:min(1080px, calc(100vw - 40px)); max-width:none; margin:38px auto 0; position:relative; left:50%; transform:translateX(-50%)}
-@media (max-width:760px){ .cases-wide{width:auto; left:auto; transform:none; margin-top:28px} }
+.cases-wide{width:min(1080px, calc(100% - 40px)); max-width:none; margin:38px auto 0; position:relative}
+@media (max-width:760px){ .cases-wide{width:auto; margin-top:28px} }
 .cases-list{display:flex; flex-direction:column; gap:20px}
 .case{position:relative; display:grid; grid-template-columns:.82fr 1.18fr; gap:0; background:#fff; border:1px solid var(--line); border-radius:20px; overflow:hidden; box-shadow:var(--shadow-md); transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease}
 .case:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg)}
