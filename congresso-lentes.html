@@ -318,14 +318,15 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
 .radio-opt input:focus-visible ~ .radio-dot{box-shadow:0 0 0 3px rgba(194,176,103,.35)}
 .radio-txt{font-size:14.5px; color:var(--text); line-height:1.3}
 .btn-block .wa-ic{width:17px; height:17px; fill:currentColor; flex:0 0 auto; margin-right:9px; vertical-align:-3px}
+.modal{max-height:calc(100vh - 48px); overflow-y:auto; -webkit-overflow-scrolling:touch}
+#leadForm .btn-block{position:sticky; bottom:0; z-index:2; box-shadow:0 -16px 16px 10px #fff}
 @media (max-width:560px){
-  .modal{max-height:calc(100dvh - 34px); overflow-y:auto; -webkit-overflow-scrolling:touch}
+  .modal{max-height:calc(100dvh - 26px)}
   .modal-head{margin-bottom:16px}
   .modal-head p{font-size:13px}
   .field{margin-bottom:13px}
   .radio-opt{padding:11px 13px}
   .radio-txt{font-size:14px}
-  #leadForm .btn-block{position:sticky; bottom:0; z-index:2; box-shadow:0 -16px 16px 10px #fff}
 }
 .modal .btn-primary{margin-top:4px}
 
@@ -620,6 +621,11 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
         <input id="f-nome" name="nome" type="text" autocomplete="name" autocapitalize="words" placeholder="Nome e sobrenome">
         <div class="field-msg">Digite seu nome.</div>
       </div>
+      <div class="field" data-field="email">
+        <label class="field-label" for="f-email">Seu melhor e-mail</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com">
+        <div class="field-msg">Digite um e-mail válido.</div>
+      </div>
       <div class="field" data-field="whatsapp">
         <label class="field-label" for="f-whats">Seu WhatsApp</label>
         <div class="tel-wrap">
@@ -636,14 +642,23 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
       <div class="field" data-field="faturamento">
         <label class="field-label">Faturamento do consultório (por mês)</label>
         <div class="radio-group">
-          <label class="radio-opt"><input type="radio" name="faturamento" value="Abaixo de R$ 10 mil"><span class="radio-dot"></span><span class="radio-txt">Abaixo de R$ 10 mil</span></label>
-          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 10 mil e R$ 20 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 10 mil e R$ 20 mil</span></label>
-          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 20 mil e R$ 40 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 20 mil e R$ 40 mil</span></label>
-          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 40 mil e R$ 60 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 40 mil e R$ 60 mil</span></label>
-          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 60 mil e R$ 100 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 60 mil e R$ 100 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Abaixo de R$ 15 mil"><span class="radio-dot"></span><span class="radio-txt">Abaixo de R$ 15 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 15 mil e R$ 30 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 15 mil e R$ 30 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 30 mil e R$ 50 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 30 mil e R$ 50 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 50 mil e R$ 100 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 50 mil e R$ 100 mil</span></label>
           <label class="radio-opt"><input type="radio" name="faturamento" value="Acima de R$ 100 mil"><span class="radio-dot"></span><span class="radio-txt">Acima de R$ 100 mil</span></label>
         </div>
         <div class="field-msg">Selecione sua faixa de faturamento.</div>
+      </div>
+      <div class="field" data-field="investimento">
+        <label class="field-label">Você já investe para atrair pacientes pela internet?</label>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="investimento_ads" value="Sim, invisto acima de R$ 5.000/mês"><span class="radio-dot"></span><span class="radio-txt">Sim, invisto acima de R$ 5.000/mês</span></label>
+          <label class="radio-opt"><input type="radio" name="investimento_ads" value="Sim, entre R$ 1.500 e R$ 5.000/mês"><span class="radio-dot"></span><span class="radio-txt">Sim, entre R$ 1.500 e R$ 5.000/mês</span></label>
+          <label class="radio-opt"><input type="radio" name="investimento_ads" value="Sim, até R$ 1.500/mês"><span class="radio-dot"></span><span class="radio-txt">Sim, até R$ 1.500/mês</span></label>
+          <label class="radio-opt"><input type="radio" name="investimento_ads" value="Ainda não invisto em anúncios"><span class="radio-dot"></span><span class="radio-txt">Ainda não invisto em anúncios</span></label>
+        </div>
+        <div class="field-msg">Selecione uma opção.</div>
       </div>
       <button type="submit" class="btn btn-primary btn-block"><svg class="wa-ic" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>Entrar no grupo do congresso</button>
       <p class="form-note">Seus dados ficam só com a B2Donto. Nada de spam.</p>
@@ -786,15 +801,19 @@ function runCount(el){
   form.addEventListener('submit', e=>{
     e.preventDefault();
     const nome  = form.nome.value.trim();
+    const email = form.email.value.trim();
     const whats = form.whatsapp.value.replace(/\D/g,'');
     const insta = form.instagram.value.trim().replace(/^@+/, '');
     const fat  = form.faturamento.value;
+    const inv  = form.investimento_ads.value;
 
     const okNome  = nome.length >= 2;                               setErr('nome', !okNome);
+    const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);        setErr('email', !okEmail);
     const okWhats = whats.length >= 10 && whats.length <= 11;        setErr('whatsapp', !okWhats);
     const okInsta = insta.length >= 2;                              setErr('instagram', !okInsta);
     const okFat   = !!fat;                                           setErr('faturamento', !okFat);
-    if(!(okNome && okWhats && okInsta && okFat)){
+    const okInv   = !!inv;                                           setErr('investimento', !okInv);
+    if(!(okNome && okEmail && okWhats && okInsta && okFat && okInv)){
       const first = form.querySelector('.field.error input, .field.error select'); if(first) first.focus();
       return;
     }
@@ -807,7 +826,8 @@ function runCount(el){
     const _p = new URLSearchParams(location.search);
     const _g = k => (_p.get(k) || '').slice(0, 200);
     const payload = {
-      nome, email: '', whatsapp: whats, instagram: insta ? '@' + insta : '', cro: '', area_atuacao: '', faturamento: fat,
+      nome, email, whatsapp: whats, instagram: insta ? '@' + insta : '', cro: '',
+      area_atuacao: inv, investimento_ads: inv, faturamento: fat,
       campanha: _g('utm_campaign'),
       conjunto: _g('utm_adset') || _g('utm_medium'),
       anuncio: _g('utm_ad') || _g('utm_content'),
