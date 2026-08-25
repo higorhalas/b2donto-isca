@@ -303,6 +303,30 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
 .field-msg{display:none; margin-top:6px; font-size:12px; color:var(--danger)}
 .field.error .field-msg{display:block}
 .form-note{text-align:center; font-size:11.5px; color:var(--muted-2); margin-top:13px; line-height:1.55}
+.tel-wrap{display:flex; gap:9px}
+.tel-prefix{display:flex; align-items:center; gap:7px; flex:0 0 auto; background:var(--bg-soft); border:1.5px solid var(--line); border-radius:11px; padding:0 13px; font-size:15px; color:var(--text); font-weight:600}
+.tel-wrap input{flex:1 1 auto; min-width:0}
+.radio-group{display:flex; flex-direction:column; gap:8px}
+.radio-opt{display:flex; align-items:center; gap:11px; background:var(--bg-soft); border:1.5px solid var(--line); border-radius:11px; padding:12px 14px; cursor:pointer; transition:border-color .18s ease, background .18s ease}
+.radio-opt:hover{border-color:var(--accent-line); background:#fff}
+.radio-opt input{position:absolute; opacity:0; width:0; height:0}
+.radio-dot{flex:0 0 auto; width:19px; height:19px; border-radius:50%; border:1.5px solid var(--muted-2); display:grid; place-items:center; transition:border-color .18s ease}
+.radio-dot::after{content:""; width:9px; height:9px; border-radius:50%; background:var(--accent-dark); transform:scale(0); transition:transform .18s cubic-bezier(.2,.8,.2,1)}
+.radio-opt input:checked ~ .radio-dot{border-color:var(--accent-dark)}
+.radio-opt input:checked ~ .radio-dot::after{transform:scale(1)}
+.radio-opt:has(input:checked){border-color:var(--accent-dark); background:var(--accent-soft)}
+.radio-opt input:focus-visible ~ .radio-dot{box-shadow:0 0 0 3px rgba(194,176,103,.35)}
+.radio-txt{font-size:14.5px; color:var(--text); line-height:1.3}
+.btn-block .wa-ic{width:17px; height:17px; fill:currentColor; flex:0 0 auto; margin-right:9px; vertical-align:-3px}
+@media (max-width:560px){
+  .modal{max-height:calc(100dvh - 34px); overflow-y:auto; -webkit-overflow-scrolling:touch}
+  .modal-head{margin-bottom:16px}
+  .modal-head p{font-size:13px}
+  .field{margin-bottom:13px}
+  .radio-opt{padding:11px 13px}
+  .radio-txt{font-size:14px}
+  #leadForm .btn-block{position:sticky; bottom:0; z-index:2; box-shadow:0 -16px 16px 10px #fff}
+}
 .modal .btn-primary{margin-top:4px}
 
 @media (max-width:480px){ .hero h1{font-size:29px} h2.title{font-size:25px} .cta-band h2{font-size:26px} }
@@ -588,7 +612,7 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
     <div class="modal-head">
       <div class="eyebrow">Garanta sua vaga</div>
       <h3 id="formModalTitle">Falta pouco pra sua vaga</h3>
-      <p>Preencha pra entrar na lista do congresso. As vagas do grupo são limitadas.</p>
+      <p>Preencha pra receber o link do congresso no grupo de WhatsApp. É grupo de aviso, ninguém fala lá além de mim.</p>
     </div>
     <form id="leadForm" novalidate>
       <div class="field" data-field="nome">
@@ -596,14 +620,12 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
         <input id="f-nome" name="nome" type="text" autocomplete="name" autocapitalize="words" placeholder="Nome e sobrenome">
         <div class="field-msg">Digite seu nome.</div>
       </div>
-      <div class="field" data-field="email">
-        <label class="field-label" for="f-email">Seu melhor e-mail</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com">
-        <div class="field-msg">Digite um e-mail válido.</div>
-      </div>
       <div class="field" data-field="whatsapp">
         <label class="field-label" for="f-whats">Seu WhatsApp</label>
-        <input id="f-whats" name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" placeholder="(00) 00000-0000">
+        <div class="tel-wrap">
+          <span class="tel-prefix" aria-hidden="true">🇧🇷 +55</span>
+          <input id="f-whats" name="whatsapp" type="tel" autocomplete="tel" inputmode="numeric" placeholder="(00) 00000-0000">
+        </div>
         <div class="field-msg">Digite um WhatsApp válido com DDD.</div>
       </div>
       <div class="field" data-field="instagram">
@@ -611,39 +633,20 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
         <input id="f-insta" name="instagram" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="@seuperfil">
         <div class="field-msg">Digite seu @ do Instagram.</div>
       </div>
-      <div class="field" data-field="cro">
-        <label class="field-label" for="f-cro">Número do seu CRO</label>
-        <input id="f-cro" name="cro" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="CRO-PR 00000">
-        <div class="field-msg">Informe seu CRO (só dentistas têm).</div>
-      </div>
-      <div class="field" data-field="area">
-        <label class="field-label" for="f-area">Sua área de atuação</label>
-        <select id="f-area" name="area_atuacao" class="placeholder">
-          <option value="" disabled selected>Selecione</option>
-          <option>Dentística / Lentes</option>
-          <option>Ortodontia</option>
-          <option>Implantodontia</option>
-          <option>Harmonização Orofacial (HOF)</option>
-          <option>Clínico geral</option>
-          <option>Outra</option>
-        </select>
-        <div class="field-msg">Selecione sua área de atuação.</div>
-      </div>
       <div class="field" data-field="faturamento">
-        <label class="field-label" for="f-fat">Faturamento do consultório (por mês)</label>
-        <select id="f-fat" name="faturamento" class="placeholder">
-          <option value="" disabled selected>Selecione uma faixa</option>
-          <option>Abaixo de R$ 10 mil</option>
-          <option>Entre R$ 10 mil e R$ 20 mil</option>
-          <option>Entre R$ 20 mil e R$ 40 mil</option>
-          <option>Entre R$ 40 mil e R$ 60 mil</option>
-          <option>Entre R$ 60 mil e R$ 100 mil</option>
-          <option>Acima de R$ 100 mil</option>
-        </select>
+        <label class="field-label">Faturamento do consultório (por mês)</label>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Abaixo de R$ 10 mil"><span class="radio-dot"></span><span class="radio-txt">Abaixo de R$ 10 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 10 mil e R$ 20 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 10 mil e R$ 20 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 20 mil e R$ 40 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 20 mil e R$ 40 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 40 mil e R$ 60 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 40 mil e R$ 60 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Entre R$ 60 mil e R$ 100 mil"><span class="radio-dot"></span><span class="radio-txt">Entre R$ 60 mil e R$ 100 mil</span></label>
+          <label class="radio-opt"><input type="radio" name="faturamento" value="Acima de R$ 100 mil"><span class="radio-dot"></span><span class="radio-txt">Acima de R$ 100 mil</span></label>
+        </div>
         <div class="field-msg">Selecione sua faixa de faturamento.</div>
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Quero garantir minha vaga</button>
-      <p class="form-note">Seus dados são usados só pra te avisar sobre o congresso. Nada de spam.</p>
+      <button type="submit" class="btn btn-primary btn-block"><svg class="wa-ic" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>Entrar no grupo do congresso</button>
+      <p class="form-note">Seus dados ficam só com a B2Donto. Nada de spam.</p>
     </form>
   </div>
 </div>
@@ -765,7 +768,6 @@ function runCount(el){
   const form = document.getElementById('leadForm');
   if(!form) return;
   const wa = form.querySelector('[name=whatsapp]');
-  const cro = form.querySelector('[name=cro]');
 
   wa.addEventListener('input', ()=>{
     let v = wa.value.replace(/\D/g,'').slice(0,11);
@@ -774,7 +776,6 @@ function runCount(el){
     else if(v.length > 0) wa.value = `(${v}`;
     else wa.value = '';
   });
-  cro.addEventListener('input', ()=>{ cro.value = cro.value.toUpperCase().slice(0,20); });
 
   form.querySelectorAll('select').forEach(sel=>{
     sel.addEventListener('change', ()=> sel.classList.toggle('placeholder', !sel.value));
@@ -785,21 +786,15 @@ function runCount(el){
   form.addEventListener('submit', e=>{
     e.preventDefault();
     const nome  = form.nome.value.trim();
-    const email = form.email.value.trim();
     const whats = form.whatsapp.value.replace(/\D/g,'');
     const insta = form.instagram.value.trim().replace(/^@+/, '');
-    const croVal = form.cro.value.trim();
-    const area = form.area_atuacao.value;
     const fat  = form.faturamento.value;
 
     const okNome  = nome.length >= 2;                               setErr('nome', !okNome);
-    const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);        setErr('email', !okEmail);
     const okWhats = whats.length >= 10 && whats.length <= 11;        setErr('whatsapp', !okWhats);
     const okInsta = insta.length >= 2;                              setErr('instagram', !okInsta);
-    const okCro   = (croVal.replace(/\D/g,'').length >= 3);          setErr('cro', !okCro);
-    const okArea  = !!area;                                          setErr('area', !okArea);
     const okFat   = !!fat;                                           setErr('faturamento', !okFat);
-    if(!(okNome && okEmail && okWhats && okInsta && okCro && okArea && okFat)){
+    if(!(okNome && okWhats && okInsta && okFat)){
       const first = form.querySelector('.field.error input, .field.error select'); if(first) first.focus();
       return;
     }
@@ -812,7 +807,7 @@ function runCount(el){
     const _p = new URLSearchParams(location.search);
     const _g = k => (_p.get(k) || '').slice(0, 200);
     const payload = {
-      nome, email, whatsapp: whats, instagram: insta ? '@' + insta : '', cro: croVal, area_atuacao: area, faturamento: fat,
+      nome, email: '', whatsapp: whats, instagram: insta ? '@' + insta : '', cro: '', area_atuacao: '', faturamento: fat,
       campanha: _g('utm_campaign'),
       conjunto: _g('utm_adset') || _g('utm_medium'),
       anuncio: _g('utm_ad') || _g('utm_content'),
