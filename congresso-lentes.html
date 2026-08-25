@@ -200,6 +200,14 @@ section{position:relative}
 
 /* section head */
 .sec-head{text-align:center; margin-bottom:8px}
+.agenda{background:var(--tint-2); padding:74px 0}
+.agenda-list{margin-top:32px}
+.agenda-item{display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start; padding:24px 2px; border-top:1px solid var(--line)}
+.agenda-item:last-child{border-bottom:1px solid var(--line)}
+.ag-num{font-size:12px; font-weight:700; letter-spacing:.14em; color:var(--accent); padding-top:5px; font-variant-numeric:tabular-nums}
+.ag-text{font-size:15.5px; line-height:1.62; color:var(--text)}
+.ag-text b{font-weight:700; color:var(--num)}
+@media (max-width:480px){ .agenda{padding:58px 0} .agenda-item{gap:14px; padding:20px 0} .ag-text{font-size:14.5px} .ag-num{font-size:11px; padding-top:4px} }
 h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025em; color:var(--text)}
 .lead{color:var(--muted); font-size:15px; max-width:470px; margin:14px auto 0}
 
@@ -348,6 +356,39 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
     <div class="proof-row reveal d3">
       <span><b>+<span data-count="300">0</span></b> clínicas aceleradas</span>
       <span><b><span data-count="23">0</span>x</b> de retorno médio</span>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE VOU ABRIR -->
+<section class="agenda">
+  <div class="wrap sec-head">
+    <div class="eyebrow reveal">No dia do congresso</div>
+    <h2 class="title reveal d1">O que eu vou abrir <span class="grad-text">na sala</span></h2>
+  </div>
+  <div class="wrap">
+    <div class="agenda-list">
+
+      <div class="agenda-item reveal">
+        <span class="ag-num">01</span>
+        <p class="ag-text">Por que anunciar lente com preço, parcela ou “condição especial” te coloca numa disputa de centavo que você não vence, e o que entra no lugar do preço pra a conversa começar em <b>“quero fazer”</b> em vez de “quanto custa?”</p>
+      </div>
+
+      <div class="agenda-item reveal">
+        <span class="ag-num">02</span>
+        <p class="ag-text">O criativo que transformou <b>R$ 78.733</b> de anúncio em <b>R$ 2,1 milhões</b> em vendas na clínica da Dra. Thaís, aberto na tela do jeito que rodou. E o mesmo caminho numa agenda que estava começando: <b>5 fechamentos de lente no primeiro mês</b> do Dr. Raphael.</p>
+      </div>
+
+      <div class="agenda-item reveal">
+        <span class="ag-num">03</span>
+        <p class="ag-text">O sistema que põe <b>de 3 a 5 pacientes de alto ticket</b> na agenda toda semana, o mesmo que já rodou em mais de 300 clínicas, sem promoção, sem sorteio e sem depender de indicação.</p>
+      </div>
+
+      <div class="agenda-item reveal">
+        <span class="ag-num">04</span>
+        <p class="ag-text">Por que o caso de lente inteira morre no intervalo entre o “oi” e o orçamento, e como responder todo lead em <b>menos de 1 minuto</b>, a qualquer hora, sem contratar mais uma secretária.</p>
+      </div>
+
     </div>
   </div>
 </section>
