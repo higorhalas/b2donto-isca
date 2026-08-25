@@ -113,6 +113,9 @@ section{position:relative}
 .hero .eyebrow{color:var(--accent)}
 .hero h1{font-size:35px; line-height:1.1; font-weight:800; letter-spacing:-.03em; margin:4px 0 20px; color:var(--text)}
 .hero h1 .grad-text{color:var(--accent)}
+.audience-pill{display:inline-flex; align-items:center; gap:9px; font-size:11.5px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--num); background:var(--accent-soft); border:1px solid var(--accent-line); border-radius:999px; padding:8px 17px; margin-bottom:16px; line-height:1.35}
+.audience-pill::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--accent-dark); flex:0 0 auto}
+@media (max-width:480px){ .audience-pill{font-size:10.5px; letter-spacing:.1em; padding:7px 13px; gap:7px} }
 .hero-chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:0 auto 6px; max-width:520px}
 .chip{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:500; color:#46557A; background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 14px; box-shadow:var(--shadow-sm)}
 .chip::before{content:"✕"; color:#D64B45; font-size:10px; font-weight:800; flex:0 0 auto; line-height:1}
@@ -322,6 +325,7 @@ h2.title{font-size:29px; font-weight:800; line-height:1.15; letter-spacing:-.025
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
+    <div class="audience-pill reveal">Exclusivo para dentistas que já faturam R$ 20 mil por mês</div>
     <div class="eyebrow reveal">Congresso ao vivo e gratuito · <span data-date-label>a definir</span></div>
     <h1 class="reveal d1">O sistema de agendamentos que gera <span class="grad-text">de 3 a 5 pacientes de alto ticket por semana</span></h1>
     <div class="hero-chips">
