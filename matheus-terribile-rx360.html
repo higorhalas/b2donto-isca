@@ -454,6 +454,15 @@ h2.title{font-size:27px; font-weight:700; line-height:1.15; letter-spacing:-.02e
 
 /* benchmark table */
 .btable{border:1px solid var(--line); border-radius:14px; overflow:hidden; font-size:12px}
+.btable-hint{display:none; font-family:var(--mono); font-size:10px; color:var(--dim-grey);
+  letter-spacing:.08em; margin-top:7px; text-transform:uppercase}
+@media (max-width:680px){
+  .btable{overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none}
+  .btable::-webkit-scrollbar{display:none}
+  .brow{min-width:560px}
+  .btable-hint{display:block}
+}
 .brow{display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; }
 .brow .bc{padding:9px 8px; border-bottom:1px solid var(--line); border-right:1px solid var(--line)}
 .brow .bc:last-child{border-right:none}
@@ -1347,11 +1356,13 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       <div class="brow"><div class="bc crit">Seguidores</div><div class="bc me">1.826</div><div class="bc">4.651</div><div class="bc">1.255</div></div>
       <div class="brow"><div class="bc crit">Publicações</div><div class="bc me">26<span class="malert"></span></div><div class="bc">504</div><div class="bc">80</div></div>
       <div class="brow"><div class="bc crit">Perfil verificado</div><div class="bc me">Sim</div><div class="bc">Não</div><div class="bc">Não</div></div>
-      <div class="brow"><div class="bc crit">Google</div><div class="bc me">5,0, poucas<span class="malert"></span></div><div class="bc">5,0 (365)</div><div class="bc pend">a confirmar</div></div>
+      <div class="brow"><div class="bc crit">Google</div><div class="bc me">5,0, poucas<span class="malert"></span></div><div class="bc">5,0 (365)</div><div class="bc">5,0, poucas</div></div>
       <div class="brow"><div class="bc crit">Destaques por procedimento</div><div class="bc me">Nenhum<span class="malert"></span></div><div class="bc">Implante, Lentes, Harmonização</div><div class="bc">Implantes, Lentes, Alinhadores</div></div>
       <div class="brow"><div class="bc crit">Bio cita lente</div><div class="bc me">Sim</div><div class="bc">Sim</div><div class="bc">Sim</div></div>
       <div class="brow"><div class="bc crit">Link da bio</div><div class="bc me">Facebook<span class="malert"></span></div><div class="bc">Linktree</div><div class="bc">Linktree</div></div>
+      <div class="brow"><div class="bc crit">Site próprio</div><div class="bc me">Não tem<span class="malert"></span></div><div class="bc">Sim</div><div class="bc">Sim</div></div>
     </div>
+    <div class="btable-hint">→ arraste a tabela para o lado</div>
     <div class="resumo r d3">
       <p>Com <b>5 meses de clínica você já tem mais seguidores que a Serafin</b> e está no mesmo patamar da Oral Unic de Flores da Cunha, que tem 1.817. E é o <b>único perfil verificado</b> entre os quatro. Isso não se compra, e nenhum concorrente tem.</p>
       <p>Onde eles ganham é em acúmulo: a Toigo está na cidade desde 1996 e tem 365 avaliações no Google e 504 posts. No Google, a briga é mais dura do que no Instagram: <b>Toigo 365, Lumine 240, Top Estética 187, Oral Unic 150</b>. A Lumine inclusive colocou "Implante Dentário | Lente de Contato Dental" dentro do nome da ficha.</p>

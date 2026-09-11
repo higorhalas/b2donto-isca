@@ -454,6 +454,15 @@ h2.title{font-size:27px; font-weight:700; line-height:1.15; letter-spacing:-.02e
 
 /* benchmark table */
 .btable{border:1px solid var(--line); border-radius:14px; overflow:hidden; font-size:12px}
+.btable-hint{display:none; font-family:var(--mono); font-size:10px; color:var(--dim-grey);
+  letter-spacing:.08em; margin-top:7px; text-transform:uppercase}
+@media (max-width:680px){
+  .btable{overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none}
+  .btable::-webkit-scrollbar{display:none}
+  .brow{min-width:560px}
+  .btable-hint{display:block}
+}
 .brow{display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; }
 .brow .bc{padding:9px 8px; border-bottom:1px solid var(--line); border-right:1px solid var(--line)}
 .brow .bc:last-child{border-right:none}
@@ -1354,6 +1363,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       <div class="brow"><div class="bc crit">Prova social na bio</div><div class="bc me">Nada<span class="malert"></span></div><div class="bc">Clínica premium</div><div class="bc">Desde 1999, +9.500 pacientes</div></div>
       <div class="brow"><div class="bc crit">Identidade visual</div><div class="bc me">Sem padrão<span class="malert"></span></div><div class="bc">Consistente</div><div class="bc">Consistente</div></div>
     </div>
+    <div class="btable-hint">→ arraste a tabela para o lado</div>
     <div class="resumo r d3">
       <p>Na <b>nota do Google você empata ou ganha</b>: 5,0 contra 5,0 da Oral Unic e 3,7 da Saulo Fernandes. O que separa é <b>volume de prova</b>: 10 publicações contra 878 e 698, e 5 avaliações contra 137 e 71. O paciente de protocolo pesquisa antes de decidir, e hoje ele não encontra rastro seu.</p>
       <p>Tem ainda o vizinho de bairro: <b>@drjuliovonheld</b>, especialista em implante guiado na Vila São Luís, com 3.050 seguidores, 323 posts e site próprio. O perfil dele é fechado, o que limita a conversão do anúncio dele.</p>

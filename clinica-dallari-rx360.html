@@ -454,6 +454,15 @@ h2.title{font-size:27px; font-weight:700; line-height:1.15; letter-spacing:-.02e
 
 /* benchmark table */
 .btable{border:1px solid var(--line); border-radius:14px; overflow:hidden; font-size:12px}
+.btable-hint{display:none; font-family:var(--mono); font-size:10px; color:var(--dim-grey);
+  letter-spacing:.08em; margin-top:7px; text-transform:uppercase}
+@media (max-width:680px){
+  .btable{overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none}
+  .btable::-webkit-scrollbar{display:none}
+  .brow{min-width:560px}
+  .btable-hint{display:block}
+}
 .brow{display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; }
 .brow .bc{padding:9px 8px; border-bottom:1px solid var(--line); border-right:1px solid var(--line)}
 .brow .bc:last-child{border-right:none}
@@ -1388,6 +1397,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       <div class="brow"><div class="bc crit">Foco da comunicação</div><div class="bc me">Institucional</div><div class="bc">Estética e implante</div><div class="bc">Implante e protocolo</div></div>
       <div class="brow"><div class="bc crit">Identidade visual</div><div class="bc me">Consistente</div><div class="bc">Consistente</div><div class="bc">Consistente</div></div>
     </div>
+    <div class="btable-hint">→ arraste a tabela para o lado</div>
     <div class="resumo r d3">
       <p>Serra Negra tem <b>menos de 30 mil habitantes e mais de 15 dentistas</b> com ficha no Google. Todo mundo tem nota 5,0. Ou seja, <b>nota não diferencia mais ninguém na cidade</b>, o que separa é quantas pessoas te viram e por qual motivo se lembram de você.</p>
       <p>A <b>Dra. Isabella Dias</b>, a 1 km daqui, tem 993 publicações contra as suas 13, e comunica estética e implante. A <b>Oral Unic de Amparo</b> roda cerca de 27 anúncios desde junho, dois terços em vídeo, com copy que chama o morador pelo nome da cidade. Nenhuma das duas fala de DTM.</p>
