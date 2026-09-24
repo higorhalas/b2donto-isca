@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Régua do Lance | Maykell Gomes</title>
+<meta name="description" content="O método que eu uso há 12 anos pra decidir até quanto pagar num lote de leilão, antes de dar o lance. Nove aulas gravadas, do cadastro no leiloeiro até a venda do carro pronto.">
+<meta property="og:title" content="A Régua do Lance | Maykell Gomes">
+<meta property="og:description" content="Nove aulas gravadas: do cadastro no leiloeiro até a venda do carro pronto. Mais a régua que decide o teto do lance antes do pregão começar.">
+<meta property="og:type" content="website">
+
+<!--
+  ============================================================
+  PAGINA DE VENDA · produto 1 da escada (assessoria, leilao tradicional)
+  Construida em 22/09/2026 com os patterns v4 da skill landing-premium
+  (modelados de mestres.ai/aniversario, analisada no mesmo dia).
+
+  IDENTIDADE: sistema modelado da mestres.ai (nao e o tema papel do aulao).
+  Escuro continuo com 4 pretos TINGIDOS no ambar, alternando por secao. Sora
+  como fonte unica, com a escada tracking x peso x entrelinha. Courier Prime
+  so nos rotulos numericos. Uma unica inversao na pagina inteira: a ilha clara
+  da garantia.
+
+  AS DUAS REGRAS QUE MANDAM AQUI (vieram da analise da mestres.ai):
+  1. Neutro nenhum e neutro: toda a escala de cinza leva tingimento no hue do
+     ambar, em sino (pouco nas pontas, muito no miolo). Branco puro sobre preto
+     puro e ausencia de marca, nao contencao.
+  2. Fill solido do ambar e MONOPOLIO DO CTA. Na pagina existe uma unica mancha
+     solida de cor, e e onde se clica. Todo o resto do acento e color,
+     border-color ou wash abaixo de 10%. Se um badge ou card ganhar fundo
+     solido de ambar, o CTA perde o monopolio e o olho para de saber onde ir.
+
+  CAIXA ALTA so abaixo de 12px (.micro e .eyebrow). Acima disso ela destroi o
+  perfil da palavra, que e como se le rapido.
+
+  [DECIDIR ANTES DE PUBLICAR]
+  1. LINK DO CHECKOUT: trocar todos os href="#oferta" que levam ao checkout
+     pelo link real (o Maykell falou em Hubla). Hoje o CTA leva pro bloco de oferta.
+  2. PRECO: esta em 12x R$ 29,70 ou R$ 297 a vista. A faixa decidida na call
+     era 197-297 e o Maykell escreveu 297 na estrutura. CONFIRMAR.
+  3. GARANTIA: 7 dias (minimo do CDC pra compra online). Confirmar se ele topa.
+  4. VALORES DA NOTA FISCAL: so entra valor que e VERDADE CONFERIVEL. Hoje a unica
+     ancora real e a mentoria individual dele, que custa R$ 4.000 e ele ja vendeu 4.
+     NAO inventar preco por item. Se ele quiser precificar cada entregavel, precisa
+     ser um valor pelo qual aquilo e realmente vendido separado.
+  5. QUEBRA DA CONTA DA SANTA FE: sabemos o lance (18 mil), o esperado (25 mil) e o
+     real (45 mil). A divisao por item (comissao, patio, pecas, oficina) e ESTIMADA
+     e esta marcada. Confirmar com ele ou trocar por "onde entraram os 20 mil".
+  6. BONUS PERECIVEL: o bloco esta pronto e vazio. Maximo 2 pereciveis, nas posicoes
+     1 e 2, cada um com objeto e porque ("100 unidades porque e fisico", nao "vagas limitadas").
+
+  REGRAS QUE NAO MUDAM: nunca citar rifa. Nunca prometer lucro, prazo de venda ou
+  retorno. Nunca afirmar a situacao do leitor ("voce esta perdendo dinheiro"): usar
+  primeira pessoa do Maykell ou condicional. Sem travessao, sem emoji.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ============================================================
+   SISTEMA VISUAL modelado de mestres.ai (analisada 22/09/2026).
+   Duas regras que vieram de la e que mandam em tudo aqui:
+
+   1. NEUTRO NENHUM E NEUTRO. Toda a escala de cinza leva tingimento
+      no hue do acento (ambar, hue ~45). Em sino: pouco nas pontas,
+      muito no miolo. O olho recebe marca o tempo todo sem gastar
+      um ponto de saturacao. Branco puro sobre preto puro e ausencia
+      de marca, nao contencao.
+
+   2. FILL SOLIDO DO ACENTO E MONOPOLIO DO CTA. Na pagina inteira
+      existe UMA mancha solida de ambar, e e onde se clica. Todo o
+      resto do acento e color, border-color ou wash abaixo de 10%.
+
+   Tipografia: Sora unica, com a escada tracking x peso x entrelinha.
+   Subiu de tamanho, aperta a letra e alivia o peso. Caixa alta so
+   abaixo de 12px, onde a altura uniforme da ancora.
+   ============================================================ */
+
+:root{
+  /* chao e superficies: 4 pretos tingidos no ambar, alternando por secao */
+  /* superficies: 6 fundos com amplitude real. Vao do quase-preto frio ao quente
+     dourado, subindo a temperatura conforme a pagina caminha pra oferta. */
+  --s-void:#050505;      /* o mais profundo e o mais frio: peso, silencio */
+  --s-base:#0B0A07;      /* o chao neutro */
+  --s-soft:#121009;      /* um degrau acima, ainda neutro */
+  --s-warm:#1A1409;      /* quente: virada e decisao */
+  --s-ember:#1E1409;     /* brasa: a conta que vai pro vermelho */
+  --s-gold:#241A0C;      /* o mais quente de todos: so a oferta */
+  /* apelidos antigos, mantidos pra nao quebrar regra existente */
+  --bg:var(--s-base); --bg-2:var(--s-soft); --bg-3:var(--s-void); --bg-4:var(--s-gold);
+  --surface:#16130D;        /* card acende ~5% acima do chao, le como material */
+  --surface-2:#1C1811;
+
+  /* neutros TINGIDOS no hue do acento */
+  --ink-1:#F8F6F0;          /* headings */
+  --ink-2:#DFD9CB;          /* subtitulo */
+  --ink-3:#B4AE9E;          /* corpo */
+  --ink-4:#88826F;          /* apoio */
+  --ink-5:#5E594A;          /* micro */
+
+  --accent:#E8C86A; --accent-hi:#F4DA8E; --accent-dark:#C9A94B;
+  --btn-text:#14100A;
+  --danger:#E0644A;
+
+  --line:rgba(232,200,106,.13);
+  --line-2:rgba(248,246,240,.07);
+
+  --font:'Sora',system-ui,-apple-system,sans-serif;
+  --mono:'Courier Prime',monospace;
+
+  /* escada tipografica: tamanho : tracking : peso : entrelinha */
+  --t-mega:clamp(38px,7.4vw,80px);   --tr-mega:-.058em;   --w-mega:600;    --lh-mega:1.06;
+  --t-h2:clamp(29px,3.8vw,46px);     --tr-h2:-.055em;     --w-h2:500;      --lh-h2:1.1;
+  --t-h3:clamp(20px,2.1vw,27px);     --tr-h3:-.045em;     --w-h3:600;      --lh-h3:1.26;
+  --t-body:15px;                     --tr-body:-.015em;   --w-body:400;    --lh-body:1.82;
+  --t-micro:10px;                    --tr-micro:.13em;    --w-micro:600;   --lh-micro:1.6;
+}
+
+body{font-family:var(--font);background:var(--bg);color:var(--ink-3);
+  font-size:var(--t-body);letter-spacing:var(--tr-body);line-height:var(--lh-body);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:780px;margin:0 auto;padding:0 22px}
+.wrap-lg{max-width:1000px;margin:0 auto;padding:0 22px}
+section{position:relative}
+img{max-width:100%;display:block}
+.num{font-variant-numeric:tabular-nums}
+
+h1{font-size:var(--t-mega);letter-spacing:var(--tr-mega);font-weight:var(--w-mega);
+  line-height:var(--lh-mega);color:var(--ink-1);max-width:17ch;text-wrap:balance}
+h2{font-size:var(--t-h2);letter-spacing:var(--tr-h2);font-weight:var(--w-h2);
+  line-height:var(--lh-h2);color:var(--ink-1);max-width:17ch;text-wrap:balance}
+h3{font-size:var(--t-h3);letter-spacing:var(--tr-h3);font-weight:var(--w-h3);
+  line-height:var(--lh-h3);color:var(--ink-1);max-width:19ch;text-wrap:balance}
+p{max-width:50ch}
+@media(max-width:767px){h1{max-width:none}h2{max-width:20ch}h3{max-width:22ch}}
+
+/* caixa alta SO aqui, o unico lugar da pagina onde ela pode aparecer */
+.micro,.eyebrow{font-size:var(--t-micro);letter-spacing:var(--tr-micro);font-weight:var(--w-micro);
+  text-transform:uppercase;line-height:var(--lh-micro)}
+.eyebrow{display:flex;align-items:center;gap:12px;color:var(--accent);margin-bottom:16px}
+.eyebrow::before{content:"";display:block;flex:0 0 28px;height:1px;background:currentColor;opacity:.45}
+.lead{font-size:16px;color:var(--ink-4);margin-top:16px;max-width:52ch}
+
+/* ===== CTA: o UNICO fill solido de ambar da pagina ===== */
+.cta-seam{display:block;width:max-content;max-width:calc(100% - 32px);margin:60px auto;
+  padding:19px 38px;border-radius:12px;
+  font:700 14.5px/1 var(--font);letter-spacing:.015em;text-decoration:none;text-align:center;
+  color:var(--btn-text);background:var(--accent);
+  box-shadow:0 14px 34px rgba(232,200,106,.17);
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,box-shadow .3s}
+.cta-seam:hover{transform:translateY(-2px);background:var(--accent-hi);box-shadow:0 18px 42px rgba(232,200,106,.24)}
+.cta-seam:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+#oferta{scroll-margin-top:24px}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* ===== HEADER ===== */
+.hdr{position:sticky;top:0;z-index:300;background:rgba(11,10,7,.82);backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid var(--line-2);padding:15px 0}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.hdr .logo{font-size:15px;font-weight:700;letter-spacing:-.035em;color:var(--ink-1)}
+.hdr .logo span{color:var(--accent)}
+.hdr a{font-size:var(--t-micro);letter-spacing:var(--tr-micro);text-transform:uppercase;font-weight:600;
+  color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:10px 17px;
+  transition:border-color .3s,background .3s}
+.hdr a:hover{border-color:rgba(232,200,106,.4);background:rgba(232,200,106,.07)}
+@media(max-width:520px){.hdr a{display:none}}
+
+/* ===== SUPERFICIE: substitui a folha de papel ===== */
+/* o card acende sobre o chao com um wash de ambar abaixo de 10%, sem sombra */
+.panel{position:relative;border-radius:18px;padding:32px 34px;
+  border:1px solid var(--line-2);
+  background:linear-gradient(152deg,rgba(232,200,106,.055),rgba(232,200,106,.012) 62%),var(--surface)}
+.panel .faixa{display:flex;justify-content:space-between;gap:14px;margin-bottom:22px;padding-bottom:14px;
+  border-bottom:1px solid var(--line-2);color:var(--ink-5);
+  font-size:var(--t-micro);letter-spacing:var(--tr-micro);text-transform:uppercase;font-weight:600}
+
+/* ===== HERO ===== */
+.hero{padding:82px 0 64px;background:var(--bg)}
+.hero .panel{max-width:800px;margin:0 auto;padding:44px 44px 38px}
+.hero h1 span{color:var(--accent)}
+.hero .sub{margin-top:20px;color:var(--ink-5);
+  font-size:var(--t-micro);letter-spacing:var(--tr-micro);text-transform:uppercase;font-weight:600}
+.hero-sub{max-width:740px;margin:28px auto 0;color:var(--ink-3);font-size:16px}
+.hero-sub b{color:var(--ink-1);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin:26px auto 0;max-width:740px}
+.chip{font-size:12.5px;padding:8px 16px;border-radius:999px;color:var(--ink-4);
+  background:rgba(232,200,106,.04);border:1px solid var(--line)}
+.chip s{text-decoration-color:rgba(224,100,74,.55);text-decoration-thickness:2px}
+
+.sec{padding:78px 0;background:var(--bg)}
+.sec-alt{background:var(--bg-2)}
+.sec-deep{background:var(--bg-4)}
+.sec-head{margin-bottom:38px}
+
+/* trava */
+.trava-list{display:grid;gap:0;margin-top:6px}
+.trava-i{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:24px 0;border-top:1px solid var(--line-2)}
+.trava-i:last-child{border-bottom:1px solid var(--line-2)}
+.trava-n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--accent);
+  padding-top:5px;font-variant-numeric:tabular-nums}
+.trava-t{font-size:15.5px;color:var(--ink-3);max-width:none}
+.trava-t b{color:var(--ink-1);font-weight:600}
+
+/* virada */
+.virada{text-align:center;padding:94px 0;background:var(--bg-3);position:relative;isolation:isolate}
+.virada::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(ellipse at 50% 42%,rgba(232,200,106,.06),transparent 64%)}
+.virada h2{margin:0 auto;max-width:16ch}
+.virada h2 span{color:var(--accent)}
+.virada p{margin:22px auto 0;color:var(--ink-4);text-align:center}
+
+/* mecanismo */
+.num-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:34px}
+.num-card{border-radius:16px;padding:26px 24px;border:1px solid var(--line-2);
+  background:linear-gradient(152deg,rgba(232,200,106,.04),transparent 62%),var(--surface);
+  transition:border-color .4s,transform .4s}
+.num-card:hover{border-color:rgba(232,200,106,.26);transform:translateY(-3px)}
+.num-card .idx{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px}
+.num-card .nm{font-size:18px;font-weight:600;letter-spacing:-.035em;color:var(--ink-1);margin-bottom:9px;line-height:1.2}
+.num-card .ds{font-size:13.5px;line-height:1.66;color:var(--ink-4);max-width:none}
+.num-card.teto{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+  border-color:rgba(232,200,106,.3);
+  background:linear-gradient(152deg,rgba(232,200,106,.09),transparent 66%),var(--surface-2)}
+.num-card.teto .eq{font-size:36px;font-weight:600;letter-spacing:-.06em;color:var(--accent);line-height:1}
+@media(max-width:560px){.num-grid{grid-template-columns:1fr}.num-card.teto{grid-template-columns:1fr}}
+
+/* mesmo que */
+.mq{border-radius:18px;padding:34px;border:1px solid var(--line-2);
+  background:linear-gradient(152deg,rgba(232,200,106,.05),transparent 62%),var(--surface)}
+.mq ul{list-style:none;margin-top:22px}
+.mq li{position:relative;padding-left:28px;font-size:15.5px;line-height:1.66;margin-bottom:14px;color:var(--ink-3)}
+.mq li::before{content:"";position:absolute;left:0;top:11px;width:14px;height:1px;background:var(--accent);opacity:.7}
+
+/* aulas */
+.aulas{display:grid;gap:1px;margin-top:34px;background:var(--line-2);border-radius:16px;overflow:hidden}
+.aula{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:24px 26px;align-items:start;
+  background:var(--surface);transition:background .35s}
+.aula:hover{background:var(--surface-2)}
+.aula-n{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--accent);
+  padding-top:6px;font-variant-numeric:tabular-nums;opacity:.75}
+.aula h3{font-size:16.5px;margin-bottom:7px;letter-spacing:-.03em;max-width:none}
+.aula p{font-size:13.5px;line-height:1.66;color:var(--ink-4);max-width:none}
+
+/* entregaveis */
+.ent{display:grid;gap:10px;margin-top:32px}
+.ent-i{display:grid;grid-template-columns:30px 1fr;gap:18px;align-items:start;padding:20px 22px;
+  border-radius:14px;border:1px solid var(--line-2);background:var(--surface);transition:border-color .35s}
+.ent-i:hover{border-color:rgba(232,200,106,.24)}
+.ent-ok{width:30px;height:30px;display:grid;place-items:center;border-radius:50%;color:var(--accent);
+  border:1px solid rgba(232,200,106,.3);background:rgba(232,200,106,.06);font-size:13px}
+.ent-i h3{font-size:15px;margin-bottom:5px;letter-spacing:-.025em;max-width:none}
+.ent-i p{font-size:13.5px;color:var(--ink-4);max-width:none;line-height:1.62}
+
+/* ancora */
+.anc{text-align:center;padding:92px 0;background:var(--bg-3);position:relative;isolation:isolate}
+.anc::before{content:"";position:absolute;inset:0;z-index:-1;transition:background 1s;
+  background:radial-gradient(ellipse at 50% 58%,rgba(var(--heat,232,200,106),var(--glow,.03)),transparent 66%)}
+.anc__lead{margin:0 auto;color:var(--ink-4);font-size:15.5px}
+.anc__sum{position:relative;display:inline-block;margin:18px 0 6px;
+  font-size:clamp(46px,9.6vw,104px);font-weight:600;line-height:1;letter-spacing:-.065em;
+  color:rgb(var(--heat,232,200,106));text-shadow:0 0 58px rgba(var(--heat,232,200,106),.2);
+  font-variant-numeric:tabular-nums;transition:color .65s,text-shadow .65s}
+.anc__cut{position:absolute;left:-3%;right:-3%;top:53%;height:3px;border-radius:999px;background:var(--danger);
+  box-shadow:0 0 16px rgba(224,100,74,.35);
+  transform:rotate(-4deg);transform-origin:left;transition:transform .65s cubic-bezier(.22,1,.36,1)}
+.anc:not(.is-final) .anc__cut{transform:rotate(-4deg) scaleX(0)}
+.anc__steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;list-style:none;
+  margin:32px auto 20px;max-width:640px;padding:0}
+.anc__card{padding:15px 9px;border-radius:12px;border:1px solid rgba(var(--card),.4);color:rgb(var(--card));
+  font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;
+  transition:opacity .5s,color .5s,border-color .5s,transform .5s,box-shadow .5s}
+.anc__card b{display:block;font-size:16px;letter-spacing:-.04em;margin-top:7px;text-transform:none;
+  font-weight:600;font-variant-numeric:tabular-nums}
+.anc__card.is-future{opacity:.24;color:var(--ink-5);border-color:var(--line-2);transform:translateY(5px)}
+.anc__card.is-current{transform:translateY(-5px);box-shadow:0 0 26px rgba(var(--card),.12)}
+.anc__rail{height:1px;background:var(--line-2);max-width:640px;margin:0 auto}
+.anc__rail>span{display:block;width:var(--progress,0%);height:1px;background:rgb(var(--heat,232,200,106));transition:width .35s linear}
+.anc__after{margin:30px auto 0;color:var(--ink-4);font-size:15.5px}
+.anc__after b{color:var(--ink-1);font-weight:600}
+@media(max-width:520px){.anc__steps{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){.anc *{transition:none!important}}
+
+/* filtro: o painel do nao usa o acento DESSATURADO, nunca vermelho */
+.pq{display:grid;gap:14px;margin-top:32px}
+@media(min-width:640px){.pq{grid-template-columns:1fr 1fr}}
+.pq-c{border-radius:18px;padding:30px 28px;border:1px solid var(--line-2);background:var(--surface)}
+.pq-c.sim{background:linear-gradient(152deg,rgba(232,200,106,.06),transparent 62%),var(--surface);
+  border-color:rgba(232,200,106,.24)}
+.pq-c h3{font-size:var(--t-micro);letter-spacing:var(--tr-micro);text-transform:uppercase;font-weight:700;
+  margin-bottom:20px;max-width:none}
+.pq-c.sim h3{color:var(--accent)}
+.pq-c.nao h3{color:var(--ink-5)}
+.pq-c ul{list-style:none}
+.pq-c li{position:relative;padding-left:26px;font-size:14.5px;line-height:1.62;margin-bottom:13px;color:var(--ink-3)}
+.pq-c li::before{position:absolute;left:0;top:0;font-size:13px;font-weight:700}
+.pq-c.sim li::before{content:"+";color:var(--accent)}
+.pq-c.nao li::before{content:"x";color:var(--ink-5)}
+.pq-c.nao li{color:var(--ink-4)}
+
+/* ===== OFERTA ===== */
+.oferta{padding:96px 0;background:var(--bg-4)}
+.nf{max-width:660px;margin:0 auto}
+.nf__row{display:grid;grid-template-columns:28px auto minmax(24px,1fr) auto;align-items:center;gap:15px;
+  min-height:54px;padding:12px 0;border-top:1px solid var(--line-2);
+  transition:border-color .35s,transform .5s cubic-bezier(.22,1,.36,1)}
+.nf__row:last-of-type{border-bottom:1px solid var(--line-2)}
+.nf__row:hover{border-color:rgba(232,200,106,.3);transform:translateX(5px)}
+.nf__ok{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;color:var(--accent);
+  border:1px solid rgba(232,200,106,.3);background:rgba(232,200,106,.06);font-size:13px;transition:all .35s}
+.nf__row:hover .nf__ok{color:var(--btn-text);background:var(--accent)}
+.nf__name{font-size:14.5px;color:var(--ink-2)}
+.nf__name small{display:block;margin-top:4px;font-size:var(--t-micro);letter-spacing:var(--tr-micro);
+  text-transform:uppercase;font-weight:600;color:var(--ink-5)}
+.nf__dots{height:1px;border-top:1px dashed var(--line-2)}
+.nf__val{font-size:var(--t-micro);letter-spacing:var(--tr-micro);text-transform:uppercase;font-weight:600;
+  color:var(--ink-5);white-space:nowrap}
+.nf__ref{position:relative;font-size:14px;font-weight:600;color:var(--ink-4);white-space:nowrap}
+.nf__ref::after{content:"";position:absolute;left:-5%;right:-5%;top:51%;height:2px;border-radius:999px;
+  background:var(--danger);box-shadow:0 0 10px rgba(224,100,74,.3);transform:rotate(-2deg)}
+
+.price-box{max-width:660px;margin:40px auto 0;border-radius:22px;padding:40px 36px;text-align:center;
+  border:1px solid rgba(232,200,106,.32);
+  background:linear-gradient(152deg,rgba(232,200,106,.1),rgba(232,200,106,.02) 64%),var(--surface-2);
+  box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.price-box .faixa{display:flex;justify-content:space-between;gap:14px;margin-bottom:6px;
+  color:var(--ink-5);font-size:var(--t-micro);letter-spacing:var(--tr-micro);
+  text-transform:uppercase;font-weight:600;border:0;padding:0}
+.money{position:relative;display:inline-flex;align-items:baseline;justify-content:center;gap:8px;
+  margin:16px 0 0;color:var(--accent);line-height:1.02;letter-spacing:-.065em;white-space:nowrap;
+  text-shadow:0 0 58px rgba(232,200,106,.2)}
+.money__cur{font-size:clamp(22px,3.7vw,40px);font-weight:500;letter-spacing:-.035em}
+.money__int{font-size:clamp(56px,11.5vw,116px);font-weight:600;font-variant-numeric:tabular-nums}
+.money__cents{font-size:clamp(22px,3.7vw,40px);font-weight:500;letter-spacing:-.035em;margin-left:-5px}
+.price-avista{margin:12px auto 0;font-size:14.5px;color:var(--ink-4)}
+.price-avista b{color:var(--ink-2);font-weight:600}
+.cta-buy{display:block;width:100%;margin:30px 0 0;padding:21px 28px;border:0;border-radius:13px;cursor:pointer;
+  font:700 16px/1 var(--font);letter-spacing:.01em;text-decoration:none;text-align:center;
+  color:var(--btn-text);background:var(--accent);
+  box-shadow:0 18px 40px rgba(232,200,106,.22);transition:transform .3s,background .3s,box-shadow .3s}
+.cta-buy:hover{transform:translateY(-2px);background:var(--accent-hi);box-shadow:0 22px 48px rgba(232,200,106,.3)}
+.price-fine{margin:18px auto 0;font-size:var(--t-micro);letter-spacing:var(--tr-micro);
+  text-transform:uppercase;font-weight:600;color:var(--ink-5)}
+
+/* autoridade */
+.bio{border-radius:18px;padding:34px;border:1px solid var(--line-2);
+  background:linear-gradient(152deg,rgba(232,200,106,.045),transparent 62%),var(--surface);
+  display:flex;flex-direction:column;gap:22px}
+@media(min-width:620px){.bio{flex-direction:row;gap:30px;align-items:flex-start}}
+.bio .av{width:104px;height:104px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;
+  background:var(--surface-2);border:1px solid rgba(232,200,106,.24);color:var(--accent);
+  font-size:36px;font-weight:600;letter-spacing:-.05em}
+.bio h3{margin-bottom:8px;max-width:none}
+.bio .role{font-size:var(--t-micro);letter-spacing:var(--tr-micro);text-transform:uppercase;font-weight:600;
+  color:var(--accent);margin-bottom:16px}
+.bio p{font-size:14.5px;color:var(--ink-4);max-width:none}
+.bio p+p{margin-top:14px}
+
+/* garantia: ILHA CLARA, a unica inversao da pagina */
+.gar{max-width:660px;margin:0 auto;border-radius:22px;padding:48px 38px;text-align:center;
+  background:#F4F2EC;color:#1A1710;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.gar .selo{font-size:clamp(62px,7.4vw,92px);font-weight:600;line-height:.88;letter-spacing:-.075em;
+  color:#8A6A18;font-variant-numeric:tabular-nums}
+.gar .selo small{display:block;font-size:var(--t-micro);letter-spacing:var(--tr-micro);
+  text-transform:uppercase;font-weight:700;color:#7A7364;margin-top:10px}
+.gar h2{margin:22px auto 0;color:#14110B;max-width:18ch}
+.gar p{margin:16px auto 0;color:#4A4437;text-align:center}
+
+/* faq */
+.faq__list{border-top:1px solid var(--line-2);margin-top:34px}
+.faq__i{border-bottom:1px solid var(--line-2)}
+.faq__i>summary{display:grid;grid-template-columns:30px minmax(0,1fr) 32px;align-items:center;gap:18px;
+  padding:26px 0;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+.faq__i>summary::-webkit-details-marker{display:none}
+.faq__i>summary::marker{content:""}
+.faq__i>summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.faq__n{font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums;color:var(--ink-5);transition:color .2s}
+.faq__q{font-size:15.5px;color:var(--ink-2);font-weight:600;letter-spacing:-.025em}
+.faq__t{position:relative;width:32px;height:32px;border:1px solid var(--line-2);border-radius:50%;
+  color:var(--accent);transition:background .2s,border-color .2s,color .2s}
+.faq__t::before,.faq__t::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;
+  background:currentColor;transform:translate(-50%,-50%)}
+.faq__t::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s,opacity .2s}
+.faq__i[open]>summary .faq__n{color:var(--accent)}
+.faq__i[open]>summary .faq__t{background:var(--accent);border-color:var(--accent);color:var(--btn-text)}
+.faq__i[open]>summary .faq__t::after{transform:translate(-50%,-50%) rotate(0);opacity:0}
+.faq__a{padding:0 50px 28px 48px}
+.faq__a p{font-size:14.5px;color:var(--ink-4);max-width:none}
+.faq__i[open] .faq__a{animation:faqIn .22s ease-out both}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media(max-width:520px){.faq__a{padding:0 0 26px 48px}}
+
+/* decisao */
+.decisao{padding:92px 0;background:var(--bg-2)}
+.decisao h2{margin:0 auto 38px;text-align:center;max-width:15ch}
+.decisao h2 span{color:var(--accent)}
+.decisao__paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.decisao__card{position:relative;isolation:isolate;overflow:hidden;padding:34px 32px 46px;border-radius:18px;
+  border:1px solid var(--line-2);background:var(--surface)}
+.decisao__card--in{border-color:rgba(232,200,106,.42);
+  background:linear-gradient(135deg,rgba(232,200,106,.09),transparent 70%),var(--surface-2)}
+.decisao__label{font-size:var(--t-micro);letter-spacing:var(--tr-micro);text-transform:uppercase;font-weight:600;
+  color:var(--ink-5);display:block;margin-bottom:14px}
+.decisao__card--in .decisao__label{color:var(--accent)}
+.decisao__card h3{font-size:20px;margin-bottom:14px;max-width:none}
+.decisao__card p{font-size:14.5px;color:var(--ink-4);max-width:none}
+.decisao__wm{position:absolute;right:-6px;bottom:-30px;z-index:-1;font-size:clamp(90px,14vw,150px);
+  font-weight:700;line-height:1;letter-spacing:-.08em;opacity:.045;pointer-events:none;color:var(--ink-1)}
+@media(max-width:767px){.decisao__paths{grid-template-columns:1fr}}
+.recap{margin:34px auto 0;max-width:660px;padding:24px 28px;border-radius:16px;
+  border:1px solid var(--line-2);background:var(--surface);text-align:center}
+.recap p{margin:0 auto;font-size:14.5px;color:var(--ink-4);max-width:none}
+.recap b{color:var(--accent);font-weight:600}
+.prazos{margin:24px auto 0;max-width:660px;text-align:center}
+.prazos p{margin:0 auto;font-size:14px;color:var(--ink-4);max-width:none}
+.prazos b{color:var(--ink-1);font-weight:600}
+
+/* rodape */
+.footer{background:var(--s-void);padding:40px 0;text-align:center;border-top:1px solid var(--line-2)}
+.footer p{margin:0 auto;font-size:var(--t-micro);letter-spacing:var(--tr-micro);text-transform:uppercase;
+  font-weight:600;color:var(--ink-5);max-width:none}
+.footer p+p{margin-top:12px;text-transform:none;letter-spacing:-.015em;font-size:13px;font-weight:400}
+.footer a{color:var(--accent)}
+
+/* ============================================================
+   TRANSICOES ENTRE SECOES (4 eixos, padrao ja validado pelo Higor
+   nas 6 identidades, readaptado pro sistema escuro + ambar)
+
+   1. SEPARADOR nas juncoes, com a virada de fundo absorvida pelo
+      gradiente (--from / --to inline), nunca por linha dura.
+   2. MARCADOR DE PROGRESSO que percorre a pagina, na linguagem do
+      produto: "lote 01" ate "lote 12".
+   3. COSTURA VERTICAL (.spine) ligando tudo na margem do wrap.
+   4. RITMO: padding diferente por secao, no lugar do uniforme.
+   ============================================================ */
+
+/* eixo 1: o separador */
+.sep{position:relative;height:var(--h,86px);overflow:hidden;
+  background:linear-gradient(180deg,var(--from) 0%,var(--from) 30%,var(--to) 70%,var(--to) 100%)}
+.sep .ln{position:absolute;left:0;right:0;top:50%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(232,200,106,.22) 22%,rgba(232,200,106,.22) 78%,transparent)}
+.sep .no{position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;
+  border:1px solid rgba(232,200,106,.5);background:var(--mid,var(--from));transform:rotate(45deg);
+  transition:transform .8s cubic-bezier(.2,.7,.2,1),border-color .8s}
+.sep.in .no{transform:rotate(225deg);border-color:rgba(232,200,106,.9)}
+.sep .in-wrap{position:absolute;inset:0;display:flex;align-items:center;z-index:3}
+.sep .in-wrap .wrap{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.sep .mk{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  white-space:nowrap;background:var(--mid,var(--from));padding:3px 11px;line-height:1.6;
+  opacity:0;transform:translateY(5px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.sep.in .mk{opacity:1;transform:none}
+.sep .mk-l{color:var(--accent)}
+.sep .mk-r{color:var(--ink-5);transition-delay:.12s}
+.sep.alt{--h:74px}
+.sep.alt .ln{background:linear-gradient(90deg,transparent,rgba(232,200,106,.13) 30%,rgba(232,200,106,.13) 70%,transparent)}
+@media(max-width:520px){
+  .hero .panel{padding:26px 22px 24px}
+  :root{--t-mega:clamp(31px,8.6vw,44px)}
+  .wrap,.wrap-lg{padding:0 18px}
+}
+@media(max-width:620px){.sep{--h:64px}.sep.alt{--h:58px}.sep .mk-r{display:none}
+  .sep .mk{font-size:8.5px;letter-spacing:.16em;padding:3px 8px}}
+@media(prefers-reduced-motion:reduce){.sep .no,.sep .mk{transition:none;opacity:1;transform:none}}
+
+/* eixo 3: costura vertical */
+.spine{position:absolute;top:0;bottom:0;left:calc(50% - 432px);width:1px;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(232,200,106,.14) 4%,rgba(232,200,106,.14) 96%,transparent)}
+@media(max-width:980px){.spine{display:none}}
+
+/* barra de progresso de leitura: a pagina e longa, e isso da nocao de fim */
+.prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:400;background:var(--accent);
+  box-shadow:0 0 12px rgba(232,200,106,.5);transition:width .1s linear}
+@media(prefers-reduced-motion:reduce){.prog{transition:none}}
+
+/* eixo 4: ritmo. paddings diferentes no lugar do uniforme */
+.sec{padding:74px 0}
+.sec.r-a{padding:62px 0 70px}
+.sec.r-b{padding:86px 0 78px}
+.sec.r-c{padding:68px 0 82px}
+
+/* reveal em cascata dentro das listas, pra entrada nao ser um bloco so */
+.stagger>*{opacity:0;transform:translateY(16px);
+  transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(1){transition-delay:.02s}
+.stagger.in>*:nth-child(2){transition-delay:.07s}
+.stagger.in>*:nth-child(3){transition-delay:.12s}
+.stagger.in>*:nth-child(4){transition-delay:.17s}
+.stagger.in>*:nth-child(5){transition-delay:.22s}
+.stagger.in>*:nth-child(6){transition-delay:.27s}
+.stagger.in>*:nth-child(7){transition-delay:.32s}
+.stagger.in>*:nth-child(8){transition-delay:.37s}
+.stagger.in>*:nth-child(9){transition-delay:.42s}
+@media(prefers-reduced-motion:reduce){.stagger>*{opacity:1!important;transform:none!important;transition:none!important}}
+
+
+/* ===== VARIACAO DE COR ENTRE SECOES =====
+   A pagina caminha do frio pro quente conforme se aproxima da oferta.
+   O wash e sempre radial e sempre abaixo de 9%: variacao de temperatura,
+   nunca mancha de cor, senao o CTA perde o monopolio do ambar. */
+.s-void{background:var(--s-void)}
+.s-base{background:var(--s-base)}
+.s-soft{background:var(--s-soft)}
+.s-warm{background:var(--s-warm)}
+.s-ember{background:var(--s-ember)}
+.s-gold{background:var(--s-gold)}
+
+.s-warm,.s-ember,.s-gold{position:relative;isolation:isolate}
+.s-warm::after,.s-ember::after,.s-gold::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none}
+.s-warm::after{background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(232,200,106,.055),transparent 70%)}
+.s-ember::after{background:radial-gradient(ellipse 75% 65% at 50% 55%,rgba(224,140,74,.07),transparent 68%)}
+.s-gold::after{background:radial-gradient(ellipse 90% 70% at 50% 34%,rgba(232,200,106,.085),transparent 66%)}
+
+/* a borda superior de cada bloco quente pega um fio de luz, so o suficiente
+   pro olho registrar que mudou de ambiente */
+.s-warm,.s-gold{border-top:1px solid rgba(232,200,106,.09)}
+.s-ember{border-top:1px solid rgba(224,140,74,.11)}
+
+</style>
+</head>
+<body>
+<div class="prog" data-prog></div>
+<div class="spine"></div>
+
+<header class="hdr">
+  <div class="wrap">
+    <div class="logo">A Régua<span> do Lance</span></div>
+    <a href="#oferta">Quero entrar</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero s-base">
+  <div class="wrap">
+    <div class="panel reveal">
+      <div class="faixa"><span>Método completo</span><span>nove aulas gravadas</span></div>
+      <h1>Eu já vendi o carro<br><span>antes de dar o lance.</span></h1>
+      <div class="sub">A conta que decide o preço de saída, feita antes do pregão</div>
+    </div>
+    <p class="hero-sub reveal d1">Quando eu dou o lance, o preço de saída já está decidido. Quem decide é uma sequência de quatro passos que eu repito há 12 anos, em mais de 100 carros. <b>São nove aulas gravadas, do cadastro no leiloeiro até a venda do carro pronto.</b></p>
+    <div class="chips reveal d2">
+      <span class="chip"><s>Sem precisar entender de mecânica</s></span>
+      <span class="chip"><s>Sem ter oficina, pátio ou CNPJ</s></span>
+      <span class="chip"><s>Sem nome limpo pra começar</s></span>
+    </div>
+  </div>
+  <a class="cta-seam reveal d3" href="#oferta">Quero a régua do lance</a>
+</section>
+
+<div class="sep" style="--from:#0B0A07;--to:#050505;--mid:#0B0A07"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 01</span><span class="mk mk-r">o problema</span></div></div></div>
+
+<!-- O QUE TRAVA -->
+<section class="sec r-a sec-alt s-void">
+  <div class="wrap sec-head">
+    <span class="eyebrow reveal">Onde quase todo mundo para</span>
+    <h2 class="reveal d1">Não é falta de carro barato. É não saber até quanto pagar.</h2>
+  </div>
+  <div class="wrap">
+    <div class="trava-list reveal d1">
+      <div class="trava-i">
+        <span class="trava-n">01</span>
+        <p class="trava-t">O leilão está aberto agora, de graça, e qualquer um pode olhar. <b>O que falta não é acesso, é decisão.</b></p>
+      </div>
+      <div class="trava-i">
+        <span class="trava-n">02</span>
+        <p class="trava-t">Site falso e leilão clonado existem, e é o medo que mais trava quem nunca deu lance. <b>Às vezes eu estou vendendo só a lista pro cara.</b></p>
+      </div>
+      <div class="trava-i">
+        <span class="trava-n">03</span>
+        <p class="trava-t">A foto do lote mostra uma parte do estrago. A conta do que aquilo custa pronto, <b>com taxa, peça, oficina e documento</b>, quase ninguém faz antes de dar o lance.</p>
+      </div>
+      <div class="trava-i">
+        <span class="trava-n">04</span>
+        <p class="trava-t">E tem a pergunta que eu mais escuto: <b>vou conseguir vender esse carro depois?</b> Todo mundo ensina a achar barato. Ninguém ensina a sair.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep alt" style="--from:#050505;--to:#1A1409;--mid:#1A1409"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 02</span><span class="mk mk-r">a virada</span></div></div></div>
+
+<!-- A VIRADA -->
+<section class="virada s-warm">
+  <div class="wrap">
+    <h2 class="reveal">Tudo vende. <span>Até caminhão pegando fogo.</span></h2>
+    <p class="reveal d1">Pagou barato, vende barato e vende rápido. Pagou caro, vai demorar. O que decide não é o carro, é o preço que você pagou nele. E o preço se decide antes do lance, não depois.</p>
+  </div>
+</section>
+
+<div class="sep" style="--from:#1A1409;--to:#0B0A07;--mid:#1A1409"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 03</span><span class="mk mk-r">a régua do lance</span></div></div></div>
+
+<!-- MECANISMO -->
+<section class="sec r-b s-base">
+  <div class="wrap sec-head">
+    <span class="eyebrow reveal">O método</span>
+    <h2 class="reveal d1">A Régua do Lance</h2>
+    <p class="lead reveal d2">O iniciante bate o olho na foto e chuta. Eu olho três coisas, sempre na mesma ordem, e no fim aplico um percentual que muda conforme o tipo de carro e o tamanho da batida. O que sai da régua é o meu teto. Passou dele, eu deixo o lote passar.</p>
+  </div>
+  <div class="wrap">
+    <div class="num-grid stagger">
+      <div class="num-card reveal">
+        <div class="idx">Olhar 01</div>
+        <div class="nm">Os dados</div>
+        <div class="ds">Tipo de monta, ano e tabela. É onde eu tenho 100% de informação, por isso começo por aqui. Grande monta eu nem abro: vira sucata.</div>
+      </div>
+      <div class="num-card reveal d1">
+        <div class="idx">Olhar 02</div>
+        <div class="nm">As fotos</div>
+        <div class="ds">Aqui eu vejo tudo que quebrou e anoto peça por peça: farol, para-choque, painel frontal, kit radiador. Não é 100%, e é por isso que existe margem de segurança.</div>
+      </div>
+      <div class="num-card reveal d2">
+        <div class="idx">Olhar 03</div>
+        <div class="nm">As peças</div>
+        <div class="ds">Cada peça anotada eu pesquiso no Mercado Livre e somo. É a conta do que o carro vai custar pronto, feita antes do lance e não depois.</div>
+      </div>
+      <div class="num-card teto reveal d3">
+        <div class="eq">=</div>
+        <div>
+          <div class="nm">A régua: o percentual que vira o teto</div>
+          <div class="ds">Carro premium com pequena monta vai até 50% da tabela. Premium com média monta fica em 40 a 42%. Carro popular paga proporcionalmente mais. O número que sai da régua vai escrito pro leilão, e se a disputa passa dele eu deixo o lote passar.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="cta-seam" href="#oferta">Quero a régua do lance</a>
+</section>
+
+<div class="sep alt" style="--from:#0B0A07;--to:#121009;--mid:#121009"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 04</span><span class="mk mk-r">pra quem serve</span></div></div></div>
+
+<!-- MESMO QUE VOCE -->
+<section class="sec r-c sec-alt s-soft">
+  <div class="wrap">
+    <div class="mq reveal">
+      <h2>Mesmo que você...</h2>
+      <ul>
+        <li>nunca tenha dado um lance na vida, e nem saiba como se cadastra num leiloeiro</li>
+        <li>já tenha tentado sozinho uma vez e se queimado</li>
+        <li>não entenda nada de mecânica nem tenha oficina</li>
+        <li>esteja com o nome sujo, o que não impede de arrematar no leilão tradicional</li>
+      </ul>
+    </div>
+  </div>
+  <a class="cta-seam" href="#oferta">Quero a régua do lance</a>
+</section>
+
+<div class="sep" style="--from:#121009;--to:#0B0A07;--mid:#121009"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 05</span><span class="mk mk-r">as nove aulas</span></div></div></div>
+
+<!-- AS 9 AULAS -->
+<section class="sec r-a s-base">
+  <div class="wrap sec-head">
+    <span class="eyebrow reveal">O que você recebe</span>
+    <h2 class="reveal d1">Nove aulas, na ordem em que se faz</h2>
+    <p class="lead reveal d2">De 15 a 20 minutos cada, gravadas, pra assistir quando der. A ordem não é didática, é operacional: a partir da terceira aula você já tem o que precisa pra dar o primeiro lance.</p>
+  </div>
+  <div class="wrap">
+    <div class="aulas stagger">
+      <article class="aula reveal"><span class="aula-n">01</span><div>
+        <h3>Como funciona o leilão tradicional</h3>
+        <p>De onde vêm os veículos, o que é o edital e por que a origem do lote é a primeira coisa que eu analiso, antes até de pensar em preço.</p></div></article>
+      <article class="aula reveal"><span class="aula-n">02</span><div>
+        <h3>Cadastro e habilitação</h3>
+        <p>O cadastro feito na tela, do zero. Como conferir que o site é oficial antes de mandar documento, e por que cadastro não é a mesma coisa que habilitação.</p></div></article>
+      <article class="aula reveal"><span class="aula-n">03</span><div>
+        <h3>Como ler o edital e calcular o valor real do lote</h3>
+        <p>Comissão do leiloeiro, taxas, débitos e reparos. A fórmula do custo efetivo e o cálculo ao contrário: não quanto eu quero dar, e sim qual o máximo que dá pra pagar.</p></div></article>
+      <article class="aula reveal"><span class="aula-n">04</span><div>
+        <h3>Como avaliar um lote remotamente</h3>
+        <p>Pequena, média e grande monta, leilão de financeira, veículo de enchente. A pesquisa de peça pela foto do dano e a definição do lance máximo antes do leilão começar.</p></div></article>
+      <article class="aula reveal"><span class="aula-n">05</span><div>
+        <h3>Estratégia de lance</h3>
+        <p>Incremento, lance manual e automático, e a guerra de lances. Arrematou, a disputa acabou. Não arrematou, isso também pode ter sido a decisão certa.</p></div></article>
+      <article class="aula reveal"><span class="aula-n">06</span><div>
+        <h3>O que fazer depois que arrematou</h3>
+        <p>Confirmação, conferência da nota contra o edital e o pagamento pelos canais oficiais.</p></div></article>
+      <article class="aula reveal"><span class="aula-n">07</span><div>
+        <h3>Retirando o carro do pátio</h3>
+        <p>Prazo de retirada, guincho ou cegonha, e o registro fotográfico na hora de tirar, que é o que te protege numa contestação.</p></div></article>
+      <article class="aula reveal"><span class="aula-n">08</span><div>
+        <h3>Documentação e regularização</h3>
+        <p>Liberação documental, débitos e restrições, vistoria, transferência e laudo do Inmetro quando o caso pede.</p></div></article>
+      <article class="aula reveal"><span class="aula-n">09</span><div>
+        <h3>Como revender o carro</h3>
+        <p>A venda começa na compra. Preparação, precificação com o histórico de leilão, transparência sobre a procedência, e onde anunciar.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<div class="sep alt" style="--from:#0B0A07;--to:#121009;--mid:#121009"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 06</span><span class="mk mk-r">o que vem junto</span></div></div></div>
+
+<!-- O QUE VEM JUNTO -->
+<section class="sec r-b sec-alt s-soft">
+  <div class="wrap sec-head">
+    <span class="eyebrow reveal">Além das aulas</span>
+    <h2 class="reveal d1">O que eu abro junto</h2>
+  </div>
+  <div class="wrap">
+    <div class="ent stagger">
+      <div class="ent-i reveal"><span class="ent-ok">&#10003;</span><div>
+        <h3>A lista de 20 a 30 leilões confiáveis</h3>
+        <p>É o item que meus alunos mais valorizam, porque mata o medo número um: cair em site falso.</p></div></div>
+      <div class="ent-i reveal"><span class="ent-ok">&#10003;</span><div>
+        <h3>Lista de cegonheiros do Brasil inteiro</h3>
+        <p>Pra você não travar na hora de tirar o carro do pátio, que é onde muita gente descobre que não pensou no transporte.</p></div></div>
+      <div class="ent-i reveal"><span class="ent-ok">&#10003;</span><div>
+        <h3>Lista de despachantes nacionais</h3>
+        <p>O desembaraço da documentação com quem já faz isso todo dia.</p></div></div>
+      <div class="ent-i reveal"><span class="ent-ok">&#10003;</span><div>
+        <h3>Empresa de laudo cautelar em PR e SP</h3>
+        <p>Quem eu uso e recomendo pra parte de vistoria e laudo.</p></div></div>
+      <div class="ent-i reveal"><span class="ent-ok">&#10003;</span><div>
+        <h3>Acesso ao meu grupo de repasse</h3>
+        <p>São 700 pessoas. É o canal onde meus alunos anunciam o carro quando ele fica pronto.</p></div></div>
+    </div>
+  </div>
+  <a class="cta-seam" href="#oferta">Quero a régua do lance</a>
+</section>
+
+<div class="sep" style="--from:#121009;--to:#1E1409;--mid:#121009"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 07</span><span class="mk mk-r">a conta</span></div></div></div>
+
+<!-- ANCORA: a conta da Santa Fe -->
+<!-- [CONFIRMAR COM O MAYKELL] a quebra por item e ESTIMADA. Fatos confirmados na call:
+     lance 18 mil, era pra ter ficado em 25, terminou em 45. Se ele nao lembrar a quebra,
+     trocar os 4 degraus por "lance / o que eu esperava / o que apareceu / o que ficou". -->
+<section class="anc s-ember" data-anchor style="--heat:232,200,106;--glow:.03;--progress:0%">
+  <div class="wrap">
+    <p class="anc__lead reveal">Uma vez eu comprei um carro de apreensão por R$ 18 mil. Era pra ter ficado em 25.</p>
+    <p class="anc__sum reveal d1">R$ <span data-anchor-num>18.000</span><i class="anc__cut" aria-hidden="true"></i></p>
+    <ol class="anc__steps stagger">
+      <li class="anc__card" style="--card:232,200,106">O lance<b>18 mil</b></li>
+      <li class="anc__card" style="--card:214,170,90">Taxas e pátio<b>+</b></li>
+      <li class="anc__card" style="--card:196,110,60">O que não estava na foto<b>+</b></li>
+      <li class="anc__card" style="--card:196,64,42">O que ficou<b>45 mil</b></li>
+    </ol>
+    <div class="anc__rail"><span></span></div>
+    <p class="anc__after reveal d2">Estourou <b>R$ 20 mil</b> num carro só, e o erro não foi no lance. Foi no que eu não soube ler antes dele. <b>É essa conta que a régua resolve.</b></p>
+  </div>
+</section>
+
+<div class="sep alt" style="--from:#1E1409;--to:#0B0A07;--mid:#0B0A07"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 08</span><span class="mk mk-r">o filtro</span></div></div></div>
+
+<!-- E / NAO E PRA VOCE -->
+<section class="sec r-c s-base">
+  <div class="wrap sec-head">
+    <span class="eyebrow reveal">Antes de você decidir</span>
+    <h2 class="reveal d1">Sinceridade: isso é pra você?</h2>
+  </div>
+  <div class="wrap">
+    <div class="pq stagger">
+      <div class="pq-c sim reveal">
+        <h3>É pra você se</h3>
+        <ul>
+          <li>Quer comprar carro ou caminhonete abaixo da tabela, pra revender ou pra usar.</li>
+          <li>Tem por volta de dez mil pra separar sem apertar em casa, que é o piso com que eu me sinto confortável.</li>
+          <li>Já olha lote e trava na hora do lance, porque não consegue provar pra si mesmo que vale.</li>
+          <li>Já arremata e quer trocar o feeling por uma conta que se repete.</li>
+        </ul>
+      </div>
+      <div class="pq-c nao reveal d1">
+        <h3>Não é pra você se</h3>
+        <ul>
+          <li>Quer comprar um carro hoje e vender amanhã. Isso não existe, e eu não vou fingir que existe.</li>
+          <li>Procura uma lista de lotes prontos em vez de aprender a escolher os seus.</li>
+          <li>Não pretende assistir as aulas nem fazer a conta antes de dar lance.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <a class="cta-seam" href="#oferta">Quero a régua do lance</a>
+</section>
+
+<div class="sep" style="--from:#0B0A07;--to:#241A0C;--mid:#0B0A07"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 09</span><span class="mk mk-r">a oferta</span></div></div></div>
+
+<!-- OFERTA -->
+<!-- [DEFINIR] Os valores da nota fiscal. A UNICA ancora verdadeira hoje e a mentoria
+     individual dele: custa R$ 4.000 e ele ja vendeu 4. Por isso ela e a unica linha com
+     valor. NAO preencher os outros itens com preco inventado: quem compra confere, e uma
+     mentira barata derruba a pagina inteira junto com o preco.
+     Se o Maykell quiser precificar cada item, o valor tem que ser aquele pelo qual
+     aquilo e realmente vendido separado. -->
+<section class="oferta s-gold" id="oferta">
+  <div class="wrap sec-head" style="text-align:center">
+    <span class="eyebrow reveal">A oferta</span>
+    <h2 class="reveal d1" style="margin:0 auto">Tudo que entra</h2>
+  </div>
+  <div class="wrap">
+    <div class="nf reveal d1">
+      <div class="nf__row">
+        <span class="nf__ok" aria-hidden="true">&#10003;</span>
+        <span class="nf__name">As nove aulas gravadas<small>do cadastro até a revenda</small></span>
+        <span class="nf__dots" aria-hidden="true"></span>
+        <span class="nf__val">incluso</span>
+      </div>
+      <div class="nf__row">
+        <span class="nf__ok" aria-hidden="true">&#10003;</span>
+        <span class="nf__name">A Régua do Lance<small>o método de precificação, passo a passo</small></span>
+        <span class="nf__dots" aria-hidden="true"></span>
+        <span class="nf__val">incluso</span>
+      </div>
+      <div class="nf__row">
+        <span class="nf__ok" aria-hidden="true">&#10003;</span>
+        <span class="nf__name">Lista de 20 a 30 leilões confiáveis</span>
+        <span class="nf__dots" aria-hidden="true"></span>
+        <span class="nf__val">incluso</span>
+      </div>
+      <div class="nf__row">
+        <span class="nf__ok" aria-hidden="true">&#10003;</span>
+        <span class="nf__name">Listas de cegonheiros e despachantes<small>Brasil inteiro</small></span>
+        <span class="nf__dots" aria-hidden="true"></span>
+        <span class="nf__val">incluso</span>
+      </div>
+      <div class="nf__row">
+        <span class="nf__ok" aria-hidden="true">&#10003;</span>
+        <span class="nf__name">Acesso ao grupo de repasse<small>700 pessoas</small></span>
+        <span class="nf__dots" aria-hidden="true"></span>
+        <span class="nf__val">incluso</span>
+      </div>
+      <div class="nf__row">
+        <span class="nf__ok" aria-hidden="true">&#10003;</span>
+        <span class="nf__name">O mesmo método que eu ensino na mentoria individual<small>que eu vendo a R$ 4.000</small></span>
+        <span class="nf__dots" aria-hidden="true"></span>
+        <span class="nf__ref">R$ 4.000</span>
+      </div>
+    </div>
+
+    <div class="price-box reveal d2">
+      <div class="faixa"><span>Acesso imediato</span><span>vitalício</span></div>
+      <p class="money">
+        <span class="money__cur">12x</span><span class="money__int">29</span><span class="money__cents">,70</span>
+      </p>
+      <p class="price-avista">ou <b>R$ 297 à vista</b></p>
+      <!-- [TROCAR] href pelo link real do checkout (Hubla) -->
+      <a class="cta-buy" href="#oferta" data-checkout>Quero a régua do lance</a>
+      <p class="price-fine">Acesso imediato · assiste quando der · 7 dias de garantia</p>
+    </div>
+  </div>
+</section>
+
+<div class="sep alt" style="--from:#241A0C;--to:#121009;--mid:#121009"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 10</span><span class="mk mk-r">quem conduz</span></div></div></div>
+
+<!-- AUTORIDADE -->
+<section class="sec r-a s-soft">
+  <div class="wrap">
+    <div class="bio reveal">
+      <!-- [TROCAR] a inicial pela foto dele quando chegar: assets/maykell.jpg -->
+      <div class="av">M</div>
+      <div>
+        <h3>Maykell Gomes</h3>
+        <div class="role">12 anos de leilão · mais de 100 carros</div>
+        <p>Comecei indo em leilão presencial com o meu pai, daqueles de martelo e papelzinho no vidro. Comprei o meu primeiro carro sozinho aos 18 anos, um Civic, e o latoeiro errou o serviço. Mesmo assim vendi e coloquei quatro mil no bolso. Foi ali que eu entendi que esse negócio dava dinheiro.</p>
+        <p>Hoje eu compro, reformo e revendo, mostro as restaurações de F-250 pra 146 mil pessoas no Instagram, e o meu maior lucro num carro só veio de uma F-250. Também já tomei prejuízo, e eu abro os dois nas aulas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep" style="--from:#121009;--to:#050505;--mid:#121009"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 11</span><span class="mk mk-r">a garantia</span></div></div></div>
+
+<!-- GARANTIA -->
+<!-- [CONFIRMAR] 7 dias e o minimo do CDC pra compra online. Se o Maykell topar 14 ou 30, e melhor. -->
+<section class="sec r-b sec-alt s-void">
+  <div class="wrap">
+    <div class="gar reveal">
+      <div class="selo">7<small>dias de garantia</small></div>
+      <h2>Se não for o que você esperava, eu devolvo</h2>
+      <p>Você entra, assiste as aulas, olha as listas. Se em sete dias achar que não era pra você, pede o reembolso e eu devolvo o valor inteiro, sem perguntar nada. O risco de testar é meu, não seu.</p>
+    </div>
+  </div>
+</section>
+
+<div class="sep alt" style="--from:#050505;--to:#0B0A07;--mid:#0B0A07"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 12</span><span class="mk mk-r">dúvidas</span></div></div></div>
+
+<!-- FAQ -->
+<section class="sec r-c s-base">
+  <div class="wrap sec-head">
+    <span class="eyebrow reveal">Dúvidas</span>
+    <h2 class="reveal d1">Perguntas que eu mais recebo</h2>
+  </div>
+  <div class="wrap">
+    <div class="faq__list stagger">
+      <details class="faq__i" name="faq" open>
+        <summary><span class="faq__n">01</span><span class="faq__q">Vou conseguir vender o carro depois?</span><span class="faq__t"></span></summary>
+        <div class="faq__a"><p>É a pergunta que eu mais escuto. A resposta curta é que tudo vende, o que muda é o tempo, e o tempo é decidido pelo preço que você pagou. É exatamente por isso que a régua existe e é por isso que ela vem antes de qualquer coisa nas aulas. Eu não prometo prazo de venda pra ninguém, e quem promete está inventando.</p></div>
+      </details>
+      <details class="faq__i" name="faq">
+        <summary><span class="faq__n">02</span><span class="faq__q">Preciso de quanto pra começar?</span><span class="faq__t"></span></summary>
+        <div class="faq__a"><p>Dá pra entrar com menos, mas o piso com que eu me sinto confortável é uns dez mil, porque sobra folga pra imprevisto. Sem folga, qualquer surpresa na oficina vira aperto.</p></div>
+      </details>
+      <details class="faq__i" name="faq">
+        <summary><span class="faq__n">03</span><span class="faq__q">Carro de leilão faz seguro?</span><span class="faq__t"></span></summary>
+        <div class="faq__a"><p>Faz, com condições. No leilão tradicional nem toda seguradora aceita e a cobertura costuma ficar abaixo de 100% da tabela. Eu explico isso nas aulas, com o que eu confiro antes de arrematar.</p></div>
+      </details>
+      <details class="faq__i" name="faq">
+        <summary><span class="faq__n">04</span><span class="faq__q">Preciso ter CNPJ ou nome limpo?</span><span class="faq__t"></span></summary>
+        <div class="faq__a"><p>Pode ser CPF ou CNPJ, tanto faz. E nome sujo não impede de arrematar no leilão tradicional. A única exceção são lotes de modalidade específica, como sucata, que exigem empresa credenciada, e eu mostro como identificar esses lotes.</p></div>
+      </details>
+      <details class="faq__i" name="faq">
+        <summary><span class="faq__n">05</span><span class="faq__q">Preciso entender de mecânica?</span><span class="faq__t"></span></summary>
+        <div class="faq__a"><p>Não. O que eu faço é ler as fotos, listar o que quebrou e pesquisar cada peça. Isso é pesquisa, não conserto. Quem faz o serviço é o latoeiro ou a oficina.</p></div>
+      </details>
+      <details class="faq__i" name="faq">
+        <summary><span class="faq__n">06</span><span class="faq__q">As aulas são ao vivo?</span><span class="faq__t"></span></summary>
+        <div class="faq__a"><p>Não, são gravadas. Você assiste quando der, na ordem que quiser, quantas vezes precisar. São nove aulas de 15 a 20 minutos, e a partir da terceira você já tem o que precisa pra dar o primeiro lance.</p></div>
+      </details>
+      <details class="faq__i" name="faq">
+        <summary><span class="faq__n">07</span><span class="faq__q">E o leilão judicial, entra aqui?</span><span class="faq__t"></span></summary>
+        <div class="faq__a"><p>Não. Aqui é leilão tradicional, que é onde faz sentido começar. O judicial tem edital mais difícil, outras regras de documentação e um caminho próprio, e por isso ele é um passo separado.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="sep" style="--from:#0B0A07;--to:#1A1409;--mid:#0B0A07"><div class="ln"></div><div class="no"></div><div class="in-wrap"><div class="wrap"><span class="mk mk-l">lote 13</span><span class="mk mk-r">a decisão</span></div></div></div>
+
+<!-- DECISAO -->
+<section class="decisao s-warm">
+  <div class="wrap-lg">
+    <h2 class="reveal">A partir daqui, existem<br><span>só dois caminhos</span></h2>
+    <div class="decisao__paths stagger">
+      <article class="decisao__card reveal d1">
+        <span class="decisao__label">Caminho 01</span>
+        <h3>Você fecha esta página.</h3>
+        <p>O leilão continua aberto amanhã, do mesmo jeito. Você abre um lote, acha bonito o preço, e fecha a aba de novo porque não consegue provar pra si mesmo que vale. Daqui a seis meses o carro que você não deu lance vai estar rodando com outro dono, e a conta que decidiria aquilo continua não existindo no seu papel.</p>
+        <span class="decisao__wm" aria-hidden="true">01</span>
+      </article>
+      <article class="decisao__card decisao__card--in reveal d2">
+        <span class="decisao__label">Caminho 02</span>
+        <h3>Você entra agora.</h3>
+        <p>Hoje você recebe as nove aulas e as listas. Na terceira aula você já tem um teto escrito no papel pro primeiro lote que abrir. E se em sete dias achar que não era pra você, eu devolvo o valor inteiro, sem perguntar nada.</p>
+        <span class="decisao__wm" aria-hidden="true">02</span>
+      </article>
+    </div>
+
+    <div class="recap reveal d2">
+      <p>Nove aulas gravadas, a Régua do Lance, as listas de leilões, cegonheiros e despachantes, e o grupo de repasse. O mesmo método que eu ensino na mentoria de <b>R$ 4.000</b>, por <b>12x R$ 29,70</b> ou R$ 297 à vista.</p>
+    </div>
+
+    <!-- [PREENCHER] tres prazos concretos, cada um com OBJETO e PORQUE, e cada um preso a
+         um bonus, nunca a oferta. Nada de "vagas limitadas" ou "por tempo limitado".
+         Exemplo do molde: "O grupo de repasse tem X vagas por mês porque eu modero na mao."
+         Maximo 2 pereciveis. Enquanto o Maykell nao definir, este bloco fica fora do ar. -->
+
+    <a class="cta-seam" href="#oferta">Quero a régua do lance</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>Maykell Gomes · A Régua do Lance · 2026</p>
+    <p>Dúvida antes de entrar? Chama no <a href="#" data-suporte>WhatsApp</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduz = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* barra de progresso de leitura */
+  (function progresso(){
+    var bar = document.querySelector('[data-prog]');
+    if (!bar) return;
+    var tick = false;
+    function pinta(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, window.scrollY / h * 100) : 0) + '%';
+      tick = false;
+    }
+    addEventListener('scroll', function(){ if(!tick){ tick = true; requestAnimationFrame(pinta); } }, {passive:true});
+    addEventListener('resize', pinta, {passive:true});
+    pinta();
+  })();
+
+  /* separadores e listas em cascata: acendem quando entram na tela */
+  (function transicoes(){
+    var alvos = document.querySelectorAll('.sep, .stagger');
+    if (!alvos.length) return;
+    if (reduz || !('IntersectionObserver' in window)) {
+      alvos.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.3, rootMargin:'0px 0px -6% 0px'});
+    alvos.forEach(function(el){ io.observe(el); });
+  })();
+
+  /* reveals */
+  var alvos = document.querySelectorAll('.reveal');
+  if (reduz || !('IntersectionObserver' in window)) {
+    alvos.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+    alvos.forEach(function(el){ io.observe(el); });
+  }
+
+  /* acumulador da conta: 18 mil -> 45 mil em 4 degraus, cor da marca ate o alerta */
+  (function anchorCount(){
+    var root = document.querySelector('[data-anchor]');
+    if (!root) return;
+    var n = root.querySelector('[data-anchor-num]');
+    var cards = [].slice.call(root.querySelectorAll('.anc__card'));
+    var VALORES = [18000, 27000, 36000, 45000];   /* [CONFIRMAR] degraus intermediarios estimados */
+    var CORES = [[232,200,106],[214,170,90],[196,110,60],[196,64,42]];
+    var CICLO = 5200, LEAD = 400, PASSO = 800, SUBIDA = 420;
+
+    function draw(t){
+      var s = Math.min(VALORES.length-1, Math.max(0, Math.floor((t-LEAD)/PASSO)));
+      var loc = Math.max(0, t-LEAD-s*PASSO), p = Math.min(1, loc/SUBIDA), e = 1-Math.pow(1-p,3);
+      var de = VALORES[Math.max(0,s-1)], pra = VALORES[s];
+      n.textContent = Math.round(s===0 ? pra : de+(pra-de)*e).toLocaleString('pt-BR');
+      cards.forEach(function(c,i){
+        c.classList.toggle('is-future', i>s);
+        c.classList.toggle('is-current', i===s);
+      });
+      var cde = CORES[Math.max(0,s-1)], cpra = CORES[s];
+      root.style.setProperty('--heat', cpra.map(function(v,i){ return Math.round(cde[i]+(v-cde[i])*e); }).join(','));
+      root.style.setProperty('--glow', (.025+(s+e)/VALORES.length*.13).toFixed(3));
+      root.style.setProperty('--progress', (s===0?0:(s-1+e)/(VALORES.length-1)*100)+'%');
+      root.classList.toggle('is-final', t >= LEAD+PASSO*(VALORES.length-1)+SUBIDA+400);
+    }
+
+    if (reduz) { draw(CICLO); return; }
+    var el=0, last=0, raf=0, vis=false;
+    function tick(now){ if(!last) last=now; el=(el+Math.min(now-last,100))%CICLO; last=now; draw(el); raf=requestAnimationFrame(tick); }
+    function play(){ if(raf||!vis||document.hidden) return; last=0; raf=requestAnimationFrame(tick); }
+    function pause(){ cancelAnimationFrame(raf); raf=0; }
+    new IntersectionObserver(function(en){ vis=en[0].isIntersecting; vis?play():pause(); },{threshold:.35}).observe(root);
+    document.addEventListener('visibilitychange', function(){ document.hidden?pause():play(); });
+    draw(0);
+  })();
+
+  /* [INSTRUMENTACAO] quando o pixel entrar, disparar ViewContent quando o bloco de oferta
+     aparecer, e Purchase no checkout. Hoje so registra no console. */
+  var oferta = document.getElementById('oferta');
+  if (oferta && 'IntersectionObserver' in window) {
+    var visto = false;
+    new IntersectionObserver(function(en){
+      if (en[0].isIntersecting && !visto) {
+        visto = true;
+        if (typeof fbq === 'function') { fbq('track','ViewContent',{content_name:'Regua do Lance'}); }
+      }
+    }, {threshold:.3}).observe(oferta);
+  }
+  document.querySelectorAll('[data-checkout]').forEach(function(b){
+    b.addEventListener('click', function(){
+      if (typeof fbq === 'function') { fbq('track','InitiateCheckout',{value:297,currency:'BRL'}); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
