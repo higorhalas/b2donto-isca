@@ -1,0 +1,1733 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal do Aluno, Leilao de Veiculos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   SISTEMA VISUAL, MODO CLARO ("claro nitido")
+   Paleta DERIVADA da escura da casa (curso-297.html): mesma familia de hue,
+   papel quente tingido no ambar. Nunca branco azulado, nunca cinza de template.
+   ========================================================================= */
+:root{
+  /* papel: 6 superficies, do mais claro ao mais quente. Mesma logica da
+     escura, invertida. Na escura a temperatura sobe conforme caminha pra
+     oferta; aqui tambem, --p-gold e so upgrade. */
+  --p-card:#FFFFFF;     /* so card elevado */
+  --p-base:#FAF8F4;     /* o chao do portal */
+  --p-soft:#F5F1E9;
+  --p-warm:#F0EADC;
+  --p-ember:#EBE3D1;
+  --p-gold:#F7EEDA;     /* o mais quente: so upgrade e oferta */
+
+  /* tinta tingida no ambar, nunca preto puro. Mesma escada de 5 da escura. */
+  --ink-1:#1A150C; --ink-2:#3D3527; --ink-3:#5E5442; --ink-4:#8A7F68; --ink-5:#B5AB94;
+
+  /* acento: em papel o ambar claro nao tem contraste pra texto, entao sao
+     dois. --accent carrega texto e borda, --accent-fill so preenche botao. */
+  --accent:#9A7414;        /* texto, link, borda, numero de etapa. Contraste AA no papel */
+  --accent-fill:#E8C86A;   /* SO o fill do botao principal, com --btn-text por cima */
+  --accent-soft:#F5E6BE;   /* wash de fundo, badge, destaque */
+  --btn-text:#14100A;
+  --ok:#3F7D4E; --danger:#B03E28;
+
+  --line:rgba(26,21,12,.10);
+  --line-2:rgba(154,116,20,.20);
+
+  --font:'Sora',system-ui,-apple-system,sans-serif;
+  --mono:'Courier Prime',monospace;
+
+  /* escada tipografica: tamanho : tracking : peso : entrelinha.
+     O tracking negativo forte e a assinatura premium da casa. Nao afrouxar. */
+  --t-mega:clamp(32px,5.2vw,52px); --tr-mega:-.055em; --w-mega:600; --lh-mega:1.08;
+  --t-h2:clamp(24px,3vw,34px);     --tr-h2:-.05em;    --w-h2:550;   --lh-h2:1.14;
+  --t-h3:19px;                     --tr-h3:-.04em;    --w-h3:600;   --lh-h3:1.3;
+  --t-body:15px;                   --tr-body:-.012em; --w-body:400; --lh-body:1.7;
+  --t-micro:10px;                  --tr-micro:.12em;  --w-micro:600; --lh-micro:1.6;
+
+  /* profundidade vem de LINHA e de um degrau de papel, nao de sombra pesada.
+     Duas sombras no sistema inteiro, e so isso. */
+  --sh-1:0 1px 2px rgba(26,21,12,.04);
+  --sh-2:0 8px 24px rgba(26,21,12,.05);
+
+  /* raio contido: 10 a 14px. Raio grande demais infantiliza ferramenta de trabalho. */
+  --r:12px; --r-sm:10px; --r-lg:14px;
+
+  --sidebar:272px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:var(--p-base);
+  color:var(--ink-2);
+  font-size:var(--t-body);letter-spacing:var(--tr-body);line-height:var(--lh-body);
+  font-weight:var(--w-body);
+  -webkit-font-smoothing:antialiased;
+  /* mobile-first de verdade: nada de largura fixa em lugar nenhum */
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{margin:0;color:var(--ink-1)}
+p{margin:0}
+a{color:var(--accent);text-decoration:none}
+button{font:inherit;letter-spacing:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,textarea{font:inherit;letter-spacing:inherit;color:inherit}
+
+/* foco visivel em tudo que recebe foco. Sem isso o portal e inutilizavel no teclado. */
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+.h1{font-size:var(--t-mega);letter-spacing:var(--tr-mega);font-weight:var(--w-mega);line-height:var(--lh-mega)}
+.h2{font-size:var(--t-h2);letter-spacing:var(--tr-h2);font-weight:var(--w-h2);line-height:var(--lh-h2)}
+.h3{font-size:var(--t-h3);letter-spacing:var(--tr-h3);font-weight:var(--w-h3);line-height:var(--lh-h3)}
+/* caixa alta SO abaixo de 12px. Acima disso vira grito. */
+.micro{font-size:var(--t-micro);letter-spacing:var(--tr-micro);font-weight:var(--w-micro);
+  line-height:var(--lh-micro);text-transform:uppercase;color:var(--ink-4)}
+.mono{font-family:var(--mono)}
+.dim{color:var(--ink-3)}
+.dim-2{color:var(--ink-4)}
+
+/* =========================================================================
+   SHELL: sidebar fixa a esquerda, sempre visivel no desktop.
+   No celular ela vira gaveta sobre o conteudo.
+   ========================================================================= */
+.shell{display:block}
+.topbar{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 14px;background:var(--p-card);
+  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:40;
+}
+.burger{
+  /* alvo de toque de 44px, medido */
+  width:44px;height:44px;display:grid;place-items:center;
+  border:1px solid var(--line-2);border-radius:var(--r-sm);background:var(--p-soft);
+}
+.burger span{display:block;width:16px;height:1.5px;background:var(--ink-1);
+  box-shadow:0 -5px 0 var(--ink-1),0 5px 0 var(--ink-1)}
+.topbar .tb-title{font-size:13px;font-weight:600;letter-spacing:-.03em;color:var(--ink-1)}
+
+.backdrop{position:fixed;inset:0;background:rgba(26,21,12,.36);z-index:48;border:0}
+.backdrop[hidden]{display:none}
+
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:min(88vw,var(--sidebar));
+  background:var(--p-card);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;z-index:50;
+  transform:translateX(-102%);transition:transform .22s ease;
+  overflow-y:auto;overscroll-behavior:contain;
+}
+.sidebar.open{transform:none;box-shadow:var(--sh-2)}
+@media(prefers-reduced-motion:reduce){.sidebar{transition:none}}
+
+.main{padding:22px 16px 72px}
+
+/* No desktop a sidebar deixa de ser gaveta e vira coluna fixa do grid. */
+@media(min-width:980px){
+  .topbar{display:none}
+  .shell{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh}
+  .sidebar{position:sticky;height:100vh;transform:none;width:auto;box-shadow:none}
+  .backdrop{display:none!important}
+  .main{padding:38px 40px 96px;max-width:1180px}
+}
+
+/* ---- bloco de nivel, topo da sidebar ---- */
+.nivel{padding:18px 18px 16px;border-bottom:1px solid var(--line);background:var(--p-soft)}
+.nivel .n-lab{margin-bottom:8px}
+.nivel .n-num{font-size:22px;font-weight:600;letter-spacing:-.045em;color:var(--ink-1);line-height:1.1}
+.nivel .n-sub{font-size:11.5px;color:var(--ink-4);margin-top:12px;display:flex;
+  justify-content:space-between;align-items:baseline;gap:8px}
+.nivel .n-pct{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:700}
+.bar{height:6px;border-radius:99px;background:var(--p-ember);overflow:hidden;margin-top:7px;
+  border:1px solid var(--line)}
+.bar > i{display:block;height:100%;background:var(--accent-fill);border-radius:99px;
+  transition:width .35s ease}
+.nivel .n-falta{font-size:11.5px;color:var(--ink-4);margin-top:9px}
+
+/* ---- navegacao ---- */
+.nav{padding:12px 10px;flex:1}
+.nav button{
+  display:flex;align-items:center;gap:10px;width:100%;
+  min-height:44px;padding:0 12px;border-radius:var(--r-sm);
+  font-size:14px;letter-spacing:-.02em;color:var(--ink-2);text-align:left;
+  border:1px solid transparent;
+}
+.nav button:hover{background:var(--p-soft)}
+/* "claro nitido": o item ativo marca ZONA com --accent-soft e borda, nao so cor de texto */
+.nav button[aria-current="page"]{
+  background:var(--accent-soft);border-color:var(--line-2);
+  color:var(--ink-1);font-weight:600;
+}
+.nav .dot{width:5px;height:5px;border-radius:99px;background:var(--ink-5);flex:none}
+.nav button[aria-current="page"] .dot{background:var(--accent)}
+
+/* ---- rodape da sidebar ---- */
+.perfil{padding:14px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:flex-start;
+  background:var(--p-soft)}
+.avatar{width:34px;height:34px;flex:none;border-radius:9px;background:var(--accent-soft);
+  border:1px solid var(--line-2);display:grid;place-items:center;
+  font-weight:600;color:var(--accent);font-size:14px;letter-spacing:-.02em}
+.perfil .p-mail{font-size:12px;color:var(--ink-2);word-break:break-all;line-height:1.35}
+.perfil .p-plano{font-size:11px;color:var(--accent);margin-top:3px;line-height:1.35;font-weight:500}
+
+/* =========================================================================
+   COMPONENTES
+   ========================================================================= */
+/* breadcrumb: e navegacao de verdade, cada pedaco anterior e clicavel.
+   O portal do Joao mostra sempre o mesmo curso aqui. Esse bug nao foi copiado. */
+.crumb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;
+  color:var(--ink-4);margin-bottom:16px}
+.crumb button{color:var(--accent);font-size:12px;padding:2px 0}
+.crumb button:hover{text-decoration:underline}
+.crumb .sep{color:var(--ink-5)}
+.crumb .cur{color:var(--ink-3)}
+
+.card{background:var(--p-card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--sh-1)}
+/* "claro nitido": a borda do card e mais presente que o normal, tingida no ambar.
+   Card branco sobre papel #FAF8F4 ja e hierarquia. Nao empilho sombra em cima. */
+.card.nitido{border-color:var(--line-2)}
+
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:99px;
+  font-size:11px;font-weight:600;letter-spacing:-.01em;border:1px solid transparent;white-space:nowrap}
+/* badge usa --accent em texto sobre --accent-soft, nunca fill cheio.
+   O ambar solido aparece UMA VEZ por contexto, e e onde o aluno avanca. */
+.b-ok{background:rgba(63,125,78,.10);color:var(--ok);border-color:rgba(63,125,78,.24)}
+.b-prog{background:var(--accent-soft);color:var(--accent);border-color:var(--line-2)}
+.b-off{background:var(--p-warm);color:var(--ink-4);border-color:var(--line)}
+.b-lock{background:var(--p-warm);color:var(--ink-3);border-color:var(--line)}
+.b-herd{background:var(--accent-soft);color:var(--accent);border-color:var(--line-2)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:0 18px;border-radius:var(--r-sm);
+  font-size:14px;font-weight:600;letter-spacing:-.02em;border:1px solid var(--line-2);
+  background:var(--p-card);color:var(--ink-1);transition:background .15s ease}
+.btn:hover{background:var(--p-soft)}
+/* o unico fill solido de ambar da tela, e so onde o aluno AVANCA */
+.btn.pri{background:var(--accent-fill);color:var(--btn-text);border-color:#D9B855}
+.btn.pri:hover{background:#F0D689}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn[disabled]:hover{background:var(--p-card)}
+.btn.pri[disabled]:hover{background:var(--accent-fill)}
+.btn.sm{min-height:38px;padding:0 13px;font-size:13px}
+.btn.gh{background:transparent;border-color:var(--line);color:var(--ink-3);font-weight:500}
+.btn.gh:hover{background:var(--p-soft);color:var(--ink-2)}
+
+.wash{background:var(--accent-soft);border:1px solid var(--line-2);border-radius:var(--r-sm);
+  padding:14px 16px}
+.nota{background:var(--p-soft);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:var(--r-sm);padding:13px 15px;font-size:13.5px;color:var(--ink-3);line-height:1.62}
+
+.grid-2{display:grid;gap:14px}
+@media(min-width:760px){.grid-2{grid-template-columns:repeat(2,1fr)}}
+
+/* =========================================================================
+   TELA: SUA ROTA
+   ========================================================================= */
+.head{margin-bottom:24px}
+.head .h1{margin-bottom:8px}
+.head p{color:var(--ink-3);font-size:15px;max-width:60ch}
+
+.jornada{display:block;width:100%;text-align:left;padding:18px;border-radius:var(--r);
+  background:var(--p-card);border:1px solid var(--line-2);box-shadow:var(--sh-1);
+  transition:box-shadow .18s ease,transform .18s ease}
+.jornada:hover{box-shadow:var(--sh-2)}
+.jornada.trava{background:var(--p-soft);border-color:var(--line);box-shadow:none}
+.j-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px}
+.j-nome{font-size:17px;font-weight:600;letter-spacing:-.035em;color:var(--ink-1);line-height:1.28}
+.j-desc{font-size:13.5px;color:var(--ink-3);line-height:1.6;margin-bottom:14px}
+.j-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-4)}
+.j-pct{font-family:var(--mono);font-weight:700;color:var(--accent);font-size:13px}
+
+/* =========================================================================
+   TELA: TRILHA (lista de etapas + coluna direita)
+   ========================================================================= */
+.trilha-wrap{display:grid;gap:22px}
+@media(min-width:1040px){
+  /* coluna da direita fixa em 288px: e painel de estado, nao conteudo */
+  .trilha-wrap{grid-template-columns:1fr 288px;align-items:start}
+  .trilha-side{position:sticky;top:28px}
+}
+
+.mod-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  margin:26px 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line-2)}
+.mod-head:first-child{margin-top:0}
+.mod-head .m-nome{font-size:13px;font-weight:600;letter-spacing:-.02em;color:var(--ink-1)}
+
+.etapa{display:flex;gap:14px;width:100%;text-align:left;padding:16px;margin-bottom:10px;
+  background:var(--p-card);border:1px solid var(--line-2);border-radius:var(--r);
+  box-shadow:var(--sh-1);transition:box-shadow .18s ease}
+.etapa:hover{box-shadow:var(--sh-2)}
+.etapa.done{background:var(--p-soft)}
+/* "claro nitido": numero de etapa grande e em --accent. E o que da leitura
+   rapida da posicao na trilha sem precisar ler titulo. */
+.e-num{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent);
+  line-height:1;flex:none;width:42px;padding-top:2px;letter-spacing:-.02em}
+.etapa.done .e-num{color:var(--ink-5)}
+.e-body{flex:1;min-width:0}
+.e-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.e-tit{font-size:15px;font-weight:600;letter-spacing:-.03em;color:var(--ink-1);line-height:1.35}
+.e-desc{font-size:13.5px;color:var(--ink-3);line-height:1.6}
+.e-prog{display:inline-flex;align-items:center;gap:7px;margin-top:10px;
+  background:var(--accent-soft);border:1px solid var(--line-2);border-radius:99px;
+  padding:3px 10px;font-size:11px;font-weight:600;color:var(--accent)}
+
+.side-box{background:var(--p-card);border:1px solid var(--line-2);border-radius:var(--r);
+  padding:18px;box-shadow:var(--sh-1);margin-bottom:14px}
+.side-frac{font-size:40px;font-weight:600;letter-spacing:-.055em;color:var(--ink-1);
+  line-height:1;font-family:var(--mono)}
+.side-frac em{font-style:normal;color:var(--ink-4);font-size:26px}
+.side-lab{font-size:12px;color:var(--ink-4);margin-top:6px}
+.prox{display:block;width:100%;text-align:left;margin-top:14px;padding:12px 13px;
+  background:var(--accent-soft);border:1px solid var(--line-2);border-radius:var(--r-sm)}
+.prox:hover{background:#F1DFB0}
+.prox .p-lab{font-size:11px;color:var(--accent);font-weight:600;margin-bottom:3px}
+.prox .p-nome{font-size:13.5px;font-weight:600;color:var(--ink-1);letter-spacing:-.025em;line-height:1.35}
+.links-rap{display:flex;flex-direction:column;gap:2px;margin-top:8px}
+.links-rap button{min-height:40px;text-align:left;font-size:13.5px;color:var(--accent);padding:0 2px}
+.links-rap button:hover{text-decoration:underline}
+
+/* =========================================================================
+   TELA: ETAPA (abas)
+   ========================================================================= */
+.etapa-head{margin-bottom:20px}
+.eh-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.eh-num{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);
+  background:var(--accent-soft);border:1px solid var(--line-2);border-radius:99px;padding:4px 11px}
+.etapa-head .h2{margin-bottom:10px}
+.etapa-head p{color:var(--ink-3);max-width:66ch}
+
+/* abas: o conjunto VARIA por etapa. Teorica tem 2, produtiva tem 4.
+   A barra rola no eixo x dentro dela mesma, o body nunca rola. */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line-2);margin-bottom:22px;
+  overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{min-height:44px;padding:0 15px;font-size:14px;font-weight:500;
+  letter-spacing:-.025em;color:var(--ink-4);white-space:nowrap;
+  border-bottom:2px solid transparent;margin-bottom:-1px;border-radius:var(--r-sm) var(--r-sm) 0 0}
+.tabs button:hover{color:var(--ink-2);background:var(--p-soft)}
+.tabs button[aria-selected="true"]{color:var(--ink-1);font-weight:600;
+  border-bottom-color:var(--accent);background:var(--accent-soft)}
+.tabs button .tk{display:inline-block;margin-left:7px;font-size:11px;color:var(--ok)}
+
+/* player: placeholder HONESTO. Nenhuma aula foi gravada ainda, e a tela diz isso. */
+.player{aspect-ratio:16/9;width:100%;border-radius:var(--r);background:var(--p-warm);
+  border:1px solid var(--line-2);display:grid;place-items:center;text-align:center;padding:24px}
+.player .pl-in{max-width:44ch}
+.player .pl-t{font-size:13.5px;font-weight:600;color:var(--ink-2);letter-spacing:-.025em;
+  margin-bottom:6px}
+.player .pl-d{font-size:12.5px;color:var(--ink-4);line-height:1.6}
+
+.pontos{list-style:none;padding:0;margin:14px 0 0}
+.pontos li{position:relative;padding-left:20px;margin-bottom:9px;font-size:14px;
+  color:var(--ink-2);line-height:1.62}
+.pontos li::before{content:"";position:absolute;left:3px;top:9px;width:6px;height:6px;
+  border-radius:99px;background:var(--accent)}
+
+.mat{display:flex;gap:12px;align-items:flex-start;padding:15px;
+  background:var(--p-card);border:1px solid var(--line);border-radius:var(--r-sm)}
+.mat .m-ico{width:38px;height:38px;flex:none;border-radius:9px;background:var(--p-warm);
+  border:1px solid var(--line);display:grid;place-items:center;
+  font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--ink-3);letter-spacing:.04em}
+.mat .m-n{font-size:14px;font-weight:600;color:var(--ink-1);letter-spacing:-.025em;line-height:1.35}
+.mat .m-d{font-size:12.5px;color:var(--ink-4);margin-top:3px;line-height:1.55}
+
+.campo{display:block;margin-bottom:14px}
+.campo .c-lab{display:block;font-size:13px;font-weight:600;color:var(--ink-2);
+  letter-spacing:-.02em;margin-bottom:6px}
+.campo .c-help{display:block;font-size:12px;color:var(--ink-4);margin-bottom:7px;line-height:1.5}
+.campo input,.campo textarea{width:100%;min-height:44px;padding:11px 13px;
+  background:var(--p-card);border:1px solid var(--line-2);border-radius:var(--r-sm);
+  font-size:14.5px;color:var(--ink-1)}
+.campo textarea{min-height:120px;resize:vertical;line-height:1.6}
+.campo input:focus,.campo textarea:focus{outline:2px solid var(--accent);outline-offset:1px;
+  border-color:var(--accent)}
+
+.regua-out{background:var(--p-gold);border:1px solid var(--line-2);border-radius:var(--r);
+  padding:20px;margin-top:6px}
+.ro-lab{margin-bottom:8px}
+.ro-val{font-family:var(--mono);font-size:clamp(28px,7vw,42px);font-weight:700;
+  letter-spacing:-.05em;color:var(--ink-1);line-height:1}
+.ro-sub{font-size:12.5px;color:var(--ink-3);margin-top:10px;line-height:1.6}
+.ro-linha{display:flex;justify-content:space-between;gap:12px;font-size:13px;
+  padding:7px 0;border-top:1px solid var(--line)}
+.ro-linha span:last-child{font-family:var(--mono);color:var(--ink-2);white-space:nowrap}
+
+.check{display:flex;gap:11px;align-items:flex-start;padding:13px;margin-bottom:8px;
+  background:var(--p-card);border:1px solid var(--line);border-radius:var(--r-sm);
+  cursor:pointer;min-height:44px}
+.check:hover{background:var(--p-soft)}
+.check input{width:20px;height:20px;flex:none;margin:2px 0 0;accent-color:var(--accent)}
+.check span{font-size:13.5px;color:var(--ink-2);line-height:1.6}
+
+.trava{background:var(--p-soft);border:1px dashed var(--line-2);border-radius:var(--r);
+  padding:22px;text-align:left}
+.aviso{font-size:13px;margin-top:10px;line-height:1.6;min-height:1px}
+.aviso.err{color:var(--danger)}
+.aviso.ok{color:var(--ok)}
+
+.acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+/* =========================================================================
+   TELA: MEUS MATERIAIS
+   ========================================================================= */
+.mm-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.mm-tabs button{min-height:40px;padding:0 14px;border-radius:99px;font-size:13px;font-weight:600;
+  border:1px solid var(--line);background:var(--p-card);color:var(--ink-3)}
+.mm-tabs button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--line-2);
+  color:var(--accent)}
+.mm-cnt{display:inline-block;margin-left:7px;font-family:var(--mono);font-size:11px;color:var(--ink-4)}
+.mm-tabs button[aria-pressed="true"] .mm-cnt{color:var(--accent)}
+
+.vazio{padding:26px;text-align:center;background:var(--p-soft);border:1px dashed var(--line-2);
+  border-radius:var(--r);color:var(--ink-3);font-size:13.5px;line-height:1.65}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- topbar: so existe no celular, e o que abre a gaveta -->
+  <header class="topbar">
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+      <span></span>
+    </button>
+    <div class="tb-title" id="tbTitle">Sua Rota</div>
+  </header>
+  <button class="backdrop" id="backdrop" hidden aria-label="Fechar menu"></button>
+
+  <aside class="sidebar" id="sidebar" aria-label="Navegacao principal">
+    <div class="nivel">
+      <div class="micro n-lab">Seu nivel</div>
+      <div class="n-num" id="nvNum">Nivel 1</div>
+      <div class="n-sub">
+        <span>Progresso para proximo nivel</span>
+        <span class="n-pct" id="nvPct">0%</span>
+      </div>
+      <div class="bar"><i id="nvBar" style="width:0%"></i></div>
+      <div class="n-falta" id="nvFalta">0 aulas para o proximo nivel</div>
+    </div>
+
+    <nav class="nav" id="nav"></nav>
+
+    <div class="perfil">
+      <div class="avatar" id="pfIni" aria-hidden="true">A</div>
+      <div>
+        <div class="p-mail" id="pfMail"></div>
+        <div class="p-plano" id="pfPlano"></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+
+<div class="sr" id="live" aria-live="polite" role="status"></div>
+
+<script>
+/* =========================================================================
+   MODELO DE DADOS
+   4 entidades SEPARADAS, do jeito que vira tabela no Supabase.
+   - MODULO  e a unidade atomica: existe UMA VEZ SO no sistema.
+   - PRODUTO e um pacote que libera um conjunto de modulos.
+   - ALUNO   compra produtos.
+   - PROGRESSO e do ALUNO por AULA, independente do produto que deu acesso.
+   Consequencia pratica: quem comprou o low ticket, concluiu o Modulo 1 e
+   depois deu upgrade, ve o Modulo 1 JA MARCADO COMO VISTO.
+   ========================================================================= */
+
+/* ---------- entregavel nomeado pelo RESULTADO, nunca pelo processo ---------- */
+
+const MODULOS = {
+  m1:{
+    id:'m1',
+    nome:'Leilao tradicional',
+    subtitulo:'Do cadastro ao carro revendido, na ordem que faz voce dar lance cedo',
+    estado:'gravado',
+    aulas:[
+      {id:'m1a1',n:'01',titulo:'Como funciona o leilao tradicional',
+       desc:'Quem e quem no leilao, de onde vem o lote e o que muda entre leilao de seguradora, de banco e de frota.',
+       abas:['aprenda','finalize'],
+       aula:{titulo:'Aula: Como funciona o leilao tradicional',
+         desc:'O mapa do jogo antes de voce colocar dinheiro nele.',
+         pontos:['Quem e o comitente, quem e o leiloeiro e por que essa diferenca muda o edital',
+                 'As origens de lote e o que cada uma diz sobre o estado do carro',
+                 'Por que o preco de tela nunca e o preco final']},
+       materiais:[]},
+
+      {id:'m1a2',n:'02',titulo:'Cadastro e habilitacao',
+       desc:'Sair do zero e ficar apto a dar lance, com os documentos certos e sem retrabalho.',
+       abas:['aprenda','construa','finalize'],
+       aula:{titulo:'Aula: Cadastro e habilitacao',
+         desc:'O passo burocratico que trava a maioria antes de comecar.',
+         pontos:['Os documentos que todo leiloeiro pede, e os que variam',
+                 'Habilitacao por lote e habilitacao geral, quando cada uma serve',
+                 'O que fazer quando o cadastro e recusado']},
+       materiais:[],
+       construa:{tipo:'texto',
+         titulo:'Meu cadastro aprovado em 2 leiloeiros',
+         help:'Escreva em quais leiloeiros voce esta habilitado e a data da aprovacao. Se ainda foi recusado, escreva o motivo que veio na resposta.',
+         ph:'Leiloeiro 1, aprovado em ...'}},
+
+      {id:'m1a3',n:'03',titulo:'Como ler o edital e calcular o valor real do lote',
+       desc:'A Regua do Lance aplicada a um lote de verdade. Aqui sai o numero que voce nao ultrapassa.',
+       abas:['aprenda','construa','valide','finalize'],
+       aula:{titulo:'Aula: O edital manda, e a Regua traduz',
+         desc:'Todo concorrente ensina a achar o lote. A partir daqui voce calcula a saida antes de entrar.',
+         pontos:['O que ler primeiro no edital, e o que costuma estar escondido no fim',
+                 'Custo que entra sobre o lance e custo que entra depois, por que a conta muda',
+                 'Por que o lucro que voce quer entra na conta ANTES do lance, e nao sobra dele']},
+       materiais:[{nome:'A Regua do Lance',desc:'A planilha da conta que sai desta aula, com os seus numeros dentro.',tipo:'Planilha',fmt:'CSV',gera:'regua'}],
+       construa:{tipo:'regua',titulo:'Meu teto de lance num lote real'},
+       valide:{titulo:'Confira antes de fechar',
+         itens:['Conferi a taxa do leiloeiro no edital DESTE lote, nao repeti a do lote anterior',
+                'O preco de revenda que usei e de anuncio real da minha praca, nao e tabela cheia',
+                'O lucro que eu quero esta em Meus Materiais e e o mesmo em todo lote']}},
+
+      {id:'m1a4',n:'04',titulo:'Como avaliar um lote remotamente antes de arrematar',
+       desc:'Ler foto, laudo e descricao como quem ja sabe o que costuma estar faltando.',
+       abas:['aprenda','construa','finalize'],
+       aula:{titulo:'Aula: Avaliando sem ver o carro',
+         desc:'O que da pra afirmar pela foto, o que da pra suspeitar e o que so o patio responde.',
+         pontos:['O que a foto de um angulo so esconde, e como pedir a que falta',
+                 'Sinais de batida estrutural que aparecem em foto de anuncio',
+                 'Quando a duvida ja e cara o bastante pra pular o lote']},
+       materiais:[],
+       construa:{tipo:'texto',
+         titulo:'Meu parecer de um lote sem ver o carro',
+         help:'Pegue um lote aberto agora. Escreva o que voce afirma, o que voce suspeita e o que voce nao consegue saber. Essa separacao e o exercicio.',
+         ph:'Afirmo que ... / Suspeito que ... / Nao da pra saber ...'}},
+
+      {id:'m1a5',n:'05',titulo:'Estrategia de lance',
+       desc:'Entrar na disputa com o teto ja fechado, e parar quando ele e alcancado.',
+       abas:['aprenda','construa','valide','finalize'],
+       aula:{titulo:'Aula: Estrategia de lance',
+         desc:'A estrategia nao e sobre ganhar o lote. E sobre nao ganhar o lote errado.',
+         pontos:['Lance de abertura, lance automatico e o que cada um entrega de informacao pro concorrente',
+                 'O minuto final e a prorrogacao automatica: o que muda no seu comportamento',
+                 'O unico motivo legitimo de parar de dar lance e o teto, e ele ja foi calculado na etapa 03']},
+       materiais:[],
+       construa:{tipo:'lance',titulo:'Meu lance registrado com teto respeitado'},
+       valide:{titulo:'Confira antes de fechar',
+         itens:['Meu lance e menor ou igual ao teto que saiu da Regua',
+                'Ja sei o que eu faco se cobrirem o meu lance, e a resposta e parar',
+                'Confirmei que o lote do lance e o mesmo lote que eu analisei na etapa 03']}},
+
+      {id:'m1a6',n:'06',titulo:'O que fazer depois que arrematou',
+       desc:'As primeiras 48 horas depois do martelo, na ordem em que os prazos vencem.',
+       abas:['aprenda','finalize'],
+       aula:{titulo:'Aula: Arrematei. E agora',
+         desc:'A etapa onde o dinheiro ja saiu e o carro ainda nao e seu.',
+         pontos:['A sequencia de pagamento e o que acontece se um prazo do edital estourar',
+                 'Os documentos que o leiloeiro emite e pra que serve cada um',
+                 'Por que a nota de arrematacao e o papel que destrava todo o resto']},
+       materiais:[]},
+
+      {id:'m1a7',n:'07',titulo:'Retirando o carro do patio',
+       desc:'Agendamento, transporte e a conferencia que precisa acontecer com o carro na frente.',
+       abas:['aprenda','construa','finalize'],
+       aula:{titulo:'Aula: Retirando o carro do patio',
+         desc:'O dia em que a avaliacao remota encontra a realidade.',
+         pontos:['Como agendar a retirada e o que levar no dia',
+                 'A conferencia item a item antes de assinar a retirada',
+                 'Diaria de patio: por que ela corre contra voce desde o martelo']},
+       materiais:[],
+       construa:{tipo:'texto',
+         titulo:'Meu carro fora do patio',
+         help:'Registre a data da retirada, quem transportou e o que voce encontrou de diferente do que tinha avaliado remotamente.',
+         ph:'Retirado em ... / Diferencas em relacao a avaliacao: ...'}},
+
+      {id:'m1a8',n:'08',titulo:'Documentacao e regularizacao',
+       desc:'Transferencia, vistoria e as pendencias que aparecem so quando o processo comeca.',
+       abas:['aprenda','construa','finalize'],
+       aula:{titulo:'Aula: Documentacao e regularizacao',
+         desc:'O carro so e revendavel quando o papel fecha.',
+         pontos:['A ordem das etapas de transferencia e quem depende de quem',
+                 'Vistoria: o que reprova e o que da pra resolver antes',
+                 'Debito que segue o veiculo e debito que segue o antigo dono']},
+       materiais:[],
+       construa:{tipo:'texto',
+         titulo:'Meu carro no meu nome',
+         help:'Escreva em que ponto do processo de transferencia voce esta e qual e a proxima pendencia a resolver.',
+         ph:'Etapa atual: ... / Proxima pendencia: ...'}},
+
+      {id:'m1a9',n:'09',titulo:'Como revender o carro',
+       desc:'Anuncio, precificacao e atendimento de quem chega. O fim da regua que comecou na etapa 03.',
+       abas:['aprenda','construa','finalize'],
+       aula:{titulo:'Aula: Como revender o carro',
+         desc:'Fechar o ciclo pelo preco que sustentou o teto do seu lance.',
+         pontos:['Como montar o anuncio: as fotos, o texto e o que nao omitir',
+                 'Precificar a partir do que voce anotou na Regua, nao a partir do que voce gastou',
+                 'Atender quem chega: as perguntas que sempre vem e como responder sem improviso']},
+       materiais:[],
+       construa:{tipo:'texto',
+         titulo:'Meu anuncio de revenda no ar',
+         help:'Cole o link do anuncio publicado e o preco que voce pediu. Depois compare esse preco com o de revenda que voce usou na Regua, na etapa 03.',
+         ph:'Link do anuncio: ... / Preco pedido: ...'}}
+    ]
+  },
+
+  mj:{
+    id:'mj',
+    nome:'Leilao judicial',
+    subtitulo:'9 aulas, J1 a J9. As aulas existem no plano do curso, os titulos ainda nao foram definidos.',
+    estado:'planejado',
+    aulas:[1,2,3,4,5,6,7,8,9].map(function(i){
+      return {id:'mja'+i,n:'J'+i,titulo:'Aula J'+i,
+        desc:'[PLACEHOLDER: titulo e descricao da aula J'+i+']',
+        abas:['aprenda','finalize'],
+        aula:{titulo:'Aula J'+i,
+          desc:'[PLACEHOLDER: descricao da aula J'+i+']',
+          pontos:['[PLACEHOLDER: pontos-chave da aula J'+i+']']},
+        materiais:[]};
+    })
+  },
+
+  mfin:{id:'mfin',nome:'Comprando carro em leilao com financiamento',
+    subtitulo:'Prateleira cadastrada. Sem estrutura de aulas ainda.',
+    estado:'cadastrado',
+    realidade:['Nenhuma aula definida ate agora.',
+               'A prateleira esta cadastrada porque o tema entra na escada de produtos, nao porque o conteudo existe.',
+               '[PLACEHOLDER: o que o Maykell vai cobrir nesta prateleira]'],
+    aulas:[]},
+
+  malu:{id:'malu',nome:'Renda extra alugando carros',
+    subtitulo:'Sem aulas gravadas. O que existe e operacao rodando.',
+    estado:'cadastrado',
+    realidade:['Nenhuma aula gravada ate agora.',
+               'O lastro desta prateleira e a operacao do Maykell: 3 carros comprados entre R$ 25 mil e R$ 30 mil, rodando no Uber, rendendo R$ 700 por semana cada um.',
+               'O conteudo, quando for gravado, sai dessa operacao. [PLACEHOLDER: formato e data de gravacao]'],
+    aulas:[]},
+
+  mpref:{id:'mpref',nome:'Leilao de prefeitura',
+    subtitulo:'Sem aulas gravadas. Em estudo pelo Maykell.',
+    estado:'cadastrado',
+    realidade:['Nenhuma aula gravada ate agora.',
+               'O Maykell vai estudar o tema e gravar. Nao existe material anterior aqui.',
+               '[PLACEHOLDER: escopo das aulas de leilao de prefeitura]'],
+    aulas:[]},
+
+  mment:{id:'mment',nome:'O Arquivo Secreto',
+    subtitulo:'A mentoria. Libera as 6 prateleiras.',
+    estado:'cadastrado',
+    realidade:['A mentoria nao tem trilha propria de aulas gravadas: ela LIBERA todos os modulos do sistema.',
+               'O que e proprio dela: 24 vagas de hot seat por ciclo.',
+               '[PLACEHOLDER: calendario e formato dos hot seats]'],
+    aulas:[]}
+};
+
+/* PRODUTO: o pacote. Repare que m1 aparece em p1 E em p2.
+   Nao e copia: e o MESMO modulo, referenciado duas vezes. */
+const PRODUTOS = {
+  p1:{id:'p1',nome:'Leilao tradicional',preco:'R$ 297',
+      desc:'A entrada. As 9 aulas que levam do cadastro ao carro revendido.',
+      modulos:['m1'],
+      extras:[]},
+  p2:{id:'p2',nome:'[PLACEHOLDER: nome do produto 2]',preco:'R$ 997 a 1997',
+      desc:'O judicial. Inclui o modulo de entrada inteiro, mais as 9 aulas J1 a J9, a call individual e os encontros quinzenais.',
+      modulos:['m1','mj'],
+      herda:['m1'],
+      extras:[
+        {tipo:'Call individual',titulo:'Sua call individual',
+         desc:'Uma call, um a um, pra fechar o direcionamento do seu capital. E nela que entra a regra 60/40: 60% do capital no lance, 40% de reserva.'},
+        {tipo:'Encontros',titulo:'12 encontros quinzenais',
+         desc:'Encontros a cada quinze dias ao longo do ciclo. [PLACEHOLDER: datas e horario dos encontros]'}
+      ]},
+  p6:{id:'p6',nome:'O Arquivo Secreto',preco:'R$ 4 a 5 mil',
+      desc:'A mentoria. Libera todos os modulos do sistema, os que existem e os que forem gravados.',
+      modulos:['m1','mj','mfin','malu','mpref','mment'],
+      extras:[{tipo:'Hot seat',titulo:'24 vagas de hot seat por ciclo',
+        desc:'As vagas de hot seat do ciclo. [PLACEHOLDER: como a vaga e distribuida]'}]}
+};
+
+/* PRATELEIRAS: a ordem de vitrine das 6, e qual modulo cada uma abre. */
+const PRATELEIRAS = [
+  {id:'pr1',modulo:'m1',   nome:'Leilao tradicional',  liberadoPor:['p1','p2','p6'],
+   desc:'A entrada. 9 aulas fechadas, na ordem que faz voce dar o primeiro lance ja a partir da aula 3.'},
+  {id:'pr2',modulo:'mj',   nome:'[PLACEHOLDER: nome do produto 2]', liberadoPor:['p2','p6'],
+   desc:'O leilao judicial. 9 aulas J1 a J9, uma call individual e 12 encontros quinzenais.'},
+  {id:'pr3',modulo:'mfin', nome:'Comprando carro em leilao com financiamento', liberadoPor:['p6'],
+   desc:'Prateleira cadastrada. Sem estrutura de aulas ainda.'},
+  {id:'pr4',modulo:'malu', nome:'Renda extra alugando carros', liberadoPor:['p6'],
+   desc:'Sem aulas gravadas. O lastro e a operacao de 3 carros do Maykell rodando no Uber.'},
+  {id:'pr5',modulo:'mpref',nome:'Leilao de prefeitura', liberadoPor:['p6'],
+   desc:'Sem aulas gravadas. O Maykell vai estudar e gravar.'},
+  {id:'pr6',modulo:'mment',nome:'O Arquivo Secreto', liberadoPor:['p6'],
+   desc:'A mentoria. Libera as 6 prateleiras e traz 24 vagas de hot seat por ciclo.'}
+];
+
+/* ALUNO: comprou o low ticket e depois deu upgrade pro judicial. */
+const ALUNO = {
+  nome:'Aluno Demo', inicial:'A', email:'aluno@exemplo.com',
+  produtos:['p1','p2']
+};
+
+/* PROGRESSO: do ALUNO por AULA. Nao tem produto nenhum nesta estrutura,
+   e e exatamente esse o ponto. As 9 aulas do modulo 1 foram concluidas
+   quando ele so tinha o produto de R$ 297, e continuam concluidas agora. */
+const PROGRESSO = {
+  m1a1:{abas:{aprenda:true},concluida:true,quando:'Modulo 1, ainda no plano de entrada'},
+  m1a2:{abas:{aprenda:true,construa:true},concluida:true,salvo:true,entrega:'Leiloeiro 1 e Leiloeiro 2, habilitacao geral aprovada.',quando:'Modulo 1, ainda no plano de entrada'},
+  m1a3:{abas:{aprenda:true,construa:true,valide:true},concluida:true,salvo:true,quando:'Modulo 1, ainda no plano de entrada'},
+  m1a4:{abas:{aprenda:true,construa:true},concluida:true,salvo:true,entrega:'Afirmo que o para-choque foi repintado. Suspeito de batida traseira leve. Nao da pra saber o estado do cambio.',quando:'Modulo 1, ainda no plano de entrada'},
+  m1a5:{abas:{aprenda:true,construa:true,valide:true},concluida:true,quando:'Modulo 1, ainda no plano de entrada'},
+  m1a6:{abas:{aprenda:true},concluida:true,quando:'Modulo 1, ainda no plano de entrada'},
+  m1a7:{abas:{aprenda:true,construa:true},concluida:true,salvo:true,entrega:'Retirado no dia seguinte ao pagamento. Pneus piores do que a foto mostrava.',quando:'Modulo 1, ainda no plano de entrada'},
+  m1a8:{abas:{aprenda:true,construa:true},concluida:true,salvo:true,entrega:'Vistoria aprovada. Falta a segunda via do CRV.',quando:'Modulo 1, ainda no plano de entrada'},
+  m1a9:{abas:{aprenda:true,construa:true},concluida:true,salvo:true,entrega:'Anuncio publicado. Preco pedido em linha com o de revenda usado na Regua.',quando:'Modulo 1, ainda no plano de entrada'},
+  mja1:{abas:{aprenda:true},concluida:true},
+  mja2:{abas:{},concluida:false}
+};
+
+/* MEUS MATERIAIS: o repositorio COMPARTILHADO.
+   O aluno preenche uma vez aqui e as ferramentas leem daqui.
+   "lucroAlvo" e lido pela Regua do Lance na etapa 03 e na tela Ferramentas. */
+const MATERIAIS = {
+  empresa:{
+    lucroAlvo:'4000',
+    capital:'',
+    praca:''
+  },
+  /* os numeros do lote que esta sendo analisado agora */
+  lote:{
+    revenda:'45000', taxa:'5', remocao:'1200', doc:'2800', reparos:'3500',
+    lance:''
+  },
+  feedbacks:[]
+};
+
+const CAMPOS_EMPRESA = [
+  {k:'lucroAlvo',lab:'O lucro que eu quero por carro',un:'R$',
+   help:'A Regua do Lance subtrai este valor ANTES de mostrar o teto. Mudar aqui muda o teto na etapa 03 na hora.'},
+  {k:'capital',lab:'O capital que eu tenho disponivel',un:'R$',
+   help:'Serve pra voce saber quantos lotes consegue tocar ao mesmo tempo.'},
+  {k:'praca',lab:'A praca onde eu revendo',un:'',
+   help:'Cidade ou regiao onde voce pesquisa o preco de revenda. O preco muda de praca pra praca.'}
+];
+
+const CAMPOS_LOTE = [
+  {k:'revenda',lab:'Preco de revenda realista deste carro',un:'R$',
+   help:'De anuncio real da sua praca, nao de tabela cheia.'},
+  {k:'taxa',lab:'Taxa do leiloeiro',un:'%',
+   help:'Confira no edital DESTE lote. Ela incide sobre o lance, por isso entra dividindo.'},
+  {k:'remocao',lab:'Remocao e patio',un:'R$',help:'Transporte, diarias e guincho.'},
+  {k:'doc',lab:'Documentacao e transferencia',un:'R$',help:'Taxas, vistoria e despachante.'},
+  {k:'reparos',lab:'Reparos e revisao',un:'R$',help:'O que o carro precisa pra ficar vendavel.'}
+];
+
+/* =========================================================================
+   ESTADO DE NAVEGACAO
+   ========================================================================= */
+const state = {tela:'rota', prateleira:null, aulaId:null, aba:null, mmFiltro:'todos'};
+
+/* =========================================================================
+   FUNCOES DE DOMINIO
+   ========================================================================= */
+function temProduto(pid){return ALUNO.produtos.indexOf(pid)>=0}
+
+function prateleiraLiberada(pr){
+  for(var i=0;i<pr.liberadoPor.length;i++){if(temProduto(pr.liberadoPor[i]))return true}
+  return false;
+}
+/* qual produto do aluno abre esta prateleira (pra dizer na interface de onde veio) */
+function produtoQueAbre(pr){
+  for(var i=0;i<pr.liberadoPor.length;i++){if(temProduto(pr.liberadoPor[i]))return PRODUTOS[pr.liberadoPor[i]]}
+  return null;
+}
+/* o produto de menor degrau que ja dava acesso. E isso que revela HERANCA. */
+function produtoDeOrigem(pr){
+  var ordem=['p1','p2','p6'];
+  for(var i=0;i<ordem.length;i++){
+    if(pr.liberadoPor.indexOf(ordem[i])>=0 && temProduto(ordem[i])) return PRODUTOS[ordem[i]];
+  }
+  return null;
+}
+function ehHerdado(pr){
+  /* herdado = o modulo ja vinha de um produto anterior ao plano mais alto do aluno */
+  var origem=produtoDeOrigem(pr);
+  var topo=planoTopo();
+  return !!(origem && topo && origem.id!==topo.id);
+}
+function planoTopo(){
+  var ordem=['p6','p2','p1'];
+  for(var i=0;i<ordem.length;i++){if(temProduto(ordem[i]))return PRODUTOS[ordem[i]]}
+  return null;
+}
+function prog(id){return PROGRESSO[id]||(PROGRESSO[id]={abas:{},concluida:false})}
+function statusAula(id){
+  var p=PROGRESSO[id];
+  if(p&&p.concluida)return 'concluida';
+  if(p&&Object.keys(p.abas).length>0)return 'progresso';
+  return 'nao';
+}
+function rotuloStatus(s){return s==='concluida'?'Concluido':(s==='progresso'?'Em progresso':'Nao iniciado')}
+function classeStatus(s){return s==='concluida'?'b-ok':(s==='progresso'?'b-prog':'b-off')}
+function abasFeitas(a){
+  var p=PROGRESSO[a.id],c=0;
+  if(!p)return 0;
+  for(var i=0;i<a.abas.length;i++){if(p.abas[a.abas[i]])c++}
+  return c;
+}
+function aulasDaPrateleira(pr){return MODULOS[pr.modulo].aulas}
+function concluidasDa(lista){
+  var c=0;for(var i=0;i<lista.length;i++){if(statusAula(lista[i].id)==='concluida')c++}
+  return c;
+}
+function todasAulasDoAluno(){
+  var vistos={},out=[];
+  PRATELEIRAS.forEach(function(pr){
+    if(!prateleiraLiberada(pr))return;
+    aulasDaPrateleira(pr).forEach(function(a){if(!vistos[a.id]){vistos[a.id]=1;out.push(a)}});
+  });
+  return out;
+}
+function nivelDoAluno(){
+  /* 6 aulas por nivel. Numero de regra interna do portal, nao e numero de negocio. */
+  var POR=6, c=concluidasDa(todasAulasDoAluno());
+  return {nivel:Math.floor(c/POR)+1, pct:Math.round((c%POR)/POR*100), falta:POR-(c%POR), feitas:c};
+}
+function proximaAula(pr){
+  var l=aulasDaPrateleira(pr);
+  for(var i=0;i<l.length;i++){if(statusAula(l[i].id)!=='concluida')return l[i]}
+  return null;
+}
+function aulaPorId(id){
+  var k,i;
+  for(k in MODULOS){for(i=0;i<MODULOS[k].aulas.length;i++){if(MODULOS[k].aulas[i].id===id)return MODULOS[k].aulas[i]}}
+  return null;
+}
+
+/* ---------- A REGUA DO LANCE, o mecanismo da casa ----------
+   lance + (lance * taxa) + remocao + doc + reparos + lucro = revenda
+   logo: teto = (revenda - remocao - doc - reparos - lucro) / (1 + taxa/100)
+   O "lucro" vem de Meus Materiais. Mudar la muda o teto aqui.           */
+function num(v){
+  if(v===undefined||v===null)return 0;
+  var s=String(v).replace(/\./g,'').replace(',','.').replace(/[^0-9.\-]/g,'');
+  var n=parseFloat(s);return isNaN(n)?0:n;
+}
+function calcRegua(){
+  var L=MATERIAIS.lote, revenda=num(L.revenda), taxa=num(L.taxa),
+      custos=num(L.remocao)+num(L.doc)+num(L.reparos), lucro=num(MATERIAIS.empresa.lucroAlvo);
+  var teto=(revenda-custos-lucro)/(1+taxa/100);
+  return {revenda:revenda,taxa:taxa,custos:custos,lucro:lucro,
+          teto:teto,valido:revenda>0&&teto>0};
+}
+function brl(n){
+  return 'R$ '+Math.round(n).toLocaleString('pt-BR');
+}
+
+/* =========================================================================
+   UTIL DE RENDER
+   ========================================================================= */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function el(id){return document.getElementById(id)}
+function avisar(msg){el('live').textContent=msg}
+
+const NAV=[
+  {k:'rota',  t:'Sua Rota'},
+  {k:'cursos',t:'Meus Cursos'},
+  {k:'ferr',  t:'Ferramentas'},
+  {k:'mat',   t:'Meus Materiais'},
+  {k:'cal',   t:'Calendario'},
+  {k:'fb',    t:'Enviar Feedback'}
+];
+
+function ir(tela,extra){
+  state.tela=tela;
+  if(extra){for(var k in extra)state[k]=extra[k]}
+  fecharMenu();
+  render();
+  el('main').focus();
+  window.scrollTo(0,0);
+}
+
+/* =========================================================================
+   SIDEBAR
+   ========================================================================= */
+function renderSidebar(){
+  var n=nivelDoAluno();
+  el('nvNum').textContent='Nivel '+n.nivel;
+  el('nvPct').textContent=n.pct+'%';
+  el('nvBar').style.width=n.pct+'%';
+  el('nvFalta').textContent=n.falta+(n.falta===1?' aula':' aulas')+' para o proximo nivel';
+
+  var telaNav={rota:'rota',cursos:'cursos',trilha:'rota',etapa:'rota',ferr:'ferr',mat:'mat',cal:'cal',fb:'fb'}[state.tela];
+  el('nav').innerHTML=NAV.map(function(i){
+    return '<button data-nav="'+i.k+'"'+(telaNav===i.k?' aria-current="page"':'')+
+           '><span class="dot"></span>'+i.t+'</button>';
+  }).join('');
+
+  el('pfIni').textContent=ALUNO.inicial;
+  el('pfMail').textContent=ALUNO.email;
+  var topo=planoTopo();
+  el('pfPlano').textContent=topo?topo.nome:'Sem plano ativo';
+}
+
+/* =========================================================================
+   TELA: SUA ROTA
+   ========================================================================= */
+function telaRota(){
+  var cards=PRATELEIRAS.map(function(pr){
+    var mod=MODULOS[pr.modulo], lib=prateleiraLiberada(pr), aulas=aulasDaPrateleira(pr);
+    var total=aulas.length, feitas=concluidasDa(aulas);
+    var pct=total?Math.round(feitas/total*100):0;
+    var herd=lib&&ehHerdado(pr)&&total>0;
+
+    var rodape;
+    if(!lib){
+      var abre=PRODUTOS[pr.liberadoPor[pr.liberadoPor.length-1]];
+      /* a prateleira da mentoria E o proprio produto que a abre: dizer
+         "abre com ela mesma" seria circular, entao vira o preco dela */
+      rodape=(abre.nome===pr.nome)
+        ? '<span>Nao contratado</span><span class="j-pct">'+esc(abre.preco)+'</span>'
+        : '<span>Abre com '+esc(abre.nome)+'</span><span class="j-pct">'+esc(abre.preco)+'</span>';
+    }else if(total===0){
+      rodape='<span>Prateleira cadastrada, sem aula gravada</span><span></span>';
+    }else{
+      rodape='<span>'+feitas+' de '+total+' aulas concluidas</span><span class="j-pct">'+pct+'%</span>';
+    }
+
+    return '<button class="jornada'+(lib?'':' trava')+'" data-pr="'+pr.id+'">'+
+      '<div class="j-top"><div class="j-nome">'+esc(pr.nome)+'</div>'+
+      '<span class="badge '+(lib?'b-ok':'b-lock')+'">'+(lib?'Liberado':'Travado')+'</span></div>'+
+      (herd?'<div style="margin:-2px 0 10px"><span class="badge b-herd">Herdado do plano anterior</span></div>':'')+
+      '<div class="j-desc">'+esc(pr.desc)+'</div>'+
+      '<div class="j-foot">'+rodape+'</div></button>';
+  }).join('');
+
+  return '<div class="head"><h1 class="h1">Sua Rota</h1>'+
+    '<p>Escolha uma jornada.</p></div>'+
+    '<div class="grid-2">'+cards+'</div>';
+}
+
+/* =========================================================================
+   TELA: MEUS CURSOS
+   E a visao POR PRODUTO: o que cada plano empacota, e o que o proximo
+   acrescenta. E aqui que a heranca de modulo fica explicita.
+   Nao e um /courses vazio convivendo com a rota cheia: tem trabalho proprio.
+   ========================================================================= */
+function telaCursos(){
+  var ordem=['p1','p2','p6'];
+  var blocos=ordem.map(function(pid){
+    var p=PRODUTOS[pid], meu=temProduto(pid), gold=(pid==='p6'&&!meu);
+    var mods=p.modulos.map(function(mid){
+      var m=MODULOS[mid], herdado=(p.herda||[]).indexOf(mid)>=0;
+      var total=m.aulas.length, feitas=concluidasDa(m.aulas);
+      var estado;
+      if(total===0){estado='Prateleira cadastrada, sem aula gravada';}
+      else if(meu){estado=feitas+' de '+total+' aulas concluidas';}
+      else{estado=total+' aulas';}
+      return '<div style="display:flex;gap:10px;justify-content:space-between;align-items:flex-start;'+
+        'padding:11px 0;border-top:1px solid var(--line)">'+
+        '<div style="min-width:0"><div style="font-size:13.5px;font-weight:600;color:var(--ink-1);'+
+        'letter-spacing:-.025em;line-height:1.4">'+esc(m.nome)+
+        (herdado?' <span class="badge b-herd" style="margin-left:4px">Herdado</span>':'')+'</div>'+
+        '<div style="font-size:12px;color:var(--ink-4);margin-top:3px">'+esc(estado)+'</div></div></div>';
+    }).join('');
+
+    var extras=(p.extras||[]).map(function(e){
+      return '<div style="padding:11px 0;border-top:1px solid var(--line)">'+
+        '<div style="font-size:13.5px;font-weight:600;color:var(--ink-1);letter-spacing:-.025em">'+esc(e.titulo)+'</div>'+
+        '<div style="font-size:12.5px;color:var(--ink-4);margin-top:3px;line-height:1.55">'+esc(e.desc)+'</div></div>';
+    }).join('');
+
+    var heranca='';
+    if(p.herda&&p.herda.length&&meu){
+      heranca='<div class="nota" style="margin:14px 0 0">O modulo '+
+        esc(MODULOS[p.herda[0]].nome)+' nao foi duplicado aqui. E o mesmo modulo do plano de entrada, '+
+        'com o mesmo progresso. Voce subiu de degrau, nao recomecou.</div>';
+    }
+
+    return '<section class="card nitido" style="padding:20px;margin-bottom:14px'+
+      (gold?';background:var(--p-gold)':'')+'">'+
+      '<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:flex-start">'+
+      '<div style="min-width:0"><h2 class="h3">'+esc(p.nome)+'</h2>'+
+      '<div class="mono" style="font-size:12.5px;color:var(--accent);margin-top:4px">'+esc(p.preco)+'</div></div>'+
+      '<span class="badge '+(meu?'b-ok':'b-lock')+'">'+(meu?'Seu plano':'Nao contratado')+'</span></div>'+
+      '<p class="dim" style="font-size:13.5px;margin-top:10px;line-height:1.62">'+esc(p.desc)+'</p>'+
+      '<div style="margin-top:14px">'+mods+extras+'</div>'+heranca+'</section>';
+  }).join('');
+
+  return '<div class="head"><h1 class="h1">Meus Cursos</h1>'+
+    '<p>O que cada plano empacota. O modulo e a unidade: ele existe uma vez so no sistema, e um plano apenas libera o acesso a ele.</p></div>'+
+    blocos;
+}
+
+/* =========================================================================
+   TELA: TRILHA
+   ========================================================================= */
+function telaTrilha(){
+  var pr=PRATELEIRAS.filter(function(x){return x.id===state.prateleira})[0];
+  var mod=MODULOS[pr.modulo], lib=prateleiraLiberada(pr), aulas=aulasDaPrateleira(pr);
+
+  var crumb='<div class="crumb"><button data-nav="rota">Sua Rota</button>'+
+    '<span class="sep">&rsaquo;</span><span class="cur">'+esc(pr.nome)+'</span></div>';
+
+  var cabeca='<div class="head"><h1 class="h2">'+esc(pr.nome)+'</h1>'+
+    '<p style="margin-top:8px">'+esc(mod.subtitulo)+'</p></div>';
+
+  /* prateleira cadastrada sem aula: tratamento digno, e o estado REAL escrito.
+     Nunca a promessa vaga de conteudo futuro, que e o defeito do portal de referencia. */
+  if(aulas.length===0){
+    var itens=(mod.realidade||[]).map(function(t){return '<li>'+esc(t)+'</li>'}).join('');
+    return crumb+cabeca+
+      '<div class="card nitido" style="padding:22px;max-width:70ch">'+
+      '<div class="micro" style="margin-bottom:10px">O que existe hoje</div>'+
+      '<ul class="pontos">'+itens+'</ul>'+
+      (lib?'':'<div class="nota" style="margin-top:18px">Esta prateleira abre com '+
+        esc(PRODUTOS[pr.liberadoPor[pr.liberadoPor.length-1]].nome)+'.</div>')+
+      '<div class="acoes"><button class="btn gh" data-nav="cursos">Ver o que cada plano libera</button></div>'+
+      '</div>';
+  }
+
+  if(!lib){
+    return crumb+cabeca+
+      '<div class="card nitido" style="padding:22px;max-width:70ch">'+
+      '<p class="dim">Esta prateleira tem '+aulas.length+' aulas e abre com '+
+      esc(PRODUTOS[pr.liberadoPor[pr.liberadoPor.length-1]].nome)+'.</p>'+
+      '<div class="acoes"><button class="btn gh" data-nav="cursos">Ver o que cada plano libera</button></div></div>';
+  }
+
+  /* No judicial a trilha mostra os DOIS modulos: o herdado e o proprio.
+     Herdado aparece com cabecalho proprio, nao duplicado como aula nova. */
+  var grupos=[];
+  var topo=planoTopo();
+  if(pr.modulo==='mj' && temProduto('p2')){
+    grupos.push({mod:MODULOS.m1,herdado:true});
+    grupos.push({mod:MODULOS.mj,herdado:false});
+  }else{
+    grupos.push({mod:mod,herdado:ehHerdado(pr)});
+  }
+
+  var corpo=grupos.map(function(g){
+    var l=g.mod.aulas, f=concluidasDa(l);
+    var head='<div class="mod-head"><span class="m-nome">'+esc(g.mod.nome)+'</span>'+
+      (g.herdado?'<span class="badge b-herd">Herdado da entrada</span>':'')+
+      '<span class="micro" style="margin-left:auto">'+f+'/'+l.length+' concluidas</span></div>';
+    if(g.herdado){
+      head+='<div class="nota" style="margin:0 0 14px">Estas '+l.length+
+        ' aulas vieram do plano de entrada ja concluidas. O progresso e por aula, nao por produto, '+
+        'entao ele veio com voce no upgrade.</div>';
+    }
+    var cards=l.map(function(a){
+      var s=statusAula(a.id), feitas=abasFeitas(a);
+      return '<button class="etapa'+(s==='concluida'?' done':'')+'" data-aula="'+a.id+'">'+
+        '<div class="e-num">'+esc(a.n)+'</div>'+
+        '<div class="e-body">'+
+        '<div class="e-top"><span class="e-tit">'+esc(a.titulo)+'</span>'+
+        '<span class="badge '+classeStatus(s)+'">'+rotuloStatus(s)+'</span></div>'+
+        '<div class="e-desc">'+esc(a.desc)+'</div>'+
+        (s==='progresso'?'<div class="e-prog">Progresso '+feitas+'/'+a.abas.length+' abas</div>':'')+
+        '</div></button>';
+    }).join('');
+    return head+cards;
+  }).join('');
+
+  /* extras do produto (call individual, encontros) entram como bloco proprio,
+     porque nao sao etapa de trilha e nao podem virar card falso de aula */
+  var prod=produtoQueAbre(pr);
+  var extras='';
+  if(prod&&prod.extras&&prod.extras.length&&pr.modulo==='mj'){
+    extras='<div class="mod-head"><span class="m-nome">Fora da trilha, incluso no seu plano</span></div>'+
+      prod.extras.map(function(e){
+        return '<div class="card" style="padding:16px;margin-bottom:10px">'+
+        '<div class="micro" style="margin-bottom:6px">'+esc(e.tipo)+'</div>'+
+        '<div class="e-tit">'+esc(e.titulo)+'</div>'+
+        '<div class="e-desc" style="margin-top:5px">'+esc(e.desc)+'</div></div>';
+      }).join('');
+  }
+
+  /* coluna da direita: estado, proxima etapa e links rapidos */
+  var todas=[];grupos.forEach(function(g){todas=todas.concat(g.mod.aulas)});
+  var feitas=concluidasDa(todas);
+  var prox=null;for(var i=0;i<todas.length;i++){if(statusAula(todas[i].id)!=='concluida'){prox=todas[i];break}}
+
+  var side='<div class="trilha-side">'+
+    '<div class="side-box">'+
+    '<div class="micro" style="margin-bottom:10px">Seu Progresso</div>'+
+    '<div class="side-frac">'+feitas+'<em>/'+todas.length+'</em></div>'+
+    '<div class="side-lab">etapas concluidas</div>'+
+    (prox?'<button class="prox" data-aula="'+prox.id+'">'+
+      '<div class="p-lab">Proxima etapa:</div>'+
+      '<div class="p-nome">'+esc(prox.titulo)+'</div></button>':
+      '<div class="nota" style="margin-top:14px">Todas as etapas desta trilha estao concluidas.</div>')+
+    '</div>'+
+    '<div class="side-box">'+
+    '<div class="micro" style="margin-bottom:6px">Links rapidos</div>'+
+    '<div class="links-rap">'+
+    '<button data-nav="mat">Meus Materiais</button>'+
+    '<button data-nav="ferr">Ferramentas</button>'+
+    '</div></div></div>';
+
+  return crumb+cabeca+'<div class="trilha-wrap"><div>'+corpo+extras+'</div>'+side+'</div>';
+}
+
+/* =========================================================================
+   TELA: ETAPA
+   ========================================================================= */
+const NOME_ABA={aprenda:'Aprenda',construa:'Construa',valide:'Valide',finalize:'Finalize'};
+
+function telaEtapa(){
+  var a=aulaPorId(state.aulaId);
+  var pr=PRATELEIRAS.filter(function(x){return x.id===state.prateleira})[0];
+  var s=statusAula(a.id);
+  if(!state.aba||a.abas.indexOf(state.aba)<0)state.aba=a.abas[0];
+
+  var crumb='<div class="crumb"><button data-nav="rota">Sua Rota</button>'+
+    '<span class="sep">&rsaquo;</span><button data-pr="'+pr.id+'">'+esc(pr.nome)+'</button>'+
+    '<span class="sep">&rsaquo;</span><span class="cur">'+esc(a.titulo)+'</span></div>';
+
+  var cab='<div class="etapa-head">'+
+    '<div class="eh-top"><span class="eh-num">Etapa '+esc(a.n)+'</span>'+
+    '<span class="badge '+classeStatus(s)+'" id="stBadge">'+rotuloStatus(s)+'</span></div>'+
+    '<h1 class="h2">'+esc(a.titulo)+'</h1>'+
+    '<p style="margin-top:10px">'+esc(a.desc)+'</p></div>';
+
+  var p=prog(a.id);
+  var tabs='<div class="tabs" role="tablist" aria-label="Abas da etapa">'+
+    a.abas.map(function(k){
+      var sel=k===state.aba;
+      return '<button role="tab" id="tab-'+k+'" aria-controls="pan-'+k+'" data-aba="'+k+'"'+
+        ' aria-selected="'+sel+'" tabindex="'+(sel?'0':'-1')+'">'+NOME_ABA[k]+
+        (p.abas[k]?'<span class="tk" aria-label="aba concluida">&#10003;</span>':'')+'</button>';
+    }).join('')+'</div>';
+
+  var painel='<div role="tabpanel" id="pan-'+state.aba+'" aria-labelledby="tab-'+state.aba+'" tabindex="0">'+
+    painelAba(a,state.aba)+'</div>';
+
+  return crumb+cab+tabs+painel;
+}
+
+function painelAba(a,k){
+  if(k==='aprenda')return abaAprenda(a);
+  if(k==='construa')return abaConstrua(a);
+  if(k==='valide')return abaValide(a);
+  return abaFinalize(a);
+}
+
+function abaAprenda(a){
+  var p=prog(a.id), assistida=!!p.abas.aprenda;
+  var pontos=a.aula.pontos.map(function(t){return '<li>'+esc(t)+'</li>'}).join('');
+
+  var mats='';
+  if(a.materiais&&a.materiais.length){
+    mats='<div style="margin-top:28px">'+
+      '<div class="micro" style="margin-bottom:12px">Materiais Complementares</div>'+
+      '<div class="grid-2">'+a.materiais.map(function(m,i){
+        /* botao Baixar so existe quando o arquivo e gerado de verdade aqui na tela.
+           Material que ainda nao existe nao ganha botao morto nem promessa vaga:
+           ganha a linha do estado real. */
+        var acao=m.gera
+          ? '<button class="btn sm" data-baixar="'+m.gera+'">Baixar</button>'
+          : '<div class="micro" style="color:var(--ink-4)">Planilha ainda nao montada</div>';
+        return '<div class="mat"><div class="m-ico">'+esc(m.fmt)+'</div>'+
+          '<div style="flex:1;min-width:0"><div class="m-n">'+esc(m.nome)+'</div>'+
+          '<div class="m-d">'+esc(m.desc)+'</div>'+
+          '<div class="micro" style="margin-top:7px">'+esc(m.tipo)+'</div>'+
+          '<div style="margin-top:10px">'+acao+'</div></div></div>';
+      }).join('')+'</div></div>';
+  }
+
+  return '<div style="max-width:78ch">'+
+    '<div class="player"><div class="pl-in">'+
+    '<div class="pl-t">Aula ainda nao gravada</div>'+
+    '<div class="pl-d">Nenhuma das aulas deste portal foi gravada ate agora. O player fica aqui, '+
+    'no lugar exato onde o video vai entrar. A duracao prevista por aula e de 15 a 20 minutos.</div>'+
+    '</div></div>'+
+    '<h2 class="h3" style="margin-top:22px">'+esc(a.aula.titulo)+'</h2>'+
+    '<p class="dim" style="margin-top:8px">'+esc(a.aula.desc)+'</p>'+
+    '<div class="micro" style="margin-top:22px">Pontos-chave da aula</div>'+
+    '<ul class="pontos">'+pontos+'</ul>'+
+    '<div class="acoes">'+
+      (assistida
+        ? '<button class="btn" data-desmarcar="aprenda">Aula assistida</button>'
+        : '<button class="btn pri" data-marcar="aprenda">Aula assistida</button>')+
+    '</div>'+
+    (assistida?'<div class="aviso ok">Marcada como assistida. Clique de novo pra desmarcar.</div>':'')+
+    mats+'</div>';
+}
+
+/* ---- ABA CONSTRUA: o exercicio. E onde a Regua do Lance e aplicada. ---- */
+function abaConstrua(a){
+  var c=a.construa;
+  if(!c)return '';
+  if(c.tipo==='regua')return construaRegua(a);
+  if(c.tipo==='lance')return construaLance(a);
+  return construaTexto(a);
+}
+
+function campoNum(escopo,f,val){
+  return '<label class="campo"><span class="c-lab">'+esc(f.lab)+(f.un?' ('+f.un+')':'')+'</span>'+
+    '<span class="c-help">'+esc(f.help)+'</span>'+
+    '<input type="text" inputmode="decimal" autocomplete="off" data-campo="'+escopo+':'+f.k+'" value="'+esc(val||'')+'"></label>';
+}
+
+function construaRegua(a){
+  var campos=CAMPOS_LOTE.map(function(f){return campoNum('lote',f,MATERIAIS.lote[f.k])}).join('');
+  return '<div class="grid-2" style="align-items:start">'+
+    '<div>'+
+      '<h2 class="h3">Meu teto de lance num lote real</h2>'+
+      '<p class="dim" style="margin-top:8px;font-size:13.5px">Pegue um lote aberto agora e preencha com os numeros dele. '+
+      'Os campos vem com um exemplo preenchido: troque pelos seus.</p>'+
+      '<div style="margin-top:18px">'+campos+'</div>'+
+      '<div class="acoes"><button class="btn gh sm" id="limparLote">Limpar e usar meus numeros</button></div>'+
+    '</div>'+
+    '<div>'+ blocoRegua() +
+      '<div class="nota" style="margin-top:14px">O lucro sai de Meus Materiais, nao deste formulario. '+
+      'Ele e o mesmo em todo lote que voce analisar, e por isso mora em um lugar so.'+
+      '<div style="margin-top:12px"><button class="btn gh sm" data-nav="mat">Abrir Meus Materiais</button></div></div>'+
+      '<div class="acoes"><button class="btn pri" data-guardar="construa">Guardar meu teto</button></div>'+
+      '<div class="aviso" id="avisoConstrua" aria-live="polite"></div>'+
+    '</div></div>';
+}
+
+/* O bloco de saida e re-renderizado SOZINHO a cada tecla.
+   Os inputs nunca sao reescritos durante a digitacao: quem reescreve input
+   enquanto a pessoa digita embaralha o numero. */
+function blocoRegua(id){
+  var r=calcRegua();
+  return '<div class="regua-out" id="'+(id||'reguaOut')+'" aria-live="polite">'+
+    '<div class="micro ro-lab">Meu teto de lance neste lote</div>'+
+    '<div class="ro-val">'+(r.valido?brl(r.teto):'preencha o lote')+'</div>'+
+    '<div class="ro-sub">Acima disso o lote deixa de pagar o lucro que voce definiu.</div>'+
+    '<div style="margin-top:16px">'+
+      '<div class="ro-linha"><span>Revenda realista</span><span>'+brl(r.revenda)+'</span></div>'+
+      '<div class="ro-linha"><span>Custos fora do lance</span><span>'+brl(r.custos)+'</span></div>'+
+      '<div class="ro-linha"><span>Lucro que eu quero</span><span>'+brl(r.lucro)+'</span></div>'+
+      '<div class="ro-linha"><span>Taxa do leiloeiro</span><span>'+(r.taxa||0)+'%</span></div>'+
+    '</div></div>';
+}
+
+function construaLance(a){
+  var r=calcRegua();
+  return '<div class="grid-2" style="align-items:start">'+
+    '<div><h2 class="h3">Meu lance registrado com teto respeitado</h2>'+
+    '<p class="dim" style="margin-top:8px;font-size:13.5px">O teto abaixo veio da Regua que voce montou na etapa 03. '+
+    'Escreva o lance que voce deu neste lote.</p>'+
+    '<label class="campo" style="margin-top:18px"><span class="c-lab">O lance que eu dei (R$)</span>'+
+    '<input type="text" inputmode="decimal" autocomplete="off" data-campo="lote:lance" value="'+esc(MATERIAIS.lote.lance||'')+'"></label>'+
+    '<div class="aviso" id="avisoLance" aria-live="polite"></div>'+
+    '<div class="acoes"><button class="btn pri" data-guardar="construa">Guardar meu lance</button></div>'+
+    '<div class="aviso" id="avisoConstrua" aria-live="polite"></div>'+
+    '</div>'+
+    '<div class="regua-out"><div class="micro ro-lab">Teto que saiu da etapa 03</div>'+
+    '<div class="ro-val">'+(r.valido?brl(r.teto):'sem teto calculado')+'</div>'+
+    '<div class="ro-sub">Se a etapa 03 mudar, este numero muda junto. E a mesma conta, num lugar so.</div>'+
+    '</div></div>';
+}
+
+function construaTexto(a){
+  var c=a.construa,p=prog(a.id);
+  return '<div style="max-width:70ch">'+
+    '<h2 class="h3">'+esc(c.titulo)+'</h2>'+
+    '<p class="dim" style="margin-top:8px;font-size:13.5px">'+esc(c.help)+'</p>'+
+    '<label class="campo" style="margin-top:18px">'+
+    '<span class="c-lab">Sua entrega</span>'+
+    '<textarea data-entrega="'+a.id+'" placeholder="'+esc(c.ph)+'">'+esc(p.entrega||'')+'</textarea></label>'+
+    '<div class="acoes"><button class="btn pri" data-guardar="construa">Guardar minha entrega</button></div>'+
+    '<div class="aviso" id="avisoConstrua" aria-live="polite"></div></div>';
+}
+
+/* ---- ABA VALIDE ---- */
+function abaValide(a){
+  var v=a.valide,p=prog(a.id);
+  p.check=p.check||{};
+  var itens=v.itens.map(function(t,i){
+    return '<label class="check"><input type="checkbox" data-check="'+i+'"'+(p.check[i]?' checked':'')+'>'+
+      '<span>'+esc(t)+'</span></label>';
+  }).join('');
+  return '<div style="max-width:70ch">'+
+    '<h2 class="h3">'+esc(v.titulo)+'</h2>'+
+    '<p class="dim" style="margin-top:8px;font-size:13.5px">A aba fecha sozinha quando os tres itens estiverem marcados.</p>'+
+    '<div style="margin-top:18px">'+itens+'</div>'+
+    '<div class="aviso" id="avisoValide" aria-live="polite">'+
+    (p.abas.valide?'<span class="ok">Aba Valide concluida.</span>':'')+'</div></div>';
+}
+
+/* ---- ABA FINALIZE: e TRAVA, nao conteudo ---- */
+function abaFinalize(a){
+  var p=prog(a.id);
+  var faltam=a.abas.filter(function(k){return k!=='finalize'&&!p.abas[k]});
+  var nomes=faltam.map(function(k){return '"'+NOME_ABA[k]+'"'}).join(' e ');
+
+  if(faltam.length===0){
+    var temEntrega=a.construa?true:false;
+    return '<div style="max-width:70ch">'+
+      '<div class="wash"><div class="h3" style="color:var(--ink-1)">Tudo o que esta etapa pedia esta feito</div>'+
+      '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-2)">'+
+      (temEntrega?'Salve o resultado em Meus Materiais pra que as ferramentas leiam dele.'
+                 :'Esta etapa e teorica e nao produz entregavel. Marque como concluida pra seguir.')+'</p></div>'+
+      '<div class="acoes">'+
+        (temEntrega?'<button class="btn pri" data-finalizar="salvar">Salvar em Meus Materiais</button>':
+                    '<button class="btn pri" data-finalizar="escape">Marcar como concluida</button>')+
+        (temEntrega?'<button class="btn gh" data-finalizar="escape">Marcar como concluida assim mesmo</button>':'')+
+      '</div>'+
+      '<div class="aviso" id="avisoFin" aria-live="polite">'+
+      (p.concluida?'<span class="ok">Etapa concluida.'+(p.salvo?' Entrega salva em Meus Materiais.':'')+'</span>':'')+'</div>'+
+      (p.concluida?'<div class="acoes"><button class="btn gh sm" data-nav="mat">Ver em Meus Materiais</button>'+
+        botaoProxima(a)+'</div>':'')+
+      '</div>';
+  }
+
+  return '<div style="max-width:70ch">'+
+    '<div class="trava">'+
+    '<div class="h3" style="color:var(--ink-1)">Ainda nao da pra finalizar</div>'+
+    '<p style="margin-top:8px;font-size:13.5px;color:var(--ink-3)">Para finalizar esta etapa, voce precisa primeiro '+
+    'completar '+(faltam.length>1?'as abas':'a aba')+' '+nomes+'.</p>'+
+    '</div>'+
+    '<div class="acoes">'+
+    '<button class="btn pri" disabled>Salvar em Meus Materiais</button>'+
+    '<button class="btn gh" data-finalizar="escape">Marcar como concluida assim mesmo</button>'+
+    '</div>'+
+    '<div class="aviso" id="avisoFin" aria-live="polite"></div></div>';
+}
+
+function botaoProxima(a){
+  var pr=PRATELEIRAS.filter(function(x){return x.id===state.prateleira})[0];
+  var lista=[];
+  if(pr.modulo==='mj'&&temProduto('p2')){lista=MODULOS.m1.aulas.concat(MODULOS.mj.aulas)}
+  else{lista=aulasDaPrateleira(pr)}
+  var i=-1,j;
+  for(j=0;j<lista.length;j++){if(lista[j].id===a.id){i=j;break}}
+  if(i<0||i>=lista.length-1)return '';
+  return '<button class="btn sm" data-aula="'+lista[i+1].id+'">Proxima etapa</button>';
+}
+
+/* =========================================================================
+   TELA: FERRAMENTAS
+   A Regua do Lance avulsa, lendo o MESMO estado de Meus Materiais.
+   ========================================================================= */
+function telaFerr(){
+  var campos=CAMPOS_LOTE.map(function(f){return campoNum('lote',f,MATERIAIS.lote[f.k])}).join('');
+  return '<div class="head"><h1 class="h1">Ferramentas</h1>'+
+    '<p>A Regua do Lance fora da trilha, pra usar em qualquer lote. Ela le o lucro de Meus Materiais, '+
+    'e os numeros que voce mexer aqui sao os mesmos da etapa 03.</p></div>'+
+    '<div class="grid-2" style="align-items:start">'+
+    '<div class="card nitido" style="padding:20px">'+
+      '<div class="micro" style="margin-bottom:14px">A Regua do Lance</div>'+campos+
+    '</div>'+
+    '<div>'+blocoRegua('reguaOutFerr')+
+      '<div class="nota" style="margin-top:14px">Nenhuma outra ferramenta foi construida ate agora. '+
+      'Esta tela lista o que existe, e so.</div>'+
+    '</div></div>';
+}
+
+/* =========================================================================
+   TELA: MEUS MATERIAIS, o repositorio compartilhado
+   ========================================================================= */
+function materiaisProduzidos(){
+  /* DERIVADO do PROGRESSO, nunca de uma lista paralela.
+     Se a etapa deixar de estar concluida, o material some junto. Sem fantasma. */
+  var out=[];
+  for(var k in MODULOS){
+    MODULOS[k].aulas.forEach(function(a){
+      var p=PROGRESSO[a.id];
+      if(!a.construa||!p||!p.concluida||!p.salvo)return;
+      out.push({nome:a.construa.titulo,modulo:MODULOS[k].nome,etapa:a.n,aulaId:a.id});
+    });
+  }
+  return out;
+}
+
+function telaMateriais(){
+  var emp=CAMPOS_EMPRESA.map(function(f){
+    return '<label class="campo"><span class="c-lab">'+esc(f.lab)+(f.un?' ('+f.un+')':'')+'</span>'+
+      '<span class="c-help">'+esc(f.help)+'</span>'+
+      '<input type="text" autocomplete="off" data-campo="empresa:'+f.k+'" value="'+esc(MATERIAIS.empresa[f.k]||'')+'"'+
+      (f.k==='lucroAlvo'?' inputmode="decimal"':'')+'></label>';
+  }).join('');
+
+  var prod=materiaisProduzidos();
+  var listaProd=prod.length
+    ? prod.map(function(m){
+        return '<div class="mat" style="margin-bottom:10px"><div class="m-ico">OK</div>'+
+        '<div style="flex:1;min-width:0"><div class="m-n">'+esc(m.nome)+'</div>'+
+        '<div class="m-d">'+esc(m.modulo)+', etapa '+esc(m.etapa)+'</div>'+
+        '<div style="margin-top:10px"><button class="btn sm" data-aula="'+m.aulaId+'">Abrir a etapa</button></div>'+
+        '</div></div>';
+      }).join('')
+    : '<div class="vazio">Nenhuma entrega salva aqui ainda. Uma entrega chega nesta lista quando voce usa '+
+      '"Salvar em Meus Materiais" na aba Finalize de uma etapa.</div>';
+
+  var r=calcRegua();
+  var implement='<div class="card" style="padding:18px">'+
+    '<div class="micro" style="margin-bottom:10px">O lote que eu estou analisando agora</div>'+
+    (r.valido
+      ? '<div class="ro-val" style="font-size:26px">'+brl(r.teto)+'</div>'+
+        '<div class="ro-sub">teto de lance calculado com os numeros que estao na Regua</div>'
+      : '<div class="vazio">Nenhum lote preenchido na Regua ainda.</div>')+
+    '<div style="margin-top:14px"><button class="btn gh sm" data-nav="ferr">Abrir a Regua do Lance</button></div>'+
+    '</div>';
+
+  var filtros=[{k:'todos',t:'Todos'},{k:'empresa',t:'Materiais da Empresa'},
+               {k:'produto',t:'Materiais por Produto'},{k:'impl',t:'Implementacao'}];
+  var contagem={todos:CAMPOS_EMPRESA.length+prod.length+(r.valido?1:0),
+                empresa:CAMPOS_EMPRESA.length,produto:prod.length,impl:r.valido?1:0};
+
+  var abas='<div class="mm-tabs">'+filtros.map(function(f){
+    return '<button data-mm="'+f.k+'" aria-pressed="'+(state.mmFiltro===f.k)+'">'+f.t+
+      '<span class="mm-cnt">'+contagem[f.k]+'</span></button>';
+  }).join('')+'</div>';
+
+  var blocos='';
+  if(state.mmFiltro==='todos'||state.mmFiltro==='empresa'){
+    blocos+='<section style="margin-bottom:26px"><h2 class="h3">Materiais da Empresa</h2>'+
+      '<p class="dim" style="font-size:13.5px;margin:8px 0 16px;max-width:64ch">Preencha uma vez. '+
+      'A Regua do Lance le daqui, na trilha e em Ferramentas. Mudar o lucro aqui muda o teto de lance na hora.</p>'+
+      '<div class="card nitido" style="padding:20px;max-width:56ch">'+emp+
+      '<div class="aviso" id="avisoEmp" aria-live="polite"></div></div></section>';
+  }
+  if(state.mmFiltro==='todos'||state.mmFiltro==='produto'){
+    blocos+='<section style="margin-bottom:26px"><h2 class="h3">Materiais por Produto</h2>'+
+      '<p class="dim" style="font-size:13.5px;margin:8px 0 16px;max-width:64ch">O que voce entregou nas etapas. '+
+      'Esta lista e montada a partir do progresso: se a etapa reabrir, o material sai daqui junto.</p>'+
+      listaProd+'</section>';
+  }
+  if(state.mmFiltro==='todos'||state.mmFiltro==='impl'){
+    blocos+='<section><h2 class="h3">Implementacao</h2>'+
+      '<p class="dim" style="font-size:13.5px;margin:8px 0 16px;max-width:64ch">O lote em analise neste momento.</p>'+
+      implement+'</section>';
+  }
+
+  return '<div class="head"><h1 class="h1">Meus Materiais</h1>'+
+    '<p>O repositorio compartilhado do portal. Voce preenche uma vez, e as ferramentas leem daqui.</p></div>'+
+    abas+blocos;
+}
+
+/* =========================================================================
+   TELA: CALENDARIO
+   ========================================================================= */
+function telaCal(){
+  var temJud=temProduto('p2');
+  var linhas='';
+  if(temJud){
+    linhas='<div class="card nitido" style="padding:18px;margin-bottom:12px">'+
+      '<div class="micro" style="margin-bottom:8px">Call individual</div>'+
+      '<div class="e-tit">Sua call individual, inclusa no plano</div>'+
+      '<div class="e-desc" style="margin-top:6px">Uma call, um a um. [PLACEHOLDER: link de agendamento da call individual]</div>'+
+      '</div>'+
+      '<div class="card nitido" style="padding:18px">'+
+      '<div class="micro" style="margin-bottom:8px">Encontros quinzenais</div>'+
+      '<div class="e-tit">12 encontros ao longo do ciclo</div>'+
+      '<div class="e-desc" style="margin-top:6px">Sao 12, a cada quinze dias. '+
+      '[PLACEHOLDER: datas, horario e link da sala dos 12 encontros]</div></div>';
+  }else{
+    linhas='<div class="vazio">Seu plano atual nao tem encontro ao vivo. Os encontros quinzenais e a call individual '+
+      'entram com o plano do judicial.</div>';
+  }
+  return '<div class="head"><h1 class="h1">Calendario</h1>'+
+    '<p>O que e ao vivo no seu plano. Aula gravada nao entra aqui.</p></div>'+linhas;
+}
+
+/* =========================================================================
+   TELA: ENVIAR FEEDBACK
+   ========================================================================= */
+function telaFb(){
+  var enviados=MATERIAIS.feedbacks.map(function(f){
+    return '<div class="card" style="padding:14px;margin-bottom:8px">'+
+      '<div class="micro" style="margin-bottom:6px">'+esc(f.quando)+'</div>'+
+      '<div style="font-size:13.5px;color:var(--ink-2);line-height:1.6">'+esc(f.texto)+'</div></div>';
+  }).join('');
+  return '<div class="head"><h1 class="h1">Enviar Feedback</h1>'+
+    '<p>O que travou, o que faltou, o que voce procurou e nao achou.</p></div>'+
+    '<div style="max-width:62ch">'+
+    '<label class="campo"><span class="c-lab">Seu feedback</span>'+
+    '<textarea id="fbTxt" placeholder="Escreva aqui"></textarea></label>'+
+    '<div class="acoes"><button class="btn pri" id="fbEnviar">Enviar feedback</button></div>'+
+    '<div class="aviso" id="avisoFb" aria-live="polite"></div>'+
+    (enviados?'<div style="margin-top:26px"><div class="micro" style="margin-bottom:10px">Enviados nesta sessao</div>'+enviados+'</div>':'')+
+    '</div>';
+}
+
+/* =========================================================================
+   RENDER
+   ========================================================================= */
+function render(){
+  renderSidebar();
+  var html='';
+  if(state.tela==='rota')html=telaRota();
+  else if(state.tela==='cursos')html=telaCursos();
+  else if(state.tela==='trilha')html=telaTrilha();
+  else if(state.tela==='etapa')html=telaEtapa();
+  else if(state.tela==='ferr')html=telaFerr();
+  else if(state.tela==='mat')html=telaMateriais();
+  else if(state.tela==='cal')html=telaCal();
+  else if(state.tela==='fb')html=telaFb();
+  el('main').innerHTML=html;
+
+  var t={rota:'Sua Rota',cursos:'Meus Cursos',trilha:'Trilha',etapa:'Etapa',
+         ferr:'Ferramentas',mat:'Meus Materiais',cal:'Calendario',fb:'Enviar Feedback'}[state.tela];
+  el('tbTitle').textContent=t;
+}
+
+/* Re-render SO do painel da aba, sem tocar no resto da tela. */
+function renderPainel(){
+  var a=aulaPorId(state.aulaId);
+  var pan=document.querySelector('[role="tabpanel"]');
+  pan.id='pan-'+state.aba;
+  pan.setAttribute('aria-labelledby','tab-'+state.aba);
+  pan.innerHTML=painelAba(a,state.aba);
+  document.querySelectorAll('.tabs [role="tab"]').forEach(function(b){
+    var sel=b.dataset.aba===state.aba;
+    b.setAttribute('aria-selected',sel);b.tabIndex=sel?0:-1;
+  });
+}
+/* atualiza so os ticks das abas e o badge de status, sem redesenhar o painel
+   (nao pode redesenhar: o cursor do aluno pode estar dentro de um input) */
+function refreshChrome(){
+  var a=aulaPorId(state.aulaId),p=prog(a.id);
+  document.querySelectorAll('.tabs [role="tab"]').forEach(function(b){
+    var k=b.dataset.aba, tick=b.querySelector('.tk');
+    if(p.abas[k]&&!tick){
+      var s=document.createElement('span');s.className='tk';s.setAttribute('aria-label','aba concluida');
+      s.innerHTML='&#10003;';b.appendChild(s);
+    }else if(!p.abas[k]&&tick){tick.remove()}
+  });
+  var badge=el('stBadge');
+  if(badge){var s=statusAula(a.id);badge.className='badge '+classeStatus(s);badge.textContent=rotuloStatus(s)}
+  renderSidebar();
+}
+
+/* =========================================================================
+   EVENTOS
+   ========================================================================= */
+function abrirMenu(){el('sidebar').classList.add('open');el('backdrop').hidden=false;
+  el('burger').setAttribute('aria-expanded','true');el('sidebar').focus()}
+function fecharMenu(){el('sidebar').classList.remove('open');el('backdrop').hidden=true;
+  el('burger').setAttribute('aria-expanded','false')}
+
+el('burger').addEventListener('click',function(){
+  el('sidebar').classList.contains('open')?fecharMenu():abrirMenu();
+});
+el('backdrop').addEventListener('click',fecharMenu);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharMenu()});
+
+/* clique global: navegacao e acoes */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+
+  if(b.dataset.nav){ir(b.dataset.nav);return}
+
+  if(b.dataset.pr){
+    var pr=PRATELEIRAS.filter(function(x){return x.id===b.dataset.pr})[0];
+    ir('trilha',{prateleira:pr.id});return;
+  }
+
+  if(b.dataset.aula){
+    var id=b.dataset.aula;
+    /* descobre a prateleira de origem se o clique veio de fora da trilha */
+    if(!state.prateleira||!aulaNaPrateleira(id,state.prateleira)){
+      state.prateleira=prateleiraDaAula(id);
+    }
+    ir('etapa',{aulaId:id,aba:null});return;
+  }
+
+  if(b.dataset.aba){escolherAba(b.dataset.aba);return}
+
+  if(b.dataset.marcar){
+    var a=aulaPorId(state.aulaId),p=prog(a.id);
+    p.abas[b.dataset.marcar]=true;
+    avisar('Aula marcada como assistida.');
+    renderPainel();refreshChrome();return;
+  }
+  if(b.dataset.desmarcar){
+    var a2=aulaPorId(state.aulaId),p2=prog(a2.id);
+    delete p2.abas[b.dataset.desmarcar];
+    /* reabrir uma aba derruba a conclusao E o material salvo junto.
+       Material salvo de etapa reaberta vira fantasma em Meus Materiais. */
+    p2.concluida=false;p2.salvo=false;
+    avisar('Aula desmarcada. A etapa voltou para em progresso.');
+    renderPainel();refreshChrome();return;
+  }
+
+  if(b.dataset.guardar){guardarConstrua();return}
+  if(b.dataset.finalizar){finalizar(b.dataset.finalizar);return}
+  if(b.dataset.baixar){baixarRegua();return}
+
+  if(b.dataset.mm){state.mmFiltro=b.dataset.mm;render();return}
+
+  if(b.id==='limparLote'){
+    CAMPOS_LOTE.forEach(function(f){MATERIAIS.lote[f.k]=''});
+    MATERIAIS.lote.lance='';
+    renderPainel();avisar('Campos do lote limpos.');return;
+  }
+
+  if(b.id==='fbEnviar'){
+    var txt=el('fbTxt').value.trim(),av=el('avisoFb');
+    if(!txt){av.className='aviso err';av.textContent='Escreva alguma coisa antes de enviar.';
+      avisar('Feedback vazio, nao foi enviado.');el('fbTxt').focus();return}
+    MATERIAIS.feedbacks.unshift({texto:txt,quando:'Agora, nesta sessao'});
+    avisar('Feedback enviado.');render();
+    var a3=el('avisoFb');if(a3){a3.className='aviso ok';a3.textContent='Feedback enviado. Ele fica nesta sessao.'}
+    return;
+  }
+});
+
+function aulaNaPrateleira(aulaId,prId){
+  var pr=PRATELEIRAS.filter(function(x){return x.id===prId})[0];
+  if(!pr)return false;
+  var l=aulasDaPrateleira(pr);
+  if(pr.modulo==='mj'&&temProduto('p2'))l=MODULOS.m1.aulas.concat(MODULOS.mj.aulas);
+  return l.some(function(a){return a.id===aulaId});
+}
+function prateleiraDaAula(aulaId){
+  for(var i=0;i<PRATELEIRAS.length;i++){
+    var pr=PRATELEIRAS[i];
+    if(!prateleiraLiberada(pr))continue;
+    if(aulasDaPrateleira(pr).some(function(a){return a.id===aulaId}))return pr.id;
+  }
+  return 'pr1';
+}
+
+function escolherAba(k){
+  state.aba=k;renderPainel();
+  var t=document.getElementById('tab-'+k);if(t)t.focus();
+}
+
+/* tablist com seta, exigencia de acessibilidade */
+document.addEventListener('keydown',function(e){
+  var t=e.target;
+  if(!t.closest||!t.closest('.tabs'))return;
+  if(t.getAttribute('role')!=='tab')return;
+  var a=aulaPorId(state.aulaId);if(!a)return;
+  var i=a.abas.indexOf(state.aba),n=null;
+  if(e.key==='ArrowRight')n=a.abas[(i+1)%a.abas.length];
+  else if(e.key==='ArrowLeft')n=a.abas[(i-1+a.abas.length)%a.abas.length];
+  else if(e.key==='Home')n=a.abas[0];
+  else if(e.key==='End')n=a.abas[a.abas.length-1];
+  if(n){e.preventDefault();escolherAba(n)}
+});
+
+/* ---------- INPUT: nunca re-renderiza o campo que esta sendo digitado ----------
+   O valor vai pro estado e SO os blocos de saida sao reescritos.
+   Reescrever o input enquanto a pessoa digita embaralha o numero. */
+document.addEventListener('input',function(e){
+  var t=e.target;
+
+  if(t.dataset.campo){
+    var p=t.dataset.campo.split(':');
+    if(p[0]==='empresa'){MATERIAIS.empresa[p[1]]=t.value}
+    else{MATERIAIS.lote[p[1]]=t.value}
+    atualizarSaidas();
+    return;
+  }
+  if(t.dataset.entrega){prog(t.dataset.entrega).entrega=t.value}
+});
+
+function atualizarSaidas(){
+  ['reguaOut','reguaOutFerr'].forEach(function(id){
+    var n=el(id);if(n)n.outerHTML=blocoRegua(id);
+  });
+  var av=el('avisoLance');
+  if(av){
+    var r=calcRegua(),l=num(MATERIAIS.lote.lance);
+    if(!l){av.className='aviso';av.textContent=''}
+    else if(!r.valido){av.className='aviso';av.textContent='Sem teto calculado na etapa 03 ainda.'}
+    else if(l>r.teto){av.className='aviso err';
+      av.textContent='Este lance esta '+brl(l-r.teto)+' acima do seu teto. A regua diz pra parar.'}
+    else{av.className='aviso ok';av.textContent='Dentro do teto, com '+brl(r.teto-l)+' de folga.'}
+  }
+}
+
+/* checkbox da aba Valide */
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.dataset.check===undefined)return;
+  var a=aulaPorId(state.aulaId),p=prog(a.id);
+  p.check=p.check||{};
+  p.check[t.dataset.check]=t.checked;
+  var todos=a.valide.itens.every(function(_,i){return p.check[i]});
+  if(todos)p.abas.valide=true;else{delete p.abas.valide;p.concluida=false;p.salvo=false}
+  var av=el('avisoValide');
+  if(av){
+    av.className='aviso '+(todos?'ok':'');
+    av.textContent=todos?'Aba Valide concluida.':'';
+  }
+  avisar(todos?'Aba Valide concluida.':'Aba Valide reaberta.');
+  refreshChrome();
+});
+
+/* ---------- guardar a entrega da aba Construa ---------- */
+function guardarConstrua(){
+  var a=aulaPorId(state.aulaId),p=prog(a.id),av=el('avisoConstrua');
+  var c=a.construa,ok=false,msg='';
+
+  if(c.tipo==='regua'){
+    var r=calcRegua();
+    if(!r.valido){msg='Preencha ao menos o preco de revenda pra sair um teto.';}
+    else{ok=true;msg='Teto guardado: '+brl(r.teto)+'. Ele passa a aparecer na etapa 05 e em Meus Materiais.'}
+  }else if(c.tipo==='lance'){
+    if(!num(MATERIAIS.lote.lance)){msg='Escreva o lance que voce deu antes de guardar.';}
+    else{ok=true;msg='Lance guardado.'}
+  }else{
+    var v=(p.entrega||'').trim();
+    if(!v){msg='O campo esta vazio. Escreva a sua entrega antes de guardar.';}
+    else{ok=true;msg='Entrega guardada.'}
+  }
+
+  if(ok)p.abas.construa=true;
+  if(av){av.className='aviso '+(ok?'ok':'err');av.textContent=msg}
+  avisar(msg);
+  if(!ok){
+    var campo=document.querySelector('[data-entrega],[data-campo="lote:lance"],[data-campo="lote:revenda"]');
+    if(campo)campo.focus();
+  }
+  refreshChrome();
+}
+
+/* ---------- Finalize ---------- */
+function finalizar(modo){
+  var a=aulaPorId(state.aulaId),p=prog(a.id),av;
+  if(modo==='salvar'){
+    p.concluida=true;p.salvo=true;
+    avisar('Etapa concluida e entrega salva em Meus Materiais.');
+  }else{
+    p.concluida=true;
+    /* escape: conclui sem entregar. O material NAO entra em Meus Materiais,
+       porque ele nao existe. Progresso pode mentir, repositorio nao. */
+    if(!p.abas.construa)p.salvo=false;
+    avisar('Etapa marcada como concluida.');
+  }
+  renderPainel();refreshChrome();
+  av=el('avisoFin');
+  if(av){av.className='aviso ok';
+    av.textContent=modo==='salvar'
+      ? 'Etapa concluida. Entrega salva em Meus Materiais.'
+      : 'Etapa concluida sem entrega. Nada foi salvo em Meus Materiais.';
+  }
+}
+
+/* ---------- download real da Regua, gerado aqui na hora ---------- */
+function baixarRegua(){
+  var r=calcRegua(),L=MATERIAIS.lote;
+  var linhas=[
+    ['A Regua do Lance',''],
+    ['Preco de revenda realista',L.revenda||''],
+    ['Taxa do leiloeiro (%)',L.taxa||''],
+    ['Remocao e patio',L.remocao||''],
+    ['Documentacao e transferencia',L.doc||''],
+    ['Reparos e revisao',L.reparos||''],
+    ['Lucro que eu quero (de Meus Materiais)',MATERIAIS.empresa.lucroAlvo||''],
+    ['',''],
+    ['Meu teto de lance',r.valido?Math.round(r.teto):'']
+  ];
+  var csv='﻿'+linhas.map(function(l){return '"'+l[0]+'";"'+l[1]+'"'}).join('\r\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  var url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='regua-do-lance.csv';document.body.appendChild(a);a.click();
+  document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url)},1000);
+  avisar('Planilha da Regua baixada com os seus numeros.');
+}
+
+render();
+</script>
+</body>
+</html>

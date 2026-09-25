@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal do aluno | Leilão de veículos</title>
+<meta name="description" content="Portal do aluno dos cursos de leilão de veículos do Maykell Gomes. Modo claro, papel quente.">
+
+<!--
+  ============================================================
+  PORTAL DO ALUNO · versao MODO CLARO, temperamento "papel quente"
+  Sociedade Higor Henrique + Maykell Gomes. Fora da B2Donto.
+
+  A ESTRUTURA E COPIADA do portal do Joao Araujo (maquinadereuniao.online),
+  capturado logado em 22 e 23/09/2026. Engenharia reversa em
+  ~/portal-joao-desenho.md, texto real das telas em
+  ~/Mentoria Joao Araujo/Portal/_trilhas.json e etapas-completas/.
+
+  O que foi copiado dele, de proposito:
+  - shell com sidebar fixa, bloco de nivel no topo, rodape com avatar/e-mail/plano
+  - Sua Rota > trilha > etapa, com breadcrumb em 3 niveis
+  - card de etapa: numero em destaque, titulo, badge de status, descricao,
+    e "Progresso X/Y abas" quando em progresso
+  - coluna direita da trilha: Seu Progresso, fracao grande, proxima etapa
+    clicavel, links rapidos
+  - abas MODULARES por etapa (teorica tem 2, produtiva tem 4)
+  - Finalize como TRAVA com botao de escape
+  - Meus Materiais como repositorio COMPARTILHADO que as ferramentas leem
+
+  O que NAO foi copiado (defeitos achados na engenharia reversa):
+  - breadcrumb que mostra sempre o mesmo curso (aqui ele deriva do estado real)
+  - rota de cursos vazia convivendo com a cheia (aqui existe UMA rota so)
+  - material anunciado com "Em breve" (aqui o material diz o estado real dele)
+  - emoji na tela de sucesso (o portal dele usa, aqui nao entra)
+
+  MODELO DE DADOS (fechado com o Higor, vira contrato quando virar Supabase):
+  MODULO e a unidade atomica, existe uma vez so.
+  PRODUTO e um pacote que libera um conjunto de modulos.
+  PROGRESSO e do ALUNO por AULA, independente do produto que deu acesso.
+  Consequencia visivel: quem concluiu o Modulo 1 no low ticket e deu upgrade
+  ve o Modulo 1 ja marcado como visto dentro do produto 2, como MODULO HERDADO.
+
+  REGRAS DURAS: portugues brasileiro, sem travessao, sem emoji, sem numero
+  inventado, sem promessa de prazo de venda, sem citar rifa. A regra 60/40 e
+  do direcionamento da call do judicial e NAO aparece no produto de R$ 297.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Sora:wght@300..800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. TOKENS
+   A paleta clara e DERIVADA da escura da casa (curso-297.html), nao e
+   cinza de template. Mesma familia de hue (ambar, hue ~45): o papel e
+   quente, tingido, nunca branco azulado. A logica da escura foi invertida:
+   la eram 6 pretos subindo de temperatura ate a oferta, aqui sao 6 papeis
+   descendo de claridade pela mesma rampa de temperatura.
+   ============================================================ */
+:root{
+  /* papel: 6 superficies, do mais claro ao mais quente */
+  --p-card:#FFFFFF;     /* so card elevado */
+  --p-base:#FAF8F4;     /* o chao do portal */
+  --p-soft:#F5F1E9;
+  --p-warm:#F0EADC;
+  --p-ember:#EBE3D1;
+  --p-gold:#F7EEDA;     /* o mais quente: so upgrade e oferta */
+
+  /* tinta tingida no ambar, nunca preto puro. Preto puro sobre papel
+     quente le como erro de impressao, nao como contencao. */
+  --ink-1:#1A150C; --ink-2:#3D3527; --ink-3:#5E5442; --ink-4:#8A7F68; --ink-5:#B5AB94;
+
+  /* acento: em papel o ambar claro nao tem contraste pra texto, entao sao dois.
+     --accent carrega texto e borda, --accent-fill carrega SO o fill do botao. */
+  --accent:#9A7414;        /* texto, link, borda, numero de etapa. AA no papel */
+  --accent-fill:#E8C86A;   /* so o fill do botao principal, com --btn-text por cima */
+  --accent-soft:#F5E6BE;   /* wash de fundo, badge, destaque */
+  --btn-text:#14100A;
+  --ok:#3F7D4E; --danger:#B03E28;
+
+  --line:rgba(26,21,12,.10);
+  --line-2:rgba(154,116,20,.20);
+
+  /* DERIVADOS, e nao substituicoes. Os tokens acima ficam exatamente como
+     foram especificados. Em papel claro, --accent (4.06:1) e --ink-4 (3.72:1)
+     passam o AA de componente e de texto grande, mas nao o de texto pequeno.
+     Como o portal e uma ferramenta de trabalho diario, cheia de rotulo de 11 e
+     12px, o texto pequeno sai de duas versoes um degrau mais escuras, no MESMO
+     hue e na MESMA saturacao. Borda, fio, sublinhado de aba e fill continuam
+     usando os tokens originais. */
+  --accent-ink:#806011;   /* mesmo hue 43 do --accent, so mais escuro: 5.5:1 no papel */
+  --ok-ink:#397046;       /* mesmo hue 134 do --ok, so mais escuro: 5.2:1 no wash verde */
+  --ink-apoio:#706755;    /* mesmo hue 41 do --ink-4, so mais escuro: 5.3:1 no papel */
+
+  --font:'Sora',system-ui,-apple-system,sans-serif;
+  --mono:'Courier Prime',monospace;
+
+  /* ESCADA TIPOGRAFICA: a mesma da casa. O tracking negativo forte e a
+     assinatura premium. Subiu de tamanho, aperta a letra e alivia o peso. */
+  --t-mega:clamp(32px,5.2vw,52px); --tr-mega:-.055em; --w-mega:600; --lh-mega:1.08;
+  --t-h2:clamp(24px,3vw,34px);     --tr-h2:-.05em;    --w-h2:550;   --lh-h2:1.14;
+  --t-h3:19px;                     --tr-h3:-.04em;    --w-h3:600;   --lh-h3:1.3;
+  --t-body:15px;                   --tr-body:-.012em; --w-body:400; --lh-body:1.7;
+  --t-micro:10px;                  --tr-micro:.12em;  --w-micro:600; --lh-micro:1.6;
+
+  /* PROFUNDIDADE: vem de linha e de um degrau de papel, nao de sombra pesada.
+     Duas sombras no sistema inteiro, e a segunda so no card que flutua mesmo. */
+  --sh-1:0 1px 2px rgba(26,21,12,.04);
+  --sh-2:0 8px 24px rgba(26,21,12,.05);
+
+  --raio:12px;   /* raio contido. Acima de 14px o portal infantiliza. */
+  --raio-s:10px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto};*{transition:none!important}}
+
+body{
+  background:var(--p-base);
+  color:var(--ink-2);
+  font-family:var(--font);
+  font-size:var(--t-body);
+  font-weight:var(--w-body);
+  letter-spacing:var(--tr-body);
+  line-height:var(--lh-body);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* CAIXA ALTA so abaixo de 12px. Acima disso ela destroi o perfil da palavra,
+   que e como se le rapido. */
+.micro{
+  font-size:var(--t-micro);letter-spacing:var(--tr-micro);
+  font-weight:var(--w-micro);line-height:var(--lh-micro);
+  text-transform:uppercase;color:var(--ink-apoio);
+}
+h1{font-size:var(--t-mega);letter-spacing:var(--tr-mega);font-weight:var(--w-mega);line-height:var(--lh-mega);color:var(--ink-1)}
+h2{font-size:var(--t-h2);letter-spacing:var(--tr-h2);font-weight:var(--w-h2);line-height:var(--lh-h2);color:var(--ink-1)}
+h3{font-size:var(--t-h3);letter-spacing:var(--tr-h3);font-weight:var(--w-h3);line-height:var(--lh-h3);color:var(--ink-1)}
+a{color:var(--accent-ink);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;font-size:inherit;letter-spacing:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,textarea,select{font-family:inherit;font-size:15px;letter-spacing:var(--tr-body);color:var(--ink-1)}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+.pular{position:absolute;left:-9999px;top:0;z-index:99;background:var(--p-card);padding:12px 16px;border:1px solid var(--line)}
+.pular:focus{left:8px;top:8px}
+
+/* ============================================================
+   2. SHELL. Sidebar fixa a esquerda em desktop, gaveta no celular.
+   Grid de 2 colunas: a sidebar nao rola junto com o conteudo.
+   ============================================================ */
+.app{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+
+.sidebar{
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  background:var(--p-card);
+  border-right:1px solid var(--line);
+  display:flex;flex-direction:column;
+  z-index:30;
+}
+.marca{padding:22px 20px 18px;border-bottom:1px solid var(--line)}
+.marca .nome{font-size:15px;font-weight:650;letter-spacing:-.035em;color:var(--ink-1)}
+.marca .sub{font-size:11.5px;color:var(--ink-apoio);letter-spacing:-.01em;margin-top:2px}
+
+/* BLOCO DE NIVEL: copiado da posicao dele, topo da sidebar, visivel em toda
+   pagina. Discreto de proposito: o wash quente basta, sem barra colorida. */
+.nivel{padding:18px 20px;border-bottom:1px solid var(--line);background:var(--p-soft)}
+.nivel .n{font-size:20px;font-weight:600;letter-spacing:-.04em;color:var(--ink-1);margin:6px 0 12px}
+.nivel .lin{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.nivel .pct{font-family:var(--mono);font-size:13px;color:var(--accent-ink)}
+.barra{height:5px;background:var(--p-ember);border-radius:99px;overflow:hidden;margin:8px 0 8px}
+.barra > i{display:block;height:100%;background:var(--accent-fill);border-radius:99px;transition:width .3s}
+.nivel .falta{font-size:11.5px;color:var(--ink-apoio);letter-spacing:-.01em}
+
+.nav{padding:12px 12px;flex:1}
+.nav a{
+  display:flex;align-items:center;gap:10px;
+  min-height:44px;padding:10px 12px;border-radius:var(--raio-s);
+  color:var(--ink-3);font-size:14px;letter-spacing:-.02em;font-weight:450;
+  text-decoration:none;transition:background .15s,color .15s;
+}
+.nav a:hover{background:var(--p-soft);color:var(--ink-1);text-decoration:none}
+/* Estado ativo: wash quente + tinta do acento + fio a esquerda. Sem fill cheio:
+   o ambar solido e monopolio do botao de avancar. */
+.nav a[aria-current="page"]{background:var(--accent-soft);color:var(--ink-1);font-weight:550;box-shadow:inset 2px 0 0 var(--accent)}
+.nav .ponto{width:5px;height:5px;border-radius:99px;background:currentColor;opacity:.45;flex:none}
+
+.perfil{padding:14px 16px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
+.avatar{
+  width:34px;height:34px;flex:none;border-radius:var(--raio-s);
+  background:var(--accent-soft);color:var(--accent-ink);
+  display:grid;place-items:center;font-weight:650;font-size:14px;letter-spacing:-.02em;
+  border:1px solid var(--line-2);
+}
+.perfil .dados{min-width:0}
+.perfil .mail{font-size:11.5px;color:var(--ink-3);word-break:break-word;line-height:1.45}
+.perfil .plano{font-size:11px;color:var(--accent-ink);margin-top:3px;font-weight:600;letter-spacing:-.01em}
+
+/* Topbar so existe no celular, e e onde mora o botao da gaveta. */
+.topbar{
+  display:none;position:sticky;top:0;z-index:25;
+  background:var(--p-card);border-bottom:1px solid var(--line);
+  padding:10px 14px;align-items:center;gap:12px;
+}
+.burger{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:var(--raio-s);background:var(--p-card)}
+.burger span{display:block;width:17px;height:1.5px;background:var(--ink-2);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:17px;height:1.5px;background:var(--ink-2)}
+.burger span::before{top:-5px}.burger span::after{top:5px}
+.scrim{display:none;position:fixed;inset:0;background:rgba(26,21,12,.28);z-index:29}
+
+main{padding:clamp(20px,4vw,44px) clamp(16px,4vw,44px) 72px;max-width:1180px;width:100%}
+
+@media(max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .sidebar{
+    position:fixed;left:0;top:0;width:min(86vw,300px);
+    transform:translateX(-101%);transition:transform .22s ease;
+    box-shadow:var(--sh-2);
+  }
+  .sidebar.aberta{transform:none}
+  .topbar{display:flex}
+  .scrim.on{display:block}
+}
+
+/* ============================================================
+   3. PECAS REUSADAS
+   Card branco sobre papel #FAF8F4 ja e hierarquia suficiente. Nao empilho
+   sombra em cima de borda em cima de fundo diferente: escolho um degrau.
+   ============================================================ */
+.crumb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12.5px;color:var(--ink-apoio);letter-spacing:-.01em;margin-bottom:18px}
+.crumb button{color:var(--ink-apoio);text-decoration:none;padding:4px 0;min-height:auto}
+.crumb button:hover{color:var(--accent-ink);text-decoration:underline}
+.crumb .sep{opacity:.5}
+.crumb .aqui{color:var(--ink-2)}
+
+.cab{margin-bottom:28px;max-width:780px}
+.cab h1,.cab h2{margin-bottom:10px}
+.cab p{color:var(--ink-3);font-size:16px}
+h1:focus,h2:focus{outline:none}
+
+.card{background:var(--p-card);border:1px solid var(--line);border-radius:var(--raio);box-shadow:var(--sh-1)}
+
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 9px;border-radius:99px;border:1px solid transparent;
+  font-size:11px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;
+}
+.b-ok{color:var(--ok-ink);background:rgba(63,125,78,.09);border-color:rgba(63,125,78,.20)}
+.b-prog{color:var(--accent-ink);background:var(--accent-soft);border-color:var(--line-2)}
+.b-nao{color:var(--ink-apoio);background:var(--p-warm);border-color:var(--line)}
+.b-trava{color:var(--ink-apoio);background:var(--p-soft);border-color:var(--line)}
+.b-herd{color:var(--accent-ink);background:var(--p-gold);border-color:var(--line-2)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:11px 18px;border-radius:var(--raio-s);
+  font-size:14px;font-weight:550;letter-spacing:-.025em;
+  transition:background .15s,border-color .15s,color .15s;
+}
+/* O ambar SOLIDO aparece uma vez por contexto, e e onde o aluno avanca. */
+.btn-1{background:var(--accent-fill);color:var(--btn-text)}
+.btn-1:hover{background:#DFBC55}
+.btn-2{background:var(--p-card);color:var(--ink-1);border:1px solid var(--line)}
+.btn-2:hover{background:var(--p-soft)}
+.btn-3{background:transparent;color:var(--ink-3);border:1px solid var(--line)}
+.btn-3:hover{color:var(--ink-1);background:var(--p-soft)}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.btn[disabled]:hover,.btn[aria-disabled="true"]:hover{background:var(--accent-fill)}
+.btn-2[disabled]:hover{background:var(--p-card)}
+.acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+.aviso{padding:14px 16px;border-radius:var(--raio-s);border:1px solid var(--line);background:var(--p-soft);font-size:14px;color:var(--ink-3)}
+.aviso.quente{background:var(--p-gold);border-color:var(--line-2)}
+.aviso.ok{background:rgba(63,125,78,.07);border-color:rgba(63,125,78,.20);color:var(--ink-2)}
+.aviso strong{color:var(--ink-1);font-weight:600}
+
+/* PLACEHOLDER: marca visivel de coisa sem lastro. Monoespacada de proposito,
+   pra nunca ser confundida com copy pronta. */
+.ph{font-family:var(--mono);font-size:12.5px;color:#8F3120;background:rgba(176,62,40,.06);
+    border:1px solid rgba(176,62,40,.20);border-radius:6px;padding:2px 7px;display:inline-block;letter-spacing:0}
+
+/* ============================================================
+   4. SUA ROTA: os cards de curso (as prateleiras)
+   ============================================================ */
+.grade-rota{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.curso{
+  text-align:left;width:100%;display:flex;flex-direction:column;gap:12px;
+  padding:22px;background:var(--p-card);border:1px solid var(--line);
+  border-radius:var(--raio);box-shadow:var(--sh-1);
+  transition:border-color .15s,box-shadow .18s,transform .18s;
+}
+.curso:hover{border-color:var(--line-2);box-shadow:var(--sh-2);transform:translateY(-1px)}
+.curso.travado{background:var(--p-soft);box-shadow:none}
+.curso .topo{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.curso h3{margin:0}
+.curso .linha{font-family:var(--mono);font-size:11.5px;color:var(--accent-ink);letter-spacing:.02em}
+.curso .desc{font-size:14px;color:var(--ink-3);line-height:1.6}
+.curso .preco{font-size:13px;color:var(--ink-2);font-weight:550;letter-spacing:-.02em}
+.curso .rodape{margin-top:auto;padding-top:6px}
+.curso .frac{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--ink-apoio)}
+.curso .frac b{color:var(--ink-2);font-weight:550}
+.curso .nota-herd{font-size:12.5px;color:var(--accent-ink);background:var(--p-gold);border:1px solid var(--line-2);border-radius:8px;padding:8px 10px;line-height:1.5}
+
+/* ============================================================
+   5. TRILHA: lista de etapas + coluna direita
+   No celular a coluna direita sobe pra cima da lista (order:-1), porque
+   "qual e a proxima etapa" e a informacao mais util na tela pequena.
+   ============================================================ */
+.trilha{display:grid;grid-template-columns:minmax(0,1fr) 288px;gap:28px;align-items:start}
+@media(max-width:940px){.trilha{grid-template-columns:minmax(0,1fr)} .lateral{order:-1}}
+
+.etapas{display:flex;flex-direction:column;gap:10px}
+
+.modulo-cab{margin:22px 0 4px;padding:16px 18px;border-radius:var(--raio);background:var(--p-warm);border:1px solid var(--line)}
+.modulo-cab:first-child{margin-top:0}
+.modulo-cab.herdado{background:var(--p-gold);border-color:var(--line-2)}
+.modulo-cab .topo{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+.modulo-cab h3{font-size:16px}
+.modulo-cab p{font-size:13px;color:var(--ink-3);margin-top:6px;line-height:1.55}
+
+.etapa{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;
+  text-align:left;width:100%;padding:18px;
+  background:var(--p-card);border:1px solid var(--line);border-radius:var(--raio);
+  box-shadow:var(--sh-1);transition:border-color .15s,box-shadow .18s;
+}
+.etapa:hover{border-color:var(--line-2);box-shadow:var(--sh-2)}
+.etapa[disabled]{opacity:.62;box-shadow:none;background:var(--p-soft)}
+.etapa[disabled]:hover{border-color:var(--line);box-shadow:none}
+/* NUMERO da etapa: chip com wash do acento e tinta do acento. Nunca fill cheio. */
+.num{
+  width:46px;height:46px;flex:none;border-radius:var(--raio-s);
+  background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--line-2);
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:0;
+}
+.etapa.feita .num{background:rgba(63,125,78,.09);color:var(--ok-ink);border-color:rgba(63,125,78,.20)}
+.etapa[disabled] .num{background:var(--p-warm);color:var(--ink-apoio);border-color:var(--line)}
+.etapa .linha1{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:6px}
+.etapa .tit{font-size:16px;font-weight:600;letter-spacing:-.032em;color:var(--ink-1);line-height:1.3}
+.etapa .desc{font-size:13.5px;color:var(--ink-3);line-height:1.6}
+.etapa .abas-prog{margin-top:9px;font-size:12px;color:var(--ink-apoio);display:flex;align-items:center;gap:8px}
+.etapa .abas-prog .mini{width:86px;height:4px;background:var(--p-warm);border-radius:99px;overflow:hidden}
+.etapa .abas-prog .mini i{display:block;height:100%;background:var(--accent-fill)}
+
+.lateral{display:flex;flex-direction:column;gap:14px;position:sticky;top:24px}
+@media(max-width:940px){.lateral{position:static}}
+.painel{padding:20px;background:var(--p-card);border:1px solid var(--line);border-radius:var(--raio);box-shadow:var(--sh-1)}
+.painel .frac-g{font-size:40px;font-weight:600;letter-spacing:-.055em;color:var(--ink-1);line-height:1;margin:10px 0 4px}
+.painel .rot{font-size:12.5px;color:var(--ink-apoio)}
+.painel hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+.painel .prox-rot{font-size:12.5px;color:var(--ink-apoio);margin-bottom:6px}
+.painel .prox{font-size:14.5px;font-weight:550;letter-spacing:-.03em;color:var(--accent-ink);text-align:left;line-height:1.4}
+.painel .prox:hover{text-decoration:underline}
+.links-r{display:flex;flex-direction:column;gap:2px;margin-top:8px}
+.links-r button{text-align:left;font-size:13.5px;color:var(--ink-3);min-height:40px;padding:8px 0}
+.links-r button:hover{color:var(--accent-ink)}
+
+/* ============================================================
+   6. ETAPA: abas modulares
+   ============================================================ */
+.etapa-topo{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.etapa-topo .et{font-family:var(--mono);font-size:12.5px;color:var(--ink-apoio);letter-spacing:.02em}
+
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin:26px 0 24px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  min-height:44px;padding:11px 16px;white-space:nowrap;
+  font-size:14px;font-weight:500;letter-spacing:-.025em;color:var(--ink-apoio);
+  border-bottom:2px solid transparent;margin-bottom:-1px;border-radius:var(--raio-s) var(--raio-s) 0 0;
+}
+.tab:hover{color:var(--ink-2);background:var(--p-soft)}
+.tab[aria-selected="true"]{color:var(--ink-1);font-weight:600;border-bottom-color:var(--accent)}
+.tab .pt{display:inline-block;width:6px;height:6px;border-radius:99px;background:var(--ok);margin-left:7px;vertical-align:middle}
+.tab[disabled]{opacity:.5;cursor:not-allowed}
+
+.painel-aba{max-width:760px}
+.painel-aba > * + *{margin-top:20px}
+
+/* PLAYER: placeholder honesto. Nenhuma aula foi gravada ainda, entao a caixa
+   diz isso com todas as letras em vez de fingir um play. */
+.player{
+  aspect-ratio:16/9;border-radius:var(--raio);border:1px solid var(--line);
+  background:var(--p-warm);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;text-align:center;padding:24px;
+}
+.player .sel{font-family:var(--mono);font-size:11.5px;color:var(--accent-ink);border:1px solid var(--line-2);background:var(--p-gold);padding:5px 10px;border-radius:99px}
+.player .l1{font-size:15px;color:var(--ink-2);font-weight:550;letter-spacing:-.03em;max-width:46ch}
+.player .l2{font-size:13px;color:var(--ink-apoio);max-width:52ch;line-height:1.55}
+
+.pontos{padding:20px;background:var(--p-soft);border:1px solid var(--line);border-radius:var(--raio)}
+.pontos h3{font-size:15px;margin-bottom:12px}
+.pontos ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.pontos li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:11px;font-size:14px;color:var(--ink-3);line-height:1.6}
+.pontos li::before{content:"";width:5px;height:5px;border-radius:99px;background:var(--accent);margin-top:9px}
+
+.mats{display:grid;gap:10px}
+.mat{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px 18px;background:var(--p-card);border:1px solid var(--line);border-radius:var(--raio)}
+.mat .n{font-size:14.5px;font-weight:600;letter-spacing:-.03em;color:var(--ink-1)}
+.mat .d{font-size:13px;color:var(--ink-3);margin-top:3px;line-height:1.55}
+.mat .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--ink-apoio);border:1px solid var(--line);border-radius:5px;padding:2px 7px}
+.mat .estado{font-size:12px;color:var(--ink-apoio);text-align:right;max-width:150px;line-height:1.45}
+@media(max-width:560px){.mat{grid-template-columns:minmax(0,1fr)}.mat .estado{text-align:left;max-width:none}}
+
+/* FORMULARIOS do Construa. Campo em papel um degrau abaixo do card, com fio
+   fino. Sem sombra interna, sem borda de 2px. */
+.campos{display:grid;gap:14px}
+.campo label{display:block;font-size:13px;font-weight:550;letter-spacing:-.02em;color:var(--ink-2);margin-bottom:6px}
+.campo .dica{font-size:12px;color:var(--ink-apoio);margin-bottom:7px;line-height:1.5}
+.campo input,.campo textarea,.campo select{
+  width:100%;min-height:44px;padding:11px 13px;
+  background:var(--p-base);border:1px solid var(--line);border-radius:var(--raio-s);
+  transition:border-color .15s,background .15s;
+}
+.campo input:focus,.campo textarea:focus,.campo select:focus{background:var(--p-card);border-color:var(--accent)}
+.campo textarea{min-height:96px;resize:vertical;line-height:1.6}
+.dupla{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.dupla{grid-template-columns:1fr}}
+
+/* SAIDA DA REGUA: e o unico lugar da tela de etapa que usa o papel mais quente,
+   porque e onde sai o numero que o aluno leva pro pregao. */
+.saida{padding:20px;background:var(--p-gold);border:1px solid var(--line-2);border-radius:var(--raio)}
+.saida .ln{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line-2);font-size:14px}
+.saida .ln:last-of-type{border-bottom:0}
+.saida .ln span{color:var(--ink-3)}
+.saida .ln b{font-family:var(--mono);font-weight:700;color:var(--ink-1);font-size:15px;letter-spacing:0}
+.saida .teto{margin-top:12px;padding-top:14px;border-top:1px solid var(--accent)}
+.saida .teto .rot{font-size:12.5px;color:var(--accent-ink);font-weight:600}
+.saida .teto .v{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--ink-1);letter-spacing:-.02em;line-height:1.2;margin-top:4px}
+
+.check{display:flex;flex-direction:column;gap:2px}
+.check label{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;padding:12px;min-height:44px;border-radius:var(--raio-s);cursor:pointer;font-size:14px;color:var(--ink-2);line-height:1.55}
+.check label:hover{background:var(--p-soft)}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent)}
+
+.lista-num{display:flex;flex-direction:column;gap:10px;counter-reset:passo}
+.lista-num li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-size:14px;color:var(--ink-3);line-height:1.6;list-style:none}
+.lista-num li::before{
+  counter-increment:passo;content:counter(passo);
+  font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent-ink);
+  width:22px;height:22px;border-radius:6px;background:var(--accent-soft);border:1px solid var(--line-2);
+  display:grid;place-items:center;
+}
+
+/* ============================================================
+   7. MEUS MATERIAIS, FERRAMENTAS, CALENDARIO
+   ============================================================ */
+.secao{margin-top:34px}
+.secao > h2{margin-bottom:6px}
+.secao > .sub{font-size:14px;color:var(--ink-3);margin-bottom:16px}
+
+.arq{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:15px 18px;background:var(--p-card);border:1px solid var(--line);border-radius:var(--raio)}
+.arq + .arq{margin-top:8px}
+.arq .ic{width:38px;height:38px;border-radius:var(--raio-s);background:var(--p-warm);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink-apoio)}
+.arq .n{font-size:14.5px;font-weight:550;letter-spacing:-.03em;color:var(--ink-1);line-height:1.35}
+.arq .m{font-size:12px;color:var(--ink-apoio);margin-top:3px}
+@media(max-width:560px){.arq{grid-template-columns:auto minmax(0,1fr)} .arq .btn{grid-column:1/-1;width:100%}}
+
+.contadores{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
+.cont{padding:16px 18px;background:var(--p-card);border:1px solid var(--line);border-radius:var(--raio)}
+.cont .v{font-size:26px;font-weight:600;letter-spacing:-.05em;color:var(--ink-1);line-height:1}
+.cont .r{font-size:12.5px;color:var(--ink-apoio);margin-top:5px}
+
+.enc{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:15px 18px;background:var(--p-card);border:1px solid var(--line);border-radius:var(--raio)}
+.enc + .enc{margin-top:8px}
+.enc .cod{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent-ink);width:40px}
+.enc .t{font-size:14px;color:var(--ink-1);font-weight:500;letter-spacing:-.025em;line-height:1.4}
+.enc .d{font-size:12px;color:var(--ink-apoio);margin-top:3px}
+@media(max-width:560px){.enc{grid-template-columns:auto minmax(0,1fr)}}
+
+.vivo{position:fixed;left:-9999px}
+</style>
+</head>
+<body>
+
+<a class="pular" href="#main">Pular para o conteúdo</a>
+
+<header class="topbar">
+  <button class="burger" id="btn-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar"><span></span></button>
+  <div>
+    <div class="nome" style="font-size:14px;font-weight:650;letter-spacing:-.035em;color:var(--ink-1)">Portal do aluno</div>
+  </div>
+</header>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="app">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="marca">
+      <div class="nome">Portal do aluno</div>
+      <div class="sub">Leilão de veículos, com Maykell Gomes</div>
+    </div>
+
+    <!-- Bloco de nivel: mesma posicao e mesmos rotulos do portal do Joao.
+         Aqui ele e CALCULADO das aulas concluidas, nao e enfeite parado. -->
+    <div class="nivel">
+      <div class="micro">Seu nível</div>
+      <div class="n" id="niv-n">Nível 1</div>
+      <div class="lin">
+        <span style="font-size:11.5px;color:var(--ink-apoio);letter-spacing:-.01em">Progresso para próximo nível</span>
+        <span class="pct" id="niv-pct">0%</span>
+      </div>
+      <div class="barra"><i id="niv-barra" style="width:0%"></i></div>
+      <div class="falta" id="niv-falta" aria-live="polite">0 aulas para o próximo nível</div>
+    </div>
+
+    <nav class="nav" id="nav" aria-label="Navegação principal"></nav>
+
+    <div class="perfil">
+      <div class="avatar" id="perf-ini">A</div>
+      <div class="dados">
+        <div class="mail" id="perf-mail"></div>
+        <div class="plano" id="perf-plano"></div>
+      </div>
+    </div>
+  </aside>
+
+  <main id="main" tabindex="-1"></main>
+</div>
+
+<div class="vivo" id="vivo" aria-live="polite" role="status"></div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   MODELO DE DADOS
+   Quatro entidades separadas, do jeito que o modelo manda. Isto aqui e o
+   contrato que vai pro Supabase: modulos, produtos, aluno, progresso.
+   ============================================================ */
+
+/* ---------- MODULOS: a unidade atomica. Existe UMA VEZ SO. ---------- */
+var MODULOS = {
+
+  "m-tradicional": {
+    id: "m-tradicional",
+    nome: "Leilão tradicional",
+    resumo: "As 9 aulas do processo inteiro, do cadastro no leiloeiro até a venda do carro pronto. A ordem foi pensada para você dar o primeiro lance já a partir da aula 3.",
+    aulas: [
+      {
+        id:"t1", num:"01", titulo:"Como funciona o leilão tradicional",
+        desc:"Entenda o que é um lote, de onde vêm os carros e por que a origem do veículo pesa mais que o preço.",
+        abas:["aprenda","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"Como funciona o leilão tradicional", sub:"O mapa do processo inteiro antes de você tocar em qualquer lote."},
+        pontos:[
+          "Veículo em leilão é lote, e quem dá o maior lance arremata. Arrematar não é comprar em loja: existe edital, comissão do leiloeiro, prazo e condição.",
+          "De onde vêm os carros: seguradora, banco e financeira, recuperação de financiamento, renovação de frota, órgão público, sinistrado.",
+          "A origem do veículo é uma das primeiras coisas que o Maykell analisa, antes do preço, porque ela define a facilidade de vender depois.",
+          "Visitação física às vezes existe, na maior parte das vezes não existe.",
+          "O erro mais comum: olhar só o valor do lance e esquecer o custo que vem depois.",
+          "Lote real na tela, do número do lote às observações: [PLACEHOLDER: carro de exemplo desta aula]"
+        ],
+        materiais:[]
+      },
+      {
+        id:"t2", num:"02", titulo:"Cadastro e habilitação",
+        desc:"A etapa obrigatória antes de qualquer lance, e os dois alertas que evitam golpe.",
+        abas:["aprenda","construa","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"Cadastro e habilitação", sub:"Como entrar num leilão que existe de verdade sem mandar documento para o lugar errado."},
+        pontos:[
+          "Cadastro não é habilitação. Em alguns leilões também é preciso aceitar o edital.",
+          "Confirme que está no site oficial do leiloeiro antes de enviar documento. Leilão falso e site clonado são risco real.",
+          "A validação de documento leva tempo. Não deixe para a última hora.",
+          "PF e PJ não arrematam as mesmas coisas. Sucata, por exemplo, costuma exigir PJ credenciada ao Detran.",
+          "Nunca pague porque alguém chamou no WhatsApp dizendo que você arrematou. Confira sempre os dados de pagamento nos canais oficiais."
+        ],
+        materiais:[
+          {nome:"Lista de leilões confiáveis", desc:"De 20 a 30 leiloeiros que o Maykell acompanha, para você não cair em site clonado.", tipo:"Lista", formato:"XLSX", arquivo:false}
+        ],
+        entregavel:"Meu cadastro aprovado num leiloeiro que existe de verdade",
+        construa:{
+          tipo:"campos",
+          intro:"Escolha um leiloeiro da lista, faça o cadastro e volte aqui quando a habilitação sair.",
+          passos:["Abra a lista de leilões confiáveis","Confira que a URL é a oficial, sem atalho de terceiro","Faça o cadastro e envie os documentos","Anote abaixo quando a habilitação for aprovada"],
+          campos:[
+            {k:"leiloeiro", l:"Leiloeiro em que me habilitei", ph:"Nome do leiloeiro"},
+            {k:"url", l:"URL oficial que eu conferi", ph:"site do leiloeiro"},
+            {k:"pfpj", l:"Eu me cadastrei como", tipo:"select", opcoes:["Pessoa física","Pessoa jurídica"]},
+            {k:"data", l:"Data em que a habilitação saiu", ph:"dd/mm/aaaa"}
+          ]
+        }
+      },
+      {
+        id:"t3", num:"03", titulo:"Como ler o edital e calcular o valor real do lote",
+        desc:"A etapa que separa quem compra com estratégia de quem tem prejuízo. Aqui entra A Régua do Lance.",
+        abas:["aprenda","construa","valide","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"O edital e a conta do valor real", sub:"A fórmula que transforma um lance num custo efetivo, e a conta ao contrário que dá o teto."},
+        pontos:[
+          "O que procurar no edital: comissão do leiloeiro, taxas e despesas adicionais, débitos e situação documental.",
+          "Estado do veículo: pneu, funilaria, mecânica e peças. Cada um deles vira custo estimado.",
+          "A fórmula do valor real: lance mais comissão mais taxas mais débitos mais reparos é igual ao custo efetivo.",
+          "A conta ao contrário: não é quanto eu quero dar, é qual o máximo que eu posso dar para esse carro ainda valer a pena.",
+          "A Régua do Lance tem quatro tempos, sempre nesta ordem: os dados, as fotos, as peças somadas, o percentual da tabela.",
+          "O que sai do quarto tempo é um número. Esse número é o teto, e é ele que vai junto para a sala do pregão."
+        ],
+        materiais:[
+          {nome:"A Régua do Lance em uma página", desc:"Os quatro tempos na ordem e a fórmula do valor real, para você abrir ao lado do edital.", tipo:"Referência", formato:"TXT", arquivo:true, gera:"regua"},
+          {nome:"Planilha de valor real do lote", desc:"A conta pronta para preencher fora do portal.", tipo:"Planilha", formato:"XLSX", arquivo:false, nota:"Fica no produto judicial, de propósito. No leilão tradicional a conta é feita aqui dentro."}
+        ],
+        entregavel:"Meu teto de lance num lote real",
+        construa:{tipo:"regua", hastas:false}
+      },
+      {
+        id:"t4", num:"04", titulo:"Como avaliar um lote remotamente antes de arrematar",
+        desc:"Identificar o carro, ler a descrição inteira, classificar o tipo de monta e somar as peças pelas fotos.",
+        abas:["aprenda","construa","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"Avaliação remota do lote", sub:"Como ler um carro que você não vai ver pessoalmente."},
+        pontos:[
+          "Identifique exatamente o veículo: marca, modelo, versão, ano e chassi.",
+          "Leia toda a descrição antes de olhar só a foto.",
+          "Classifique: pequena, média e grande monta, leilão de financeira (apreendido por falta de pagamento, sem monta) e veículo de enchente.",
+          "Pesquise o custo das peças pelas fotos, peça por peça, no Mercado Livre.",
+          "Pesquise o valor de mercado na tabela e em anúncios parecidos.",
+          "Defina o lance máximo antes do leilão começar, nunca durante.",
+          "Lote real de cada tipo de monta na tela: [PLACEHOLDER: carro de exemplo desta aula]"
+        ],
+        materiais:[],
+        entregavel:"Minha leitura de um lote, feita só pelas fotos e pela ficha",
+        construa:{
+          tipo:"campos",
+          intro:"Escolha um lote que esteja aberto agora e leia ele inteiro antes de olhar preço.",
+          passos:["Copie a identificação do veículo da ficha técnica","Leia a descrição inteira e anote o que o edital diz do estado","Classifique o tipo de monta","Some as peças pesquisando pelas fotos"],
+          campos:[
+            {k:"lote", l:"Lote que eu escolhi", ph:"número do lote, marca, modelo, versão e ano"},
+            {k:"origem", l:"Origem do lote", ph:"seguradora, financeira, frota, órgão público"},
+            {k:"monta", l:"Classificação", tipo:"select", opcoes:["Pequena monta","Média monta","Grande monta","Financeira, sem monta","Enchente","Não consegui classificar"]},
+            {k:"pecas", l:"Soma das peças que eu pesquisei", ph:"o que você somou e onde pesquisou", tipo:"textarea"},
+            {k:"mercado", l:"Valor de mercado que eu encontrei", ph:"tabela e anúncios parecidos"}
+          ]
+        }
+      },
+      {
+        id:"t5", num:"05", titulo:"Estratégia de lance",
+        desc:"Como entrar no pregão com o teto já decidido e sair sem estourar ele.",
+        abas:["aprenda","construa","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"Estratégia de lance", sub:"O objetivo não é ganhar a disputa, é fazer uma boa compra."},
+        pontos:[
+          "Entre no leilão com o lance máximo já definido na etapa anterior.",
+          "Entenda o incremento dos lances antes do pregão começar.",
+          "Lance manual e lance automático servem a situações diferentes.",
+          "Não demonstre ansiedade entrando em toda disputa, e cuidado com a guerra de lances.",
+          "Nunca aumente o teto por emoção. Arrematou, a disputa acabou.",
+          "Não arrematar também pode ser uma boa decisão."
+        ],
+        materiais:[],
+        entregavel:"Meu teto escrito antes do pregão começar",
+        construa:{
+          tipo:"campos",
+          intro:"Antes do pregão, escreva o número e o que você faz se a disputa passar dele.",
+          passos:["Traga o teto que saiu da Régua do Lance","Confira o incremento do leilão","Decida manual ou automático","Escreva a frase que você vai reler quando a disputa esquentar"],
+          campos:[
+            {k:"teto", l:"Teto que eu escrevi antes de entrar", ph:"R$"},
+            {k:"incremento", l:"Incremento deste leilão", ph:"R$"},
+            {k:"modo", l:"Vou dar lance", tipo:"select", opcoes:["Manual","Automático"]},
+            {k:"regra", l:"O que eu faço se a disputa passar do meu teto", ph:"escreva em uma frase", tipo:"textarea"}
+          ]
+        }
+      },
+      {
+        id:"t6", num:"06", titulo:"O que fazer depois que arrematou",
+        desc:"Confirmação, conferência da nota contra o edital, pagamento pelos canais oficiais e liberação.",
+        abas:["aprenda","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"O pós-arremate", sub:"Os cinco movimentos entre a martelada e a retirada."},
+        pontos:[
+          "Confirme oficialmente o arremate.",
+          "Confira a nota de arrematação contra o edital, item por item.",
+          "Pague só pelos canais oficiais, reforçando o alerta da aula 2.",
+          "Aguarde a confirmação e a liberação antes de organizar qualquer coisa.",
+          "Organize a retirada, que é o assunto da próxima aula."
+        ],
+        materiais:[]
+      },
+      {
+        id:"t7", num:"07", titulo:"Retirando o carro do pátio",
+        desc:"Prazo, transporte, e o registro fotográfico que protege você numa contestação.",
+        abas:["aprenda","construa","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"A retirada", sub:"Planeje o transporte antes de ir ao pátio, não depois."},
+        pontos:[
+          "Confira o prazo de retirada no edital. Perder o prazo custa caro.",
+          "Guincho ou cegonha: decida pela distância, pelo estado do carro e pelo custo.",
+          "Registre o estado do veículo na retirada com fotos. Isso é o que sustenta uma contestação.",
+          "Quando o veículo chegar, não saia simplesmente usando."
+        ],
+        materiais:[
+          {nome:"Lista de cegonheiros do Brasil inteiro", desc:"Contatos para tirar o carro do pátio em qualquer estado.", tipo:"Lista", formato:"XLSX", arquivo:false}
+        ],
+        entregavel:"Meu carro fora do pátio, com o estado registrado",
+        construa:{
+          tipo:"campos",
+          intro:"Feche o transporte antes de ir, e registre o carro no momento em que ele sai.",
+          passos:["Confira o prazo de retirada no edital","Escolha guincho ou cegonha e feche o contato","Tire as fotos do estado na hora da retirada","Anote aqui o que ficou registrado"],
+          campos:[
+            {k:"prazo", l:"Prazo de retirada que o edital dá", ph:"quantos dias"},
+            {k:"transporte", l:"Transporte que eu fechei", tipo:"select", opcoes:["Guincho","Cegonha","Eu mesmo retiro"]},
+            {k:"contato", l:"Contato que eu usei", ph:"quem fez o transporte"},
+            {k:"registro", l:"O que eu registrei em foto na retirada", ph:"descreva o estado do carro na saída do pátio", tipo:"textarea"}
+          ]
+        }
+      },
+      {
+        id:"t8", num:"08", titulo:"Documentação e regularização",
+        desc:"Da liberação documental junto ao leiloeiro até a transferência para o seu nome.",
+        abas:["aprenda","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"Documentação e regularização", sub:"Onde mais gente trava, e o caminho para destravar."},
+        pontos:[
+          "Volte à situação documental que o edital declarava e compare com o que chegou.",
+          "Acompanhe a liberação documental junto ao leiloeiro e ao órgão.",
+          "Verifique débitos e restrições antes de qualquer vistoria.",
+          "Vistoria e exigências de regularização mudam por estado e por tipo de avaria.",
+          "Transferência para o novo proprietário, e quando entra laudo adicional como o do Inmetro."
+        ],
+        materiais:[
+          {nome:"Lista de despachantes nacionais", desc:"Para desembaraçar a documentação sem depender de indicação de última hora.", tipo:"Lista", formato:"XLSX", arquivo:false},
+          {nome:"Empresa de laudo cautelar recomendada", desc:"Recomendação do Maykell no Paraná e em São Paulo.", tipo:"Contato", formato:"PDF", arquivo:false}
+        ]
+      },
+      {
+        id:"t9", num:"09", titulo:"Como revender o carro",
+        desc:"A venda começa na compra. Preço, transparência sobre a procedência, anúncio e canal.",
+        abas:["aprenda","construa","valide","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"A revenda", sub:"Saber exatamente quanto o carro custou é o que deixa você negociar sem perder a conta."},
+        pontos:[
+          "A venda começa na compra: se o teto estava certo, o preço de anúncio fecha sozinho.",
+          "Prepare o carro antes de fotografar.",
+          "Pesquise o preço real de mercado e considere o histórico de leilão na precificação.",
+          "Seja transparente sobre a procedência, e guarde prova do que foi feito: reparo, documentação e laudo.",
+          "Boas fotos e um bom anúncio valem mais que desconto.",
+          "Escolha bem onde anunciar, e deixe margem para negociação.",
+          "O grupo de repasse é um dos canais onde você pode anunciar."
+        ],
+        materiais:[
+          {nome:"Acesso ao grupo de repasse", desc:"Grupo com 700 pessoas, para anunciar o carro por canal próprio.", tipo:"Acesso", formato:"Link", arquivo:false}
+        ],
+        entregavel:"Meu anúncio pronto, com preço que fecha a conta",
+        construa:{
+          tipo:"campos",
+          intro:"Monte o anúncio com o custo real na mão, não com o preço que você gostaria de receber.",
+          passos:["Traga o custo efetivo que saiu da Régua do Lance","Pesquise anúncios do mesmo carro e da mesma faixa","Escreva o texto dizendo a procedência com todas as letras","Escolha onde publicar"],
+          campos:[
+            {k:"custo", l:"Quanto esse carro me custou pronto", ph:"R$"},
+            {k:"preco", l:"Preço que eu vou anunciar", ph:"R$"},
+            {k:"onde", l:"Onde eu vou anunciar", ph:"canais escolhidos"},
+            {k:"texto", l:"O texto do meu anúncio", ph:"inclua a procedência e o que foi feito no carro", tipo:"textarea"}
+          ]
+        }
+      }
+    ]
+  },
+
+  "m-judicial": {
+    id: "m-judicial",
+    nome: "Leilão judicial",
+    resumo: "Nove aulas que mostram só o que muda em relação ao tradicional, mais a call individual que fecha o seu plano. As fontes são SENAD, TRT e Junta Comercial.",
+    aulas: [
+      {
+        id:"j1", num:"J1", titulo:"Tradicional e judicial: o que muda e de onde vêm os carros",
+        desc:"Quem vende, o que cada origem entrega de bom e de ruim, e a tarefa que você leva para a call.",
+        abas:["aprenda","construa","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"O que muda no judicial", sub:"SENAD, secretarias, prefeituras e troca de frota, uma por uma."},
+        pontos:[
+          "Quem vende: SENAD (apreensões do tráfico), secretarias, prefeituras e troca de frota.",
+          "A SENAD costuma dar o melhor negócio. Troca de frota exige cuidado com desgaste. Secretaria e prefeitura, caso a caso.",
+          "Vantagens do judicial: parcelamento, seguro a 100 por cento da tabela e procedência mais limpa.",
+          "Desvantagens: edital mais difícil, prazo longo, documentação lenta e carro parado muito tempo.",
+          "Sobre o medo da documentação: ela trava, mas libera. Tem uma aula inteira só disso."
+        ],
+        materiais:[],
+        entregavel:"A origem de lote que combina com o meu caixa",
+        construa:{
+          tipo:"campos",
+          intro:"Esta resposta vai com você para a call individual. É o ponto de partida do seu direcionamento.",
+          passos:["Releia as quatro origens","Compare com quanto você tem hoje","Escreva qual origem combina com o seu orçamento e com o seu objetivo"],
+          campos:[
+            {k:"origem", l:"A origem que combina comigo", tipo:"select", opcoes:["SENAD","Secretaria","Prefeitura","Troca de frota"]},
+            {k:"porque", l:"Por que essa e não outra", ph:"em uma ou duas frases", tipo:"textarea"},
+            {k:"objetivo", l:"Meu objetivo com o primeiro carro", tipo:"select", opcoes:["Renda extra","Virar negócio","Uso próprio"]}
+          ]
+        }
+      },
+      {
+        id:"j2", num:"J2", titulo:"Onde achar os pregões: as 3 fontes",
+        desc:"O caminho oficial até o calendário da SENAD, o site do TRT do seu estado e a Junta Comercial.",
+        abas:["aprenda","construa","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"As três fontes", sub:"Onde os pregões judiciais aparecem, e como não entrar por link de terceiro."},
+        pontos:[
+          "Caminho oficial: gov.br, Ministério da Justiça, SENAD, Leilões em Andamento, Calendário de Leilões.",
+          "O painel abre no Power BI, fora do gov.br, e isso é normal. Nunca entre por link de terceiros.",
+          "Filtros que importam: estado, espécie do ativo (móvel é veículo), mês, leilão suspenso e leiloeiro.",
+          "A tabela traz primeira e segunda hasta, quantidade de ativos e link para o leiloeiro.",
+          "Segunda fonte: o site do TRT do seu estado, com bens penhorados.",
+          "Terceira fonte: a Junta Comercial, onde dá para conferir se o leiloeiro é registrado."
+        ],
+        materiais:[
+          {nome:"Mapa das 3 fontes e roteiro de busca semanal", desc:"O caminho de cada fonte e a rotina de 30 minutos por semana.", tipo:"Roteiro", formato:"PDF", arquivo:false}
+        ],
+        entregavel:"Meus 3 pregões marcados para os próximos 30 dias",
+        construa:{
+          tipo:"campos",
+          intro:"Separe três leilões nos próximos 30 dias usando pelo menos duas fontes diferentes.",
+          passos:["Abra o calendário da SENAD pelo caminho oficial","Abra o site do TRT do seu estado","Confira o leiloeiro na Junta Comercial","Anote os três aqui"],
+          campos:[
+            {k:"p1", l:"Pregão 1", ph:"fonte, leiloeiro e data"},
+            {k:"p2", l:"Pregão 2", ph:"fonte, leiloeiro e data"},
+            {k:"p3", l:"Pregão 3", ph:"fonte, leiloeiro e data"}
+          ]
+        }
+      },
+      {
+        id:"j3", num:"J3", titulo:"Habilitação e leitura do edital judicial",
+        desc:"Os três pontos que mais dão prejuízo, mais ICMS, hastas e penalidade por desistência.",
+        abas:["aprenda","construa","valide","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"O edital judicial", sub:"Ele é mais difícil que o tradicional, e os pontos caros estão sempre nos mesmos lugares."},
+        pontos:[
+          "Prazo de retirada: quem define é o leiloeiro, e perder o prazo custa caro.",
+          "Débitos: confira se IPVA e multas anteriores ficam com o órgão ou com o arrematante.",
+          "Estado real: o edital é ponto de partida, não é garantia.",
+          "Habilite-se por leiloeiro, com antecedência.",
+          "Primeira e segunda hasta: na segunda o edital aceita valor menor, até o piso.",
+          "Valor de avaliação não é lance mínimo. E alguns leiloeiros governamentais cobram ICMS.",
+          "A fórmula do valor real ganha três parcelas novas aqui: débitos, ICMS e diárias de pátio."
+        ],
+        materiais:[
+          {nome:"Checklist de edital judicial", desc:"Os pontos do edital na ordem em que eles aparecem.", tipo:"Checklist", formato:"PDF", arquivo:false}
+        ],
+        entregavel:"Meu edital judicial lido pelos 3 pontos que dão prejuízo",
+        construa:{
+          tipo:"campos",
+          intro:"Pegue o edital de um dos três pregões que você separou na J2.",
+          passos:["Abra o edital do pregão escolhido","Ache o prazo de retirada","Ache de quem são os débitos anteriores","Ache o que o edital diz do estado do bem"],
+          campos:[
+            {k:"edital", l:"Edital que eu li", ph:"leiloeiro e número do leilão"},
+            {k:"prazoret", l:"Prazo de retirada", ph:"quantos dias"},
+            {k:"debitos", l:"Os débitos anteriores ficam com", tipo:"select", opcoes:["O órgão","O arrematante","O edital não deixa claro"]},
+            {k:"icms", l:"Este leiloeiro cobra ICMS", tipo:"select", opcoes:["Sim","Não","Não consegui identificar"]},
+            {k:"estado", l:"O que o edital diz do estado do bem", ph:"copie o trecho", tipo:"textarea"}
+          ]
+        }
+      },
+      {
+        id:"j4", num:"J4", titulo:"Avaliando o lote judicial e definindo o teto",
+        desc:"Ler o processo antes das fotos, e sair com um teto para a primeira hasta e outro para a segunda.",
+        abas:["aprenda","construa","valide","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"O teto nas duas hastas", sub:"Esse carro tem uma história dentro de um processo, e o edital conta essa história."},
+        pontos:[
+          "Leia o processo antes das fotos, para descobrir há quanto tempo o carro está apreendido ou parado.",
+          "As fotos confirmam o que o processo já contou: limo esverdeado, pintura desbotada e sujeira acumulada são sinais de carro parado há muito tempo.",
+          "Laudo de avaliação, tabela e mercado real são três números diferentes. Nenhum deles é o seu teto.",
+          "A Régua do Lance roda igual, com os mesmos quatro tempos. O que muda é que aqui saem dois tetos.",
+          "Teto por hasta: um para a primeira e a decisão de esperar ou não a segunda."
+        ],
+        materiais:[
+          {nome:"A Régua do Lance em uma página", desc:"Os quatro tempos na ordem e a fórmula do valor real.", tipo:"Referência", formato:"TXT", arquivo:true, gera:"regua"},
+          {nome:"Planilha de teto do judicial", desc:"Com simulação à vista e parcelado.", tipo:"Planilha", formato:"XLSX", arquivo:false}
+        ],
+        entregavel:"Meu teto nas duas hastas do mesmo lote",
+        construa:{tipo:"regua", hastas:true}
+      },
+      {
+        id:"j5", num:"J5", titulo:"Parcelamento direto com o governo",
+        desc:"Entrada de 20 a 30 por cento e o resto parcelado. Aula curta gravada mais a parte ao vivo no encontro E3.",
+        abas:["aprenda","finalize"], duracao:"5 a 10 min",
+        aula:{titulo:"Parcelamento direto com o governo", sub:"O que permite comprar com o caixa de um carro e ter mais de um rodando."},
+        pontos:[
+          "A entrada fica entre 20 e 30 por cento, e o resto é parcelado.",
+          "Por que isso importa: com o caixa de um carro você pode ter mais de um rodando.",
+          "A parte prática acontece ao vivo no encontro E3, com o convidado que opera o parcelamento: [PLACEHOLDER: nome do convidado do parcelamento]",
+          "[PLACEHOLDER: confirmar com o convidado se é sem juros ou com correção pelo índice oficial, e em quais fontes vale]"
+        ],
+        materiais:[]
+      },
+      {
+        id:"j6", num:"J6", titulo:"O pregão judicial na prática",
+        desc:"Onde você dá o primeiro lance judicial, com o teto das duas hastas já escrito.",
+        abas:["aprenda","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"O pregão judicial", sub:"O mesmo sangue frio do tradicional, com regra de hasta por cima."},
+        pontos:[
+          "Você entra com os dois tetos da J4 escritos, um para cada hasta.",
+          "Na segunda hasta o edital aceita valor menor, até o piso. Isso muda quando vale esperar.",
+          "A penalidade por desistência é real. Não dê lance em lote que você não estudou.",
+          "[PLACEHOLDER: o que mais surpreende no pregão judicial, a confirmar com o Maykell]"
+        ],
+        materiais:[]
+      },
+      {
+        id:"j7", num:"J7", titulo:"Pós-arremate: pagamento, liberação e retirada",
+        desc:"O caminho entre a arrematação e o carro na sua mão, com os prazos do judicial.",
+        abas:["aprenda","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"Pós-arremate no judicial", sub:"Prazos mais longos, e diária de pátio correndo enquanto isso."},
+        pontos:[
+          "Pagamento pelos canais oficiais, à vista ou pela via do parcelamento.",
+          "A liberação depende do órgão, não do leiloeiro. Isso muda o seu planejamento.",
+          "Diária de pátio conta contra você enquanto a liberação não sai. Ela entra na conta do teto.",
+          "[PLACEHOLDER: nome do documento de liberação do pátio e prazo médio, na SENAD e no TRT]"
+        ],
+        materiais:[
+          {nome:"Linha do tempo pós-arremate", desc:"Cada etapa entre a martelada e a retirada, com o prazo de cada uma.", tipo:"Referência", formato:"PDF", arquivo:false}
+        ]
+      },
+      {
+        id:"j8", num:"J8", titulo:"Documentação: como liberar o carro",
+        desc:"A aula que tira o medo. Demora, mas libera.",
+        abas:["aprenda","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"A liberação documental", sub:"O caminho inteiro, etapa por etapa, com quem responde por cada uma."},
+        pontos:[
+          "A documentação do judicial é mais lenta que a do tradicional, e é a etapa que mais assusta quem está começando.",
+          "Ela trava, mas libera. O que resolve é saber a ordem e acompanhar.",
+          "Acompanhe junto ao leiloeiro e ao juízo, e guarde protocolo de cada pedido.",
+          "[PLACEHOLDER: nome do documento do leiloeiro ou do juízo, e prazo real de cada etapa]"
+        ],
+        materiais:[
+          {nome:"Checklist de documentação judicial", desc:"O que pedir, para quem, e em que ordem.", tipo:"Checklist", formato:"PDF", arquivo:false}
+        ]
+      },
+      {
+        id:"j9", num:"J9", titulo:"Seguro a 100 por cento da tabela e revenda",
+        desc:"A virada de argumento: no judicial, a procedência pode trabalhar a favor do seu anúncio.",
+        abas:["aprenda","construa","finalize"], duracao:"15 a 20 min",
+        aula:{titulo:"Seguro e revenda no judicial", sub:"No tradicional, carro de leilão é argumento contra você. No judicial, pode virar a favor."},
+        pontos:[
+          "Seguro no tradicional: poucas seguradoras aceitam e o valor costuma ficar em 80 por cento da tabela.",
+          "Seguro no judicial: qualquer seguradora, e 100 por cento da tabela.",
+          "Isso muda o anúncio inteiro, porque o comprador consegue segurar o carro.",
+          "Diga a procedência com todas as letras e mostre a documentação que você guardou.",
+          "[PLACEHOLDER: como o histórico de leilão aparece no documento, a confirmar com o Maykell]"
+        ],
+        materiais:[
+          {nome:"Modelo de anúncio de carro judicial", desc:"O texto que usa a procedência a favor em vez de esconder ela.", tipo:"Modelo", formato:"PDF", arquivo:false}
+        ],
+        entregavel:"Meu anúncio de carro judicial, com a procedência a favor",
+        construa:{
+          tipo:"campos",
+          intro:"Monte o anúncio já usando o seguro a 100 por cento como argumento.",
+          passos:["Traga o custo do carro pronto","Confirme com uma seguradora o valor que ela aceita","Escreva o anúncio dizendo a origem judicial","Escolha os canais"],
+          campos:[
+            {k:"custo", l:"Quanto esse carro me custou pronto", ph:"R$"},
+            {k:"seguradora", l:"Seguradora que eu consultei", ph:"nome e valor aceito"},
+            {k:"texto", l:"O texto do meu anúncio", ph:"inclua a origem judicial e a documentação que você tem", tipo:"textarea"}
+          ]
+        }
+      },
+      {
+        id:"jcall", num:"J10", titulo:"Meu plano de 30 dias, escrito na call",
+        desc:"A call individual de 1h a 1h30. Você chega com o formulário respondido e sai com uma folha de uma página.",
+        abas:["construa","finalize"], duracao:"1h a 1h30, ao vivo",
+        entregavel:"Meu plano de 30 dias com data-meta do primeiro lance",
+        materiais:[],
+        construa:{
+          tipo:"call",
+          intro:"O formulário abaixo vai até 48 horas antes da call. A call confirma o que você escreveu, ela não recomeça do zero.",
+          passos:[
+            "Responda o formulário até 48 horas antes",
+            "Na call, os cinco blocos acontecem sempre na mesma ordem: abertura, diagnóstico, direcionamento, plano de 30 dias e fechamento",
+            "No direcionamento o painel abre ao vivo e vocês escolhem um ou dois lotes reais juntos",
+            "A folha de uma página é preenchida durante a call e enviada no mesmo dia"
+          ],
+          campos:[
+            {k:"cidade", l:"Cidade e estado", ph:"onde você opera"},
+            {k:"capital", l:"Quanto eu tenho para o primeiro carro", ph:"R$"},
+            {k:"reserva", l:"Quanto disso eu guardo de reserva", ph:"R$"},
+            {k:"objetivo", l:"Meu objetivo", tipo:"select", opcoes:["Renda extra","Virar negócio","Uso próprio"]},
+            {k:"horas", l:"Horas por semana que eu tenho", ph:"quantas horas"},
+            {k:"jaarrematou", l:"Eu já arrematei ou revendi", tipo:"select", opcoes:["Nunca","Já arrematei","Já arrematei e já revendi"]},
+            {k:"tipo", l:"Tipo de carro que eu conheço", ph:"o que você sabe avaliar sem ajuda"},
+            {k:"estrutura", l:"Tenho perto de mim", ph:"mecânico, funileiro, despachante"},
+            {k:"pfpj", l:"Vou operar como", tipo:"select", opcoes:["Pessoa física","Pessoa jurídica","Ainda não decidi"]},
+            {k:"medo", l:"Meu maior medo hoje com o judicial", ph:"escreva com sinceridade, é isso que a call resolve", tipo:"textarea"}
+          ]
+        }
+      }
+    ]
+  },
+
+  /* Modulos das prateleiras cadastradas. Sem aula gravada, e sem "Em breve":
+     o que aparece e o estado real, escrito. */
+  "m-financiamento": {
+    id:"m-financiamento", nome:"Leilão com financiamento",
+    resumo:"Comprar carro em leilão usando financiamento.",
+    aulas:[],
+    estado:{
+      titulo:"O que existe hoje nesta prateleira",
+      linhas:[
+        "A prateleira está cadastrada no portal e faz parte da escada de produtos.",
+        "O conteúdo ainda não foi estruturado. Não existe aula escrita, não existe roteiro fechado e nada foi gravado.",
+        "Quando a estrutura ficar pronta, ela aparece aqui como módulo, com as aulas numeradas, do mesmo jeito que o Leilão tradicional."
+      ]
+    }
+  },
+  "m-aluguel": {
+    id:"m-aluguel", nome:"Renda extra alugando carros",
+    resumo:"A operação de aluguel de carro que o Maykell roda hoje.",
+    aulas:[],
+    estado:{
+      titulo:"O que existe hoje nesta prateleira",
+      linhas:[
+        "Nenhuma aula foi gravada, mas a operação existe e está rodando.",
+        "O Maykell tem 3 carros no Uber hoje. Ele comprou cada um entre R$ 25 mil e R$ 30 mil, e cada carro rende R$ 700 por semana.",
+        "É essa operação que vai virar aula: como ele escolhe o carro, como ele coloca para rodar e como ele acompanha.",
+        "Enquanto as aulas não existem, esta prateleira mostra o que é real e não promete data."
+      ]
+    }
+  },
+  "m-prefeitura": {
+    id:"m-prefeitura", nome:"Leilão de prefeitura",
+    resumo:"Leilões municipais, com regra própria.",
+    aulas:[],
+    estado:{
+      titulo:"O que existe hoje nesta prateleira",
+      linhas:[
+        "A prateleira está cadastrada. O Maykell vai estudar esse tipo de leilão e depois gravar.",
+        "Hoje não existe aula, nem roteiro fechado, nem material.",
+        "O que já se sabe: prefeitura é uma das origens citadas no módulo judicial, e é tratada caso a caso."
+      ]
+    }
+  }
+};
+
+/* ---------- PRODUTOS: pacotes que liberam modulos ---------- */
+var PRODUTOS = [
+  {
+    id:"p1", slug:"leilao-tradicional",
+    nome:"Leilão tradicional",
+    linha:"Entrada",
+    preco:"R$ 297",
+    desc:"As 9 aulas do processo inteiro, de 15 a 20 minutos cada. Do cadastro no leiloeiro até a venda do carro pronto.",
+    modulos:["m-tradicional"],
+    heranca:{}
+  },
+  {
+    id:"p2", slug:"judicial",
+    nome:"[PLACEHOLDER: nome do produto 2]",
+    linha:"Meio",
+    preco:"R$ 997 a R$ 1.997",
+    desc:"Leilão judicial nas três fontes, com o Leilão tradicional inteiro incluído. Mais 1 call individual e 12 encontros quinzenais.",
+    modulos:["m-tradicional","m-judicial"],
+    heranca:{"m-tradicional":"Herdado do Leilão tradicional"},
+    extras:[
+      "1 call individual de 1h a 1h30 no início",
+      "12 encontros quinzenais ao vivo, com gravação",
+      "24 vagas de hot seat por ciclo",
+      "Grupo de assessorados"
+    ]
+  },
+  {
+    id:"p3", slug:"financiamento",
+    nome:"Comprando carro em leilão com financiamento",
+    linha:"Prateleira cadastrada",
+    preco:null,
+    desc:"Como usar financiamento para comprar em leilão.",
+    modulos:["m-financiamento"],
+    heranca:{}
+  },
+  {
+    id:"p4", slug:"aluguel",
+    nome:"Renda extra alugando carros",
+    linha:"Prateleira cadastrada",
+    preco:null,
+    desc:"A operação de aluguel que o Maykell roda hoje, com 3 carros no Uber.",
+    modulos:["m-aluguel"],
+    heranca:{}
+  },
+  {
+    id:"p5", slug:"prefeitura",
+    nome:"Leilão de prefeitura",
+    linha:"Prateleira cadastrada",
+    preco:null,
+    desc:"Leilões municipais. O Maykell vai estudar e gravar.",
+    modulos:["m-prefeitura"],
+    heranca:{}
+  },
+  {
+    id:"p6", slug:"arquivo-secreto",
+    nome:"O Arquivo Secreto",
+    linha:"Mentoria",
+    preco:"R$ 4.000 a R$ 5.000",
+    desc:"A mentoria. Libera todos os módulos do portal, inclusive os que ainda estão sendo construídos.",
+    modulos:["m-tradicional","m-judicial","m-financiamento","m-aluguel","m-prefeitura"],
+    liberaTudo:true,
+    heranca:{},
+    exclusivo:[
+      "Acesso individual, na hora em que você precisa, e não em grupo com hora marcada",
+      "Análise do lote antes de cada lance, individual",
+      "Acompanhamento do pregão junto com ele",
+      "Acesso quase vitalício, em vez de 6 meses"
+    ]
+  }
+];
+
+/* ---------- ALUNO ---------- */
+var ALUNO = {
+  inicial:"A",
+  nome:"[PLACEHOLDER: nome do aluno]",
+  email:"[PLACEHOLDER: e-mail do aluno]",
+  /* O aluno deste estado comprou o low ticket e DEPOIS deu upgrade.
+     E por isso que o Modulo 1 aparece herdado e ja concluido dentro do p2. */
+  produtos:["p1","p2"]
+};
+
+/* ---------- PROGRESSO: do ALUNO por AULA, nao por produto ----------
+   Uma aula tem UM registro de progresso. O mesmo registro e lido pelo
+   Leilao tradicional e pelo produto judicial. E isso que faz o Modulo 1
+   aparecer ja concluido depois do upgrade. */
+var PROGRESSO = {
+  t1:{abas:{aprenda:true,finalize:true}, concluida:true, entrega:null, salvo:false},
+  t2:{abas:{aprenda:true,construa:true,finalize:true}, concluida:true, entrega:{leiloeiro:"", url:"", pfpj:"Pessoa física", data:""}, salvo:true, salvoEm:"Leilão tradicional"},
+  t3:{abas:{aprenda:true,construa:true,valide:true,finalize:true}, concluida:true, entrega:{tabela:"48000", pct:"62", pecas:"6200", oficina:"1800", comissao:"2900", doc:"1600", lote:"Lote estudado na aula 3"}, salvo:true, salvoEm:"Leilão tradicional"},
+  t4:{abas:{aprenda:true,construa:true,finalize:true}, concluida:true, entrega:{}, salvo:true, salvoEm:"Leilão tradicional"},
+  t5:{abas:{aprenda:true,construa:true,finalize:true}, concluida:true, entrega:{}, salvo:true, salvoEm:"Leilão tradicional"},
+  t6:{abas:{aprenda:true}, concluida:false, entrega:null, salvo:false}
+};
+
+/* ---------- MATERIAIS DA EMPRESA: o repositorio COMPARTILHADO ----------
+   O aluno preenche UMA vez aqui e as ferramentas leem daqui. E o achado
+   numero 1 do portal do Joao, e e o que separa sistema de colecao de
+   formularios. A Regua do Lance le "capital" e "pctPadrao". */
+var MINHA_OPERACAO = {
+  capital:"",
+  reserva:"",
+  cidade:"",
+  veiculo:"",
+  pctPadrao:""
+};
+
+var FEEDBACKS = [];
+
+/* ============================================================
+   ESTADO DE NAVEGACAO
+   ============================================================ */
+var estado = {tela:"rota", produtoId:null, aulaId:null, aba:null};
+var rascunho = {};   /* o que esta sendo digitado agora, por aula */
+var reguaAtual = {}; /* campos da ferramenta Regua, fora das etapas */
+
+/* ============================================================
+   FUNCOES DO MODELO
+   ============================================================ */
+function produto(id){ for(var i=0;i<PRODUTOS.length;i++){ if(PRODUTOS[i].id===id) return PRODUTOS[i]; } return null; }
+function temProduto(id){ return ALUNO.produtos.indexOf(id) >= 0; }
+
+function aulasDoModulo(mid){ return (MODULOS[mid] && MODULOS[mid].aulas) || []; }
+
+function achaAula(aid){
+  for(var m in MODULOS){
+    var as = MODULOS[m].aulas;
+    for(var i=0;i<as.length;i++){ if(as[i].id===aid) return {aula:as[i], modulo:MODULOS[m]}; }
+  }
+  return null;
+}
+
+function prog(aid){
+  if(!PROGRESSO[aid]) PROGRESSO[aid] = {abas:{}, concluida:false, entrega:null, salvo:false};
+  return PROGRESSO[aid];
+}
+
+function abasProdutivas(aula){
+  /* Finalize nao conta como aba de trabalho: ela e trava, nao conteudo. */
+  return aula.abas.filter(function(a){ return a !== "finalize"; });
+}
+
+function statusAula(aula){
+  var p = prog(aula.id);
+  if(p.concluida) return "concluida";
+  var feitas = abasProdutivas(aula).filter(function(a){ return p.abas[a]; }).length;
+  return feitas > 0 ? "progresso" : "nao";
+}
+
+function rotuloStatus(s){
+  return s==="concluida" ? "Concluído" : (s==="progresso" ? "Em progresso" : "Não iniciado");
+}
+function classeStatus(s){
+  return s==="concluida" ? "b-ok" : (s==="progresso" ? "b-prog" : "b-nao");
+}
+
+function totalAulasConcluidas(){
+  var n = 0;
+  for(var k in PROGRESSO){ if(PROGRESSO[k].concluida) n++; }
+  return n;
+}
+
+/* Nivel: calculado, nao decorativo. 6 aulas por nivel. */
+var AULAS_POR_NIVEL = 6;
+function nivel(){
+  var t = totalAulasConcluidas();
+  var n = Math.floor(t / AULAS_POR_NIVEL) + 1;
+  var dentro = t % AULAS_POR_NIVEL;
+  return {n:n, pct:Math.round(dentro/AULAS_POR_NIVEL*100), faltam:AULAS_POR_NIVEL - dentro};
+}
+
+function progressoProduto(pid){
+  var p = produto(pid), feitas = 0, total = 0;
+  for(var i=0;i<p.modulos.length;i++){
+    var as = aulasDoModulo(p.modulos[i]);
+    total += as.length;
+    for(var j=0;j<as.length;j++){ if(prog(as[j].id).concluida) feitas++; }
+  }
+  return {feitas:feitas, total:total, pct: total ? Math.round(feitas/total*100) : 0};
+}
+
+function proximaAula(pid){
+  var p = produto(pid);
+  for(var i=0;i<p.modulos.length;i++){
+    var as = aulasDoModulo(p.modulos[i]);
+    for(var j=0;j<as.length;j++){ if(!prog(as[j].id).concluida) return as[j]; }
+  }
+  return null;
+}
+
+function estadoProduto(pid){
+  var p = produto(pid);
+  /* A ordem importa: primeiro se pergunta se EXISTE aula gravada, depois se o
+     aluno tem acesso. Prateleira sem nenhuma aula e "cadastrada" mesmo para
+     quem nao comprou, porque nao ha o que travar. Travado e so o que tem
+     conteudo e o aluno nao pode abrir. */
+  var temAula = false;
+  for(var i=0;i<p.modulos.length;i++){ if(aulasDoModulo(p.modulos[i]).length) temAula = true; }
+  if(!temAula) return "cadastrada";
+  return temProduto(pid) ? "liberado" : "travado";
+}
+
+/* Materiais salvos, lidos do progresso. Meus Materiais nao guarda copia:
+   ele LE o mesmo progresso que as trilhas escrevem. */
+function materiaisSalvos(){
+  var out = [];
+  for(var m in MODULOS){
+    var as = MODULOS[m].aulas;
+    for(var i=0;i<as.length;i++){
+      var a = as[i], p = prog(a.id);
+      if(p.salvo && a.entregavel) out.push({aula:a, modulo:MODULOS[m], p:p});
+    }
+  }
+  return out;
+}
+
+/* ============================================================
+   UTILITARIOS
+   ============================================================ */
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){ return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]; }); }
+
+/* Marca [PLACEHOLDER: ...] visivelmente, em monoespacada, no meio do texto. */
+function ph(s){
+  return esc(s).replace(/\[PLACEHOLDER:([^\]]*)\]/g, function(_,x){ return '<span class="ph">PLACEHOLDER:'+x+'</span>'; });
+}
+
+/* Leitura de numero em pt-BR. NAO escreve de volta no input: e o que evita
+   o bug de "35000" virar "530" quando um render roda a cada tecla. */
+function num(v){
+  if(v==null) return 0;
+  var s = String(v).replace(/[^\d,.-]/g,"").replace(/\./g,"").replace(",",".");
+  var n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+}
+function brl(n){
+  if(!isFinite(n)) n = 0;
+  return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
+}
+function avisa(t){ document.getElementById("vivo").textContent = t; }
+
+function baixarTexto(nome, conteudo){
+  var b = new Blob([conteudo], {type:"text/plain;charset=utf-8"});
+  var u = URL.createObjectURL(b);
+  var a = document.createElement("a");
+  a.href = u; a.download = nome; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); setTimeout(function(){ URL.revokeObjectURL(u); }, 2000);
+}
+
+var TXT_REGUA = [
+"A REGUA DO LANCE",
+"",
+"Os quatro tempos, sempre nesta ordem:",
+"1. Os dados",
+"2. As fotos",
+"3. As pecas somadas",
+"4. O percentual da tabela",
+"",
+"O que sai do quarto tempo e um numero. Esse numero e o teto, e e ele que vai",
+"junto para a sala do pregao.",
+"",
+"A FORMULA DO VALOR REAL DO LOTE",
+"lance + comissao do leiloeiro + taxas e despesas do edital + debitos + reparos",
+"= custo efetivo",
+"",
+"A CONTA AO CONTRARIO",
+"Nao e 'quanto eu quero dar'. E 'qual o maximo que eu posso dar para esse carro",
+"ainda valer a pena'.",
+"",
+"[PLACEHOLDER: a aritmetica precisa ser confirmada com o Maykell. O percentual",
+"da tabela e o teto do LANCE ou o teto do CARRO PRONTO, do qual ainda se desconta",
+"peca, oficina, comissao e documento? O portal esta calculando pela segunda",
+"versao. Uma palavra resolve.]",
+"",
+"No judicial entram tres parcelas a mais na formula: debitos, ICMS e diarias de patio."
+].join("\n");
+
+/* ============================================================
+   RENDER DA SIDEBAR
+   ============================================================ */
+var NAV = [
+  {id:"rota", r:"Sua Rota"},
+  {id:"cursos", r:"Meus Cursos"},
+  {id:"ferramentas", r:"Ferramentas"},
+  {id:"materiais", r:"Meus Materiais"},
+  {id:"calendario", r:"Calendário"},
+  {id:"feedback", r:"Enviar Feedback"}
+];
+
+function telaDeNav(){
+  if(estado.tela==="trilha" || estado.tela==="etapa") return "rota";
+  return estado.tela;
+}
+
+function renderSidebar(){
+  var nv = nivel();
+  document.getElementById("niv-n").textContent = "Nível " + nv.n;
+  document.getElementById("niv-pct").textContent = nv.pct + "%";
+  document.getElementById("niv-barra").style.width = nv.pct + "%";
+  document.getElementById("niv-falta").textContent = nv.faltam === 1
+    ? "1 aula para o próximo nível"
+    : nv.faltam + " aulas para o próximo nível";
+
+  var atual = telaDeNav();
+  document.getElementById("nav").innerHTML = NAV.map(function(n){
+    return '<a href="#" data-ir="'+n.id+'"'+(n.id===atual?' aria-current="page"':'')+'><span class="ponto"></span>'+n.r+'</a>';
+  }).join("");
+
+  document.getElementById("perf-ini").textContent = ALUNO.inicial;
+  document.getElementById("perf-mail").innerHTML = ph(ALUNO.email);
+
+  /* O rotulo do plano e o produto de maior degrau que o aluno tem. */
+  var plano = null;
+  for(var i=PRODUTOS.length-1;i>=0;i--){ if(temProduto(PRODUTOS[i].id)){ plano = PRODUTOS[i]; break; } }
+  document.getElementById("perf-plano").innerHTML = plano ? ph(plano.nome) : "Sem plano ativo";
+}
+
+/* ============================================================
+   TELA 1: SUA ROTA
+   ============================================================ */
+function telaRota(){
+  var h = '<div class="cab"><h1 tabindex="-1" id="tit">Sua Rota</h1>'+
+          '<p>Escolha uma jornada. Cada prateleira é um curso, e o seu progresso é por aula, então ele acompanha você de um curso para o outro.</p></div>';
+
+  h += '<div class="grade-rota">';
+  PRODUTOS.forEach(function(p){
+    var est = estadoProduto(p.id);
+    var pr = progressoProduto(p.id);
+    var travado = est === "travado";
+    h += '<button class="curso'+(travado?" travado":"")+'" data-curso="'+p.id+'">';
+    h += '<div class="topo"><div><div class="linha">'+esc(p.linha)+'</div><h3 style="margin-top:4px">'+ph(p.nome)+'</h3></div>';
+    if(est==="liberado") h += '<span class="badge b-prog">Liberado</span>';
+    else if(est==="cadastrada") h += '<span class="badge b-nao">Cadastrada</span>';
+    else h += '<span class="badge b-trava">Não liberado</span>';
+    h += '</div>';
+    h += '<div class="desc">'+ph(p.desc)+'</div>';
+    if(p.preco) h += '<div class="preco">'+esc(p.preco)+'</div>';
+
+    h += '<div class="rodape">';
+    if(est==="liberado"){
+      h += '<div class="frac"><span><b>'+pr.feitas+' de '+pr.total+'</b> aulas concluídas</span><span>'+pr.pct+'%</span></div>';
+      h += '<div class="barra" style="margin-top:8px"><i style="width:'+pr.pct+'%"></i></div>';
+      if(p.heranca && p.heranca["m-tradicional"]){
+        var pt = progressoProduto("p1");
+        h += '<div class="nota-herd" style="margin-top:12px">Inclui o Leilão tradicional inteiro, como módulo herdado. As '+pt.feitas+' aulas que você já concluiu continuam concluídas aqui dentro.</div>';
+      }
+    } else if(est==="cadastrada"){
+      h += '<div class="frac"><span>Nenhuma aula gravada até agora</span></div>';
+    } else {
+      h += '<div class="frac"><span>Libera todas as prateleiras do portal</span></div>';
+    }
+    h += '</div></button>';
+  });
+  h += '</div>';
+  return h;
+}
+
+/* "Meus Cursos" e a mesma prateleira, filtrada pelo que o aluno comprou.
+   No portal do Joao existiam DUAS rotas, uma delas vazia. Aqui existe uma
+   fonte so, com dois recortes. */
+function telaCursos(){
+  var h = '<div class="cab"><h1 tabindex="-1" id="tit">Meus Cursos</h1>'+
+          '<p>Os cursos que o seu plano liberou. O que não está aqui aparece em Sua Rota, com o estado real de cada prateleira.</p></div>';
+  h += '<div class="grade-rota">';
+  PRODUTOS.filter(function(p){ return temProduto(p.id); }).forEach(function(p){
+    var pr = progressoProduto(p.id);
+    h += '<button class="curso" data-curso="'+p.id+'">';
+    h += '<div class="topo"><div><div class="linha">'+esc(p.linha)+'</div><h3 style="margin-top:4px">'+ph(p.nome)+'</h3></div><span class="badge b-prog">Liberado</span></div>';
+    h += '<div class="desc">'+ph(p.desc)+'</div>';
+    h += '<div class="rodape"><div class="frac"><span><b>'+pr.feitas+' de '+pr.total+'</b> aulas concluídas</span><span>'+pr.pct+'%</span></div>';
+    h += '<div class="barra" style="margin-top:8px"><i style="width:'+pr.pct+'%"></i></div></div></button>';
+  });
+  h += '</div>';
+  return h;
+}
+
+/* ============================================================
+   TELA 2: TRILHA
+   ============================================================ */
+function telaTrilha(){
+  var p = produto(estado.produtoId);
+  var est = estadoProduto(p.id);
+
+  var h = crumb([{r:"Sua Rota", ir:"rota"}, {r:p.nome, aqui:true}]);
+  h += '<div class="cab"><h2 tabindex="-1" id="tit">'+ph(p.nome)+'</h2><p>'+ph(p.desc)+'</p></div>';
+
+  h += '<div class="trilha"><div>';
+
+  if(est === "travado"){
+    h += cardMentoria(p);
+  } else if(est === "cadastrada"){
+    var mod = MODULOS[p.modulos[0]];
+    h += '<div class="painel"><h3>'+esc(mod.estado.titulo)+'</h3><div style="margin-top:12px;display:flex;flex-direction:column;gap:12px">';
+    mod.estado.linhas.forEach(function(l){ h += '<p style="font-size:14.5px;color:var(--ink-3);line-height:1.65">'+ph(l)+'</p>'; });
+    h += '</div></div>';
+  } else {
+    p.modulos.forEach(function(mid){
+      var mod = MODULOS[mid];
+      var herd = p.heranca && p.heranca[mid];
+      var as = aulasDoModulo(mid);
+      var feitas = as.filter(function(a){ return prog(a.id).concluida; }).length;
+
+      /* Cabecalho de modulo. So aparece quando o produto empacota mais de um,
+         que e onde a heranca precisa ficar visivel. */
+      if(p.modulos.length > 1){
+        h += '<div class="modulo-cab'+(herd?" herdado":"")+'"><div class="topo"><h3>'+esc(mod.nome)+'</h3>'+
+             (herd ? '<span class="badge b-herd">'+esc(herd)+'</span>' : '<span class="badge b-nao">'+feitas+' de '+as.length+'</span>')+'</div>';
+        if(herd){
+          h += '<p>As mesmas '+as.length+' aulas do curso de entrada, não são aulas novas. Seu progresso veio junto: <strong style="color:var(--accent-ink)">'+feitas+' de '+as.length+' já concluídas</strong>. Nada recomeça.</p>';
+        } else {
+          h += '<p>'+esc(mod.resumo)+'</p>';
+        }
+        h += '</div>';
+      }
+
+      h += '<div class="etapas">';
+      as.forEach(function(a){ h += cardEtapa(a); });
+      h += '</div>';
+    });
+
+    if(p.extras && p.extras.length){
+      h += '<div class="modulo-cab" style="margin-top:22px"><div class="topo"><h3>O que vem junto, fora das aulas</h3></div>'+
+           '<ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:8px">'+
+           p.extras.map(function(e){ return '<li style="font-size:14px;color:var(--ink-3);display:grid;grid-template-columns:auto 1fr;gap:10px"><span style="color:var(--accent)">&bull;</span>'+esc(e)+'</li>'; }).join("")+
+           '</ul></div>';
+    }
+  }
+
+  h += '</div>';
+  h += lateralTrilha(p, est);
+  h += '</div>';
+  return h;
+}
+
+function cardEtapa(a){
+  var s = statusAula(a);
+  var p = prog(a.id);
+  /* A fracao conta TODAS as abas da etapa, Finalize incluida, igual ao portal
+     do Joao ("Progresso 1/4 abas"). A trava do Finalize continua olhando so
+     as abas de trabalho: sao duas contas diferentes de proposito. */
+  var feitas = a.abas.filter(function(x){ return x === "finalize" ? p.concluida : p.abas[x]; }).length;
+
+  var h = '<button class="etapa'+(s==="concluida"?" feita":"")+'" data-aula="'+a.id+'">';
+  h += '<div class="num">'+esc(a.num)+'</div><div>';
+  h += '<div class="linha1"><span class="tit">'+esc(a.titulo)+'</span><span class="badge '+classeStatus(s)+'">'+rotuloStatus(s)+'</span></div>';
+  h += '<div class="desc">'+ph(a.desc)+'</div>';
+  if(s === "progresso"){
+    var pct = Math.round(feitas/Math.max(a.abas.length,1)*100);
+    h += '<div class="abas-prog"><span>Progresso '+feitas+'/'+a.abas.length+' abas</span><span class="mini"><i style="width:'+pct+'%"></i></span></div>';
+  }
+  h += '</div></button>';
+  return h;
+}
+
+function cardMentoria(p){
+  var h = '<div class="painel"><h3>O que O Arquivo Secreto libera</h3>';
+  h += '<p style="margin-top:10px;font-size:14.5px;color:var(--ink-3)">Todas as prateleiras do portal, incluindo as que ainda estão sendo construídas. Quando uma aula nova é gravada, ela entra aqui sem cobrança nova.</p>';
+  h += '<div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">';
+  PRODUTOS.filter(function(x){ return x.id !== "p6"; }).forEach(function(x){
+    var as = [];
+    x.modulos.forEach(function(m){ as = as.concat(aulasDoModulo(m)); });
+    h += '<div class="arq" style="grid-template-columns:minmax(0,1fr) auto"><div><div class="n">'+ph(x.nome)+'</div>'+
+         '<div class="m">'+(as.length ? as.length+' aulas' : 'Nenhuma aula gravada até agora')+'</div></div>'+
+         '<span class="badge '+(temProduto(x.id)?"b-ok":"b-trava")+'">'+(temProduto(x.id)?"Você já tem":"Libera")+'</span></div>';
+  });
+  h += '</div>';
+  if(p.exclusivo && p.exclusivo.length){
+    h += '<hr><h3 style="font-size:16px">O que só existe aqui</h3><ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:9px">';
+    p.exclusivo.forEach(function(e){
+      h += '<li style="font-size:14px;color:var(--ink-3);display:grid;grid-template-columns:auto 1fr;gap:10px"><span style="color:var(--accent)">&bull;</span>'+esc(e)+'</li>';
+    });
+    h += '</ul>';
+  }
+  h += '<div class="aviso quente" style="margin-top:18px">Investimento: <strong>R$ 4.000 a R$ 5.000</strong>. O portal não vende aqui dentro. Quem fecha a mentoria é o Maykell, direto com você.</div>';
+  h += '</div>';
+  return h;
+}
+
+function lateralTrilha(p, est){
+  var pr = progressoProduto(p.id);
+  var prox = proximaAula(p.id);
+
+  var h = '<aside class="lateral">';
+  h += '<div class="painel"><div class="micro">Seu Progresso</div>';
+  if(est === "liberado"){
+    h += '<div class="frac-g" aria-live="polite">'+pr.feitas+'/'+pr.total+'</div><div class="rot">aulas concluídas</div>';
+    h += '<div class="barra" style="margin-top:14px"><i style="width:'+pr.pct+'%"></i></div>';
+    h += '<hr><div class="prox-rot">Próxima etapa:</div>';
+    if(prox){
+      h += '<button class="prox" data-aula="'+prox.id+'">'+esc(prox.titulo)+'</button>';
+    } else {
+      h += '<div style="font-size:14px;color:var(--ok-ink);font-weight:550;letter-spacing:-.03em">Você concluiu todas as aulas deste curso.</div>';
+    }
+  } else if(est === "cadastrada"){
+    h += '<div class="frac-g">0/0</div><div class="rot">aulas gravadas até agora</div>';
+    h += '<hr><div style="font-size:13.5px;color:var(--ink-3);line-height:1.6">Esta prateleira está cadastrada no portal. Quando a primeira aula for gravada, ela aparece aqui numerada.</div>';
+  } else {
+    h += '<div class="frac-g">'+esc(p.preco || "Travado")+'</div><div class="rot">'+(p.preco ? "o investimento desta prateleira" : "você ainda não tem acesso")+'</div>';
+    h += '<hr><div style="font-size:13.5px;color:var(--ink-3);line-height:1.6">Você ainda não tem acesso a esta prateleira.</div>';
+  }
+  h += '</div>';
+
+  h += '<div class="painel"><div class="micro">Links rápidos</div><div class="links-r">'+
+       '<button data-ir="materiais">Meus Materiais</button>'+
+       '<button data-ir="ferramentas">Ferramentas</button>'+
+       (temProduto("p2") ? '<button data-ir="calendario">Calendário dos encontros</button>' : '')+
+       '</div></div>';
+  h += '</aside>';
+  return h;
+}
+
+/* ============================================================
+   TELA 3: ETAPA
+   ============================================================ */
+var ROTULO_ABA = {aprenda:"Aprenda", construa:"Construa", valide:"Valide", finalize:"Finalize"};
+
+function telaEtapa(){
+  var r = achaAula(estado.aulaId);
+  var a = r.aula, mod = r.modulo, p = produto(estado.produtoId);
+  var pg = prog(a.id);
+  var s = statusAula(a);
+
+  /* Breadcrumb derivado do estado REAL. O do Joao mostrava sempre o mesmo
+     curso em 22 de 22 etapas: esse era o bug mais visivel do portal dele. */
+  var h = crumb([{r:"Sua Rota", ir:"rota"}, {r:p.nome, ir:"trilha"}, {r:a.titulo, aqui:true}]);
+
+  h += '<div class="etapa-topo"><span class="et">Etapa '+esc(a.num)+'</span><span class="badge '+classeStatus(s)+'">'+rotuloStatus(s)+'</span>';
+  if(p.heranca && p.heranca[mod.id]) h += '<span class="badge b-herd">'+esc(p.heranca[mod.id])+'</span>';
+  h += '</div>';
+
+  h += '<div class="cab"><h2 tabindex="-1" id="tit">'+esc(a.titulo)+'</h2><p>'+ph(a.desc)+'</p></div>';
+
+  /* ABAS MODULARES: o conjunto varia por etapa. Teorica tem duas, etapa que
+     produz entregavel tem quatro. Nao se forca quatro em todas. */
+  var abaAtual = estado.aba && a.abas.indexOf(estado.aba) >= 0 ? estado.aba : a.abas[0];
+  estado.aba = abaAtual;
+
+  h += '<div class="tabs" role="tablist" aria-label="Seções da etapa">';
+  a.abas.forEach(function(ab){
+    var sel = ab === abaAtual;
+    var feita = ab !== "finalize" ? !!pg.abas[ab] : pg.concluida;
+    h += '<button class="tab" role="tab" id="tab-'+ab+'" aria-selected="'+sel+'" aria-controls="painel-'+ab+'" tabindex="'+(sel?0:-1)+'" data-aba="'+ab+'">'+
+         ROTULO_ABA[ab] + (feita ? '<span class="pt" aria-label="concluída"></span>' : '') + '</button>';
+  });
+  h += '</div>';
+
+  h += '<div class="painel-aba" role="tabpanel" id="painel-'+abaAtual+'" aria-labelledby="tab-'+abaAtual+'" tabindex="0">';
+  if(abaAtual === "aprenda")  h += abaAprenda(a, pg);
+  if(abaAtual === "construa") h += abaConstrua(a, pg);
+  if(abaAtual === "valide")   h += abaValide(a, pg);
+  if(abaAtual === "finalize") h += abaFinalize(a, pg);
+  h += '</div>';
+  return h;
+}
+
+function abaAprenda(a, pg){
+  var h = '<div class="player">'+
+    '<span class="sel">Aula não gravada</span>'+
+    '<div class="l1">'+esc(a.aula ? a.aula.titulo : a.titulo)+'</div>'+
+    '<div class="l2">O roteiro desta aula está fechado e a duração prevista é de '+esc(a.duracao)+'. A gravação ainda não aconteceu, então o player fica vazio de propósito em vez de fingir um vídeo.</div>'+
+    '</div>';
+
+  if(a.aula && a.aula.sub) h += '<p style="font-size:15px;color:var(--ink-3)">'+esc(a.aula.sub)+'</p>';
+
+  if(a.pontos && a.pontos.length){
+    h += '<div class="pontos"><h3>Pontos-chave da aula</h3><ul>';
+    a.pontos.forEach(function(x){ h += '<li><span>'+ph(x)+'</span></li>'; });
+    h += '</ul></div>';
+  }
+
+  h += '<div class="acoes">';
+  if(pg.abas.aprenda){
+    h += '<span class="badge b-ok" style="padding:11px 16px;font-size:13px">Aula assistida</span>'+
+         '<button class="btn btn-3" data-acao="desmarcar-aprenda" data-aula="'+a.id+'">Desmarcar</button>';
+  } else {
+    h += '<button class="btn btn-1" data-acao="aula-assistida" data-aula="'+a.id+'">Aula assistida</button>';
+  }
+  h += '</div>';
+
+  if(a.materiais && a.materiais.length){
+    h += '<div style="margin-top:34px"><h3 style="margin-bottom:12px">Materiais Complementares</h3><div class="mats">';
+    a.materiais.forEach(function(m, i){
+      h += '<div class="mat"><div>'+
+           '<div class="n">'+esc(m.nome)+'</div><div class="d">'+esc(m.desc)+'</div>'+
+           '<div class="tags"><span class="tag">'+esc(m.tipo)+'</span><span class="tag">'+esc(m.formato)+'</span></div>'+
+           '</div>';
+      if(m.arquivo){
+        h += '<button class="btn btn-2" data-acao="baixar" data-gera="'+esc(m.gera)+'" data-nome="'+esc(m.nome)+'">Baixar</button>';
+      } else {
+        /* Sem "Em breve". O card diz o estado real do arquivo, que e o
+           defeito numero 3 do portal do Joao corrigido. */
+        h += '<div class="estado">'+(m.nota ? esc(m.nota) : "Arquivo ainda não subiu para o portal.")+'</div>';
+      }
+      h += '</div>';
+    });
+    h += '</div></div>';
+  }
+  return h;
+}
+
+function abaConstrua(a, pg){
+  var c = a.construa;
+  if(!c) return '<div class="aviso">Esta etapa não tem exercício.</div>';
+
+  var h = "";
+  if(a.entregavel){
+    h += '<div class="aviso quente"><div class="micro" style="margin-bottom:6px">O que sai daqui</div><strong style="font-size:16px;letter-spacing:-.035em">'+esc(a.entregavel)+'</strong></div>';
+  }
+  if(c.intro) h += '<p style="font-size:15px;color:var(--ink-3)">'+esc(c.intro)+'</p>';
+
+  if(c.passos && c.passos.length){
+    h += '<div><div class="micro" style="margin-bottom:10px">Como completar esta etapa</div><ol class="lista-num">';
+    c.passos.forEach(function(x){ h += '<li><span>'+esc(x)+'</span></li>'; });
+    h += '</ol></div>';
+  }
+
+  /* A regra 60/40 vive AQUI, no direcionamento da call do judicial, e em
+     lugar nenhum do produto de entrada. */
+  if(c.tipo === "call"){
+    h += '<div class="aviso"><div class="micro" style="margin-bottom:6px">A regra fixa de direcionamento desta call</div>'+
+         '<strong>60 por cento do capital no lance, 40 por cento de reserva</strong> para débitos, ICMS, frete, reparo e documentação. '+
+         'Essa regra vale para o leilão judicial e é aplicada na sua call individual.</div>';
+  }
+
+  if(c.tipo === "regua"){
+    h += formRegua(a, pg, c.hastas, "etapa");
+  } else {
+    h += '<div class="campos">';
+    c.campos.forEach(function(f){
+      var v = valorRascunho(a.id, f.k, pg);
+      h += '<div class="campo"><label for="f-'+a.id+'-'+f.k+'">'+esc(f.l)+'</label>';
+      if(f.tipo === "textarea"){
+        h += '<textarea id="f-'+a.id+'-'+f.k+'" data-ent="'+f.k+'" data-aula="'+a.id+'" placeholder="'+esc(f.ph||"")+'">'+esc(v)+'</textarea>';
+      } else if(f.tipo === "select"){
+        h += '<select id="f-'+a.id+'-'+f.k+'" data-ent="'+f.k+'" data-aula="'+a.id+'"><option value="">Escolher</option>'+
+             f.opcoes.map(function(o){ return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>'; }).join("")+'</select>';
+      } else {
+        h += '<input id="f-'+a.id+'-'+f.k+'" type="text" data-ent="'+f.k+'" data-aula="'+a.id+'" value="'+esc(v)+'" placeholder="'+esc(f.ph||"")+'">';
+      }
+      h += '</div>';
+    });
+    h += '</div>';
+    h += '<div class="acoes"><button class="btn btn-1" data-acao="guardar" data-aula="'+a.id+'">Guardar minha entrega</button></div>';
+    h += '<div id="retorno-construa" style="margin-top:14px"></div>';
+  }
+  return h;
+}
+
+function valorRascunho(aid, k, pg){
+  if(rascunho[aid] && rascunho[aid][k] != null) return rascunho[aid][k];
+  if(pg.entrega && pg.entrega[k] != null) return pg.entrega[k];
+  return "";
+}
+
+/* A REGUA DO LANCE. O calculo e o mesmo nos tres produtos: e o mecanismo da
+   casa. Os campos NAO sao reescritos pelo script enquanto se digita, so as
+   saidas. Isso e o que impede o numero de embaralhar na digitacao. */
+function formRegua(a, pg, hastas, ctx){
+  var id = ctx === "etapa" ? a.id : "ferramenta";
+  var v = function(k){
+    if(ctx !== "etapa") return reguaAtual[k] != null ? reguaAtual[k] : (k==="pct" ? MINHA_OPERACAO.pctPadrao : "");
+    var x = valorRascunho(a.id, k, pg);
+    if(x === "" && k === "pct") return MINHA_OPERACAO.pctPadrao;
+    return x;
+  };
+
+  var h = '<div class="campos" data-regua="'+id+'">';
+  h += '<div class="campo"><label for="r-'+id+'-lote">Tempo 1, os dados: qual lote</label>'+
+       '<div class="dica">Marca, modelo, versão, ano e número do lote.</div>'+
+       '<input id="r-'+id+'-lote" type="text" data-regua-c="lote" value="'+esc(v("lote"))+'" placeholder="o lote que você está estudando"></div>';
+
+  h += '<div class="dupla">'+
+       '<div class="campo"><label for="r-'+id+'-tabela">Valor de tabela do carro</label>'+
+       '<input id="r-'+id+'-tabela" type="text" inputmode="decimal" data-regua-c="tabela" value="'+esc(v("tabela"))+'" placeholder="R$"></div>'+
+       '<div class="campo"><label for="r-'+id+'-pct">Tempo 4, o percentual da tabela</label>'+
+       '<input id="r-'+id+'-pct" type="text" inputmode="decimal" data-regua-c="pct" value="'+esc(v("pct"))+'" placeholder="%"></div>'+
+       '</div>';
+
+  h += '<div class="dupla">'+
+       '<div class="campo"><label for="r-'+id+'-pecas">Tempo 3, as peças somadas</label>'+
+       '<div class="dica">O que você somou olhando as fotos, peça por peça.</div>'+
+       '<input id="r-'+id+'-pecas" type="text" inputmode="decimal" data-regua-c="pecas" value="'+esc(v("pecas"))+'" placeholder="R$"></div>'+
+       '<div class="campo"><label for="r-'+id+'-oficina">Oficina e mão de obra</label>'+
+       '<div class="dica">Funilaria, pintura e mecânica.</div>'+
+       '<input id="r-'+id+'-oficina" type="text" inputmode="decimal" data-regua-c="oficina" value="'+esc(v("oficina"))+'" placeholder="R$"></div>'+
+       '</div>';
+
+  h += '<div class="dupla">'+
+       '<div class="campo"><label for="r-'+id+'-comissao">Comissão e taxas do edital</label>'+
+       '<input id="r-'+id+'-comissao" type="text" inputmode="decimal" data-regua-c="comissao" value="'+esc(v("comissao"))+'" placeholder="R$"></div>'+
+       '<div class="campo"><label for="r-'+id+'-doc">Documento, laudo e transporte</label>'+
+       '<input id="r-'+id+'-doc" type="text" inputmode="decimal" data-regua-c="doc" value="'+esc(v("doc"))+'" placeholder="R$"></div>'+
+       '</div>';
+
+  if(hastas){
+    h += '<div class="dupla">'+
+         '<div class="campo"><label for="r-'+id+'-debitos">Débitos que ficam com o arrematante</label>'+
+         '<input id="r-'+id+'-debitos" type="text" inputmode="decimal" data-regua-c="debitos" value="'+esc(v("debitos"))+'" placeholder="R$"></div>'+
+         '<div class="campo"><label for="r-'+id+'-icms">ICMS e diárias de pátio</label>'+
+         '<input id="r-'+id+'-icms" type="text" inputmode="decimal" data-regua-c="icms" value="'+esc(v("icms"))+'" placeholder="R$"></div>'+
+         '</div>';
+    h += '<div class="campo"><label for="r-'+id+'-piso">Piso da segunda hasta, em percentual da avaliação</label>'+
+         '<div class="dica">O edital diz até quanto a segunda hasta aceita descer.</div>'+
+         '<input id="r-'+id+'-piso" type="text" inputmode="decimal" data-regua-c="piso" value="'+esc(v("piso"))+'" placeholder="%"></div>';
+  }
+  h += '</div>';
+
+  h += '<div class="saida" data-saida="'+id+'" aria-live="polite">';
+  h += '<div class="micro" style="margin-bottom:8px">O que a régua devolve</div>';
+  h += '<div class="ln"><span>Custo máximo do carro pronto</span><b data-out="pronto">R$ 0</b></div>';
+  h += '<div class="ln"><span>Menos peças e oficina</span><b data-out="reparos">R$ 0</b></div>';
+  h += '<div class="ln"><span>Menos comissão, taxas e documento</span><b data-out="custos">R$ 0</b></div>';
+  if(hastas) h += '<div class="ln"><span>Menos débitos, ICMS e pátio</span><b data-out="jud">R$ 0</b></div>';
+  h += '<div class="teto"><div class="rot">'+(hastas ? "Meu teto na primeira hasta" : "Meu teto de lance")+'</div><div class="v" data-out="teto">R$ 0</div></div>';
+  if(hastas) h += '<div class="teto" style="border-top-color:var(--line-2)"><div class="rot">Meu teto na segunda hasta</div><div class="v" data-out="teto2">R$ 0</div></div>';
+  h += '<div data-out="alerta" style="margin-top:14px"></div>';
+  h += '</div>';
+
+  h += '<div class="aviso"><div class="micro" style="margin-bottom:6px">A aritmética que ainda precisa ser confirmada</div>'+
+       ph('[PLACEHOLDER: confirmar com o Maykell se o percentual da tabela é o teto do LANCE ou o teto do CARRO PRONTO. O portal está calculando pela segunda versão, que é a que está no roteiro do webinário. Uma palavra resolve.]')+'</div>';
+
+  if(ctx === "etapa"){
+    h += '<div class="acoes"><button class="btn btn-1" data-acao="guardar-regua" data-aula="'+a.id+'">Guardar meu teto</button></div>';
+    h += '<div id="retorno-construa" style="margin-top:14px"></div>';
+  }
+  return h;
+}
+
+function abaValide(a, pg){
+  var itens = itensValide(a);
+  var marcados = (pg.valideItens || []);
+  var h = '<p style="font-size:15px;color:var(--ink-3)">Confira o que você produziu antes de fechar a etapa. A aba Finalize só libera quando esta conferência estiver inteira.</p>';
+  h += '<div class="painel"><div class="check">';
+  itens.forEach(function(t, i){
+    h += '<label><input type="checkbox" data-valide="'+i+'" data-aula="'+a.id+'"'+(marcados.indexOf(i)>=0?" checked":"")+'><span>'+esc(t)+'</span></label>';
+  });
+  h += '</div></div>';
+  h += '<div id="retorno-valide" aria-live="polite"></div>';
+  return h;
+}
+
+function itensValide(a){
+  if(a.id === "t3") return [
+    "Eu achei a comissão do leiloeiro no edital e ela está na conta",
+    "Eu conferi os débitos e a situação documental que o edital declara",
+    "Eu somei as peças olhando as fotos, e não por estimativa de cabeça",
+    "O teto que saiu cabe no capital que eu registrei em Meus Materiais"
+  ];
+  if(a.id === "t9") return [
+    "O preço de anúncio fecha a conta do custo efetivo",
+    "O texto diz a procedência com todas as letras",
+    "Eu tenho prova do que foi feito no carro, guardada",
+    "As fotos foram tiradas com o carro já preparado"
+  ];
+  if(a.id === "j3") return [
+    "Eu achei o prazo de retirada no edital",
+    "Eu sei de quem são os débitos anteriores",
+    "Eu verifiquei se este leiloeiro cobra ICMS",
+    "Eu li o que o edital diz do estado do bem, e entendi que isso não é garantia"
+  ];
+  if(a.id === "j4") return [
+    "Eu li o processo antes de olhar as fotos",
+    "Eu procurei nas fotos os sinais de carro parado há muito tempo",
+    "Eu tenho um teto para a primeira hasta e outro para a segunda",
+    "Os débitos, o ICMS e as diárias de pátio entraram na conta"
+  ];
+  return ["Eu revisei o que produzi nesta etapa"];
+}
+
+function abaFinalize(a, pg){
+  /* FINALIZE E TRAVA, nao conteudo. Ela bloqueia ate as anteriores fecharem,
+     e tem escape explicito, igual ao do Joao. O escape deixa o progresso
+     mentir, e isso foi decisao consciente: e melhor que o aluno travar. */
+  var prods = abasProdutivas(a);
+  var faltam = prods.filter(function(x){ return !pg.abas[x]; });
+  var pronto = faltam.length === 0;
+
+  var h = "";
+  if(pg.concluida){
+    h += '<div class="aviso ok"><strong>Etapa concluída.</strong>'+
+         (pg.salvo && a.entregavel ? ' O material <strong>'+esc(a.entregavel)+'</strong> está em Meus Materiais e as ferramentas podem ler ele.' : '')+
+         '</div>';
+    h += '<div class="acoes">';
+    if(pg.salvo) h += '<button class="btn btn-2" data-ir="materiais">Ver em Meus Materiais</button>';
+    var prox = proximaAula(estado.produtoId);
+    if(prox) h += '<button class="btn btn-1" data-aula="'+prox.id+'">Próxima etapa</button>';
+    h += '<button class="btn btn-3" data-acao="reabrir" data-aula="'+a.id+'">Reabrir esta etapa</button>';
+    h += '</div>';
+    return h;
+  }
+
+  if(!pronto){
+    var nomes = faltam.map(function(x){ return '"'+ROTULO_ABA[x]+'"'; }).join(" e ");
+    h += '<div class="aviso"><strong>Ainda não dá para finalizar.</strong> Para finalizar esta etapa, você precisa primeiro completar '+
+         (faltam.length>1?'as abas ':'a aba ')+nomes+'.</div>';
+  } else if(a.entregavel){
+    h += '<div class="aviso ok"><strong>Tudo pronto para fechar.</strong> Ao salvar, <strong>'+esc(a.entregavel)+'</strong> entra em Meus Materiais.</div>';
+  } else {
+    h += '<div class="aviso ok"><strong>Você assistiu o conteúdo desta etapa.</strong> Marque como concluída para seguir.</div>';
+  }
+
+  h += '<div class="acoes">';
+  if(a.entregavel){
+    h += '<button class="btn btn-1" data-acao="salvar-materiais" data-aula="'+a.id+'"'+(pronto?"":' aria-disabled="true" disabled')+'>Salvar em Meus Materiais</button>';
+  }
+  h += '<button class="btn '+(a.entregavel?"btn-3":"btn-1")+'" data-acao="concluir-assim" data-aula="'+a.id+'">'+
+       (a.entregavel ? "Marcar como concluída assim mesmo" : "Marcar como concluída")+'</button>';
+  h += '</div>';
+  return h;
+}
+
+/* ============================================================
+   TELA 4: MEUS MATERIAIS (o repositorio compartilhado)
+   ============================================================ */
+function telaMateriais(){
+  var salvos = materiaisSalvos();
+  var preenchidos = 0;
+  for(var k in MINHA_OPERACAO){ if(String(MINHA_OPERACAO[k]).trim()) preenchidos++; }
+
+  var h = '<div class="cab"><h1 tabindex="-1" id="tit">Meus Materiais</h1>'+
+          '<p>Tudo que você produziu nas etapas fica aqui. E o que você preenche em Materiais da Empresa é lido pelas Ferramentas, então você preenche uma vez só.</p></div>';
+
+  h += '<div class="contadores">'+
+       '<div class="cont"><div class="v">'+salvos.length+'</div><div class="r">materiais salvos</div></div>'+
+       '<div class="cont"><div class="v">'+preenchidos+'/5</div><div class="r">campos da empresa preenchidos</div></div>'+
+       '<div class="cont"><div class="v">'+(prog("jcall").salvo?"1":"0")+'</div><div class="r">plano de implementação</div></div>'+
+       '</div>';
+
+  /* BLOCO 1: Materiais da Empresa. E o coracao do repositorio compartilhado. */
+  h += '<div class="secao"><h2>Materiais da Empresa</h2>'+
+       '<div class="sub">Os dados da sua operação. A Régua do Lance lê daqui, então não peça de novo em cada exercício.</div>';
+  h += '<div class="painel"><div class="campos">'+
+       campoOp("capital","Quanto eu tenho para o primeiro carro","R$","O teto que sair da régua é comparado com este número.")+
+       campoOp("reserva","Quanto disso eu guardo de reserva","R$","")+
+       campoOp("cidade","Cidade e estado onde eu opero","","")+
+       campoOp("veiculo","Tipo de carro que eu sei avaliar","","")+
+       campoOp("pctPadrao","O percentual da tabela que eu uso como padrão","%","A régua já abre com este número preenchido.")+
+       '</div><div class="acoes"><button class="btn btn-1" data-acao="salvar-operacao">Guardar os dados da minha operação</button></div>'+
+       '<div id="retorno-operacao" style="margin-top:14px"></div></div></div>';
+
+  /* BLOCO 2: Materiais por Produto. */
+  h += '<div class="secao"><h2>Materiais por Produto</h2>'+
+       '<div class="sub">O que saiu de cada etapa, nomeado pelo resultado que ele gera.</div>';
+  if(!salvos.length){
+    h += '<div class="aviso">Você ainda não salvou nenhum material. Eles entram aqui quando você fecha a aba Finalize de uma etapa que produz entregável.</div>';
+  } else {
+    var porModulo = {};
+    salvos.forEach(function(s){ (porModulo[s.modulo.nome] = porModulo[s.modulo.nome] || []).push(s); });
+    Object.keys(porModulo).forEach(function(mn){
+      h += '<h3 style="font-size:15px;margin:18px 0 10px">'+esc(mn)+'</h3>';
+      porModulo[mn].forEach(function(s){
+        h += '<div class="arq"><div class="ic">'+esc(s.aula.num)+'</div><div>'+
+             '<div class="n">'+esc(s.aula.entregavel)+'</div>'+
+             '<div class="m">'+esc(s.aula.titulo)+'</div></div>'+
+             '<button class="btn btn-2" data-acao="baixar-entrega" data-aula="'+s.aula.id+'">Baixar</button></div>';
+      });
+    });
+  }
+  h += '</div>';
+
+  /* BLOCO 3: Implementacao. */
+  h += '<div class="secao"><h2>Implementação</h2>'+
+       '<div class="sub">O plano que sai da call individual, e é ele que você executa nos 30 dias seguintes.</div>';
+  if(!temProduto("p2")){
+    h += '<div class="aviso">A call individual faz parte do produto judicial. Você ainda não tem acesso a ela.</div>';
+  } else if(prog("jcall").salvo){
+    h += '<div class="arq"><div class="ic">J10</div><div><div class="n">Meu plano de 30 dias com data-meta do primeiro lance</div>'+
+         '<div class="m">Preenchido na etapa da call individual</div></div>'+
+         '<button class="btn btn-2" data-acao="baixar-entrega" data-aula="jcall">Baixar</button></div>';
+  } else {
+    h += '<div class="aviso">O formulário pré-call fica na etapa <strong>Meu plano de 30 dias, escrito na call</strong>, dentro do curso judicial. Ele vai até 48 horas antes. A folha de uma página é preenchida durante a call e enviada no mesmo dia.<br><br>Data da sua call: '+ph("[PLACEHOLDER: data da call individual]")+'</div>';
+  }
+  h += '</div>';
+  return h;
+}
+
+function campoOp(k, l, ph2, dica){
+  return '<div class="campo"><label for="op-'+k+'">'+esc(l)+'</label>'+
+         (dica ? '<div class="dica">'+esc(dica)+'</div>' : '')+
+         '<input id="op-'+k+'" type="text" data-op="'+k+'" value="'+esc(MINHA_OPERACAO[k])+'" placeholder="'+esc(ph2)+'"></div>';
+}
+
+/* ============================================================
+   TELA 5: FERRAMENTAS
+   ============================================================ */
+function telaFerramentas(){
+  var h = '<div class="cab"><h1 tabindex="-1" id="tit">Ferramentas</h1>'+
+          '<p>O portal tem uma ferramenta hoje, e é o mecanismo da casa: A Régua do Lance. Ela lê os dados que você preencheu em Meus Materiais.</p></div>';
+
+  h += '<div class="painel"><div class="micro">Ferramenta</div><h2 style="font-size:24px;margin:8px 0 6px">A Régua do Lance</h2>'+
+       '<p style="font-size:15px;color:var(--ink-3);max-width:60ch">Quatro tempos, sempre na mesma ordem: os dados, as fotos, as peças somadas e o percentual da tabela. O que sai do quarto tempo é o teto, e é ele que vai junto para a sala do pregão.</p>';
+
+  if(!String(MINHA_OPERACAO.capital).trim()){
+    h += '<div class="aviso" style="margin-top:18px"><strong>Dados importantes faltando.</strong> Preencha o capital disponível em Meus Materiais para a régua conferir se o teto cabe no seu caixa.'+
+         '<div class="acoes"><button class="btn btn-2" data-ir="materiais">Ir para Meus Materiais</button></div></div>';
+  } else {
+    h += '<div class="aviso ok" style="margin-top:18px">Lendo de Meus Materiais: capital de <strong>'+brl(num(MINHA_OPERACAO.capital))+'</strong>'+
+         (String(MINHA_OPERACAO.pctPadrao).trim() ? ' e percentual padrão de <strong>'+esc(MINHA_OPERACAO.pctPadrao)+'%</strong>' : '')+'.</div>';
+  }
+
+  h += '<div style="margin-top:22px">'+formRegua({id:"ferramenta"}, {abas:{},entrega:null}, false, "ferramenta")+'</div>';
+  h += '</div>';
+  return h;
+}
+
+/* ============================================================
+   TELA 6: CALENDARIO
+   ============================================================ */
+var ENCONTROS = [
+  ["E1","Montando a agenda de pregões nas 3 fontes",true],
+  ["E2","Leitura de edital ao vivo, com editais dos alunos",false],
+  ["E3","Parcelamento com o convidado",false],
+  ["E4","Primeira e segunda hasta na prática",true],
+  ["E5","Pós-arremate com casos reais",false],
+  ["E6","Documentação: casos travados resolvidos um a um",true],
+  ["E7","Revenda: preço, seguro a 100 por cento e anúncio",false],
+  ["E8","Os erros mais caros do ciclo",true],
+  ["E9","Do primeiro para o segundo carro: capital de giro",false],
+  ["E10","Quando vale pensar em PJ",true],
+  ["E11","Nichos: utilitários, motos, troca de frota e TRT",false],
+  ["E12","Escalar e o próximo nível",true]
+];
+
+function telaCalendario(){
+  var h = '<div class="cab"><h1 tabindex="-1" id="tit">Calendário</h1>'+
+          '<p>Os 12 encontros quinzenais do ciclo. A entrada é contínua: você faz 12 a partir de quando entrou, não precisa esperar turma fechar.</p></div>';
+
+  if(!temProduto("p2")){
+    h += '<div class="aviso">Os encontros quinzenais fazem parte do produto judicial. Você ainda não tem acesso.</div>';
+    return h;
+  }
+
+  h += '<div class="aviso quente"><strong>Formato fixo de 1h30:</strong> radar do mês em 5 minutos, conteúdo novo em 25 a 30, hot seat em 30 minutos com 2 casos de 15, e pregão ao vivo em 6 dos 12 encontros. '+
+       'Hot seat: inscrição por formulário até 48 horas antes, 24 vagas por ciclo.</div>';
+
+  h += '<div class="secao"><h2 style="font-size:20px">Sua call individual</h2>'+
+       '<div class="sub">Acontece no início, antes do primeiro quinzenal.</div>'+
+       '<div class="enc"><div class="cod">J10</div><div><div class="t">Call individual de 1h a 1h30</div>'+
+       '<div class="d">Data: '+ph("[PLACEHOLDER: data da call individual]")+'</div></div>'+
+       '<button class="btn btn-2" data-aula="jcall" data-produto="p2">Abrir o formulário</button></div></div>';
+
+  h += '<div class="secao"><h2 style="font-size:20px">Os 12 encontros do ciclo</h2>'+
+       '<div class="sub">As datas do seu ciclo ainda não foram marcadas.</div>';
+  ENCONTROS.forEach(function(e){
+    h += '<div class="enc"><div class="cod">'+esc(e[0])+'</div><div>'+
+         '<div class="t">'+esc(e[1])+'</div>'+
+         '<div class="d">Data: '+ph("[PLACEHOLDER: data]")+'</div></div>'+
+         (e[2] ? '<span class="badge b-prog">Pregão ao vivo</span>' : '<span class="badge b-nao">Sem pregão</span>')+
+         '</div>';
+  });
+  h += '</div>';
+  return h;
+}
+
+/* ============================================================
+   TELA 7: ENVIAR FEEDBACK
+   ============================================================ */
+function telaFeedback(){
+  var h = '<div class="cab"><h1 tabindex="-1" id="tit">Enviar Feedback</h1>'+
+          '<p>O que travou, o que faltou e o que você não entendeu. Isso muda a ordem do que vai ser gravado primeiro.</p></div>';
+
+  h += '<div class="painel"><div class="campos">'+
+       '<div class="campo"><label for="fb-onde">Onde aconteceu</label>'+
+       '<select id="fb-onde"><option value="">Escolher</option>'+
+       '<option>Uma aula específica</option><option>A Régua do Lance</option><option>Meus Materiais</option><option>Os encontros ao vivo</option><option>Outra coisa</option>'+
+       '</select></div>'+
+       '<div class="campo"><label for="fb-texto">O que você quer contar</label>'+
+       '<textarea id="fb-texto" placeholder="escreva com as suas palavras"></textarea></div>'+
+       '</div><div class="acoes"><button class="btn btn-1" data-acao="enviar-feedback">Enviar</button></div>'+
+       '<div id="retorno-feedback" style="margin-top:14px" aria-live="polite"></div></div>';
+
+  if(FEEDBACKS.length){
+    h += '<div class="secao"><h2 style="font-size:20px">Enviados nesta sessão</h2>'+
+         '<div class="sub">O portal ainda não tem servidor, então isto fica só nesta aba do navegador.</div>';
+    FEEDBACKS.forEach(function(f){
+      h += '<div class="arq" style="grid-template-columns:minmax(0,1fr)"><div><div class="n">'+esc(f.onde || "Sem local")+'</div><div class="m">'+esc(f.texto)+'</div></div></div>';
+    });
+    h += '</div>';
+  }
+  return h;
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+function crumb(itens){
+  var h = '<nav class="crumb" aria-label="Você está aqui">';
+  itens.forEach(function(it, i){
+    if(i) h += '<span class="sep" aria-hidden="true">&rsaquo;</span>';
+    if(it.aqui) h += '<span class="aqui" aria-current="page">'+ph(it.r)+'</span>';
+    else h += '<button data-ir="'+it.ir+'">'+ph(it.r)+'</button>';
+  });
+  return h + '</nav>';
+}
+
+/* ============================================================
+   RENDER PRINCIPAL
+   ============================================================ */
+function render(focar){
+  var m = document.getElementById("main"), h = "";
+  if(estado.tela === "rota") h = telaRota();
+  else if(estado.tela === "cursos") h = telaCursos();
+  else if(estado.tela === "trilha") h = telaTrilha();
+  else if(estado.tela === "etapa") h = telaEtapa();
+  else if(estado.tela === "materiais") h = telaMateriais();
+  else if(estado.tela === "ferramentas") h = telaFerramentas();
+  else if(estado.tela === "calendario") h = telaCalendario();
+  else if(estado.tela === "feedback") h = telaFeedback();
+  m.innerHTML = h;
+
+  renderSidebar();
+  ligarRegua();
+
+  if(focar !== false){
+    var t = document.getElementById("tit");
+    if(t) t.focus({preventScroll:true});
+    window.scrollTo(0,0);
+  }
+}
+
+function ir(tela){
+  estado.tela = tela;
+  if(tela !== "etapa") estado.aba = null;
+  fecharMenu();
+  render();
+}
+
+function abrirCurso(pid){
+  estado.produtoId = pid; estado.tela = "trilha"; estado.aba = null;
+  fecharMenu(); render();
+}
+
+function abrirAula(aid, pid){
+  if(pid) estado.produtoId = pid;
+  if(!estado.produtoId) estado.produtoId = "p1";
+  estado.aulaId = aid; estado.tela = "etapa"; estado.aba = null;
+  fecharMenu(); render();
+}
+
+/* ============================================================
+   A REGUA: calculo sem re-render
+   As saidas sao escritas por textContent em nos separados. O input nunca e
+   reescrito enquanto o aluno digita, e e por isso que "35000" continua
+   sendo 35000.
+   ============================================================ */
+function ligarRegua(){
+  var box = document.querySelector("[data-regua]");
+  if(!box) return;
+  var id = box.getAttribute("data-regua");
+  box.querySelectorAll("[data-regua-c]").forEach(function(inp){
+    inp.addEventListener("input", function(){
+      var k = inp.getAttribute("data-regua-c");
+      if(id === "ferramenta") reguaAtual[k] = inp.value;
+      else { rascunho[id] = rascunho[id] || {}; rascunho[id][k] = inp.value; }
+      calcularRegua(id);
+    });
+  });
+  calcularRegua(id);
+}
+
+function lerRegua(id){
+  var o = {};
+  document.querySelectorAll('[data-regua="'+id+'"] [data-regua-c]').forEach(function(i){
+    o[i.getAttribute("data-regua-c")] = i.value;
+  });
+  return o;
+}
+
+function calcularRegua(id){
+  var box = document.querySelector('[data-saida="'+id+'"]');
+  if(!box) return;
+  var d = lerRegua(id);
+
+  var tabela = num(d.tabela), pct = num(d.pct);
+  var pecas = num(d.pecas), oficina = num(d.oficina);
+  var comissao = num(d.comissao), doc = num(d.doc);
+  var debitos = num(d.debitos), icms = num(d.icms);
+
+  var pronto = tabela * (pct/100);
+  var reparos = pecas + oficina;
+  var custos = comissao + doc;
+  var jud = debitos + icms;
+  var teto = pronto - reparos - custos - jud;
+
+  var set = function(k, v){ var e = box.querySelector('[data-out="'+k+'"]'); if(e) e.textContent = v; };
+  set("pronto", brl(pronto));
+  set("reparos", "- " + brl(reparos));
+  set("custos", "- " + brl(custos));
+  set("jud", "- " + brl(jud));
+  set("teto", brl(Math.max(teto,0)));
+
+  var e2 = box.querySelector('[data-out="teto2"]');
+  if(e2){
+    var piso = num(d.piso);
+    e2.textContent = piso > 0 ? brl(Math.max(Math.min(teto, tabela*(piso/100)),0)) : brl(Math.max(teto,0));
+  }
+
+  /* O elo com o repositorio compartilhado: a regua confere o teto contra o
+     capital que o aluno registrou UMA vez em Meus Materiais. */
+  var al = box.querySelector('[data-out="alerta"]');
+  if(al){
+    var cap = num(MINHA_OPERACAO.capital);
+    if(teto <= 0 && tabela > 0){
+      al.innerHTML = '<div class="aviso" style="background:rgba(176,62,40,.07);border-color:rgba(176,62,40,.22)">Com esses números não sobra teto. Esse lote não é seu, e não arrematar também é decisão boa.</div>';
+    } else if(cap > 0 && teto > cap){
+      al.innerHTML = '<div class="aviso">O teto passa do capital que você registrou em Meus Materiais ('+brl(cap)+'). Ou o percentual está alto, ou esse lote é para outro momento.</div>';
+    } else if(cap > 0 && teto > 0){
+      al.innerHTML = '<div class="aviso ok">O teto cabe no capital que você registrou em Meus Materiais ('+brl(cap)+').</div>';
+    } else {
+      al.innerHTML = "";
+    }
+  }
+}
+
+/* ============================================================
+   ACOES
+   ============================================================ */
+function marcarAba(aid, aba, v){
+  var p = prog(aid);
+  p.abas[aba] = v;
+  if(!v) p.concluida = false;
+}
+
+function retorno(alvo, classe, texto){
+  var e = document.getElementById(alvo);
+  if(e) e.innerHTML = '<div class="aviso '+classe+'">'+texto+'</div>';
+  avisa(texto.replace(/<[^>]+>/g,""));
+}
+
+function guardarEntrega(aid){
+  var r = achaAula(aid), a = r.aula, p = prog(aid);
+  var dados = {}, vazios = 0, total = 0;
+
+  if(a.construa.tipo === "regua"){
+    dados = lerRegua(aid);
+    total = Object.keys(dados).length;
+    for(var k in dados){ if(!String(dados[k]).trim()) vazios++; }
+  } else {
+    document.querySelectorAll('[data-aula="'+aid+'"][data-ent]').forEach(function(i){
+      dados[i.getAttribute("data-ent")] = i.value;
+      total++;
+      if(!String(i.value).trim()) vazios++;
+    });
+  }
+
+  /* Retorno SEMPRE, inclusive quando esta tudo vazio. Silencio aqui e bug. */
+  if(total > 0 && vazios === total){
+    retorno("retorno-construa","", "<strong>Nada foi preenchido ainda.</strong> Preencha pelo menos um campo para guardar a sua entrega.");
+    return false;
+  }
+
+  p.entrega = dados;
+  rascunho[aid] = dados;
+  p.abas.construa = true;
+
+  var faltando = [];
+  for(var kk in dados){ if(!String(dados[kk]).trim()) faltando.push(kk); }
+  var msg = "<strong>Entrega guardada.</strong> " + (a.entregavel ? '"'+esc(a.entregavel)+'" está pronto para ir a Meus Materiais na aba Finalize.' : "");
+  if(faltando.length) msg += " Ficaram " + faltando.length + (faltando.length===1?" campo em branco.":" campos em branco.");
+  retorno("retorno-construa","ok", msg);
+  renderSidebar();
+  return true;
+}
+
+document.addEventListener("click", function(ev){
+  var b = ev.target.closest("[data-ir],[data-curso],[data-aula],[data-acao],[data-aba]");
+  if(!b) return;
+
+  var acao = b.getAttribute("data-acao");
+
+  /* Navegacao simples */
+  if(!acao && b.hasAttribute("data-ir")){ ev.preventDefault(); ir(b.getAttribute("data-ir")); return; }
+  if(!acao && b.hasAttribute("data-curso")){ ev.preventDefault(); abrirCurso(b.getAttribute("data-curso")); return; }
+  if(!acao && b.hasAttribute("data-aula") && !b.hasAttribute("data-aba")){
+    ev.preventDefault(); abrirAula(b.getAttribute("data-aula"), b.getAttribute("data-produto")); return;
+  }
+  if(!acao && b.hasAttribute("data-aba")){
+    ev.preventDefault(); estado.aba = b.getAttribute("data-aba"); render(false);
+    var t = document.getElementById("tab-"+estado.aba); if(t) t.focus();
+    return;
+  }
+
+  ev.preventDefault();
+  var aid = b.getAttribute("data-aula");
+
+  if(acao === "aula-assistida"){
+    marcarAba(aid, "aprenda", true);
+    avisa("Aula marcada como assistida.");
+    render(false); return;
+  }
+  if(acao === "desmarcar-aprenda"){
+    marcarAba(aid, "aprenda", false);
+    avisa("Aula desmarcada.");
+    render(false); return;
+  }
+  if(acao === "guardar" || acao === "guardar-regua"){
+    if(guardarEntrega(aid)) { /* mantem a aba aberta, nao re-renderiza o form */ }
+    return;
+  }
+  if(acao === "salvar-materiais"){
+    var p = prog(aid), r = achaAula(aid);
+    p.concluida = true; p.abas.finalize = true; p.salvo = true; p.salvoEm = r.modulo.nome;
+    avisa("Etapa concluída e material salvo em Meus Materiais.");
+    render(false); return;
+  }
+  if(acao === "concluir-assim"){
+    var p2 = prog(aid);
+    p2.concluida = true; p2.abas.finalize = true;
+    avisa("Etapa marcada como concluída.");
+    render(false); return;
+  }
+  if(acao === "reabrir"){
+    /* Reabrir desfaz a CONCLUSAO, e nao o material ja entregue. Material
+       salvo continua salvo: senao ele viraria fantasma em Meus Materiais. */
+    var p3 = prog(aid);
+    p3.concluida = false; p3.abas.finalize = false;
+    avisa("Etapa reaberta. O material que você já salvou continua em Meus Materiais.");
+    render(false); return;
+  }
+  if(acao === "baixar"){
+    if(b.getAttribute("data-gera") === "regua") baixarTexto("a-regua-do-lance.txt", TXT_REGUA);
+    avisa("Arquivo baixado.");
+    return;
+  }
+  if(acao === "baixar-entrega"){
+    var rr = achaAula(aid), pp = prog(aid);
+    var linhas = [rr.aula.entregavel, "", "Etapa " + rr.aula.num + ": " + rr.aula.titulo, "Módulo: " + rr.modulo.nome, ""];
+    for(var k in (pp.entrega||{})){ linhas.push(k + ": " + pp.entrega[k]); }
+    baixarTexto("material-" + aid + ".txt", linhas.join("\n"));
+    avisa("Material baixado.");
+    return;
+  }
+  if(acao === "salvar-operacao"){
+    var mudou = 0;
+    document.querySelectorAll("[data-op]").forEach(function(i){
+      MINHA_OPERACAO[i.getAttribute("data-op")] = i.value;
+      if(String(i.value).trim()) mudou++;
+    });
+    if(!mudou){
+      retorno("retorno-operacao","", "<strong>Nada foi preenchido.</strong> Preencha pelo menos o capital disponível, que é o campo que a Régua do Lance lê.");
+    } else {
+      retorno("retorno-operacao","ok", "<strong>Dados guardados.</strong> A Régua do Lance passa a usar eles agora, em qualquer etapa e na tela de Ferramentas.");
+      renderSidebar();
+    }
+    return;
+  }
+  if(acao === "enviar-feedback"){
+    var onde = document.getElementById("fb-onde").value;
+    var txt = document.getElementById("fb-texto").value;
+    if(!txt.trim()){
+      retorno("retorno-feedback","", "<strong>Escreva alguma coisa antes de enviar.</strong>");
+      return;
+    }
+    FEEDBACKS.push({onde:onde, texto:txt});
+    avisa("Feedback registrado.");
+    render(false);
+    return;
+  }
+});
+
+/* Checkbox do Valide */
+document.addEventListener("change", function(ev){
+  var c = ev.target.closest("[data-valide]");
+  if(c){
+    var aid = c.getAttribute("data-aula"), i = parseInt(c.getAttribute("data-valide"),10);
+    var p = prog(aid);
+    p.valideItens = p.valideItens || [];
+    var pos = p.valideItens.indexOf(i);
+    if(c.checked && pos < 0) p.valideItens.push(i);
+    if(!c.checked && pos >= 0) p.valideItens.splice(pos,1);
+
+    var r = achaAula(aid);
+    var total = itensValide(r.aula).length;
+    var completo = p.valideItens.length === total;
+    p.abas.valide = completo;
+    if(!completo) p.concluida = false;
+
+    var e = document.getElementById("retorno-valide");
+    if(e){
+      e.innerHTML = completo
+        ? '<div class="aviso ok" style="margin-top:14px"><strong>Conferência completa.</strong> A aba Finalize está liberada.</div>'
+        : '<div class="aviso" style="margin-top:14px">'+p.valideItens.length+' de '+total+' conferidos.</div>';
+    }
+    renderSidebar();
+    /* Atualiza o ponto da aba sem redesenhar o painel, pra nao perder o foco. */
+    var tf = document.getElementById("tab-valide");
+    if(tf && completo && !tf.querySelector(".pt")) tf.insertAdjacentHTML("beforeend",'<span class="pt"></span>');
+    if(tf && !completo){ var pt = tf.querySelector(".pt"); if(pt) pt.remove(); }
+    return;
+  }
+
+  /* Campos de entrega e de operacao: so guardam rascunho, nunca re-renderizam. */
+  var ent = ev.target.closest("[data-ent]");
+  if(ent){
+    var a2 = ent.getAttribute("data-aula");
+    rascunho[a2] = rascunho[a2] || {};
+    rascunho[a2][ent.getAttribute("data-ent")] = ent.value;
+  }
+});
+
+document.addEventListener("input", function(ev){
+  var ent = ev.target.closest("[data-ent]");
+  if(ent){
+    var a2 = ent.getAttribute("data-aula");
+    rascunho[a2] = rascunho[a2] || {};
+    rascunho[a2][ent.getAttribute("data-ent")] = ent.value;
+  }
+  var op = ev.target.closest("[data-op]");
+  if(op) MINHA_OPERACAO[op.getAttribute("data-op")] = op.value;
+});
+
+/* Tablist com seta, como manda a acessibilidade de abas. */
+document.addEventListener("keydown", function(ev){
+  var t = ev.target.closest('.tab');
+  if(!t) return;
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  var i = tabs.indexOf(t), n = null;
+  if(ev.key === "ArrowRight") n = tabs[(i+1)%tabs.length];
+  if(ev.key === "ArrowLeft")  n = tabs[(i-1+tabs.length)%tabs.length];
+  if(ev.key === "Home") n = tabs[0];
+  if(ev.key === "End")  n = tabs[tabs.length-1];
+  if(n){ ev.preventDefault(); estado.aba = n.getAttribute("data-aba"); render(false); var f = document.getElementById("tab-"+estado.aba); if(f) f.focus(); }
+});
+
+/* Gaveta do celular */
+var sb = document.getElementById("sidebar"), scrim = document.getElementById("scrim"), bm = document.getElementById("btn-menu");
+function fecharMenu(){ sb.classList.remove("aberta"); scrim.classList.remove("on"); bm.setAttribute("aria-expanded","false"); }
+bm.addEventListener("click", function(){
+  var ab = sb.classList.toggle("aberta");
+  scrim.classList.toggle("on", ab);
+  bm.setAttribute("aria-expanded", ab ? "true" : "false");
+});
+scrim.addEventListener("click", fecharMenu);
+document.addEventListener("keydown", function(e){ if(e.key === "Escape") fecharMenu(); });
+
+render();
+</script>
+</body>
+</html>
