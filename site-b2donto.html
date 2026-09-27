@@ -336,6 +336,18 @@ footer{border-top:1px solid var(--line); padding:clamp(40px,5vw,60px) 0 34px; ba
   color:var(--cool-grey); margin-bottom:14px; font-weight:600}
 .f-col a,.f-col span{display:block; font-size:13.5px; color:var(--dim-grey); margin-bottom:9px; transition:color .2s}
 .f-col a:hover{color:var(--cyan)}
+.priv{margin-top:34px; padding-top:22px; border-top:1px solid var(--line)}
+.priv>summary{cursor:pointer; list-style:none; font-size:13px; color:var(--cool-grey);
+  display:inline-flex; align-items:center; gap:9px; transition:color .2s}
+.priv>summary::-webkit-details-marker{display:none}
+.priv>summary::marker{content:''}
+.priv>summary::before{content:'+'; font-family:var(--mono); color:var(--cyan)}
+.priv[open]>summary::before{content:'\2212'}
+.priv>summary:hover{color:var(--white)}
+.priv-in{margin-top:16px; max-width:76ch}
+.priv-in p{font-size:12.8px; color:var(--dim-grey); line-height:1.75; max-width:none}
+.priv-in p+p{margin-top:11px}
+.priv-in strong{color:var(--cool-grey); font-weight:600}
 .f-bot{margin-top:38px; padding-top:22px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap;
   gap:14px; justify-content:space-between; font-size:11.5px; color:var(--dim-grey)}
 
@@ -1190,7 +1202,7 @@ body.rx-lock{overflow:hidden}
           <h4>Para clientes</h4>
           <a href="https://portal.b2donto.com" target="_blank" rel="noopener">Portal do cliente</a>
           <a href="#faq">Dúvidas frequentes</a>
-          <a href="https://b2donto.com/politica-de-privacidade/">Política de privacidade</a>
+          <a href="#privacidade">Privacidade e dados</a>
         </div>
         <div class="f-col">
           <h4>Falar com a gente</h4>
@@ -1200,6 +1212,16 @@ body.rx-lock{overflow:hidden}
         </div>
       </div>
     </div>
+    <details class="priv" id="privacidade">
+      <summary>Privacidade e uso dos seus dados</summary>
+      <div class="priv-in">
+        <p><strong>O que a gente coleta.</strong> Se você preenche o Raio-X, a B2Donto recebe o que você digitou: nome, nome da clínica, cidade, WhatsApp, o @ do Instagram quando informado, e as respostas sobre faturamento, anúncio e prioridade. Nada além disso.</p>
+        <p><strong>Pra que serve.</strong> Só pra analisar o seu cenário e falar com você sobre os serviços da B2Donto. A gente não vende e não cede a sua informação pra terceiros.</p>
+        <p><strong>Medição do site.</strong> Usamos Google Analytics e o pixel da Meta pra entender como as pessoas chegam até aqui. São dados de navegação, tratados de forma agregada por essas ferramentas.</p>
+        <p><strong>Seus direitos.</strong> Você pode pedir a qualquer momento pra ver, corrigir ou apagar tudo que temos sobre você. Basta pedir no nosso WhatsApp comercial e a gente resolve.</p>
+        <p><strong>Responsável.</strong> B2Donto, CNPJ 47.804.906/0001-22, Curitiba, PR.</p>
+      </div>
+    </details>
     <div class="f-bot">
       <span>B2Donto · Higor Halas · CNPJ 47.804.906/0001-22</span>
       <span>Resultados apresentados são de clientes reais e não representam garantia de resultado futuro.</span>
@@ -1422,7 +1444,7 @@ function track(nome, dados){
     { id:'q28', tipo:'opcao', q:'Se resolvesse uma coisa nos próximos 90 dias, qual seria?',
       opcoes:['Trazer mais paciente novo','Parar de perder quem chega no WhatsApp','Aumentar o ticket e vender caso maior','Fazer a base antiga voltar','Organizar o comercial inteiro'] },
     { id:'contato', tipo:'contato', q:'Pronto. Pra onde mandamos a análise?',
-      dica:'A gente te chama no WhatsApp com a leitura do seu cenário. Sem robô de ligação.' }
+      dica:'A gente te chama no WhatsApp com a leitura do seu cenário. Sem robô de ligação. Seus dados ficam com a B2Donto, são usados só pra esse contato comercial e você pode pedir a exclusão a qualquer momento.' }
   ];
 
   var rx = document.getElementById('rx'), stage = document.getElementById('rxStage'),
