@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>B2Donto · Aceleradora comercial para clínicas de odontologia</title>
-<meta name="description" content="A B2Donto instala o processo comercial que transforma anúncio em paciente na cadeira. Tráfego, atendimento com IA e gestão de vendas operando como uma coisa só. Mais de 200 clínicas aceleradas.">
+<meta name="description" content="A B2Donto instala o processo comercial que transforma anúncio em paciente na cadeira. Tráfego, atendimento com IA e gestão de vendas operando como uma coisa só. Mais de 300 clínicas aceleradas.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://b2donto.com/">
 <meta property="og:type" content="website">
@@ -524,12 +524,6 @@ body.rx-lock{overflow:hidden}
 /* ================= v2: mais limpo ================= */
 #aurora{opacity:.5}
 section{padding:clamp(56px,7vw,104px) 0}
-.btn{background:var(--cyan); color:#03121A; box-shadow:0 10px 26px rgba(0,225,195,.16)}
-.btn:hover{background:#2FEBD3; box-shadow:0 14px 32px rgba(0,225,195,.24)}
-.grad-text{background:none; -webkit-background-clip:border-box; background-clip:border-box; color:var(--white)}
-.hero h1,.kicker-line,.final h2{color:var(--cool-grey)}
-.tri-num{background:none; -webkit-background-clip:border-box; background-clip:border-box; color:var(--white)}
-.tm-av span{background:none; -webkit-background-clip:border-box; background-clip:border-box; color:var(--cyan)}
 .team{display:flex; flex-wrap:wrap; justify-content:center}
 .team>.tm{flex:0 1 calc((100% - 28px)/3)}
 @media(max-width:900px){ .team>.tm{flex-basis:calc((100% - 14px)/2)} }
@@ -682,6 +676,59 @@ section{padding:clamp(56px,7vw,104px) 0}
 #faq .faq-i[open]>summary .faq-t{background:var(--cyan-on-light); border-color:var(--cyan-on-light); color:#fff}
 #faq .faq-a p{color:#4A5552}
 #faq .faq-i>summary:focus-visible{outline-color:var(--cyan-on-light)}
+
+/* ================= v2.2 ================= */
+.pre-h{display:inline-flex; align-items:center; gap:9px; margin:0 auto 22px; padding:8px 16px; border-radius:999px;
+  border:1px solid rgba(0,225,195,.22); background:rgba(0,225,195,.05); font-size:13.5px; color:var(--off-white); letter-spacing:-.01em}
+.pre-h::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan)}
+.hero h1 .h1-l{display:block}
+.hero h1{max-width:22ch; margin-left:auto; margin-right:auto; font-size:clamp(36px,5.4vw,68px); font-weight:500;
+  letter-spacing:-.055em; line-height:1.04; text-wrap:balance}
+/* segunda secao: info a esquerda, formulario a direita */
+.start{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); align-items:start}
+.start-info h2{margin:14px 0 12px; max-width:18ch}
+.start-info>p{color:#39423F; max-width:46ch; margin-bottom:26px}
+.start-form{margin-top:0; padding:clamp(24px,3vw,34px); border-radius:22px; background:#fff;
+  border:1px solid rgba(6,43,38,.10); box-shadow:0 24px 60px rgba(6,60,53,.12); display:grid; gap:12px;
+  position:sticky; top:96px}
+.start-form-k{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan-on-light)}
+.start-form label{margin:4px 0 0; font-size:17px; font-weight:600; color:#060807; letter-spacing:-.03em}
+.start-form input{width:100%; padding:16px 18px; border-radius:13px; border:1px solid rgba(6,43,38,.18); background:#F7FAFA;
+  font:500 15px/1.2 var(--font); color:#060807; outline:none; transition:border-color .2s, box-shadow .2s}
+.start-form input::placeholder{color:#8A9592}
+.start-form input:focus{border-color:var(--cyan-on-light); box-shadow:0 0 0 4px rgba(0,128,111,.12); background:#fff}
+.start-form .btn{width:100%}
+.start-form .start-note{margin-top:0; text-align:center}
+@media(max-width:860px){ .start-form{position:static} }
+/* depoimentos */
+#depoimentos{background:#0B1031; border-top:1px solid rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.04)}
+.dep-head{text-align:center} .dep-head h2{margin:0 auto; max-width:20ch}
+.vcar{position:relative}
+.vcar-track{display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none;
+  padding:6px max(var(--pad-x), calc((100vw - var(--max-w))/2 + var(--pad-x))) 10px; scroll-padding:0 max(var(--pad-x), calc((100vw - var(--max-w))/2 + var(--pad-x)))}
+.vcar-track::-webkit-scrollbar{display:none}
+.vcard{position:relative; flex:0 0 clamp(210px,22vw,264px); aspect-ratio:9/16; border-radius:20px; overflow:hidden; padding:0;
+  border:1px solid var(--line-strong); background:var(--surface-1); cursor:pointer; scroll-snap-align:start;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1), border-color .3s}
+.vcard img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.vcard::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,9,34,0) 45%, rgba(5,9,34,.92) 100%)}
+.vcard:hover{transform:translateY(-4px); border-color:rgba(0,225,195,.5)} .vcard:hover img{transform:scale(1.04)}
+.vcard-play{position:absolute; left:50%; top:46%; z-index:2; transform:translate(-50%,-50%); width:58px; height:58px; border-radius:50%;
+  display:grid; place-items:center; color:#03121A; background:var(--grad-brand); box-shadow:0 10px 30px rgba(0,225,195,.35)}
+.vcard-play svg{width:22px; height:22px; margin-left:3px}
+.vcard-info{position:absolute; left:16px; right:16px; bottom:16px; z-index:2; text-align:left}
+.vcard-info b{display:block; font-size:15px; font-weight:600; color:#fff; letter-spacing:-.02em}
+.vcard-info small{display:block; margin-top:3px; font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--cool-grey)}
+.vcar-btn{position:absolute; top:50%; z-index:3; transform:translateY(-50%); width:46px; height:46px; border-radius:50%;
+  display:grid; place-items:center; color:#fff; background:rgba(5,9,34,.7); border:1px solid var(--line-strong); backdrop-filter:blur(8px); cursor:pointer}
+.vcar-btn svg{width:20px; height:20px} .vcar-btn:hover{border-color:var(--cyan); color:var(--cyan)}
+.vcar-prev{left:max(12px, calc((100vw - var(--max-w))/2 - 10px))} .vcar-next{right:max(12px, calc((100vw - var(--max-w))/2 - 10px))}
+@media(max-width:760px){ .vcar-btn{display:none} }
+/* video vertical no player */
+.lb-box{aspect-ratio:9/16; width:auto; height:min(86vh,780px); max-width:92vw}
+/* faixas na ordem nova */
+#cases,#estrutura{background:#0B1031}
+#metodo{background:transparent; border:0}
 </style>
 </head>
 <body>
@@ -711,8 +758,8 @@ section{padding:clamp(56px,7vw,104px) 0}
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow r"><span>Aceleradora comercial para clínicas</span></p>
-    <h1 class="r d1"><span class="h1-main">Pacientes de alto valor toda semana</span><span class="h1-sub">na sua clínica odontológica</span></h1>
+    <p class="pre-h r">Para dentistas que querem mais e estão prontos para fazer acontecer</p>
+    <h1 class="r d1"><span class="h1-l">Pacientes de alto valor</span> <span class="h1-l grad-text">toda semana na sua cadeira</span></h1>
     <p class="lead r d2">A B2Donto instala na sua clínica a operação que transforma anúncio em paciente sentado na cadeira. Captação, atendimento com IA e fechamento rodando juntos, com a nossa equipe dentro da sua operação. Não é mais uma agência que entrega o clique e larga o resto na mão da recepção.</p>
     <div class="cta-row r d3">
       <a href="#raiox" class="btn" data-open-raiox data-ev="Lead" data-pos="hero">
@@ -724,16 +771,16 @@ section{padding:clamp(56px,7vw,104px) 0}
 
     <div class="tri r d5">
       <div class="tri-cell">
-        <div class="tri-num"><span data-count="200">200</span>+</div>
-        <div class="tri-lbl">clínicas atendidas<br>em 4 anos de operação</div>
+        <div class="tri-num"><span data-count="300">300</span>+</div>
+        <div class="tri-lbl">clínicas aceleradas<br>em todo o Brasil</div>
       </div>
       <div class="tri-cell">
         <div class="tri-num"><span data-count="23">23</span>x</div>
         <div class="tri-lbl">de retorno médio sobre o<br>que a clínica investe em anúncio</div>
       </div>
       <div class="tri-cell">
-        <div class="tri-num"><span data-count="14">14</span> estados</div>
-        <div class="tri-lbl">mais o Distrito Federal,<br>de capital a cidade de 20 mil</div>
+        <div class="tri-num"><span data-count="5">5</span> anos</div>
+        <div class="tri-lbl">de operação, só com<br>clínicas de odontologia</div>
       </div>
     </div>
 
@@ -750,303 +797,83 @@ section{padding:clamp(56px,7vw,104px) 0}
 <section id="comecar">
   <div class="wrap">
     <div class="island start r">
-      <div class="start-main">
-        <p class="eyebrow"><span>Raio-X gratuito</span></p>
-        <h2>Em 2 minutos, a&nbsp;gente <strong>entende a sua clínica.</strong></h2>
-        <p>Sete perguntas rápidas, sem custo e sem compromisso de fechar nada.</p>
-        <form class="start-form" id="rxInline" novalidate>
-          <label for="rxNomeInline">Pra começar, como você se chama?</label>
-          <div class="start-row">
-            <input id="rxNomeInline" type="text" placeholder="Seu nome" autocomplete="given-name">
-            <button class="btn" type="submit" data-open-raiox data-rx-inline data-pos="comecar">Quero mais informações <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          </div>
-          <p class="start-note">Ninguém liga sem você pedir.</p>
-        </form>
+      <div class="start-info">
+        <p class="eyebrow"><span>Aplicação gratuita</span></p>
+        <h2>Falta pouco pra você atrair <strong>os pacientes certos.</strong></h2>
+        <p>Aplique agora para descobrir se a sua clínica está apta para receber nossas soluções.</p>
+        <ol class="steps">
+          <li><span class="steps-n">01</span><div><b>Você responde 7 perguntas</b><p>Faturamento, anúncio, quem atende o WhatsApp e o que você quer resolver nos próximos 90 dias.</p></div></li>
+          <li><span class="steps-n">02</span><div><b>Abre o nosso WhatsApp com tudo escrito</b><p>As suas respostas já vêm montadas na mensagem. É só tocar em enviar.</p></div></li>
+          <li><span class="steps-n">03</span><div><b>Você recebe a leitura do seu cenário</b><p>Alguém do time olha o seu perfil, a sua praça e os seus números. Se fizer sentido, a gente marca uma conversa.</p></div></li>
+        </ol>
       </div>
-      <ol class="steps">
-        <li><span class="steps-n">01</span><div><b>Você responde 7 perguntas</b><p>Faturamento, anúncio, quem atende o WhatsApp e o que você quer resolver nos próximos 90 dias.</p></div></li>
-        <li><span class="steps-n">02</span><div><b>Abre o nosso WhatsApp com tudo escrito</b><p>As suas respostas já vêm montadas na mensagem. É só tocar em enviar, sem repetir nada pra ninguém.</p></div></li>
-        <li><span class="steps-n">03</span><div><b>Você recebe a leitura do seu cenário</b><p>Alguém do time olha o seu perfil, a sua praça e os seus números e responde por ali. Se fizer sentido, a gente marca uma conversa.</p></div></li>
-      </ol>
+      <form class="start-form" id="rxInline" novalidate>
+        <p class="start-form-k">Aplicação · 7 perguntas · 2 minutos</p>
+        <label for="rxNomeInline">Pra começar, como você se chama?</label>
+        <input id="rxNomeInline" type="text" placeholder="Seu nome" autocomplete="given-name">
+        <button class="btn" type="submit" data-open-raiox data-rx-inline data-pos="comecar">Quero mais informações <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="start-note">Ninguém liga sem você pedir.</p>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- ============ POSICIONAMENTO ============ -->
-<section id="oque">
+<!-- ============ DEPOIMENTOS ============ -->
+<section id="depoimentos">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow r"><span>O que a gente é</span></p>
-      <h2 class="r d1">Não é falta de esforço. É o modelo.</h2>
-      <p class="lead r d2">Se você já contratou agência e não deu certo, provavelmente não foi por falta de empenho seu nem de talento deles. Foi porque cada um entregou um pedaço, e pedaço solto não funciona.</p>
+    <div class="sec-head dep-head">
+      <p class="eyebrow r"><span>Depoimentos</span></p>
+      <h2 class="r d1">Quem já acelerou <span class="grad-text">conta como foi.</span></h2>
     </div>
-
-    <div class="analogy r d3">
-      <p>Pensa num tratamento de verdade. Se um profissional faz o diagnóstico, outro o planejamento, outro a execução e outro o acompanhamento, sem ninguém conversando, o caso desanda e cada um culpa o outro.</p>
-      <p><strong>É exatamente isso que a agência tradicional faz com o seu comercial:</strong> entrega o clique e larga o resto.</p>
+  </div>
+  <div class="vcar r d2">
+    <button class="vcar-btn vcar-prev" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="vcar-track" id="vcarTrack">
+        <button class="vcard" type="button" data-video="i9vapFxmH0s" aria-label="Ver depoimento de Dr. Tiago Augusto">
+          <img src="https://i.ytimg.com/vi/i9vapFxmH0s/oar2.jpg" alt="" loading="lazy" decoding="async">
+          <span class="vcard-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="vcard-info"><b>Dr. Tiago Augusto</b><small>Passos, MG</small></span>
+        </button>
+        <button class="vcard" type="button" data-video="AKQEXRSCPWg" aria-label="Ver depoimento de Lessa e Almeida">
+          <img src="https://i.ytimg.com/vi/AKQEXRSCPWg/oar2.jpg" alt="" loading="lazy" decoding="async">
+          <span class="vcard-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="vcard-info"><b>Lessa e Almeida</b><small>Balneário Camboriú, SC</small></span>
+        </button>
+        <button class="vcard" type="button" data-video="5Zx9sqI-I5g" aria-label="Ver depoimento de Dra. Kissila Lopes">
+          <img src="https://i.ytimg.com/vi/5Zx9sqI-I5g/oar2.jpg" alt="" loading="lazy" decoding="async">
+          <span class="vcard-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="vcard-info"><b>Dra. Kissila Lopes</b><small>Espera Feliz, MG</small></span>
+        </button>
+        <button class="vcard" type="button" data-video="HgL4PKysuX8" aria-label="Ver depoimento de Dr. Pedro Caio">
+          <img src="https://i.ytimg.com/vi/HgL4PKysuX8/oar2.jpg" alt="" loading="lazy" decoding="async">
+          <span class="vcard-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="vcard-info"><b>Dr. Pedro Caio</b><small>Caruaru, PE</small></span>
+        </button>
+        <button class="vcard" type="button" data-video="phJYnw70IO4" aria-label="Ver depoimento de Dra. Thainá Pache">
+          <img src="https://i.ytimg.com/vi/phJYnw70IO4/oar2.jpg" alt="" loading="lazy" decoding="async">
+          <span class="vcard-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="vcard-info"><b>Dra. Thainá Pache</b></span>
+        </button>
+        <button class="vcard" type="button" data-video="qiPBgSPhp84" aria-label="Ver depoimento de DellaTorre Odontologia">
+          <img src="https://i.ytimg.com/vi/qiPBgSPhp84/oar2.jpg" alt="" loading="lazy" decoding="async">
+          <span class="vcard-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="vcard-info"><b>DellaTorre Odontologia</b><small>Caxias do Sul, RS</small></span>
+        </button>
+        <button class="vcard" type="button" data-video="SHZ0wod3R_c" aria-label="Ver depoimento de Dr. Douglas Vaz">
+          <img src="https://i.ytimg.com/vi/SHZ0wod3R_c/oar2.jpg" alt="" loading="lazy" decoding="async">
+          <span class="vcard-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="vcard-info"><b>Dr. Douglas Vaz</b><small>Belo Horizonte, MG</small></span>
+        </button>
     </div>
-
-    <div class="vs r d4">
-      <div class="vs-col vs-col--old">
-        <h3><span class="ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </span>Agência tradicional</h3>
-        <ul>
-          <li>Traz o clique e para por aí</li>
-          <li>Larga o atendimento na recepção</li>
-          <li>Lead cru, sem qualificação nenhuma</li>
-          <li>Resposta quando dá, e o lead esfria</li>
-          <li>Relatório de curtida no fim do mês</li>
-        </ul>
-      </div>
-      <div class="vs-col vs-col--new">
-        <h3><span class="ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        </span>B2Donto</h3>
-        <ul>
-          <li>Atrai o lead certo, que quer o procedimento</li>
-          <li>Primeiro contato com a Maia, a nossa IA, em menos de 1 minuto</li>
-          <li>Qualifica e quebra objeção antes de chegar em você</li>
-          <li>Pré-agenda e entrega o horário pra sua equipe só confirmar</li>
-          <li>Painel com faturamento, não com curtida</li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="kicker-line r d5">Você cuida da cadeira. <span class="grad-text">A gente cuida de encher a agenda.</span></p>
+    <button class="vcar-btn vcar-next" type="button" aria-label="Próximo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
   </div>
 </section>
 
-<section id="cases">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow r"><span>Resultados</span></p>
-      <h2 class="r d1">Nove clínicas, com nome, cidade e a conta à vista.</h2>
-      <p class="lead r d2">Não é promessa de agência, é o que aconteceu com dentistas como você. Onde a gente tem o número fechado, ele está aqui com o investimento do lado, pra você dividir e conferir. Repare nas cidades: boa parte não é capital.</p>
-    </div>
-    <div class="cases">
-      <article class="case r d1">
-        <div class="case-media">
-          <span class="case-idx">01 / 9</span>
-          <img src="assets/cases-opt/thais-oliveira.jpg" alt="DentClin" loading="lazy" decoding="async" style="--pos-y:18%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">DentClin</div>
-          <div class="case-handle">@clinica_dentclin · Irará, BA</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 50 mil <span class="arrow">para</span> R$ 300 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 78.733</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 2.103.247</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">26,7x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Lentes e implantes</span>
-          </div>
-        </div>
-      </article>
-      <article class="case r d2">
-        <div class="case-media">
-          <span class="case-idx">02 / 9</span>
-          <img src="assets/cases-opt/thiago-augusto.jpg" alt="Dr. Tiago Augusto" loading="lazy" decoding="async" style="--pos-y:12%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dr. Tiago Augusto</div>
-          <div class="case-handle">@drtiagoaugusto · Passos, MG</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 15 mil <span class="arrow">para</span> R$ 100 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 62.909</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 1.045.300</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">16,6x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Ciclo completo de projeto</span>
-            <button class="case-play" type="button" data-video="i9vapFxmH0s" aria-label="Ver depoimento de Dr. Tiago Augusto">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d3">
-        <div class="case-media">
-          <span class="case-idx">03 / 9</span>
-          <img src="assets/cases-opt/thaina-pache.jpg" alt="Dra. Thainá Pache" loading="lazy" decoding="async" style="--pos-y:16%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dra. Thainá Pache</div>
-          <div class="case-handle">@drathainapache</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 0 <span class="arrow">para</span> R$ 60 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 19.368</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 616.000</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">31,8x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Maior retorno da carteira</span>
-            <button class="case-play" type="button" data-video="phJYnw70IO4" aria-label="Ver depoimento de Dra. Thainá Pache">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d4">
-        <div class="case-media">
-          <span class="case-idx">04 / 9</span>
-          <img src="assets/cases-opt/kissila.jpg" alt="Dra. Kissila Lopes" loading="lazy" decoding="async" style="--pos-y:14%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dra. Kissila Lopes</div>
-          <div class="case-handle">@dra.kissilalopes · Espera Feliz, MG</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 0 <span class="arrow">para</span> R$ 60 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 25.234</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 362.602</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">14,4x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Começou do zero</span>
-            <button class="case-play" type="button" data-video="5Zx9sqI-I5g" aria-label="Ver depoimento de Dra. Kissila Lopes">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">05 / 9</span>
-          <img src="assets/cases-opt/lessa-almeida.jpg" alt="Lessa e Almeida" loading="lazy" decoding="async" style="--pos-y:20%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Lessa e Almeida</div>
-          <div class="case-handle">@lessaealmeidaodonto · Balneário Camboriú, SC</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 20 mil <span class="arrow">para</span> R$ 63 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 12.394</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 263.323</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">21,2x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Lentes e facetas</span>
-            <button class="case-play" type="button" data-video="AKQEXRSCPWg" aria-label="Ver depoimento de Lessa e Almeida">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">06 / 9</span>
-          <div class="case-ini" aria-hidden="true"><span>C</span></div>
-        </div>
-        <div class="case-body">
-          <div class="case-name">CORP Odontologia</div>
-          <div class="case-handle">@corp.odonto · Costa Rica, MS</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 0 <span class="arrow">para</span> R$ 50 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 200.295</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Cidade de 20 mil habitantes</span>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">07 / 9</span>
-          <img src="assets/cases-opt/pedro-caio.jpg" alt="Dr. Pedro Caio" loading="lazy" decoding="async" style="--pos-y:25%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dr. Pedro Caio</div>
-          <div class="case-handle">@dr.pedrocaio · Caruaru, PE</div>
-          <div class="case-big">
-            <span class="lbl">O que mudou</span>
-            <span class="val">Quadruplicou<span class="suffix"> o faturamento</span></span>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Receita 4x</span>
-            <button class="case-play" type="button" data-video="HgL4PKysuX8" aria-label="Ver depoimento de Dr. Pedro Caio">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">08 / 9</span>
-          <img src="assets/cases-opt/douglas-vaz.jpg" alt="Dr. Douglas Vaz" loading="lazy" decoding="async" style="--pos-y:6%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dr. Douglas Vaz</div>
-          <div class="case-handle">@drdouglasvaz · Belo Horizonte, MG</div>
-          <div class="case-big">
-            <span class="lbl">O que mudou</span>
-            <span class="val">Dobrou de tamanho<span class="suffix"> em 6 meses</span></span>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Crescimento estrutural</span>
-            <button class="case-play" type="button" data-video="SHZ0wod3R_c" aria-label="Ver depoimento de Dr. Douglas Vaz">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">09 / 9</span>
-          <img src="assets/cases-opt/dellatorre.jpg" alt="DellaTorre Odontologia" loading="lazy" decoding="async" style="--pos-y:22%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">DellaTorre Odontologia</div>
-          <div class="case-handle">@dellatorre_odontologia · Caxias do Sul, RS</div>
-          <div class="case-big">
-            <span class="lbl">O que mudou</span>
-            <span class="val">Dobrou<span class="suffix"> faturamento e nº de pacientes</span></span>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Crescimento sustentado</span>
-            <button class="case-play" type="button" data-video="qiPBgSPhp84" aria-label="Ver depoimento de DellaTorre Odontologia">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-    </div>
 
-    <div class="audit r">
-      <div class="audit-row">
-        <div><span class="k">Nos 5 cases com a conta fechada</span><span class="v">R$ 198.639 investidos em anúncio</span></div>
-        <div><span class="k">Viraram</span><span class="v grad-text">R$ 4.390.472 em tratamento vendido</span></div>
-        <div><span class="k">Retorno médio desses 5</span><span class="v">22,1x</span></div>
-      </div>
-      <p class="audit-note">Esses são os cases que a gente escolhe mostrar, não a carteira inteira, e resultado passado não garante resultado futuro. Cada número é de um período específico do projeto daquela clínica, medido no gerenciador de anúncios e no fechamento informado por ela. Onde a gente não tem o valor exato do investimento, preferimos mostrar só a progressão de faturamento a inventar a conta.</p>
-    </div>
 
-  </div>
-</section>
+
+
+
 
 
 <!-- ============ METODO ============ -->
@@ -1428,6 +1255,281 @@ section{padding:clamp(56px,7vw,104px) 0}
   </div>
 </section>
 
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow r"><span>Resultados</span></p>
+      <h2 class="r d1">Nove clínicas, com nome, cidade e a conta à vista.</h2>
+      <p class="lead r d2">Não é promessa de agência, é o que aconteceu com dentistas como você. Onde a gente tem o número fechado, ele está aqui com o investimento do lado, pra você dividir e conferir. Repare nas cidades: boa parte não é capital.</p>
+    </div>
+    <div class="cases">
+      <article class="case r d1">
+        <div class="case-media">
+          <span class="case-idx">01 / 9</span>
+          <img src="assets/cases-opt/thais-oliveira.jpg" alt="DentClin" loading="lazy" decoding="async" style="--pos-y:18%">
+        </div>
+        <div class="case-body">
+          <div class="case-name">DentClin</div>
+          <div class="case-handle">@clinica_dentclin · Irará, BA</div>
+          <div class="case-big">
+            <span class="lbl">Faturamento por mês</span>
+            <span class="val">R$ 50 mil <span class="arrow">para</span> R$ 300 mil</span>
+          </div>
+          <div class="case-mini">
+            <div><span class="k">Investido em anúncio</span><span class="v">R$ 78.733</span></div>
+            <div><span class="k">Faturamento gerado</span><span class="v">R$ 2.103.247</span></div>
+            <div><span class="k">Retorno</span><span class="v roas">26,7x</span></div>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Lentes e implantes</span>
+          </div>
+        </div>
+      </article>
+      <article class="case r d2">
+        <div class="case-media">
+          <span class="case-idx">02 / 9</span>
+          <img src="assets/cases-opt/thiago-augusto.jpg" alt="Dr. Tiago Augusto" loading="lazy" decoding="async" style="--pos-y:12%">
+        </div>
+        <div class="case-body">
+          <div class="case-name">Dr. Tiago Augusto</div>
+          <div class="case-handle">@drtiagoaugusto · Passos, MG</div>
+          <div class="case-big">
+            <span class="lbl">Faturamento por mês</span>
+            <span class="val">R$ 15 mil <span class="arrow">para</span> R$ 100 mil</span>
+          </div>
+          <div class="case-mini">
+            <div><span class="k">Investido em anúncio</span><span class="v">R$ 62.909</span></div>
+            <div><span class="k">Faturamento gerado</span><span class="v">R$ 1.045.300</span></div>
+            <div><span class="k">Retorno</span><span class="v roas">16,6x</span></div>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Ciclo completo de projeto</span>
+            <button class="case-play" type="button" data-video="i9vapFxmH0s" aria-label="Ver depoimento de Dr. Tiago Augusto">
+              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
+              <span>Ver depoimento</span>
+            </button>
+          </div>
+        </div>
+      </article>
+      <article class="case r d3">
+        <div class="case-media">
+          <span class="case-idx">03 / 9</span>
+          <img src="assets/cases-opt/thaina-pache.jpg" alt="Dra. Thainá Pache" loading="lazy" decoding="async" style="--pos-y:16%">
+        </div>
+        <div class="case-body">
+          <div class="case-name">Dra. Thainá Pache</div>
+          <div class="case-handle">@drathainapache</div>
+          <div class="case-big">
+            <span class="lbl">Faturamento por mês</span>
+            <span class="val">R$ 0 <span class="arrow">para</span> R$ 60 mil</span>
+          </div>
+          <div class="case-mini">
+            <div><span class="k">Investido em anúncio</span><span class="v">R$ 19.368</span></div>
+            <div><span class="k">Faturamento gerado</span><span class="v">R$ 616.000</span></div>
+            <div><span class="k">Retorno</span><span class="v roas">31,8x</span></div>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Maior retorno da carteira</span>
+            <button class="case-play" type="button" data-video="phJYnw70IO4" aria-label="Ver depoimento de Dra. Thainá Pache">
+              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
+              <span>Ver depoimento</span>
+            </button>
+          </div>
+        </div>
+      </article>
+      <article class="case r d4">
+        <div class="case-media">
+          <span class="case-idx">04 / 9</span>
+          <img src="assets/cases-opt/kissila.jpg" alt="Dra. Kissila Lopes" loading="lazy" decoding="async" style="--pos-y:14%">
+        </div>
+        <div class="case-body">
+          <div class="case-name">Dra. Kissila Lopes</div>
+          <div class="case-handle">@dra.kissilalopes · Espera Feliz, MG</div>
+          <div class="case-big">
+            <span class="lbl">Faturamento por mês</span>
+            <span class="val">R$ 0 <span class="arrow">para</span> R$ 60 mil</span>
+          </div>
+          <div class="case-mini">
+            <div><span class="k">Investido em anúncio</span><span class="v">R$ 25.234</span></div>
+            <div><span class="k">Faturamento gerado</span><span class="v">R$ 362.602</span></div>
+            <div><span class="k">Retorno</span><span class="v roas">14,4x</span></div>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Começou do zero</span>
+            <button class="case-play" type="button" data-video="5Zx9sqI-I5g" aria-label="Ver depoimento de Dra. Kissila Lopes">
+              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
+              <span>Ver depoimento</span>
+            </button>
+          </div>
+        </div>
+      </article>
+      <article class="case r d5">
+        <div class="case-media">
+          <span class="case-idx">05 / 9</span>
+          <img src="assets/cases-opt/lessa-almeida.jpg" alt="Lessa e Almeida" loading="lazy" decoding="async" style="--pos-y:20%">
+        </div>
+        <div class="case-body">
+          <div class="case-name">Lessa e Almeida</div>
+          <div class="case-handle">@lessaealmeidaodonto · Balneário Camboriú, SC</div>
+          <div class="case-big">
+            <span class="lbl">Faturamento por mês</span>
+            <span class="val">R$ 20 mil <span class="arrow">para</span> R$ 63 mil</span>
+          </div>
+          <div class="case-mini">
+            <div><span class="k">Investido em anúncio</span><span class="v">R$ 12.394</span></div>
+            <div><span class="k">Faturamento gerado</span><span class="v">R$ 263.323</span></div>
+            <div><span class="k">Retorno</span><span class="v roas">21,2x</span></div>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Lentes e facetas</span>
+            <button class="case-play" type="button" data-video="AKQEXRSCPWg" aria-label="Ver depoimento de Lessa e Almeida">
+              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
+              <span>Ver depoimento</span>
+            </button>
+          </div>
+        </div>
+      </article>
+      <article class="case r d5">
+        <div class="case-media">
+          <span class="case-idx">06 / 9</span>
+          <div class="case-ini" aria-hidden="true"><span>C</span></div>
+        </div>
+        <div class="case-body">
+          <div class="case-name">CORP Odontologia</div>
+          <div class="case-handle">@corp.odonto · Costa Rica, MS</div>
+          <div class="case-big">
+            <span class="lbl">Faturamento por mês</span>
+            <span class="val">R$ 0 <span class="arrow">para</span> R$ 50 mil</span>
+          </div>
+          <div class="case-mini">
+            <div><span class="k">Faturamento gerado</span><span class="v">R$ 200.295</span></div>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Cidade de 20 mil habitantes</span>
+          </div>
+        </div>
+      </article>
+      <article class="case r d5">
+        <div class="case-media">
+          <span class="case-idx">07 / 9</span>
+          <img src="assets/cases-opt/pedro-caio.jpg" alt="Dr. Pedro Caio" loading="lazy" decoding="async" style="--pos-y:25%">
+        </div>
+        <div class="case-body">
+          <div class="case-name">Dr. Pedro Caio</div>
+          <div class="case-handle">@dr.pedrocaio · Caruaru, PE</div>
+          <div class="case-big">
+            <span class="lbl">O que mudou</span>
+            <span class="val">Quadruplicou<span class="suffix"> o faturamento</span></span>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Receita 4x</span>
+            <button class="case-play" type="button" data-video="HgL4PKysuX8" aria-label="Ver depoimento de Dr. Pedro Caio">
+              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
+              <span>Ver depoimento</span>
+            </button>
+          </div>
+        </div>
+      </article>
+      <article class="case r d5">
+        <div class="case-media">
+          <span class="case-idx">08 / 9</span>
+          <img src="assets/cases-opt/douglas-vaz.jpg" alt="Dr. Douglas Vaz" loading="lazy" decoding="async" style="--pos-y:6%">
+        </div>
+        <div class="case-body">
+          <div class="case-name">Dr. Douglas Vaz</div>
+          <div class="case-handle">@drdouglasvaz · Belo Horizonte, MG</div>
+          <div class="case-big">
+            <span class="lbl">O que mudou</span>
+            <span class="val">Dobrou de tamanho<span class="suffix"> em 6 meses</span></span>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Crescimento estrutural</span>
+            <button class="case-play" type="button" data-video="SHZ0wod3R_c" aria-label="Ver depoimento de Dr. Douglas Vaz">
+              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
+              <span>Ver depoimento</span>
+            </button>
+          </div>
+        </div>
+      </article>
+      <article class="case r d5">
+        <div class="case-media">
+          <span class="case-idx">09 / 9</span>
+          <img src="assets/cases-opt/dellatorre.jpg" alt="DellaTorre Odontologia" loading="lazy" decoding="async" style="--pos-y:22%">
+        </div>
+        <div class="case-body">
+          <div class="case-name">DellaTorre Odontologia</div>
+          <div class="case-handle">@dellatorre_odontologia · Caxias do Sul, RS</div>
+          <div class="case-big">
+            <span class="lbl">O que mudou</span>
+            <span class="val">Dobrou<span class="suffix"> faturamento e nº de pacientes</span></span>
+          </div>
+          <div class="case-foot">
+            <span class="tag">Crescimento sustentado</span>
+            <button class="case-play" type="button" data-video="qiPBgSPhp84" aria-label="Ver depoimento de DellaTorre Odontologia">
+              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
+              <span>Ver depoimento</span>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="audit r">
+      <div class="audit-row">
+        <div><span class="k">Nos 5 cases com a conta fechada</span><span class="v">R$ 198.639 investidos em anúncio</span></div>
+        <div><span class="k">Viraram</span><span class="v grad-text">R$ 4.390.472 em tratamento vendido</span></div>
+        <div><span class="k">Retorno médio desses 5</span><span class="v">22,1x</span></div>
+      </div>
+      <p class="audit-note">Esses são os cases que a gente escolhe mostrar, não a carteira inteira, e resultado passado não garante resultado futuro. Cada número é de um período específico do projeto daquela clínica, medido no gerenciador de anúncios e no fechamento informado por ela. Onde a gente não tem o valor exato do investimento, preferimos mostrar só a progressão de faturamento a inventar a conta.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ POSICIONAMENTO ============ -->
+<section id="oque">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow r"><span>O que a gente é</span></p>
+      <h2 class="r d1">Não é falta de esforço. É o modelo.</h2>
+      <p class="lead r d2">Se você já contratou agência e não deu certo, provavelmente não foi por falta de empenho seu nem de talento deles. Foi porque cada um entregou um pedaço, e pedaço solto não funciona.</p>
+    </div>
+
+    <div class="analogy r d3">
+      <p>Pensa num tratamento de verdade. Se um profissional faz o diagnóstico, outro o planejamento, outro a execução e outro o acompanhamento, sem ninguém conversando, o caso desanda e cada um culpa o outro.</p>
+      <p><strong>É exatamente isso que a agência tradicional faz com o seu comercial:</strong> entrega o clique e larga o resto.</p>
+    </div>
+
+    <div class="vs r d4">
+      <div class="vs-col vs-col--old">
+        <h3><span class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </span>Agência tradicional</h3>
+        <ul>
+          <li>Traz o clique e para por aí</li>
+          <li>Larga o atendimento na recepção</li>
+          <li>Lead cru, sem qualificação nenhuma</li>
+          <li>Resposta quando dá, e o lead esfria</li>
+          <li>Relatório de curtida no fim do mês</li>
+        </ul>
+      </div>
+      <div class="vs-col vs-col--new">
+        <h3><span class="ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>B2Donto</h3>
+        <ul>
+          <li>Atrai o lead certo, que quer o procedimento</li>
+          <li>Primeiro contato com a Maia, a nossa IA, em menos de 1 minuto</li>
+          <li>Qualifica e quebra objeção antes de chegar em você</li>
+          <li>Pré-agenda e entrega o horário pra sua equipe só confirmar</li>
+          <li>Painel com faturamento, não com curtida</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="kicker-line r d5">Você cuida da cadeira. <span class="grad-text">A gente cuida de encher a agenda.</span></p>
+  </div>
+</section>
 
 <!-- ============ ESTRUTURA PROPRIA ============ -->
 <section id="estrutura">
@@ -2174,6 +2276,15 @@ function track(nome, dados){
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
+})();
+
+/* ===== carrossel de depoimentos ===== */
+(function(){
+  var t=document.getElementById('vcarTrack'); if(!t) return;
+  function passo(){ var c=t.querySelector('.vcard'); return c ? c.getBoundingClientRect().width + 16 : 280; }
+  document.querySelectorAll('.vcar-prev,.vcar-next').forEach(function(b){
+    b.addEventListener('click', function(){ t.scrollBy({left:(b.classList.contains('vcar-next')?1:-1)*passo()*2, behavior:'smooth'}); });
+  });
 })();
 </script>
 
