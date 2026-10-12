@@ -932,14 +932,10 @@ section{padding:clamp(56px,7vw,104px) 0}
 }
 
 /* ================= v2.8 ================= */
-.nav{transition:transform .35s cubic-bezier(.2,.7,.2,1), background .3s}
-body.nav-off .nav{transform:translateY(-110%)}
-@media(min-width:861px){ .fx-stage{transition:top .35s cubic-bezier(.2,.7,.2,1)} body.nav-off .fx-stage{top:28px} }
 .fx-pin{display:contents}
 @media(max-width:860px){
   .fx{display:block; position:relative; height:calc(5 * 80vh + 100vh); margin-top:10px}
   .fx-pin{--glow:0,225,195; display:flex; flex-direction:column; position:sticky; top:0; height:100vh; height:100svh; overflow:hidden; padding:16px 0 18px}
-  body:not(.nav-off) .fx-pin{padding-top:68px; transition:padding .35s}
   .fx-stage{position:relative; top:auto; flex:0 0 auto; height:auto; max-height:none; margin:0; padding:0; background:none; border:0;
     display:flex; flex-direction:column; align-items:center; gap:8px; -webkit-backdrop-filter:none; backdrop-filter:none}
   .fx-frame{order:1; position:relative; width:100%; height:min(36vh,280px); flex:none}
@@ -958,6 +954,22 @@ body.nav-off .nav{transform:translateY(-110%)}
   .fx-step h3{font-size:clamp(24px,6.6vw,30px); margin-bottom:10px; max-width:20ch}
   .fx-p{font-size:15px; line-height:1.65}
 }
+
+/* ================= v2.9: nome e progresso em cima do icone ================= */
+.fx-rail{max-width:230px; gap:5px}
+.fx-rail button{height:12px}
+.fx-rail button::before{top:4px; height:3px}
+@media(max-width:860px){
+  .fx-now{order:1; margin-top:0}
+  .fx-rail{order:2; max-width:140px; gap:4px}
+  .fx-frame{order:3; margin-top:10px}
+}
+
+/* ================= v2.9b: menu so no topo da pagina, sem ficar fixo ================= */
+.nav{position:absolute}
+@media(min-width:861px){ .fx-stage{top:28px} }
+#comecar{scroll-margin-top:16px}
+.start-form{top:24px}
 </style>
 </head>
 <body>
@@ -2564,16 +2576,6 @@ function track(nome, dados){
   porRolagem();
 })();
 
-/* ===== menu some ao descer, volta ao subir ===== */
-(function(){
-  var last=scrollY, nav=document.getElementById('nav'); if(!nav) return;
-  addEventListener('scroll', function(){
-    var y=scrollY;
-    if(y>last+4 && y>140) document.body.classList.add('nav-off');
-    else if(y<last-4 || y<140) document.body.classList.remove('nav-off');
-    last=y;
-  }, { passive:true });
-})();
 </script>
 
 </div>
