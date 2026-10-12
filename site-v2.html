@@ -970,6 +970,26 @@ section{padding:clamp(56px,7vw,104px) 0}
 @media(min-width:861px){ .fx-stage{top:28px} }
 #comecar{scroll-margin-top:16px}
 .start-form{top:24px}
+
+/* ================= v2.10: barra lateral, nome do pilar abaixo do icone ================= */
+.fx-rail{position:absolute; top:50%; left:0; transform:translateY(-50%); z-index:2;
+  flex-direction:column; gap:7px; width:auto; max-width:none; overflow:visible}
+.fx-rail button{flex:none; width:14px; height:28px}
+.fx-rail button::before{left:5px; right:auto; top:0; bottom:0; width:3px; height:auto}
+.fx-frame{order:1; margin-top:0}
+.fx-now{order:2; flex-direction:column; align-items:center; gap:5px; text-align:center; margin:4px auto 0}
+.fx-now-t{font-size:20px; white-space:normal; line-height:1.25}
+@media(max-width:860px){
+  .fx-rail{left:auto; right:0}
+  .fx-frame{order:1; margin-top:0}
+  .fx-now{order:2; align-self:center; margin-top:12px}
+  .fx-now-t{font-size:19px; white-space:normal; text-align:center}
+  .fx-steps{margin-top:12px; text-align:center}
+  .fx-step h3{margin-left:auto; margin-right:auto}
+  .fx-p{margin-left:auto; margin-right:auto}
+}
+@media(min-width:861px){ .fx-now{display:none} }
+@media(max-width:860px){ .fx-rail{right:-12px} }
 </style>
 </head>
 <body>
