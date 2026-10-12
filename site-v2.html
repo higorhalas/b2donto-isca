@@ -876,6 +876,36 @@ section{padding:clamp(56px,7vw,104px) 0}
 .fx>*,.fx-stage,.fx-frame,.fx-steps{min-width:0}
 .fx-rail{max-width:100%}
 .nav-links a.nav-cta,.nav-links a.nav-cta:hover{color:#03121A}
+
+/* ================= v2.5: metodo mais legivel ================= */
+.fx-now{display:flex; align-items:baseline; gap:10px; margin:0; min-width:0}
+.fx-now-n{font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--cyan); flex:0 0 auto}
+.fx-now-t{font-size:17px; font-weight:600; letter-spacing:-.025em; color:var(--white); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.fx-rail{display:flex; flex-wrap:nowrap; gap:6px; max-width:380px; min-width:0; overflow:hidden}
+.fx-rail button{position:relative; flex:1 1 0; min-width:0; height:16px; padding:0; border:0; background:transparent; cursor:pointer; font-size:0; border-radius:0}
+.fx-rail button::before{content:''; position:absolute; left:0; right:0; top:6px; height:4px; border-radius:99px; background:rgba(255,255,255,.12); transition:background .3s}
+.fx-rail button.on::before{background:var(--grad-brand)}
+.fx-rail button:hover::before{background:rgba(0,225,195,.45)}
+.fx-rail button span,.fx-rail button em{display:none}
+.fx-rail em{font-style:normal}
+.fx{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)}
+.fx-stage{height:calc(100vh - 140px); max-height:640px; gap:12px}
+.fx-frame{margin-top:10px}
+.fx-viz svg{max-width:410px}
+.fx-step{min-height:72vh}
+@media(max-width:860px){
+  .fx{grid-template-columns:minmax(0,1fr)}
+  .fx-stage{display:grid; grid-template-columns:84px minmax(0,1fr); grid-template-rows:auto auto; column-gap:14px; row-gap:8px; align-items:center;
+    top:56px; height:auto; max-height:none; padding:10px var(--pad-x); margin:0 calc(-1 * var(--pad-x));
+    background:rgba(5,9,34,.94); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+  .fx-frame{grid-column:1; grid-row:1 / span 2; width:84px; height:84px; flex:none}
+  .fx-viz svg{max-width:84px; max-height:84px}
+  .fx-now{display:flex; align-items:baseline; gap:8px; grid-column:2; grid-row:1; min-width:0; margin:0}
+  .fx-now-n{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; color:var(--cyan); flex:0 0 auto}
+  .fx-now-t{font-size:14.5px; font-weight:600; letter-spacing:-.02em; color:var(--white); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .fx-step{min-height:auto; padding:26px 0 52px; opacity:.3}
+  .fx-step h3{font-size:clamp(25px,7vw,30px)}
+}
 </style>
 </head>
 <body>
@@ -1039,7 +1069,8 @@ section{padding:clamp(56px,7vw,104px) 0}
     </div>
     <div class="fx">
       <div class="fx-stage" aria-hidden="true">
-        <div class="fx-rail"><button type="button" data-fx="0"><span>01</span>Briefing Raio-X 360°</button><button type="button" data-fx="1"><span>02</span>Vitrine 3E</button><button type="button" data-fx="2"><span>03</span>Bola de neve de indicações</button><button type="button" data-fx="3"><span>04</span>Agendamento Autoprogressivo</button><button type="button" data-fx="4"><span>05</span>Farming da Base</button></div>
+        <p class="fx-now"><span class="fx-now-n">01/05</span><b class="fx-now-t">Briefing Raio-X 360°</b></p>
+        <div class="fx-rail"><button type="button" data-fx="0"><span>01</span><em>Briefing Raio-X 360°</em></button><button type="button" data-fx="1"><span>02</span><em>Vitrine 3E</em></button><button type="button" data-fx="2"><span>03</span><em>Bola de neve de indicações</em></button><button type="button" data-fx="3"><span>04</span><em>Agendamento Autoprogressivo</em></button><button type="button" data-fx="4"><span>05</span><em>Farming da Base</em></button></div>
         <div class="fx-frame">
           <div class="fx-viz" data-fx="0"><svg aria-hidden="true" focusable="false" viewBox="-36 13 429 374" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raio-X 360: Instagram, Google, site, atendimento, concorrência e mídia">
               <circle cx="200" cy="200" r="65" fill="none" stroke="rgba(0,225,195,.18)" stroke-width="1"/>
@@ -2453,6 +2484,9 @@ function track(nome, dados){
     steps.forEach(function(x,k){ x.classList.toggle('on',k===i); });
     viz.forEach(function(x,k){ x.classList.toggle('on',k===i); });
     rail.forEach(function(x,k){ x.classList.toggle('on',k===i); });
+    var nn=document.querySelector('.fx-now-n'), nt=document.querySelector('.fx-now-t');
+    if(nn) nn.textContent='0'+(i+1)+'/0'+steps.length;
+    if(nt && rail[i]){ var em=rail[i].querySelector('em'); nt.textContent=em?em.textContent:''; }
     var b=rail[i]; if(b && b.parentNode.scrollWidth>b.parentNode.clientWidth) b.parentNode.scrollTo({left:b.offsetLeft-12, behavior:'smooth'});
   }
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) set(steps.indexOf(e.target)); }); },
