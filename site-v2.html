@@ -930,6 +930,34 @@ section{padding:clamp(56px,7vw,104px) 0}
   .fx-rail{order:3; align-self:center; width:100%; max-width:240px}
   .fx-step{padding:30px 0 60px}
 }
+
+/* ================= v2.8 ================= */
+.nav{transition:transform .35s cubic-bezier(.2,.7,.2,1), background .3s}
+body.nav-off .nav{transform:translateY(-110%)}
+@media(min-width:861px){ .fx-stage{transition:top .35s cubic-bezier(.2,.7,.2,1)} body.nav-off .fx-stage{top:28px} }
+.fx-pin{display:contents}
+@media(max-width:860px){
+  .fx{display:block; position:relative; height:calc(5 * 80vh + 100vh); margin-top:10px}
+  .fx-pin{--glow:0,225,195; display:flex; flex-direction:column; position:sticky; top:0; height:100vh; height:100svh; overflow:hidden; padding:16px 0 18px}
+  body:not(.nav-off) .fx-pin{padding-top:68px; transition:padding .35s}
+  .fx-stage{position:relative; top:auto; flex:0 0 auto; height:auto; max-height:none; margin:0; padding:0; background:none; border:0;
+    display:flex; flex-direction:column; align-items:center; gap:8px; -webkit-backdrop-filter:none; backdrop-filter:none}
+  .fx-frame{order:1; position:relative; width:100%; height:min(36vh,280px); flex:none}
+  .fx-frame::before{content:''; position:absolute; left:50%; top:50%; width:min(80vw,320px); aspect-ratio:1; transform:translate(-50%,-50%);
+    border-radius:50%; background:radial-gradient(circle, rgba(var(--glow),.30) 0%, rgba(var(--glow),.08) 45%, transparent 70%);
+    transition:background .6s ease; pointer-events:none}
+  .fx-viz svg{max-width:min(80vw,310px); max-height:min(36vh,280px)}
+  .fx-now{order:2; margin-top:4px} .fx-now-t{font-size:16px}
+  .fx-rail{order:3; max-width:220px}
+  .fx-steps{position:relative; flex:1 1 auto; min-height:0; margin-top:20px}
+  .fx-step{position:absolute; inset:0; display:block; min-height:0; padding:0; opacity:0; transform:translateY(16px);
+    transition:opacity .45s ease, transform .5s cubic-bezier(.2,.7,.2,1); pointer-events:none}
+  .fx-step.on{opacity:1; transform:none; pointer-events:auto}
+  .fx-step .consc,.fx-step .sim{display:none}
+  .fx-num{display:none}
+  .fx-step h3{font-size:clamp(24px,6.6vw,30px); margin-bottom:10px; max-width:20ch}
+  .fx-p{font-size:15px; line-height:1.65}
+}
 </style>
 </head>
 <body>
@@ -1092,6 +1120,7 @@ section{padding:clamp(56px,7vw,104px) 0}
       <p class="lead r d2">180 dias para construir uma clínica próspera, previsível e que te devolve o tempo pra viver. São cinco pilares, instalados e operados pela nossa equipe.</p>
     </div>
     <div class="fx">
+     <div class="fx-pin">
       <div class="fx-stage" aria-hidden="true">
         <p class="fx-now"><span class="fx-now-n">01/05</span><b class="fx-now-t">Briefing Raio-X 360°</b></p>
         <div class="fx-rail"><button type="button" data-fx="0"><span>01</span><em>Briefing Raio-X 360°</em></button><button type="button" data-fx="1"><span>02</span><em>Vitrine 3E</em></button><button type="button" data-fx="2"><span>03</span><em>Bola de neve de indicações</em></button><button type="button" data-fx="3"><span>04</span><em>Agendamento Autoprogressivo</em></button><button type="button" data-fx="4"><span>05</span><em>Farming da Base</em></button></div>
@@ -1437,6 +1466,7 @@ section{padding:clamp(56px,7vw,104px) 0}
           
         </article>
       </div>
+     </div>
     </div>
     <div class="acomp r">
       <p class="eyebrow"><span>Aceleração comercial</span></p>
@@ -2506,6 +2536,7 @@ function track(nome, dados){
   function set(i){
     if(i===cur||i<0) return; cur=i;
     steps.forEach(function(x,k){ x.classList.toggle('on',k===i); });
+    if(pin) pin.style.setProperty('--glow',CORES[i%CORES.length]);
     viz.forEach(function(x,k){ x.classList.toggle('on',k===i); });
     rail.forEach(function(x,k){ x.classList.toggle('on',k===i); });
     var nn=document.querySelector('.fx-now-n'), nt=document.querySelector('.fx-now-t');
@@ -2513,11 +2544,35 @@ function track(nome, dados){
     if(nt && rail[i]){ var em=rail[i].querySelector('em'); nt.textContent=em?em.textContent:''; }
     var b=rail[i]; if(b && b.parentNode.scrollWidth>b.parentNode.clientWidth) b.parentNode.scrollTo({left:b.offsetLeft-12, behavior:'smooth'});
   }
-  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) set(steps.indexOf(e.target)); }); },
+  var mq=matchMedia('(max-width:860px)'), fxBox=document.querySelector('.fx'), pin=document.querySelector('.fx-pin');
+  var CORES=['0,225,195','74,108,247','167,19,185','61,219,192','216,123,241'];
+  function porRolagem(){
+    if(!mq.matches || !fxBox) return;
+    var r=fxBox.getBoundingClientRect(), total=fxBox.offsetHeight-innerHeight;
+    var p=total>0 ? Math.min(Math.max(-r.top/total,0),0.9999) : 0;
+    set(Math.floor(p*steps.length));
+  }
+  addEventListener('scroll',porRolagem,{passive:true}); addEventListener('resize',porRolagem);
+  var io=new IntersectionObserver(function(es){ if(mq.matches) return; es.forEach(function(e){ if(e.isIntersecting) set(steps.indexOf(e.target)); }); },
     { rootMargin: matchMedia('(max-width:860px)').matches ? '-55% 0px -35% 0px' : '-45% 0px -45% 0px' });
   steps.forEach(function(x){ io.observe(x); });
   set(0);
-  rail.forEach(function(b,k){ b.addEventListener('click', function(){ steps[k].scrollIntoView({ behavior:'smooth', block:'center' }); }); });
+  rail.forEach(function(b,k){ b.addEventListener('click', function(){
+    if(mq.matches && fxBox){ var total=fxBox.offsetHeight-innerHeight; scrollTo({ top: fxBox.getBoundingClientRect().top+scrollY+total*(k+.5)/steps.length, behavior:'smooth' }); }
+    else steps[k].scrollIntoView({ behavior:'smooth', block:'center' });
+  }); });
+  porRolagem();
+})();
+
+/* ===== menu some ao descer, volta ao subir ===== */
+(function(){
+  var last=scrollY, nav=document.getElementById('nav'); if(!nav) return;
+  addEventListener('scroll', function(){
+    var y=scrollY;
+    if(y>last+4 && y>140) document.body.classList.add('nav-off');
+    else if(y<last-4 || y<140) document.body.classList.remove('nav-off');
+    last=y;
+  }, { passive:true });
 })();
 </script>
 
