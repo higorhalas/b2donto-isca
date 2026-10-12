@@ -729,6 +729,40 @@ section{padding:clamp(56px,7vw,104px) 0}
 /* faixas na ordem nova */
 #cases,#estrutura{background:#0B1031}
 #metodo{background:transparent; border:0}
+
+/* ================= v2.3: aplicacao com todas as perguntas ================= */
+.ap{gap:10px}
+.ap-title{font-size:clamp(20px,2vw,24px); font-weight:600; letter-spacing:-.035em; color:#060807; margin:2px 0 6px}
+.ff{position:relative; display:flex; align-items:stretch; border:1px solid rgba(6,43,38,.16); border-radius:12px; background:#F7FAFA;
+  transition:border-color .2s, box-shadow .2s, background .2s}
+.ff:focus-within{border-color:var(--cyan-on-light); box-shadow:0 0 0 4px rgba(0,128,111,.12); background:#fff}
+.ff.ff-bad{border-color:#D9435E; box-shadow:0 0 0 4px rgba(217,67,94,.10)}
+.ap .ff input,.ap .ff select{flex:1; min-width:0; width:100%; padding:15px 16px; border:0; background:transparent; outline:none; box-shadow:none;
+  font:500 15px/1.2 var(--font); color:#060807; border-radius:12px}
+.ap .ff input:focus{box-shadow:none; background:transparent}
+.ap .ff input::placeholder{color:#7E8A87}
+.ff-sel select{appearance:none; -webkit-appearance:none; cursor:pointer; padding-right:42px}
+.ff-sel select:invalid{color:#7E8A87}
+.ff-sel select option{color:#060807}
+.ff-sel::after{content:''; position:absolute; right:17px; top:50%; width:8px; height:8px; margin-top:-6px; pointer-events:none;
+  border-right:1.6px solid #5B6663; border-bottom:1.6px solid #5B6663; transform:rotate(45deg)}
+.ff-ddi{display:flex; align-items:center; padding:0 12px 0 14px; border-right:1px solid rgba(6,43,38,.12);
+  font:600 13px/1 var(--mono); letter-spacing:.04em; color:#3E4A47; white-space:nowrap}
+.ap-err{min-height:0; font-size:13px; color:#C2304C; margin:0}
+.ap-err:empty{display:none}
+.ap .btn{margin-top:4px}
+.ap-ok{font-size:14.5px; line-height:1.65; color:#39423F; margin-bottom:8px}
+
+/* v2.3 correcoes */
+#comecar{scroll-margin-top:76px}
+@media(max-width:860px){
+  .start{display:flex; flex-direction:column; gap:0}
+  .start-info{display:contents}
+  .start-info h2{order:1} .start-info .eyebrow{order:0} .start-info>p{order:2; margin-bottom:22px}
+  .start-form{order:3; margin-bottom:28px}
+  .steps{order:4}
+}
+@media(max-width:560px){ .ap .ff input,.ap .ff select{font-size:14.5px; padding:14px 14px} .ff-sel select{padding-right:36px} .ff-sel::after{right:14px} .ff-ddi{padding:0 10px 0 12px; font-size:12px} }
 </style>
 </head>
 <body>
@@ -750,7 +784,7 @@ section{padding:clamp(56px,7vw,104px) 0}
       <a href="#cases">Resultados</a>
       <a href="#quem">Quem somos</a>
       <a href="#faq">Dúvidas</a>
-      <a href="#raiox" class="nav-cta" data-open-raiox>Quero mais informações</a>
+      <a href="#comecar" class="nav-cta" data-go-form>Quero mais informações</a>
     </div>
   </div>
 </nav>
@@ -762,12 +796,12 @@ section{padding:clamp(56px,7vw,104px) 0}
     <h1 class="r d1"><span class="h1-l">Pacientes de alto valor</span> <span class="h1-l grad-text">toda semana na sua cadeira</span></h1>
     <p class="lead r d2">A B2Donto instala na sua clínica a operação que transforma anúncio em paciente sentado na cadeira. Captação, atendimento com IA e fechamento rodando juntos, com a nossa equipe dentro da sua operação. Não é mais uma agência que entrega o clique e larga o resto na mão da recepção.</p>
     <div class="cta-row r d3">
-      <a href="#raiox" class="btn" data-open-raiox data-ev="Lead" data-pos="hero">
+      <a href="#comecar" class="btn" data-go-form data-pos="hero">
         Quero mais informações
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
-    <p class="hero-note r d4">O Raio-X é gratuito. São 7 perguntas rápidas e no fim você cai direto no nosso WhatsApp, com o seu cenário já na nossa mão.</p>
+    <p class="hero-note r d4">A aplicação é gratuita e leva menos de 1 minuto. No fim, você cai direto no nosso WhatsApp.</p>
 
     <div class="tri r d5">
       <div class="tri-cell">
@@ -802,17 +836,23 @@ section{padding:clamp(56px,7vw,104px) 0}
         <h2>Falta pouco pra você atrair <strong>os pacientes certos.</strong></h2>
         <p>Aplique agora para descobrir se a sua clínica está apta para receber nossas soluções.</p>
         <ol class="steps">
-          <li><span class="steps-n">01</span><div><b>Você responde 7 perguntas</b><p>Faturamento, anúncio, quem atende o WhatsApp e o que você quer resolver nos próximos 90 dias.</p></div></li>
+          <li><span class="steps-n">01</span><div><b>Você preenche a aplicação</b><p>Seis campos rápidos: contato, Instagram, carro-chefe, faturamento e quanto investe em anúncio.</p></div></li>
           <li><span class="steps-n">02</span><div><b>Abre o nosso WhatsApp com tudo escrito</b><p>As suas respostas já vêm montadas na mensagem. É só tocar em enviar.</p></div></li>
           <li><span class="steps-n">03</span><div><b>Você recebe a leitura do seu cenário</b><p>Alguém do time olha o seu perfil, a sua praça e os seus números. Se fizer sentido, a gente marca uma conversa.</p></div></li>
         </ol>
       </div>
-      <form class="start-form" id="rxInline" novalidate>
-        <p class="start-form-k">Aplicação · 7 perguntas · 2 minutos</p>
-        <label for="rxNomeInline">Pra começar, como você se chama?</label>
-        <input id="rxNomeInline" type="text" placeholder="Seu nome" autocomplete="given-name">
-        <button class="btn" type="submit" data-open-raiox data-rx-inline data-pos="comecar">Quero mais informações <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <p class="start-note">Ninguém liga sem você pedir.</p>
+      <form class="start-form ap" id="apForm" novalidate>
+        <p class="start-form-k">Aplicação · leva menos de 1 minuto</p>
+        <p class="ap-title">Queremos te conhecer</p>
+        <div class="ff"><input id="fNome" type="text" placeholder="Nome completo" autocomplete="name" required></div>
+        <div class="ff ff-tel"><span class="ff-ddi">BR +55</span><input id="fZap" type="tel" inputmode="tel" placeholder="WhatsApp com DDD" autocomplete="tel-national" required></div>
+        <div class="ff"><input id="fInsta" type="text" placeholder="@ do Instagram da clínica" autocomplete="off" required></div>
+        <div class="ff ff-sel"><select id="fCarro" required><option value="" disabled selected>Qual o seu carro-chefe?</option><option>Lentes de contato dental</option><option>Implantes e prótese</option><option>Harmonização orofacial</option><option>Ortodontia</option><option>Clínica geral</option><option>Outro</option></select></div>
+        <div class="ff ff-sel"><select id="fFat" required><option value="" disabled selected>Quanto a clínica fatura por mês?</option><option>Até R$ 20 mil</option><option>De R$ 20 mil a R$ 50 mil</option><option>De R$ 50 mil a R$ 100 mil</option><option>Acima de R$ 100 mil</option><option>Prefiro falar na conversa</option></select></div>
+        <div class="ff ff-sel"><select id="fAds" required><option value="" disabled selected>Quanto investe em anúncios por mês?</option><option>Ainda não invisto</option><option>Até R$ 1.500</option><option>De R$ 1.500 a R$ 3.000</option><option>De R$ 3.000 a R$ 6.000</option><option>Acima de R$ 6.000</option></select></div>
+        <p class="ap-err" id="apErr" role="alert"></p>
+        <button class="btn" type="submit" data-pos="comecar">Quero mais informações <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="start-note">Ninguém liga sem você pedir. Seus dados ficam só com a B2Donto.</p>
       </form>
     </div>
   </div>
@@ -1762,9 +1802,9 @@ section{padding:clamp(56px,7vw,104px) 0}
             </svg></div>
     <p class="eyebrow r"><span>Primeiro passo</span></p>
     <h2 class="r d1">Antes de proposta, <span class="grad-text">diagnóstico.</span></h2>
-    <p class="lead r d2">Responda 7 perguntas rápidas sobre a sua clínica. A gente olha o seu cenário, o seu perfil e a sua praça, e você fala com a gente no WhatsApp já sabendo onde está o gargalo. Sem custo e sem compromisso de fechar nada.</p>
+    <p class="lead r d2">Preencha a aplicação em menos de 1 minuto. A gente olha o seu cenário, o seu perfil e a sua praça, e você fala com a gente no WhatsApp já sabendo onde está o gargalo. Sem custo e sem compromisso de fechar nada.</p>
     <div class="cta-row r d3">
-      <button class="btn" type="button" data-open-raiox data-pos="final">
+      <button class="btn" type="button" data-go-form data-pos="final">
         Quero mais informações
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
@@ -1798,7 +1838,7 @@ section{padding:clamp(56px,7vw,104px) 0}
         <div class="f-col">
           <h4>Falar com a gente</h4>
           <a href="#" data-zap data-pos="footer">WhatsApp comercial</a>
-          <a href="#raiox" data-open-raiox>Raio-X gratuito</a>
+          <a href="#comecar" data-go-form>Aplicação gratuita</a>
           <span>Curitiba, PR</span>
         </div>
       </div>
@@ -2284,6 +2324,58 @@ function track(nome, dados){
   function passo(){ var c=t.querySelector('.vcard'); return c ? c.getBoundingClientRect().width + 16 : 280; }
   document.querySelectorAll('.vcar-prev,.vcar-next').forEach(function(b){
     b.addEventListener('click', function(){ t.scrollBy({left:(b.classList.contains('vcar-next')?1:-1)*passo()*2, behavior:'smooth'}); });
+  });
+})();
+
+/* ===== aplicacao do site: todas as perguntas visiveis ===== */
+(function(){
+  document.addEventListener('click', function(e){
+    var g = e.target.closest('[data-go-form]'); if(!g) return;
+    e.preventDefault();
+    var alvo = document.getElementById('comecar'); if(!alvo) return;
+    alvo.scrollIntoView({ behavior:'smooth', block:'start' });
+    setTimeout(function(){ var n = document.getElementById('fNome'); if(n) n.focus({ preventScroll:true }); }, 650);
+  });
+  var f = document.getElementById('apForm'); if(!f) return;
+  var err = document.getElementById('apErr'), enviado = false;
+  ['input','change'].forEach(function(ev){ f.addEventListener(ev, function(e){ var c = e.target.closest('.ff'); if(c && c.classList.contains('ff-bad')){ c.classList.remove('ff-bad'); err.textContent = ''; } }); });
+  var sid = 'site-' + Math.random().toString(36).slice(2,10) + '-' + (new Date()).getTime().toString(36);
+  function v(id){ return (document.getElementById(id).value || '').trim(); }
+  function so(d){ return d.replace(/\D/g,''); }
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nome = v('fNome'), zap = so(v('fZap')), ig = v('fInsta'), carro = v('fCarro'), fat = v('fFat'), ads = v('fAds');
+    var falta = null;
+    if(nome.length < 2) falta = ['fNome','Escreve o seu nome pra gente saber com quem fala.'];
+    else if(zap.length < 10 || zap.length > 11 || /^(\d)\1+$/.test(zap)) falta = ['fZap','Confere o WhatsApp com DDD, parece incompleto.'];
+    else if(ig.replace('@','').length < 2) falta = ['fInsta','Coloca o @ da clínica (ou o seu, se for o mesmo).'];
+    else if(!carro) falta = ['fCarro','Escolhe o seu carro-chefe.'];
+    else if(!fat) falta = ['fFat','Escolhe a faixa de faturamento.'];
+    else if(!ads) falta = ['fAds','Escolhe quanto investe em anúncios hoje.'];
+    f.querySelectorAll('.ff').forEach(function(x){ x.classList.remove('ff-bad'); });
+    if(falta){ err.textContent = falta[1]; var el = document.getElementById(falta[0]); el.closest('.ff').classList.add('ff-bad'); el.focus(); return; }
+    err.textContent = '';
+    if(ig.charAt(0) !== '@') ig = '@' + ig;
+    var corpo = JSON.stringify({ q1:nome, q3:'55'+zap, q5:ig, q9:carro, q30:fat, q27:ads,
+      sessionId:sid, status:'completo', event:'progress', lastQuestion:'APLICACAO DO SITE',
+      source:(typeof CFG !== 'undefined' ? CFG.ORIGEM : 'site-b2donto'), userAgent:navigator.userAgent });
+    if(!enviado && typeof CFG !== 'undefined' && CFG.SHEETS){
+      enviado = true;
+      try {
+        var blob = new Blob([corpo], { type:'text/plain;charset=utf-8' });
+        if(!(navigator.sendBeacon && navigator.sendBeacon(CFG.SHEETS, blob))){
+          fetch(CFG.SHEETS, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body:corpo, keepalive:true });
+        }
+      } catch(x){}
+    }
+    if(typeof track === 'function') track('aplicacao_site', { faturamento:fat, anuncio:ads, carro_chefe:carro });
+    var msg = ['Olá! Vim pelo site da B2Donto e preenchi a aplicação.','',
+      'Nome: '+nome,'Instagram: '+ig,'Carro-chefe: '+carro,'Faturamento: '+fat,'Investimento em anúncio: '+ads,'','Quero mais informações.'].join('\n');
+    var url = window.zapLink ? window.zapLink(msg) : '#';
+    f.innerHTML = '<p class="start-form-k">Aplicação recebida</p><p class="ap-title">Obrigado, ' + (nome.split(' ')[0]) + '.</p>' +
+      '<p class="ap-ok">Estamos abrindo o nosso WhatsApp com as suas respostas já escritas. É só tocar em enviar.</p>' +
+      '<a class="btn" target="_blank" rel="noopener" href="' + url + '">Abrir o WhatsApp</a>';
+    setTimeout(function(){ window.open(url, '_blank', 'noopener'); }, 700);
   });
 })();
 </script>
