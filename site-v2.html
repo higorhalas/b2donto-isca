@@ -906,6 +906,18 @@ section{padding:clamp(56px,7vw,104px) 0}
   .fx-step{min-height:auto; padding:26px 0 52px; opacity:.3}
   .fx-step h3{font-size:clamp(25px,7vw,30px)}
 }
+
+/* ================= v2.6: icone maior no celular, texto enxuto ================= */
+.fx-step .consc,.fx-step .sim{margin-top:26px}
+@media(max-width:860px){
+  .fx-stage{grid-template-columns:132px minmax(0,1fr); column-gap:16px; padding:10px var(--pad-x) 12px}
+  .fx-frame{width:132px; height:120px}
+  .fx-viz svg{max-width:132px; max-height:120px}
+  .fx-now{flex-direction:column; align-items:flex-start; gap:4px; align-self:end}
+  .fx-now-t{white-space:normal; font-size:16px; line-height:1.25}
+  .fx-rail{align-self:start}
+  .fx-step{padding:28px 0 56px}
+}
 </style>
 </head>
 <body>
@@ -1370,14 +1382,14 @@ section{padding:clamp(56px,7vw,104px) 0}
         <article class="fx-step" data-fx="0" id="pilar-1">
           <p class="fx-num">Pilar 01 · Briefing Raio-X 360°</p>
           <h3>Antes do primeiro anúncio, <span class="grad-text">o diagnóstico</span>.</h3>
-          <p class="fx-p">Assim como um implante começa no planejamento, a sua clínica começa no diagnóstico. A gente analisa o negócio inteiro e entrega o plano de ação num site só da sua clínica.</p>
-          <ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Instagram, Google, site, atendimento, concorrência e mídia, um a um</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Plano de ação com o que fazer primeiro e por quê</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Entregue num site só seu, pra consultar quando quiser</span></li></ul>
+          <p class="fx-p">Assim como um implante começa no planejamento, a sua clínica começa no diagnóstico. A gente analisa Instagram, Google, site, atendimento, concorrência e mídia, e entrega o plano de ação num site só da sua clínica.</p>
+          
         </article>
         <article class="fx-step" data-fx="1" id="pilar-2">
           <p class="fx-num">Pilar 02 · Vitrine 3E</p>
           <h3>Seu Instagram vira a sua <span class="grad-text">nova recepção</span>.</h3>
-          <p class="fx-p">A vitrine digital que transforma quem chega ao seu perfil em paciente. Ela une três coisas pra te posicionar como referência, e não como mais uma.</p>
-          <ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Estratégia:</b> entender o mercado e a marca e traçar o caminho</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Essência:</b> levar a personalidade e os valores reais da marca pro conteúdo</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Estética:</b> elevar o visual da comunicação, transmitindo valor</span></li></ul>
+          <p class="fx-p">A vitrine digital que transforma quem chega ao seu perfil em paciente. Ela une estratégia, essência e estética pra te posicionar como referência, e não como mais uma.</p>
+          
         </article>
         <article class="fx-step" data-fx="2" id="pilar-3">
           <p class="fx-num">Pilar 03 · Bola de neve de indicações</p>
@@ -1389,13 +1401,13 @@ section{padding:clamp(56px,7vw,104px) 0}
             <div class="consc-row"><span>Consciente da solução</span><i style="--w:30%"></i><b>15%</b></div>
             <div class="consc-row consc-hot"><span>Pronto para decidir</span><i style="--w:10%"></i><b>5%</b></div>
             <p class="consc-note">Quase todo mundo disputa os 5% prontos. A Bola de neve trabalha os outros <strong>95%</strong> até eles chegarem confiando.</p>
-          </div><ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Roteiros com a narrativa D.E.P.O.S.I.T.O., que ativa desejo</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>10 mídias por mês, entre vídeos e imagens</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Do público frio ao núcleo de conversão, sem queimar verba com curioso</span></li></ul>
+          </div>
         </article>
         <article class="fx-step" data-fx="3" id="pilar-4">
           <p class="fx-num">Pilar 04 · Agendamento Autoprogressivo</p>
           <h3>Cada lead respondido na hora, <span class="grad-text">24 horas</span>.</h3>
-          <p class="fx-p">A implementação comercial focada em conversão. A Maia, a nossa IA de pré-atendimento, roda no WhatsApp da própria clínica: responde na hora, qualifica, contorna objeção e entrega o paciente pré-agendado pra sua equipe só confirmar.</p>
-          <ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Resposta imediata, 24 horas, 7 dias por semana</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>5 resgates inteligentes de quem parou de responder</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Objeções de preço e de medo contornadas sempre do jeito certo</span></li></ul><div class="sim">
+          <p class="fx-p">A Maia, a nossa IA de pré-atendimento, roda no WhatsApp da própria clínica: responde na hora, 24 horas, faz até 5 resgates de quem sumiu, contorna objeção e entrega o paciente pré-agendado pra sua equipe só confirmar.</p>
+          <div class="sim">
             <p class="sim-k">Simulação · mesmo investimento de R$ 3 mil em anúncio</p>
             <div class="sim-grid">
               <span></span><em>Sem a Maia</em><em>Com a Maia</em>
@@ -1409,8 +1421,8 @@ section{padding:clamp(56px,7vw,104px) 0}
         <article class="fx-step" data-fx="4" id="pilar-5">
           <p class="fx-num">Pilar 05 · Farming da Base</p>
           <h3>Paciente que já passou é <span class="grad-text">nova receita</span>.</h3>
-          <p class="fx-p">Um sistema de reativação da base e de geração de indicação de quem já fechou com você. É o dinheiro mais barato da clínica, e quase ninguém vai buscar.</p>
-          <ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Cadência de recuperação:</b> quem sumiu recebe contato programado, no tempo certo</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Gatilho de indicação:</b> quem fechou entra num fluxo que pede indicação na hora certa</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>CRM inteligente:</b> cada lead rastreado, do primeiro oi ao orçamento fechado</span></li></ul>
+          <p class="fx-p">Um sistema que reativa quem sumiu, pede indicação na hora certa pra quem já fechou e rastreia cada lead no CRM. É o dinheiro mais barato da clínica, e quase ninguém vai buscar.</p>
+          
         </article>
       </div>
     </div>
