@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>B2Donto · Aceleradora comercial para clínicas de odontologia</title>
-<meta name="description" content="A B2Donto instala o processo comercial que transforma anúncio em paciente na cadeira. Tráfego, atendimento com IA e gestão de vendas operando como uma coisa só. Mais de 300 clínicas aceleradas.">
+<title>B2donto · Aceleradora comercial para clínicas de odontologia</title>
+<meta name="description" content="A B2donto instala o processo comercial que transforma anúncio em paciente na cadeira. Tráfego, atendimento com IA e gestão de vendas operando como uma coisa só. Mais de 300 clínicas aceleradas.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://b2donto.com/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="B2Donto · Aceleradora comercial para clínicas de odontologia">
+<meta property="og:title" content="B2donto · Aceleradora comercial para clínicas de odontologia">
 <meta property="og:description" content="Não é agência de marketing. É o processo comercial completo instalado na sua clínica: tráfego, atendimento e vendas operando junto.">
 <meta property="og:url" content="https://b2donto.com/">
 
@@ -51,7 +51,7 @@ body{
   background:var(--black-hole); color:var(--off-white);
   font-family:var(--font); font-size:var(--t-body); letter-spacing:var(--tr-body);
   line-height:var(--lh-body); -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  overflow-x:hidden; overflow-x:clip;
 }
 img{max-width:100%; display:block}
 a{color:inherit; text-decoration:none}
@@ -763,6 +763,119 @@ section{padding:clamp(56px,7vw,104px) 0}
   .steps{order:4}
 }
 @media(max-width:560px){ .ap .ff input,.ap .ff select{font-size:14.5px; padding:14px 14px} .ff-sel select{padding-right:36px} .ff-sel::after{right:14px} .ff-ddi{padding:0 10px 0 12px; font-size:12px} }
+
+/* animacoes dos desenhos do metodo, disparadas pelo pilar ativo */
+.fx-viz.on .anim-stroke{stroke-dashoffset:0}
+.fx-viz .loop-draw{stroke-dasharray:760; stroke-dashoffset:760; transition:stroke-dashoffset 1.9s cubic-bezier(.2,.7,.2,1) .3s}
+.fx-viz.on .loop-draw{stroke-dashoffset:0}
+.fx-viz.on .svg-pulse-a,
+.fx-viz.on .svg-pulse-b,
+.fx-viz.on .svg-pulse-c{ transform-box: fill-box; transform-origin: 50% 50%; }
+.fx-viz.on .svg-pulse-a{ animation: svgPulseA 4.5s ease-in-out infinite; }
+.fx-viz.on .svg-pulse-b{ animation: svgPulseA 4.5s ease-in-out infinite .8s; }
+.fx-viz.on .svg-pulse-c{ animation: svgPulseA 4.5s ease-in-out infinite 1.6s; }
+.fx-viz.on .svg-breathe{ animation: svgBreathe 3s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.fx-viz.on .svg-breathe-inner{ animation: svgBreathe 3s ease-in-out infinite .3s; transform-origin: center; transform-box: fill-box; }
+.fx-viz.on .svg-letter-pulse{ animation: svgLetterPulse 3.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.fx-viz .svg-seq-a, .fx-viz .svg-seq-b, .fx-viz .svg-seq-c{
+  transform-origin: center; transform-box: fill-box;
+  opacity: 0; transform: scale(.25);
+}
+.fx-viz.on .svg-seq-a{ animation: svgGrowIn 1s cubic-bezier(.2,.7,.2,1) .2s forwards, svgPulseA 4.5s ease-in-out 1.4s infinite; }
+.fx-viz.on .svg-seq-b{ animation: svgGrowIn 1s cubic-bezier(.2,.7,.2,1) 1.0s forwards, svgPulseA 4.5s ease-in-out 2.2s infinite; }
+.fx-viz.on .svg-seq-c{ animation: svgGrowIn 1s cubic-bezier(.2,.7,.2,1) 1.8s forwards, svgPulseA 4.5s ease-in-out 3.0s infinite; }
+.fx-viz .svg-label-fade{ opacity: 0; transition: opacity .8s ease; }
+.fx-viz.on .svg-label-fade.s1{ transition-delay: .9s; opacity: 1; }
+.fx-viz.on .svg-label-fade.s2{ transition-delay: 1.7s; opacity: 1; }
+.fx-viz.on .svg-label-fade.s3{ transition-delay: 2.5s; opacity: 1; }
+.fx-viz .svg-leader-draw{ transition: stroke-dashoffset 1.1s cubic-bezier(.2,.7,.2,1); }
+.fx-viz.on .svg-leader-draw.s1{ transition-delay: 1.1s; stroke-dashoffset: 0; }
+.fx-viz.on .svg-leader-draw.s2{ transition-delay: 1.9s; stroke-dashoffset: 0; }
+.fx-viz.on .svg-leader-draw.s3{ transition-delay: 2.7s; stroke-dashoffset: 0; }
+.fx-viz .anim-fade{opacity:0; transition: opacity .6s ease}
+.fx-viz.on .anim-fade{opacity:1}
+.fx-viz.on .anim-fade.d1{transition-delay:.2s}
+.fx-viz.on .anim-fade.d2{transition-delay:.35s}
+.fx-viz.on .anim-fade.d3{transition-delay:.5s}
+.fx-viz.on .anim-fade.d4{transition-delay:.65s}
+.fx-viz.on .anim-fade.d5{transition-delay:.8s}
+.fx-viz.on .anim-fade.d6{transition-delay:.95s}
+.fx-viz.on .anim-fade.d7{transition-delay:1.1s}
+.fx-viz.on .anim-fade.d8{transition-delay:1.25s}
+.fx-viz.on .arr{ animation: arrowChase 3.2s ease-in-out infinite; }
+.fx-viz.on .arr-2{ animation-delay:.8s; }
+.fx-viz.on .arr-3{ animation-delay:1.6s; }
+.fx-viz.on .arr-4{ animation-delay:2.4s; }
+
+/* ================= v2.4: metodo em rolagem ================= */
+.formula-head{text-align:center} .formula-head h2,.formula-head .lead{margin-left:auto; margin-right:auto} .formula-head .lead{margin-top:14px}
+.fx{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,5vw,72px); margin-top:clamp(20px,3vw,40px)}
+.fx-stage{position:sticky; top:84px; height:calc(100vh - 112px); max-height:760px; display:flex; flex-direction:column; justify-content:center; gap:22px}
+.fx-rail{display:flex; flex-wrap:wrap; gap:8px}
+.fx-rail button{display:inline-flex; align-items:center; gap:7px; padding:8px 12px; border-radius:999px; cursor:pointer;
+  border:1px solid var(--line); background:transparent; color:var(--dim-grey); font:500 12px/1 var(--font); letter-spacing:-.01em;
+  transition:color .3s, border-color .3s, background .3s}
+.fx-rail button span{font-family:var(--mono); font-size:10px; letter-spacing:.06em}
+.fx-rail button.on{color:var(--white); border-color:rgba(0,225,195,.45); background:rgba(0,225,195,.07)}
+.fx-rail button.on span{color:var(--cyan)}
+.fx-frame{position:relative; flex:1; min-height:0}
+.fx-viz{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden;
+  transform:translateY(14px) scale(.97); transition:opacity .55s ease, transform .65s cubic-bezier(.2,.7,.2,1), visibility 0s .55s}
+.fx-viz.on{opacity:1; visibility:visible; transform:none; transition:opacity .55s ease, transform .65s cubic-bezier(.2,.7,.2,1), visibility 0s}
+.fx-viz svg{display:block; width:100%; max-width:470px; max-height:100%; height:auto; overflow:visible}
+.fx-steps{display:grid}
+.fx-step{min-height:82vh; display:flex; flex-direction:column; justify-content:center; padding:40px 0; opacity:.22; transition:opacity .5s ease}
+.fx-step.on{opacity:1}
+.fx-num{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan); margin-bottom:14px}
+.fx-step h3{font-size:clamp(27px,3vw,40px); font-weight:500; letter-spacing:-.05em; line-height:1.1; max-width:17ch; margin-bottom:16px}
+.fx-p{font-size:clamp(15px,1.3vw,17px); color:var(--cool-grey); line-height:1.75; max-width:48ch}
+.fx-list{list-style:none; display:grid; gap:11px; margin-top:22px; padding:0}
+.fx-list li{display:flex; gap:11px; font-size:14.5px; line-height:1.6; color:var(--off-white); max-width:50ch}
+.fx-list li b{color:var(--white); font-weight:600}
+.fx-list svg{width:15px; height:15px; flex:0 0 15px; margin-top:4px; color:var(--cyan)}
+/* barras de consciencia (pilar 3) */
+.consc{margin-top:24px; display:grid; gap:9px; max-width:470px}
+.consc-row{display:grid; grid-template-columns:170px 1fr 40px; align-items:center; gap:12px; font-size:12.5px; color:var(--cool-grey)}
+.consc-row i{display:block; height:10px; border-radius:99px; background:rgba(255,255,255,.06); position:relative; overflow:hidden}
+.consc-row i::after{content:''; position:absolute; inset:0; width:0; border-radius:inherit; background:var(--grad-brand); transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.fx-step.on .consc-row i::after{width:var(--w)}
+.consc-row:nth-child(2) i::after{transition-delay:.12s} .consc-row:nth-child(3) i::after{transition-delay:.24s} .consc-row:nth-child(4) i::after{transition-delay:.36s}
+.consc-hot i::after{background:rgba(255,112,144,.75)} .consc-hot b{color:var(--danger)}
+.consc-row b{font-family:var(--mono); font-size:12px; color:var(--white); text-align:right}
+.consc-note{margin-top:8px; font-size:13px; color:var(--cool-grey); max-width:52ch} .consc-note strong{color:var(--cyan)}
+/* simulacao (pilar 4) */
+.sim{margin-top:24px; padding:20px 22px; border:1px solid rgba(0,225,195,.2); border-radius:16px; background:rgba(0,225,195,.04); max-width:470px}
+.sim-k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--cool-grey); margin-bottom:14px}
+.sim-grid{display:grid; grid-template-columns:1fr auto auto; gap:9px 22px; align-items:center; font-size:13.5px; color:var(--cool-grey)}
+.sim-grid em{font-style:normal; font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim-grey); text-align:right}
+.sim-grid b{font-variant-numeric:tabular-nums; text-align:right; color:var(--off-white); font-weight:600}
+.sim-grid b.hl{color:var(--cyan)}
+.sim-note{margin-top:14px; font-size:13px; color:var(--cool-grey)} .sim-note strong{color:var(--white)}
+/* acompanhamento */
+.acomp{margin-top:clamp(40px,6vw,80px); padding:clamp(28px,4vw,48px); border:1px solid var(--line); border-radius:24px;
+  background:linear-gradient(150deg, rgba(74,108,247,.08), rgba(167,19,185,.04) 60%), var(--surface-1)}
+.acomp h3{font-size:clamp(24px,2.6vw,34px); font-weight:500; letter-spacing:-.045em; margin:12px 0 26px; max-width:22ch}
+.ac-grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px}
+.ac-card{padding:20px; border:1px solid var(--line); border-radius:16px; background:rgba(5,9,34,.5)}
+.ac-card b{display:block; font-size:15px; font-weight:600; letter-spacing:-.02em; color:var(--white); margin-bottom:8px}
+.ac-card p{font-size:13.5px; line-height:1.6; color:var(--cool-grey)}
+.ac-team{margin-top:20px; font-size:13.5px; color:var(--cool-grey)}
+@media(max-width:980px){ .ac-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media(max-width:860px){
+  .fx{grid-template-columns:minmax(0,1fr); gap:0}
+  .fx-stage{top:56px; height:auto; max-height:none; z-index:3; gap:10px; padding:12px var(--pad-x) 14px; margin:0 calc(-1 * var(--pad-x));
+    background:linear-gradient(180deg, var(--black-hole) 82%, rgba(5,9,34,0))}
+  .fx-rail{flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none} .fx-rail::-webkit-scrollbar{display:none}
+  .fx-rail button{flex:0 0 auto; padding:7px 10px; font-size:11px}
+  .fx-frame{flex:none; height:34vh}
+  .fx-viz svg{max-width:300px}
+  .fx-step{min-height:auto; padding:30px 0 70px; opacity:.35}
+  .consc-row{grid-template-columns:130px 1fr 34px; font-size:11.5px}
+}
+@media(max-width:560px){ .ac-grid{grid-template-columns:1fr} }
+.fx>*,.fx-stage,.fx-frame,.fx-steps{min-width:0}
+.fx-rail{max-width:100%}
+.nav-links a.nav-cta,.nav-links a.nav-cta:hover{color:#03121A}
 </style>
 </head>
 <body>
@@ -777,7 +890,7 @@ section{padding:clamp(56px,7vw,104px) 0}
   <div class="nav-in">
     <a class="brand" href="#top">
       <img src="assets/logos/b2donto-symbol-white.svg" alt="" width="26" height="26">
-      <span>B2Donto</span>
+      <span>B2donto</span>
     </a>
     <div class="nav-links">
       <a href="#metodo">Como funciona</a>
@@ -793,8 +906,8 @@ section{padding:clamp(56px,7vw,104px) 0}
 <header class="hero" id="top">
   <div class="wrap">
     <p class="pre-h r">Para dentistas que querem mais e estão prontos para fazer acontecer</p>
-    <h1 class="r d1"><span class="h1-l">Pacientes de alto valor</span> <span class="h1-l grad-text">toda semana na sua cadeira</span></h1>
-    <p class="lead r d2">A B2Donto instala na sua clínica a operação que transforma anúncio em paciente sentado na cadeira. Captação, atendimento com IA e fechamento rodando juntos, com a nossa equipe dentro da sua operação. Não é mais uma agência que entrega o clique e larga o resto na mão da recepção.</p>
+    <h1 class="r d1"><span class="h1-l">Pacientes de <span class="grad-text">alto valor</span></span> <span class="h1-l">toda semana na sua cadeira</span></h1>
+    <p class="lead r d2">A B2donto instala na sua clínica a operação que transforma anúncio em paciente sentado na cadeira. Captação, atendimento com IA e fechamento rodando juntos, com a nossa equipe dentro da sua operação. Não é mais uma agência que entrega o clique e larga o resto na mão da recepção.</p>
     <div class="cta-row r d3">
       <a href="#comecar" class="btn" data-go-form data-pos="hero">
         Quero mais informações
@@ -833,7 +946,7 @@ section{padding:clamp(56px,7vw,104px) 0}
     <div class="island start r">
       <div class="start-info">
         <p class="eyebrow"><span>Aplicação gratuita</span></p>
-        <h2>Falta pouco pra você atrair <strong>os pacientes certos.</strong></h2>
+        <h2>Falta pouco pra você atrair os <strong>pacientes certos</strong>.</h2>
         <p>Aplique agora para descobrir se a sua clínica está apta para receber nossas soluções.</p>
         <ol class="steps">
           <li><span class="steps-n">01</span><div><b>Você preenche a aplicação</b><p>Seis campos rápidos: contato, Instagram, carro-chefe, faturamento e quanto investe em anúncio.</p></div></li>
@@ -852,7 +965,7 @@ section{padding:clamp(56px,7vw,104px) 0}
         <div class="ff ff-sel"><select id="fAds" required><option value="" disabled selected>Quanto investe em anúncios por mês?</option><option>Ainda não invisto</option><option>Até R$ 1.500</option><option>De R$ 1.500 a R$ 3.000</option><option>De R$ 3.000 a R$ 6.000</option><option>Acima de R$ 6.000</option></select></div>
         <p class="ap-err" id="apErr" role="alert"></p>
         <button class="btn" type="submit" data-pos="comecar">Quero mais informações <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <p class="start-note">Ninguém liga sem você pedir. Seus dados ficam só com a B2Donto.</p>
+        <p class="start-note">Ninguém liga sem você pedir. Seus dados ficam só com a B2donto.</p>
       </form>
     </div>
   </div>
@@ -863,7 +976,7 @@ section{padding:clamp(56px,7vw,104px) 0}
   <div class="wrap">
     <div class="sec-head dep-head">
       <p class="eyebrow r"><span>Depoimentos</span></p>
-      <h2 class="r d1">Quem já acelerou <span class="grad-text">conta como foi.</span></h2>
+      <h2 class="r d1">Quem já <span class="grad-text">acelerou</span> conta como foi.</h2>
     </div>
   </div>
   <div class="vcar r d2">
@@ -917,28 +1030,50 @@ section{padding:clamp(56px,7vw,104px) 0}
 
 
 <!-- ============ METODO ============ -->
-<section id="metodo">
+<section id="metodo" class="formula">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow r"><span>Como funciona</span></p>
-      <h2 class="r d1">Cinco engrenagens, girando juntas.</h2>
-      <p class="lead r d2">A maioria entrega um pedaço: só tráfego, só post, só um robô. Isolada, cada peça falha. Vitrine sem tráfego ninguém vê, tráfego sem vitrine só traz curioso, e agendamento sem os dois não tem o que agendar. A gente instala as cinco e opera todas.</p>
+    <div class="sec-head formula-head">
+      <p class="eyebrow r"><span>Metodologia</span></p>
+      <h2 class="r d1">A Fórmula da <span class="grad-text">Prosperidade Clínica</span>.</h2>
+      <p class="lead r d2">180 dias para construir uma clínica próspera, previsível e que te devolve o tempo pra viver. São cinco pilares, instalados e operados pela nossa equipe.</p>
     </div>
-
-    <div class="etapas">
-      <article class="pilar etapa r" style="--acc-c:#6FE8D2; --acc-t:111,232,210">
-        <div class="etapa-txt">
-
-        <p class="pilar-num"><span>Etapa 01</span><i></i><span>Presença</span></p>
-        <h3>Fazer o paciente confiar antes de falar com você</h3>
-        <p>O paciente pesquisa seu nome antes de mandar mensagem. Se o que ele acha não sustenta o seu preço, ele pede desconto ou desiste calado. A gente arruma a vitrine: perfil, provas, Google e a narrativa do seu trabalho.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Reposicionar perfil e bio pra vender o procedimento certo</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Organizar a prova social que faz o preço parecer justo</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ocupar o Google da sua região, onde a decisão começa</li>
-        </ul>
-        </div>
-        <div class="etapa-viz"><svg aria-hidden="true" focusable="false" viewBox="0 0 380 410" xmlns="http://www.w3.org/2000/svg">
+    <div class="fx">
+      <div class="fx-stage" aria-hidden="true">
+        <div class="fx-rail"><button type="button" data-fx="0"><span>01</span>Briefing Raio-X 360°</button><button type="button" data-fx="1"><span>02</span>Vitrine 3E</button><button type="button" data-fx="2"><span>03</span>Bola de neve de indicações</button><button type="button" data-fx="3"><span>04</span>Agendamento Autoprogressivo</button><button type="button" data-fx="4"><span>05</span>Farming da Base</button></div>
+        <div class="fx-frame">
+          <div class="fx-viz" data-fx="0"><svg aria-hidden="true" focusable="false" viewBox="-36 13 429 374" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raio-X 360: Instagram, Google, site, atendimento, concorrência e mídia">
+              <circle cx="200" cy="200" r="65" fill="none" stroke="rgba(0,225,195,.18)" stroke-width="1"/>
+              <circle cx="200" cy="200" r="130" fill="none" stroke="rgba(0,225,195,.28)" stroke-width="1" stroke-dasharray="3 6"/>
+              <circle cx="200" cy="200" r="175" fill="none" stroke="rgba(216,123,241,.12)" stroke-width="1"/>
+              <line x1="200" y1="200" x2="200" y2="70" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:0" cx="200" cy="70" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+              <circle cx="200" cy="70" r="7" fill="#00E1C3"/>
+              <text x="200" y="52" text-anchor="middle" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Instagram</text>
+              <line x1="200" y1="200" x2="312.6" y2="135" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:1" cx="312.6" cy="135" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
+              <circle cx="312.6" cy="135" r="7" fill="#D87BF1"/>
+              <text x="328.6" y="140" text-anchor="start" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Google</text>
+              <line x1="200" y1="200" x2="312.6" y2="265" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:2" cx="312.6" cy="265" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+              <circle cx="312.6" cy="265" r="7" fill="#00E1C3"/>
+              <text x="328.6" y="270" text-anchor="start" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Site</text>
+              <line x1="200" y1="200" x2="200" y2="330" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:3" cx="200" cy="330" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
+              <circle cx="200" cy="330" r="7" fill="#D87BF1"/>
+              <text x="200" y="360" text-anchor="middle" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Atendimento</text>
+              <line x1="200" y1="200" x2="87.4" y2="265" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:4" cx="87.4" cy="265" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+              <circle cx="87.4" cy="265" r="7" fill="#00E1C3"/>
+              <text x="71.4" y="270" text-anchor="end" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Concorrência</text>
+              <line x1="200" y1="200" x2="87.4" y2="135" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:5" cx="87.4" cy="135" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
+              <circle cx="87.4" cy="135" r="7" fill="#D87BF1"/>
+              <text x="71.4" y="140" text-anchor="end" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Mídia</text>
+              <circle cx="200" cy="200" r="48" fill="#0A0E2E" stroke="#00E1C3" stroke-width="1.5"/>
+              <text x="200" y="204" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800" font-family="Sora, sans-serif">360°</text>
+              <text x="200" y="224" text-anchor="middle" fill="#00E1C3" font-size="11" font-weight="600" letter-spacing="1.5" font-family="Sora, sans-serif">RAIO-X</text>
+            </svg></div>
+          <div class="fx-viz" data-fx="1"><svg aria-hidden="true" focusable="false" viewBox="0 0 380 410" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <filter id="pV1g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
                 <linearGradient id="pV1grad" x1="0" y1="0" x2="1" y2="1">
@@ -957,7 +1092,7 @@ section{padding:clamp(56px,7vw,104px) 0}
               </defs>
 
               <!-- 3E GIGANTE NO FUNDO (rente ao quadrado, bem transparente) -->
-              
+              <text x="172" y="240" text-anchor="middle" dominant-baseline="central" fill="url(#pV1gradSoft)" font-family="Sora" font-weight="800" font-size="440" letter-spacing="-.1em" class="anim-fade d1">3E</text>
 
               <!-- Linhas radiais sutis (centro → labels) -->
               <g stroke="rgba(255,255,255,.10)" stroke-width=".7" fill="none" class="anim-stroke">
@@ -1010,20 +1145,7 @@ section{padding:clamp(56px,7vw,104px) 0}
                 <line x1="133" y1="139" x2="174" y2="175" stroke="rgba(242,247,255,.55)" stroke-width="1.4" stroke-linecap="round" marker-end="url(#arrowNucleo)"/>
               </g>
             </svg></div>
-      </article>
-      <article class="pilar etapa r" style="--acc-c:#7FC5F5; --acc-t:127,197,245">
-        <div class="etapa-txt">
-
-        <p class="pilar-num"><span>Etapa 02</span><i></i><span>Captação</span></p>
-        <h3>Atrair quem já quer o procedimento</h3>
-        <p>Indicação converte porque chega com confiança pronta. A gente monta o anúncio pra trazer gente com essa mesma temperatura, todos os dias, sem depender do boca a boca acontecer.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Criar e rodar as campanhas com a nossa equipe de criação</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Filtrar curioso antes de ele chegar no seu WhatsApp</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gerar desejo em quem ainda não estava procurando</li>
-        </ul>
-        </div>
-        <div class="etapa-viz"><svg aria-hidden="true" focusable="false" viewBox="0 -50 620 590" xmlns="http://www.w3.org/2000/svg">
+          <div class="fx-viz" data-fx="2"><svg aria-hidden="true" focusable="false" viewBox="0 -50 620 590" xmlns="http://www.w3.org/2000/svg">
 
               <!-- CÍRCULO MAIOR - Aumento da Base (purple, aparece POR ÚLTIMO) -->
               <g class="svg-seq-c">
@@ -1044,14 +1166,14 @@ section{padding:clamp(56px,7vw,104px) 0}
               <g class="svg-label-fade s1">
                 <text x="320" y="284" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="32" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 18px rgba(0,225,195,.6))">Núcleo de</text>
                 <text x="320" y="320" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="32" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 18px rgba(0,225,195,.6))">Conversão</text>
-                
+                <text x="320" y="344" text-anchor="middle" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="3">PÚBLICO QUENTE</text>
               </g>
 
               <!-- ========== LABEL 2 - Relacionamento (TOPO-ESQUERDA) ========== -->
               <g class="svg-label-fade s2">
                 <text x="10" y="68" fill="#4A6CF7" font-family="Sora" font-weight="800" font-size="36" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(74,108,247,.4)) drop-shadow(0 0 22px rgba(74,108,247,.7))">Confiança</text>
                 <line x1="10" y1="82" x2="172" y2="82" stroke="#4A6CF7" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                
+                <text x="10" y="106" fill="rgba(74,108,247,.85)" font-family="JetBrains Mono" font-weight="700" font-size="14" letter-spacing="2.5">PÚBLICO MORNO</text>
               </g>
               <!-- Leader Relacionamento → borda esquerda do MÉDIO -->
               <g>
@@ -1066,7 +1188,7 @@ section{padding:clamp(56px,7vw,104px) 0}
               <g class="svg-label-fade s3">
                 <text x="610" y="-12" text-anchor="end" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="36" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Despertar</text>
                 <line x1="448" y1="2" x2="610" y2="2" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                
+                <text x="610" y="26" text-anchor="end" fill="rgba(216,123,241,.85)" font-family="JetBrains Mono" font-weight="700" font-size="14" letter-spacing="2.5">PÚBLICO FRIO</text>
               </g>
               <!-- Leader Aumento da Base → borda direita do MAIOR (path bem mais comprido) -->
               <g>
@@ -1077,20 +1199,7 @@ section{padding:clamp(56px,7vw,104px) 0}
                 </g>
               </g>
             </svg></div>
-      </article>
-      <article class="pilar etapa r" style="--acc-c:#92A8FF; --acc-t:146,168,255">
-        <div class="etapa-txt">
-
-        <p class="pilar-num"><span>Etapa 03</span><i></i><span>Pré-atendimento</span></p>
-        <h3>Responder em menos de 1 minuto, a qualquer hora</h3>
-        <p>Aqui mora o vazamento mais caro da clínica. O lead chega às 22h de domingo, ninguém responde, e na segunda ele já marcou com outro. A Maia, a nossa IA de pré-atendimento, responde em menos de um minuto, qualifica, contorna as objeções de medo e de preço, e entrega o horário pré-agendado pra sua equipe só confirmar.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Atender todo contato em menos de 1 minuto, 24 horas por dia, 7 dias por semana</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Aplicar 5 toques de follow-up em quem parou de responder</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Implementar lembrete e confirmação de consulta pra reduzir o não comparecimento</li>
-        </ul>
-        </div>
-        <div class="etapa-viz"><svg aria-hidden="true" focusable="false" viewBox="-112 -43 785 691" xmlns="http://www.w3.org/2000/svg">
+          <div class="fx-viz" data-fx="3"><svg aria-hidden="true" focusable="false" viewBox="-112 -43 785 691" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="maiaGrad" gradientUnits="userSpaceOnUse" x1="622" y1="312" x2="664" y2="312"><stop offset="0" stop-color="#00E1C3"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
                 <filter id="pV3glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="10"/></filter>
@@ -1121,8 +1230,8 @@ section{padding:clamp(56px,7vw,104px) 0}
                 <circle cx="300" cy="300" r="116" fill="rgba(8,14,46,.98)"/>
                 <circle cx="300" cy="300" r="120" fill="none" stroke="#00E1C3" stroke-width="3.5" filter="url(#pV3ringGlow)"/>
                 <circle cx="300" cy="300" r="120" fill="none" stroke="#00E1C3" stroke-width="1.6"/>
-                <text x="300" y="292" text-anchor="middle" fill="#8fa6cc" font-family="Sora" font-weight="500" font-size="14" letter-spacing="3">PRÉ-ATENDIMENTO</text>
-                <text x="300" y="320" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="18" letter-spacing="-.01em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.3)) drop-shadow(0 0 16px rgba(0,225,195,.6))">24 HORAS</text>
+                <text x="300" y="292" text-anchor="middle" fill="#8fa6cc" font-family="Sora" font-weight="500" font-size="14" letter-spacing="3">AGENDAMENTO</text>
+                <text x="300" y="320" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="18" letter-spacing="-.01em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.3)) drop-shadow(0 0 16px rgba(0,225,195,.6))">AUTOPROGRESSIVO</text>
               </g>
 
               <!-- Badges navy com anel colorido (pop + pulse contínuo) -->
@@ -1170,73 +1279,7 @@ section{padding:clamp(56px,7vw,104px) 0}
                 <circle cx="60" cy="300" r="4.5" fill="#B23BC9" style="filter:drop-shadow(0 0 7px rgba(167,19,185,.95))"/>
               </g>
             </svg></div>
-      </article>
-      <article class="pilar etapa r" style="--acc-c:#C0A3FF; --acc-t:192,163,255">
-        <div class="etapa-txt">
-
-        <p class="pilar-num"><span>Etapa 04</span><i></i><span>Conversão</span></p>
-        <h3>Conduzir até o tratamento fechado na cadeira</h3>
-        <p>Paciente na cadeira não é venda fechada. A gente entra no seu processo comercial: como se apresenta o orçamento, como se responde o "vou pensar" e como se retoma quem compareceu e não fechou.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Implementar roteiro de apresentação de orçamento</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Implementar cadência pra retomar quem não fechou na hora</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Treinar a sua equipe pra conduzir, não só para informar preço</li>
-        </ul>
-        </div>
-        <div class="etapa-viz"><svg aria-hidden="true" focusable="false" viewBox="0 0 460 440" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="cvLine" x1="90" y1="362" x2="400" y2="90" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#A713B9"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#00E1C3"/>
-    </linearGradient>
-    <radialGradient id="cvGlow"><stop offset="0" stop-color="#00E1C3" stop-opacity=".55"/><stop offset="1" stop-color="#00E1C3" stop-opacity="0"/></radialGradient>
-  </defs>
-  <g class="anim-fade d1" stroke="rgba(255,255,255,.05)">
-    <path d="M40 400H440M40 300H440M40 200H440M40 100H440"/>
-  </g>
-  <path class="anim-stroke" d="M90 362 C140 352 160 320 200 290 S255 205 290 175 S360 100 400 90" stroke="url(#cvLine)" stroke-width="2.5" stroke-linecap="round" style="filter:drop-shadow(0 0 8px rgba(74,108,247,.45))"/>
-  <g class="anim-fade d2">
-    <circle class="svg-pulse-a" cx="90" cy="362" r="20" stroke="rgba(216,123,241,.35)"/>
-    <circle cx="90" cy="362" r="13" fill="#0A0E2E" stroke="#D87BF1" stroke-width="1.5"/>
-    <text x="90" y="366.5" text-anchor="middle" fill="#F2E6FA" font-family="JetBrains Mono" font-weight="700" font-size="11">1</text>
-    <text x="114" y="390" fill="#C8D2F0" font-family="Sora" font-weight="600" font-size="13.5">Orçamento</text>
-    <text x="114" y="407" fill="#C8D2F0" font-family="Sora" font-weight="600" font-size="13.5">apresentado</text>
-  </g>
-  <g class="anim-fade d3">
-    <circle class="svg-pulse-b" cx="200" cy="290" r="20" stroke="rgba(74,108,247,.4)"/>
-    <circle cx="200" cy="290" r="13" fill="#0A0E2E" stroke="#4A6CF7" stroke-width="1.5"/>
-    <text x="200" y="294.5" text-anchor="middle" fill="#E6ECFF" font-family="JetBrains Mono" font-weight="700" font-size="11">2</text>
-    <text x="224" y="318" fill="#C8D2F0" font-family="Sora" font-weight="600" font-size="13.5">Objeção</text>
-    <text x="224" y="335" fill="#C8D2F0" font-family="Sora" font-weight="600" font-size="13.5">contornada</text>
-  </g>
-  <g class="anim-fade d4">
-    <circle class="svg-pulse-c" cx="290" cy="175" r="20" stroke="rgba(61,219,192,.4)"/>
-    <circle cx="290" cy="175" r="13" fill="#0A0E2E" stroke="#3DDBC0" stroke-width="1.5"/>
-    <text x="290" y="179.5" text-anchor="middle" fill="#E3FBF6" font-family="JetBrains Mono" font-weight="700" font-size="11">3</text>
-    <text x="314" y="203" fill="#C8D2F0" font-family="Sora" font-weight="600" font-size="13.5">Retomada no</text>
-    <text x="314" y="220" fill="#C8D2F0" font-family="Sora" font-weight="600" font-size="13.5">tempo certo</text>
-  </g>
-  <g class="anim-fade d5">
-    <circle cx="400" cy="90" r="58" fill="url(#cvGlow)" class="svg-breathe"/>
-    <circle cx="400" cy="90" r="27" fill="#0A0E2E" stroke="#00E1C3" stroke-width="2" style="filter:drop-shadow(0 0 14px rgba(0,225,195,.55))"/>
-    <path d="M389 90.5l7.5 7.5 15-16" stroke="#00E1C3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="400" y="146" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="700" font-size="15">Tratamento</text>
-    <text x="400" y="164" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="700" font-size="15">fechado</text>
-  </g>
-</svg></div>
-      </article>
-      <article class="pilar etapa r" style="--acc-c:#E4A0F0; --acc-t:228,160,240">
-        <div class="etapa-txt">
-
-        <p class="pilar-num"><span>Etapa 05</span><i></i><span>Base</span></p>
-        <h3>Fazer a base antiga voltar e indicar</h3>
-        <p>Você já tem centenas de pacientes que confiam em você e estão parados no seu WhatsApp. É o dinheiro mais barato da clínica, e quase ninguém vai buscar. A gente vai.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Reativar a base antiga com oferta que faz sentido pra ela</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Aplicar campanha de indicação com quem já é paciente</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Transformar caso bem resolvido em prova pra atrair o próximo</li>
-        </ul>
-        </div>
-        <div class="etapa-viz"><svg aria-hidden="true" focusable="false" viewBox="100 -18 440 500" xmlns="http://www.w3.org/2000/svg">
+          <div class="fx-viz" data-fx="4"><svg aria-hidden="true" focusable="false" viewBox="100 -18 440 500" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="fzBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#11204f"/><stop offset="1" stop-color="#070c28"/></linearGradient>
                 <linearGradient id="fzRing" gradientUnits="userSpaceOnUse" x1="266" y1="135" x2="374" y2="320"><stop offset="0" stop-color="#00E1C3"/><stop offset="1" stop-color="#A713B9"/></linearGradient>
@@ -1288,9 +1331,63 @@ section{padding:clamp(56px,7vw,104px) 0}
                   <polygon points="415,101 412,95 418,95" fill="#D87BF1" opacity=".75"/>
                 </g>
               </g>
-              <g class="anim-fade d6"><text x="320" y="405" text-anchor="middle" fill="#C8D2F0" font-family="Sora" font-weight="800" font-size="19" letter-spacing=".5" style="filter:drop-shadow(0 0 10px rgba(0,225,195,.5))">BASE <tspan fill="#00E1C3">QUE VOLTA</tspan></text></g>
+              <g class="anim-fade d6"><text x="320" y="405" text-anchor="middle" fill="#C8D2F0" font-family="Sora" font-weight="800" font-size="19" letter-spacing=".5" style="filter:drop-shadow(0 0 10px rgba(0,225,195,.5))">FARMING <tspan fill="#00E1C3">INFINITO</tspan></text></g>
             </svg></div>
-      </article>
+        </div>
+      </div>
+      <div class="fx-steps">
+        <article class="fx-step" data-fx="0" id="pilar-1">
+          <p class="fx-num">Pilar 01 · Briefing Raio-X 360°</p>
+          <h3>Antes do primeiro anúncio, <span class="grad-text">o diagnóstico</span>.</h3>
+          <p class="fx-p">Assim como um implante começa no planejamento, a sua clínica começa no diagnóstico. A gente analisa o negócio inteiro e entrega o plano de ação num site só da sua clínica.</p>
+          <ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Instagram, Google, site, atendimento, concorrência e mídia, um a um</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Plano de ação com o que fazer primeiro e por quê</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Entregue num site só seu, pra consultar quando quiser</span></li></ul>
+        </article>
+        <article class="fx-step" data-fx="1" id="pilar-2">
+          <p class="fx-num">Pilar 02 · Vitrine 3E</p>
+          <h3>Seu Instagram vira a sua <span class="grad-text">nova recepção</span>.</h3>
+          <p class="fx-p">A vitrine digital que transforma quem chega ao seu perfil em paciente. Ela une três coisas pra te posicionar como referência, e não como mais uma.</p>
+          <ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Estratégia:</b> entender o mercado e a marca e traçar o caminho</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Essência:</b> levar a personalidade e os valores reais da marca pro conteúdo</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Estética:</b> elevar o visual da comunicação, transmitindo valor</span></li></ul>
+        </article>
+        <article class="fx-step" data-fx="2" id="pilar-3">
+          <p class="fx-num">Pilar 03 · Bola de neve de indicações</p>
+          <h3>Anúncio que gera a confiança de uma <span class="grad-text">indicação</span>.</h3>
+          <p class="fx-p">Campanhas estruturadas pra elevar o nível de consciência e ganhar a confiança do público interessado. Quando o paciente chega, chega com a mesma segurança de quem foi indicado.</p>
+          <div class="consc" aria-label="Níveis de consciência do público">
+            <div class="consc-row"><span>Inconsciente do problema</span><i style="--w:100%"></i><b>50%</b></div>
+            <div class="consc-row"><span>Consciente do problema</span><i style="--w:60%"></i><b>30%</b></div>
+            <div class="consc-row"><span>Consciente da solução</span><i style="--w:30%"></i><b>15%</b></div>
+            <div class="consc-row consc-hot"><span>Pronto para decidir</span><i style="--w:10%"></i><b>5%</b></div>
+            <p class="consc-note">Quase todo mundo disputa os 5% prontos. A Bola de neve trabalha os outros <strong>95%</strong> até eles chegarem confiando.</p>
+          </div><ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Roteiros com a narrativa D.E.P.O.S.I.T.O., que ativa desejo</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>10 mídias por mês, entre vídeos e imagens</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Do público frio ao núcleo de conversão, sem queimar verba com curioso</span></li></ul>
+        </article>
+        <article class="fx-step" data-fx="3" id="pilar-4">
+          <p class="fx-num">Pilar 04 · Agendamento Autoprogressivo</p>
+          <h3>Cada lead respondido na hora, <span class="grad-text">24 horas</span>.</h3>
+          <p class="fx-p">A implementação comercial focada em conversão. A Maia, a nossa IA de pré-atendimento, roda no WhatsApp da própria clínica: responde na hora, qualifica, contorna objeção e entrega o paciente pré-agendado pra sua equipe só confirmar.</p>
+          <ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Resposta imediata, 24 horas, 7 dias por semana</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>5 resgates inteligentes de quem parou de responder</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Objeções de preço e de medo contornadas sempre do jeito certo</span></li></ul><div class="sim">
+            <p class="sim-k">Simulação · mesmo investimento de R$ 3 mil em anúncio</p>
+            <div class="sim-grid">
+              <span></span><em>Sem a Maia</em><em>Com a Maia</em>
+              <span>Taxa de agendamento</span><b>20%</b><b class="hl">30%</b>
+              <span>Agendamentos no mês</span><b>40</b><b class="hl">60</b>
+              <span>Tratamentos fechados</span><b>~8</b><b class="hl">~12</b>
+            </div>
+            <p class="sim-note">Com ticket médio de R$ 10 mil, são cerca de <strong>R$ 40 mil a mais</strong> no mês, com a mesma verba.</p>
+          </div>
+        </article>
+        <article class="fx-step" data-fx="4" id="pilar-5">
+          <p class="fx-num">Pilar 05 · Farming da Base</p>
+          <h3>Paciente que já passou é <span class="grad-text">nova receita</span>.</h3>
+          <p class="fx-p">Um sistema de reativação da base e de geração de indicação de quem já fechou com você. É o dinheiro mais barato da clínica, e quase ninguém vai buscar.</p>
+          <ul class="fx-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Cadência de recuperação:</b> quem sumiu recebe contato programado, no tempo certo</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Gatilho de indicação:</b> quem fechou entra num fluxo que pede indicação na hora certa</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>CRM inteligente:</b> cada lead rastreado, do primeiro oi ao orçamento fechado</span></li></ul>
+        </article>
+      </div>
+    </div>
+    <div class="acomp r">
+      <p class="eyebrow"><span>Aceleração comercial</span></p>
+      <h3>E por cima dos 5 pilares, <span class="grad-text">o acompanhamento</span>.</h3>
+      <div class="ac-grid"><div class="ac-card"><b>12 imersões estratégicas</b><p>Pra afiar a performance e o marketing ao longo do projeto.</p></div><div class="ac-card"><b>12 treinamentos comerciais</b><p>Pra alinhar e refinar o processo de vendas da sua equipe.</p></div><div class="ac-card"><b>Calls de análise documentadas</b><p>Cada etapa do funil analisada ponto a ponto, com o ajuste fino registrado.</p></div><div class="ac-card"><b>Grupo exclusivo no WhatsApp</b><p>Acesso direto ao time, com suporte diário e resposta rápida.</p></div></div>
+      <p class="ac-team">Um time em três níveis: estratégico, operação e performance, criativo e execução.</p>
     </div>
   </div>
 </section>
@@ -1517,7 +1614,7 @@ section{padding:clamp(56px,7vw,104px) 0}
     <div class="audit r">
       <div class="audit-row">
         <div><span class="k">Nos 5 cases com a conta fechada</span><span class="v">R$ 198.639 investidos em anúncio</span></div>
-        <div><span class="k">Viraram</span><span class="v grad-text">R$ 4.390.472 em tratamento vendido</span></div>
+        <div><span class="k">Viraram</span><span class="v"><span class="grad-text">R$ 4.390.472</span> em tratamento vendido</span></div>
         <div><span class="k">Retorno médio desses 5</span><span class="v">22,1x</span></div>
       </div>
       <p class="audit-note">Esses são os cases que a gente escolhe mostrar, não a carteira inteira, e resultado passado não garante resultado futuro. Cada número é de um período específico do projeto daquela clínica, medido no gerenciador de anúncios e no fechamento informado por ela. Onde a gente não tem o valor exato do investimento, preferimos mostrar só a progressão de faturamento a inventar a conta.</p>
@@ -1556,7 +1653,7 @@ section{padding:clamp(56px,7vw,104px) 0}
       <div class="vs-col vs-col--new">
         <h3><span class="ic" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        </span>B2Donto</h3>
+        </span>B2donto</h3>
         <ul>
           <li>Atrai o lead certo, que quer o procedimento</li>
           <li>Primeiro contato com a Maia, a nossa IA, em menos de 1 minuto</li>
@@ -1567,7 +1664,7 @@ section{padding:clamp(56px,7vw,104px) 0}
       </div>
     </div>
 
-    <p class="kicker-line r d5">Você cuida da cadeira. <span class="grad-text">A gente cuida de encher a agenda.</span></p>
+    <p class="kicker-line r d5">Você cuida da cadeira. A gente cuida de <span class="grad-text">encher a agenda</span>.</p>
   </div>
 </section>
 
@@ -1613,7 +1710,7 @@ section{padding:clamp(56px,7vw,104px) 0}
           <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
           <span class="mock-url">portal.b2donto.com</span>
         </div>
-        <img id="portalShot" src="assets/portal/funil.jpg" alt="Painel do portal da B2Donto" loading="lazy" decoding="async">
+        <img id="portalShot" src="assets/portal/funil.jpg" alt="Painel do portal da B2donto" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -1660,7 +1757,7 @@ section{padding:clamp(56px,7vw,104px) 0}
     <div class="sec-head">
       <p class="eyebrow r"><span>Quem somos</span></p>
       <h2 class="r d1">Gente, não robô de atendimento ao cliente.</h2>
-      <p class="lead r d2">A B2Donto é uma aceleradora comercial focada só em clínicas de odontologia. Só isso, desde o começo. Cada cliente tem um time com nome e rosto do lado dele.</p>
+      <p class="lead r d2">A B2donto é uma aceleradora comercial focada só em clínicas de odontologia. Só isso, desde o começo. Cada cliente tem um time com nome e rosto do lado dele.</p>
     </div>
 
     <div class="founder r d3">
@@ -1668,7 +1765,7 @@ section{padding:clamp(56px,7vw,104px) 0}
         <p class="micro" style="color:var(--cyan); margin-bottom:14px">Fundador e CEO</p>
         <h3>Higor Henrique</h3>
         <p>Passei os últimos anos dentro do comercial de clínicas odontológicas, vendo o mesmo padrão se repetir: dentista tecnicamente excelente, com uma clínica que trava na captação e no processo de venda, trocando de agência a cada seis meses e culpando o próprio esforço.</p>
-        <p>A B2Donto nasceu pra resolver isso de um jeito que agência não resolve, porque agência não entra no comercial. A gente entra.</p>
+        <p>A B2donto nasceu pra resolver isso de um jeito que agência não resolve, porque agência não entra no comercial. A gente entra.</p>
         <p class="founder-quote">A parte difícil você já fez: aprendeu a fazer um trabalho bom. O resto é processo, e processo a gente instala.</p>
       </div>
       <div class="founder-side">
@@ -1709,7 +1806,7 @@ section{padding:clamp(56px,7vw,104px) 0}
   <div class="wrap">
     <div class="pact r">
       <p class="eyebrow"><span>Sem amarra</span></p>
-      <h2>A gente vive de resultado,<br><strong>não de prender cliente em contrato.</strong></h2>
+      <h2>A gente vive de resultado,<br>não de <strong>prender cliente</strong> em contrato.</h2>
       <p>Você já foi amarrado antes, e é justo desconfiar. Então o combinado é assim:</p>
       <ul class="ilist">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Sem multa de saída.</strong> Depois do terceiro mês, é só aviso prévio. Se não estiver entregando, cabe a nós resolver, não a você pagar pra sair.</span></li>
@@ -1768,38 +1865,6 @@ section{padding:clamp(56px,7vw,104px) 0}
 <!-- ============ CTA FINAL ============ -->
 <section class="final" id="raiox">
   <div class="wrap">
-    <div class="final-radar r"><svg aria-hidden="true" focusable="false" viewBox="-36 13 429 374" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raio-X 360: Instagram, Google, site, atendimento, concorrência e mídia">
-              <circle cx="200" cy="200" r="65" fill="none" stroke="rgba(0,225,195,.18)" stroke-width="1"/>
-              <circle cx="200" cy="200" r="130" fill="none" stroke="rgba(0,225,195,.28)" stroke-width="1" stroke-dasharray="3 6"/>
-              <circle cx="200" cy="200" r="175" fill="none" stroke="rgba(216,123,241,.12)" stroke-width="1"/>
-              <line x1="200" y1="200" x2="200" y2="70" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:0" cx="200" cy="70" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-              <circle cx="200" cy="70" r="7" fill="#00E1C3"/>
-              <text x="200" y="52" text-anchor="middle" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Instagram</text>
-              <line x1="200" y1="200" x2="312.6" y2="135" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:1" cx="312.6" cy="135" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
-              <circle cx="312.6" cy="135" r="7" fill="#D87BF1"/>
-              <text x="328.6" y="140" text-anchor="start" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Google</text>
-              <line x1="200" y1="200" x2="312.6" y2="265" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:2" cx="312.6" cy="265" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-              <circle cx="312.6" cy="265" r="7" fill="#00E1C3"/>
-              <text x="328.6" y="270" text-anchor="start" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Site</text>
-              <line x1="200" y1="200" x2="200" y2="330" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:3" cx="200" cy="330" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
-              <circle cx="200" cy="330" r="7" fill="#D87BF1"/>
-              <text x="200" y="360" text-anchor="middle" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Atendimento</text>
-              <line x1="200" y1="200" x2="87.4" y2="265" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:4" cx="87.4" cy="265" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-              <circle cx="87.4" cy="265" r="7" fill="#00E1C3"/>
-              <text x="71.4" y="270" text-anchor="end" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Concorrência</text>
-              <line x1="200" y1="200" x2="87.4" y2="135" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:5" cx="87.4" cy="135" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
-              <circle cx="87.4" cy="135" r="7" fill="#D87BF1"/>
-              <text x="71.4" y="140" text-anchor="end" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Mídia</text>
-              <circle cx="200" cy="200" r="48" fill="#0A0E2E" stroke="#00E1C3" stroke-width="1.5"/>
-              <text x="200" y="204" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800" font-family="Sora, sans-serif">360°</text>
-              <text x="200" y="224" text-anchor="middle" fill="#00E1C3" font-size="11" font-weight="600" letter-spacing="1.5" font-family="Sora, sans-serif">RAIO-X</text>
-            </svg></div>
     <p class="eyebrow r"><span>Primeiro passo</span></p>
     <h2 class="r d1">Antes de proposta, <span class="grad-text">diagnóstico.</span></h2>
     <p class="lead r d2">Preencha a aplicação em menos de 1 minuto. A gente olha o seu cenário, o seu perfil e a sua praça, e você fala com a gente no WhatsApp já sabendo onde está o gargalo. Sem custo e sem compromisso de fechar nada.</p>
@@ -1818,7 +1883,7 @@ section{padding:clamp(56px,7vw,104px) 0}
   <div class="wrap">
     <div class="f-top">
       <div class="f-brand">
-        <img src="assets/logos/b2donto-logo-white.svg" alt="B2Donto">
+        <img src="assets/logos/b2donto-logo-white.svg" alt="B2donto">
         <p>Aceleradora comercial para clínicas de odontologia. Do primeiro anúncio ao paciente sentado na cadeira.</p>
       </div>
       <div class="f-cols">
@@ -1846,15 +1911,15 @@ section{padding:clamp(56px,7vw,104px) 0}
     <details class="priv" id="privacidade">
       <summary>Privacidade e uso dos seus dados</summary>
       <div class="priv-in">
-        <p><strong>O que a gente coleta.</strong> Se você preenche o Raio-X, a B2Donto recebe o que você digitou: nome, nome da clínica, cidade, WhatsApp, o @ do Instagram quando informado, e as respostas sobre faturamento, anúncio e prioridade. Nada além disso.</p>
-        <p><strong>Pra que serve.</strong> Só pra analisar o seu cenário e falar com você sobre os serviços da B2Donto. A gente não vende e não cede a sua informação pra terceiros.</p>
+        <p><strong>O que a gente coleta.</strong> Se você preenche o Raio-X, a B2donto recebe o que você digitou: nome, nome da clínica, cidade, WhatsApp, o @ do Instagram quando informado, e as respostas sobre faturamento, anúncio e prioridade. Nada além disso.</p>
+        <p><strong>Pra que serve.</strong> Só pra analisar o seu cenário e falar com você sobre os serviços da B2donto. A gente não vende e não cede a sua informação pra terceiros.</p>
         <p><strong>Medição do site.</strong> Usamos Google Analytics e o pixel da Meta pra entender como as pessoas chegam até aqui. São dados de navegação, tratados de forma agregada por essas ferramentas.</p>
         <p><strong>Seus direitos.</strong> Você pode pedir a qualquer momento pra ver, corrigir ou apagar tudo que temos sobre você. Basta pedir no nosso WhatsApp comercial e a gente resolve.</p>
-        <p><strong>Responsável.</strong> B2Donto, CNPJ 47.804.906/0001-22, Curitiba, PR.</p>
+        <p><strong>Responsável.</strong> B2donto, CNPJ 47.804.906/0001-22, Curitiba, PR.</p>
       </div>
     </details>
     <div class="f-bot">
-      <span>B2Donto · CNPJ 47.804.906/0001-22</span>
+      <span>B2donto · CNPJ 47.804.906/0001-22</span>
       <span>Resultados apresentados são de clientes reais e não representam garantia de resultado futuro.</span>
     </div>
   </div>
@@ -1893,12 +1958,12 @@ section{padding:clamp(56px,7vw,104px) 0}
 
 <script>
 /* ============================================================
-   B2Donto · site institucional
+   B2donto · site institucional
    CONFIG: unico lugar pra trocar numero, planilha e mensagem.
    ============================================================ */
 var CFG = {
   WHATSAPP: '554191008710',
-  MSG_PADRAO: 'Olá! Vim pelo site da B2Donto e quero acelerar minha clínica.',
+  MSG_PADRAO: 'Olá! Vim pelo site da B2donto e quero acelerar minha clínica.',
   SHEETS: 'https://script.google.com/macros/s/AKfycbwTLjGnX7DEBWe0uAj1xvzgVg3p3-HPPXRkb3ADlyhh9c4ewTGzh40oVX7vSdvulKXhgg/exec',
   ORIGEM: 'site-b2donto'
 };
@@ -2075,7 +2140,7 @@ function track(nome, dados){
     { id:'q28', tipo:'opcao', q:'Se resolvesse uma coisa nos próximos 90 dias, qual seria?',
       opcoes:['Trazer mais paciente novo','Parar de perder quem chega no WhatsApp','Aumentar o ticket e vender caso maior','Fazer a base antiga voltar','Organizar o comercial inteiro'] },
     { id:'contato', tipo:'contato', q:'Pronto. Pra onde mandamos a análise?',
-      dica:'A gente te chama no WhatsApp com a leitura do seu cenário. Sem robô de ligação. Seus dados ficam com a B2Donto, são usados só pra esse contato comercial e você pode pedir a exclusão a qualquer momento.' }
+      dica:'A gente te chama no WhatsApp com a leitura do seu cenário. Sem robô de ligação. Seus dados ficam com a B2donto, são usados só pra esse contato comercial e você pode pedir a exclusão a qualquer momento.' }
   ];
 
   var rx = document.getElementById('rx'), stage = document.getElementById('rxStage'),
@@ -2185,7 +2250,7 @@ function track(nome, dados){
   }
 
   function mensagem(){
-    var L = ['Olá! Vim pelo site da B2Donto e acabei de fazer o Raio-X da minha clínica.', ''];
+    var L = ['Olá! Vim pelo site da B2donto e acabei de fazer o Raio-X da minha clínica.', ''];
     L.push('Nome: ' + (resp.q1 || ''));
     L.push('Clínica: ' + (resp.q2 || ''));
     L.push('Cidade: ' + (resp.q8 || ''));
@@ -2369,7 +2434,7 @@ function track(nome, dados){
       } catch(x){}
     }
     if(typeof track === 'function') track('aplicacao_site', { faturamento:fat, anuncio:ads, carro_chefe:carro });
-    var msg = ['Olá! Vim pelo site da B2Donto e preenchi a aplicação.','',
+    var msg = ['Olá! Vim pelo site da B2donto e preenchi a aplicação.','',
       'Nome: '+nome,'Instagram: '+ig,'Carro-chefe: '+carro,'Faturamento: '+fat,'Investimento em anúncio: '+ads,'','Quero mais informações.'].join('\n');
     var url = window.zapLink ? window.zapLink(msg) : '#';
     f.innerHTML = '<p class="start-form-k">Aplicação recebida</p><p class="ap-title">Obrigado, ' + (nome.split(' ')[0]) + '.</p>' +
@@ -2377,6 +2442,24 @@ function track(nome, dados){
       '<a class="btn" target="_blank" rel="noopener" href="' + url + '">Abrir o WhatsApp</a>';
     setTimeout(function(){ window.open(url, '_blank', 'noopener'); }, 700);
   });
+})();
+
+/* ===== metodo em rolagem: pilar ativo troca o desenho ===== */
+(function(){
+  var steps=[].slice.call(document.querySelectorAll('.fx-step')); if(!steps.length) return;
+  var viz=[].slice.call(document.querySelectorAll('.fx-viz')), rail=[].slice.call(document.querySelectorAll('.fx-rail button')), cur=-1;
+  function set(i){
+    if(i===cur||i<0) return; cur=i;
+    steps.forEach(function(x,k){ x.classList.toggle('on',k===i); });
+    viz.forEach(function(x,k){ x.classList.toggle('on',k===i); });
+    rail.forEach(function(x,k){ x.classList.toggle('on',k===i); });
+    var b=rail[i]; if(b && b.parentNode.scrollWidth>b.parentNode.clientWidth) b.parentNode.scrollTo({left:b.offsetLeft-12, behavior:'smooth'});
+  }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) set(steps.indexOf(e.target)); }); },
+    { rootMargin: matchMedia('(max-width:860px)').matches ? '-55% 0px -35% 0px' : '-45% 0px -45% 0px' });
+  steps.forEach(function(x){ io.observe(x); });
+  set(0);
+  rail.forEach(function(b,k){ b.addEventListener('click', function(){ steps[k].scrollIntoView({ behavior:'smooth', block:'center' }); }); });
 })();
 </script>
 
