@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Simulador de Funil B2donto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: palco 1600x900 escalado pra caber na tela (igual ao slide 69 do deck); abaixo de 760px vira coluna */
+:root {
+  --bg: #050922;
+  --bg-a: #0B1146;
+  --bg-b: #070B2E;
+  --glow-a: rgba(74, 108, 247, .22);
+  --glow-b: rgba(167, 19, 185, .14);
+  --pill: rgba(12, 20, 64, .55);
+  --line: rgba(0, 225, 195, .5);
+  --line-soft: rgba(0, 225, 195, .30);
+  --ciano: #00E1C3;
+  --label: #5ED8C5;
+  --fg: #FFFFFF;
+  --muted: #A9B0D6;
+  --chip: rgba(255, 255, 255, .06);
+  --chip-line: rgba(169, 176, 214, .22);
+  --track: rgba(0, 225, 195, .18);
+  --neg: #FF8A9A;
+  --f: "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1100px 650px at 10% -10%, var(--glow-a), transparent 60%),
+    radial-gradient(900px 600px at 105% 105%, var(--glow-b), transparent 60%),
+    linear-gradient(160deg, var(--bg-a) 0%, var(--bg-b) 55%, var(--bg) 100%);
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: var(--f);
+  -webkit-font-smoothing: antialiased;
+}
+button { font-family: inherit; }
+
+/* ---------- base (celular) ---------- */
+.vp { padding: 24px 16px 40px; }
+.stage { display: flex; flex-direction: column; gap: 18px; }
+.title { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; text-wrap: balance; }
+.title .c { color: var(--ciano); }
+
+.modes { display: inline-flex; align-self: flex-start; border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; background: var(--pill); }
+.modes button {
+  border: 0; background: transparent; color: var(--muted); font-size: 14px; font-weight: 600;
+  padding: 8px 18px; border-radius: 999px; cursor: pointer; letter-spacing: .01em;
+}
+.modes button[aria-selected="true"] { background: var(--ciano); color: var(--bg); }
+
+.links { display: none; }
+
+.pill {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; border: 1.5px solid var(--line); border-radius: 999px; background: var(--pill);
+  padding: 10px 20px; min-width: 0;
+}
+.lab { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--label); white-space: nowrap; }
+.val { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0; font-weight: 700; font-size: 22px; line-height: 1.2; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.val b { font-weight: 700; }
+.val i { font-style: normal; font-weight: 500; font-size: .5em; color: var(--muted); margin-left: .6em; }
+.val i.neg { color: var(--neg); }
+.pre { margin-right: .15em; }
+
+.params { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.params .p-ticket { grid-column: 1 / -1; }
+.params .lab { font-size: 10px; letter-spacing: .1em; white-space: normal; }
+
+.funnel { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.f-inv { width: 100%; } .f-leads { width: 92%; } .f-ag { width: 84%; } .f-co { width: 76%; } .f-ve { width: 68%; }
+.fat {
+  width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;
+  border: 2px solid var(--ciano); border-radius: 18px; padding: 14px 16px; background: var(--pill);
+  box-shadow: 0 0 22px rgba(0, 225, 195, .28), inset 0 0 18px rgba(0, 225, 195, .08);
+}
+.fat .val { font-size: 28px; }
+.params, .funnel { min-width: 0; }
+.hl { border-color: var(--ciano); border-width: 2px; box-shadow: 0 0 18px rgba(0, 225, 195, .35), inset 0 0 12px rgba(0, 225, 195, .08); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip { border: 1px solid var(--chip-line); background: var(--chip); border-radius: 999px; padding: 8px 18px; font-size: 16px; color: var(--muted); font-weight: 500; }
+.chip b { color: var(--fg); font-weight: 700; margin-left: .3em; font-variant-numeric: tabular-nums; }
+
+.reset {
+  align-self: flex-start; border: 1px solid var(--chip-line); background: var(--chip); color: var(--muted);
+  border-radius: 999px; padding: 8px 14px 8px 18px; font-size: 14px; cursor: pointer; display: inline-flex; gap: 10px; align-items: center;
+}
+.reset kbd { font-family: inherit; font-size: 12px; background: rgba(255,255,255,.1); border-radius: 6px; padding: 2px 8px; color: var(--fg); }
+.reset:hover { color: var(--fg); }
+
+/* campos editáveis: parecem texto do slide, revelam que dá pra mexer no hover */
+.edit input {
+  font: inherit; color: inherit; background: transparent; border: 0; padding: 0; margin: 0;
+  border-bottom: 1.5px dashed transparent; text-align: center; min-width: 1ch; cursor: text; font-variant-numeric: tabular-nums;
+}
+.edit:hover input, .edit input:focus { border-bottom-color: var(--line); outline: none; }
+/* barra de arrastar: trilho fino, parte preenchida em ciano (--p = posição em %) */
+.rng {
+  -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 26px; margin: 8px 0 0;
+  background: transparent; cursor: pointer; --p: 50%;
+}
+.rng::-webkit-slider-runnable-track {
+  height: 4px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--ciano) 0 var(--p), var(--track) var(--p) 100%);
+}
+.rng::-moz-range-track { height: 4px; border-radius: 4px; background: var(--track); }
+.rng::-moz-range-progress { height: 4px; border-radius: 4px; background: var(--ciano); }
+.rng::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; margin-top: -7px; border-radius: 50%;
+  background: var(--ciano); border: 3px solid var(--bg-b); box-shadow: 0 0 0 1.5px var(--ciano), 0 0 14px rgba(0, 225, 195, .55);
+  transition: transform .12s;
+}
+.rng::-moz-range-thumb {
+  width: 12px; height: 12px; border-radius: 50%; background: var(--ciano); border: 3px solid var(--bg-b);
+  box-shadow: 0 0 0 1.5px var(--ciano), 0 0 14px rgba(0, 225, 195, .55);
+}
+.rng:hover::-webkit-slider-thumb, .rng:active::-webkit-slider-thumb { transform: scale(1.2); }
+.rng:focus-visible { outline: 2px solid var(--ciano); outline-offset: 4px; border-radius: 6px; }
+.modes button:focus-visible, .reset:focus-visible { outline: 2px solid var(--ciano); outline-offset: 2px; }
+
+/* ---------- palco do slide (tela de computador / compartilhamento) ---------- */
+@media (min-width: 760px) {
+  .vp { padding: 0; position: relative; overflow: hidden; }
+  .stage { position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0; display: block; }
+  .stage .params, .stage .funnel { display: block; }
+  .title { position: absolute; left: 70px; top: 40px; font-size: 46px; white-space: nowrap; }
+  .modes { position: absolute; right: 70px; top: 50px; }
+  .links { display: block; position: absolute; inset: 0; width: 1600px; height: 900px; pointer-events: none; }
+
+  .pill { position: absolute; padding: 0 48px; }
+  .fn { height: 76px; }
+  .fn .lab { font-size: 14px; letter-spacing: .16em; }
+  .fn .val { font-size: 30px; }
+  .f-inv   { left: 274px; top: 162px; width: 688px; }
+  .f-leads { left: 316px; top: 256px; width: 604px; }
+  .f-ag    { left: 358px; top: 350px; width: 521px; }
+  .f-co    { left: 399px; top: 444px; width: 438px; }
+  .f-ve    { left: 440px; top: 538px; width: 356px; }
+  .fat { position: absolute; left: 380px; top: 649px; width: 476px; height: 90px; padding: 0; justify-content: center; }
+  .fat .lab { font-size: 15px; letter-spacing: .16em; }
+  .fat .val { font-size: 42px; }
+
+  .pr { left: 1114px; width: 237px; height: 61px; padding: 0 30px; }
+  .pr .lab { font-size: 12px; letter-spacing: .12em; white-space: nowrap; }
+  .pr .val { font-size: 23px; }
+  .p-cpl { top: 216px; } .p-ag { top: 310px; } .p-co { top: 404px; } .p-fe { top: 497px; } .p-ticket { top: 600px; }
+  /* barras fora das pílulas: à direita das taxas, à esquerda do investimento */
+  .rng { position: absolute; top: 50%; margin: 0; transform: translateY(-50%); width: 170px; }
+  .pr .rng { left: calc(100% + 20px); }
+  .f-inv .rng { right: calc(100% + 20px); }
+
+  .chips { position: absolute; left: 80px; top: 784px; }
+  .chip { font-size: 21px; padding: 8px 24px; }
+  .reset { position: absolute; right: 70px; top: 790px; font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .rng::-webkit-slider-thumb { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="vp" id="vp">
+  <div class="stage" id="stage">
+    <h1 class="title" id="title">Com IA · taxa de agendamento de 30%</h1>
+
+    <div class="modes" role="tablist" aria-label="Cenário">
+      <button type="button" role="tab" id="m0" aria-selected="false">Sem IA</button>
+      <button type="button" role="tab" id="m1" aria-selected="true">Com IA</button>
+    </div>
+
+    <svg class="links" viewBox="0 0 1600 900" aria-hidden="true" fill="none" stroke="rgba(0,225,195,.42)" stroke-width="1.5">
+      <path d="M1050 200V694"/>
+      <path d="M962 200H1050M920 294H1050M879 388H1050M837 482H1050M796 576H1050M856 694H1050"/>
+      <path d="M1050 247H1114M1050 341H1114M1050 435H1114M1050 528H1114M1050 631H1114"/>
+    </svg>
+
+    <div class="params">
+      <div class="pill pr p-cpl edit" data-k="cpl">
+        <label class="lab" for="cpl">Valor por lead</label>
+        <span class="val"><span class="pre">R$</span><input id="cpl" inputmode="decimal" autocomplete="off"></span>
+        <input type="range" class="rng" id="r-cpl" data-k="cpl" aria-label="Arrastar valor por lead">
+      </div>
+      <div class="pill pr p-ag edit" data-k="ag">
+        <label class="lab" for="ag">Taxa de agendamento</label>
+        <span class="val"><input id="ag" inputmode="numeric" autocomplete="off"><span>%</span></span>
+        <input type="range" class="rng" id="r-ag" data-k="ag" aria-label="Arrastar taxa de agendamento">
+      </div>
+      <div class="pill pr p-co edit" data-k="co">
+        <label class="lab" for="co">Taxa de comparecimento</label>
+        <span class="val"><input id="co" inputmode="numeric" autocomplete="off"><span>%</span></span>
+        <input type="range" class="rng" id="r-co" data-k="co" aria-label="Arrastar taxa de comparecimento">
+      </div>
+      <div class="pill pr p-fe edit" data-k="fe">
+        <label class="lab" for="fe">Taxa de conversão</label>
+        <span class="val"><input id="fe" inputmode="numeric" autocomplete="off"><span>%</span></span>
+        <input type="range" class="rng" id="r-fe" data-k="fe" aria-label="Arrastar taxa de conversão">
+      </div>
+      <div class="pill pr p-ticket edit" data-k="ticket">
+        <label class="lab" for="ticket">Ticket médio</label>
+        <span class="val"><span class="pre">R$</span><input id="ticket" inputmode="numeric" autocomplete="off"></span>
+        <input type="range" class="rng" id="r-ticket" data-k="ticket" aria-label="Arrastar ticket médio">
+      </div>
+    </div>
+
+    <div class="funnel">
+      <div class="pill fn f-inv edit" data-k="inv">
+        <label class="lab" for="inv">Investimento em anúncios</label>
+        <span class="val"><span class="pre">R$</span><input id="inv" inputmode="numeric" autocomplete="off"></span>
+        <input type="range" class="rng" id="r-inv" data-k="inv" aria-label="Arrastar investimento">
+      </div>
+      <div class="pill fn f-leads"><span class="lab">Leads gerados</span><span class="val"><b id="o-leads">200</b></span></div>
+      <div class="pill fn f-ag"><span class="lab">Agendamentos</span><span class="val"><b id="o-ag">60</b><i id="d-ag"></i></span></div>
+      <div class="pill fn f-co"><span class="lab">Comparecimentos</span><span class="val"><b id="o-co">30</b><i id="d-co"></i></span></div>
+      <div class="pill fn f-ve"><span class="lab">Vendas</span><span class="val"><b id="o-ve">~12</b><i id="d-ve"></i></span></div>
+      <div class="fat" aria-live="polite"><span class="lab">Faturamento no mês</span><span class="val"><b id="o-fat">R$ 120.000</b><i id="d-fat"></i></span></div>
+    </div>
+
+    <div class="chips">
+      <span class="chip">CAC<b id="o-cac">R$ 250</b></span>
+      <span class="chip">ROAS<b id="o-roas">40</b></span>
+    </div>
+
+    <button type="button" class="reset" id="reset">Reset <kbd>R</kbd></button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var DEFAULTS = { inv: 3000, cpl: 15, ticket: 10000, mode: 1,
+    s: [ { ag: 20, co: 50, fe: 40 }, { ag: 30, co: 50, fe: 40 } ] };
+  var RATES = { ag: "agendamento", co: "comparecimento", fe: "conversão" };
+  var STEP = { inv: 100, cpl: 1, ticket: 500, ag: 1, co: 1, fe: 1 };
+  // faixa de cada barra: [mínimo, máximo, passo]. Digitando dá pra passar do máximo.
+  var RANGE = { inv: [500, 30000, 100], cpl: [1, 100, 1], ticket: [1000, 60000, 500],
+    ag: [0, 100, 1], co: [0, 100, 1], fe: [0, 100, 1] };
+  var KEYS = ["inv", "cpl", "ticket", "ag", "co", "fe"];
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var st;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var clone = function (o) { return JSON.parse(JSON.stringify(o)); };
+  var isRate = function (k) { return k in RATES; };
+  var int = function (v) { return Math.round(v).toLocaleString("pt-BR"); };
+  var money = function (v) { return "R$ " + int(v); };
+  var dec = function (v) { return v.toLocaleString("pt-BR", { maximumFractionDigits: 2 }); };
+
+  function parseBR(s) {
+    s = String(s).replace(/[^\d,.]/g, "");
+    if (s.indexOf(",") > -1) s = s.replace(/\./g, "").replace(",", ".");
+    else s = s.replace(/\.(?=\d{3}(\D|$))/g, "");
+    var v = parseFloat(s);
+    return isFinite(v) ? v : 0;
+  }
+  function get(k) { return isRate(k) ? st.s[st.mode][k] : st[k]; }
+  function set(k, v) {
+    v = Math.max(0, v);
+    if (isRate(k)) st.s[st.mode][k] = Math.min(100, Math.round(v));
+    else st[k] = k === "cpl" ? Math.round(v * 100) / 100 : Math.round(v);
+  }
+  function show(k) {
+    var el = $(k), v = get(k);
+    el.value = k === "cpl" ? dec(v) : isRate(k) ? String(v) : int(v);
+    size(el);
+    bar(k);
+  }
+  function bar(k) {
+    var r = $("r-" + k), lim = RANGE[k], v = get(k);
+    r.value = v;
+    var p = Math.max(0, Math.min(1, (v - lim[0]) / (lim[1] - lim[0])));
+    r.style.setProperty("--p", (p * 100) + "%");
+  }
+  function size(el) { el.style.width = (Math.max(1, el.value.length) * 0.64 + 0.1) + "em"; }
+
+  function tween(el, to, fmt, now) {
+    if (to === null) { el._v = null; cancelAnimationFrame(el._raf); el.textContent = "sem venda"; return; }
+    var from = el._v == null ? to : el._v;
+    el._v = to; cancelAnimationFrame(el._raf);
+    if (reduce || now || from === to) { el.textContent = fmt(to); return; }
+    var t0 = performance.now(), D = 450;
+    var step = function (t) {
+      var p = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(from + (to - from) * e);
+      if (p < 1) el._raf = requestAnimationFrame(step);
+    };
+    el._raf = requestAnimationFrame(step);
+  }
+  function delta(id, d, fmt) {
+    var el = $(id);
+    if (st.mode === 0 || Math.round(d) === 0) { el.textContent = ""; return; }
+    el.textContent = "(" + (d > 0 ? "+" : "-") + fmt(Math.abs(d)) + ")";
+    el.classList.toggle("neg", d < 0);
+  }
+
+  function calc(now) {
+    var leads = st.cpl > 0 ? Math.round(st.inv / st.cpl) : 0;
+    var run = function (r) {
+      var ag = Math.round(leads * r.ag / 100), co = Math.round(ag * r.co / 100), ve = Math.round(co * r.fe / 100);
+      return { ag: ag, co: co, ve: ve, fat: ve * st.ticket };
+    };
+    var a = run(st.s[0]), b = run(st.s[1]), cur = st.mode ? b : a;
+
+    tween($("o-leads"), leads, int, now);
+    tween($("o-ag"), cur.ag, int, now);
+    tween($("o-co"), cur.co, int, now);
+    tween($("o-ve"), cur.ve, function (v) { return "~" + int(v); }, now);
+    tween($("o-fat"), cur.fat, money, now);
+    tween($("o-cac"), cur.ve > 0 ? st.inv / cur.ve : null, money, now);
+    tween($("o-roas"), st.inv > 0 ? cur.fat / st.inv : 0, function (v) {
+      return (Math.round(v * 10) / 10).toLocaleString("pt-BR", { maximumFractionDigits: 1 });
+    }, now);
+
+    delta("d-ag", b.ag - a.ag, int);
+    delta("d-co", b.co - a.co, int);
+    delta("d-ve", b.ve - a.ve, int);
+    delta("d-fat", b.fat - a.fat, money);
+
+    // o que a IA mexeu em relação ao cenário sem IA
+    var changed = Object.keys(RATES).filter(function (k) { return st.s[1][k] !== st.s[0][k]; });
+    Object.keys(RATES).forEach(function (k) {
+      document.querySelector(".p-" + k).classList.toggle("hl", changed.indexOf(k) > -1);
+    });
+    var lead = st.mode ? "Com IA" : "Sem IA";
+    var list = changed.length ? changed : ["ag"];
+    var s = st.s[st.mode];
+    $("title").innerHTML = list.length === 1
+      ? '<span class="c">' + lead + '</span> · taxa de ' + RATES[list[0]] + ' de <span class="c">' + s[list[0]] + '%</span>'
+      : '<span class="c">' + lead + '</span> · ' + list.map(function (k) {
+          return RATES[k] + ' <span class="c">' + s[k] + '%</span>';
+        }).join(" · ");
+
+    $("m0").setAttribute("aria-selected", st.mode === 0);
+    $("m1").setAttribute("aria-selected", st.mode === 1);
+  }
+
+  function setMode(m) {
+    st.mode = m;
+    Object.keys(RATES).forEach(show);
+    calc();
+  }
+  function reset() {
+    var m = st ? st.mode : DEFAULTS.mode;
+    st = clone(DEFAULTS); st.mode = m;
+    KEYS.forEach(show); calc();
+  }
+
+  KEYS.forEach(function (k) {
+    var el = $(k);
+    el.addEventListener("input", function () { set(k, parseBR(el.value)); size(el); bar(k); calc(); });
+    el.addEventListener("blur", function () { show(k); });
+    el.addEventListener("focus", function () { el.select(); });
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { el.blur(); return; }
+      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+      e.preventDefault();
+      set(k, get(k) + (e.key === "ArrowUp" ? 1 : -1) * (isRate(k) ? 1 : STEP[k]));
+      show(k); calc();
+    });
+  });
+  // barras: número acompanha o arraste na hora, sem animação atrasada
+  KEYS.forEach(function (k) {
+    var r = $("r-" + k);
+    r.min = RANGE[k][0]; r.max = RANGE[k][1]; r.step = RANGE[k][2];
+    r.addEventListener("input", function () { set(k, Number(r.value)); show(k); calc(true); });
+  });
+  $("m0").addEventListener("click", function () { setMode(0); });
+  $("m1").addEventListener("click", function () { setMode(1); });
+  $("reset").addEventListener("click", reset);
+  document.addEventListener("keydown", function (e) {
+    if (e.target.tagName === "INPUT" || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === "r" || e.key === "R") reset();
+    else if (e.key === "ArrowLeft") setMode(0);
+    else if (e.key === "ArrowRight") setMode(1);
+  });
+
+  // escala o palco 1600x900 pra caber na janela, como um slide
+  var vp = $("vp"), stage = $("stage");
+  function fit() {
+    if (window.innerWidth < 760) { stage.style.transform = ""; stage.style.marginLeft = ""; vp.style.height = ""; return; }
+    var w = vp.clientWidth, h = window.innerHeight;
+    var sc = Math.min(w / 1600, h / 900);
+    stage.style.transform = "scale(" + sc + ")";
+    stage.style.left = Math.max(0, (w - 1600 * sc) / 2) + "px";
+    vp.style.height = Math.max(h, 900 * sc) + "px";
+    stage.style.top = Math.max(0, (h - 900 * sc) / 2) + "px";
+  }
+  window.addEventListener("resize", fit);
+
+  reset();
+  fit();
+})();
+</script>
+</body>
+</html>
