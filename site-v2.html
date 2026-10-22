@@ -89,11 +89,7 @@ section{position:relative; padding:clamp(64px,9vw,128px) 0}
 .nav-links{margin-left:auto; display:flex; gap:28px; align-items:center}
 .nav-links a{font-size:13px; color:var(--cool-grey); transition:color .2s}
 .nav-links a:hover{color:var(--white)}
-.nav-cta{padding:10px 18px; border-radius:999px; background:var(--grad-brand); color:#03121A;
-  font-size:12.5px; font-weight:700; letter-spacing:.01em; white-space:nowrap;
-  transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s}
-.nav-cta:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(0,225,195,.22)}
-@media(max-width:880px){ .nav-links a:not(.nav-cta){display:none} }
+@media(max-width:880px){ .nav-links{display:none} }
 
 /* ===== BOTOES ===== */
 .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px;
@@ -798,7 +794,6 @@ section{padding:clamp(56px,7vw,104px) 0}
   .consc-row{grid-template-columns:130px 1fr 34px; font-size:11.5px}
 }
 @media(max-width:560px){ .ac-grid{grid-template-columns:1fr} }
-.nav-links a.nav-cta,.nav-links a.nav-cta:hover{color:#03121A}
 
 /* ================= v2.9b: menu so no topo da pagina, sem ficar fixo ================= */
 .nav{position:absolute}
@@ -847,54 +842,65 @@ section{padding:clamp(56px,7vw,104px) 0}
   .sb-pillar{color:var(--cool-grey); padding-left:16px; border-left:1px solid var(--line-strong)}
   .sb-pillar b{color:var(--cyan); margin-right:6px}
 }
-/* ================= TEMAS EM TESTE (seletor flutuante, so na revisao) =================
-   shortcut: os 3 temas convivem pra o Higor escolher; depois de escolhido, fixar so o vencedor e apagar este bloco + o seletor */
-/* A: navy aceso (escuro, mas mais claro e mais vivo) */
-body.tema-a,body.tema-b{--black-hole:#0C1240; --white:#fff; --off-white:#E8EAF5; --cool-grey:#B0B6D8; --dim-grey:#868CB4;
-  --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.2); --surface-1:#121A4D; --surface-2:#151E55; --deep-navy:#101748;
-  --cyan:#00E1C3; color:var(--off-white)}
-body.tema-a #aurora,body.tema-b #aurora{opacity:.8}
-body.tema-a :is(#estrutura,#quem),body.tema-b :is(#estrutura,#quem){background:#111948}
-/* B: navy aceso + secoes claras alternadas */
-body.tema-b :is(#depoimentos,#oque,#filtro,#risco){--white:#0B1031; --off-white:#262D5C; --cool-grey:#535A7C; --dim-grey:#80869F;
-  --line:rgba(11,16,49,.09); --line-strong:rgba(11,16,49,.17); --surface-1:#fff; --surface-2:#F1F4FA; --deep-navy:#fff;
-  --cyan:#00A38D; color:var(--off-white); background:radial-gradient(ellipse 55% 60% at 8% 0%, rgba(0,225,195,.07), transparent 60%), radial-gradient(ellipse 50% 60% at 95% 100%, rgba(167,19,185,.06), transparent 60%), #F5F7FB}
-/* C: pagina clara, desenhos do metodo e fechamento em cartao escuro */
-body.tema-c{--white:#0B1031; --off-white:#262D5C; --cool-grey:#535A7C; --dim-grey:#80869F;
-  --line:rgba(11,16,49,.09); --line-strong:rgba(11,16,49,.17); --surface-1:#fff; --surface-2:#F1F4FA; --deep-navy:#fff;
-  --cyan:#00A38D; color:var(--off-white); background:#F4F6FB}
-body.tema-c #aurora{opacity:.45}
-body.tema-c :is(#estrutura,#quem){background:#fff; border-color:var(--line)}
-body.tema-c .pilar-viz-box{--white:#fff; --off-white:#E8EAF5; --cool-grey:#B0B6D8; --dim-grey:#868CB4;
-  --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.2); --surface-1:#121A4D; --surface-2:#151E55; --deep-navy:#101748;
-  --cyan:#00E1C3; color:var(--off-white); background:radial-gradient(circle at 50% 40%, #1A2363, #0B1031 75%); border-color:#1B2360}
-body.tema-c .final{--black-hole:#0C1240; --white:#fff; --off-white:#E8EAF5; --cool-grey:#B0B6D8; --dim-grey:#868CB4;
-  --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.2); --surface-1:#121A4D; --surface-2:#151E55; --deep-navy:#101748;
-  --cyan:#00E1C3; color:var(--off-white); background:radial-gradient(ellipse 70% 80% at 50% 0%, #1A2363, #0B1031 70%)}
-body.tema-c footer{--white:#fff; --off-white:#E8EAF5; --cool-grey:#B0B6D8; --dim-grey:#868CB4;
-  --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.2); --surface-1:#121A4D; --surface-2:#151E55; --deep-navy:#101748;
-  --cyan:#00E1C3; color:var(--off-white); background:#0B1031}
-body.tema-c .brand img{filter:brightness(0)}
-body.tema-c .sticky-bar{background:rgba(255,255,255,.9); box-shadow:0 8px 32px rgba(11,16,49,.12)}
-/* claro: ajustes de cores que estavam fixas pro escuro */
-:is(body.tema-b :is(#depoimentos,#oque,#filtro,#risco),body.tema-c) :is(.panel li,.vs-col li){border-bottom-color:var(--line)}
-:is(body.tema-b #oque,body.tema-c) .vs-col--old h3{color:#3F4566}
-:is(body.tema-b #oque,body.tema-c) .vs-col--old li{color:#6B7090}
-:is(body.tema-b :is(#depoimentos,#oque,#filtro,#risco),body.tema-c) h2{color:var(--white)}
-:is(body.tema-b #filtro,body.tema-c) .panel{--p-head:#0B1031; --p-body:#535A7C}
-:is(body.tema-b #filtro,body.tema-c) .panel--no{--p-head:#3F4566; --p-body:#6B7090}
-/* seletor */
-.tema-sw{position:fixed; left:16px; bottom:16px; z-index:200; display:flex; align-items:center; gap:4px; padding:5px;
-  border-radius:999px; background:rgba(11,16,49,.92); border:1px solid rgba(255,255,255,.18); box-shadow:0 10px 30px rgba(0,0,0,.35);
+/* ================= v2.13: topo sem botao, logo no centro ================= */
+.nav-in{flex-direction:column; justify-content:center; gap:12px; padding-top:22px}
+.nav-links{margin-left:0}
+@media(min-width:881px){ .hero{padding-top:clamp(140px,18vh,196px)} }
+
+/* ================= SELO EM TESTE: 3 opcoes pro "Para dentistas" =================
+   shortcut: as 3 convivem pra o Higor escolher (?selo=1|2|3); depois fixar a vencedora e apagar as outras + o seletor */
+.pre .pre-h{margin-bottom:22px}
+.selo{display:none}
+body.s1 .pre-h,body.s2 .pre-h,body.s3 .pre-h{display:none}
+body.s1 .selo-1,body.s2 .selo-2{display:inline-flex}
+body.s3 .selo-3{display:block}
+.selo .selo-txt{max-width:none}
+/* 1: rostos dos clientes */
+.selo-1{align-items:center; gap:14px; margin:0 auto 26px; text-align:left}
+.selo-faces{display:flex; flex:none}
+.selo-faces i{width:40px; height:40px; border-radius:50%; margin-left:-11px; background-color:#0B1031;
+  background-size:205% auto; background-position:50% 26%; background-repeat:no-repeat;
+  border:2px solid #0B1031; box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.selo-faces i:first-child{margin-left:0}
+.selo-1 .selo-txt{font-size:14px; line-height:1.45; color:var(--cool-grey); max-width:31ch}
+.selo-1 .selo-txt b{color:var(--white); font-weight:600}
+@media(max-width:560px){ .selo-1{flex-direction:column; gap:10px; text-align:center} }
+/* 2: icone de dente */
+.selo-2{align-items:center; gap:14px; margin:0 auto 26px; padding:10px 20px 10px 10px; border-radius:18px; text-align:left;
+  border:1px solid rgba(0,225,195,.22); background:linear-gradient(135deg, rgba(0,225,195,.08), rgba(167,19,185,.06))}
+.selo-ic{flex:none; width:44px; height:44px; border-radius:13px; display:grid; place-items:center; background:var(--grad-brand);
+  box-shadow:0 6px 20px rgba(74,108,247,.35)}
+.selo-ic img{width:24px; height:24px}
+.selo-2 .selo-txt{display:flex; flex-direction:column; gap:4px; font-size:14.5px; line-height:1.4; color:var(--off-white)}
+.selo-2 small{font:700 10.5px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--cyan)}
+/* 3: "dentistas" sublinhado a mao */
+.selo-3{margin:0 auto 28px; max-width:36ch; font-size:clamp(16px,1.8vw,19px); line-height:1.85; color:var(--cool-grey)}
+.selo-3 b{position:relative; display:inline-block; color:var(--white); font-weight:600}
+.selo-3 svg{position:absolute; left:-4%; bottom:-8px; width:108%; height:12px; overflow:visible}
+.selo-3 path{fill:none; stroke:url(#seloGrad); stroke-width:3; stroke-linecap:round; stroke-dasharray:140; stroke-dashoffset:140;
+  transition:stroke-dashoffset 1.1s cubic-bezier(.2,.7,.2,1) .5s}
+.pre.in .selo-3 path{stroke-dashoffset:0}
+/* ================= FUNDO EM TESTE: o mesmo da apresentacao de vendas (bg-navy-1920x1080.jpg) ================= */
+.bg-deck{display:none; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:#06063A url(assets/backgrounds/bg-navy-1920x1080.jpg) 30% 0 / cover no-repeat}
+body.f1{background:#06063A}
+body.f1 .bg-deck{display:block}
+body.f1 #aurora{display:none}
+body.f1 :is(#estrutura,#quem){background:transparent; border-color:transparent}
+/* painel de revisao (selo + fundo) */
+.rev-sw{position:fixed; left:12px; bottom:12px; z-index:200; display:grid; gap:4px; padding:5px; border-radius:16px;
+  background:rgba(11,16,49,.92); border:1px solid rgba(255,255,255,.18); box-shadow:0 10px 30px rgba(0,0,0,.35);
   font:600 11px/1 var(--mono); letter-spacing:.06em}
-.tema-sw span{padding:0 8px 0 10px; color:#9AA0C4}
-.tema-sw button{padding:8px 11px; border-radius:999px; color:#E8EAF5}
-.tema-sw button.on{background:#00E1C3; color:#03121A}
+.rev-row{display:flex; align-items:center; gap:3px}
+.rev-row span{width:52px; padding-left:8px; color:#9AA0C4}
+.rev-row button{padding:8px 11px; border-radius:999px; color:#E8EAF5}
+.rev-row button.on{background:#00E1C3; color:#03121A}
 </style>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT4J9DT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <canvas id="aurora" aria-hidden="true"></canvas>
+<div class="bg-deck" aria-hidden="true"></div>
 <div class="page">
 
 <div class="prog" id="prog" aria-hidden="true"></div>
@@ -911,7 +917,6 @@ body.tema-c .sticky-bar{background:rgba(255,255,255,.9); box-shadow:0 8px 32px r
       <a href="#depoimentos">Resultados</a>
       <a href="#quem">Quem somos</a>
       <a href="#faq">Dúvidas</a>
-      <a href="#comecar" class="nav-cta" data-go-form>Quero mais informações</a>
     </div>
   </div>
 </nav>
@@ -919,7 +924,12 @@ body.tema-c .sticky-bar{background:rgba(255,255,255,.9); box-shadow:0 8px 32px r
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="pre-h r">Para dentistas que querem mais e estão prontos para fazer acontecer</p>
+    <div class="pre r">
+      <p class="pre-h">Para dentistas que querem mais e estão prontos para fazer acontecer</p>
+      <div class="selo selo-1"><span class="selo-faces" aria-hidden="true"><i style="background-image:url(https://i.ytimg.com/vi/i9vapFxmH0s/oar2.jpg)"></i><i style="background-image:url(https://i.ytimg.com/vi/AKQEXRSCPWg/oar2.jpg)"></i><i style="background-image:url(https://i.ytimg.com/vi/5Zx9sqI-I5g/oar2.jpg)"></i><i style="background-image:url(https://i.ytimg.com/vi/HgL4PKysuX8/oar2.jpg)"></i><i style="background-image:url(https://i.ytimg.com/vi/phJYnw70IO4/oar2.jpg)"></i></span><p class="selo-txt"><b>Para dentistas</b> que querem mais e estão prontos para fazer acontecer</p></div>
+      <div class="selo selo-2"><span class="selo-ic" aria-hidden="true"><img src="assets/logos/b2donto-symbol-white.svg" alt="" width="24" height="24"></span><p class="selo-txt"><small>Para dentistas</small>que querem mais e estão prontos para fazer acontecer</p></div>
+      <p class="selo selo-3">Para <b>dentistas<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="seloGrad" x1="0" x2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#A713B9"/></linearGradient></defs><path pathLength="140" d="M2 8 C 30 3, 60 2, 118 6"/></svg></b> que querem mais e estão prontos para fazer acontecer</p>
+    </div>
     <h1 class="r d1"><span class="h1-l">Pacientes prontos pra comprar</span> <span class="h1-l">tratamentos de <span class="grad-text">alto valor</span></span></h1>
     <p class="lead r d2">Acelere o seu crescimento com um sistema que transforma anúncio em paciente fechado.</p>
     <div class="cta-row r d3">
@@ -2270,20 +2280,28 @@ function track(nome, dados){
   document.querySelectorAll('.pilar-section').forEach(function(s){ io.observe(s); });
 })();
 
-/* ===== seletor de tema (revisao) ===== */
+/* ===== painel de revisao: selo e fundo (sai quando o Higor escolher) ===== */
 (function(){
-  var temas = ['atual','a','b','c'], nomes = {atual:'Atual', a:'A', b:'B', c:'C'};
-  var sw = document.createElement('div'); sw.className = 'tema-sw'; sw.innerHTML = '<span>TEMA</span>' +
-    temas.map(function(t){ return '<button type="button" data-t="'+t+'">'+nomes[t]+'</button>'; }).join('');
-  document.body.appendChild(sw);
-  function usa(t){
-    temas.forEach(function(x){ document.body.classList.toggle('tema-'+x, x===t && x!=='atual'); });
-    [].forEach.call(sw.querySelectorAll('button'), function(b){ b.classList.toggle('on', b.dataset.t===t); });
-    try{ history.replaceState(null,'', t==='atual' ? location.pathname : '?tema='+t); }catch(e){}
-  }
-  sw.addEventListener('click', function(e){ var b = e.target.closest('button'); if(b) usa(b.dataset.t); });
-  var q = (location.search.match(/tema=([abc])/)||[])[1];
-  usa(q || 'atual');
+  var grupos = [
+    { nome:'SELO', chave:'selo', cls:'s', ops:[['0','Atual'],['1','1'],['2','2'],['3','3']] },
+    { nome:'FUNDO', chave:'fundo', cls:'f', ops:[['0','Atual'],['1','Apres.']] }
+  ];
+  var sw = document.createElement('div'); sw.className = 'rev-sw'; document.body.appendChild(sw);
+  var q = new URLSearchParams(location.search), est = {};
+  grupos.forEach(function(g){
+    var row = document.createElement('div'); row.className = 'rev-row';
+    row.innerHTML = '<span>' + g.nome + '</span>' + g.ops.map(function(o){ return '<button type="button" data-v="' + o[0] + '">' + o[1] + '</button>'; }).join('');
+    sw.appendChild(row);
+    function usa(v){
+      est[g.chave] = v;
+      g.ops.forEach(function(o){ if(o[0] !== '0') document.body.classList.toggle(g.cls + o[0], o[0] === v); });
+      [].forEach.call(row.querySelectorAll('button'), function(b){ b.classList.toggle('on', b.dataset.v === v); });
+      var p = new URLSearchParams(); Object.keys(est).forEach(function(k){ if(est[k] !== '0') p.set(k, est[k]); });
+      try{ history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : '')); }catch(e){}
+    }
+    row.addEventListener('click', function(e){ var b = e.target.closest('button'); if(b) usa(b.dataset.v); });
+    var ini = q.get(g.chave); usa(g.ops.some(function(o){ return o[0] === ini; }) ? ini : '0');
+  });
 })();
 </script>
 
