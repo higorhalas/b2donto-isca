@@ -661,7 +661,7 @@ section{padding:clamp(56px,7vw,104px) 0}
 
 /* faixas de cor: clara / fumaca / navy solido, alternando */
 #comecar,#faq{background:radial-gradient(ellipse 60% 70% at 12% 30%, rgba(0,225,195,.10), transparent 60%), linear-gradient(180deg,#F5F9FA,#EEF4F4); color:#060807}
-#cases,#estrutura,#quem{background:#0B1031; border-top:1px solid rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.04)}
+#estrutura,#quem{background:#0B1031; border-top:1px solid rgba(255,255,255,.04); border-bottom:1px solid rgba(255,255,255,.04)}
 #comecar .island{background:transparent; border:0; box-shadow:none; padding:0}
 /* FAQ em fundo claro */
 #faq .eyebrow{color:var(--cyan-on-light)}
@@ -727,7 +727,7 @@ section{padding:clamp(56px,7vw,104px) 0}
 /* video vertical no player */
 .lb-box{aspect-ratio:9/16; width:auto; height:min(86vh,780px); max-width:92vw}
 /* faixas na ordem nova */
-#cases,#estrutura{background:#0B1031}
+#estrutura{background:#0B1031}
 #metodo{background:transparent; border:0}
 
 /* ================= v2.3: aplicacao com todas as perguntas ================= */
@@ -847,6 +847,49 @@ section{padding:clamp(56px,7vw,104px) 0}
   .sb-pillar{color:var(--cool-grey); padding-left:16px; border-left:1px solid var(--line-strong)}
   .sb-pillar b{color:var(--cyan); margin-right:6px}
 }
+/* ================= TEMAS EM TESTE (seletor flutuante, so na revisao) =================
+   shortcut: os 3 temas convivem pra o Higor escolher; depois de escolhido, fixar so o vencedor e apagar este bloco + o seletor */
+/* A: navy aceso (escuro, mas mais claro e mais vivo) */
+body.tema-a,body.tema-b{--black-hole:#0C1240; --white:#fff; --off-white:#E8EAF5; --cool-grey:#B0B6D8; --dim-grey:#868CB4;
+  --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.2); --surface-1:#121A4D; --surface-2:#151E55; --deep-navy:#101748;
+  --cyan:#00E1C3; color:var(--off-white)}
+body.tema-a #aurora,body.tema-b #aurora{opacity:.8}
+body.tema-a :is(#estrutura,#quem),body.tema-b :is(#estrutura,#quem){background:#111948}
+/* B: navy aceso + secoes claras alternadas */
+body.tema-b :is(#depoimentos,#oque,#filtro,#risco){--white:#0B1031; --off-white:#262D5C; --cool-grey:#535A7C; --dim-grey:#80869F;
+  --line:rgba(11,16,49,.09); --line-strong:rgba(11,16,49,.17); --surface-1:#fff; --surface-2:#F1F4FA; --deep-navy:#fff;
+  --cyan:#00A38D; color:var(--off-white); background:radial-gradient(ellipse 55% 60% at 8% 0%, rgba(0,225,195,.07), transparent 60%), radial-gradient(ellipse 50% 60% at 95% 100%, rgba(167,19,185,.06), transparent 60%), #F5F7FB}
+/* C: pagina clara, desenhos do metodo e fechamento em cartao escuro */
+body.tema-c{--white:#0B1031; --off-white:#262D5C; --cool-grey:#535A7C; --dim-grey:#80869F;
+  --line:rgba(11,16,49,.09); --line-strong:rgba(11,16,49,.17); --surface-1:#fff; --surface-2:#F1F4FA; --deep-navy:#fff;
+  --cyan:#00A38D; color:var(--off-white); background:#F4F6FB}
+body.tema-c #aurora{opacity:.45}
+body.tema-c :is(#estrutura,#quem){background:#fff; border-color:var(--line)}
+body.tema-c .pilar-viz-box{--white:#fff; --off-white:#E8EAF5; --cool-grey:#B0B6D8; --dim-grey:#868CB4;
+  --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.2); --surface-1:#121A4D; --surface-2:#151E55; --deep-navy:#101748;
+  --cyan:#00E1C3; color:var(--off-white); background:radial-gradient(circle at 50% 40%, #1A2363, #0B1031 75%); border-color:#1B2360}
+body.tema-c .final{--black-hole:#0C1240; --white:#fff; --off-white:#E8EAF5; --cool-grey:#B0B6D8; --dim-grey:#868CB4;
+  --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.2); --surface-1:#121A4D; --surface-2:#151E55; --deep-navy:#101748;
+  --cyan:#00E1C3; color:var(--off-white); background:radial-gradient(ellipse 70% 80% at 50% 0%, #1A2363, #0B1031 70%)}
+body.tema-c footer{--white:#fff; --off-white:#E8EAF5; --cool-grey:#B0B6D8; --dim-grey:#868CB4;
+  --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.2); --surface-1:#121A4D; --surface-2:#151E55; --deep-navy:#101748;
+  --cyan:#00E1C3; color:var(--off-white); background:#0B1031}
+body.tema-c .brand img{filter:brightness(0)}
+body.tema-c .sticky-bar{background:rgba(255,255,255,.9); box-shadow:0 8px 32px rgba(11,16,49,.12)}
+/* claro: ajustes de cores que estavam fixas pro escuro */
+:is(body.tema-b :is(#depoimentos,#oque,#filtro,#risco),body.tema-c) :is(.panel li,.vs-col li){border-bottom-color:var(--line)}
+:is(body.tema-b #oque,body.tema-c) .vs-col--old h3{color:#3F4566}
+:is(body.tema-b #oque,body.tema-c) .vs-col--old li{color:#6B7090}
+:is(body.tema-b :is(#depoimentos,#oque,#filtro,#risco),body.tema-c) h2{color:var(--white)}
+:is(body.tema-b #filtro,body.tema-c) .panel{--p-head:#0B1031; --p-body:#535A7C}
+:is(body.tema-b #filtro,body.tema-c) .panel--no{--p-head:#3F4566; --p-body:#6B7090}
+/* seletor */
+.tema-sw{position:fixed; left:16px; bottom:16px; z-index:200; display:flex; align-items:center; gap:4px; padding:5px;
+  border-radius:999px; background:rgba(11,16,49,.92); border:1px solid rgba(255,255,255,.18); box-shadow:0 10px 30px rgba(0,0,0,.35);
+  font:600 11px/1 var(--mono); letter-spacing:.06em}
+.tema-sw span{padding:0 8px 0 10px; color:#9AA0C4}
+.tema-sw button{padding:8px 11px; border-radius:999px; color:#E8EAF5}
+.tema-sw button.on{background:#00E1C3; color:#03121A}
 </style>
 </head>
 <body>
@@ -865,7 +908,7 @@ section{padding:clamp(56px,7vw,104px) 0}
     </a>
     <div class="nav-links">
       <a href="#metodo">Como funciona</a>
-      <a href="#cases">Resultados</a>
+      <a href="#depoimentos">Resultados</a>
       <a href="#quem">Quem somos</a>
       <a href="#faq">Dúvidas</a>
       <a href="#comecar" class="nav-cta" data-go-form>Quero mais informações</a>
@@ -1219,7 +1262,7 @@ section{padding:clamp(56px,7vw,104px) 0}
         <div class="pilar-grid">
           <div class="pilar-text-col">
             <h3 class="pilar-headline r d1">Cada lead respondido na hora, <span class="grad-text">24 horas</span>.</h3>
-            <p class="pilar-lead r d2">A Maia, a nossa IA de pré-atendimento, roda no WhatsApp da própria clínica: responde na hora, 24 horas, faz até 5 resgates de quem sumiu, contorna objeção e entrega o paciente pré-agendado pra sua equipe só confirmar.</p>
+            <p class="pilar-lead r d2">Nosso sistema de agendamento roda no WhatsApp da própria clínica: responde na hora, 24 horas, faz até 5 resgates de quem sumiu, contorna objeção e entrega o paciente pré-agendado pra sua equipe só confirmar.</p>
             <div class="sim r d3">
             <p class="sim-k">Simulação · mesmo investimento de R$ 3 mil em anúncio</p>
             <div class="sim-grid">
@@ -1391,237 +1434,6 @@ section{padding:clamp(56px,7vw,104px) 0}
       <div class="ac-grid"><div class="ac-card"><b>12 imersões estratégicas</b><p>Pra afiar a performance e o marketing ao longo do projeto.</p></div><div class="ac-card"><b>12 treinamentos comerciais</b><p>Pra alinhar e refinar o processo de vendas da sua equipe.</p></div><div class="ac-card"><b>Calls de análise documentadas</b><p>Cada etapa do funil analisada ponto a ponto, com o ajuste fino registrado.</p></div><div class="ac-card"><b>Grupo exclusivo no WhatsApp</b><p>Acesso direto ao time, com suporte diário e resposta rápida.</p></div></div>
       <p class="ac-team">Um time em três níveis: estratégico, operação e performance, criativo e execução.</p>
     </div>
-  </div>
-</section>
-
-<section id="cases">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow r"><span>Resultados</span></p>
-      <h2 class="r d1">Nove clínicas, com nome, cidade e a conta à vista.</h2>
-      <p class="lead r d2">Não é promessa de agência, é o que aconteceu com dentistas como você. Onde a gente tem o número fechado, ele está aqui com o investimento do lado, pra você dividir e conferir. Repare nas cidades: boa parte não é capital.</p>
-    </div>
-    <div class="cases">
-      <article class="case r d1">
-        <div class="case-media">
-          <span class="case-idx">01 / 9</span>
-          <img src="assets/cases-opt/thais-oliveira.jpg" alt="DentClin" loading="lazy" decoding="async" style="--pos-y:18%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">DentClin</div>
-          <div class="case-handle">@clinica_dentclin · Irará, BA</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 50 mil <span class="arrow">para</span> R$ 300 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 78.733</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 2.103.247</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">26,7x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Lentes e implantes</span>
-          </div>
-        </div>
-      </article>
-      <article class="case r d2">
-        <div class="case-media">
-          <span class="case-idx">02 / 9</span>
-          <img src="assets/cases-opt/thiago-augusto.jpg" alt="Dr. Tiago Augusto" loading="lazy" decoding="async" style="--pos-y:12%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dr. Tiago Augusto</div>
-          <div class="case-handle">@drtiagoaugusto · Passos, MG</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 15 mil <span class="arrow">para</span> R$ 100 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 62.909</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 1.045.300</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">16,6x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Ciclo completo de projeto</span>
-            <button class="case-play" type="button" data-video="i9vapFxmH0s" aria-label="Ver depoimento de Dr. Tiago Augusto">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d3">
-        <div class="case-media">
-          <span class="case-idx">03 / 9</span>
-          <img src="assets/cases-opt/thaina-pache.jpg" alt="Dra. Thainá Pache" loading="lazy" decoding="async" style="--pos-y:16%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dra. Thainá Pache</div>
-          <div class="case-handle">@drathainapache</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 0 <span class="arrow">para</span> R$ 60 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 19.368</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 616.000</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">31,8x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Maior retorno da carteira</span>
-            <button class="case-play" type="button" data-video="phJYnw70IO4" aria-label="Ver depoimento de Dra. Thainá Pache">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d4">
-        <div class="case-media">
-          <span class="case-idx">04 / 9</span>
-          <img src="assets/cases-opt/kissila.jpg" alt="Dra. Kissila Lopes" loading="lazy" decoding="async" style="--pos-y:14%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dra. Kissila Lopes</div>
-          <div class="case-handle">@dra.kissilalopes · Espera Feliz, MG</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 0 <span class="arrow">para</span> R$ 60 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 25.234</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 362.602</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">14,4x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Começou do zero</span>
-            <button class="case-play" type="button" data-video="5Zx9sqI-I5g" aria-label="Ver depoimento de Dra. Kissila Lopes">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">05 / 9</span>
-          <img src="assets/cases-opt/lessa-almeida.jpg" alt="Lessa e Almeida" loading="lazy" decoding="async" style="--pos-y:20%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Lessa e Almeida</div>
-          <div class="case-handle">@lessaealmeidaodonto · Balneário Camboriú, SC</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 20 mil <span class="arrow">para</span> R$ 63 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Investido em anúncio</span><span class="v">R$ 12.394</span></div>
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 263.323</span></div>
-            <div><span class="k">Retorno</span><span class="v roas">21,2x</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Lentes e facetas</span>
-            <button class="case-play" type="button" data-video="AKQEXRSCPWg" aria-label="Ver depoimento de Lessa e Almeida">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">06 / 9</span>
-          <div class="case-ini" aria-hidden="true"><span>C</span></div>
-        </div>
-        <div class="case-body">
-          <div class="case-name">CORP Odontologia</div>
-          <div class="case-handle">@corp.odonto · Costa Rica, MS</div>
-          <div class="case-big">
-            <span class="lbl">Faturamento por mês</span>
-            <span class="val">R$ 0 <span class="arrow">para</span> R$ 50 mil</span>
-          </div>
-          <div class="case-mini">
-            <div><span class="k">Faturamento gerado</span><span class="v">R$ 200.295</span></div>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Cidade de 20 mil habitantes</span>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">07 / 9</span>
-          <img src="assets/cases-opt/pedro-caio.jpg" alt="Dr. Pedro Caio" loading="lazy" decoding="async" style="--pos-y:25%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dr. Pedro Caio</div>
-          <div class="case-handle">@dr.pedrocaio · Caruaru, PE</div>
-          <div class="case-big">
-            <span class="lbl">O que mudou</span>
-            <span class="val">Quadruplicou<span class="suffix"> o faturamento</span></span>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Receita 4x</span>
-            <button class="case-play" type="button" data-video="HgL4PKysuX8" aria-label="Ver depoimento de Dr. Pedro Caio">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">08 / 9</span>
-          <img src="assets/cases-opt/douglas-vaz.jpg" alt="Dr. Douglas Vaz" loading="lazy" decoding="async" style="--pos-y:6%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">Dr. Douglas Vaz</div>
-          <div class="case-handle">@drdouglasvaz · Belo Horizonte, MG</div>
-          <div class="case-big">
-            <span class="lbl">O que mudou</span>
-            <span class="val">Dobrou de tamanho<span class="suffix"> em 6 meses</span></span>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Crescimento estrutural</span>
-            <button class="case-play" type="button" data-video="SHZ0wod3R_c" aria-label="Ver depoimento de Dr. Douglas Vaz">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-      <article class="case r d5">
-        <div class="case-media">
-          <span class="case-idx">09 / 9</span>
-          <img src="assets/cases-opt/dellatorre.jpg" alt="DellaTorre Odontologia" loading="lazy" decoding="async" style="--pos-y:22%">
-        </div>
-        <div class="case-body">
-          <div class="case-name">DellaTorre Odontologia</div>
-          <div class="case-handle">@dellatorre_odontologia · Caxias do Sul, RS</div>
-          <div class="case-big">
-            <span class="lbl">O que mudou</span>
-            <span class="val">Dobrou<span class="suffix"> faturamento e nº de pacientes</span></span>
-          </div>
-          <div class="case-foot">
-            <span class="tag">Crescimento sustentado</span>
-            <button class="case-play" type="button" data-video="qiPBgSPhp84" aria-label="Ver depoimento de DellaTorre Odontologia">
-              <span class="ic"><svg viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg></span>
-              <span>Ver depoimento</span>
-            </button>
-          </div>
-        </div>
-      </article>
-    </div>
-
-    <div class="audit r">
-      <div class="audit-row">
-        <div><span class="k">Nos 5 cases com a conta fechada</span><span class="v">R$ 198.639 investidos em anúncio</span></div>
-        <div><span class="k">Viraram</span><span class="v"><span class="grad-text">R$ 4.390.472</span> em tratamento vendido</span></div>
-        <div><span class="k">Retorno médio desses 5</span><span class="v">22,1x</span></div>
-      </div>
-      <p class="audit-note">Esses são os cases que a gente escolhe mostrar, não a carteira inteira, e resultado passado não garante resultado futuro. Cada número é de um período específico do projeto daquela clínica, medido no gerenciador de anúncios e no fechamento informado por ela. Onde a gente não tem o valor exato do investimento, preferimos mostrar só a progressão de faturamento a inventar a conta.</p>
-    </div>
-
   </div>
 </section>
 
@@ -1893,7 +1705,7 @@ section{padding:clamp(56px,7vw,104px) 0}
           <h4>A empresa</h4>
           <a href="#oque">O que fazemos</a>
           <a href="#metodo">Como funciona</a>
-          <a href="#cases">Resultados</a>
+          <a href="#depoimentos">Resultados</a>
           <a href="#quem">Quem somos</a>
         </div>
         <div class="f-col">
@@ -2458,6 +2270,21 @@ function track(nome, dados){
   document.querySelectorAll('.pilar-section').forEach(function(s){ io.observe(s); });
 })();
 
+/* ===== seletor de tema (revisao) ===== */
+(function(){
+  var temas = ['atual','a','b','c'], nomes = {atual:'Atual', a:'A', b:'B', c:'C'};
+  var sw = document.createElement('div'); sw.className = 'tema-sw'; sw.innerHTML = '<span>TEMA</span>' +
+    temas.map(function(t){ return '<button type="button" data-t="'+t+'">'+nomes[t]+'</button>'; }).join('');
+  document.body.appendChild(sw);
+  function usa(t){
+    temas.forEach(function(x){ document.body.classList.toggle('tema-'+x, x===t && x!=='atual'); });
+    [].forEach.call(sw.querySelectorAll('button'), function(b){ b.classList.toggle('on', b.dataset.t===t); });
+    try{ history.replaceState(null,'', t==='atual' ? location.pathname : '?tema='+t); }catch(e){}
+  }
+  sw.addEventListener('click', function(e){ var b = e.target.closest('button'); if(b) usa(b.dataset.t); });
+  var q = (location.search.match(/tema=([abc])/)||[])[1];
+  usa(q || 'atual');
+})();
 </script>
 
 </div>
