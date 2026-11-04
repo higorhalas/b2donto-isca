@@ -11,7 +11,7 @@
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "x23mfc68mo");
 </script>
-<title>Diagnóstico · Dr. Leonardo Cintra</title>
+<title>Proposta · Dr. Leonardo e Dr. Vitor · B2Donto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -2176,6 +2176,28 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
   12%{ opacity:1; transform:scale(1.4); }
   38%{ opacity:.28; transform:scale(.9); }
 }
+.invest-wrap{display:flex; flex-direction:column; gap:16px; max-width:540px; margin:10px auto 0}
+.invest-card{position:relative; border:1px solid var(--line); border-radius:20px; padding:30px 26px; text-align:center;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012))}
+.invest-card.hero{border-color:rgba(0,225,195,.4); background:linear-gradient(180deg,rgba(0,225,195,.10),rgba(255,255,255,.012));
+  box-shadow:0 0 34px rgba(0,225,195,.14)}
+.invest-tag{display:inline-block; font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--cyan); background:rgba(0,225,195,.12); padding:5px 12px; border-radius:20px; margin-bottom:14px}
+.invest-tag.muted{color:var(--cool-grey); background:rgba(255,255,255,.06)}
+.invest-num{font-weight:800; line-height:.95; letter-spacing:-.03em; color:#fff}
+.invest-card.hero .invest-num{font-size:clamp(58px,15vw,92px);
+  background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.invest-card .invest-num{font-size:clamp(44px,11vw,64px)}
+.invest-num .per{font-size:.30em; font-weight:700; letter-spacing:0; color:var(--cool-grey); -webkit-text-fill-color:var(--cool-grey)}
+.invest-obs{font-size:13.5px; color:var(--cool-grey); margin-top:14px; line-height:1.45}
+.invest-media{max-width:540px; margin:18px auto 0; text-align:center; font-size:14px; color:var(--cool-grey)}
+.invest-media b{color:var(--off-white)}
+@media (min-width:1024px){.metodologia-wrap .pilar-grid{max-width:1180px;margin-left:auto;margin-right:auto;padding-left:40px;padding-right:40px;box-sizing:border-box}}
+
+/* Raio-X 360: halos acendem em sequencia (chase), sem rotacao */
+.rx-halo{ opacity:0; animation:rxChase 6s ease-in-out infinite; animation-delay:calc(var(--i) * 1s) }
+@keyframes rxChase{ 0%{opacity:0} 8%{opacity:.9} 22%{opacity:0} 100%{opacity:0} }
+@media (prefers-reduced-motion: reduce){ .rx-halo{ animation:none; opacity:.5 } }
 </style>
 </head>
 <body>
@@ -2217,7 +2239,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 <!-- FIXED HEADER -->
 <div class="fixed-header">
   <div class="logo">B2<span>donto</span></div>
-  <span class="badge">RAIO-X</span>
+  <span class="badge">PROPOSTA</span>
 </div>
 
 <!-- BEAM HORIZONTAL (linha de luz percorrendo a tela) -->
@@ -2269,12 +2291,12 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
           <line x1="22" y1="78" x2="28" y2="72" stroke="rgba(216,123,241,.5)" stroke-width=".8"/>
         </svg>
       </div>
-      <div class="name"><span class="glitch" data-text="RAIO-X">RAIO-X</span><span class="dot"></span><span class="three-sixty">360</span></div>
-      <div class="tagline">Diagnóstico Digital</div>
+      <div class="name"><span class="glitch" data-text="PROPOSTA">PROPOSTA</span><span class="dot"></span><span class="three-sixty">B2</span></div>
+      <div class="tagline">Aceleração Comercial</div>
     </div>
-    <div class="eyebrow">Diagnóstico estratégico da presença digital</div>
-    <h1><span class="grad-text">Dr. Leonardo Cintra</span></h1>
-    <p class="sub">Um raio-x do perfil da clínica, do Google e do atendimento, e o caminho pra sair só do boca a boca e <b>escalar com previsibilidade</b>.</p>
+    <div class="eyebrow">Proposta de aceleração comercial</div>
+    <h1>Plano para<br><span class="grad-text">Dr. Leonardo<br>e Dr. Vitor</span></h1>
+    <p class="sub">Implante, protocolo e lente rumo aos R$ 150 mil por mês, com a clínica nova já rodando.</p>
     <p class="hero-rotator">B2Donto entrega <span class="rotator">
       <span class="rotator-word">tráfego que converte.</span>
       <span class="rotator-word">Maia que atende 24h.</span>
@@ -2284,31 +2306,43 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
     <div class="scroll-hint"></div>
   </header>
 
+  <!-- DREAM -->
+  <section data-anim="slide-up" data-theme="purple">
+    <div class="r eyebrow">O que vocês querem</div>
+    <h2 class="title r d1">Onde vocês<br>querem chegar</h2>
+    <p class="lead r d2">Vocês disseram: <em>"A gente quer triplicar o que a gente fatura hoje."</em></p>
+    <div class="grid-3">
+      <div class="fcard ok r d1"><div class="ftop"><span class="flbl">01 · Faturamento</span></div><div class="fval">R$ 150 mil só no odonto</div><div class="fobs">Triplicar com implante, protocolo e lente, os casos que vocês querem fazer.</div></div>
+      <div class="fcard ok r d2"><div class="ftop"><span class="flbl">02 · Clínica nova</span></div><div class="fval">Mudar com a casa pronta</div><div class="fobs">Chegar no prédio novo com secretária, telefone próprio e o processo já rodando.</div></div>
+      <div class="fcard ok r d3"><div class="ftop"><span class="flbl">03 · Marca</span></div><div class="fval">A clínica como referência</div><div class="fobs">Um Instagram só de odonto, com autoridade, que traga o caso certo e não volume.</div></div>
+    </div>
+  </section>
+
   <!-- PANORAMA -->
   <section data-anim="slide-up" data-theme="cyan">
     <div class="r eyebrow">Diagnóstico geral</div>
-    <h2 class="title r d1">Como estão seus<br>canais hoje</h2>
-    <p class="lead r d2">Avaliamos os 4 pilares da sua presença digital, Dr. Leonardo. A base é forte: casos de lente bem fotografados, uma linha de trabalho clara de naturalidade e uma clínica que, como você contou, já cresce pelo boca a boca. O que pode estar travando o próximo passo são <b>os caminhos até você e o que acontece depois do primeiro contato</b>: um perfil da clínica com 287 seguidores, 1 avaliação no Google e, pelas taxas que você passou, 1 em cada 10 contatos chegando na cadeira.</p>
+    <h2 class="title r d1">Como estão os canais<br>da clínica hoje</h2>
+    <p class="lead r d2">A base é forte: casos de lente bem fotografados e uma clínica que já cresce pelo boca a boca. O que pode estar travando é <b>o caminho até vocês e o que acontece depois do primeiro contato</b>.</p>
 
     <div class="grid-2">
       <div class="chan r d1">
         <div class="top"><span class="nm">Instagram</span><span class="pill atencao">Atenção</span></div>
-        <div class="desc">O perfil da clínica, @drleonardocintralentes, tem 287 seguidores e casos de lente com foto de estúdio. Mas só 1 dos 24 posts do último ano é da própria clínica, e nenhum convida pra agendar.</div>
+        <div class="desc">287 seguidores e casos de lente com foto de estúdio. Mas só 1 dos 24 posts do último ano é da clínica, e nenhum convida pra agendar.</div>
         <div class="bar"><i class="atencao" data-w="45"></i></div>
       </div>
       <div class="chan r d2">
         <div class="top"><span class="nm">Google Meu Negócio</span><span class="pill critico">Crítico</span></div>
-        <div class="desc">A ficha da LEOMA tem nota 5,0, mas <b>só 1 avaliação</b>, de 2 anos atrás, e nenhum site. Na busca por lentes em Franca, ela não aparece entre as 10 primeiras.</div>
+        <div class="desc">Nota 5,0, mas <b>só 1 avaliação</b>, de 2 anos atrás, e sem site. Na busca por lentes em Franca, não aparece entre as 10 primeiras.</div>
         <div class="bar"><i class="critico" data-w="25"></i></div>
       </div>
       <div class="chan r d3">
         <div class="top"><span class="nm">Links e WhatsApp</span><span class="pill atencao">Atenção</span></div>
-        <div class="desc">O link da bio abre o WhatsApp Business. Mas o 2º WhatsApp do perfil da LEOMA foi salvo <b>com o código dos EUA</b>, e não encontramos site.</div>
+        <div class="desc">O link da bio abre o WhatsApp Business. Mas o 2º WhatsApp do perfil foi salvo <b>com o código dos EUA</b>.</div>
         <div class="bar"><i class="atencao" data-w="45"></i></div>
       </div>
       <div class="chan r d4">
         <div class="top"><span class="nm">Atendimento</span><span class="pill critico">Crítico</span></div>
-        <div class="desc">Ninguém dedicado no WhatsApp e resposta no mesmo dia. 5 de cada 10 contatos agendam, mas só 2 de cada 10 agendados aparecem: <b>1 em cada 10 chega na cadeira</b>.</div>
+        <div class="desc">Ninguém dedicado no WhatsApp e resposta no mesmo dia. No fim, <b>1 em cada 10 contatos chega na cadeira</b>.</div>
         <div class="bar"><i class="critico" data-w="30"></i></div>
       </div>
     </div>
@@ -2338,14 +2372,14 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       <div class="cols">
         <div class="r d2">
           <div class="colhead pos">▲ O que está bom</div>
-          <div class="li pos"><span class="ic">✓</span>Nome da clínica e endereço completo na bio, com edifício e sala: quem vai pela primeira vez chega sem se perder</div>
-          <div class="li pos"><span class="ic">✓</span>O link da bio abre direto o WhatsApp Business, sem página no meio: um toque e a conversa começa</div>
-          <div class="li pos"><span class="ic">✓</span>Destaques separados por serviço: Harmonização, Lentes cerâmicas e Clínica geral</div>
+          <div class="li pos"><span class="ic">✓</span>Nome da clínica e endereço completo na bio: quem vai pela primeira vez chega sem se perder</div>
+          <div class="li pos"><span class="ic">✓</span>O link da bio abre direto o WhatsApp Business: um toque e a conversa começa</div>
+          <div class="li pos"><span class="ic">✓</span>Destaques separados por serviço, como Lentes cerâmicas e Clínica geral</div>
         </div>
         <div class="r d3">
           <div class="colhead atn">▼ Pontos de atenção</div>
           <div class="li atn"><span class="ic">!</span>A bio não diz o que a clínica faz nem convida pra agendar: lente, implante e protocolo não aparecem</div>
-          <div class="li atn"><span class="ic">!</span>Os 3 destaques têm a mesma capa, o logo. O paciente só diferencia pelo nome, que aparece cortado ("Harmoniz...", "Lentes ce...")</div>
+          <div class="li atn"><span class="ic">!</span>Os 3 destaques têm a mesma capa, o logo, e o nome aparece cortado ("Lentes ce...")</div>
           <div class="li atn"><span class="ic">!</span>O 2º WhatsApp do perfil foi salvo com +1, o código dos EUA: quem toca ali não fala com a clínica</div>
         </div>
       </div>
@@ -2373,13 +2407,11 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
         <div class="r d2">
           <div class="colhead pos">▲ O que está bom</div>
           <div class="li pos"><span class="ic">✓</span>As 9 primeiras fotos são resultado: sorrisos com foto de estúdio, antes e depois lado a lado</div>
-          <div class="li pos"><span class="ic">✓</span>Um dos posts fixados compara o antes e o depois com um Uno e uma Ferrari: quem nunca fez lente entende na hora</div>
-          <div class="li pos"><span class="ic">✓</span>Legendas que explicam o caso e a linha de trabalho: "Somente o necessário", "Sem exageros". Quem tem medo de lente artificial entende na hora</div>
+          <div class="li pos"><span class="ic">✓</span>Um post fixado compara o antes e o depois com um Uno e uma Ferrari: quem nunca fez lente entende na hora</div>
+          <div class="li pos"><span class="ic">✓</span>Legendas que explicam a linha de trabalho: "Somente o necessário", "Sem exageros"</div>
         </div>
         <div class="r d3">
           <div class="colhead atn">▼ Pontos de atenção</div>
-          <div class="li atn"><span class="ic">!</span>23 dos 24 posts do último ano são parcerias com outros perfis: a clínica quase não publica nada dela</div>
-          <div class="li atn"><span class="ic">!</span>Nenhum post do último ano diz como marcar uma avaliação</div>
           <div class="li atn"><span class="ic">!</span>De julho a setembro, nenhum post novo. Nesse tempo, o Instituto Vert publicou 27</div>
         </div>
       </div>
@@ -2409,14 +2441,14 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
         <div class="r d2">
           <div class="colhead pos">▲ O que está bom</div>
           <div class="li pos"><span class="ic">✓</span>Ficha com o nome da LEOMA, endereço completo, horário e o mesmo WhatsApp da bio</div>
-          <div class="li pos"><span class="ic">✓</span>A avaliação que existe cita vocês dois pelo nome: "Adorei Dra Maísa e Dr Leo, excelências em odontologia"</div>
+          <div class="li pos"><span class="ic">✓</span>A única avaliação é nota 5 e cita o Dr. Leo pelo nome</div>
           <div class="li pos"><span class="ic">✓</span>Foto da recepção com a marca na parede: o paciente reconhece a clínica quando chega</div>
         </div>
         <div class="r d3">
           <div class="colhead atn">▼ Pontos de atenção</div>
           <div class="li atn"><span class="ic">!</span>1 avaliação, de 2 anos atrás. Na mesma busca aparecem vizinhos com 12, 46 e mais de mil</div>
           <div class="li atn"><span class="ic">!</span>Sem site: a ficha mostra "Adicionar website" no lugar</div>
-          <div class="li atn"><span class="ic">!</span>Nas buscas "lentes de contato dental Franca SP" e "implante dentário Franca SP" no Google Maps, a LEOMA não aparece entre as 10 primeiras</div>
+          <div class="li atn"><span class="ic">!</span>Nas buscas por lente e por implante em Franca, no Google Maps, a LEOMA não aparece entre as 10 primeiras</div>
         </div>
       </div>
     </div>
@@ -2424,7 +2456,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 
   <!-- BENCHMARK -->
   <section data-anim="wipe-h" data-theme="cyan">
-    <div class="r eyebrow">Benchmark · Os concorrentes que você citou</div>
+    <div class="r eyebrow">Benchmark · Os concorrentes que vocês citaram</div>
     <h2 class="title r d1">Quem disputa<br>o mesmo paciente</h2>
     <div class="btable r d2">
       <div class="brow head"><div class="bc">Critério</div><div class="bc me">LEOMA</div><div class="bc">Instituto Vert</div><div class="bc">Instituto Douglas Marques</div></div>
@@ -2435,13 +2467,12 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       <div class="brow"><div class="bc crit">Google (Franca)</div><div class="bc me">5,0 (1)</div><div class="bc">4,8 (23)<span class="trend">23x</span></div><div class="bc">5,0 (39)<span class="trend">39x</span></div></div>
     </div>
     <div class="resumo r d3">
-      <p>Os dois concorrentes que você citou têm quase 40 vezes os seguidores da LEOMA. O <b>Instituto Vert</b> acelerou: foram 18 posts em outubro, com unidade em Franca e em Ribeirão Preto e uma página que já abre com "Agende sua avaliação". O <b>Instituto Douglas Marques</b> soma 39 avaliações no Google e ensina resina pra outros dentistas: mais de 400 já passaram pelo curso. <span style="opacity:.7">(x na tabela = quantas vezes cada um tem o seu número.)</span></p>
-      <p class="tk">→ Resultado você já entrega. O que separa vocês é a prova à vista de quem pesquisa: avaliação no Google, constância no feed e um convite claro pra agendar.</p>
+      <p><span style="opacity:.7">(x na tabela = quantas vezes cada um tem o número da LEOMA.)</span></p>
+      <p class="tk">→ Resultado vocês já entregam. O que separa vocês é a prova à vista de quem pesquisa: avaliação no Google, constância no feed e um convite claro pra agendar.</p>
     </div>
 
     <div class="grid-2" style="margin-top:18px">
-      <div class="fcard ok r d1"><div class="ftop"><span class="flbl">Onde você já está forte</span><span class="tag">✓</span></div><div class="fval">Refazer a lente de outro</div><div class="fobs">"A paciente estava insatisfeita com suas lentes, feitas por outro profissional." Pelo menos 5 casos de troca no feed, um deles com 22 lentes cerâmicas. Quem se arrependeu de uma lente procura exatamente isso.</div><div class="fmelhoria"><b>Como usar:</b> uma campanha só pra quem quer refazer a lente, com esses casos.</div></div>
-      <div class="fcard warn r d2"><div class="ftop"><span class="flbl">O que perseguir</span><span class="tag">!</span></div><div class="fval">Prova no Google</div><div class="fobs">Os dois concorrentes têm 23 e 39 avaliações em Franca. A LEOMA tem 1, de 2 anos atrás. Pra quem compara clínicas antes de investir R$&nbsp;8 mil, esse número pesa.</div><div class="fmelhoria"><b>Como aplicar:</b> pedido de avaliação no fim de cada caso entregue, com o link direto da ficha.</div></div>
+      <div class="fcard ok r d1" style="grid-column:1/-1"><div class="ftop"><span class="flbl">Onde vocês já estão fortes</span><span class="tag">✓</span></div><div class="fval">Refazer a lente de outro</div><div class="fobs">Pelo menos 5 casos de troca de lente feita por outro profissional, um deles com 22 lentes cerâmicas. Quem se arrependeu de uma lente procura exatamente isso.</div></div>
     </div>
   </section>
 
@@ -2449,7 +2480,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
   <section data-anim="zoom-in" data-theme="danger">
     <div class="r eyebrow">Atendimento · O coração da venda</div>
     <h2 class="title r d1">O furo está depois<br>da agenda: 8 em 10 faltam</h2>
-    <p class="lead r d2">Pelas taxas que você passou, de cada 10 pessoas que falam com a clínica, 5 marcam avaliação. É um bom começo. O problema vem depois: de cada 10 que agendam, só 2 aparecem. <b>No fim, 1 em cada 10 contatos senta na cadeira.</b></p>
+    <p class="lead r d2">De cada 10 pessoas que falam com a clínica, 5 marcam avaliação. Mas de cada 10 que agendam, só 2 aparecem. <b>No fim, 1 em cada 10 contatos senta na cadeira.</b></p>
 
     <div class="funnel r d2">
       <div class="funnel-row">
@@ -2464,172 +2495,210 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
         <div class="lbl"><span>Comparecem na consulta</span><b>2 de 10 agendados</b></div>
         <div class="track"><div class="fill" style="background:linear-gradient(90deg,var(--blue),#6f8bf9)" data-w="10">1</div></div>
       </div>
-      <div class="shotcap" style="text-align:left; letter-spacing:0; text-transform:none; font-size:12.5px; color:var(--cool-grey)">De 10 contatos, 1 chega na cadeira. Com ticket médio de R$&nbsp;8 mil, cada falta pesa: se 6 de cada 10 agendados comparecessem, seriam 3 na cadeira em vez de 1, <b>com os mesmos contatos</b>.</div>
+      <div class="shotcap" style="text-align:left; letter-spacing:0; text-transform:none; font-size:12.5px; color:var(--cool-grey)">Com ticket médio de R$&nbsp;8 mil, se 6 de cada 10 agendados comparecessem, seriam 3 na cadeira em vez de 1, <b>com os mesmos contatos</b>.</div>
     </div>
 
     <div class="grid-2">
-      <div class="fcard warn r d1"><div class="ftop"><span class="flbl">Tempo de resposta</span><span class="tag">!</span></div><div class="fval">No mesmo dia</div><div class="fobs">Quem pesquisa lente ou implante costuma chamar mais de uma clínica, e quem responde primeiro sai na frente.</div><div class="fmelhoria"><b>Como melhorar:</b> IA de pré-atendimento responde em segundos, 24h por dia, 7 dias por semana.</div></div>
-      <div class="fcard warn r d1"><div class="ftop"><span class="flbl">Quem responde</span><span class="tag">!</span></div><div class="fval">Ninguém dedicado</div><div class="fobs">Sem um dono do WhatsApp, a resposta depende de quem estiver livre entre um paciente e outro. E um tratamento de R$&nbsp;8 mil pede condução até a avaliação.</div><div class="fmelhoria"><b>Como melhorar:</b> IA cobre o 1º contato e a triagem; uma pessoa assume com roteiro comercial treinado.</div></div>
-      <div class="fcard ok r d2"><div class="ftop"><span class="flbl">Como agenda</span><span class="tag">✓</span></div><div class="fval">WhatsApp</div><div class="fobs">Um número só, na bio e no Google, no WhatsApp Business. Ninguém precisa adivinhar onde chamar.</div><div class="fmelhoria"><b>Como manter:</b> WhatsApp como porta principal, com resposta rápida e registro de cada agendamento.</div></div>
-      <div class="fcard warn r d2"><div class="ftop"><span class="flbl">Taxa de agendamento</span><span class="tag">!</span></div><div class="fval">5 de 10</div><div class="fobs">Metade dos contatos vira avaliação. A outra metade some no meio da conversa, e dá pra recuperar parte dela.</div><div class="fmelhoria"><b>Como melhorar:</b> resposta imediata e roteiro que leva a conversa até o agendamento.</div></div>
-      <div class="fcard warn r d3"><div class="ftop"><span class="flbl">Comparecimento</span><span class="tag">!</span></div><div class="fval">2 de 10</div><div class="fobs">8 de cada 10 horários marcados ficam vazios. É a maior perda do funil hoje, e o lembrete só no dia ajuda a explicar.</div><div class="fmelhoria"><b>Como melhorar:</b> lembrete 2 dias antes, 1 dia antes e no dia, com pedido de confirmação.</div></div>
-      <div class="fcard warn r d3"><div class="ftop"><span class="flbl">Perde pacientes</span><span class="tag">!</span></div><div class="fval">Quase não</div><div class="fobs">Você marcou que quase não perde paciente. Mas se 8 de cada 10 agendados não aparecem, a perda pode estar escondida: quem falta não diz não, só não vem. Vale conferir esse número na conversa.</div><div class="fmelhoria"><b>Como medir:</b> registrar cada agendamento e cada falta por 30 dias.</div></div>
+      <div class="fcard warn r d1"><div class="ftop"><span class="flbl">Tempo de resposta</span><span class="tag">!</span></div><div class="fval">No mesmo dia</div><div class="fobs">Quem pesquisa lente ou implante costuma chamar mais de uma clínica, e quem responde primeiro sai na frente.</div></div>
+      <div class="fcard warn r d1"><div class="ftop"><span class="flbl">Quem responde</span><span class="tag">!</span></div><div class="fval">Ninguém dedicado</div><div class="fobs">Sem um dono do WhatsApp, a resposta depende de quem estiver livre.</div></div>
+      <div class="fcard ok r d2"><div class="ftop"><span class="flbl">Como agenda</span><span class="tag">✓</span></div><div class="fval">WhatsApp</div><div class="fobs">Um número só, na bio e no Google. Ninguém precisa adivinhar onde chamar.</div></div>
+      <div class="fcard warn r d2"><div class="ftop"><span class="flbl">Taxa de agendamento</span><span class="tag">!</span></div><div class="fval">5 de 10</div><div class="fobs">A outra metade some no meio da conversa, e dá pra recuperar parte dela.</div></div>
+      <div class="fcard warn r d3"><div class="ftop"><span class="flbl">Comparecimento</span><span class="tag">!</span></div><div class="fval">2 de 10</div><div class="fobs">8 de cada 10 horários marcados ficam vazios: a maior perda do funil hoje.</div></div>
+      <div class="fcard warn r d3"><div class="ftop"><span class="flbl">Perde pacientes</span><span class="tag">!</span></div><div class="fval">Quase não</div><div class="fobs">Vocês marcaram que quase não perdem paciente, mas 8 de cada 10 agendados não aparecem. Quem falta não diz não, só não vem.</div></div>
     </div>
   </section>
 
   <!-- COMERCIAL -->
   <section data-anim="rotate-3d" data-theme="warm">
     <div class="r eyebrow">Processo comercial · Maturidade de vendas</div>
-    <h2 class="title r d1">O quanto seu processo<br>de vendas está pronto</h2>
-    <p class="lead r d2">Atrair é só metade. Estas são as engrenagens que transformam contato em paciente:</p>
+    <h2 class="title r d1">O quanto o processo<br>de vendas está pronto</h2>
+    <p class="lead r d2">Atrair é só metade. O resto acontece aqui:</p>
 
     <div class="grid-2">
-      <div class="fcard ok r d1"><div class="ftop"><span class="flbl">Social selling</span><span class="tag">✓</span></div><div class="fval">Com rotina</div><div class="fobs">Você já aborda quem interage com o perfil, e com constância. Pouca clínica faz isso.</div><div class="fmelhoria"><b>Como usar:</b> levar a mesma rotina pra quem chegar pelo anúncio, com etiqueta e próximo passo.</div></div>
-      <div class="fcard warn r d1"><div class="ftop"><span class="flbl">Etiquetagem de leads</span><span class="tag">!</span></div><div class="fval">Não etiqueta</div><div class="fobs">Sem saber quem está em que etapa, não dá pra saber quem retomar nem medir onde o paciente some.</div><div class="fmelhoria"><b>Como melhorar:</b> etiquetas no WhatsApp Business: novo, em conversa, agendado, compareceu, fechou.</div></div>
-      <div class="fcard warn r d2"><div class="ftop"><span class="flbl">Follow-up de quem parou</span><span class="tag">!</span></div><div class="fval">Não faz</div><div class="fobs">Implante e lente são decisões de semanas. Quem para de responder pode estar comparando orçamento, e fecha com quem lembrou dele.</div><div class="fmelhoria"><b>Como melhorar:</b> cadência (dia seguinte, 2, 3, 4 dias e 1 semana), de preferência automatizada.</div></div>
-      <div class="fcard warn r d2"><div class="ftop"><span class="flbl">Cadência pós-avaliação</span><span class="tag">!</span></div><div class="fval">Não tem</div><div class="fobs">Quem avaliou e não fechou é o paciente mais quente que existe, e hoje não é retomado.</div><div class="fmelhoria"><b>Como melhorar:</b> follow-up pós-avaliação nos primeiros dias, quando a chance de fechar é maior.</div></div>
-      <div class="fcard warn r d3"><div class="ftop"><span class="flbl">Lembretes de consulta</span><span class="tag">!</span></div><div class="fval">Só no dia</div><div class="fobs">O lembrete no dia chega tarde: a pessoa já se programou pra outra coisa. Com 2 de cada 10 comparecendo, é o ajuste mais rápido do funil.</div><div class="fmelhoria"><b>Como melhorar:</b> lembrar 2 dias antes, 1 dia antes e no dia, de preferência por ligação.</div></div>
-      <div class="fcard warn r d3"><div class="ftop"><span class="flbl">Campanha de indicação</span><span class="tag">!</span></div><div class="fval">Não roda</div><div class="fobs">A clínica cresce pelo boca a boca, como você contou. Mas sem campanha, a indicação depende do paciente lembrar sozinho.</div><div class="fmelhoria"><b>Como melhorar:</b> campanha de indicação com recompensa e gatilho no fim de cada tratamento.</div></div>
+      <div class="fcard ok r d1"><div class="ftop"><span class="flbl">Social selling</span><span class="tag">✓</span></div><div class="fval">Com rotina</div><div class="fobs">Vocês já abordam quem interage com o perfil, e com constância. Pouca clínica faz isso.</div></div>
+      <div class="fcard warn r d1"><div class="ftop"><span class="flbl">Etiquetagem de leads</span><span class="tag">!</span></div><div class="fval">Não etiqueta</div><div class="fobs">Sem etapa marcada, não dá pra saber quem retomar nem onde o paciente some.</div></div>
+      <div class="fcard warn r d2"><div class="ftop"><span class="flbl">Follow-up de quem parou</span><span class="tag">!</span></div><div class="fval">Não faz</div><div class="fobs">Implante e lente são decisões de semanas. Quem para de responder pode estar comparando orçamento.</div></div>
+      <div class="fcard warn r d2"><div class="ftop"><span class="flbl">Cadência pós-avaliação</span><span class="tag">!</span></div><div class="fval">Não tem</div><div class="fobs">Quem avaliou e não fechou é o paciente mais quente, e hoje não é retomado.</div></div>
+      <div class="fcard warn r d3"><div class="ftop"><span class="flbl">Lembretes de consulta</span><span class="tag">!</span></div><div class="fval">Só no dia</div><div class="fobs">O lembrete no dia chega tarde: a pessoa já se programou pra outra coisa.</div></div>
+      <div class="fcard warn r d3"><div class="ftop"><span class="flbl">Campanha de indicação</span><span class="tag">!</span></div><div class="fval">Não roda</div><div class="fobs">Sem campanha, a indicação depende do paciente lembrar sozinho.</div></div>
     </div>
   </section>
 
-  <!-- VERBA -->
-  <section data-anim="wipe-radial" data-theme="blue">
-    <div class="r eyebrow">Seu ponto de partida · Sugestão</div>
-    <h2 class="title r d1">Como investir<br>os primeiros R$&nbsp;1.500/mês</h2>
-    <p class="lead r d2">Você nunca anunciou e marcou que ainda não definiu a verba. Pra começar, sugerimos R$&nbsp;1.500 por mês. Com 1,8 mil seguidores, já dá pra dividir em três papéis. E uma regra vem antes do valor: com 1 em cada 10 contatos chegando na cadeira, <b>o atendimento entra junto com a campanha</b>.</p>
-    <div class="donutwrap">
-      <div class="donut r d2">
-        <svg width="200" height="200" viewBox="0 0 200 200">
-          <defs>
-            <linearGradient id="gOferta" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#00E1C3"/><stop offset="1" stop-color="#42F3DD"/>
-            </linearGradient>
-            <linearGradient id="gDescoberta" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#3B5BF0"/><stop offset="1" stop-color="#8AA4FF"/>
-            </linearGradient>
-            <linearGradient id="gRelacao" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#A713B9"/><stop offset="1" stop-color="#E08CF5"/>
-            </linearGradient>
-          </defs>
-          <circle cx="100" cy="100" r="82" stroke="rgba(255,255,255,.06)" fill="none"></circle>
-          <circle id="seg1" cx="100" cy="100" r="82" pathLength="100" stroke="url(#gOferta)" stroke-dasharray="0 100"></circle>
-          <circle id="seg2" cx="100" cy="100" r="82" pathLength="100" stroke="url(#gDescoberta)" stroke-dasharray="0 100"></circle>
-          <circle id="seg3" cx="100" cy="100" r="82" pathLength="100" stroke="url(#gRelacao)" stroke-dasharray="0 100"></circle>
-        </svg>
-        <div class="center"><div class="t">R$ 1.500</div><div class="d">R$ 50 / dia</div></div>
+  <!-- INVERSÃO DE CRENÇA -->
+  <section data-anim="slide-up" data-theme="danger">
+    <div class="r eyebrow">Por que só anúncio não resolve</div>
+    <h2 class="title r d1">Não é falta de esforço.<br>É o modelo.</h2>
+    <p class="lead r d2">Hoje cada um de vocês responde no próprio celular. Uma agência que só entrega mensagem traria mais conversas pra ninguém atender.</p>
+    <div class="grid-2">
+      <div class="r d2">
+        <div class="colhead atn">▼ Modelo tradicional</div>
+        <div class="li atn"><span class="ic">!</span>Anuncia só pros 5% que já estão prontos e pesquisam preço</div>
+        <div class="li atn"><span class="ic">!</span>Mede clique e mensagem, não paciente na cadeira</div>
+        <div class="li atn"><span class="ic">!</span>O contato chega e espera alguém responder</div>
+        <div class="li atn"><span class="ic">!</span>Ninguém vê onde o paciente se perdeu</div>
       </div>
-      <div class="vcards">
-        <div class="vhint r d2">Toque em cada etapa para ver os objetivos de campanha ↓</div>
-
-        <div class="vrow r d2">
-          <div class="vcard" onclick="toggleV(this)" role="button" tabindex="0">
-            <span class="swatch" style="background:#00E1C3"></span>
-            <div class="vinfo"><div class="vph">Oferta</div><div class="vtt">Gerar as primeiras vendas</div></div>
-            <div class="vmo"><div class="pc" style="color:#00E1C3">50%</div><div class="mo">R$ 750/mês</div></div>
-            <i class="chev">▾</i>
-          </div>
-          <div class="vdetail"><div class="inner">
-            <div class="vd-h">Possíveis objetivos no Meta Ads</div>
-            <div class="vd-li">Engajamento (conversas)</div>
-            <div class="vd-li">Vendas</div>
-            <div class="vd-li">Formulário nativo</div>
-            <div class="vd-tip">Os <b>casos de troca de lente</b>, como o de outubro, são os criativos mais fortes que você tem.</div>
-          </div></div>
-        </div>
-
-        <div class="vrow r d3">
-          <div class="vcard" onclick="toggleV(this)" role="button" tabindex="0">
-            <span class="swatch" style="background:#4A6CF7"></span>
-            <div class="vinfo"><div class="vph">Descoberta</div><div class="vtt">Aumentar o alcance</div></div>
-            <div class="vmo"><div class="pc" style="color:#4A6CF7">25%</div><div class="mo">R$ 375/mês</div></div>
-            <i class="chev">▾</i>
-          </div>
-          <div class="vdetail"><div class="inner">
-            <div class="vd-h">Possíveis objetivos no Meta Ads</div>
-            <div class="vd-li">Visitas ao perfil</div>
-            <div class="vd-li">VideoView (alcance)</div>
-            <div class="vd-li">Impulsionar publicações do Instagram</div>
-            <div class="vd-tip">Foco em <b>alcançar Franca e região</b>, com vídeos em que você explica o tratamento.</div>
-          </div></div>
-        </div>
-
-        <div class="vrow r d4">
-          <div class="vcard" onclick="toggleV(this)" role="button" tabindex="0">
-            <span class="swatch" style="background:#A713B9"></span>
-            <div class="vinfo"><div class="vph">Relacionamento</div><div class="vtt">Nutrir e reativar a base</div></div>
-            <div class="vmo"><div class="pc" style="color:#D87BF1">25%</div><div class="mo">R$ 375/mês</div></div>
-            <i class="chev">▾</i>
-          </div>
-          <div class="vdetail"><div class="inner">
-            <div class="vd-h">Campanha de engajamento · público quente</div>
-            <div class="vd-li">Seguidores (1,8 mil)</div>
-            <div class="vd-li">Quem curtiu ou comentou</div>
-            <div class="vd-li">Quem engajou com o perfil</div>
-            <div class="vd-li">Viu seu vídeo até 50 a 70%</div>
-          </div></div>
-        </div>
+      <div class="r d3">
+        <div class="colhead pos">▲ B2Donto</div>
+        <div class="li pos"><span class="ic">✓</span>Só clínica odontológica, há 4 anos</div>
+        <div class="li pos"><span class="ic">✓</span>Prepara os outros 95% pra escolher vocês</div>
+        <div class="li pos"><span class="ic">✓</span>A Maia responde em segundos, 24 horas</div>
+        <div class="li pos"><span class="ic">✓</span>O CRM mostra de onde veio e onde parou cada paciente</div>
       </div>
+    </div>
+    <div class="resumo r d3">
+      <p class="tk">→ Quando a secretária chegar, o protocolo e a Maia já estão prontos pra ela.</p>
+    </div>
+  </section>
+
+  <!-- PILARES -->
+  <section data-anim="slide-left" data-theme="purple">
+    <div class="r eyebrow">A virada · o método</div>
+    <h2 class="title r d1">Os 5 pilares que trazem<br>o paciente de implante e lente</h2>
+    <p class="lead r d2">Primeiro o diagnóstico, depois quatro frentes operando juntas, da vitrine ao paciente fechado.</p>
+
+    <div class="grid-2">
+      <div class="fcard ok r d1" style="grid-column:1/-1"><div class="ftop"><span class="flbl">Pilar 01 · Diagnóstico</span><span class="tag">✓</span></div><div class="fval">Briefing Raio-X 360</div><div class="fobs">O Raio-X que vocês já leram, aprofundado no onboarding: perfil, Google, atendimento e concorrência em Franca.</div></div>
+      <div class="fcard ok r d1"><div class="ftop"><span class="flbl">Pilar 02 · Presença</span><span class="tag">✓</span></div><div class="fval">Vitrine 3E</div><div class="fobs">Estratégia, essência e estética pra que o paciente entenda por que o tratamento de vocês vale mais.</div></div>
+      <div class="fcard ok r d2"><div class="ftop"><span class="flbl">Pilar 03 · Demanda</span><span class="tag">✓</span></div><div class="fval">Efeito Bola de Neve</div><div class="fobs">Campanhas de descoberta, relacionamento e oferta pra implante e lente, do público frio ao pronto pra fechar.</div></div>
+      <div class="fcard ok r d2"><div class="ftop"><span class="flbl">Pilar 04 · Conversão</span><span class="tag">✓</span></div><div class="fval">Agendamento Autoprogressivo</div><div class="fobs">Protocolo comercial validado com mais de 300 clínicas, com a Maia no pré-atendimento 24 horas.</div></div>
+      <div class="fcard ok r d3"><div class="ftop"><span class="flbl">Pilar 05 · Recorrência</span><span class="tag">✓</span></div><div class="fval">Farming da Base</div><div class="fobs">Indicação ativa de quem já fechou e resgate de quem pediu valor e sumiu.</div></div>
+    </div>
+
+    <div class="resumo r d3">
+      <p class="tk">→ Vocês cuidam da cadeira. A gente cuida de trazer o paciente de implante e lente.</p>
+    </div>
+  </section>
+
+  <!-- ENTREGÁVEIS -->
+  <section data-anim="slide-right" data-theme="blue">
+    <div class="r eyebrow">Escopo · O que está incluso</div>
+    <h2 class="title r d1">Tudo que entra<br>na operação de vocês</h2>
+    <p class="lead r d2">Cada frente abaixo é instalada, operada e acompanhada pelo time B2Donto.</p>
+
+    <div class="grid-3">
+      <div class="r d1">
+        <div class="colhead pos">▲ Aquisição</div>
+        <div class="li pos"><span class="ic">✓</span>Gestão de tráfego no Meta</div>
+        <div class="li pos"><span class="ic">✓</span>Campanhas de implante e de lente: descoberta, relacionamento e oferta</div>
+        <div class="li pos"><span class="ic">✓</span>Roteiros dos vídeos e edição das mídias</div>
+        <div class="li pos"><span class="ic">✓</span>Ficha de documentação de caso: antes, depois e depoimento</div>
+        <div class="li pos"><span class="ic">✓</span>Otimização diária das campanhas</div>
+        <div class="li pos"><span class="ic">✓</span>Vitrine nova pro Instagram só de odonto</div>
+        <div class="li pos"><span class="ic">✓</span>Site com casos, técnica e WhatsApp</div>
+        <div class="li pos"><span class="ic">✓</span>Ajustes na ficha do Google</div>
+      </div>
+      <div class="r d2">
+        <div class="colhead pos">▲ Atendimento e conversão</div>
+        <div class="li pos"><span class="ic">✓</span>Maia: IA de pré-atendimento, resposta imediata 24h</div>
+        <div class="li pos"><span class="ic">✓</span>Protocolo de atendimento em 14 aulas</div>
+        <div class="li pos"><span class="ic">✓</span>Análise das conversas e treinamento da secretária</div>
+        <div class="li pos"><span class="ic">✓</span>Follow-up de até 5 resgates de quem sumiu</div>
+        <div class="li pos"><span class="ic">✓</span>CRM com cadastro automático e origem de cada contato</div>
+        <div class="li pos"><span class="ic">✓</span>CRM ligado à Meta: a campanha aprende com os fechamentos de vocês</div>
+      </div>
+      <div class="r d3">
+        <div class="colhead pos">▲ Retenção e escala</div>
+        <div class="li pos"><span class="ic">✓</span>Social selling (transformando novos seguidores em lucro)</div>
+        <div class="li pos"><span class="ic">✓</span>Campanha de indicação com quem já fechou</div>
+        <div class="li pos"><span class="ic">✓</span>Resgate de quem pediu valor e não voltou</div>
+        <div class="li pos"><span class="ic">✓</span>2 reuniões de alinhamento por mês e grupo com o time</div>
+        <div class="li pos"><span class="ic">✓</span>Relatórios semanais de performance</div>
+      </div>
+    </div>
+    <div class="resumo r d3">
+      <p class="tk">→ Vocês gravam com o roteiro pronto. A edição é com a gente.</p>
+    </div>
+  </section>
+
+  <!-- SEM PASSO EM FALSO -->
+  <section data-anim="slide-up" data-theme="cyan">
+    <div class="r eyebrow">Sem passo em falso</div>
+    <h2 class="title r d1">Primeiro a casa pronta,<br>depois o anúncio</h2>
+    <p class="lead r d2">Vocês disseram: <em>"Esse que é nosso medo, começar a investir e não ver o retorno."</em></p>
+    <div class="grid-3">
+      <div class="fcard ok r d1"><div class="ftop"><span class="flbl">Mensalidade</span><span class="tag">✓</span></div><div class="fval">Começa com o tráfego</div><div class="fobs">Até a campanha entrar no ar, vocês pagam só a implementação. Os R$ 2.000 começam junto com o tráfego.</div></div>
+      <div class="fcard ok r d2"><div class="ftop"><span class="flbl">Atendimento primeiro</span><span class="tag">✓</span></div><div class="fval">A casa em ordem antes</div><div class="fobs">Maia, protocolo e lembretes entram antes do anúncio, pra cada contato pago ter alguém pronto do outro lado.</div></div>
+      <div class="fcard ok r d3"><div class="ftop"><span class="flbl">Retorno medido</span><span class="tag">✓</span></div><div class="fval">Cada real rastreado</div><div class="fobs">O CRM mostra de onde veio cada paciente e quanto fechou, com relatório toda semana.</div></div>
     </div>
   </section>
 
   <!-- PLANO -->
   <section data-anim="slide-up-dramatic" data-theme="purple">
-    <div class="r eyebrow">Plano de ação</div>
-    <h2 class="title r d1">Os primeiros<br>passos pra virar o jogo</h2>
+    <div class="r eyebrow">O caminho até o prédio novo</div>
+    <h2 class="title r d1">Os primeiros passos<br>rumo aos R$ 150 mil</h2>
     <div class="plano-progress r d1">
       <div class="pp-top"><span><b id="plano-done">0</b> de <span id="plano-total">0</span> concluídos</span><span id="plano-pct">0%</span></div>
       <div class="pp-bar"><i id="plano-fill"></i></div>
     </div>
 
     <div class="grid-3">
-    <div class="pgroup pg-u r d1">
-      <div class="pgroup-head"><span class="pdot"></span><span class="plabel">Urgente</span><span class="pwhen">O quanto antes</span></div>
-      <div class="plano">
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar lembrete 2 dias antes, 1 dia antes e no dia, com pedido de confirmação</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar IA de pré-atendimento pra responder em segundos, e não no mesmo dia</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar roteiro comercial do primeiro "oi" até a avaliação</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Corrigir o 2º WhatsApp do perfil da LEOMA, trocando o +1 pelo +55</div></div>
+      <div class="pgroup pg-u r d1">
+        <div class="pgroup-head"><span class="pdot"></span><span class="plabel">Agora</span><span class="pwhen">Antes da mudança</span></div>
+        <div class="plano">
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Aprofundar o Raio-X 360 no onboarding</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Definir o Instagram só de odonto e entregar a vitrine nova</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Colocar no ar o site com casos, técnica e WhatsApp</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Gravar os primeiros vídeos com os roteiros prontos</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Assistir às aulas do protocolo comercial no portal</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Corrigir o 2º WhatsApp do perfil, trocando o +1 pelo +55</div></div>
+        </div>
       </div>
-    </div>
-
-    <div class="pgroup pg-i r d2">
-      <div class="pgroup-head"><span class="pdot"></span><span class="plabel">Importante</span><span class="pwhen">Próximas semanas</span></div>
-      <div class="plano">
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar etiquetas por etapa no WhatsApp: novo, em conversa, agendado, compareceu, fechou</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar follow-up cadenciado de quem parou de responder</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar cadência pós-avaliação pra quem compareceu e não fechou</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Aplicar rotina de pedir avaliação no Google a cada caso entregue</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Definir o papel de cada perfil, o seu e o da LEOMA, ou concentrar num só</div></div>
+      <div class="pgroup pg-i r d2">
+        <div class="pgroup-head"><span class="pdot"></span><span class="plabel">Na mudança</span><span class="pwhen">Jan/fev 2027</span></div>
+        <div class="plano">
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Treinar a secretária nova no protocolo de atendimento</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar a Maia e o CRM no telefone da clínica</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar lembrete 2 dias antes, 1 dia antes e no dia</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Subir as campanhas de implante e de lente em Franca</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Implementar o follow-up de 5 resgates</div></div>
+        </div>
       </div>
-    </div>
-
-    <div class="pgroup pg-c r d3">
-      <div class="pgroup-head"><span class="pdot"></span><span class="plabel">Crescimento</span><span class="pwhen">Evolução contínua</span></div>
-      <div class="plano">
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Subir a primeira campanha de Meta Ads com os casos de troca de lente</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Produzir casos de implante e protocolo pro feed e pros anúncios</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Criar campanha de indicação com os pacientes atuais</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Gravar vídeos seus explicando o caso, com convite pra agendar no fim</div></div>
-        <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Acompanhar os resultados toda semana, rumo aos R$&nbsp;150 mil/mês</div></div>
+      <div class="pgroup pg-c r d3">
+        <div class="pgroup-head"><span class="pdot"></span><span class="plabel">Depois</span><span class="pwhen">Escala</span></div>
+        <div class="plano">
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Aplicar a rotina de pedir avaliação no Google a cada caso</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Subir a campanha de troca de lente com os casos do feed</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Criar a campanha de indicação com quem já fechou</div></div>
+          <div class="pitem" onclick="togglePlano(this)" tabindex="0"><span class="pcheck"></span><div class="ptxt">Acompanhar os fechamentos por origem, rumo aos R$ 150 mil/mês</div></div>
+        </div>
       </div>
-    </div>
     </div>
   </section>
 
-  <!-- CTA MID-PAGE (entre PLANO e CASES) -->
-  <section class="cta-mid" data-anim="zoom-glow" data-theme="cyan">
-    <div class="cta-mid-eyebrow r">Com dúvida de por onde começar?</div>
-    <h3 class="r d1">Esse plano vira realidade<br>com a <span class="grad-text">B2 Aceleradora!</span></h3>
-    <a class="btn btn-glitch r d2" href="https://wa.me/5541991008710?text=Quero%20saber%20mais%20sobre%20o%20programa%20B2%20acelera%C3%A7%C3%A3o%20comercial" data-text="Quero acelerar minhas vendas">Quero acelerar minhas vendas</a>
-    <span class="cta-mid-next r d3">Ou veja quem já aplicou <span class="arrow">↓</span></span>
+  <!-- INVESTIMENTO -->
+  <section data-anim="wipe-radial" data-theme="blue">
+    <div class="r eyebrow">Investimento</div>
+    <h2 class="title r d1">Condição especial<br>dos 6 primeiros meses</h2>
+
+    <div class="stats r d2">
+      <div class="stat"><div class="v">R$ 50 mil</div><div class="k">Hoje / mês</div></div>
+      <div class="stat"><div class="v grad">R$ 150 mil</div><div class="k">A meta / mês</div></div>
+      <div class="stat"><div class="v grad">+R$ 1,2 mi</div><div class="k">A mais / ano</div></div>
+    </div>
+    <p class="lead r d2">Um caso de R$ 8 mil paga 4 meses de mensalidade.</p>
+
+    <div class="invest-wrap">
+      <div class="invest-card hero r d1">
+        <span class="invest-tag">Mensalidade · 6 primeiros meses</span>
+        <div class="invest-old" style="font-size:18px;font-weight:700;color:var(--cool-grey);margin:10px 0 2px"><s>R$ 3.390/mês</s></div>
+        <div class="invest-num" style="font-size:clamp(46px,12.5vw,92px);white-space:nowrap">R$&nbsp;2.000<span class="per">/mês</span></div>
+        <div class="invest-obs">Começa só quando o tráfego entrar no ar. Inclui tráfego, Maia, CRM, roteiros, edição, treinamentos e relatórios.</div>
+      </div>
+      <div class="invest-card r d2">
+        <span class="invest-tag muted">Implementação</span>
+        <div class="invest-num" style="white-space:nowrap">12x R$&nbsp;400</div>
+        <div class="invest-obs">Ou <b style="color:var(--off-white)">R$ 4.000 no PIX</b>. Setup inicial: Raio-X 360, vitrine, site, campanhas, Maia e CRM.</div>
+      </div>
+    </div>
+
+    <p class="invest-media r d3">+ <b>Verba de mídia à parte</b>, a partir de R$ 1.500 por mês pra implante e R$ 1.500 pra lente, paga direto à Meta, sem passar pela B2Donto.</p>
   </section>
 
-<!-- CASES -->
+  <!-- CASES -->
   <section data-anim="slide-up" data-theme="cyan">
     <div class="r eyebrow">Cases · Resultados reais</div>
     <h2 class="title r d1">Clínicas que já viveram<br>essa <span class="grad-text">transformação</span></h2>
-    <p class="lead r d2">Não é teoria. Estes são os números reais de clínicas odontológicas que aplicaram o método B2Donto.</p>
+    <p class="lead r d2">Antes de decidir, olha quem já passou por isso. São números reais de clínicas que aplicaram o método B2Donto.</p>
 
     <div class="cases-list">
 
@@ -2863,6 +2932,24 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
     </div>
   </div>
 
+  <!-- COMO COMEÇAMOS -->
+  <section data-anim="slide-up-dramatic" data-theme="purple">
+    <div class="r eyebrow">Como começamos</div>
+    <h2 class="title r d1">Do aceite à clínica<br>pronta pra rodar</h2>
+    <p class="lead r d2">Os roteiros e o protocolo chegam prontos. Bateu o sim, o onboarding começa.</p>
+
+    <div class="grid-2">
+      <div class="fcard ok r d1"><div class="ftop"><span class="flbl">Passo 01 · Dia 1</span><span class="tag">✓</span></div><div class="fval">Aceite e onboarding</div><div class="fobs">Alinhamento, acessos às contas no nome da clínica e briefing. A gente assume a parte técnica.</div></div>
+      <div class="fcard ok r d1"><div class="ftop"><span class="flbl">Passo 02 · Primeiras semanas</span><span class="tag">✓</span></div><div class="fval">Estrutura</div><div class="fobs">Vitrine, site, Maia e CRM configurados com o tom da clínica.</div></div>
+      <div class="fcard ok r d2"><div class="ftop"><span class="flbl">Passo 03 · Com a casa pronta</span><span class="tag">✓</span></div><div class="fval">Tráfego no ar</div><div class="fobs">As campanhas entram, a mensalidade começa e os primeiros contatos chegam.</div></div>
+      <div class="fcard ok r d2"><div class="ftop"><span class="flbl">Passo 04 · Contínuo</span><span class="tag">✓</span></div><div class="fval">Otimização e relatórios</div><div class="fobs">Acompanhamento semanal, ajuste fino e escala do que está funcionando.</div></div>
+    </div>
+
+    <div class="resumo r d3">
+      <p class="tk">→ Ficou alguma dúvida? A gente fecha os detalhes na conversa de terça, 10/11, às 17h.</p>
+    </div>
+  </section>
+
   <!-- MARQUEE DE STATS + CTA -->
   <div class="marquee">
     <div class="marquee-track">
@@ -2881,7 +2968,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 
 
   <!-- ============================================================
-       METODOLOGIA, 4 pilares premium (Renke-style + DNA B2Donto)
+       METODOLOGIA - 5 pilares
        ============================================================ -->
   <div id="metodologiaWrap" class="metodologia-wrap">
 
@@ -2890,8 +2977,8 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
       <div class="sticky-bar">
         <span class="sb-num">Método B2Donto</span>
         <span class="sb-sep">·</span>
-        <span class="sb-name">4 pilares</span>
-        <span class="sb-pillar" id="stickyPillar"><b>01</b>Fortalecer a presença digital</span>
+        <span class="sb-name">5 pilares</span>
+        <span class="sb-pillar" id="stickyPillar"><b>01</b>Diagnosticar e planejar</span>
       </div>
     </div>
 
@@ -2899,11 +2986,69 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
     <section class="metodologia-intro" id="metodologiaSection" data-anim="slide-up" data-theme="purple">
       <div class="r eyebrow">Método B2Donto · Como entregamos</div>
       <h2 class="title r d1">Os <span class="grad-text">pilares</span> que aceleram<br>seu crescimento</h2>
-      <p class="lead r d2">Método testado e validado com <b>centenas de clínicas</b>, com histórico comprovado de <b>23×</b> de retorno médio sobre o investimento. Esse é o sistema por trás do diagnóstico que você acabou de receber.</p>
+      <p class="lead r d2">Método testado e validado com <b>centenas de clínicas</b>, com histórico comprovado de <b>23×</b> de retorno médio sobre o investimento. Esse é o sistema que vai rodar dentro da sua clínica.</p>
     </section>
 
     <!-- ============================================================
-         PILAR 01, Vitrine Digital 3E (Presença · Posicionamento)
+         PILAR 01 - Briefing Raio-X 360 (Diagnostico · Planejamento)
+         ============================================================ -->
+    <section class="pilar-section reverse" data-anim="slide-up" data-theme="blue" data-pilar="rx" id="pilar-rx">
+      <div class="pilar-eyebrow r">
+        <span class="pe-tag">Diagnóstico · Planejamento</span>
+      </div>
+      <div class="pilar-grid">
+        <div class="pilar-text-col">
+          <h2 class="pilar-headline r d1">Briefing <span class="grad-text">Raio-X 360</span></h2>
+          <p class="pilar-lead r d2">Assim como uma lente começa no planejamento do sorriso, <b>a sua meta começa no diagnóstico</b>. Antes do primeiro anúncio.</p>
+          <ul class="pilar-list r d3">
+            <li><span class="ic">▸</span><div><b>Instagram, Google e site</b> analisados ponto a ponto, com os ajustes do primeiro mês.</div></li>
+            <li><span class="ic">▸</span><div><b>Atendimento e comercial:</b> tempo de resposta, quem responde e onde o paciente se perde.</div></li>
+            <li><span class="ic">▸</span><div><b>Concorrência e plano de mídia:</b> como a verba se divide entre descoberta, relacionamento e oferta.</div></li>
+          </ul>
+          <div class="pilar-highlight r d4">Sem planejamento, chegar na meta depende de sorte.</div>
+        </div>
+        <div class="pilar-viz-col">
+          <div class="pilar-viz-box r">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <svg viewBox="-60 -10 520 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raio-X 360: Instagram, Google, site, atendimento, concorrência e mídia">
+              <circle cx="200" cy="200" r="65" fill="none" stroke="rgba(0,225,195,.18)" stroke-width="1"/>
+              <circle cx="200" cy="200" r="130" fill="none" stroke="rgba(0,225,195,.28)" stroke-width="1" stroke-dasharray="3 6"/>
+              <circle cx="200" cy="200" r="175" fill="none" stroke="rgba(216,123,241,.12)" stroke-width="1"/>
+              <line x1="200" y1="200" x2="200" y2="70" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:0" cx="200" cy="70" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+              <circle cx="200" cy="70" r="7" fill="#00E1C3"/>
+              <text x="200" y="52" text-anchor="middle" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Instagram</text>
+              <line x1="200" y1="200" x2="312.6" y2="135" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:1" cx="312.6" cy="135" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
+              <circle cx="312.6" cy="135" r="7" fill="#D87BF1"/>
+              <text x="328.6" y="140" text-anchor="start" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Google</text>
+              <line x1="200" y1="200" x2="312.6" y2="265" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:2" cx="312.6" cy="265" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+              <circle cx="312.6" cy="265" r="7" fill="#00E1C3"/>
+              <text x="328.6" y="270" text-anchor="start" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Site</text>
+              <line x1="200" y1="200" x2="200" y2="330" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:3" cx="200" cy="330" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
+              <circle cx="200" cy="330" r="7" fill="#D87BF1"/>
+              <text x="200" y="360" text-anchor="middle" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Atendimento</text>
+              <line x1="200" y1="200" x2="87.4" y2="265" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:4" cx="87.4" cy="265" r="15" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+              <circle cx="87.4" cy="265" r="7" fill="#00E1C3"/>
+              <text x="71.4" y="270" text-anchor="end" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Concorrência</text>
+              <line x1="200" y1="200" x2="87.4" y2="135" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+              <circle class="rx-halo" style="--i:5" cx="87.4" cy="135" r="15" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
+              <circle cx="87.4" cy="135" r="7" fill="#D87BF1"/>
+              <text x="71.4" y="140" text-anchor="end" fill="#E8EAF5" font-size="14" font-weight="600" font-family="Sora, sans-serif">Mídia</text>
+              <circle cx="200" cy="200" r="48" fill="#0A0E2E" stroke="#00E1C3" stroke-width="1.5"/>
+              <text x="200" y="204" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800" font-family="Sora, sans-serif">360°</text>
+              <text x="200" y="224" text-anchor="middle" fill="#00E1C3" font-size="11" font-weight="600" letter-spacing="1.5" font-family="Sora, sans-serif">RAIO-X</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PILAR 01 - Vitrine Digital 3E (Presença · Posicionamento)
          ============================================================ -->
     <section class="pilar-section" data-anim="slide-up" data-theme="cyan" data-pilar="01" id="pilar-01">
       <div class="pilar-eyebrow r">
@@ -2950,22 +3095,22 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
                 <line x1="190" y1="190" x2="190" y2="384" stroke-dasharray="240" stroke-dashoffset="240"/>
               </g>
 
-              <!-- Círculo Cyan, Estratégia -->
+              <!-- Círculo Cyan - Estratégia -->
               <g class="anim-fade d2 svg-pulse-a">
                 <circle cx="130" cy="155" r="95" fill="rgba(0,225,195,.16)" stroke="#00E1C3" stroke-width="1.8"/>
               </g>
 
-              <!-- Círculo Purple, Essência -->
+              <!-- Círculo Purple - Essência -->
               <g class="anim-fade d3 svg-pulse-b">
                 <circle cx="250" cy="155" r="95" fill="rgba(167,19,185,.16)" stroke="#A713B9" stroke-width="1.8"/>
               </g>
 
-              <!-- Círculo Blue, Estética -->
+              <!-- Círculo Blue - Estética -->
               <g class="anim-fade d4 svg-pulse-c">
                 <circle cx="190" cy="259" r="95" fill="rgba(74,108,247,.16)" stroke="#4A6CF7" stroke-width="1.8"/>
               </g>
 
-              <!-- Centro, fusão (glow gradient + ponto branco) -->
+              <!-- Centro - fusão (glow gradient + ponto branco) -->
               <g class="anim-fade d5">
                 <circle cx="190" cy="190" r="22" fill="url(#pV1grad)" filter="url(#pV1g)" opacity=".75" class="svg-breathe"/>
                 <circle cx="190" cy="190" r="8" fill="#fff" class="svg-breathe-inner"/>
@@ -2985,7 +3130,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
                 <line x1="162" y1="402" x2="218" y2="402" stroke="#4A6CF7" stroke-width="1" opacity=".5"/>
               </g>
 
-              <!-- NÚCLEO, legenda no círculo Estratégia + mini seta apontando pra bola central -->
+              <!-- NÚCLEO - legenda no círculo Estratégia + mini seta apontando pra bola central -->
               <g class="anim-fade d8" font-family="Sora" text-anchor="middle" fill="rgba(242,247,255,.82)" style="filter:drop-shadow(0 0 8px rgba(0,225,195,.28))">
                 <text x="108" y="120" font-weight="600" font-size="11.5">Clínica</text>
                 <text x="108" y="135" font-weight="600" font-size="11.5">Referência</text>
@@ -3000,7 +3145,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
     </section>
 
     <!-- ============================================================
-         PILAR 02, Atrair pacientes de alto valor com tráfego inteligente
+         PILAR 02 - Atrair pacientes de alto valor com tráfego inteligente
          ============================================================ -->
     <section class="pilar-section reverse" data-anim="slide-left" data-theme="purple" data-pilar="02" id="pilar-02">
       <div class="pilar-eyebrow r">
@@ -3022,29 +3167,29 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
             <svg viewBox="0 -50 620 590" xmlns="http://www.w3.org/2000/svg">
 
-              <!-- CÍRCULO MAIOR, Aumento da Base (purple, aparece POR ÚLTIMO) -->
+              <!-- CÍRCULO MAIOR - Aumento da Base (purple, aparece POR ÚLTIMO) -->
               <g class="svg-seq-c">
                 <circle cx="350" cy="300" r="265" fill="rgba(167,19,185,.07)" stroke="rgba(167,19,185,.65)" stroke-width="1.8"/>
               </g>
 
-              <!-- CÍRCULO MÉDIO, Relacionamento (blue, aparece SEGUNDO) -->
+              <!-- CÍRCULO MÉDIO - Relacionamento (blue, aparece SEGUNDO) -->
               <g class="svg-seq-b">
                 <circle cx="335" cy="300" r="190" fill="rgba(74,108,247,.13)" stroke="rgba(74,108,247,.8)" stroke-width="1.8"/>
               </g>
 
-              <!-- CÍRCULO MENOR, Núcleo de Conversão (cyan, aparece PRIMEIRO) -->
+              <!-- CÍRCULO MENOR - Núcleo de Conversão (cyan, aparece PRIMEIRO) -->
               <g class="svg-seq-a">
                 <circle cx="320" cy="300" r="120" fill="rgba(0,225,195,.18)" stroke="rgba(0,225,195,.95)" stroke-width="2.2"/>
               </g>
 
-              <!-- ========== LABEL 3, Núcleo de Conversão (DENTRO do menor) ========== -->
+              <!-- ========== LABEL 3 - Núcleo de Conversão (DENTRO do menor) ========== -->
               <g class="svg-label-fade s1">
                 <text x="320" y="284" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="32" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 18px rgba(0,225,195,.6))">Núcleo de</text>
                 <text x="320" y="320" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="32" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 18px rgba(0,225,195,.6))">Conversão</text>
                 <text x="320" y="344" text-anchor="middle" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="3">PÚBLICO QUENTE</text>
               </g>
 
-              <!-- ========== LABEL 2, Relacionamento (TOPO-ESQUERDA) ========== -->
+              <!-- ========== LABEL 2 - Relacionamento (TOPO-ESQUERDA) ========== -->
               <g class="svg-label-fade s2">
                 <text x="10" y="68" fill="#4A6CF7" font-family="Sora" font-weight="800" font-size="36" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(74,108,247,.4)) drop-shadow(0 0 22px rgba(74,108,247,.7))">Confiança</text>
                 <line x1="10" y1="82" x2="172" y2="82" stroke="#4A6CF7" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
@@ -3059,7 +3204,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
                 </g>
               </g>
 
-              <!-- ========== LABEL 1, Aumento da Base (ULTRA topo, usa espaço negativo do viewBox) ========== -->
+              <!-- ========== LABEL 1 - Aumento da Base (ULTRA topo, usa espaço negativo do viewBox) ========== -->
               <g class="svg-label-fade s3">
                 <text x="610" y="-12" text-anchor="end" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="36" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Despertar</text>
                 <line x1="448" y1="2" x2="610" y2="2" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
@@ -3080,7 +3225,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
     </section>
 
     <!-- ============================================================
-         PILAR 03, Converter cada lead em paciente agendado
+         PILAR 03 - Converter cada lead em paciente agendado
          ============================================================ -->
     <section class="pilar-section" data-anim="slide-right" data-theme="blue" data-pilar="03" id="pilar-03">
       <div class="pilar-eyebrow r">
@@ -3118,7 +3263,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
               <circle cx="300" cy="300" r="248" fill="none" stroke="rgba(0,225,195,.32)" stroke-width="1.6" class="anim-fade d2"/>
               <circle cx="300" cy="300" r="237" fill="none" stroke="rgba(74,108,247,.18)" stroke-width="1" stroke-dasharray="2 7" class="anim-fade d2"/>
 
-              <!-- Setas de fluxo, acendem em sequência horária (chase, repete infinito) -->
+              <!-- Setas de fluxo - acendem em sequência horária (chase, repete infinito) -->
               <polygon points="483.2,132.4 468.3,126.0 476.8,117.5" fill="#00E1C3" class="arr arr-1" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
               <polygon points="467.6,483.2 474.0,468.3 482.5,476.8" fill="#00E1C3" class="arr arr-2" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
               <polygon points="116.8,467.6 131.7,474.0 123.2,482.5" fill="#00E1C3" class="arr arr-3" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
@@ -3148,7 +3293,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
               <g class="anim-fade d5 svg-pulse-c"><circle cx="300" cy="435" r="22" fill="rgba(5,9,34,.96)" stroke="#4A6CF7" stroke-width="2.5" style="filter:drop-shadow(0 0 10px rgba(74,108,247,.7))"/><text x="300" y="442" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="18">3</text></g>
               <g class="anim-fade d6 svg-pulse-a"><circle cx="165" cy="300" r="22" fill="rgba(5,9,34,.96)" stroke="#B23BC9" stroke-width="2.5" style="filter:drop-shadow(0 0 10px rgba(167,19,185,.7))"/><text x="165" y="307" text-anchor="middle" fill="#fff" font-family="Sora" font-weight="800" font-size="18">4</text></g>
 
-              <!-- LABEL 1 (topo), Aceleração comercial + conexão -->
+              <!-- LABEL 1 (topo) - Aceleração comercial + conexão -->
               <g class="anim-fade d4" font-family="Sora" fill="#F2F7FF" style="filter:drop-shadow(0 0 14px rgba(0,225,195,.4))">
                 <text x="300" y="-12" text-anchor="middle" font-weight="700" font-size="20">Aceleração</text>
                 <text x="300" y="16" text-anchor="middle" font-weight="700" font-size="20">comercial</text>
@@ -3158,7 +3303,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
                 <circle cx="300" cy="60" r="4.5" fill="#00E1C3" style="filter:drop-shadow(0 0 7px rgba(0,225,195,.95))"/>
               </g>
 
-              <!-- LABEL 2 (direita), MaIA + conexão -->
+              <!-- LABEL 2 (direita) - MaIA + conexão -->
               <g class="anim-fade d5" font-family="Sora" style="filter:drop-shadow(0 0 14px rgba(0,225,195,.4))">
                 <text x="586" y="312" font-weight="800" font-size="28" fill="#fff">Ma<tspan fill="url(#maiaGrad)">IA</tspan></text>
               </g>
@@ -3167,7 +3312,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
                 <circle cx="540" cy="300" r="4.5" fill="#3DA5E6" style="filter:drop-shadow(0 0 7px rgba(61,165,230,.95))"/>
               </g>
 
-              <!-- LABEL 3 (base), Resgate Automático + conexão -->
+              <!-- LABEL 3 (base) - Resgate Automático + conexão -->
               <g class="anim-fade d6" font-family="Sora" fill="#F2F7FF" style="filter:drop-shadow(0 0 14px rgba(74,108,247,.4))">
                 <text x="300" y="602" text-anchor="middle" font-weight="700" font-size="20">Resgate</text>
                 <text x="300" y="630" text-anchor="middle" font-weight="700" font-size="20">Automático</text>
@@ -3177,7 +3322,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
                 <circle cx="300" cy="540" r="4.5" fill="#4A6CF7" style="filter:drop-shadow(0 0 7px rgba(74,108,247,.95))"/>
               </g>
 
-              <!-- LABEL 4 (esquerda), Otimização contínua + conexão -->
+              <!-- LABEL 4 (esquerda) - Otimização contínua + conexão -->
               <g class="anim-fade d7" font-family="Sora" fill="#F2F7FF" style="filter:drop-shadow(0 0 14px rgba(167,19,185,.4))">
                 <text x="16" y="294" text-anchor="end" font-weight="700" font-size="20">Otimização</text>
                 <text x="16" y="322" text-anchor="end" font-weight="700" font-size="20">contínua</text>
@@ -3193,7 +3338,7 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
     </section>
 
     <!-- ============================================================
-         PILAR 04, Reativar base e gerar indicações constantes (NOVO)
+         PILAR 04 - Reativar base e gerar indicações constantes (NOVO)
          ============================================================ -->
     <section class="pilar-section reverse" data-anim="zoom-in" data-theme="warm" data-pilar="04" id="pilar-04">
       <div class="pilar-eyebrow r">
@@ -3279,10 +3424,10 @@ section:not(.entered)[data-anim="slide-up-dramatic"]{ --ty: 60px; --sc: .94; }
 
   <!-- CTA -->
   <section class="cta-final" id="ctaFinal" data-anim="zoom-glow" data-theme="cyan">
-    <h2 class="r">Pronto pra<br><span class="grad-text">acelerar suas vendas?</span></h2>
-    <p class="r d1">Esse diagnóstico é só o começo. Na conversa, a gente monta o plano sob medida pra sua clínica.</p>
-    <a class="btn r d2" href="https://wa.me/5541991008710?text=Quero%20saber%20mais%20sobre%20o%20programa%20B2%20acelera%C3%A7%C3%A3o%20comercial">Quero Acelerar minhas vendas com a B2Donto</a>
-    <p class="r d2" style="font-size:13px; color:var(--dim-grey); max-width:340px; margin:14px auto 0">Mande "QUERO" no WhatsApp e receba um plano sob medida pra sua clínica</p>
+    <h2 class="r">Prontos pra<br><span class="grad-text">triplicar no odonto?</span></h2>
+    <p class="r d1">A técnica e os casos já estão prontos. Agora é o paciente certo chegar.</p>
+    <a class="btn r d2" href="https://wa.me/5541991008710?text=Aceito%20a%20proposta">Aceitar proposta e começar</a>
+    <p class="r d2" style="font-size:13px; color:var(--dim-grey); max-width:340px; margin:14px auto 0">Mande "ACEITO" no WhatsApp e a gente inicia o onboarding da clínica</p>
     <footer>b2donto · Aceleradora comercial para clínicas odontológicas</footer>
   </section>
 
