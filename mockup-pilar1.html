@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pilar 01 · opções de ícone</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--cyan:#00E1C3; --blue:#4A6CF7; --roxo:#D87BF1; --bg:#050922; --line:rgba(255,255,255,.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg); color:#E8EAF5; font-family:'Sora',sans-serif; padding:40px 20px 80px}
+.wrap{max-width:1100px; margin:0 auto}
+h1{font-size:clamp(24px,3.5vw,34px); font-weight:500; letter-spacing:-.05em; margin-bottom:10px}
+.sub{color:#9AA0C4; font-size:14.5px; margin-bottom:38px; max-width:60ch; line-height:1.7}
+.grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+.op{border:1px solid var(--line); border-radius:20px; background:#0A0E22; padding:22px; position:relative}
+.op-k{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--cyan); margin-bottom:6px}
+.op h2{font-size:18px; font-weight:600; letter-spacing:-.03em; margin-bottom:4px}
+.op p{font-size:13px; color:#9AA0C4; line-height:1.6; margin-bottom:14px; max-width:52ch}
+.viz{position:relative; display:flex; align-items:center; justify-content:center; min-height:330px; border:1px solid var(--line); border-radius:16px;
+  background:radial-gradient(circle at 50% 42%, rgba(0,225,195,.05), rgba(167,19,185,.02) 60%, transparent 80%)}
+.viz svg{display:block; width:100%; max-width:430px; height:auto; overflow:visible; font-family:'Sora',sans-serif}
+.re{position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.04); color:#E8EAF5; font-size:16px; cursor:pointer; z-index:2}
+.re:hover{border-color:var(--cyan); color:var(--cyan)}
+/* animacoes */
+.mkdraw{stroke-dasharray:1; stroke-dashoffset:1}
+.op.in .mkdraw{animation:mkDraw 1.1s cubic-bezier(.2,.7,.2,1) var(--d,0s) forwards}
+@keyframes mkDraw{to{stroke-dashoffset:0}}
+.mkfade{opacity:0}
+.op.in .mkfade{animation:mkFade .7s ease var(--d,0s) forwards}
+@keyframes mkFade{to{opacity:1}}
+.mkrise{opacity:0; transform:translateY(14px)}
+.op.in .mkrise{animation:mkRise .8s cubic-bezier(.2,.7,.2,1) var(--d,0s) forwards}
+@keyframes mkRise{70%{opacity:1; transform:translateY(-2px)} 100%{opacity:1; transform:translateY(0)}}
+.mkpulse{opacity:0; transform-box:fill-box; transform-origin:center}
+.op.in .mkpulse{animation:mkIn .6s ease var(--d,0s) forwards, mkPulse 3.4s ease-in-out calc(var(--d,0s) + .6s) infinite}
+@keyframes mkIn{to{opacity:1}}
+@keyframes mkPulse{0%,100%{transform:scale(1)} 50%{transform:scale(1.25)}}
+.mkchase{opacity:.25; transform-box:fill-box; transform-origin:center}
+.mkarc{opacity:0}
+.op.in .mkarc{animation:mkArcIn .7s ease var(--d,0s) forwards, mkTile 5.2s ease-in-out calc(var(--d,0s) + .7s) infinite}
+@keyframes mkArcIn{to{opacity:.4}}
+.op.in .mkchase{animation:mkChase 4.8s ease-in-out infinite; animation-delay:var(--d,0s)}
+@keyframes mkChase{0%,100%{opacity:.25} 8%,18%{opacity:1} 30%{opacity:.25}}
+.mktile{opacity:.3}
+.op.in .mktile{animation:mkTile 5.6s ease-in-out infinite; animation-delay:var(--d,0s)}
+@keyframes mkTile{0%,100%{opacity:.3} 7%,17%{opacity:1} 28%{opacity:.3}}
+.mkbar{transform:scaleY(0); transform-box:fill-box; transform-origin:bottom}
+.op.in .mkbar{animation:mkBar 1s cubic-bezier(.2,.7,.2,1) var(--d,.8s) forwards}
+@keyframes mkBar{to{transform:scaleY(1)}}
+.op.in .mkbola{animation:mkSobe 7.5s linear .6s infinite}
+.mkbola{opacity:0}
+.op.in .mkmarcha{animation:mkMarcha 9s linear infinite}
+@keyframes mkMarcha{from{stroke-dashoffset:0} to{stroke-dashoffset:-1}}
+@keyframes mkSobe{0%{transform:translate(0.0px,-7.2px); opacity:0}6%{transform:translate(0.0px,-7.2px); opacity:1}20%{transform:translate(0.0px,-7.2px); opacity:1}27%{transform:translate(46.8px,-60.1px); opacity:1}33%{transform:translate(93.6px,-53.0px); opacity:1}46%{transform:translate(93.6px,-53.0px); opacity:1}53%{transform:translate(141.8px,-106.6px); opacity:1}59%{transform:translate(190.0px,-100.2px); opacity:1}72%{transform:translate(190.0px,-100.2px); opacity:1}79%{transform:translate(239.7px,-154.6px); opacity:1}85%{transform:translate(289.4px,-148.9px); opacity:1}94%{transform:translate(289.4px,-148.9px); opacity:0}100%{transform:translate(289.4px,-148.9px); opacity:0}}
+@media(prefers-reduced-motion:reduce){
+  .mkdraw{stroke-dashoffset:0} .mkfade,.mkrise,.mkpulse{opacity:1; transform:none}
+  .op.in :is(.mkchase,.mktile){animation:none; opacity:1}
+  .op.in .mkbola,.op.in .mkmarcha,.op.in .mkpulse{animation:none}
+  .mkbar{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Pilar 01 · Gestão empresarial: opções de ícone</h1>
+  <p class="sub">Cinco caminhos pro desenho do pilar, todos na linguagem dos vídeos: traço branco fino, navy, cor só no acento, animação de montagem + vida contínua sem rotação. Toca no ↻ pra rever a entrada. Me diz a letra (dá pra misturar: estrutura de uma com detalhe de outra).</p>
+  <div class="grid">
+
+  <article class="op" id="opA">
+    <button class="re" type="button" aria-label="Repetir">&#8635;</button>
+    <p class="op-k">Opção A</p><h2>Pódio da gestão</h2>
+    <p>Quatro degraus em perspectiva (as quatro frentes) e o lead subindo degrau a degrau até o crescimento. Mesma família da plataforma dos níveis.</p>
+    <div class="viz"><svg viewBox="-212.1 -234.8 654.7 317.5">
+      <g><polygon points="-101.2,-26.2 101.2,-26.2 109.1,28.2 -109.1,28.2" fill="rgba(10,14,46,.4)" class="mkfade" style="--d:0.0s"/>
+    <polygon points="-101.2,-26.2 101.2,-26.2 109.1,28.2 -109.1,28.2" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round" pathLength="1" class="mkdraw" style="--d:0.0s"/></g>
+    <g><polygon points="-12.7,-70.5 192.7,-70.5 207.8,-18.7 -13.7,-18.7" fill="rgba(10,14,46,.4)" class="mkfade" style="--d:0.25s"/><line x1="-12.7" y1="-70.5" x2="-12.5" y2="-26.2" class="mkfade" style="--d:0.4s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="192.7" y1="-70.5" x2="189.9" y2="-26.2" class="mkfade" style="--d:0.4s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="207.8" y1="-18.7" x2="204.6" y2="28.2" class="mkfade" style="--d:0.4s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="-13.7" y1="-18.7" x2="-13.5" y2="28.2" class="mkfade" style="--d:0.4s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/>
+    <polygon points="-12.7,-70.5 192.7,-70.5 207.8,-18.7 -13.7,-18.7" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round" pathLength="1" class="mkdraw" style="--d:0.25s"/></g>
+    <g><polygon points="78.4,-116.1 286.7,-116.1 309.5,-67.2 84.6,-67.2" fill="rgba(10,14,46,.4)" class="mkfade" style="--d:0.5s"/><line x1="78.4" y1="-116.1" x2="77.3" y2="-70.5" class="mkfade" style="--d:0.65s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="286.7" y1="-116.1" x2="282.6" y2="-70.5" class="mkfade" style="--d:0.65s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="309.5" y1="-67.2" x2="304.8" y2="-18.7" class="mkfade" style="--d:0.65s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="84.6" y1="-67.2" x2="83.3" y2="-18.7" class="mkfade" style="--d:0.65s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/>
+    <polygon points="78.4,-116.1 286.7,-116.1 309.5,-67.2 84.6,-67.2" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round" pathLength="1" class="mkdraw" style="--d:0.5s"/></g>
+    <g><polygon points="172.2,-163.1 383.6,-163.1 414.6,-117.1 186.1,-117.1" fill="rgba(10,14,46,.4)" class="mkfade" style="--d:0.75s"/><line x1="172.2" y1="-163.1" x2="169.7" y2="-116.1" class="mkfade" style="--d:0.9s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="383.6" y1="-163.1" x2="378.0" y2="-116.1" class="mkfade" style="--d:0.9s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="414.6" y1="-117.1" x2="408.1" y2="-67.2" class="mkfade" style="--d:0.9s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/><line x1="186.1" y1="-117.1" x2="183.2" y2="-67.2" class="mkfade" style="--d:0.9s" stroke="#FFFFFF" stroke-width="1" opacity=".14"/>
+    <polygon points="172.2,-163.1 383.6,-163.1 414.6,-117.1 186.1,-117.1" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round" pathLength="1" class="mkdraw" style="--d:0.75s"/></g>
+    
+      <text x="-159.2" y="44.7" text-anchor="end" fill="#E8EAF5" font-weight="600" font-size="14.5" class="mkfade" style="--d:0.3s">Diagnóstico</text><text x="-62.5" y="-3.1" text-anchor="end" fill="#E8EAF5" font-weight="600" font-size="14.5" class="mkfade" style="--d:0.55s">Precificação</text><text x="37.2" y="-52.3" text-anchor="end" fill="#E8EAF5" font-weight="600" font-size="14.5" class="mkfade" style="--d:0.8s">Liderança</text><text x="140.2" y="-103.2" text-anchor="end" fill="#E8EAF5" font-weight="600" font-size="14.5" class="mkfade" style="--d:1.05s">Rotinas</text>
+      <line x1="288.7" y1="-141.0" x2="292.6" y2="-184.8" stroke="#00E1C3" stroke-width="2" class="mkdraw" style="--d:1.2s" pathLength="1"/>
+  <circle cx="292.6" cy="-184.8" r="6" fill="#00E1C3" class="mkpulse" style="--d:1.5s"/>
+  <text x="292.6" y="-200.8" text-anchor="middle" fill="#F2F7FF" font-weight="700" font-size="15" class="mkfade" style="--d:1.6s">Crescimento</text>
+      <g class="mkbola"><circle r="10" fill="#FFFFFF" opacity=".15"/><circle r="5" fill="#FFFFFF" stroke="#0A0E2E" stroke-width="1.8"/></g>
+    </svg></div>
+  </article>
+
+  <article class="op" id="opB">
+    <button class="re" type="button" aria-label="Repetir">&#8635;</button>
+    <p class="op-k">Opção B</p><h2>Painel de comando</h2>
+    <p>A gestão como cockpit: quatro módulos acendendo em sequência, medidores subindo e status vivo. Parente do portal e dos relatórios.</p>
+    <div class="viz"><svg viewBox="0 0 440 360">
+      <rect x="20" y="18" width="400" height="310" rx="18" fill="rgba(10,14,46,.55)" stroke="rgba(255,255,255,.3)" stroke-width="1.5" pathLength="1" class="mkdraw"/>
+      <g class="mkfade" style="--d:.3s"><circle cx="44" cy="42" r="4" fill="rgba(255,255,255,.25)"/><circle cx="58" cy="42" r="4" fill="rgba(255,255,255,.25)"/><circle cx="72" cy="42" r="4" fill="rgba(255,255,255,.25)"/>
+      <text x="396" y="47" text-anchor="end" fill="#9AA0C4" font-size="11" font-family="JetBrains Mono" letter-spacing="2">GESTÃO</text></g>
+      <line x1="20" y1="60" x2="420" y2="60" stroke="rgba(255,255,255,.14)" stroke-width="1" class="mkfade" style="--d:.35s"/>
+      <g class="mktile" style="--d:0.5s">
+      <rect x="44" y="78" width="164" height="80" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+      <g transform="translate(58,92) scale(.62)" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="8" width="30" height="35" rx="4"/><path d="M18 8V5h12v3"/><path d="M13 27h6l3-7 4 12 3-6h6"/></g>
+      <text x="96" y="110" fill="#E8EAF5" font-weight="600" font-size="13">Diagnóstico</text>
+      <rect x="162" y="114" width="7" height="26" rx="2.5" fill="#00E1C3" class="mkbar" style="--d:0.8s" opacity=".85"/>
+      <rect x="176" y="122" width="7" height="18" rx="2.5" fill="rgba(255,255,255,.4)" class="mkbar" style="--d:1.0s"/>
+    </g><g class="mktile" style="--d:1.9s">
+      <rect x="232" y="78" width="164" height="80" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+      <g transform="translate(246,92) scale(.62)" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h17l19 19-16 16L7 23z"/><circle cx="15.5" cy="16" r="3"/></g>
+      <text x="284" y="110" fill="#E8EAF5" font-weight="600" font-size="13">Precificação</text>
+      <rect x="350" y="106" width="7" height="34" rx="2.5" fill="#00E1C3" class="mkbar" style="--d:2.2s" opacity=".85"/>
+      <rect x="364" y="114" width="7" height="26" rx="2.5" fill="rgba(255,255,255,.4)" class="mkbar" style="--d:2.4s"/>
+    </g><g class="mktile" style="--d:3.3s">
+      <rect x="44" y="172" width="164" height="80" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+      <g transform="translate(58,186) scale(.62)" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="15" r="6.5"/><path d="M5 42c0-8 6-14 13-14s13 6 13 14"/><path d="M35 6v18M35 6h9l-3 4.5 3 4.5h-9"/></g>
+      <text x="96" y="204" fill="#E8EAF5" font-weight="600" font-size="13">Liderança</text>
+      <rect x="162" y="214" width="7" height="20" rx="2.5" fill="#00E1C3" class="mkbar" style="--d:3.5999999999999996s" opacity=".85"/>
+      <rect x="176" y="222" width="7" height="12" rx="2.5" fill="rgba(255,255,255,.4)" class="mkbar" style="--d:3.8s"/>
+    </g><g class="mktile" style="--d:4.699999999999999s">
+      <rect x="232" y="172" width="164" height="80" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+      <g transform="translate(246,186) scale(.62)" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 22a15 15 0 0 1 26-9"/><path d="M39 26a15 15 0 0 1-26 9"/><path d="M36 5v9h-9M12 43v-9h9"/></g>
+      <text x="284" y="204" fill="#E8EAF5" font-weight="600" font-size="13">Rotinas</text>
+      <rect x="350" y="208" width="7" height="26" rx="2.5" fill="#00E1C3" class="mkbar" style="--d:4.999999999999999s" opacity=".85"/>
+      <rect x="364" y="216" width="7" height="18" rx="2.5" fill="rgba(255,255,255,.4)" class="mkbar" style="--d:5.199999999999999s"/>
+    </g>
+      <g class="mkfade" style="--d:1.3s">
+        <line x1="44" y1="296" x2="300" y2="296" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+        <text x="44" y="282" fill="#9AA0C4" font-size="10.5" font-family="JetBrains Mono" letter-spacing="1.5">ACOMPANHAMENTO CONTÍNUO</text>
+        <circle cx="316" cy="296" r="5" fill="#00E1C3" class="mkpulse" style="--d:1.5s"/>
+      </g>
+    </svg></div>
+  </article>
+
+  <article class="op" id="opC">
+    <button class="re" type="button" aria-label="Repetir">&#8635;</button>
+    <p class="op-k">Opção C</p><h2>Alvo em quadrantes</h2>
+    <p>Gestão no centro e as quatro frentes como setores do alvo, acendendo uma por vez. Conversa direto com o Método ALVO.</p>
+    <div class="viz"><svg viewBox="0 0 440 380">
+      <circle cx="220" cy="190" r="150" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1" pathLength="1" class="mkdraw"/>
+      <circle cx="220" cy="190" r="108" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1" pathLength="1" class="mkdraw" style="--d:.15s"/>
+      <circle cx="220" cy="190" r="128" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-dasharray=".006 .02" pathLength="1" class="mkfade mkmarcha" style="--d:.9s" opacity=".4"/>
+      <path d="M 231.7 106.8 A 84.0 84.0 0 0 1 303.2 178.3" fill="none" stroke="#00E1C3" stroke-width="13" stroke-linecap="round" opacity=".8" pathLength="1" class="mkarc" style="--d:0.5s"/><path d="M 303.2 201.7 A 84.0 84.0 0 0 1 231.7 273.2" fill="none" stroke="#3DA5E6" stroke-width="13" stroke-linecap="round" opacity=".8" pathLength="1" class="mkarc" style="--d:1.7s"/><path d="M 208.3 273.2 A 84.0 84.0 0 0 1 136.8 201.7" fill="none" stroke="#4A6CF7" stroke-width="13" stroke-linecap="round" opacity=".8" pathLength="1" class="mkarc" style="--d:2.9s"/><path d="M 136.8 178.3 A 84.0 84.0 0 0 1 208.3 106.8" fill="none" stroke="#D87BF1" stroke-width="13" stroke-linecap="round" opacity=".8" pathLength="1" class="mkarc" style="--d:4.1s"/>
+      <circle cx="220" cy="190" r="56" fill="#0A0E2E" stroke="#00E1C3" stroke-width="1.6" pathLength="1" class="mkdraw" style="--d:.45s"/>
+      <text x="220" y="186" text-anchor="middle" fill="#FFFFFF" font-weight="800" font-size="19" class="mkfade" style="--d:.7s">GESTÃO</text>
+      <text x="220" y="204" text-anchor="middle" fill="#00E1C3" font-weight="600" font-size="9" letter-spacing="1.6" class="mkfade" style="--d:.8s">EMPRESARIAL</text>
+      <g class="mkfade" style="--d:0.8s">
+      <line x1="326.1" y1="83.9" x2="338" y2="74" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+      <circle cx="326.1" cy="83.9" r="3.5" fill="#00E1C3"/>
+      <text x="330" y="78" text-anchor="start" fill="#E8EAF5" font-weight="600" font-size="13.5">Diagnóstico</text></g><g class="mkfade" style="--d:2.0s">
+      <line x1="326.1" y1="296.1" x2="338" y2="308" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+      <circle cx="326.1" cy="296.1" r="3.5" fill="#3DA5E6"/>
+      <text x="330" y="312" text-anchor="start" fill="#E8EAF5" font-weight="600" font-size="13.5">Precificação</text></g><g class="mkfade" style="--d:3.2s">
+      <line x1="113.9" y1="296.1" x2="102" y2="308" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+      <circle cx="113.9" cy="296.1" r="3.5" fill="#4A6CF7"/>
+      <text x="110" y="312" text-anchor="end" fill="#E8EAF5" font-weight="600" font-size="13.5">Liderança</text></g><g class="mkfade" style="--d:4.3999999999999995s">
+      <line x1="113.9" y1="83.9" x2="102" y2="74" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+      <circle cx="113.9" cy="83.9" r="3.5" fill="#D87BF1"/>
+      <text x="110" y="78" text-anchor="end" fill="#E8EAF5" font-weight="600" font-size="13.5">Rotinas</text></g>
+    </svg></div>
+  </article>
+
+  <article class="op" id="opD">
+    <button class="re" type="button" aria-label="Repetir">&#8635;</button>
+    <p class="op-k">Opção D</p><h2>Liderança e estrutura</h2>
+    <p>O organograma vivo: o dono no topo, a equipe conectada embaixo e a rotina rodando no calendário. Gestão como gente e processo.</p>
+    <div class="viz"><svg viewBox="0 0 440 380">
+      <g class="mkrise" style="--d:0s">
+        <circle cx="220" cy="66" r="40" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.75)" stroke-width="1.8"/>
+        <g transform="translate(196,42) scale(1)" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="15" r="6.5"/><path d="M5 42c0-8 6-14 13-14s13 6 13 14"/><path d="M35 6v18M35 6h9l-3 4.5 3 4.5h-9"/>
+        </g>
+        <text x="220" y="128" text-anchor="middle" fill="#E8EAF5" font-weight="600" font-size="14">Liderança</text>
+      </g>
+      <g stroke="rgba(255,255,255,.4)" stroke-width="1.4">
+        <path d="M220 108 L220 140 L110 140 L110 170" fill="none" pathLength="1" class="mkdraw" style="--d:.4s"/>
+        <line x1="220" y1="108" x2="220" y2="170" pathLength="1" class="mkdraw" style="--d:.5s"/>
+        <path d="M220 108 L220 140 L330 140 L330 170" fill="none" pathLength="1" class="mkdraw" style="--d:.6s"/>
+      </g>
+      <g class="mkrise" style="--d:0.7s">
+      <circle cx="110" cy="206" r="32" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+      <g transform="translate(93,188) scale(.72)" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round">
+        <circle cx="24" cy="15" r="7.5" transform="translate(-2,-6)"/><path d="M7 40c0-9 7-15 15-15s15 6 15 15" transform="translate(-2,-6)"/>
+      </g>
+      <rect x="82" y="246" width="56" height="7" rx="3.5" fill="rgba(255,255,255,.14)"/>
+      <rect x="82" y="246" width="22" height="7" rx="3.5" fill="#00E1C3" class="mkbar" style="--d:1.1s; transform-origin:left; transform:scaleX(0)" opacity=".85"/>
+    </g><g class="mkrise" style="--d:0.8999999999999999s">
+      <circle cx="220" cy="206" r="32" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+      <g transform="translate(203,188) scale(.72)" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round">
+        <circle cx="24" cy="15" r="7.5" transform="translate(-2,-6)"/><path d="M7 40c0-9 7-15 15-15s15 6 15 15" transform="translate(-2,-6)"/>
+      </g>
+      <rect x="192" y="246" width="56" height="7" rx="3.5" fill="rgba(255,255,255,.14)"/>
+      <rect x="192" y="246" width="36" height="7" rx="3.5" fill="#00E1C3" class="mkbar" style="--d:1.35s; transform-origin:left; transform:scaleX(0)" opacity=".85"/>
+    </g><g class="mkrise" style="--d:1.1s">
+      <circle cx="330" cy="206" r="32" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+      <g transform="translate(313,188) scale(.72)" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round">
+        <circle cx="24" cy="15" r="7.5" transform="translate(-2,-6)"/><path d="M7 40c0-9 7-15 15-15s15 6 15 15" transform="translate(-2,-6)"/>
+      </g>
+      <rect x="302" y="246" width="56" height="7" rx="3.5" fill="rgba(255,255,255,.14)"/>
+      <rect x="302" y="246" width="50" height="7" rx="3.5" fill="#00E1C3" class="mkbar" style="--d:1.6s; transform-origin:left; transform:scaleX(0)" opacity=".85"/>
+    </g>
+      <g class="mkfade" style="--d:1.2s">
+        <text x="220" y="294" text-anchor="middle" fill="#9AA0C4" font-size="10.5" font-family="JetBrains Mono" letter-spacing="1.6">ROTINAS E TREINAMENTOS</text>
+      </g>
+      <g class="mkfade" style="--d:1.3s"><rect x="88" y="306" width="40" height="36" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.3)" stroke-width="1.1"/></g><g class="mkfade mkchase" style="--d:2.1s"><rect x="134" y="306" width="40" height="36" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.3)" stroke-width="1.1"/><circle cx="154" cy="324" r="5" fill="#00E1C3"/></g><g class="mkfade" style="--d:1.54s"><rect x="180" y="306" width="40" height="36" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.3)" stroke-width="1.1"/></g><g class="mkfade mkchase" style="--d:3.1s"><rect x="226" y="306" width="40" height="36" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.3)" stroke-width="1.1"/><circle cx="246" cy="324" r="5" fill="#00E1C3"/></g><g class="mkfade" style="--d:1.78s"><rect x="272" y="306" width="40" height="36" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.3)" stroke-width="1.1"/></g><g class="mkfade mkchase" style="--d:4.1s"><rect x="318" y="306" width="40" height="36" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.3)" stroke-width="1.1"/><circle cx="338" cy="324" r="5" fill="#00E1C3"/></g>
+    </svg></div>
+  </article>
+
+  <article class="op" id="opE">
+    <button class="re" type="button" aria-label="Repetir">&#8635;</button>
+    <p class="op-k">Opção E</p><h2>Engrenagem viva</h2>
+    <p>A engrenagem da operação com os dentes acendendo em volta (sem girar) e as quatro frentes engatadas nela.</p>
+    <div class="viz"><svg viewBox="0 0 440 380">
+      <circle cx="200" cy="190" r="92" fill="rgba(10,14,46,.5)" stroke="rgba(255,255,255,.55)" stroke-width="1.8" pathLength="1" class="mkdraw"/>
+      <circle cx="200" cy="190" r="64" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1" pathLength="1" class="mkdraw" style="--d:.2s"/>
+      <line x1="296.0" y1="190.0" x2="312.0" y2="190.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:0.4s"/><line x1="283.1" y1="238.0" x2="297.0" y2="246.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:0.8s"/><line x1="248.0" y1="273.1" x2="256.0" y2="287.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:1.2000000000000002s"/><line x1="200.0" y1="286.0" x2="200.0" y2="302.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:1.6s"/><line x1="152.0" y1="273.1" x2="144.0" y2="287.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:2.0s"/><line x1="116.9" y1="238.0" x2="103.0" y2="246.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:2.4s"/><line x1="104.0" y1="190.0" x2="88.0" y2="190.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:2.8000000000000003s"/><line x1="116.9" y1="142.0" x2="103.0" y2="134.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:3.2s"/><line x1="152.0" y1="106.9" x2="144.0" y2="93.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:3.6s"/><line x1="200.0" y1="94.0" x2="200.0" y2="78.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:4.0s"/><line x1="248.0" y1="106.9" x2="256.0" y2="93.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:4.4s"/><line x1="283.1" y1="142.0" x2="297.0" y2="134.0" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" class="mkchase" style="--d:4.800000000000001s"/>
+      <text x="200" y="186" text-anchor="middle" fill="#FFFFFF" font-weight="800" font-size="19" class="mkfade" style="--d:.6s">GESTÃO</text>
+      <text x="200" y="204" text-anchor="middle" fill="#00E1C3" font-weight="600" font-size="9" letter-spacing="1.6" class="mkfade" style="--d:.7s">EMPRESARIAL</text>
+      <circle cx="334" cy="110" r="46" fill="rgba(10,14,46,.5)" stroke="rgba(255,255,255,.45)" stroke-width="1.5" pathLength="1" class="mkdraw" style="--d:.5s"/>
+      <g class="mkfade" style="--d:.8s" transform="translate(312,88) scale(.92)" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round">
+        <circle cx="22" cy="26" r="16"/><circle cx="22" cy="26" r="9"/><circle cx="22" cy="26" r="2.5"/><path d="M22 26L40 8M34 8h6v6"/>
+      </g>
+      <line x1="378.5" y1="128.0" x2="387.8" y2="131.7" stroke="rgba(255,255,255,.7)" stroke-width="5" stroke-linecap="round" class="mkchase" style="--d:0.6s"/><line x1="352.8" y1="154.2" x2="356.7" y2="163.4" stroke="rgba(255,255,255,.7)" stroke-width="5" stroke-linecap="round" class="mkchase" style="--d:1.2s"/><line x1="316.0" y1="154.5" x2="312.3" y2="163.8" stroke="rgba(255,255,255,.7)" stroke-width="5" stroke-linecap="round" class="mkchase" style="--d:1.7999999999999998s"/><line x1="289.8" y1="128.8" x2="280.6" y2="132.7" stroke="rgba(255,255,255,.7)" stroke-width="5" stroke-linecap="round" class="mkchase" style="--d:2.4s"/><line x1="289.5" y1="92.0" x2="280.2" y2="88.3" stroke="rgba(255,255,255,.7)" stroke-width="5" stroke-linecap="round" class="mkchase" style="--d:3.0s"/><line x1="315.2" y1="65.8" x2="311.3" y2="56.6" stroke="rgba(255,255,255,.7)" stroke-width="5" stroke-linecap="round" class="mkchase" style="--d:3.6s"/><line x1="352.0" y1="65.5" x2="355.7" y2="56.2" stroke="rgba(255,255,255,.7)" stroke-width="5" stroke-linecap="round" class="mkchase" style="--d:4.199999999999999s"/><line x1="378.2" y1="91.2" x2="387.4" y2="87.3" stroke="rgba(255,255,255,.7)" stroke-width="5" stroke-linecap="round" class="mkchase" style="--d:4.8s"/>
+      <text x="86" y="60" text-anchor="middle" fill="#9AA0C4" font-weight="600" font-size="13" class="mkfade" style="--d:1.0s">Diagnóstico</text><text x="60" y="330" text-anchor="middle" fill="#9AA0C4" font-weight="600" font-size="13" class="mkfade" style="--d:1.25s">Precificação</text><text x="348" y="330" text-anchor="middle" fill="#9AA0C4" font-weight="600" font-size="13" class="mkfade" style="--d:1.5s">Liderança</text><text x="388" y="208" text-anchor="middle" fill="#9AA0C4" font-weight="600" font-size="13" class="mkfade" style="--d:1.75s">Rotinas</text>
+    </svg></div>
+  </article>
+
+  </div>
+</div>
+<script>
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);}})},{threshold:.3});
+document.querySelectorAll('.op').forEach(function(o){io.observe(o)});
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.re'); if(!b) return;
+  var op=b.closest('.op'); op.classList.remove('in');
+  void op.offsetWidth; op.classList.add('in');
+});
+</script>
+</body>
+</html>
