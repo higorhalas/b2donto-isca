@@ -1003,49 +1003,51 @@ section{padding:clamp(56px,7vw,104px) 0}
   background:linear-gradient(160deg, rgba(0,225,195,.16), rgba(10,14,46,.98) 55%);
   box-shadow:0 0 26px rgba(0,225,195,.35), 0 6px 18px rgba(5,9,34,.6)}
 @media(max-width:560px){ .j-pill{font-size:8.5px; gap:5px; padding:5px 9px 5px 7px; border-width:1px} .j-pill svg{width:13px; height:13px} }
-/* pilar 4: processo comercial hibrido (portado do anuncio, montagem por etapa na rolagem) */
+/* pilar 4: processo comercial hibrido (dois lados com suas funcoes, fusao no agendamento) */
 .hibrido{position:relative; width:100%; max-width:520px; padding:6px 0}
-.hb-t{font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--cool-grey);
-  text-align:center; margin-bottom:26px; opacity:0; transition:opacity .6s}
-.hibrido:not([data-hb="-1"]) .hb-t{opacity:1}
-.hb-palco{position:relative; height:168px}
-.hb-linha{position:absolute; left:22%; right:22%; top:58px; height:0; border-top:1.5px dashed rgba(255,255,255,.3); opacity:0; transition:opacity .6s}
+.hb-palco{position:relative; height:158px}
+.hb-linha{position:absolute; left:25%; right:25%; top:52px; height:0; border-top:1.5px dashed rgba(255,255,255,.3); opacity:0; transition:opacity .6s}
 .hb-p{position:absolute; top:-4px; left:8%; width:7px; height:7px; border-radius:50%; background:var(--cyan);
   box-shadow:0 0 9px rgba(0,225,195,.9); opacity:0}
-.hb-no{position:absolute; top:12px; translate:-50% 0; display:grid; justify-items:center; gap:12px;
+.hb-no{position:absolute; top:8px; translate:-50% 0; display:grid; justify-items:center; gap:11px;
   opacity:0; transform:translateY(22px) scale(.9);
   transition:opacity .7s cubic-bezier(.2,.85,.3,1.1), transform .7s cubic-bezier(.2,.85,.3,1.1), left .9s cubic-bezier(.4,0,.2,1)}
-.hb-ia{left:22%} .hb-crc{left:78%}
+.hb-ia{left:25%} .hb-crc{left:75%}
 .hb-no b{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--off-white); transition:opacity .5s}
-.hb-disco{width:92px; height:92px; border-radius:50%; display:grid; place-items:center; box-sizing:border-box;
+.hb-disco{width:88px; height:88px; border-radius:50%; display:grid; place-items:center; box-sizing:border-box;
   background:radial-gradient(circle at 35% 30%, rgba(30,46,120,.95), rgba(8,12,44,.97) 75%);
   border:1.5px solid rgba(255,255,255,.4); box-shadow:0 0 14px rgba(0,225,195,.1), 0 10px 30px rgba(5,9,34,.55);
   transition:border-color .5s, box-shadow .5s}
-.hb-disco svg{width:46px; height:46px}
-.hb-selo{position:absolute; left:50%; top:12px; translate:-50% 0; display:grid; justify-items:center; gap:12px;
+.hb-disco svg{width:44px; height:44px}
+.hb-selo{position:absolute; left:50%; top:8px; translate:-50% 0; display:grid; justify-items:center; gap:11px;
   opacity:0; transform:scale(.6); transition:opacity .6s ease .55s, transform .6s cubic-bezier(.2,.85,.3,1.15) .55s; z-index:2}
 .hb-ds{border-color:rgba(0,225,195,.8); box-shadow:0 0 34px rgba(0,225,195,.4), 0 10px 30px rgba(5,9,34,.55)}
 .hb-check{stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset .8s cubic-bezier(.2,.7,.2,1) .9s}
 .hb-selo b{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan)}
-.hb-tarefas{display:grid; grid-template-columns:1.2fr 1fr; gap:14px; margin-top:6px; transition:opacity .6s}
-.hb-l{list-style:none; display:flex; flex-wrap:wrap; gap:6px; justify-content:center; align-content:flex-start}
-.hb-l li{font-family:var(--mono); font-size:9.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--cool-grey);
-  border:1px solid var(--line-strong); padding:6px 9px; border-radius:999px; opacity:0; transform:translateY(8px);
-  transition:opacity .5s ease calc(var(--i)*.12s), transform .5s ease calc(var(--i)*.12s)}
+/* grupos de funcao: um card embaixo de cada disco */
+.hb-grupos{display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,4vw,34px); margin-top:4px; transition:opacity .6s}
+.hb-g{list-style:none; display:grid; gap:7px; padding:14px; border-radius:15px;
+  border:1px solid rgba(var(--gt),.28); background:rgba(var(--gt),.04);
+  opacity:0; transform:translateY(16px); transition:opacity .7s cubic-bezier(.2,.85,.3,1.1), transform .7s cubic-bezier(.2,.85,.3,1.1)}
+.hb-g li{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:9.5px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--cool-grey); opacity:0; transform:translateY(6px);
+  transition:opacity .5s ease calc(var(--i)*.14s + .2s), transform .5s ease calc(var(--i)*.14s + .2s)}
+.hb-g li::before{content:''; width:5px; height:5px; border-radius:50%; background:var(--gc); flex:none;
+  box-shadow:0 0 7px rgba(var(--gt),.8)}
 /* etapas */
 :is([data-hb="0"],[data-hb="1"],[data-hb="2"],[data-hb="3"]) .hb-ia{opacity:1; transform:none}
 :is([data-hb="1"],[data-hb="2"],[data-hb="3"]) .hb-crc{opacity:1; transform:none}
 :is([data-hb="1"],[data-hb="2"]) .hb-linha{opacity:1}
 :is([data-hb="1"],[data-hb="2"]) .hb-p{animation:hbGo 2.3s linear var(--pd) infinite}
 @keyframes hbGo{0%{left:6%; opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{left:92%; opacity:0}}
-:is([data-hb="2"],[data-hb="3"]) .hb-l li{opacity:1; transform:none}
-[data-hb="2"] .hb-l li{animation:chipOn 7s ease-in-out calc(var(--i)*1s + 1s) infinite}
+:is([data-hb="2"],[data-hb="3"]) .hb-g{opacity:1; transform:none}
+:is([data-hb="2"],[data-hb="3"]) .hb-g li{opacity:1; transform:none}
 [data-hb="3"] .hb-ia,[data-hb="3"] .hb-crc{left:50%; opacity:.25; transform:scale(.8)}
 [data-hb="3"] .hb-no b{opacity:0}
 [data-hb="3"] .hb-selo{opacity:1; transform:scale(1)}
 [data-hb="3"] .hb-check{stroke-dashoffset:0}
-[data-hb="3"] .hb-tarefas{opacity:.35}
-@media(max-width:560px){ .hb-tarefas{grid-template-columns:1fr} .hb-l{justify-content:flex-start} .hb-palco{height:150px} .hb-disco{width:80px; height:80px} .hb-disco svg{width:40px; height:40px} }
+[data-hb="3"] .hb-grupos{opacity:.45}
+@media(max-width:560px){ .hb-palco{height:142px} .hb-disco{width:76px; height:76px} .hb-disco svg{width:38px; height:38px} .hb-g{padding:11px} .hb-g li{font-size:8.5px} }
 /* grafico de gestao (pilar 1): curva desenha, icones de traco nos chips */
 .g1-curve{stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1.7s cubic-bezier(.2,.7,.2,1) .4s}
 .pilar-viz-box.in .g1-curve{stroke-dashoffset:0}
@@ -1078,8 +1080,8 @@ section{padding:clamp(56px,7vw,104px) 0}
   .lk-item{opacity:1; transform:none}
   .lk-dot{animation:none}
   .card.area{opacity:1; transform:none}
-  .hb-p,[data-hb="2"] .hb-l li{animation:none}
-  .hb-no,.hb-l li{opacity:1; transform:none}
+  .hb-p{animation:none}
+  .hb-no,.hb-g,.hb-g li{opacity:1; transform:none}
   .j-pill :is(path,rect),.pi-disc :is(path,rect),.g1ic :is(path,rect,circle){stroke-dashoffset:0}
   .g1-curve{stroke-dashoffset:0; transition:none}
 }
@@ -1543,16 +1545,19 @@ section{padding:clamp(56px,7vw,104px) 0}
           <div class="pilar-viz-col">
             <div class="pilar-viz-box r"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
               <div class="hibrido" data-hb="-1">
-              <p class="hb-t">Processo comercial híbrido</p>
               <div class="hb-palco" aria-hidden="true">
                 <div class="hb-linha"><i class="hb-p" style="--pd:0s"></i><i class="hb-p" style="--pd:.75s"></i><i class="hb-p" style="--pd:1.5s"></i></div>
                 <div class="hb-no hb-ia"><div class="hb-disco"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="13" width="22" height="22" rx="4"/><rect x="19" y="19" width="10" height="10" rx="2"/><path d="M19 13V6M24 13V6M29 13V6M19 35v7M24 35v7M29 35v7M13 19H6M13 24H6M13 29H6M35 19h7M35 24h7M35 29h7"/></svg></div><b>IA</b></div>
                 <div class="hb-no hb-crc"><div class="hb-disco"><svg viewBox="0 0 48 48" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="21" r="8"/><path d="M11 42c1-7 6-11 13-11s12 4 13 11"/><path d="M12 22v-3a12 12 0 0 1 24 0v3"/><rect x="9" y="20" width="5" height="8" rx="2"/><rect x="34" y="20" width="5" height="8" rx="2"/><path d="M36 28c0 4-3 6-7 6"/></svg></div><b>CRC humana</b></div>
                 <div class="hb-selo"><div class="hb-disco hb-ds"><svg viewBox="0 0 36 30"><path class="hb-check" d="M4 16 L13 25 L32 5" fill="none" stroke="#00E1C3" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></svg></div><b>Agendamento</b></div>
               </div>
-              <div class="hb-tarefas">
-                <ul class="hb-l"><li style="--i:0">Resposta na hora</li><li style="--i:1">Qualificação</li><li style="--i:2">Follow-up</li><li style="--i:3">Resgate</li><li style="--i:4">Encaminhamento</li></ul>
-                <ul class="hb-l hb-l-crc"><li style="--i:0">Ligações</li><li style="--i:1">Relacionamento</li><li style="--i:2">Conversão</li></ul>
+              <div class="hb-grupos">
+                <ul class="hb-g" style="--gc:#00E1C3; --gt:0,225,195">
+                  <li style="--i:0">Resposta na hora</li><li style="--i:1">Qualificação</li><li style="--i:2">Follow-up</li><li style="--i:3">Resgate</li><li style="--i:4">Encaminhamento</li>
+                </ul>
+                <ul class="hb-g" style="--gc:#D87BF1; --gt:216,123,241">
+                  <li style="--i:0">Ligações</li><li style="--i:1">Relacionamento</li><li style="--i:2">Conversão</li>
+                </ul>
               </div>
             </div>
             </div>
