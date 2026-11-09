@@ -275,21 +275,6 @@ section{position:relative; padding:clamp(64px,9vw,128px) 0}
 .island .ilist svg{width:17px; height:17px; flex:0 0 17px; margin-top:3px; color:var(--cyan-on-light)}
 
 /* ===== EQUIPE ===== */
-.team{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px}
-@media(max-width:900px){ .team{grid-template-columns:1fr 1fr} }
-@media(max-width:560px){ .team{grid-template-columns:1fr} }
-.tm{padding:22px; border:1px solid var(--line); border-radius:14px; background:var(--surface-1);
-  transition:border-color .35s}
-.tm:hover{border-color:rgba(0,225,195,.26)}
-.tm-top{display:flex; align-items:center; gap:13px}
-.tm-av{width:42px; height:42px; flex:0 0 42px; border-radius:50%; display:grid; place-items:center;
-  background:linear-gradient(135deg,rgba(0,225,195,.14),rgba(167,19,185,.14));
-  border:1px solid rgba(0,225,195,.26); font-weight:700; font-size:16px;
-  background-clip:padding-box}
-.tm-av span{background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent}
-.tm-nome{font-size:15px; font-weight:600; letter-spacing:-.03em}
-.tm-fn{font-family:var(--mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--cyan); margin-top:2px}
-.tm p{margin-top:13px; font-size:13.5px; color:var(--cool-grey); max-width:none}
 
 /* ===== FAQ ===== */
 .faq-list{border-top:1px solid var(--line); max-width:820px}
@@ -520,10 +505,6 @@ body.rx-lock{overflow:hidden}
 /* ================= v2: mais limpo ================= */
 #aurora{opacity:.5}
 section{padding:clamp(56px,7vw,104px) 0}
-.team{display:flex; flex-wrap:wrap; justify-content:center}
-.team>.tm{flex:0 1 calc((100% - 28px)/3)}
-@media(max-width:900px){ .team>.tm{flex-basis:calc((100% - 14px)/2)} }
-@media(max-width:560px){ .team>.tm{flex-basis:100%} }
 
 /* bloco Comecar (a ilha clara da pagina) */
 .start{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:clamp(28px,5vw,64px); align-items:center}
@@ -762,14 +743,6 @@ section{padding:clamp(56px,7vw,104px) 0}
 
 /* ================= v2.4: metodo em rolagem ================= */
 .formula-head{text-align:center} .formula-head h2,.formula-head .lead{margin-left:auto; margin-right:auto} .formula-head .lead{margin-top:14px}
-/* simulacao (pilar 4) */
-.sim{margin-top:24px; padding:20px 22px; border:1px solid rgba(0,225,195,.2); border-radius:16px; background:rgba(0,225,195,.04); max-width:470px}
-.sim-k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--cool-grey); margin-bottom:14px}
-.sim-grid{display:grid; grid-template-columns:1fr auto auto; gap:9px 22px; align-items:center; font-size:13.5px; color:var(--cool-grey)}
-.sim-grid em{font-style:normal; font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim-grey); text-align:right}
-.sim-grid b{font-variant-numeric:tabular-nums; text-align:right; color:var(--off-white); font-weight:600}
-.sim-grid b.hl{color:var(--cyan)}
-.sim-note{margin-top:14px; font-size:13px; color:var(--cool-grey)} .sim-note strong{color:var(--white)}
 
 /* ================= v2.9b: menu so no topo da pagina, sem ficar fixo ================= */
 .nav{position:absolute}
@@ -951,13 +924,14 @@ section{padding:clamp(56px,7vw,104px) 0}
 .alvo-note{margin-top:26px; font-size:13.5px; color:var(--cool-grey); max-width:72ch; line-height:1.7}
 @media(max-width:560px){ .tl{padding-left:46px} .tl-spine{left:14px} .tl-node{left:-46px; width:32px; height:32px; font-size:10.5px} }
 /* alvo da etapa 01: o disco inteiro do icone acerta o alvo conforme a rolagem */
-.tl-viz.alvo-stage svg{max-width:440px}
+.pilar-viz-box .alvo-stage{position:relative; z-index:1; width:100%}
+.alvo-stage svg{max-width:440px}
 .alvo-ic :is(path,rect,circle){fill:none; stroke:#FFFFFF; stroke-width:4.6; stroke-linecap:round; stroke-linejoin:round}
 .alvo-sonar{opacity:0; transform-box:fill-box; transform-origin:center}
-.tl-step.in .alvo-sonar{animation:alvoSonar 3.8s ease-out 1.2s infinite}
+:is(.tl-step.in,.pilar-viz-box.in) .alvo-sonar{animation:alvoSonar 3.8s ease-out 1.2s infinite}
 @keyframes alvoSonar{0%{opacity:.5; transform:scale(.9)} 70%{opacity:0; transform:scale(2.4)} 100%{opacity:0; transform:scale(2.4)}}
 .an-slot{opacity:0; transition:opacity .6s ease var(--d,0s)}
-.tl-step.in .an-slot{opacity:1}
+:is(.tl-step.in,.pilar-viz-box.in) .an-slot{opacity:1}
 .an-lbl{transition:fill .4s}
 .an-core{opacity:0; transform-box:fill-box; transform-origin:center}
 .an-core .an-disco{transition:stroke .4s, stroke-width .4s}
@@ -1413,59 +1387,86 @@ section{padding:clamp(56px,7vw,104px) 0}
           </div>
           <div class="pilar-viz-col">
             <div class="pilar-viz-box r"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Planejamento estratégico: curva de crescimento com meta, sustentada por diagnóstico, precificação, liderança e rotinas">
-              <defs>
-                <linearGradient id="g1line" gradientUnits="userSpaceOnUse" x1="36" y1="238" x2="424" y2="74">
-                  <stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#00E1C3"/><stop offset="1" stop-color="#4A6CF7"/>
-                </linearGradient>
-                <linearGradient id="g1area" x1="0" y1="74" x2="0" y2="260" gradientUnits="userSpaceOnUse">
-                  <stop offset="0" stop-color="#00E1C3" stop-opacity=".26"/><stop offset="1" stop-color="#00E1C3" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <text x="230" y="186" text-anchor="middle" fill="rgba(232,234,245,.04)" font-family="Sora, sans-serif" font-weight="800" font-size="92" letter-spacing="-.06em" class="anim-fade d1">GESTÃO</text>
-              <text x="36" y="38" fill="#9AA0C4" font-family="JetBrains Mono, monospace" font-weight="600" font-size="12" letter-spacing="2.5" class="anim-fade d1">PLANEJAMENTO ESTRATÉGICO</text>
-              <g class="anim-fade d2">
-                <line x1="36" y1="120" x2="424" y2="120" stroke="rgba(255,255,255,.07)" stroke-width="1.2"/>
-                <line x1="36" y1="166" x2="424" y2="166" stroke="rgba(255,255,255,.07)" stroke-width="1.2"/>
-                <line x1="36" y1="212" x2="424" y2="212" stroke="rgba(255,255,255,.07)" stroke-width="1.2"/>
-                <line x1="36" y1="258" x2="424" y2="258" stroke="rgba(255,255,255,.14)" stroke-width="1.2"/>
-              </g>
-              <path class="anim-fade d6" d="M36 238 C150 232,210 190,265 160 C320 130,370 92,424 74 L424 258 L36 258 Z" fill="url(#g1area)"/>
-              <path class="g1-curve" d="M36 238 C150 232,210 190,265 160 C320 130,370 92,424 74" fill="none" stroke="url(#g1line)" stroke-width="4" stroke-linecap="round" pathLength="1"/>
-              <g class="svg-seq-a"><circle cx="160" cy="204" r="13" fill="rgba(0,225,195,.18)"/><circle cx="160" cy="204" r="6" fill="#FFFFFF"/></g>
-              <g class="svg-seq-b"><circle cx="290" cy="146" r="13" fill="rgba(0,225,195,.18)"/><circle cx="290" cy="146" r="6" fill="#FFFFFF"/></g>
-              <g class="svg-seq-c"><circle cx="424" cy="74" r="13" fill="rgba(0,225,195,.2)"/><circle cx="424" cy="74" r="6" fill="#FFFFFF"/></g>
-              <g class="svg-rise" style="--d:1.3s">
-                <rect x="296" y="96" width="112" height="38" rx="19" fill="rgba(10,14,46,.92)" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
-                <g class="g1ic" style="--gd:1.45s" transform="translate(306,103) scale(.5)"><circle cx="22" cy="26" r="16" pathLength="1"/><circle cx="22" cy="26" r="9" pathLength="1"/><circle cx="22" cy="26" r="2.5" pathLength="1"/><path d="M22 26L40 8M34 8h6v6" pathLength="1"/></g>
-                <text x="340" y="121" fill="#FFFFFF" font-family="Sora, sans-serif" font-weight="700" font-size="16" letter-spacing=".06em">META</text>
-              </g>
-              <line x1="36" y1="292" x2="424" y2="292" stroke="rgba(255,255,255,.08)" stroke-width="1" class="anim-fade d5"/>
-              <g>
-                <circle class="rx-halo" style="--i:0" cx="86" cy="324" r="31" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-                <circle cx="86" cy="324" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
-                <g class="g1ic" style="--gd:1.00s" transform="translate(74,312) scale(.5)"><rect x="9" y="8" width="30" height="35" rx="4" pathLength="1"/><path d="M18 8V5h12v3" pathLength="1"/><path d="M13 27h6l3-7 4 12 3-6h6" pathLength="1"/></g>
-                <text x="86" y="374" text-anchor="middle" fill="#E8EAF5" font-family="Sora, sans-serif" font-weight="600" font-size="12.5">Diagnóstico</text>
-              </g>
-              <g>
-                <circle class="rx-halo" style="--i:1" cx="182" cy="324" r="31" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-                <circle cx="182" cy="324" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
-                <g class="g1ic" style="--gd:1.15s" transform="translate(170,312) scale(.5)"><path d="M6 7h17l19 19-16 16L7 23z" pathLength="1"/><circle cx="15.5" cy="16" r="3" pathLength="1"/></g>
-                <text x="182" y="374" text-anchor="middle" fill="#E8EAF5" font-family="Sora, sans-serif" font-weight="600" font-size="12.5">Precificação</text>
-              </g>
-              <g>
-                <circle class="rx-halo" style="--i:2" cx="278" cy="324" r="31" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-                <circle cx="278" cy="324" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
-                <g class="g1ic" style="--gd:1.30s" transform="translate(266,312) scale(.5)"><circle cx="18" cy="15" r="6.5" pathLength="1"/><path d="M5 42c0-8 6-14 13-14s13 6 13 14" pathLength="1"/><path d="M35 6v18M35 6h9l-3 4.5 3 4.5h-9" pathLength="1"/></g>
-                <text x="278" y="374" text-anchor="middle" fill="#E8EAF5" font-family="Sora, sans-serif" font-weight="600" font-size="12.5">Liderança</text>
-              </g>
-              <g>
-                <circle class="rx-halo" style="--i:3" cx="374" cy="324" r="31" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-                <circle cx="374" cy="324" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
-                <g class="g1ic" style="--gd:1.45s" transform="translate(362,312) scale(.5)"><rect x="5" y="7" width="38" height="28" rx="4" pathLength="1"/><path d="M5 15h38M13 29v-6M20 29v-9M27 29v-4M34 29v-11M17 43h14M24 35v8" pathLength="1"/></g>
-                <text x="374" y="374" text-anchor="middle" fill="#E8EAF5" font-family="Sora, sans-serif" font-weight="600" font-size="12.5">Rotinas</text>
-              </g>
+              <div class="alvo-stage" data-tiro="-1">
+              <svg aria-hidden="true" focusable="false" viewBox="-66 -22 512 436" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raio-X comercial: a rolagem vai marcando atendimentos, conversão, precificação, metas, equipe e rotinas no alvo">
+      <circle cx="190" cy="192" r="86" fill="none" stroke="rgba(0,225,195,.16)" stroke-width="1" pathLength="600" class="anim-stroke"/>
+      <circle cx="190" cy="192" r="146" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1" pathLength="600" class="anim-stroke" style="transition-delay:.15s"/>
+      <circle cx="190" cy="192" r="180" fill="none" stroke="rgba(216,123,241,.14)" stroke-width="1" pathLength="600" class="anim-stroke" style="transition-delay:.3s"/>
+      <circle cx="190" cy="192" r="64" fill="rgba(0,225,195,.1)" class="alvo-sonar"/>
+      <line x1="190.0" y1="192.0" x2="190.0" y2="46.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.2s"/>
+      <g class="alvo-no an0">
+        <circle class="an-slot" cx="190.0" cy="46.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.3s"/>
+        <circle class="an-burst" cx="190.0" cy="46.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
+        <g class="an-core">
+          <circle class="an-disco" cx="190.0" cy="46.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
+          <g class="alvo-ic" transform="translate(178.0,34.0) scale(.5)"><path d="M8 9h24a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H19l-8 7v-7H8a4 4 0 0 1-4-4V13a4 4 0 0 1 4-4z"/><path d="M40 18a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-1v6l-7-6h-7"/></g>
+        </g>
+        <text class="an-lbl anim-fade" x="190.0" y="-12.0" text-anchor="middle" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.35s">Atendimentos</text>
+        <g class="an-ok" transform="translate(209.0,27.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </g>
+      <line x1="190.0" y1="192.0" x2="316.4" y2="119.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.30000000000000004s"/>
+      <g class="alvo-no an1">
+        <circle class="an-slot" cx="316.4" cy="119.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.4s"/>
+        <circle class="an-burst" cx="316.4" cy="119.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
+        <g class="an-core">
+          <circle class="an-disco" cx="316.4" cy="119.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
+          <g class="alvo-ic" transform="translate(304.4,107.0) scale(.5)"><path d="M5 42h38"/><path d="M9 35l9-10 7 6 14-16"/><path d="M31 15h8v8"/></g>
+        </g>
+        <text class="an-lbl anim-fade" x="361.5" y="98.0" text-anchor="start" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.44999999999999996s">Conversão</text>
+        <g class="an-ok" transform="translate(335.4,100.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </g>
+      <line x1="190.0" y1="192.0" x2="316.4" y2="265.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.4s"/>
+      <g class="alvo-no an2">
+        <circle class="an-slot" cx="316.4" cy="265.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.5s"/>
+        <circle class="an-burst" cx="316.4" cy="265.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
+        <g class="an-core">
+          <circle class="an-disco" cx="316.4" cy="265.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
+          <g class="alvo-ic" transform="translate(304.4,253.0) scale(.5)"><path d="M6 7h17l19 19-16 16L7 23z"/><circle cx="15.5" cy="16" r="3"/></g>
+        </g>
+        <text class="an-lbl anim-fade" x="361.5" y="296.0" text-anchor="start" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.55s">Precificação</text>
+        <g class="an-ok" transform="translate(335.4,246.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </g>
+      <line x1="190.0" y1="192.0" x2="190.0" y2="338.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.5s"/>
+      <g class="alvo-no an3">
+        <circle class="an-slot" cx="190.0" cy="338.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.6000000000000001s"/>
+        <circle class="an-burst" cx="190.0" cy="338.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
+        <g class="an-core">
+          <circle class="an-disco" cx="190.0" cy="338.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
+          <g class="alvo-ic" transform="translate(178.0,326.0) scale(.5)"><circle cx="22" cy="26" r="16"/><circle cx="22" cy="26" r="9"/><path d="M22 26L40 8M34 8h6v6"/></g>
+        </g>
+        <text class="an-lbl anim-fade" x="190.0" y="406.0" text-anchor="middle" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.65s">Metas</text>
+        <g class="an-ok" transform="translate(209.0,319.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </g>
+      <line x1="190.0" y1="192.0" x2="63.6" y2="265.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.6000000000000001s"/>
+      <g class="alvo-no an4">
+        <circle class="an-slot" cx="63.6" cy="265.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.7s"/>
+        <circle class="an-burst" cx="63.6" cy="265.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
+        <g class="an-core">
+          <circle class="an-disco" cx="63.6" cy="265.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
+          <g class="alvo-ic" transform="translate(51.6,253.0) scale(.5)"><circle cx="24" cy="15" r="7.5"/><path d="M9 42c0-9 7-15 15-15s15 6 15 15"/></g>
+        </g>
+        <text class="an-lbl anim-fade" x="18.5" y="296.0" text-anchor="end" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.75s">Equipe</text>
+        <g class="an-ok" transform="translate(82.6,246.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </g>
+      <line x1="190.0" y1="192.0" x2="63.6" y2="119.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.7s"/>
+      <g class="alvo-no an5">
+        <circle class="an-slot" cx="63.6" cy="119.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.8s"/>
+        <circle class="an-burst" cx="63.6" cy="119.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
+        <g class="an-core">
+          <circle class="an-disco" cx="63.6" cy="119.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
+          <g class="alvo-ic" transform="translate(51.6,107.0) scale(.5)"><path d="M9 22a15 15 0 0 1 26-9"/><path d="M39 26a15 15 0 0 1-26 9"/><path d="M36 5v9h-9M12 43v-9h9"/></g>
+        </g>
+        <text class="an-lbl anim-fade" x="18.5" y="87.0" text-anchor="end" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.85s">Rotinas</text>
+        <g class="an-ok" transform="translate(82.6,100.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </g>
+      
+      <g class="anim-fade d3">
+        <circle cx="190" cy="192" r="62" fill="#0A0E2E" stroke="#00E1C3" stroke-width="1.6"/>
+        <text x="190" y="190" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800" font-family="Sora, sans-serif">ALVO</text>
+        <text x="190" y="210" text-anchor="middle" fill="#00E1C3" font-size="9.5" font-weight="600" letter-spacing="1.3" font-family="Sora, sans-serif">RAIO-X COMERCIAL</text>
+      </g>
             </svg>
+              </div>
             </div>
           </div>
         </div>
@@ -1617,16 +1618,6 @@ section{padding:clamp(56px,7vw,104px) 0}
           <div class="pilar-text-col">
             <h3 class="pilar-headline r d1">IA pra dar escala. Gente pra <span class="grad-text">fechar</span>.</h3>
             <p class="pilar-lead r d2">A Maia, nossa IA, faz o pré-atendimento no WhatsApp da própria clínica: responde na hora, 24 horas, qualifica, contorna objeção e faz até 5 resgates de quem sumiu. O paciente chega pré-agendado na mão da sua equipe, que cuida do relacionamento e do fechamento. A IA potencializa o humano, não substitui.</p>
-            <div class="sim r d3">
-            <p class="sim-k">Simulação · mesmo investimento de R$ 3 mil em anúncio</p>
-            <div class="sim-grid">
-              <span></span><em>Sem o sistema</em><em>Com o sistema</em>
-              <span>Taxa de agendamento</span><b>20%</b><b class="hl">30%</b>
-              <span>Agendamentos no mês</span><b>40</b><b class="hl">60</b>
-              <span>Tratamentos fechados</span><b>~8</b><b class="hl">~12</b>
-            </div>
-            <p class="sim-note">Com ticket médio de R$ 10 mil, são cerca de <strong>R$ 40 mil a mais</strong> no mês, com a mesma verba.</p>
-          </div>
           </div>
           <div class="pilar-viz-col">
             <div class="pilar-viz-box r"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
@@ -1735,88 +1726,8 @@ section{padding:clamp(56px,7vw,104px) 0}
         <div class="tl-node" aria-hidden="true">01</div>
         <div class="tl-card">
           <p class="tl-k">Etapa 01 · Diagnóstico e planejamento</p>
-          <h3>Raio-X comercial e plano de 6 meses</h3>
-          <p>A gente analisa atendimentos reais da clínica, os que converteram e os que não converteram, e transforma isso num diagnóstico de gargalos. Em encontros estratégicos com o dono, nasce o plano de ação dos próximos 6 meses: metas comerciais, precificação, bonificação da equipe, condições de pagamento, campanhas internas e rotinas.</p>
-          <div class="tl-viz alvo-stage" data-tiro="-1">
-            <svg aria-hidden="true" focusable="false" viewBox="-66 -22 512 436" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raio-X comercial: a rolagem vai marcando atendimentos, conversão, precificação, metas, equipe e rotinas no alvo">
-      <circle cx="190" cy="192" r="86" fill="none" stroke="rgba(0,225,195,.16)" stroke-width="1" pathLength="600" class="anim-stroke"/>
-      <circle cx="190" cy="192" r="146" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1" pathLength="600" class="anim-stroke" style="transition-delay:.15s"/>
-      <circle cx="190" cy="192" r="180" fill="none" stroke="rgba(216,123,241,.14)" stroke-width="1" pathLength="600" class="anim-stroke" style="transition-delay:.3s"/>
-      <circle cx="190" cy="192" r="64" fill="rgba(0,225,195,.1)" class="alvo-sonar"/>
-      <line x1="190.0" y1="192.0" x2="190.0" y2="46.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.2s"/>
-      <g class="alvo-no an0">
-        <circle class="an-slot" cx="190.0" cy="46.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.3s"/>
-        <circle class="an-burst" cx="190.0" cy="46.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
-        <g class="an-core">
-          <circle class="an-disco" cx="190.0" cy="46.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
-          <g class="alvo-ic" transform="translate(178.0,34.0) scale(.5)"><path d="M8 9h24a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H19l-8 7v-7H8a4 4 0 0 1-4-4V13a4 4 0 0 1 4-4z"/><path d="M40 18a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-1v6l-7-6h-7"/></g>
-        </g>
-        <text class="an-lbl anim-fade" x="190.0" y="-12.0" text-anchor="middle" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.35s">Atendimentos</text>
-        <g class="an-ok" transform="translate(209.0,27.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
-      </g>
-      <line x1="190.0" y1="192.0" x2="316.4" y2="119.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.30000000000000004s"/>
-      <g class="alvo-no an1">
-        <circle class="an-slot" cx="316.4" cy="119.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.4s"/>
-        <circle class="an-burst" cx="316.4" cy="119.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
-        <g class="an-core">
-          <circle class="an-disco" cx="316.4" cy="119.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
-          <g class="alvo-ic" transform="translate(304.4,107.0) scale(.5)"><path d="M5 42h38"/><path d="M9 35l9-10 7 6 14-16"/><path d="M31 15h8v8"/></g>
-        </g>
-        <text class="an-lbl anim-fade" x="361.5" y="98.0" text-anchor="start" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.44999999999999996s">Conversão</text>
-        <g class="an-ok" transform="translate(335.4,100.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
-      </g>
-      <line x1="190.0" y1="192.0" x2="316.4" y2="265.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.4s"/>
-      <g class="alvo-no an2">
-        <circle class="an-slot" cx="316.4" cy="265.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.5s"/>
-        <circle class="an-burst" cx="316.4" cy="265.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
-        <g class="an-core">
-          <circle class="an-disco" cx="316.4" cy="265.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
-          <g class="alvo-ic" transform="translate(304.4,253.0) scale(.5)"><path d="M6 7h17l19 19-16 16L7 23z"/><circle cx="15.5" cy="16" r="3"/></g>
-        </g>
-        <text class="an-lbl anim-fade" x="361.5" y="296.0" text-anchor="start" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.55s">Precificação</text>
-        <g class="an-ok" transform="translate(335.4,246.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
-      </g>
-      <line x1="190.0" y1="192.0" x2="190.0" y2="338.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.5s"/>
-      <g class="alvo-no an3">
-        <circle class="an-slot" cx="190.0" cy="338.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.6000000000000001s"/>
-        <circle class="an-burst" cx="190.0" cy="338.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
-        <g class="an-core">
-          <circle class="an-disco" cx="190.0" cy="338.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
-          <g class="alvo-ic" transform="translate(178.0,326.0) scale(.5)"><circle cx="22" cy="26" r="16"/><circle cx="22" cy="26" r="9"/><path d="M22 26L40 8M34 8h6v6"/></g>
-        </g>
-        <text class="an-lbl anim-fade" x="190.0" y="406.0" text-anchor="middle" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.65s">Metas</text>
-        <g class="an-ok" transform="translate(209.0,319.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
-      </g>
-      <line x1="190.0" y1="192.0" x2="63.6" y2="265.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.6000000000000001s"/>
-      <g class="alvo-no an4">
-        <circle class="an-slot" cx="63.6" cy="265.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.7s"/>
-        <circle class="an-burst" cx="63.6" cy="265.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
-        <g class="an-core">
-          <circle class="an-disco" cx="63.6" cy="265.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
-          <g class="alvo-ic" transform="translate(51.6,253.0) scale(.5)"><circle cx="24" cy="15" r="7.5"/><path d="M9 42c0-9 7-15 15-15s15 6 15 15"/></g>
-        </g>
-        <text class="an-lbl anim-fade" x="18.5" y="296.0" text-anchor="end" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.75s">Equipe</text>
-        <g class="an-ok" transform="translate(82.6,246.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
-      </g>
-      <line x1="190.0" y1="192.0" x2="63.6" y2="119.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.7s"/>
-      <g class="alvo-no an5">
-        <circle class="an-slot" cx="63.6" cy="119.0" r="26" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-dasharray="3 7" style="--d:0.8s"/>
-        <circle class="an-burst" cx="63.6" cy="119.0" r="27" fill="none" stroke="#00E1C3" stroke-width="2"/>
-        <g class="an-core">
-          <circle class="an-disco" cx="63.6" cy="119.0" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.4"/>
-          <g class="alvo-ic" transform="translate(51.6,107.0) scale(.5)"><path d="M9 22a15 15 0 0 1 26-9"/><path d="M39 26a15 15 0 0 1-26 9"/><path d="M36 5v9h-9M12 43v-9h9"/></g>
-        </g>
-        <text class="an-lbl anim-fade" x="18.5" y="87.0" text-anchor="end" fill="#9AA0C4" font-size="13.5" font-weight="600" font-family="Sora, sans-serif" style="transition-delay:0.85s">Rotinas</text>
-        <g class="an-ok" transform="translate(82.6,100.0)"><circle r="8.5" fill="#00E1C3"/><path d="M-3.5 0 L-1 2.8 L4 -2.8" fill="none" stroke="#03121A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
-      </g>
-      
-      <g class="anim-fade d3">
-        <circle cx="190" cy="192" r="62" fill="#0A0E2E" stroke="#00E1C3" stroke-width="1.6"/>
-        <text x="190" y="190" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="800" font-family="Sora, sans-serif">ALVO</text>
-        <text x="190" y="210" text-anchor="middle" fill="#00E1C3" font-size="9.5" font-weight="600" letter-spacing="1.3" font-family="Sora, sans-serif">RAIO-X COMERCIAL</text>
-      </g>
-            </svg>
-          </div>
+          <h3 style="color:var(--acc-c)">Planejamento estratégico estruturado</h3>
+          <p>A gente analisa atendimentos reais da clínica, os que converteram e os que não, e transforma isso num diagnóstico de gargalos. Dele nasce o plano estratégico da clínica: o que atacar primeiro, em que ordem e com qual meta.</p>
         </div>
       </article>
       <article class="tl-step r" style="--acc-c:#3DA5E6; --acc-t:61,165,230; --i:.9s">
@@ -2017,28 +1928,6 @@ section{padding:clamp(56px,7vw,104px) 0}
       </div>
     </div>
 
-    <div class="team r d4">
-      <article class="tm">
-        <div class="tm-top"><div class="tm-av"><span>L</span></div><div><div class="tm-nome">Lorena</div><div class="tm-fn">Operação e performance</div></div></div>
-        <p>Acompanha a rotina das contas e a performance das campanhas, ajustando antes do mês fechar.</p>
-      </article>
-      <article class="tm">
-        <div class="tm-top"><div class="tm-av"><span>I</span></div><div><div class="tm-nome">Ian</div><div class="tm-fn">Tráfego e IA</div></div></div>
-        <p>Cuida da captação e da inteligência da Maia, do anúncio que atrai até a conversa que pré-agenda.</p>
-      </article>
-      <article class="tm">
-        <div class="tm-top"><div class="tm-av"><span>P</span></div><div><div class="tm-nome">Paloma</div><div class="tm-fn">Gestão de tráfego</div></div></div>
-        <p>Opera as campanhas no dia a dia, do criativo novo que entra ao ajuste fino de verba e público.</p>
-      </article>
-      <article class="tm">
-        <div class="tm-top"><div class="tm-av"><span>C</span></div><div><div class="tm-nome">Cami</div><div class="tm-fn">Criativo e conteúdo</div></div></div>
-        <p>Produz os criativos e o conteúdo que sustentam a vitrine e as campanhas das clínicas.</p>
-      </article>
-      <article class="tm">
-        <div class="tm-top"><div class="tm-av"><span>Y</span></div><div><div class="tm-nome">Ygor</div><div class="tm-fn">Tecnologia</div></div></div>
-        <p>Constrói o portal, as integrações e as automações que fazem a operação escalar sem virar planilha manual.</p>
-      </article>
-    </div>
   </div>
 </section>
 
