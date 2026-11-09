@@ -922,6 +922,14 @@ section{padding:clamp(56px,7vw,104px) 0}
 .tl-viz svg{display:block; width:100%; max-width:340px; height:auto; overflow:visible}
 .alvo-note{margin-top:26px; font-size:13.5px; color:var(--cool-grey); max-width:72ch; line-height:1.7}
 @media(max-width:560px){ .tl{padding-left:46px} .tl-spine{left:14px} .tl-node{left:-46px; width:32px; height:32px; font-size:10.5px} }
+/* alvo da etapa 01 */
+.alvo-ic :is(path,rect,circle){fill:none; stroke:#FFFFFF; stroke-width:4.6; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1) var(--gd,.6s)}
+.tl-step.in .alvo-ic :is(path,rect,circle){stroke-dashoffset:0}
+.tl-step.in .alvo-rot{animation:nucGira 10s linear infinite}
+.alvo-sonar{opacity:0; transform-box:fill-box; transform-origin:center}
+.tl-step.in .alvo-sonar{animation:alvoSonar 3.8s ease-out 1.2s infinite}
+@keyframes alvoSonar{0%{opacity:.5; transform:scale(.9)} 70%{opacity:0; transform:scale(2.5)} 100%{opacity:0; transform:scale(2.5)}}
 /* medidores dos indicadores (etapa 05) */
 .kpis{margin-top:18px; display:grid; gap:9px; max-width:420px}
 .kpi{display:grid; grid-template-columns:150px 1fr; align-items:center; gap:12px; font-size:12.5px; color:var(--cool-grey)}
@@ -1081,6 +1089,8 @@ section{padding:clamp(56px,7vw,104px) 0}
   .lk-dot{animation:none}
   .card.area{opacity:1; transform:none}
   .hb-p{animation:none}
+  .alvo-sonar,.tl-step.in .alvo-rot{animation:none}
+  .alvo-ic :is(path,rect,circle){stroke-dashoffset:0}
   .hb-no,.hb-g,.hb-g li{opacity:1; transform:none}
   .j-pill :is(path,rect),.pi-disc :is(path,rect),.g1ic :is(path,rect,circle){stroke-dashoffset:0}
   .g1-curve{stroke-dashoffset:0; transition:none}
@@ -1652,37 +1662,60 @@ section{padding:clamp(56px,7vw,104px) 0}
           <h3>Raio-X comercial e plano de 6 meses</h3>
           <p>A gente analisa atendimentos reais da clínica, os que converteram e os que não converteram, e transforma isso num diagnóstico de gargalos. Em encontros estratégicos com o dono, nasce o plano de ação dos próximos 6 meses: metas comerciais, precificação, bonificação da equipe, condições de pagamento, campanhas internas e rotinas.</p>
           <div class="tl-viz">
-            <svg aria-hidden="true" focusable="false" viewBox="-40 -6 460 392" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raio-X comercial: atendimentos, conversão, precificação, metas, equipe e rotinas">
-              <circle cx="190" cy="180" r="58" fill="none" stroke="rgba(0,225,195,.18)" stroke-width="1"/>
-              <circle cx="190" cy="180" r="112" fill="none" stroke="rgba(0,225,195,.28)" stroke-width="1" stroke-dasharray="3 6"/>
-              <circle cx="190" cy="180" r="152" fill="none" stroke="rgba(216,123,241,.12)" stroke-width="1"/>
-              <line x1="190" y1="180" x2="190" y2="50" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:0" cx="190" cy="50" r="14" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-              <circle cx="190" cy="50" r="6" fill="#00E1C3"/>
-              <text x="190" y="32" text-anchor="middle" fill="#E8EAF5" font-size="13.5" font-weight="600" font-family="Sora, sans-serif">Atendimentos</text>
-              <line x1="190" y1="180" x2="302.6" y2="115" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:1" cx="302.6" cy="115" r="14" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
-              <circle cx="302.6" cy="115" r="6" fill="#D87BF1"/>
-              <text x="318.6" y="120" text-anchor="start" fill="#E8EAF5" font-size="13.5" font-weight="600" font-family="Sora, sans-serif">Conversão</text>
-              <line x1="190" y1="180" x2="302.6" y2="245" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:2" cx="302.6" cy="245" r="14" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-              <circle cx="302.6" cy="245" r="6" fill="#00E1C3"/>
-              <text x="318.6" y="250" text-anchor="start" fill="#E8EAF5" font-size="13.5" font-weight="600" font-family="Sora, sans-serif">Precificação</text>
-              <line x1="190" y1="180" x2="190" y2="310" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:3" cx="190" cy="310" r="14" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
-              <circle cx="190" cy="310" r="6" fill="#D87BF1"/>
-              <text x="190" y="338" text-anchor="middle" fill="#E8EAF5" font-size="13.5" font-weight="600" font-family="Sora, sans-serif">Metas</text>
-              <line x1="190" y1="180" x2="77.4" y2="245" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:4" cx="77.4" cy="245" r="14" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
-              <circle cx="77.4" cy="245" r="6" fill="#00E1C3"/>
-              <text x="61.4" y="250" text-anchor="end" fill="#E8EAF5" font-size="13.5" font-weight="600" font-family="Sora, sans-serif">Equipe</text>
-              <line x1="190" y1="180" x2="77.4" y2="115" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
-              <circle class="rx-halo" style="--i:5" cx="77.4" cy="115" r="14" fill="none" stroke="#D87BF1" stroke-width="1.5"/>
-              <circle cx="77.4" cy="115" r="6" fill="#D87BF1"/>
-              <text x="61.4" y="120" text-anchor="end" fill="#E8EAF5" font-size="13.5" font-weight="600" font-family="Sora, sans-serif">Rotinas</text>
-              <circle cx="190" cy="180" r="44" fill="#0A0E2E" stroke="#00E1C3" stroke-width="1.5"/>
-              <text x="190" y="178" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" font-family="Sora, sans-serif">ALVO</text>
-              <text x="190" y="196" text-anchor="middle" fill="#00E1C3" font-size="8.5" font-weight="600" letter-spacing="1.2" font-family="Sora, sans-serif">RAIO-X COMERCIAL</text>
+            <svg aria-hidden="true" focusable="false" viewBox="-46 -10 472 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Raio-X comercial: atendimentos, conversão, precificação, metas, equipe e rotinas em volta do alvo">
+      <circle cx="190" cy="186" r="70" fill="none" stroke="rgba(0,225,195,.16)" stroke-width="1" pathLength="600" class="anim-stroke"/>
+      <circle cx="190" cy="186" r="128" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1" pathLength="600" class="anim-stroke" style="transition-delay:.15s"/>
+      <circle cx="190" cy="186" r="162" fill="none" stroke="rgba(216,123,241,.14)" stroke-width="1" pathLength="600" class="anim-stroke" style="transition-delay:.3s"/>
+      <circle cx="190" cy="186" r="148" fill="none" stroke="#FFFFFF" stroke-width="1.3" stroke-dasharray=".007 .024" pathLength="1" class="alvo-rot anim-fade d5" opacity=".35"/>
+      <circle cx="190" cy="186" r="54" fill="rgba(0,225,195,.1)" class="alvo-sonar"/>
+      <line x1="190.0" y1="186.0" x2="190.0" y2="58.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.2s"/>
+      <g class="svg-rise" style="--d:0.3s">
+        <circle class="rx-halo" style="--i:0" cx="190.0" cy="58.0" r="29" fill="none" stroke="#00E1C3" stroke-width="1.3"/>
+        <circle cx="190.0" cy="58.0" r="23" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/>
+        <g class="alvo-ic" style="--gd:0.6s" transform="translate(179.0,47.0) scale(.46)"><path d="M8 9h24a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H19l-8 7v-7H8a4 4 0 0 1-4-4V13a4 4 0 0 1 4-4z" pathLength="1"/><path d="M40 18a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-1v6l-7-6h-7" pathLength="1"/></g>
+        <text x="190.0" y="10.0" text-anchor="middle" fill="#E8EAF5" font-size="13" font-weight="600" font-family="Sora, sans-serif">Atendimentos</text>
+      </g>
+      <line x1="190.0" y1="186.0" x2="300.9" y2="122.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.32s"/>
+      <g class="svg-rise" style="--d:0.44s">
+        <circle class="rx-halo" style="--i:1" cx="300.9" cy="122.0" r="29" fill="none" stroke="#00E1C3" stroke-width="1.3"/>
+        <circle cx="300.9" cy="122.0" r="23" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/>
+        <g class="alvo-ic" style="--gd:0.74s" transform="translate(289.9,111.0) scale(.46)"><path d="M5 42h38" pathLength="1"/><path d="M9 35l9-10 7 6 14-16" pathLength="1"/><path d="M31 15h8v8" pathLength="1"/></g>
+        <text x="342.4" y="98.0" text-anchor="start" fill="#E8EAF5" font-size="13" font-weight="600" font-family="Sora, sans-serif">Conversão</text>
+      </g>
+      <line x1="190.0" y1="186.0" x2="300.9" y2="250.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.44s"/>
+      <g class="svg-rise" style="--d:0.5800000000000001s">
+        <circle class="rx-halo" style="--i:2" cx="300.9" cy="250.0" r="29" fill="none" stroke="#00E1C3" stroke-width="1.3"/>
+        <circle cx="300.9" cy="250.0" r="23" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/>
+        <g class="alvo-ic" style="--gd:0.88s" transform="translate(289.9,239.0) scale(.46)"><path d="M6 7h17l19 19-16 16L7 23z" pathLength="1"/><circle cx="15.5" cy="16" r="3" pathLength="1"/></g>
+        <text x="342.4" y="274.0" text-anchor="start" fill="#E8EAF5" font-size="13" font-weight="600" font-family="Sora, sans-serif">Precificação</text>
+      </g>
+      <line x1="190.0" y1="186.0" x2="190.0" y2="314.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.56s"/>
+      <g class="svg-rise" style="--d:0.72s">
+        <circle class="rx-halo" style="--i:3" cx="190.0" cy="314.0" r="29" fill="none" stroke="#00E1C3" stroke-width="1.3"/>
+        <circle cx="190.0" cy="314.0" r="23" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/>
+        <g class="alvo-ic" style="--gd:1.02s" transform="translate(179.0,303.0) scale(.46)"><circle cx="22" cy="26" r="16" pathLength="1"/><circle cx="22" cy="26" r="9" pathLength="1"/><path d="M22 26L40 8M34 8h6v6" pathLength="1"/></g>
+        <text x="190.0" y="376.0" text-anchor="middle" fill="#E8EAF5" font-size="13" font-weight="600" font-family="Sora, sans-serif">Metas</text>
+      </g>
+      <line x1="190.0" y1="186.0" x2="79.1" y2="250.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.6799999999999999s"/>
+      <g class="svg-rise" style="--d:0.8600000000000001s">
+        <circle class="rx-halo" style="--i:4" cx="79.1" cy="250.0" r="29" fill="none" stroke="#00E1C3" stroke-width="1.3"/>
+        <circle cx="79.1" cy="250.0" r="23" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/>
+        <g class="alvo-ic" style="--gd:1.1600000000000001s" transform="translate(68.1,239.0) scale(.46)"><circle cx="24" cy="15" r="7.5" pathLength="1"/><path d="M9 42c0-9 7-15 15-15s15 6 15 15" pathLength="1"/></g>
+        <text x="37.6" y="274.0" text-anchor="end" fill="#E8EAF5" font-size="13" font-weight="600" font-family="Sora, sans-serif">Equipe</text>
+      </g>
+      <line x1="190.0" y1="186.0" x2="79.1" y2="122.0" stroke="rgba(255,255,255,.12)" stroke-width="1" class="anim-stroke" style="transition-delay:0.8s"/>
+      <g class="svg-rise" style="--d:1.0s">
+        <circle class="rx-halo" style="--i:5" cx="79.1" cy="122.0" r="29" fill="none" stroke="#00E1C3" stroke-width="1.3"/>
+        <circle cx="79.1" cy="122.0" r="23" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.45)" stroke-width="1.4"/>
+        <g class="alvo-ic" style="--gd:1.3s" transform="translate(68.1,111.0) scale(.46)"><path d="M9 22a15 15 0 0 1 26-9" pathLength="1"/><path d="M39 26a15 15 0 0 1-26 9" pathLength="1"/><path d="M36 5v9h-9M12 43v-9h9" pathLength="1"/></g>
+        <text x="37.6" y="98.0" text-anchor="end" fill="#E8EAF5" font-size="13" font-weight="600" font-family="Sora, sans-serif">Rotinas</text>
+      </g>
+      
+      <g class="anim-fade d3">
+        <circle cx="190" cy="186" r="46" fill="#0A0E2E" stroke="#00E1C3" stroke-width="1.6"/>
+        <text x="190" y="184" text-anchor="middle" fill="#ffffff" font-size="21" font-weight="800" font-family="Sora, sans-serif">ALVO</text>
+        <text x="190" y="201" text-anchor="middle" fill="#00E1C3" font-size="8.5" font-weight="600" letter-spacing="1.2" font-family="Sora, sans-serif">RAIO-X COMERCIAL</text>
+      </g>
             </svg>
           </div>
         </div>
