@@ -762,16 +762,6 @@ section{padding:clamp(56px,7vw,104px) 0}
 
 /* ================= v2.4: metodo em rolagem ================= */
 .formula-head{text-align:center} .formula-head h2,.formula-head .lead{margin-left:auto; margin-right:auto} .formula-head .lead{margin-top:14px}
-/* barras de consciencia (pilar 3) */
-.consc{margin-top:24px; display:grid; gap:9px; max-width:470px}
-.consc-row{display:grid; grid-template-columns:170px 1fr 40px; align-items:center; gap:12px; font-size:12.5px; color:var(--cool-grey)}
-.consc-row i{display:block; height:10px; border-radius:99px; background:rgba(255,255,255,.06); position:relative; overflow:hidden}
-.consc-row i::after{content:''; position:absolute; inset:0; width:0; border-radius:inherit; background:var(--grad-brand); transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
-.consc.in .consc-row i::after{width:var(--w)}
-.consc-row:nth-child(2) i::after{transition-delay:.12s} .consc-row:nth-child(3) i::after{transition-delay:.24s} .consc-row:nth-child(4) i::after{transition-delay:.36s}
-.consc-hot i::after{background:rgba(255,112,144,.75)} .consc-hot b{color:var(--danger)}
-.consc-row b{font-family:var(--mono); font-size:12px; color:var(--white); text-align:right}
-.consc-note{margin-top:8px; font-size:13px; color:var(--cool-grey); max-width:52ch} .consc-note strong{color:var(--cyan)}
 /* simulacao (pilar 4) */
 .sim{margin-top:24px; padding:20px 22px; border:1px solid rgba(0,225,195,.2); border-radius:16px; background:rgba(0,225,195,.04); max-width:470px}
 .sim-k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--cool-grey); margin-bottom:14px}
@@ -780,9 +770,6 @@ section{padding:clamp(56px,7vw,104px) 0}
 .sim-grid b{font-variant-numeric:tabular-nums; text-align:right; color:var(--off-white); font-weight:600}
 .sim-grid b.hl{color:var(--cyan)}
 .sim-note{margin-top:14px; font-size:13px; color:var(--cool-grey)} .sim-note strong{color:var(--white)}
-@media(max-width:860px){
-  .consc-row{grid-template-columns:130px 1fr 34px; font-size:11.5px}
-}
 
 /* ================= v2.9b: menu so no topo da pagina, sem ficar fixo ================= */
 .nav{position:absolute}
@@ -913,12 +900,72 @@ section{padding:clamp(56px,7vw,104px) 0}
 .r .svg-rise{opacity:0; transform:translateY(18px); transform-box:fill-box}
 .r.in .svg-rise{animation:svgRiseIn .85s cubic-bezier(.2,.7,.2,1) var(--d,0s) forwards}
 @keyframes svgRiseIn{0%{opacity:0; transform:translateY(18px)} 70%{opacity:1; transform:translateY(-3px)} 100%{opacity:1; transform:translateY(0)}}
-/* leve parallax nos desenhos conforme a pagina desce */
-.pilar-viz-box>svg,.tl-viz>svg{transform:translateY(var(--par,0px))}
+/* parallax + tilt 3D nos desenhos (o tilt so entra com mouse, via JS) */
+.pilar-viz-box>svg,.pilar-viz-box>.jornada,.tl-viz>svg{transform:perspective(950px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--par,0px)); transition:transform .3s cubic-bezier(.2,.7,.2,1); will-change:transform}
+/* plataforma dos niveis de consciencia (portada do anuncio B2 gestao empresarial) */
+.jornada{position:relative; width:100%; max-width:560px}
+.jornada svg.j-stage{display:block; width:100%; max-width:none; height:auto; overflow:visible; pointer-events:none;
+  filter:drop-shadow(0 0 2px rgba(5,9,34,.9)) drop-shadow(0 2px 6px rgba(5,9,34,.55))}
+.j-fill{opacity:0; transition:opacity .9s ease}
+.pilar-viz-box.in .j-fill{opacity:1}
+.j-ring{stroke:#FFFFFF; fill:none; stroke-linecap:round; stroke-width:1.4; opacity:.25;
+  stroke-dasharray:1 1; stroke-dashoffset:1;
+  transition:stroke-dashoffset 1.3s cubic-bezier(.2,.7,.2,1) var(--jd,0s), opacity .5s, stroke-width .5s}
+.pilar-viz-box.in .j-ring{stroke-dashoffset:0}
+.j-glow{stroke:#FFFFFF; fill:none; stroke-linecap:round; stroke-width:9; opacity:0; transition:opacity .5s}
+.j-cols line{stroke:#FFFFFF; stroke-width:1; opacity:.08; transition:opacity .5s}
+.j-c{stroke:#FFFFFF; fill:none; stroke-width:3.2; stroke-linecap:round; stroke-dasharray:.07 .93; stroke-dashoffset:.62; opacity:0}
+@keyframes cometRun{from{stroke-dashoffset:.62} to{stroke-dashoffset:-.38}}
+.jornada[data-level="0"] .j-g0 .j-ring,.jornada[data-level="1"] .j-g1 .j-ring,.jornada[data-level="2"] .j-g2 .j-ring,.jornada[data-level="3"] .j-g3 .j-ring{opacity:.9; stroke-width:2.2}
+.jornada[data-level="0"] .j-g0 .j-glow,.jornada[data-level="1"] .j-g1 .j-glow,.jornada[data-level="2"] .j-g2 .j-glow,.jornada[data-level="3"] .j-g3 .j-glow{opacity:.1}
+.jornada[data-level="0"] .j-g0 .j-cols line,.jornada[data-level="1"] .j-g1 .j-cols line,.jornada[data-level="2"] .j-g2 .j-cols line,.jornada[data-level="3"] .j-g3 .j-cols line{opacity:.26}
+.jornada[data-level="0"] .j-g0 .j-c,.jornada[data-level="1"] .j-g1 .j-c,.jornada[data-level="2"] .j-g2 .j-c,.jornada[data-level="3"] .j-g3 .j-c{opacity:.85; animation:cometRun 3.6s linear infinite}
+.jornada[data-level="1"] .j-g0 .j-ring,.jornada[data-level="2"] :is(.j-g0,.j-g1) .j-ring,.jornada[data-level="3"] :is(.j-g0,.j-g1,.j-g2) .j-ring{opacity:.55; stroke-width:1.8}
+.j-pill{position:absolute; translate:-50% calc(-50% + 9px); display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+  padding:6px 12px 6px 9px; border-radius:999px; background:#0A0E2E;
+  border:1.5px solid rgba(255,255,255,.34); color:var(--off-white);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.07em; cursor:pointer; opacity:.75;
+  box-shadow:0 6px 18px rgba(5,9,34,.6);
+  transition:border-color .4s, box-shadow .4s, opacity .4s, scale .4s}
+.j-pill b{color:var(--cyan); font-weight:600}
+.j-pill svg{width:17px; height:17px; overflow:visible}
+.j-pill :is(path,rect){fill:none; stroke:#FFFFFF; stroke-width:3; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1) .1s}
+.jornada[data-level="0"] .j-p0,.jornada[data-level="1"] .j-p1,.jornada[data-level="2"] .j-p2,.jornada[data-level="3"] .j-p3{opacity:1; scale:1.06; border-color:rgba(255,255,255,.85); box-shadow:0 0 22px rgba(255,255,255,.22), 0 6px 18px rgba(5,9,34,.55)}
+.jornada[data-level="0"] .j-p0 :is(path,rect),.jornada[data-level="1"] .j-p1 :is(path,rect),.jornada[data-level="2"] .j-p2 :is(path,rect),.jornada[data-level="3"] .j-p3 :is(path,rect){stroke-dashoffset:0}
+.jornada[data-level="1"] .j-p0,.jornada[data-level="2"] :is(.j-p0,.j-p1),.jornada[data-level="3"] :is(.j-p0,.j-p1,.j-p2){opacity:.9}
+.jornada[data-level="1"] .j-p0 :is(path,rect),.jornada[data-level="2"] :is(.j-p0,.j-p1) :is(path,rect),.jornada[data-level="3"] :is(.j-p0,.j-p1,.j-p2) :is(path,rect){stroke-dashoffset:0}
+@media(max-width:560px){ .j-pill{font-size:8.5px; gap:5px; padding:5px 9px 5px 7px; border-width:1px} .j-pill svg{width:13px; height:13px} }
+/* grafico de gestao (pilar 1): curva desenha, icones de traco nos chips */
+.g1-curve{stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1.7s cubic-bezier(.2,.7,.2,1) .4s}
+.pilar-viz-box.in .g1-curve{stroke-dashoffset:0}
+.g1ic :is(path,rect,circle){fill:none; stroke:#FFFFFF; stroke-width:4; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1) var(--gd,1s)}
+.pilar-viz-box.in .g1ic :is(path,rect,circle){stroke-dashoffset:0}
+/* disco navy do pilar: icone de traco que se desenha + halo que acende */
+.pi-disc{width:46px; height:46px; flex:none; border-radius:50%; display:grid; place-items:center; box-sizing:border-box;
+  background:radial-gradient(circle at 35% 30%, rgba(30,46,120,.95), rgba(8,12,44,.97) 75%);
+  border:1.5px solid rgba(255,255,255,.34); box-shadow:0 0 12px rgba(0,225,195,.1), 0 8px 22px rgba(5,9,34,.5)}
+.pi-disc svg{width:26px; height:26px; overflow:visible}
+.pi-disc :is(path,rect){fill:none; stroke:#FFFFFF; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1s cubic-bezier(.2,.7,.2,1)}
+.pi-disc :is(path,rect):nth-child(2){transition-delay:.25s}
+.pi-disc :is(path,rect):nth-child(3){transition-delay:.5s}
+.pilar-eyebrow.in .pi-disc :is(path,rect){stroke-dashoffset:0}
+.pilar-eyebrow.in .pi-disc{animation:discoGlow 5.5s ease-in-out 1.4s infinite}
+@keyframes discoGlow{0%,100%{box-shadow:0 0 10px rgba(0,225,195,.08), 0 8px 22px rgba(5,9,34,.5); border-color:rgba(255,255,255,.3)}
+  50%{box-shadow:0 0 22px rgba(0,225,195,.32), 0 8px 22px rgba(5,9,34,.5); border-color:rgba(255,255,255,.75)}}
+@media(hover:hover){ .pi-disc:hover :is(path,rect){animation:redrawIc 1.1s cubic-bezier(.2,.7,.2,1) both} }
+@keyframes redrawIc{from{stroke-dashoffset:1} to{stroke-dashoffset:0}}
 @media(prefers-reduced-motion:reduce){
-  .leak i,.area .cx::after,.hub-core::before,.hub-core::after,.tl-node::after,.flow span,.r.in .svg-rise{animation:none}
+  .leak i,.area .cx::after,.hub-core::before,.hub-core::after,.tl-node::after,.flow span,.r.in .svg-rise,.j-c,.pilar-eyebrow.in .pi-disc{animation:none}
   .r .svg-rise{opacity:1; transform:none}
-  .pilar-viz-box>svg,.tl-viz>svg{transform:none}
+  .pilar-viz-box>svg,.pilar-viz-box>.jornada,.tl-viz>svg{transform:none; transition:none}
+  .j-lead{display:none}
+  .j-ring,.j-fill{opacity:1; stroke-dashoffset:0}
+  .j-pill{opacity:1}
+  .j-pill :is(path,rect),.pi-disc :is(path,rect),.g1ic :is(path,rect,circle){stroke-dashoffset:0}
+  .g1-curve{stroke-dashoffset:0; transition:none}
 }
 </style>
 </head>
@@ -1153,7 +1200,7 @@ section{padding:clamp(56px,7vw,104px) 0}
     <div class="metodo-pilares">
       <div class="sticky-bar-wrap" aria-hidden="true"><div class="sticky-bar"><span class="sb-num">Metodologia</span><span class="sb-sep">·</span><span class="sb-name">5 pilares</span><span class="sb-pillar" id="stickyPillar"><b>01</b>Gestão empresarial aplicada</span></div></div>
       <section class="pilar-section" id="pilar-1" data-pilar="01" data-nome="Gestão empresarial aplicada">
-        <p class="pilar-eyebrow r"><span class="pe-num">Pilar 01</span><span class="pe-line"></span><span class="pe-tag">Gestão empresarial aplicada</span></p>
+        <p class="pilar-eyebrow r"><span class="pi-disc" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="5" y="7" width="38" height="28" rx="4" pathLength="1"/><path d="M5 15h38M13 29v-6M20 29v-9M27 29v-4M34 29v-11M17 43h14M24 35v8" pathLength="1"/></svg></span><span class="pe-num">Pilar 01</span><span class="pe-line"></span><span class="pe-tag">Gestão empresarial aplicada</span></p>
         <div class="pilar-grid">
           <div class="pilar-text-col">
             <h3 class="pilar-headline r d1">Antes de acelerar, <span class="grad-text">preparar o terreno</span>.</h3>
@@ -1161,41 +1208,57 @@ section{padding:clamp(56px,7vw,104px) 0}
           </div>
           <div class="pilar-viz-col">
             <div class="pilar-viz-box r"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 420 408" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gestão empresarial: diagnóstico, precificação e metas, liderança e equipe, rotinas e indicadores sustentando o crescimento">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Planejamento estratégico: curva de crescimento com meta, sustentada por diagnóstico, precificação, liderança e rotinas">
               <defs>
-                <linearGradient id="g1soft" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#00E1C3" stop-opacity=".05"/>
-                  <stop offset="1" stop-color="#A713B9" stop-opacity=".05"/>
+                <linearGradient id="g1line" gradientUnits="userSpaceOnUse" x1="36" y1="238" x2="424" y2="74">
+                  <stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#00E1C3"/><stop offset="1" stop-color="#4A6CF7"/>
                 </linearGradient>
-                <linearGradient id="g1curve" gradientUnits="userSpaceOnUse" x1="120" y1="150" x2="340" y2="52">
-                  <stop offset="0" stop-color="#00E1C3"/><stop offset="1" stop-color="#D87BF1"/>
+                <linearGradient id="g1area" x1="0" y1="74" x2="0" y2="260" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#00E1C3" stop-opacity=".26"/><stop offset="1" stop-color="#00E1C3" stop-opacity="0"/>
                 </linearGradient>
-                <marker id="g1arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse">
-                  <path d="M0,0 L7,3 L0,6 Z" fill="#D87BF1"/>
-                </marker>
               </defs>
-              <text x="210" y="252" text-anchor="middle" dominant-baseline="central" fill="url(#g1soft)" font-family="Sora" font-weight="800" font-size="96" letter-spacing="-.06em" class="anim-fade d1">GESTÃO</text>
-              <g class="svg-rise" style="--d:.15s">
-                <rect x="50" y="330" width="320" height="48" rx="11" fill="rgba(0,225,195,.09)" stroke="#00E1C3" stroke-width="1.6"/>
-                <text x="210" y="360" text-anchor="middle" fill="#E8EAF5" font-family="Sora" font-weight="600" font-size="15">Diagnóstico comercial</text>
+              <text x="230" y="186" text-anchor="middle" fill="rgba(232,234,245,.04)" font-family="Sora, sans-serif" font-weight="800" font-size="92" letter-spacing="-.06em" class="anim-fade d1">GESTÃO</text>
+              <text x="36" y="38" fill="#9AA0C4" font-family="JetBrains Mono, monospace" font-weight="600" font-size="12" letter-spacing="2.5" class="anim-fade d1">PLANEJAMENTO ESTRATÉGICO</text>
+              <g class="anim-fade d2">
+                <line x1="36" y1="120" x2="424" y2="120" stroke="rgba(255,255,255,.07)" stroke-width="1.2"/>
+                <line x1="36" y1="166" x2="424" y2="166" stroke="rgba(255,255,255,.07)" stroke-width="1.2"/>
+                <line x1="36" y1="212" x2="424" y2="212" stroke="rgba(255,255,255,.07)" stroke-width="1.2"/>
+                <line x1="36" y1="258" x2="424" y2="258" stroke="rgba(255,255,255,.14)" stroke-width="1.2"/>
               </g>
-              <g class="svg-rise" style="--d:.45s">
-                <rect x="72" y="272" width="276" height="48" rx="11" fill="rgba(61,165,230,.09)" stroke="#3DA5E6" stroke-width="1.6"/>
-                <text x="210" y="302" text-anchor="middle" fill="#E8EAF5" font-family="Sora" font-weight="600" font-size="15">Precificação e metas</text>
+              <path class="anim-fade d6" d="M36 238 C150 232,210 190,265 160 C320 130,370 92,424 74 L424 258 L36 258 Z" fill="url(#g1area)"/>
+              <path class="g1-curve" d="M36 238 C150 232,210 190,265 160 C320 130,370 92,424 74" fill="none" stroke="url(#g1line)" stroke-width="4" stroke-linecap="round" pathLength="1"/>
+              <g class="svg-seq-a"><circle cx="160" cy="204" r="13" fill="rgba(0,225,195,.18)"/><circle cx="160" cy="204" r="6" fill="#FFFFFF"/></g>
+              <g class="svg-seq-b"><circle cx="290" cy="146" r="13" fill="rgba(0,225,195,.18)"/><circle cx="290" cy="146" r="6" fill="#FFFFFF"/></g>
+              <g class="svg-seq-c"><circle cx="424" cy="74" r="13" fill="rgba(0,225,195,.2)"/><circle cx="424" cy="74" r="6" fill="#FFFFFF"/></g>
+              <g class="svg-rise" style="--d:1.3s">
+                <rect x="296" y="96" width="112" height="38" rx="19" fill="rgba(10,14,46,.92)" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+                <g class="g1ic" style="--gd:1.45s" transform="translate(306,103) scale(.5)"><circle cx="22" cy="26" r="16" pathLength="1"/><circle cx="22" cy="26" r="9" pathLength="1"/><circle cx="22" cy="26" r="2.5" pathLength="1"/><path d="M22 26L40 8M34 8h6v6" pathLength="1"/></g>
+                <text x="340" y="121" fill="#FFFFFF" font-family="Sora, sans-serif" font-weight="700" font-size="16" letter-spacing=".06em">META</text>
               </g>
-              <g class="svg-rise" style="--d:.75s">
-                <rect x="94" y="214" width="232" height="48" rx="11" fill="rgba(74,108,247,.09)" stroke="#4A6CF7" stroke-width="1.6"/>
-                <text x="210" y="244" text-anchor="middle" fill="#E8EAF5" font-family="Sora" font-weight="600" font-size="15">Liderança e equipe</text>
+              <line x1="36" y1="292" x2="424" y2="292" stroke="rgba(255,255,255,.08)" stroke-width="1" class="anim-fade d5"/>
+              <g>
+                <circle class="rx-halo" style="--i:0" cx="86" cy="324" r="31" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+                <circle cx="86" cy="324" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+                <g class="g1ic" style="--gd:1.00s" transform="translate(74,312) scale(.5)"><rect x="9" y="8" width="30" height="35" rx="4" pathLength="1"/><path d="M18 8V5h12v3" pathLength="1"/><path d="M13 27h6l3-7 4 12 3-6h6" pathLength="1"/></g>
+                <text x="86" y="374" text-anchor="middle" fill="#E8EAF5" font-family="Sora, sans-serif" font-weight="600" font-size="12.5">Diagnóstico</text>
               </g>
-              <g class="svg-rise" style="--d:1.05s">
-                <rect x="116" y="156" width="188" height="48" rx="11" fill="rgba(216,123,241,.09)" stroke="#B23BC9" stroke-width="1.6"/>
-                <text x="210" y="186" text-anchor="middle" fill="#E8EAF5" font-family="Sora" font-weight="600" font-size="14">Rotinas e indicadores</text>
+              <g>
+                <circle class="rx-halo" style="--i:1" cx="182" cy="324" r="31" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+                <circle cx="182" cy="324" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+                <g class="g1ic" style="--gd:1.15s" transform="translate(170,312) scale(.5)"><path d="M6 7h17l19 19-16 16L7 23z" pathLength="1"/><circle cx="15.5" cy="16" r="3" pathLength="1"/></g>
+                <text x="182" y="374" text-anchor="middle" fill="#E8EAF5" font-family="Sora, sans-serif" font-weight="600" font-size="12.5">Precificação</text>
               </g>
-              <path d="M 120 142 C 190 118, 250 104, 330 56" fill="none" stroke="url(#g1curve)" stroke-width="2.6" stroke-linecap="round" class="anim-stroke" style="transition-delay:1.35s" marker-end="url(#g1arrow)"/>
-              <circle cx="330" cy="56" r="6" fill="#D87BF1" class="svg-breathe" style="filter:drop-shadow(0 0 9px rgba(216,123,241,.9))"/>
-              <g class="anim-fade d7" font-family="Sora" fill="#F2F7FF">
-                <text x="300" y="18" text-anchor="middle" font-weight="700" font-size="15">Crescimento</text>
-                <text x="300" y="38" text-anchor="middle" font-weight="700" font-size="15">previsível</text>
+              <g>
+                <circle class="rx-halo" style="--i:2" cx="278" cy="324" r="31" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+                <circle cx="278" cy="324" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+                <g class="g1ic" style="--gd:1.30s" transform="translate(266,312) scale(.5)"><circle cx="18" cy="15" r="6.5" pathLength="1"/><path d="M5 42c0-8 6-14 13-14s13 6 13 14" pathLength="1"/><path d="M35 6v18M35 6h9l-3 4.5 3 4.5h-9" pathLength="1"/></g>
+                <text x="278" y="374" text-anchor="middle" fill="#E8EAF5" font-family="Sora, sans-serif" font-weight="600" font-size="12.5">Liderança</text>
+              </g>
+              <g>
+                <circle class="rx-halo" style="--i:3" cx="374" cy="324" r="31" fill="none" stroke="#00E1C3" stroke-width="1.5"/>
+                <circle cx="374" cy="324" r="26" fill="rgba(8,12,44,.97)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+                <g class="g1ic" style="--gd:1.45s" transform="translate(362,312) scale(.5)"><rect x="5" y="7" width="38" height="28" rx="4" pathLength="1"/><path d="M5 15h38M13 29v-6M20 29v-9M27 29v-4M34 29v-11M17 43h14M24 35v8" pathLength="1"/></g>
+                <text x="374" y="374" text-anchor="middle" fill="#E8EAF5" font-family="Sora, sans-serif" font-weight="600" font-size="12.5">Rotinas</text>
               </g>
             </svg>
             </div>
@@ -1203,7 +1266,7 @@ section{padding:clamp(56px,7vw,104px) 0}
         </div>
       </section>
       <section class="pilar-section reverse" id="pilar-2" data-pilar="02" data-nome="Engenharia de Percepção">
-        <p class="pilar-eyebrow r"><span class="pe-num">Pilar 02</span><span class="pe-line"></span><span class="pe-tag">Engenharia de Percepção</span></p>
+        <p class="pilar-eyebrow r"><span class="pi-disc" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 6l5.3 10.8 11.9 1.7-8.6 8.4 2 11.8L24 33.1l-10.6 5.6 2-11.8-8.6-8.4 11.9-1.7z" pathLength="1"/></svg></span><span class="pe-num">Pilar 02</span><span class="pe-line"></span><span class="pe-tag">Engenharia de Percepção</span></p>
         <div class="pilar-grid">
           <div class="pilar-text-col">
             <h3 class="pilar-headline r d1">Seu Instagram vira a sua <span class="grad-text">nova recepção</span>.</h3>
@@ -1288,81 +1351,54 @@ section{padding:clamp(56px,7vw,104px) 0}
         </div>
       </section>
       <section class="pilar-section" id="pilar-3" data-pilar="03" data-nome="Bola de neve de indicações">
-        <p class="pilar-eyebrow r"><span class="pe-num">Pilar 03</span><span class="pe-line"></span><span class="pe-tag">Bola de neve de indicações</span></p>
+        <p class="pilar-eyebrow r"><span class="pi-disc" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M7 19v10h6l17 9V10l-17 9z" pathLength="1"/><path d="M36 17a9 9 0 0 1 0 14M13 29l3 11h6l-3-11" pathLength="1"/></svg></span><span class="pe-num">Pilar 03</span><span class="pe-line"></span><span class="pe-tag">Bola de neve de indicações</span></p>
         <div class="pilar-grid">
           <div class="pilar-text-col">
             <h3 class="pilar-headline r d1">Anúncio que gera a confiança de uma <span class="grad-text">indicação</span>.</h3>
             <p class="pilar-lead r d2">Campanhas e conteúdos que desenvolvem a consciência do público sobre o tratamento e sobre o seu diferencial, em vez de brigar só pelos 5% prontos pra comprar. Quando o paciente chega, chega confiando, com a segurança de quem foi indicado.</p>
-            <div class="consc r d3" aria-label="Níveis de consciência do público">
-            <div class="consc-row"><span>Inconsciente do problema</span><i style="--w:100%"></i><b>50%</b></div>
-            <div class="consc-row"><span>Consciente do problema</span><i style="--w:60%"></i><b>30%</b></div>
-            <div class="consc-row"><span>Consciente da solução</span><i style="--w:30%"></i><b>15%</b></div>
-            <div class="consc-row consc-hot"><span>Pronto para decidir</span><i style="--w:10%"></i><b>5%</b></div>
-            <p class="consc-note">Quase todo mundo disputa os 5% prontos. A Bola de neve trabalha os outros <strong>95%</strong> até eles chegarem confiando.</p>
-          </div>
+            <p class="pilar-lead r d3" style="margin-top:16px; font-size:14px">Quase todo mundo disputa os <strong style="color:var(--cyan)">5% prontos</strong>. A Bola de neve conduz os outros 95% pelas camadas até chegarem confiando. Toca nos anéis ao lado.</p>
           </div>
           <div class="pilar-viz-col">
             <div class="pilar-viz-box r"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-              <svg aria-hidden="true" focusable="false" viewBox="0 -50 620 590" xmlns="http://www.w3.org/2000/svg">
-
-              <!-- CÍRCULO MAIOR - Aumento da Base (purple, aparece POR ÚLTIMO) -->
-              <g class="svg-seq-c">
-                <circle cx="350" cy="300" r="265" fill="rgba(167,19,185,.07)" stroke="rgba(167,19,185,.65)" stroke-width="1.8"/>
-              </g>
-
-              <!-- CÍRCULO MÉDIO - Relacionamento (blue, aparece SEGUNDO) -->
-              <g class="svg-seq-b">
-                <circle cx="335" cy="300" r="190" fill="rgba(74,108,247,.13)" stroke="rgba(74,108,247,.8)" stroke-width="1.8"/>
-              </g>
-
-              <!-- CÍRCULO MENOR - Núcleo de Conversão (cyan, aparece PRIMEIRO) -->
-              <g class="svg-seq-a">
-                <circle cx="320" cy="300" r="120" fill="rgba(0,225,195,.18)" stroke="rgba(0,225,195,.95)" stroke-width="2.2"/>
-              </g>
-
-              <!-- ========== LABEL 3 - Núcleo de Conversão (DENTRO do menor) ========== -->
-              <g class="svg-label-fade s1">
-                <text x="320" y="284" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="32" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 18px rgba(0,225,195,.6))">Núcleo de</text>
-                <text x="320" y="320" text-anchor="middle" fill="#00E1C3" font-family="Sora" font-weight="800" font-size="32" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(0,225,195,.35)) drop-shadow(0 0 18px rgba(0,225,195,.6))">Conversão</text>
-                <text x="320" y="344" text-anchor="middle" fill="rgba(0,225,195,.85)" font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="3">PÚBLICO QUENTE</text>
-              </g>
-
-              <!-- ========== LABEL 2 - Relacionamento (TOPO-ESQUERDA) ========== -->
-              <g class="svg-label-fade s2">
-                <text x="10" y="68" fill="#4A6CF7" font-family="Sora" font-weight="800" font-size="36" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(74,108,247,.4)) drop-shadow(0 0 22px rgba(74,108,247,.7))">Confiança</text>
-                <line x1="10" y1="82" x2="172" y2="82" stroke="#4A6CF7" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="10" y="106" fill="rgba(74,108,247,.85)" font-family="JetBrains Mono" font-weight="700" font-size="14" letter-spacing="2.5">PÚBLICO MORNO</text>
-              </g>
-              <!-- Leader Relacionamento → borda esquerda do MÉDIO -->
-              <g>
-                <path d="M 210 118 L 210 238 L 185 238" fill="none" stroke="#4A6CF7" stroke-width="2.5" stroke-dasharray="145" stroke-dashoffset="145" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s2" style="filter:drop-shadow(0 0 6px rgba(74,108,247,.6))"/>
-                <g class="svg-label-fade s2">
-                  <circle cx="185" cy="238" r="7" fill="rgba(74,108,247,.28)"/>
-                  <circle cx="185" cy="238" r="3.6" fill="#4A6CF7" style="filter:drop-shadow(0 0 8px rgba(74,108,247,.9))"/>
-                </g>
-              </g>
-
-              <!-- ========== LABEL 1 - Aumento da Base (ULTRA topo, usa espaço negativo do viewBox) ========== -->
-              <g class="svg-label-fade s3">
-                <text x="610" y="-12" text-anchor="end" fill="#D87BF1" font-family="Sora" font-weight="800" font-size="36" letter-spacing="-.03em" style="filter:drop-shadow(0 2px 0 rgba(216,123,241,.4)) drop-shadow(0 0 22px rgba(216,123,241,.7))">Despertar</text>
-                <line x1="448" y1="2" x2="610" y2="2" stroke="#D87BF1" stroke-width="2.5" opacity=".55" stroke-linecap="round"/>
-                <text x="610" y="26" text-anchor="end" fill="rgba(216,123,241,.85)" font-family="JetBrains Mono" font-weight="700" font-size="14" letter-spacing="2.5">PÚBLICO FRIO</text>
-              </g>
-              <!-- Leader Aumento da Base → borda direita do MAIOR (path bem mais comprido) -->
-              <g>
-                <path d="M 590 40 L 590 160 L 565 160" fill="none" stroke="#D87BF1" stroke-width="2.5" stroke-dasharray="145" stroke-dashoffset="145" stroke-linecap="round" stroke-linejoin="round" class="svg-leader-draw s3" style="filter:drop-shadow(0 0 6px rgba(216,123,241,.6))"/>
-                <g class="svg-label-fade s3">
-                  <circle cx="565" cy="160" r="7" fill="rgba(216,123,241,.28)"/>
-                  <circle cx="565" cy="160" r="3.6" fill="#D87BF1" style="filter:drop-shadow(0 0 8px rgba(216,123,241,.9))"/>
-                </g>
-              </g>
-            </svg>
+              <div class="jornada" data-level="-1">
+              <svg class="j-stage" viewBox="10 150 740 392" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Níveis de consciência do público, do inconsciente ao pronto pra decidir: o anúncio conduz o lead das camadas de fora até o centro">
+      <g class="j-g j-g0">
+        <polygon class="j-fill" points="380.0,443.5 351.8,443.2 323.7,442.1 296.1,440.4 269.1,437.9 242.9,434.8 217.6,431.1 193.5,426.9 170.7,422.0 149.3,416.7 129.5,410.9 111.2,404.7 94.6,398.2 79.8,391.3 66.8,384.3 55.6,377.0 46.1,369.6 38.5,362.0 32.6,354.5 28.5,346.9 26.0,339.3 25.2,331.8 26.0,324.4 28.3,317.1 32.0,310.0 37.1,303.1 43.5,296.3 51.2,289.8 60.0,283.5 69.9,277.5 80.8,271.7 92.6,266.2 105.4,261.0 118.9,256.1 133.2,251.5 148.1,247.2 163.7,243.2 179.8,239.5 196.5,236.1 213.6,233.0 231.1,230.3 249.0,227.9 267.1,225.8 285.6,224.0 304.2,222.6 323.0,221.4 341.9,220.6 360.9,220.1 380.0,220.0 399.1,220.1 418.1,220.6 437.0,221.4 455.8,222.6 474.4,224.0 492.9,225.8 511.0,227.9 528.9,230.3 546.4,233.0 563.5,236.1 580.2,239.5 596.3,243.2 611.9,247.2 626.8,251.5 641.1,256.1 654.6,261.0 667.4,266.2 679.2,271.7 690.1,277.5 700.0,283.5 708.8,289.8 716.5,296.3 722.9,303.1 728.0,310.0 731.7,317.1 734.0,324.4 734.8,331.8 734.0,339.3 731.5,346.9 727.4,354.5 721.5,362.0 713.9,369.6 704.4,377.0 693.2,384.3 680.2,391.3 665.4,398.2 648.8,404.7 630.5,410.9 610.7,416.7 589.3,422.0 566.5,426.9 542.4,431.1 517.1,434.8 490.9,437.9 463.9,440.4 436.3,442.1 408.2,443.2 380.0,443.5" fill="rgba(10,14,46,.18)"/>
+        <polyline class="j-glow" points="380.0,443.5 351.8,443.2 323.7,442.1 296.1,440.4 269.1,437.9 242.9,434.8 217.6,431.1 193.5,426.9 170.7,422.0 149.3,416.7 129.5,410.9 111.2,404.7 94.6,398.2 79.8,391.3 66.8,384.3 55.6,377.0 46.1,369.6 38.5,362.0 32.6,354.5 28.5,346.9 26.0,339.3 25.2,331.8 26.0,324.4 28.3,317.1 32.0,310.0 37.1,303.1 43.5,296.3 51.2,289.8 60.0,283.5 69.9,277.5 80.8,271.7 92.6,266.2 105.4,261.0 118.9,256.1 133.2,251.5 148.1,247.2 163.7,243.2 179.8,239.5 196.5,236.1 213.6,233.0 231.1,230.3 249.0,227.9 267.1,225.8 285.6,224.0 304.2,222.6 323.0,221.4 341.9,220.6 360.9,220.1 380.0,220.0 399.1,220.1 418.1,220.6 437.0,221.4 455.8,222.6 474.4,224.0 492.9,225.8 511.0,227.9 528.9,230.3 546.4,233.0 563.5,236.1 580.2,239.5 596.3,243.2 611.9,247.2 626.8,251.5 641.1,256.1 654.6,261.0 667.4,266.2 679.2,271.7 690.1,277.5 700.0,283.5 708.8,289.8 716.5,296.3 722.9,303.1 728.0,310.0 731.7,317.1 734.0,324.4 734.8,331.8 734.0,339.3 731.5,346.9 727.4,354.5 721.5,362.0 713.9,369.6 704.4,377.0 693.2,384.3 680.2,391.3 665.4,398.2 648.8,404.7 630.5,410.9 610.7,416.7 589.3,422.0 566.5,426.9 542.4,431.1 517.1,434.8 490.9,437.9 463.9,440.4 436.3,442.1 408.2,443.2 380.0,443.5"/>
+        <polyline class="j-ring" points="380.0,443.5 351.8,443.2 323.7,442.1 296.1,440.4 269.1,437.9 242.9,434.8 217.6,431.1 193.5,426.9 170.7,422.0 149.3,416.7 129.5,410.9 111.2,404.7 94.6,398.2 79.8,391.3 66.8,384.3 55.6,377.0 46.1,369.6 38.5,362.0 32.6,354.5 28.5,346.9 26.0,339.3 25.2,331.8 26.0,324.4 28.3,317.1 32.0,310.0 37.1,303.1 43.5,296.3 51.2,289.8 60.0,283.5 69.9,277.5 80.8,271.7 92.6,266.2 105.4,261.0 118.9,256.1 133.2,251.5 148.1,247.2 163.7,243.2 179.8,239.5 196.5,236.1 213.6,233.0 231.1,230.3 249.0,227.9 267.1,225.8 285.6,224.0 304.2,222.6 323.0,221.4 341.9,220.6 360.9,220.1 380.0,220.0 399.1,220.1 418.1,220.6 437.0,221.4 455.8,222.6 474.4,224.0 492.9,225.8 511.0,227.9 528.9,230.3 546.4,233.0 563.5,236.1 580.2,239.5 596.3,243.2 611.9,247.2 626.8,251.5 641.1,256.1 654.6,261.0 667.4,266.2 679.2,271.7 690.1,277.5 700.0,283.5 708.8,289.8 716.5,296.3 722.9,303.1 728.0,310.0 731.7,317.1 734.0,324.4 734.8,331.8 734.0,339.3 731.5,346.9 727.4,354.5 721.5,362.0 713.9,369.6 704.4,377.0 693.2,384.3 680.2,391.3 665.4,398.2 648.8,404.7 630.5,410.9 610.7,416.7 589.3,422.0 566.5,426.9 542.4,431.1 517.1,434.8 490.9,437.9 463.9,440.4 436.3,442.1 408.2,443.2 380.0,443.5" style="--jd:0.00s" pathLength="1"/>
+        <polyline class="j-c" points="380.0,443.5 351.8,443.2 323.7,442.1 296.1,440.4 269.1,437.9 242.9,434.8 217.6,431.1 193.5,426.9 170.7,422.0 149.3,416.7 129.5,410.9 111.2,404.7 94.6,398.2 79.8,391.3 66.8,384.3 55.6,377.0 46.1,369.6 38.5,362.0 32.6,354.5 28.5,346.9 26.0,339.3 25.2,331.8 26.0,324.4 28.3,317.1 32.0,310.0 37.1,303.1 43.5,296.3 51.2,289.8 60.0,283.5 69.9,277.5 80.8,271.7 92.6,266.2 105.4,261.0 118.9,256.1 133.2,251.5 148.1,247.2 163.7,243.2 179.8,239.5 196.5,236.1 213.6,233.0 231.1,230.3 249.0,227.9 267.1,225.8 285.6,224.0 304.2,222.6 323.0,221.4 341.9,220.6 360.9,220.1 380.0,220.0 399.1,220.1 418.1,220.6 437.0,221.4 455.8,222.6 474.4,224.0 492.9,225.8 511.0,227.9 528.9,230.3 546.4,233.0 563.5,236.1 580.2,239.5 596.3,243.2 611.9,247.2 626.8,251.5 641.1,256.1 654.6,261.0 667.4,266.2 679.2,271.7 690.1,277.5 700.0,283.5 708.8,289.8 716.5,296.3 722.9,303.1 728.0,310.0 731.7,317.1 734.0,324.4 734.8,331.8 734.0,339.3 731.5,346.9 727.4,354.5 721.5,362.0 713.9,369.6 704.4,377.0 693.2,384.3 680.2,391.3 665.4,398.2 648.8,404.7 630.5,410.9 610.7,416.7 589.3,422.0 566.5,426.9 542.4,431.1 517.1,434.8 490.9,437.9 463.9,440.4 436.3,442.1 408.2,443.2 380.0,443.5" pathLength="1"/>
+      </g>
+      <g class="j-g j-g1">
+        <polygon class="j-fill" points="380.0,366.6 360.0,366.4 340.1,365.7 320.4,364.6 301.1,363.1 282.4,361.1 264.2,358.7 246.8,356.0 230.2,352.9 214.5,349.5 199.8,345.8 186.2,341.7 173.7,337.5 162.3,333.0 152.1,328.3 143.2,323.5 135.5,318.5 129.1,313.4 124.0,308.3 120.0,303.1 117.3,297.9 115.9,292.7 115.6,287.6 116.4,282.5 118.4,277.5 121.4,272.5 125.5,267.7 130.5,263.0 136.5,258.5 143.4,254.1 151.1,249.9 159.6,245.9 168.9,242.0 178.8,238.4 189.4,234.9 200.6,231.7 212.4,228.7 224.6,225.9 237.3,223.4 250.4,221.1 263.9,219.0 277.7,217.1 291.8,215.5 306.1,214.2 320.7,213.1 335.4,212.2 350.2,211.6 365.1,211.2 380.0,211.1 394.9,211.2 409.8,211.6 424.6,212.2 439.3,213.1 453.9,214.2 468.2,215.5 482.3,217.1 496.1,219.0 509.6,221.1 522.7,223.4 535.4,225.9 547.6,228.7 559.4,231.7 570.6,234.9 581.2,238.4 591.1,242.0 600.4,245.9 608.9,249.9 616.6,254.1 623.5,258.5 629.5,263.0 634.5,267.7 638.6,272.5 641.6,277.5 643.6,282.5 644.4,287.6 644.1,292.7 642.7,297.9 640.0,303.1 636.0,308.3 630.9,313.4 624.5,318.5 616.8,323.5 607.9,328.3 597.7,333.0 586.3,337.5 573.8,341.7 560.2,345.8 545.5,349.5 529.8,352.9 513.2,356.0 495.8,358.7 477.6,361.1 458.9,363.1 439.6,364.6 419.9,365.7 400.0,366.4 380.0,366.6" fill="rgba(10,14,46,.18)"/><g class="j-cols"><line x1="644.5" y1="288.3" x2="642.8" y2="321.4"/><line x1="616.9" y1="323.4" x2="615.3" y2="358.5"/><line x1="532.2" y1="352.4" x2="531.2" y2="389.1"/><line x1="405.9" y1="366.2" x2="405.7" y2="403.6"/><line x1="272.1" y1="359.8" x2="272.9" y2="396.9"/><line x1="168.8" y1="335.6" x2="170.2" y2="371.4"/><line x1="119.2" y1="301.7" x2="120.9" y2="335.6"/><line x1="126.1" y1="267.1" x2="127.6" y2="299.0"/><line x1="178.7" y1="238.4" x2="179.9" y2="268.7"/><line x1="261.8" y1="219.3" x2="262.5" y2="248.5"/><line x1="360.7" y1="211.3" x2="360.8" y2="240.1"/><line x1="461.9" y1="214.9" x2="461.5" y2="243.9"/><line x1="552.6" y1="229.9" x2="551.7" y2="259.8"/><line x1="618.6" y1="255.3" x2="617.2" y2="286.6"/></g>
+        <polyline class="j-glow" points="380.0,366.6 360.0,366.4 340.1,365.7 320.4,364.6 301.1,363.1 282.4,361.1 264.2,358.7 246.8,356.0 230.2,352.9 214.5,349.5 199.8,345.8 186.2,341.7 173.7,337.5 162.3,333.0 152.1,328.3 143.2,323.5 135.5,318.5 129.1,313.4 124.0,308.3 120.0,303.1 117.3,297.9 115.9,292.7 115.6,287.6 116.4,282.5 118.4,277.5 121.4,272.5 125.5,267.7 130.5,263.0 136.5,258.5 143.4,254.1 151.1,249.9 159.6,245.9 168.9,242.0 178.8,238.4 189.4,234.9 200.6,231.7 212.4,228.7 224.6,225.9 237.3,223.4 250.4,221.1 263.9,219.0 277.7,217.1 291.8,215.5 306.1,214.2 320.7,213.1 335.4,212.2 350.2,211.6 365.1,211.2 380.0,211.1 394.9,211.2 409.8,211.6 424.6,212.2 439.3,213.1 453.9,214.2 468.2,215.5 482.3,217.1 496.1,219.0 509.6,221.1 522.7,223.4 535.4,225.9 547.6,228.7 559.4,231.7 570.6,234.9 581.2,238.4 591.1,242.0 600.4,245.9 608.9,249.9 616.6,254.1 623.5,258.5 629.5,263.0 634.5,267.7 638.6,272.5 641.6,277.5 643.6,282.5 644.4,287.6 644.1,292.7 642.7,297.9 640.0,303.1 636.0,308.3 630.9,313.4 624.5,318.5 616.8,323.5 607.9,328.3 597.7,333.0 586.3,337.5 573.8,341.7 560.2,345.8 545.5,349.5 529.8,352.9 513.2,356.0 495.8,358.7 477.6,361.1 458.9,363.1 439.6,364.6 419.9,365.7 400.0,366.4 380.0,366.6"/>
+        <polyline class="j-ring" points="380.0,366.6 360.0,366.4 340.1,365.7 320.4,364.6 301.1,363.1 282.4,361.1 264.2,358.7 246.8,356.0 230.2,352.9 214.5,349.5 199.8,345.8 186.2,341.7 173.7,337.5 162.3,333.0 152.1,328.3 143.2,323.5 135.5,318.5 129.1,313.4 124.0,308.3 120.0,303.1 117.3,297.9 115.9,292.7 115.6,287.6 116.4,282.5 118.4,277.5 121.4,272.5 125.5,267.7 130.5,263.0 136.5,258.5 143.4,254.1 151.1,249.9 159.6,245.9 168.9,242.0 178.8,238.4 189.4,234.9 200.6,231.7 212.4,228.7 224.6,225.9 237.3,223.4 250.4,221.1 263.9,219.0 277.7,217.1 291.8,215.5 306.1,214.2 320.7,213.1 335.4,212.2 350.2,211.6 365.1,211.2 380.0,211.1 394.9,211.2 409.8,211.6 424.6,212.2 439.3,213.1 453.9,214.2 468.2,215.5 482.3,217.1 496.1,219.0 509.6,221.1 522.7,223.4 535.4,225.9 547.6,228.7 559.4,231.7 570.6,234.9 581.2,238.4 591.1,242.0 600.4,245.9 608.9,249.9 616.6,254.1 623.5,258.5 629.5,263.0 634.5,267.7 638.6,272.5 641.6,277.5 643.6,282.5 644.4,287.6 644.1,292.7 642.7,297.9 640.0,303.1 636.0,308.3 630.9,313.4 624.5,318.5 616.8,323.5 607.9,328.3 597.7,333.0 586.3,337.5 573.8,341.7 560.2,345.8 545.5,349.5 529.8,352.9 513.2,356.0 495.8,358.7 477.6,361.1 458.9,363.1 439.6,364.6 419.9,365.7 400.0,366.4 380.0,366.6" style="--jd:0.18s" pathLength="1"/>
+        <polyline class="j-c" points="380.0,366.6 360.0,366.4 340.1,365.7 320.4,364.6 301.1,363.1 282.4,361.1 264.2,358.7 246.8,356.0 230.2,352.9 214.5,349.5 199.8,345.8 186.2,341.7 173.7,337.5 162.3,333.0 152.1,328.3 143.2,323.5 135.5,318.5 129.1,313.4 124.0,308.3 120.0,303.1 117.3,297.9 115.9,292.7 115.6,287.6 116.4,282.5 118.4,277.5 121.4,272.5 125.5,267.7 130.5,263.0 136.5,258.5 143.4,254.1 151.1,249.9 159.6,245.9 168.9,242.0 178.8,238.4 189.4,234.9 200.6,231.7 212.4,228.7 224.6,225.9 237.3,223.4 250.4,221.1 263.9,219.0 277.7,217.1 291.8,215.5 306.1,214.2 320.7,213.1 335.4,212.2 350.2,211.6 365.1,211.2 380.0,211.1 394.9,211.2 409.8,211.6 424.6,212.2 439.3,213.1 453.9,214.2 468.2,215.5 482.3,217.1 496.1,219.0 509.6,221.1 522.7,223.4 535.4,225.9 547.6,228.7 559.4,231.7 570.6,234.9 581.2,238.4 591.1,242.0 600.4,245.9 608.9,249.9 616.6,254.1 623.5,258.5 629.5,263.0 634.5,267.7 638.6,272.5 641.6,277.5 643.6,282.5 644.4,287.6 644.1,292.7 642.7,297.9 640.0,303.1 636.0,308.3 630.9,313.4 624.5,318.5 616.8,323.5 607.9,328.3 597.7,333.0 586.3,337.5 573.8,341.7 560.2,345.8 545.5,349.5 529.8,352.9 513.2,356.0 495.8,358.7 477.6,361.1 458.9,363.1 439.6,364.6 419.9,365.7 400.0,366.4 380.0,366.6" pathLength="1"/>
+      </g>
+      <g class="j-g j-g2">
+        <polygon class="j-fill" points="380.0,297.1 367.4,297.0 354.8,296.6 342.4,296.0 330.2,295.1 318.3,294.0 306.8,292.7 295.6,291.1 284.9,289.4 274.7,287.4 265.1,285.3 256.1,283.0 247.7,280.5 240.1,277.9 233.1,275.2 226.9,272.4 221.5,269.5 216.8,266.4 212.9,263.4 209.8,260.3 207.4,257.1 205.9,254.0 205.1,250.8 205.1,247.6 205.8,244.5 207.3,241.4 209.5,238.4 212.4,235.4 215.9,232.5 220.1,229.7 224.9,227.0 230.3,224.4 236.2,221.9 242.6,219.5 249.6,217.3 257.0,215.1 264.8,213.1 273.0,211.3 281.6,209.6 290.5,208.0 299.7,206.6 309.2,205.4 318.9,204.3 328.7,203.4 338.8,202.6 349.0,202.1 359.3,201.6 369.6,201.4 380.0,201.3 390.4,201.4 400.7,201.6 411.0,202.1 421.2,202.6 431.3,203.4 441.1,204.3 450.8,205.4 460.3,206.6 469.5,208.0 478.4,209.6 487.0,211.3 495.2,213.1 503.0,215.1 510.4,217.3 517.4,219.5 523.8,221.9 529.7,224.4 535.1,227.0 539.9,229.7 544.1,232.5 547.6,235.4 550.5,238.4 552.7,241.4 554.2,244.5 554.9,247.6 554.9,250.8 554.1,254.0 552.6,257.1 550.2,260.3 547.1,263.4 543.2,266.4 538.5,269.5 533.1,272.4 526.9,275.2 519.9,277.9 512.3,280.5 503.9,283.0 494.9,285.3 485.3,287.4 475.1,289.4 464.4,291.1 453.2,292.7 441.7,294.0 429.8,295.1 417.6,296.0 405.2,296.6 392.6,297.0 380.0,297.1" fill="rgba(10,14,46,.18)"/><g class="j-cols"><line x1="554.8" y1="251.2" x2="553.7" y2="284.6"/><line x1="533.1" y1="272.4" x2="532.1" y2="307.0"/><line x1="476.7" y1="289.1" x2="476.0" y2="324.7"/><line x1="396.3" y1="296.9" x2="396.2" y2="333.0"/><line x1="311.8" y1="293.3" x2="312.3" y2="329.2"/><line x1="244.4" y1="279.5" x2="245.3" y2="314.5"/><line x1="209.0" y1="259.4" x2="210.1" y2="293.2"/><line x1="209.8" y1="238.0" x2="210.9" y2="270.6"/><line x1="242.6" y1="219.5" x2="243.4" y2="251.0"/><line x1="298.3" y1="206.8" x2="298.7" y2="237.5"/><line x1="366.6" y1="201.4" x2="366.6" y2="231.7"/><line x1="436.8" y1="203.9" x2="436.5" y2="234.3"/><line x1="498.5" y1="214.0" x2="497.8" y2="245.0"/><line x1="541.1" y1="230.5" x2="540.1" y2="262.6"/></g>
+        <polyline class="j-glow" points="380.0,297.1 367.4,297.0 354.8,296.6 342.4,296.0 330.2,295.1 318.3,294.0 306.8,292.7 295.6,291.1 284.9,289.4 274.7,287.4 265.1,285.3 256.1,283.0 247.7,280.5 240.1,277.9 233.1,275.2 226.9,272.4 221.5,269.5 216.8,266.4 212.9,263.4 209.8,260.3 207.4,257.1 205.9,254.0 205.1,250.8 205.1,247.6 205.8,244.5 207.3,241.4 209.5,238.4 212.4,235.4 215.9,232.5 220.1,229.7 224.9,227.0 230.3,224.4 236.2,221.9 242.6,219.5 249.6,217.3 257.0,215.1 264.8,213.1 273.0,211.3 281.6,209.6 290.5,208.0 299.7,206.6 309.2,205.4 318.9,204.3 328.7,203.4 338.8,202.6 349.0,202.1 359.3,201.6 369.6,201.4 380.0,201.3 390.4,201.4 400.7,201.6 411.0,202.1 421.2,202.6 431.3,203.4 441.1,204.3 450.8,205.4 460.3,206.6 469.5,208.0 478.4,209.6 487.0,211.3 495.2,213.1 503.0,215.1 510.4,217.3 517.4,219.5 523.8,221.9 529.7,224.4 535.1,227.0 539.9,229.7 544.1,232.5 547.6,235.4 550.5,238.4 552.7,241.4 554.2,244.5 554.9,247.6 554.9,250.8 554.1,254.0 552.6,257.1 550.2,260.3 547.1,263.4 543.2,266.4 538.5,269.5 533.1,272.4 526.9,275.2 519.9,277.9 512.3,280.5 503.9,283.0 494.9,285.3 485.3,287.4 475.1,289.4 464.4,291.1 453.2,292.7 441.7,294.0 429.8,295.1 417.6,296.0 405.2,296.6 392.6,297.0 380.0,297.1"/>
+        <polyline class="j-ring" points="380.0,297.1 367.4,297.0 354.8,296.6 342.4,296.0 330.2,295.1 318.3,294.0 306.8,292.7 295.6,291.1 284.9,289.4 274.7,287.4 265.1,285.3 256.1,283.0 247.7,280.5 240.1,277.9 233.1,275.2 226.9,272.4 221.5,269.5 216.8,266.4 212.9,263.4 209.8,260.3 207.4,257.1 205.9,254.0 205.1,250.8 205.1,247.6 205.8,244.5 207.3,241.4 209.5,238.4 212.4,235.4 215.9,232.5 220.1,229.7 224.9,227.0 230.3,224.4 236.2,221.9 242.6,219.5 249.6,217.3 257.0,215.1 264.8,213.1 273.0,211.3 281.6,209.6 290.5,208.0 299.7,206.6 309.2,205.4 318.9,204.3 328.7,203.4 338.8,202.6 349.0,202.1 359.3,201.6 369.6,201.4 380.0,201.3 390.4,201.4 400.7,201.6 411.0,202.1 421.2,202.6 431.3,203.4 441.1,204.3 450.8,205.4 460.3,206.6 469.5,208.0 478.4,209.6 487.0,211.3 495.2,213.1 503.0,215.1 510.4,217.3 517.4,219.5 523.8,221.9 529.7,224.4 535.1,227.0 539.9,229.7 544.1,232.5 547.6,235.4 550.5,238.4 552.7,241.4 554.2,244.5 554.9,247.6 554.9,250.8 554.1,254.0 552.6,257.1 550.2,260.3 547.1,263.4 543.2,266.4 538.5,269.5 533.1,272.4 526.9,275.2 519.9,277.9 512.3,280.5 503.9,283.0 494.9,285.3 485.3,287.4 475.1,289.4 464.4,291.1 453.2,292.7 441.7,294.0 429.8,295.1 417.6,296.0 405.2,296.6 392.6,297.0 380.0,297.1" style="--jd:0.36s" pathLength="1"/>
+        <polyline class="j-c" points="380.0,297.1 367.4,297.0 354.8,296.6 342.4,296.0 330.2,295.1 318.3,294.0 306.8,292.7 295.6,291.1 284.9,289.4 274.7,287.4 265.1,285.3 256.1,283.0 247.7,280.5 240.1,277.9 233.1,275.2 226.9,272.4 221.5,269.5 216.8,266.4 212.9,263.4 209.8,260.3 207.4,257.1 205.9,254.0 205.1,250.8 205.1,247.6 205.8,244.5 207.3,241.4 209.5,238.4 212.4,235.4 215.9,232.5 220.1,229.7 224.9,227.0 230.3,224.4 236.2,221.9 242.6,219.5 249.6,217.3 257.0,215.1 264.8,213.1 273.0,211.3 281.6,209.6 290.5,208.0 299.7,206.6 309.2,205.4 318.9,204.3 328.7,203.4 338.8,202.6 349.0,202.1 359.3,201.6 369.6,201.4 380.0,201.3 390.4,201.4 400.7,201.6 411.0,202.1 421.2,202.6 431.3,203.4 441.1,204.3 450.8,205.4 460.3,206.6 469.5,208.0 478.4,209.6 487.0,211.3 495.2,213.1 503.0,215.1 510.4,217.3 517.4,219.5 523.8,221.9 529.7,224.4 535.1,227.0 539.9,229.7 544.1,232.5 547.6,235.4 550.5,238.4 552.7,241.4 554.2,244.5 554.9,247.6 554.9,250.8 554.1,254.0 552.6,257.1 550.2,260.3 547.1,263.4 543.2,266.4 538.5,269.5 533.1,272.4 526.9,275.2 519.9,277.9 512.3,280.5 503.9,283.0 494.9,285.3 485.3,287.4 475.1,289.4 464.4,291.1 453.2,292.7 441.7,294.0 429.8,295.1 417.6,296.0 405.2,296.6 392.6,297.0 380.0,297.1" pathLength="1"/>
+      </g>
+      <g class="j-g j-g3">
+        <polygon class="j-fill" points="380.0,224.2 374.0,224.1 368.0,224.0 362.0,223.7 356.1,223.4 350.4,222.9 344.8,222.4 339.4,221.7 334.2,221.0 329.2,220.2 324.4,219.3 319.9,218.3 315.7,217.2 311.8,216.1 308.2,214.9 305.0,213.7 302.1,212.4 299.5,211.1 297.3,209.8 295.5,208.4 294.1,207.0 293.1,205.6 292.4,204.1 292.1,202.7 292.2,201.3 292.7,199.8 293.5,198.4 294.7,197.1 296.3,195.7 298.2,194.4 300.4,193.1 302.9,191.8 305.8,190.6 308.9,189.5 312.4,188.4 316.1,187.4 320.0,186.4 324.2,185.5 328.6,184.6 333.1,183.9 337.9,183.2 342.8,182.6 347.9,182.0 353.0,181.6 358.3,181.2 363.7,180.9 369.1,180.7 374.5,180.5 380.0,180.5 385.5,180.5 390.9,180.7 396.3,180.9 401.7,181.2 407.0,181.6 412.1,182.0 417.2,182.6 422.1,183.2 426.9,183.9 431.4,184.6 435.8,185.5 440.0,186.4 443.9,187.4 447.6,188.4 451.1,189.5 454.2,190.6 457.1,191.8 459.6,193.1 461.8,194.4 463.7,195.7 465.3,197.1 466.5,198.4 467.3,199.8 467.8,201.3 467.9,202.7 467.6,204.1 466.9,205.6 465.9,207.0 464.5,208.4 462.7,209.8 460.5,211.1 457.9,212.4 455.0,213.7 451.8,214.9 448.2,216.1 444.3,217.2 440.1,218.3 435.6,219.3 430.8,220.2 425.8,221.0 420.6,221.7 415.2,222.4 409.6,222.9 403.9,223.4 398.0,223.7 392.0,224.0 386.0,224.1 380.0,224.2" fill="rgba(10,14,46,.55)"/><g class="j-cols"><line x1="467.5" y1="204.3" x2="466.8" y2="247.8"/><line x1="455.1" y1="213.7" x2="454.4" y2="258.0"/><line x1="426.6" y1="220.9" x2="426.2" y2="265.8"/><line x1="387.8" y1="224.1" x2="387.7" y2="269.4"/><line x1="347.2" y1="222.6" x2="347.5" y2="267.7"/><line x1="314.0" y1="216.8" x2="314.6" y2="261.4"/><line x1="295.1" y1="208.0" x2="295.8" y2="251.8"/><line x1="293.7" y1="198.3" x2="294.4" y2="241.2"/><line x1="308.9" y1="189.5" x2="309.5" y2="231.7"/><line x1="337.2" y1="183.3" x2="337.5" y2="224.9"/><line x1="372.9" y1="180.6" x2="373.0" y2="222.0"/><line x1="409.9" y1="181.8" x2="409.7" y2="223.3"/><line x1="441.7" y1="186.8" x2="441.2" y2="228.7"/><line x1="462.4" y1="194.7" x2="461.7" y2="237.4"/></g>
+        <polyline class="j-glow" points="380.0,224.2 374.0,224.1 368.0,224.0 362.0,223.7 356.1,223.4 350.4,222.9 344.8,222.4 339.4,221.7 334.2,221.0 329.2,220.2 324.4,219.3 319.9,218.3 315.7,217.2 311.8,216.1 308.2,214.9 305.0,213.7 302.1,212.4 299.5,211.1 297.3,209.8 295.5,208.4 294.1,207.0 293.1,205.6 292.4,204.1 292.1,202.7 292.2,201.3 292.7,199.8 293.5,198.4 294.7,197.1 296.3,195.7 298.2,194.4 300.4,193.1 302.9,191.8 305.8,190.6 308.9,189.5 312.4,188.4 316.1,187.4 320.0,186.4 324.2,185.5 328.6,184.6 333.1,183.9 337.9,183.2 342.8,182.6 347.9,182.0 353.0,181.6 358.3,181.2 363.7,180.9 369.1,180.7 374.5,180.5 380.0,180.5 385.5,180.5 390.9,180.7 396.3,180.9 401.7,181.2 407.0,181.6 412.1,182.0 417.2,182.6 422.1,183.2 426.9,183.9 431.4,184.6 435.8,185.5 440.0,186.4 443.9,187.4 447.6,188.4 451.1,189.5 454.2,190.6 457.1,191.8 459.6,193.1 461.8,194.4 463.7,195.7 465.3,197.1 466.5,198.4 467.3,199.8 467.8,201.3 467.9,202.7 467.6,204.1 466.9,205.6 465.9,207.0 464.5,208.4 462.7,209.8 460.5,211.1 457.9,212.4 455.0,213.7 451.8,214.9 448.2,216.1 444.3,217.2 440.1,218.3 435.6,219.3 430.8,220.2 425.8,221.0 420.6,221.7 415.2,222.4 409.6,222.9 403.9,223.4 398.0,223.7 392.0,224.0 386.0,224.1 380.0,224.2"/>
+        <polyline class="j-ring" points="380.0,224.2 374.0,224.1 368.0,224.0 362.0,223.7 356.1,223.4 350.4,222.9 344.8,222.4 339.4,221.7 334.2,221.0 329.2,220.2 324.4,219.3 319.9,218.3 315.7,217.2 311.8,216.1 308.2,214.9 305.0,213.7 302.1,212.4 299.5,211.1 297.3,209.8 295.5,208.4 294.1,207.0 293.1,205.6 292.4,204.1 292.1,202.7 292.2,201.3 292.7,199.8 293.5,198.4 294.7,197.1 296.3,195.7 298.2,194.4 300.4,193.1 302.9,191.8 305.8,190.6 308.9,189.5 312.4,188.4 316.1,187.4 320.0,186.4 324.2,185.5 328.6,184.6 333.1,183.9 337.9,183.2 342.8,182.6 347.9,182.0 353.0,181.6 358.3,181.2 363.7,180.9 369.1,180.7 374.5,180.5 380.0,180.5 385.5,180.5 390.9,180.7 396.3,180.9 401.7,181.2 407.0,181.6 412.1,182.0 417.2,182.6 422.1,183.2 426.9,183.9 431.4,184.6 435.8,185.5 440.0,186.4 443.9,187.4 447.6,188.4 451.1,189.5 454.2,190.6 457.1,191.8 459.6,193.1 461.8,194.4 463.7,195.7 465.3,197.1 466.5,198.4 467.3,199.8 467.8,201.3 467.9,202.7 467.6,204.1 466.9,205.6 465.9,207.0 464.5,208.4 462.7,209.8 460.5,211.1 457.9,212.4 455.0,213.7 451.8,214.9 448.2,216.1 444.3,217.2 440.1,218.3 435.6,219.3 430.8,220.2 425.8,221.0 420.6,221.7 415.2,222.4 409.6,222.9 403.9,223.4 398.0,223.7 392.0,224.0 386.0,224.1 380.0,224.2" style="--jd:0.54s" pathLength="1"/>
+        <polyline class="j-c" points="380.0,224.2 374.0,224.1 368.0,224.0 362.0,223.7 356.1,223.4 350.4,222.9 344.8,222.4 339.4,221.7 334.2,221.0 329.2,220.2 324.4,219.3 319.9,218.3 315.7,217.2 311.8,216.1 308.2,214.9 305.0,213.7 302.1,212.4 299.5,211.1 297.3,209.8 295.5,208.4 294.1,207.0 293.1,205.6 292.4,204.1 292.1,202.7 292.2,201.3 292.7,199.8 293.5,198.4 294.7,197.1 296.3,195.7 298.2,194.4 300.4,193.1 302.9,191.8 305.8,190.6 308.9,189.5 312.4,188.4 316.1,187.4 320.0,186.4 324.2,185.5 328.6,184.6 333.1,183.9 337.9,183.2 342.8,182.6 347.9,182.0 353.0,181.6 358.3,181.2 363.7,180.9 369.1,180.7 374.5,180.5 380.0,180.5 385.5,180.5 390.9,180.7 396.3,180.9 401.7,181.2 407.0,181.6 412.1,182.0 417.2,182.6 422.1,183.2 426.9,183.9 431.4,184.6 435.8,185.5 440.0,186.4 443.9,187.4 447.6,188.4 451.1,189.5 454.2,190.6 457.1,191.8 459.6,193.1 461.8,194.4 463.7,195.7 465.3,197.1 466.5,198.4 467.3,199.8 467.8,201.3 467.9,202.7 467.6,204.1 466.9,205.6 465.9,207.0 464.5,208.4 462.7,209.8 460.5,211.1 457.9,212.4 455.0,213.7 451.8,214.9 448.2,216.1 444.3,217.2 440.1,218.3 435.6,219.3 430.8,220.2 425.8,221.0 420.6,221.7 415.2,222.4 409.6,222.9 403.9,223.4 398.0,223.7 392.0,224.0 386.0,224.1 380.0,224.2" pathLength="1"/>
+      </g>
+      <g class="j-lead"><circle r="15" fill="#FFFFFF" opacity=".16"/><circle r="6.5" fill="#FFFFFF" stroke="#0A0E2E" stroke-width="2"/><animateMotion dur="8s" repeatCount="indefinite" path="M 723.7 359.5 L 692.7 371.4 L 649.3 380.9 L 594.9 387.2 L 532.2 389.9 L 464.7 388.9 L 396.2 384.1 L 330.4 376.1 L 270.8 365.3 L 219.9 352.6 L 179.6 338.7 L 150.5 324.3 L 132.6 310.2 L 125.3 296.8 L 127.5 284.4 L 138.0 273.5 L 155.4 264.0 L 177.9 247.4 L 204.7 232.8 L 234.6 220.6 L 266.5 210.6 L 299.3 203.0 L 332.1 197.7 L 364.0 194.8 L 394.2 194.0 L 421.9 195.4 L 446.4 198.7 L 467.1 203.6 L 483.6 210.1 L 495.3 217.7 L 502.1 226.1 L 504.1 234.8 L 501.2 243.6 L 494.2 242.0 L 483.5 239.7 L 469.7 236.7 L 453.8 233.0 L 436.9 228.9 L 419.9 224.5 L 403.9 220.0 L 389.7 215.6 L 377.9 211.5 L 368.9 207.9 L 363.1 204.9 L 360.3 202.7 L 360.4 201.2 L 363.1 200.6 L 367.9 200.8 L 374.1 201.6"/></g>
+              </svg>
+              <button type="button" class="j-pill j-p0" data-j="0" style="left:50.0%; top:74.9%" aria-label="Nível inconsciente, 50% do público"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="38" height="30" rx="6" pathLength="1"/><path d="M20 17.5v13l11-6.5z" pathLength="1"/></svg><span>INCONSCIENTE</span><b>50%</b></button>
+              <button type="button" class="j-pill j-p1" data-j="1" style="left:50.0%; top:55.3%" aria-label="Nível vê o problema, 30% do público"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="6" width="34" height="16" rx="3" pathLength="1"/><rect x="7" y="26" width="34" height="16" rx="3" pathLength="1"/><path d="M24 12h12M24 16h8M24 32h12M24 36h8" pathLength="1"/></svg><span>VÊ O PROBLEMA</span><b>30%</b></button>
+              <button type="button" class="j-pill j-p2" data-j="2" style="left:50.0%; top:37.5%" aria-label="Nível vê a solução, 15% do público"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6l5.3 10.8 11.9 1.7-8.6 8.4 2 11.8L24 33.1l-10.6 5.6 2-11.8-8.6-8.4 11.9-1.7z" pathLength="1"/></svg><span>VÊ A SOLUÇÃO</span><b>15%</b></button>
+              <button type="button" class="j-pill j-p3" data-j="3" style="left:50.0%; top:18.9%" aria-label="Nível pronto, 5% do público"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="33" rx="4" pathLength="1"/><path d="M6 18h36M15 5v8M33 5v8" pathLength="1"/></svg><span>PRONTO</span><b>5%</b></button>
+            </div>
             </div>
           </div>
         </div>
       </section>
       <section class="pilar-section reverse" id="pilar-4" data-pilar="04" data-nome="Agendamento Autoprogressivo">
-        <p class="pilar-eyebrow r"><span class="pe-num">Pilar 04</span><span class="pe-line"></span><span class="pe-tag">Agendamento Autoprogressivo</span></p>
+        <p class="pilar-eyebrow r"><span class="pi-disc" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="6" y="9" width="36" height="33" rx="4" pathLength="1"/><path d="M6 18h36M15 5v8M33 5v8" pathLength="1"/></svg></span><span class="pe-num">Pilar 04</span><span class="pe-line"></span><span class="pe-tag">Agendamento Autoprogressivo</span></p>
         <div class="pilar-grid">
           <div class="pilar-text-col">
             <h3 class="pilar-headline r d1">IA pra dar escala. Gente pra <span class="grad-text">fechar</span>.</h3>
@@ -1465,7 +1501,7 @@ section{padding:clamp(56px,7vw,104px) 0}
         </div>
       </section>
       <section class="pilar-section" id="pilar-5" data-pilar="05" data-nome="Farming da Base">
-        <p class="pilar-eyebrow r"><span class="pe-num">Pilar 05</span><span class="pe-line"></span><span class="pe-tag">Farming da Base</span></p>
+        <p class="pilar-eyebrow r"><span class="pi-disc" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M9 22a15 15 0 0 1 26-9" pathLength="1"/><path d="M39 26a15 15 0 0 1-26 9" pathLength="1"/><path d="M36 5v9h-9M12 43v-9h9" pathLength="1"/></svg></span><span class="pe-num">Pilar 05</span><span class="pe-line"></span><span class="pe-tag">Farming da Base</span></p>
         <div class="pilar-grid">
           <div class="pilar-text-col">
             <h3 class="pilar-headline r d1">Paciente que já passou é <span class="grad-text">nova receita</span>.</h3>
@@ -2483,11 +2519,22 @@ function track(nome, dados){
   document.querySelectorAll('.pilar-section').forEach(function(s){ io.observe(s); });
 })();
 
-/* ===== v3: linha do ALVO preenche com a rolagem + leve parallax nos desenhos ===== */
+/* ===== v3: linha do ALVO + niveis de consciencia pela rolagem + parallax + tilt ===== */
 (function(){
   var tl = document.querySelector('.tl'), fill = document.getElementById('tlFill');
   var vizes = [].slice.call(document.querySelectorAll('.pilar-viz-box,.tl-viz'));
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ if(fill) fill.style.height = '100%'; return; }
+  var jor = document.querySelector('.jornada');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    if(fill) fill.style.height = '100%';
+    if(jor) jor.dataset.level = '3';
+    return;
+  }
+  var segura = 0;
+  document.addEventListener('click', function(e){
+    var p = e.target.closest('.j-pill'); if(!p || !jor) return;
+    jor.dataset.level = p.dataset.j;
+    segura = Date.now() + 4500;
+  });
   var raf = 0;
   function draw(){
     raf = 0;
@@ -2495,6 +2542,12 @@ function track(nome, dados){
       var r = tl.getBoundingClientRect();
       var p = (innerHeight*0.72 - r.top) / r.height;
       fill.style.height = (Math.max(0, Math.min(1, p))*100).toFixed(1) + '%';
+    }
+    if(jor && Date.now() > segura){
+      var j = jor.getBoundingClientRect();
+      var q = (innerHeight - j.top) / (innerHeight + j.height);
+      var lv = q < 0.1 ? -1 : Math.min(3, Math.floor((q - 0.1) / 0.16));
+      if(String(lv) !== jor.dataset.level) jor.dataset.level = String(lv);
     }
     for(var i = 0; i < vizes.length; i++){
       var b = vizes[i].getBoundingClientRect();
@@ -2505,6 +2558,19 @@ function track(nome, dados){
   }
   function pede(){ if(!raf) raf = requestAnimationFrame(draw); }
   addEventListener('scroll', pede, { passive:true }); addEventListener('resize', pede); draw();
+  if(matchMedia('(hover:hover)').matches){
+    vizes.filter(function(v){ return !v.querySelector('.j-pill'); }).forEach(function(v){
+      v.addEventListener('pointermove', function(e){
+        var r = v.getBoundingClientRect();
+        var px = (e.clientX - r.left)/r.width - .5, py = (e.clientY - r.top)/r.height - .5;
+        v.style.setProperty('--ry', (px*7).toFixed(2) + 'deg');
+        v.style.setProperty('--rx', (py*-7).toFixed(2) + 'deg');
+      }, { passive:true });
+      v.addEventListener('pointerleave', function(){
+        v.style.setProperty('--rx', '0deg'); v.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
 })();
 </script>
 
