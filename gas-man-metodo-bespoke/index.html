@@ -1,0 +1,224 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Proposta Método Bespoke</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: a mesa de corte do alfaiate. Página grafite com riscas de giz; cada seção põe a cena ao vivo ao lado
+   do texto; a única folha de papel marfim é a ficha do que falta, com alinhavo vinho (vinho só vive no papel). */
+:root {
+  --mesa: #1E1D1B;
+  --luz: #26231F;
+  --marfim: #EEE6D6;
+  --marfim-2: rgba(238, 230, 214, 0.74);
+  --marfim-3: rgba(238, 230, 214, 0.5);
+  --champagne: #C9B083;
+  --vinho: #7B2434;
+  --ponto: #B9AC93;
+  --fio: rgba(238, 230, 214, 0.14);
+  --serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --sans: "Jost", "Futura", "Avenir Next", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background-color: var(--mesa);
+  background-image: repeating-linear-gradient(90deg, rgba(238, 230, 214, 0.035) 0 2px, transparent 2px 72px);
+  color: var(--marfim);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.pagina {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 56px;
+  display: grid;
+  gap: 88px;
+}
+.rotulo {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  margin: 0;
+}
+h1, h2 { font-family: var(--serif); font-weight: 600; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(36px, 5vw, 54px); line-height: 1.05; }
+h2 em, h3 em { font-style: italic; font-weight: 500; }
+p { margin: 0; max-width: 62ch; }
+.texto { display: grid; gap: 18px; align-content: start; min-width: 0; }
+.texto > p { color: var(--marfim-2); }
+.nota { font-size: 14px; color: var(--marfim-3); }
+.costura { height: 1px; background: var(--champagne); width: 64px; border: 0; margin: 0; }
+
+/* cena ao vivo: o mesmo código que gera o vídeo, tocando aqui */
+.tela { border: 1px solid var(--fio); background: var(--mesa); aspect-ratio: 9 / 16; width: 100%; max-width: 100%; }
+.linha { display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+.cena { width: min(100%, 380px); justify-self: center; display: grid; gap: 10px; }
+.cena figcaption { font-size: 13px; color: var(--marfim-3); }
+@media (min-width: 860px) {
+  .linha { grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 64px; }
+  .linha.inverte { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); }
+  .linha.inverte .cena { order: 2; }
+  .cena { justify-self: stretch; }
+}
+
+/* abertura */
+.marca { display: grid; gap: 6px; }
+.marca .metodo { font-family: var(--sans); font-weight: 500; font-size: 15px; letter-spacing: 0.42em; color: var(--champagne); }
+.marca h1 { font-size: clamp(54px, 10vw, 112px); letter-spacing: 0.16em; line-height: 1; margin-right: -0.16em; }
+.abertura .texto { gap: 28px; padding-top: 8px; }
+.abertura .lede { font-size: 20px; color: var(--marfim); }
+
+/* camadas e etapas */
+.camadas, .etapas { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; border-top: 1px solid var(--fio); }
+.camadas li, .etapas li {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 14px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--fio);
+}
+.num { font-family: var(--sans); font-weight: 500; font-size: 14px; letter-spacing: 0.12em; color: var(--champagne); padding-top: 5px; font-variant-numeric: tabular-nums; }
+.camadas strong, .etapas h3 { font-family: var(--serif); font-weight: 600; font-size: 25px; line-height: 1.2; display: block; margin: 0; }
+.camadas span, .etapas p { color: var(--marfim-2); font-size: 16px; }
+
+/* a ficha do que falta: papel marfim com grade de pontos e alinhavo vinho (12 px de ponto, 9 px de folga) */
+.ficha {
+  background-color: var(--marfim);
+  background-image:
+    repeating-linear-gradient(90deg, var(--vinho) 0 12px, transparent 12px 21px),
+    repeating-linear-gradient(90deg, var(--vinho) 0 12px, transparent 12px 21px),
+    repeating-linear-gradient(180deg, var(--vinho) 0 12px, transparent 12px 21px),
+    repeating-linear-gradient(180deg, var(--vinho) 0 12px, transparent 12px 21px),
+    radial-gradient(circle, rgba(185, 172, 147, 0.55) 1px, transparent 1.6px);
+  background-size: calc(100% - 32px) 2px, calc(100% - 32px) 2px, 2px calc(100% - 32px), 2px calc(100% - 32px), 24px 24px;
+  background-position: 16px 16px, 16px calc(100% - 16px), 16px 16px, calc(100% - 16px) 16px, 0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+  color: var(--mesa);
+  padding: clamp(36px, 6vw, 64px);
+  display: grid;
+  gap: 24px;
+}
+.ficha .rotulo { color: var(--vinho); }
+.ficha h2 { color: var(--mesa); }
+.pendencias { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; max-width: 70ch; }
+.pendencias li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 14px; align-items: start; font-size: 17px; }
+.pendencias li::before { content: ""; width: 16px; height: 16px; border: 1.5px solid var(--mesa); margin-top: 5px; }
+.combinados { display: grid; gap: 12px; }
+.combinados p { color: var(--marfim-2); }
+
+footer { border-top: 1px solid var(--fio); padding-top: 24px; font-size: 14px; color: var(--marfim-3); display: grid; gap: 4px; }
+
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<main class="pagina">
+  <section class="linha inverte abertura" aria-labelledby="titulo">
+    <div class="texto">
+      <p class="rotulo">B2Donto para a GAS MAN CLINIC</p>
+      <div class="marca">
+        <span class="metodo">MÉTODO</span>
+        <h1 id="titulo">BESPOKE</h1>
+      </div>
+      <p class="lede">Dr. Anselmo, esta é a primeira prova da linguagem visual do seu método. Ela nasce da mesa de corte do alfaiate: o giz marfim observa e planeja, o alinhavo marca o que ainda é provisório e a costura champagne marca o que é definitivo.</p>
+      <hr class="costura">
+      <p>As cenas desta página tocam ao vivo. É o mesmo código que vai gerar os seus vídeos, no formato vertical do Reels.</p>
+    </div>
+    <figure class="cena" style="margin:0">
+      <div class="tela" data-cena="assinatura" data-autoplay="sim"></div>
+      <figcaption>A assinatura do método, 6 segundos.</figcaption>
+    </figure>
+  </section>
+
+  <section class="linha" aria-labelledby="caso">
+    <figure class="cena" style="margin:0">
+      <div class="tela" data-cena="caso" data-autoplay="sim"></div>
+      <figcaption>O caso abre em camadas e fecha num quadro plano, 8 segundos. Toque ou clique para ver de novo.</figcaption>
+    </figure>
+    <div class="texto">
+      <p class="rotulo">Exemplo com um caso seu</p>
+      <h2 id="caso"><em>O</em> caso, em camadas</h2>
+      <p>Usamos um caso que você publicou para mostrar como as camadas montam um quadro. Ele se abre em quatro camadas, de trás para a frente, e fecha de novo:</p>
+      <ol class="camadas">
+        <li><span class="num">01</span><div><strong>O tecido</strong><span>A mesa de corte: grafite com riscas de giz.</span></div></li>
+        <li><span class="num">02</span><div><strong>A assinatura</strong><span>MÉTODO se decodifica e a varredura revela BESPOKE.</span></div></li>
+        <li><span class="num">03</span><div><strong>A medida</strong><span>O giz acompanha o perfil, sempre por fora do rosto.</span></div></li>
+        <li><span class="num">04</span><div><strong>O paciente</strong><span>A foto do resultado, recortada, sem retoque.</span></div></li>
+      </ol>
+      <p>Fechado, BESPOKE fica atrás da cabeça. No seu vídeo, se você aprovar, a palavra fica atrás de você, uma vez, na sua frase principal. O paciente é só o exemplo desta página.</p>
+      <p>A foto é de um post seu no Instagram e está só nesta apresentação, que não aparece em lugar nenhum: só abre quem tem o link. Por favor, não encaminhe o link. Do post, usamos só a foto do resultado, sozinha: antes e depois não entra, em nenhum formato. Para ir ao ar, precisamos do termo de uso de imagem assinado pelo paciente, cobrindo vídeo e anúncio.</p>
+    </div>
+  </section>
+
+  <section class="linha inverte" aria-labelledby="etapas">
+    <div class="texto">
+      <p class="rotulo">O método, etapa por etapa</p>
+      <h2 id="etapas"><em>As</em> cinco etapas</h2>
+      <p>Cada etapa ganha uma cena no mesmo kit. A Medida já está animada; as outras quatro seguem o mesmo desenho.</p>
+      <ol class="etapas">
+        <li><span class="num">01</span><div><h3><em>A</em> Medida</h3><p>Diagnóstico facial em três partes.</p></div></li>
+        <li><span class="num">02</span><div><h3><em>O</em> Molde</h3><p>O que será realizado e o que não será necessário.</p></div></li>
+        <li><span class="num">03</span><div><h3><em>O</em> Corte</h3><p>Aplicação em pontos estratégicos.</p></div></li>
+        <li><span class="num">04</span><div><h3><em>A</em> Prova</h3><p>Reavaliação após 15 dias.</p></div></li>
+        <li><span class="num">05</span><div><h3><em>O</em> Acompanhamento</h3><p>24 meses de acompanhamento, com manutenções a cada seis meses.</p></div></li>
+      </ol>
+    </div>
+    <figure class="cena" style="margin:0">
+      <div class="tela" data-cena="etapa01"></div>
+      <figcaption>Etapa 01, A Medida, 12 segundos. Toque ou clique para assistir.</figcaption>
+    </figure>
+  </section>
+
+  <section class="linha" aria-labelledby="fala">
+    <figure class="cena" style="margin:0">
+      <div class="tela" data-cena="fala"></div>
+      <figcaption>Silhueta no lugar da sua gravação; as frases são de exemplo.</figcaption>
+    </figure>
+    <div class="texto">
+      <p class="rotulo">Quando você gravar</p>
+      <h2 id="fala"><em>A</em> sua fala, na tela</h2>
+      <p>Legenda curta, de duas a quatro palavras, sem karaokê. Nas frases em que você se posiciona entra um destaque em duas linhas: o alinhavo atravessa o que você recusa e a costura champagne sublinha o que você defende.</p>
+      <p>O vídeo termina sobre a sua última frase, com a etiqueta do seu nome tecida em marfim. Sem cartela parada no fim e sem botão de anúncio.</p>
+      <p class="nota">Para gravar: celular na vertical, câmera de trás, em 4K; do peito para cima; microfone de lapela; terno escuro liso (risca fina tremula no vídeo); parede escura ou média atrás de você e uma luz no alto, por trás, marcando o contorno do cabelo.</p>
+    </div>
+  </section>
+
+  <section class="ficha" aria-labelledby="falta">
+    <p class="rotulo">Ficha de prova</p>
+    <h2 id="falta"><em>O</em> que falta para seguir</h2>
+    <ul class="pendencias">
+      <li>Seu OK na linguagem: cores, assinatura e a Etapa 01.</li>
+      <li>Seu OK na legenda curta e nos destaques em duas linhas.</li>
+      <li>As três partes do diagnóstico da Medida, com um nome curto para cada (até 14 letras). Hoje aparecem como I, II e III, em branco.</li>
+      <li>Seu registro profissional e o responsável técnico da clínica, para o encerramento.</li>
+      <li>O logo da GAS MAN CLINIC.</li>
+      <li>A fonte da assinatura: na próxima rodada mostramos BESPOKE em Cormorant e em Bodoni, lado a lado.</li>
+      <li>O texto do acompanhamento. Na tela ficou “24 meses de acompanhamento, com manutenções a cada seis meses”, sem “incluso”: em anúncio de saúde, serviço sem custo como atrativo é vetado pelo código de ética. Confirme essa redação e se há manutenção no 24º mês.</li>
+      <li>Seu OK para BESPOKE atrás de você, uma vez por vídeo.</li>
+      <li>O termo de uso de imagem do paciente deste caso, se ele for ao ar.</li>
+      <li>O roteiro da sua fala e o dia da gravação.</li>
+    </ul>
+  </section>
+
+  <section class="combinados" aria-labelledby="combinados">
+    <p class="rotulo" id="combinados">Combinados de todo vídeo</p>
+    <p>Nada de antes e depois. Anatomia precisa, só com a sua validação; mapa de pontos de aplicação, agulha e seringa, nunca. O acompanhamento aparece como serviço, nunca como garantia de resultado. Nada de efeito de anúncio: sem brilho, sem desfoque, sem ícone genérico.</p>
+  </section>
+
+  <footer>
+    <span>Proposta visual preparada pela B2Donto para o Dr. Anselmo Carneiro, GAS MAN CLINIC, São Paulo.</span>
+    <span>Novembro de 2026. Material de apresentação, não publicado.</span>
+  </footer>
+</main>
+
+<script src="dist/apresentacao.js"></script>
+
+</body></html>
