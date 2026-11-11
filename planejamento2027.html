@@ -1009,10 +1009,13 @@ function precisaReenviar(){
   const s = localStorage.getItem('iscaV2Submitted');
   return !!(s && s > QUEDA_INICIO && s < QUEDA_FIM && state.answers.q3 && localStorage.getItem('iscaV2Reenvio') !== 'ok');
 }
+function telaReenvio(titulo, texto){
+  stage.innerHTML = '<div class="qcard in qcard-center"><div class="qcard-inner"><div class="qoutro"><h1>'+ titulo +'</h1><p>'+ texto +'</p></div></div></div>';
+}
 async function reenviarAteConfirmar(n){
   const jaTentou = localStorage.getItem('iscaV2Reenvio');
   localStorage.setItem('iscaV2Reenvio', '1');
-  const ac = new AbortController(), t = setTimeout(() => ac.abort(), 25000);
+  const ac = new AbortController(), t = setTimeout(() => ac.abort(), 15000);
   let ok = false;
   try {
     const r = await fetch(SHEETS_ENDPOINT, {
@@ -1023,8 +1026,9 @@ async function reenviarAteConfirmar(n){
     ok = (await r.json()).ok === true;
   } catch(e){ /* sem confirmacao: tenta de novo abaixo */ }
   clearTimeout(t);
-  if(ok){ localStorage.setItem('iscaV2Reenvio', 'ok'); return; }
-  if(n < 8) setTimeout(() => reenviarAteConfirmar(n + 1), 8000);
+  if(ok){ localStorage.setItem('iscaV2Reenvio', 'ok'); render(); return; }   // so agora mostra o "Recebemos"
+  if(n < 8) setTimeout(() => reenviarAteConfirmar(n + 1), 4000);
+  else telaReenvio('Não conseguimos enviar agora', 'Abra este link de novo daqui a alguns minutos. Suas respostas continuam salvas neste aparelho.');
 }
 
 // ============== NAVIGATION ==============
@@ -1153,10 +1157,12 @@ document.addEventListener('keydown', (e) => {
         document.body.classList.add('loaded');
         setTimeout(() => document.getElementById('loader').remove(), 800);
         const reenviar = precisaReenviar();
-        if(reenviar) state.index = visibleQuestions().length - 1;   // cai direto no "Recebemos"
-        render();
+        if(reenviar){
+          state.index = visibleQuestions().length - 1;   // tela final: o "Recebemos" so aparece com a confirmacao
+          telaReenvio('Enviando suas respostas…', 'Só um instante. Não feche esta página.');
+          reenviarAteConfirmar(0);
+        } else render();
         trackFunnel(reenviar ? 'step' : 'open');   // marca o topo do funil: alguém abriu a página
-        if(reenviar) reenviarAteConfirmar(0);
       }, 300);
     }
   }, 70);
