@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Microsoft Clarity (gravacao de sessao do formulario) -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "x23mfc68mo");
+</script>
+<title>Diagnóstico + Planejamento 2027 · B2donto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add('boot-loading');</script>
+<style>
+:root{
+  --cyan:#00E1C3; --cyan-soft:#3DDBC0; --purple:#A713B9; --blue:#4A6CF7;
+  --black-hole:#050922; --deep-navy:#0A0E2E; --navy-mid:#0F1A4F;
+  --white:#fff; --off-white:#E8EAF5; --cool-grey:#9AA0C4; --dim-grey:#6B7299;
+  --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.16);
+  --danger:#FF7090; --warning:#FFC857;
+  --grad-brand:linear-gradient(135deg,#00E1C3 0%,#4A6CF7 45%,#A713B9 100%);
+  --font:'Sora',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--black-hole); min-height:100vh}
+body{
+  font-family:var(--font); color:var(--off-white);
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+  overflow:hidden; height:100vh;
+  cursor:none;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(900px 700px at 85% -5%, rgba(0,225,195,.14), transparent 60%),
+    radial-gradient(800px 700px at -10% 30%, rgba(167,19,185,.12), transparent 60%),
+    radial-gradient(900px 700px at 50% 108%, rgba(74,108,247,.10), transparent 60%);
+  animation: aurora 28s ease-in-out infinite alternate;
+}
+@keyframes aurora{
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-14px, 12px, 0) scale(1.02); }
+  100% { transform: translate3d(10px, -8px, 0) scale(1.01); }
+}
+
+/* ====================== LOADING SCREEN ====================== */
+.loader{position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; overflow:hidden}
+.boot-loading .loader{background:var(--black-hole)}
+.loader-screen{position:absolute; left:0; right:0; height:50%; background:var(--black-hole); z-index:1; transition:transform .9s cubic-bezier(.7,0,.2,1)}
+.loader-screen.top{top:0; transform-origin:top}
+.loader-screen.bot{bottom:0; transform-origin:bottom}
+.loader.done .loader-screen.top{transform:translateY(-100%)}
+.loader.done .loader-screen.bot{transform:translateY(100%)}
+.loader.done{pointer-events:none}
+.loader.done .loader-content{opacity:0}
+.loader-content{position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:20px; transition:opacity .3s ease}
+.loader-logo svg{width:48px; height:48px; filter:drop-shadow(0 0 16px rgba(0,225,195,.5))}
+.loadline{position:relative; width:240px; height:1px; background:rgba(255,255,255,.1); overflow:hidden}
+.loading-bar{position:absolute; inset:0 auto 0 0; width:0%; height:1px; background:var(--cyan); box-shadow:0 0 8px var(--cyan)}
+.loadpercent{font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--cool-grey)}
+.boot-loading body > :not(.loader){opacity:0 !important; visibility:hidden !important}
+
+/* ====================== CUSTOM CURSOR ====================== */
+.cursor, .cursor-dot{position:fixed; top:0; left:0; pointer-events:none; z-index:9000; transform:translate(-50%,-50%); border-radius:50%; mix-blend-mode:difference}
+.cursor{width:32px; height:32px; border:1px solid rgba(255,255,255,.6); transition:width .25s ease, height .25s ease, opacity .3s ease, border-color .25s ease}
+.cursor-dot{width:4px; height:4px; background:#fff}
+.cursor.hover{width:54px; height:54px; border-color:var(--cyan); background:rgba(0,225,195,.08)}
+@media (hover:none){.cursor, .cursor-dot{display:none} body{cursor:auto}}
+
+/* ====================== NOISE OVERLAY ====================== */
+.noise{
+  position:fixed; inset:-50%; z-index:8000; pointer-events:none; opacity:.035;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  animation:noise 1s steps(8) infinite;
+  mix-blend-mode:overlay;
+}
+@keyframes noise{
+  0%{transform:translate(0,0)} 12%{transform:translate(-5%,-5%)} 25%{transform:translate(5%,-3%)}
+  37%{transform:translate(-3%,5%)} 50%{transform:translate(3%,3%)} 62%{transform:translate(-5%,3%)}
+  75%{transform:translate(5%,-5%)} 87%{transform:translate(-3%,-3%)} 100%{transform:translate(0,0)}
+}
+
+/* ====================== EDGE BLUR ====================== */
+.edge-blur{position:fixed; left:0; right:0; height:80px; pointer-events:none; z-index:50}
+.edge-blur.top{top:0; background:linear-gradient(180deg, var(--black-hole) 0%, transparent 100%); mask-image:linear-gradient(180deg, #000 0%, transparent 100%); -webkit-mask-image:linear-gradient(180deg, #000 0%, transparent 100%)}
+.edge-blur.bot{bottom:0; background:linear-gradient(0deg, var(--black-hole) 0%, transparent 100%); mask-image:linear-gradient(0deg, #000 0%, transparent 100%); -webkit-mask-image:linear-gradient(0deg, #000 0%, transparent 100%)}
+
+/* ====================== FRAME UI (cantos) ====================== */
+.frame{position:fixed; inset:16px; z-index:100; pointer-events:none}
+.frame .corner{position:absolute; width:14px; height:14px; opacity:.7}
+.frame .corner svg{width:100%; height:100%; display:block}
+.frame .corner.tl{top:0; left:0}
+.frame .corner.tr{top:0; right:0}
+.frame .corner.bl{bottom:0; left:0}
+.frame .corner.br{bottom:0; right:0}
+
+/* ====================== HEADER FIXO ====================== */
+.header{position:fixed; top:32px; left:32px; z-index:200; display:flex; align-items:center; gap:12px}
+.header .logo{font-family:var(--font); font-weight:800; font-size:22px; color:#fff; line-height:1; letter-spacing:-.02em}
+.header .logo span{font-weight:400; opacity:.7}
+.header .badge{font-family:var(--mono); font-size:10px; letter-spacing:2px; color:var(--cyan); text-transform:uppercase; border:1px solid rgba(0,225,195,.4); padding:3px 8px; border-radius:4px}
+@media (max-width:768px){.header{top:20px; left:20px}}
+
+/* ====================== TOP PROGRESS BAR ====================== */
+/* barra de progresso removida */
+
+/* ====================== CONTAINER PERGUNTAS ====================== */
+.stage{
+  position:relative; z-index:10;
+  height:100vh; height:100dvh; width:100%;
+  display:flex; align-items:center; justify-content:center;
+  padding:120px 32px 80px;
+}
+.qcard{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:120px 32px 80px;
+  max-width:900px; margin:0 auto;
+  opacity:0; pointer-events:none;
+  transform:translateY(40px);
+  transition: opacity .55s cubic-bezier(.2,.7,.2,1), transform .65s cubic-bezier(.2,.7,.2,1);
+}
+.qcard.in{opacity:1; transform:none; pointer-events:auto}
+.qcard.out-up{opacity:0; transform:translateY(-40px); pointer-events:none}
+.qcard.out-down{opacity:0; transform:translateY(40px); pointer-events:none}
+.qcard.qcard-center{justify-content:center}  /* checkpoint: centraliza vertical (inclusive no mobile) */
+
+.qcard-inner{width:100%; max-width:760px; margin:0 auto}
+
+.qsection{font-family:var(--mono); font-size:11px; letter-spacing:3px; color:var(--cyan); text-transform:uppercase; margin-bottom:24px; opacity:.85}
+.qnum{display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--cool-grey); margin-right:10px}
+.qnum::after{content:"→"; margin-left:8px; color:var(--cyan)}
+.qlabel{font-size:clamp(28px, 4.2vw, 48px); font-weight:700; letter-spacing:-.02em; line-height:1.1; margin-bottom:14px}
+.qhint{font-size:14px; color:var(--cool-grey); margin-bottom:36px; line-height:1.5; max-width:560px}
+.qhint b{color:var(--off-white)}
+.required{color:var(--cyan); margin-left:6px}
+
+/* ===== INPUTS ===== */
+.qinput{
+  width:100%; background:transparent; border:none;
+  border-bottom:1px solid var(--line-strong);
+  padding:14px 0; font-family:var(--font); font-size:clamp(20px, 2.5vw, 28px); color:var(--white);
+  outline:none; transition:border-color .3s ease;
+}
+.qinput::placeholder{color:var(--dim-grey); font-weight:300}
+.qinput:focus{border-bottom-color:var(--cyan)}
+
+textarea.qinput{resize:none; min-height:80px; line-height:1.4}
+
+/* ===== RADIO OPTIONS ===== */
+.qoptions{display:flex; flex-direction:column; gap:10px; margin-top:8px}
+.qopt{
+  position:relative; display:flex; align-items:center; gap:14px;
+  padding:16px 20px; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.005));
+  border:1px solid var(--line); border-radius:12px; cursor:pointer;
+  font-size:16px; transition:border-color .25s, background .25s, transform .25s cubic-bezier(.2,.7,.2,1);
+}
+.qopt::before{
+  content:""; width:18px; height:18px; border:1.5px solid var(--line-strong); border-radius:50%;
+  flex:0 0 18px; transition:border-color .25s, background .25s;
+}
+.qopt:hover{border-color:rgba(0,225,195,.4); transform:translateX(4px)}
+.qopt input{position:absolute; opacity:0; pointer-events:none}
+.qopt input:checked + .qopt-text{color:var(--white)}
+.qopt input:checked ~ .qopt-check{border-color:var(--cyan); background:radial-gradient(circle at center, var(--cyan) 40%, transparent 42%)}
+.qopt.selected{border-color:var(--cyan); background:linear-gradient(180deg, rgba(0,225,195,.08), rgba(0,225,195,.02))}
+.qopt.selected::before{border-color:var(--cyan); background:radial-gradient(circle at center, var(--cyan) 45%, transparent 47%); box-shadow:0 0 12px rgba(0,225,195,.5)}
+.qopt .qopt-key{font-family:var(--mono); font-size:11px; letter-spacing:1px; color:var(--cool-grey); margin-left:auto; padding:3px 8px; border:1px solid var(--line); border-radius:4px; opacity:0; transition:opacity .25s}
+.qopt:hover .qopt-key, .qopt.selected .qopt-key{opacity:1; color:var(--cyan); border-color:rgba(0,225,195,.3)}
+
+/* ===== NUMERIC X / 10 ===== */
+.qnumeric{display:flex; align-items:baseline; gap:12px; margin-top:6px}
+.qnumeric .qinput{width:100px; text-align:center; font-size:clamp(36px, 5vw, 56px); font-weight:700}
+.qnumeric .qof{font-size:clamp(24px, 3vw, 32px); color:var(--cool-grey); font-weight:300}
+
+/* ===== TWO FIELDS (24a, 24b) ===== */
+.qpair{display:grid; gap:18px; margin-top:6px}
+.qpair label{display:flex; flex-direction:column; gap:6px}
+.qpair label .qsub{font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--cool-grey); text-transform:uppercase}
+
+/* ===== NAVIGATION ===== */
+.qnav{margin-top:40px; display:flex; align-items:center; gap:16px}
+.qbtn{
+  display:inline-flex; align-items:center; gap:12px;
+  padding:14px 28px; border-radius:30px;
+  background:var(--grad-brand); color:var(--black-hole); font-weight:700; font-size:15px;
+  border:none; cursor:pointer; font-family:var(--font);
+  box-shadow:0 12px 36px rgba(0,225,195,.30);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, filter .35s, opacity .25s;
+}
+.qbtn:hover{transform:translateY(-2px); filter:brightness(1.08); box-shadow:0 18px 50px rgba(0,225,195,.45)}
+.qbtn:disabled{opacity:.4; cursor:not-allowed; transform:none; box-shadow:none}
+.qbtn .qbtn-key{font-family:var(--mono); font-size:10px; letter-spacing:1.5px; padding:3px 7px; border:1px solid rgba(5,9,34,.3); border-radius:4px; background:rgba(5,9,34,.1)}
+
+.qbtn.ghost{background:transparent; color:var(--cool-grey); box-shadow:none; padding:14px 18px}
+.qbtn.ghost:hover{color:var(--white); transform:none; filter:none}
+
+.qfooter{position:fixed; bottom:32px; left:32px; right:32px; display:flex; justify-content:space-between; align-items:center; z-index:150; pointer-events:none; font-family:var(--mono); font-size:10px; letter-spacing:2px; color:var(--dim-grey)}
+.qfooter > div{display:flex; align-items:center; gap:8px; pointer-events:auto}
+.qfooter kbd{background:rgba(255,255,255,.06); border:1px solid var(--line-strong); border-radius:4px; padding:3px 7px; font-family:var(--mono); font-size:10px; color:var(--cool-grey)}
+@media (max-width:768px){.qfooter{bottom:20px; left:20px; right:20px; font-size:9px}}
+
+/* ===== GLITCH ===== */
+.glitch{position:relative; display:inline-block}
+.glitch::before, .glitch::after{content:attr(data-text); position:absolute; top:0; left:0; width:100%; height:100%; background:var(--black-hole)}
+.glitch::before{color:var(--cyan); animation:glitch-1 2.5s infinite linear alternate-reverse; clip-path:polygon(0 0, 100% 0, 100% 33%, 0 33%); left:2px}
+.glitch::after {color:var(--purple); animation:glitch-2 3s infinite linear alternate-reverse; clip-path:polygon(0 67%, 100% 67%, 100% 100%, 0 100%); left:-2px}
+@keyframes glitch-1{
+  0%,100%{clip-path:polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform:translate(0)}
+  20%{clip-path:polygon(0 15%, 100% 15%, 100% 20%, 0 20%); transform:translate(-2px,0)}
+  40%{clip-path:polygon(0 40%, 100% 40%, 100% 45%, 0 45%); transform:translate(2px,0)}
+  60%{clip-path:polygon(0 60%, 100% 60%, 100% 65%, 0 65%); transform:translate(-1px,1px)}
+  80%{clip-path:polygon(0 80%, 100% 80%, 100% 85%, 0 85%); transform:translate(1px,0)}
+}
+@keyframes glitch-2{
+  0%,100%{clip-path:polygon(0 75%, 100% 75%, 100% 78%, 0 78%); transform:translate(0)}
+  25%{clip-path:polygon(0 50%, 100% 50%, 100% 55%, 0 55%); transform:translate(2px,0)}
+  50%{clip-path:polygon(0 25%, 100% 25%, 100% 30%, 0 30%); transform:translate(-2px,0)}
+  75%{clip-path:polygon(0 10%, 100% 10%, 100% 15%, 0 15%); transform:translate(1px,-1px)}
+}
+.grad-text{background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+/* ===== INTRO / OUTRO ===== */
+/* ============================================================
+   LOGO RAIO-X 360, marca decorativa
+   ============================================================ */
+.logo-raiox{
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  margin-bottom: 28px; position: relative;
+  filter: drop-shadow(0 0 24px rgba(0,225,195,.25));
+}
+.logo-raiox .mark{ width: 92px; height: 92px; position: relative }
+.logo-raiox .mark svg{ width: 100%; height: 100%; display: block }
+.logo-raiox .mark::after{
+  content:""; position:absolute; inset:0; border-radius:50%;
+  background: conic-gradient(from var(--scan-angle, 0deg), transparent 0deg, rgba(0,225,195,.5) 60deg, transparent 90deg, transparent 360deg);
+  -webkit-mask: radial-gradient(circle, transparent 60%, #000 62%, #000 100%);
+  mask: radial-gradient(circle, transparent 60%, #000 62%, #000 100%);
+  animation: scan-rotate 4s linear infinite;
+}
+@property --scan-angle{ syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes scan-rotate{ to { --scan-angle: 360deg } }
+.logo-raiox .name{
+  font-family: var(--font); font-weight: 800;
+  font-size: clamp(34px, 5.5vw, 56px); letter-spacing: .04em; line-height: 1;
+  color: #fff; text-transform: uppercase;
+  display: flex; align-items: baseline; gap: 12px;
+}
+.logo-raiox .name .three-sixty{
+  background: var(--grad-brand); -webkit-background-clip: text; background-clip: text;
+  color: transparent; font-weight: 300; font-size: .85em; letter-spacing: -.01em;
+}
+.logo-raiox .name .dot{
+  display:inline-block; width:6px; height:6px; border-radius:50%;
+  background: var(--cyan); box-shadow: 0 0 12px var(--cyan); align-self: center;
+}
+.logo-raiox .tagline{
+  font-family: var(--mono); font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--cool-grey);
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-raiox .tagline::before,
+.logo-raiox .tagline::after{
+  content:""; width: 24px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,225,195,.5), transparent);
+}
+
+.qintro h1{font-size:clamp(34px, 4.4vw, 54px); font-weight:800; letter-spacing:-.03em; line-height:1.05; margin-bottom:22px}
+.qintro p{font-size:clamp(20px, 2vw, 25px); color:var(--off-white); max-width:680px; margin-bottom:30px; line-height:1.5; font-weight:400}
+.qintro p b{font-weight:700; background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.qintro .meta{display:flex; gap:30px; margin-bottom:48px; font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--cool-grey); text-transform:uppercase}
+.qintro .meta b{display:block; color:var(--white); font-family:var(--font); font-size:18px; font-weight:700; margin-top:4px; letter-spacing:-.01em}
+
+.qoutro{text-align:center}
+.qoutro .check{width:88px; height:88px; margin:0 auto 28px; border-radius:50%; background:var(--grad-brand); display:grid; place-items:center; font-size:40px; color:var(--black-hole); font-weight:900; box-shadow:0 24px 60px rgba(0,225,195,.4); animation:pop .6s cubic-bezier(.2,1.4,.5,1) both}
+@keyframes pop{from{transform:scale(.5); opacity:0} to{transform:scale(1); opacity:1}}
+.qoutro h1{font-size:clamp(36px, 5vw, 56px); font-weight:800; letter-spacing:-.02em; margin-bottom:16px}
+.qoutro p{font-size:16px; color:var(--cool-grey); max-width:520px; margin:0 auto 32px; line-height:1.6}
+
+/* validação visual */
+.qcard.invalid .qinput{border-bottom-color:var(--danger); animation:shake .35s}
+@keyframes shake{
+  0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)}
+}
+.qerror{font-family:var(--mono); font-size:11px; color:var(--danger); margin-top:10px; letter-spacing:1px; opacity:0; transition:opacity .25s}
+.qcard.invalid .qerror{opacity:1}
+
+/* ===== GRUPO (perguntas na mesma tela) ===== */
+.qgroup{margin-top:6px; display:grid; gap:22px}
+.qgroup.row{grid-template-columns:1fr 1fr; gap:30px; align-items:end}
+.qgfield{display:flex; flex-direction:column; gap:8px}
+.qgfield .qsub{font-family:var(--mono); font-size:11px; letter-spacing:2px; color:var(--cool-grey); text-transform:uppercase}
+.qgroup.row .qnumeric{margin-top:0}
+
+/* ===== CHIPS (atalhos rápidos) ===== */
+.qchips{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+.qchip{font-family:var(--font); font-size:13px; color:var(--cool-grey); background:rgba(255,255,255,.04); border:1px solid var(--line-strong); border-radius:24px; padding:9px 16px; cursor:pointer; transition:all .25s}
+.gchoices{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+.gopt{font-family:var(--font); font-size:13px; color:var(--cool-grey); background:rgba(255,255,255,.04); border:1px solid var(--line-strong); border-radius:24px; padding:9px 14px; cursor:pointer; transition:all .25s}
+.gopt:hover{border-color:rgba(0,225,195,.5); color:var(--white)}
+.gopt.selected{border-color:var(--cyan); color:var(--white); background:rgba(0,225,195,.12); box-shadow:0 0 12px rgba(0,225,195,.25)}
+.logo-raiox .name.pe{flex-direction:column; align-items:center; gap:8px; font-size:clamp(26px, 5vw, 48px)}
+.logo-raiox .name.pe .l2{display:flex; align-items:baseline; gap:10px; font-size:.6em; letter-spacing:.14em}
+.qchip:hover{border-color:rgba(0,225,195,.5); color:var(--white); background:rgba(0,225,195,.08)}
+
+/* ===== REAÇÃO / INSIGHT (aparece na tela seguinte) ===== */
+.qreaction{display:flex; align-items:flex-start; gap:10px; margin-bottom:22px; padding:12px 16px; border-radius:12px; font-size:14px; line-height:1.45; max-width:580px; animation:reactIn .5s cubic-bezier(.2,.7,.2,1) both}
+.qreaction-ic{flex:none; width:16px; height:16px; margin-top:2px; border-radius:50%}
+.qreaction.tone-good{background:rgba(0,225,195,.08); border:1px solid rgba(0,225,195,.25); color:var(--off-white)}
+.qreaction.tone-good .qreaction-ic{background:radial-gradient(circle at center, var(--cyan) 42%, transparent 44%); box-shadow:0 0 10px rgba(0,225,195,.5)}
+.qreaction.tone-pain{background:rgba(255,176,32,.07); border:1px solid rgba(255,176,32,.28); color:var(--off-white)}
+.qreaction.tone-pain .qreaction-ic{background:radial-gradient(circle at center, #FFB020 42%, transparent 44%); box-shadow:0 0 10px rgba(255,176,32,.45)}
+@keyframes reactIn{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
+
+/* ===== CHECKPOINT (marco de bloco) ===== */
+.qcheck{text-align:center; display:flex; flex-direction:column; align-items:center; gap:18px}
+.qcheck-badge{font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--cyan)}
+.qcheck-title{font-size:clamp(30px,5vw,52px); font-weight:700; letter-spacing:-.02em; display:flex; align-items:center; gap:14px}
+.qcheck-tick{display:inline-flex; align-items:center; justify-content:center; width:clamp(40px,6vw,58px); height:clamp(40px,6vw,58px); border-radius:50%; background:var(--grad-brand); color:var(--black-hole); font-size:.6em; box-shadow:0 12px 36px rgba(0,225,195,.35); animation:tickPop .5s cubic-bezier(.2,.9,.3,1.4) both}
+.qcheck-line{font-size:16px; color:var(--cool-grey)}
+.qcheck-dots{display:flex; gap:10px; margin-top:8px}
+.qcheck-dot{width:10px; height:10px; border-radius:50%; background:var(--line-strong); transition:all .3s}
+.qcheck-dot.on{background:var(--cyan); box-shadow:0 0 10px rgba(0,225,195,.6)}
+@keyframes tickPop{from{opacity:0; transform:scale(.4)} to{opacity:1; transform:scale(1)}}
+
+@media (max-width:768px){
+  .stage{padding:0; overflow:hidden}
+  .qcard{
+    padding:calc(env(safe-area-inset-top, 0px) + 88px) 20px 96px;
+    justify-content:flex-start;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .qnav{margin-top:24px}
+  .qopt{padding:14px 16px; font-size:14px}
+  .qhint{margin-bottom:24px}
+  .qlabel{margin-bottom:10px}
+  .qgroup.row{grid-template-columns:1fr; gap:18px}
+  .qreaction{font-size:13px; margin-bottom:18px}
+  .qcheck-title{gap:10px}
+
+  /* intro compacta pro botão aparecer sem scroll */
+  .logo-raiox{margin-bottom:32px; gap:14px}
+  .logo-raiox .mark{width:60px; height:60px}
+  .logo-raiox .name{font-size:30px}
+  .qintro h1{font-size:clamp(30px, 8vw, 38px); margin-bottom:28px; line-height:1.08}
+  .qintro p{font-size:19px; margin-bottom:40px; line-height:1.55}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div class="loader" id="loader">
+  <div class="loader-screen top"></div>
+  <div class="loader-screen bot"></div>
+  <div class="loader-content">
+    <div class="loader-logo">
+      <svg viewBox="0 0 49 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 7V35L0 28V0L14 7ZM31.5 7V35L17.5 28V0L31.5 7ZM49 7V35L35 28V0L49 7Z" fill="#00E1C3"/>
+      </svg>
+    </div>
+    <div class="loadline"><div class="loading-bar" id="loadingBar"></div></div>
+    <span class="loadpercent" id="loadPercent">0%</span>
+  </div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NOISE -->
+<div class="noise"></div>
+
+<!-- EDGE BLUR -->
+<div class="edge-blur top"></div>
+<div class="edge-blur bot"></div>
+
+<!-- FRAME UI CORNERS -->
+<div class="frame">
+  <div class="corner tl"><svg viewBox="0 0 14 14" fill="none"><path d="M0 0H6V1H1V6H0V0Z" fill="#00E1C3"/></svg></div>
+  <div class="corner tr"><svg viewBox="0 0 14 14" fill="none"><path d="M14 0H8V1H13V6H14V0Z" fill="#00E1C3"/></svg></div>
+  <div class="corner bl"><svg viewBox="0 0 14 14" fill="none"><path d="M0 14H6V13H1V8H0V14Z" fill="#00E1C3"/></svg></div>
+  <div class="corner br"><svg viewBox="0 0 14 14" fill="none"><path d="M14 14H8V13H13V8H14V14Z" fill="#00E1C3"/></svg></div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">B2<span>donto</span></div>
+  <span class="badge">DIAGNÓSTICO</span>
+</div>
+
+<!-- STAGE -->
+<main class="stage" id="stage"></main>
+
+<!-- FOOTER HINTS -->
+<div class="qfooter">
+  <div><span>B2DONTO · ISCA · 2026</span></div>
+  <div><kbd>Enter</kbd> avançar · <kbd>Esc</kbd> voltar</div>
+</div>
+
+<script>
+// ============== ENDPOINT DO GOOGLE SHEETS ==============
+// Cole aqui a URL do seu App da Web do Apps Script.
+// Setup: ver landings/integracao-sheets/apps-script.gs
+// COLAR AQUI a URL /exec da implantação do apps-script-v2.gs (script PRÓPRIO do v2).
+// Vazio = o form funciona mas não grava nada (modo prévia).
+const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby0Ei0P9QieVBITCl45yUq6TAoe4jqYgPvn60P7CLmEav4-Fko9zfvViszIIujF1lVktA/exec';
+
+// ============== DADOS DAS PERGUNTAS ==============
+const QUESTIONS = [
+  // INTRO
+  { id:'intro', type:'intro', section:'Boas-vindas',
+    title:'Diagnóstico completo da sua <span class="grad-text">estrutura digital e comercial</span> + <span class="grad-text">planejamento estratégico 2027</span>',
+    body:'Receba um <b>plano de ação</b> personalizado com checklist para aplicar e acelerar seus resultados.'
+  },
+
+  // SEÇÃO 1
+  { id:'q1',  section:'1 · Quem é você',  num:1,  type:'text',  label:'Como você se chama?',         placeholder:'Seu nome', required:true },
+  { id:'q2',  section:'1 · Quem é você',  num:2,  type:'text',  label:'Qual o nome da sua clínica ou consultório?', placeholder:'Ex.: Clínica Sorriso & Cia', required:true, star:true },
+  { id:'q3',  section:'1 · Quem é você',  num:3,  type:'tel',   label:'Qual seu WhatsApp pra te enviarmos o diagnóstico?', placeholder:'(41) 9 9999-0000', hint:'Com DDD. Sem WhatsApp não conseguimos te entregar a análise.', required:true },
+  { id:'q4',  section:'1 · Quem é você',  num:4,  type:'email', label:'Seu melhor e-mail',           placeholder:'voce@clinica.com.br', required:true },
+  { id:'q5',  section:'1 · Quem é você',  num:5,  type:'text',  label:'@ do Instagram da clínica',   placeholder:'@suaclinica', hint:'Obrigatório. É a <b>base da análise</b> de presença digital.', required:true, star:true },
+  { id:'q8',  section:'1 · Quem é você',  num:8,  type:'text',  label:'Em que cidade ou região você atende?', placeholder:'Ex.: Curitiba, bairro Batel', hint:'Com ela a gente encontra seu Google e seu site, sem você precisar procurar link.', required:true, star:true },
+
+  // SEÇÃO 2
+  { id:'g_proc', section:'2 · Sobre o negócio', num:9, type:'group', layout:'stack',
+    label:'{nome}, vamos aos números do que você vende',
+    hint:'Pensa no procedimento que dá mais ticket / margem.',
+    fields:[
+      { id:'q9',  kind:'choice', sub:'Procedimento que você MAIS quer vender', options:['Implantes','Lentes / facetas','Ortodontia / alinhadores','Prótese','Harmonização orofacial','Clínica geral','Outro'] },
+      { id:'q10', kind:'choice', sub:'Ticket médio desse procedimento', options:['Até R$ 3 mil','R$ 3 a 8 mil','R$ 8 a 15 mil','Acima de R$ 15 mil'] }
+    ], required:true, star:true },
+  { id:'q11', section:'2 · Sobre o negócio', num:11, type:'textarea', label:'Quais seus principais diferenciais em relação aos concorrentes?', placeholder:'O que você faz de verdade diferente?', hint:'<b>"Atendimento humanizado" não conta</b> como diferencial. Pensa: estrutura, formação, tecnologia, garantia, processo, especialização.', required:false, star:true },
+  { id:'q32', section:'2 · Sobre o negócio', num:32, type:'radio', label:'Como é feito o conteúdo do seu Instagram hoje?',
+    options:['Eu mesmo(a), no celular','Alguém da equipe ou social media, sem foto e vídeo profissional','Tenho produção profissional (foto e vídeo) recente','Quase não posto'], required:true },
+
+  // SEÇÃO 3
+  { id:'q12', section:'3 · Atendimento', num:12, type:'radio', label:'Quem responde os contatos (WhatsApp / Direct)?',
+    options:['Eu mesmo(a)','Secretária / recepção','Equipe comercial','Ninguém dedicado','IA de atendimento'], required:true },
+  { id:'q13', section:'3 · Atendimento', num:13, type:'radio', label:'Em quanto tempo um contato é respondido, em média?',
+    options:['Menos de 4 minutos','Mais de 4 minutos','Algumas horas','No mesmo dia','Mais de 1 dia'], required:true },
+  { id:'q14', section:'3 · Atendimento', num:14, type:'radio', label:'Como o paciente agenda?',
+    options:['WhatsApp','Ligação','Site / online'], required:true },
+  { id:'g_taxas', section:'3 · Atendimento', num:15, type:'group', layout:'row',
+    label:'Suas taxas hoje <span class="grad-text">(de 0 a 10)</span>',
+    hint:'Agendamento: de cada 10 que falam com vocês, quantos agendam. Comparecimento: de cada 10 que agendam, quantos aparecem.',
+    fields:[
+      { id:'q15', kind:'numeric10', sub:'Agendamento' },
+      { id:'q16', kind:'numeric10', sub:'Comparecimento' }
+    ], required:true },
+
+  // SEÇÃO 4
+  { id:'q18', section:'4 · Comercial avançado', num:18, type:'radio', label:'Você faz social selling?',
+    hint:'Prospecta ativamente, responde stories, chama no Direct.',
+    options:['Sim, com rotina','Às vezes','Não'], required:true },
+  { id:'q19', section:'4 · Comercial avançado', num:19, type:'radio', label:'Você etiqueta / organiza os leads por etapa?',
+    hint:'Novo · em conversa · agendado · compareceu · fechou.',
+    options:['Sim','Mais ou menos','Não'], required:true },
+  { id:'q20', section:'4 · Comercial avançado', num:20, type:'radio', label:'Você faz follow-up de quem PAROU de responder (antes de fechar)?',
+    options:['Sim, com processo cadenciado e estruturado','Sim, sem processo estruturado','Às vezes, quando lembra','Não faz'], required:true },
+  { id:'q21', section:'4 · Comercial avançado', num:21, type:'radio', label:'Você tem cadência pra retomar quem COMPARECEU mas não fechou?',
+    options:['Sim, com cadência','Às vezes','Não tem'], required:true },
+  { id:'q22', section:'4 · Comercial avançado', num:22, type:'radio', label:'Você envia lembretes de consulta?',
+    hint:'Protocolo B2donto (referência): 2 dias antes, 1 dia antes e no dia, de preferência por ligação.',
+    options:['Protocolo completo: 2 dias antes, 1 dia antes e no dia','Só no dia','Às vezes','Não envia'], required:true },
+  { id:'q23', section:'4 · Comercial avançado', num:23, type:'radio', label:'Você roda alguma campanha de indicação com pacientes da base?',
+    options:['Sim','De vez em quando','Não'], required:true },
+
+  // SEÇÃO 5
+  { id:'q24', section:'5 · Concorrentes', num:24, type:'pair', label:'Cite 2 concorrentes diretos da sua região (@ do Instagram)',
+    hint:'Pra montarmos seu benchmark. Se preferir, a gente escolhe pela sua região.',
+    fields:[
+      {sub:'CONCORRENTE A', placeholder:'@concorrenteA'},
+      {sub:'CONCORRENTE B', placeholder:'@concorrenteB'}
+    ], chips:[{label:'Prefiro que vocês escolham →', value:'A equipe escolhe', advance:true}], required:false, star:true },
+
+  // SEÇÃO 6
+  { id:'q25', section:'6 · Tráfego e momento', num:25, type:'radio', label:'Já investiu em anúncios (Meta / Google)?',
+    options:['Nunca','Sim, sem resultado','Sim, com algum resultado'], required:true, star:true,
+    branch:{ skipIfFirst:['q25a','q25c'] } },
+  { id:'q25a', section:'6 · Tráfego · histórico', num:'25a', type:'radio', label:'Quem rodava os anúncios?',
+    options:['Eu mesmo(a)','Agência','Freelancer','Só impulsionava post no botão'], required:true, conditional:'q25' },
+  { id:'q25c', section:'6 · Tráfego · histórico', num:'25c', type:'radio', label:'Você acompanhava os resultados?',
+    hint:'Número de leads, custo por lead... ou só sentia que "não dava retorno"?',
+    options:['Acompanhava as métricas','Só sentia o resultado no caixa','Não acompanhava nada'], required:true, conditional:'q25' },
+  { id:'q26', section:'6 · Tráfego e momento', num:26, type:'radio', label:'Você está rodando anúncio agora?',
+    options:['Sim','Não','Pausado'], required:true },
+  { id:'q27', section:'6 · Tráfego e momento', num:27, type:'radio', label:'{nome}, quanto você tem disponível <span class="grad-text">hoje</span> pra investir em anúncios por mês?',
+    hint:'Valor que você realmente consegue separar, não a média do que já gastou.',
+    options:['R$ 1.000','R$ 1.500','R$ 2.000','R$ 3.000','R$ 5.000','Acima de R$ 5.000','Ainda não defini / preciso de orientação'], required:true, star:true },
+  { id:'q33', section:'6 · Tráfego e momento', num:33, type:'radio', label:'Se a procura dobrasse amanhã, sua agenda daria conta?',
+    hint:'É isso que define se o seu 2027 é sobre atrair mais pacientes ou sobre vender melhor pra quem já chega.',
+    options:['Sim, tenho bastante horário livre','Comporta um pouco mais','Está quase cheia','Lotada: teria que contratar ou abrir horário'], required:true },
+  { id:'g_fat', section:'6 · Tráfego e momento', num:28, type:'group', layout:'stack',
+    label:'Faturamento: onde a {clinica} está e onde quer chegar em 2027',
+    hint:'Fica entre nós, é o que dimensiona o seu plano de aceleração.',
+    fields:[
+      { id:'q30', kind:'choice', sub:'Faturamento médio HOJE (por mês)', options:['Até R$ 30 mil','R$ 30 a 60 mil','R$ 60 a 100 mil','R$ 100 a 200 mil','Acima de R$ 200 mil'] },
+      { id:'q31', kind:'choice', sub:'Meta de faturamento por mês em 2027', options:['Até R$ 60 mil','R$ 60 a 100 mil','R$ 100 a 200 mil','R$ 200 a 500 mil','Acima de R$ 500 mil'] }
+    ], required:true, star:true },
+  { id:'q28', section:'6 · Tráfego e momento', num:29, type:'radio', label:'Qual a prioridade nº 1 da clínica pra 2027?',
+    hint:'Penúltima etapa, seu raio-X já está quase montado.',
+    options:['Atrair pacientes','Vender procedimentos de maior valor','Organizar o atendimento','Escalar com previsibilidade','Abrir unidade ou ampliar a equipe'], required:true },
+  { id:'q29', section:'6 · Tráfego e momento', num:30, type:'textarea', label:'Pra fechar, {nome}: descreva o <span class="grad-text">momento atual</span> da clínica',
+    placeholder:'Como está sua clínica hoje? Quais as principais dores ou desafios?',
+    hint:'É essa resposta que transforma seus números num plano de ação, capricha. Em <b>poucas horas</b> seu raio-X cai no WhatsApp.', required:true },
+
+  // OUTRO
+  { id:'outro', type:'outro', section:'Pronto',
+    title:'Recebemos seu briefing.',
+    body:'Em <b>poucas horas</b> você recebe no WhatsApp o diagnóstico completo da sua presença digital, com o plano de ação personalizado pra sua clínica.'
+  }
+];
+
+// Números de exibição sequenciais (recalculados após os merges; condicionais herdam o nº do pai + letra)
+(function assignDisplayNums(){
+  let n = 0;
+  QUESTIONS.forEach(q => { if(!q.num || q.conditional) return; n++; q._dnum = n; });
+  QUESTIONS.forEach(q => {
+    if(q.conditional && q.num){
+      const parent = QUESTIONS.find(p => p.id === q.conditional);
+      const letter = String(q.num).replace(/[^a-z]/gi,'');
+      q._dnum = (parent && parent._dnum ? parent._dnum : '') + letter;
+    }
+  });
+})();
+
+// Reações contextuais (#8 insight + #10 validação da dor), mostradas na tela seguinte
+const REACTIONS = {
+  q13(a){
+    const v = a.q13; if(!v) return null;
+    if(v === 'Menos de 4 minutos') return { tone:'good', text:'Resposta em menos de 4 min é seu maior trunfo, segura o lead no impulso de decidir.' };
+    return { tone:'pain', text:'78% dos pacientes fecham com quem responde primeiro. Dá pra virar isso rápido.' };
+  },
+  g_taxas(a){
+    const ag = parseInt(a.q15,10), comp = parseInt(a.q16,10);
+    if(isNaN(ag) || isNaN(comp)) return null;
+    const sit = Math.round(ag * comp / 10);
+    const base = 'Do jeito de hoje, de cada 10 leads ~' + sit + ' sentam na cadeira.';
+    if(sit <= 4) return { tone:'pain', text: base + ' Tem faturamento vazando aí, e é dos ajustes mais rápidos.' };
+    return { tone:'good', text: base + ' Boa base pra escalar.' };
+  },
+  q17(a){
+    if(a.q17 === 'Sim, bastante' || a.q17 === 'Um pouco')
+      return { tone:'pain', text:'Esse vazamento no atendimento costuma custar mais caro que o tráfego, e é dos mais fáceis de tampar.' };
+    return null;
+  },
+  q20(a){
+    if(a.q20 === 'Não faz' || a.q20 === 'Às vezes, quando lembra')
+      return { tone:'pain', text:'Quem parou de responder não está perdido: follow-up cadenciado recupera venda que você já achava morta.' };
+    return null;
+  }
+};
+
+// IDs condicionais (que podem ser puladas)
+const SKIP_IF_25_NUNCA = ['q25a','q25c'];
+
+// State
+const state = {
+  index: 0,
+  answers: JSON.parse(localStorage.getItem('iscaV2Answers') || '{}')
+};
+
+// ===== Captura parcial: id de sessão único por lead (persiste em reload) =====
+state.sessionId = localStorage.getItem('iscaV2SessionId')
+  || ('s' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
+localStorage.setItem('iscaV2SessionId', state.sessionId);
+
+// rastreio de funil (topo de funil incluso): maior etapa já enviada nesta visita.
+// evita reenviar a mesma etapa e ignora "voltar"; o Apps Script ainda trava regressão.
+let funnelSentOrd = -1;
+
+let busy = false;            // trava durante transições / checkpoints
+let pendingReaction = null;  // reação a renderizar na próxima tela
+
+// Substitui {nome} e {clinica} nos textos (#9). Some sem deixar vírgula órfã se ainda não tiver resposta.
+function interpolate(str){
+  if(!str) return str;
+  const nome = (state.answers.q1 || '').trim().split(/\s+/)[0] || '';
+  const clinica = (state.answers.q2 || '').trim();
+  if(nome) str = str.replace(/\{nome\}/g, nome);
+  else str = str.replace(/\{nome\},?\s*/g, '');
+  if(clinica) str = str.replace(/\{clinica\}/g, clinica);
+  else str = str.replace(/\s*\{clinica\}/g, '');
+  return str;
+}
+function blockNum(q){ const n = parseInt(q && q.section, 10); return isNaN(n) ? null : n; }
+
+// ============== UTILITÁRIOS ==============
+function totalAnswerable(){ return QUESTIONS.filter(q => q.num).length; }
+function isQuestionVisible(q){
+  if(q.conditional === 'q25'){
+    const a25 = state.answers.q25;
+    return a25 && a25 !== 'Nunca';
+  }
+  return true;
+}
+function visibleQuestions(){ return QUESTIONS.filter(isQuestionVisible); }
+function currentQuestion(){ return visibleQuestions()[state.index]; }
+function getAnsweredCount(){
+  return visibleQuestions().filter(q => q.num && state.answers[q.id]).length;
+}
+function getTotalVisibleQuestions(){
+  return visibleQuestions().filter(q => q.num).length;
+}
+
+// ============== RENDER ==============
+const stage = document.getElementById('stage');
+
+function renderQuestion(q, animClass){
+  let html = '<div class="qcard '+ (animClass || 'in') + (q && q.type === 'outro' ? ' qcard-center' : '') +'"><div class="qcard-inner">';
+  html += '<div class="qsection">'+ q.section +'</div>';
+
+  if(q.type === 'intro'){
+    html += '<div class="qintro">';
+    html += '<div class="logo-raiox">';
+    html += '  <div class="mark"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">';
+    html += '    <defs><linearGradient id="rxGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00E1C3"/><stop offset=".5" stop-color="#4A6CF7"/><stop offset="1" stop-color="#A713B9"/></linearGradient></defs>';
+    html += '    <circle cx="50" cy="50" r="46" stroke="url(#rxGrad2)" stroke-width="1.2" fill="none" opacity=".8"/>';
+    html += '    <circle cx="50" cy="50" r="32" stroke="rgba(0,225,195,.4)" stroke-width="1" fill="none" stroke-dasharray="2 3"/>';
+    html += '    <circle cx="50" cy="50" r="18" stroke="rgba(0,225,195,.5)" stroke-width="1" fill="none"/>';
+    html += '    <circle cx="50" cy="50" r="3" fill="#00E1C3"/>';
+    html += '    <line x1="50" y1="2" x2="50" y2="10" stroke="rgba(0,225,195,.7)" stroke-width="1.2"/>';
+    html += '    <line x1="50" y1="90" x2="50" y2="98" stroke="rgba(0,225,195,.7)" stroke-width="1.2"/>';
+    html += '    <line x1="2" y1="50" x2="10" y2="50" stroke="rgba(0,225,195,.7)" stroke-width="1.2"/>';
+    html += '    <line x1="90" y1="50" x2="98" y2="50" stroke="rgba(0,225,195,.7)" stroke-width="1.2"/>';
+    html += '    <line x1="22" y1="22" x2="28" y2="28" stroke="rgba(216,123,241,.5)" stroke-width=".8"/>';
+    html += '    <line x1="72" y1="72" x2="78" y2="78" stroke="rgba(216,123,241,.5)" stroke-width=".8"/>';
+    html += '    <line x1="78" y1="22" x2="72" y2="28" stroke="rgba(216,123,241,.5)" stroke-width=".8"/>';
+    html += '    <line x1="22" y1="78" x2="28" y2="72" stroke="rgba(216,123,241,.5)" stroke-width=".8"/>';
+    html += '  </svg></div>';
+    html += '  <div class="name pe"><span class="glitch" data-text="PLANEJAMENTO">PLANEJAMENTO</span><span class="l2"><span>ESTRATÉGICO</span><span class="dot"></span><span class="three-sixty">2027</span></span></div>';
+    html += '  <div class="tagline">Diagnóstico Digital</div>';
+    html += '</div>';
+    html += '<h1>'+ q.title +'</h1>';
+    html += '<p>'+ q.body +'</p>';
+    if(q.meta){
+      html += '<div class="meta">';
+      q.meta.forEach(m => html += '<div>'+ m.l +'<b>'+ m.v +'</b></div>');
+      html += '</div>';
+    }
+    html += '<div class="qnav">';
+    html += '<button class="qbtn" data-action="next">Começar <span class="qbtn-key">ENTER</span></button>';
+    html += '</div></div></div></div>';
+    return html;
+  }
+
+  if(q.type === 'outro'){
+    html += '<div class="qoutro">';
+    html += '<div class="check">✓</div>';
+    html += '<h1>'+ q.title +'</h1>';
+    html += '<p>'+ q.body +'</p>';
+    html += '</div></div></div>';
+    return html;
+  }
+
+  // pergunta normal
+  if(pendingReaction){
+    html += '<div class="qreaction tone-'+ (pendingReaction.tone||'good') +'"><span class="qreaction-ic"></span><span>'+ pendingReaction.text +'</span></div>';
+  }
+  html += '<div class="qlabel"><span class="qnum">'+ String(q._dnum).padStart(2,'0') +'</span>'+ interpolate(q.label);
+  if(q.star) html += '<span class="required">★</span>';
+  html += '</div>';
+  if(q.hint) html += '<div class="qhint">'+ interpolate(q.hint) +'</div>';
+
+  const prev = state.answers[q.id] || '';
+
+  if(q.type === 'text' || q.type === 'tel' || q.type === 'email'){
+    const v = prev || (q.prefill ? (q.prefill(state.answers) || '') : '');
+    html += '<input class="qinput" type="'+ q.type +'" id="ans" autocomplete="off" placeholder="'+ (q.placeholder||'') +'" value="'+ String(v).replace(/"/g,'&quot;') +'">';
+  }
+  else if(q.type === 'textarea'){
+    html += '<textarea class="qinput" id="ans" placeholder="'+ (q.placeholder||'') +'" rows="3">'+ prev +'</textarea>';
+  }
+  else if(q.type === 'numeric10'){
+    html += '<div class="qnumeric">';
+    html += '<input class="qinput" id="ans" type="number" min="0" max="10" placeholder="?" value="'+ prev +'">';
+    html += '<span class="qof">de 10</span>';
+    html += '</div>';
+  }
+  else if(q.type === 'radio'){
+    html += '<div class="qoptions" id="ans">';
+    q.options.forEach((opt,i) => {
+      const sel = prev === opt ? 'selected' : '';
+      const key = (i+1) <= 9 ? (i+1) : '';
+      html += '<div class="qopt '+ sel +'" data-value="'+ opt.replace(/"/g,'&quot;') +'">';
+      html += '<span>'+ opt +'</span>';
+      if(key) html += '<span class="qopt-key">'+ key +'</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  else if(q.type === 'pair'){
+    const a = prev.a || '';
+    const b = prev.b || '';
+    html += '<div class="qpair" id="ans">';
+    q.fields.forEach((f, i) => {
+      const val = i === 0 ? a : b;
+      html += '<label><span class="qsub">'+ f.sub +'</span>';
+      html += '<input class="qinput" data-pair="'+ (i===0?'a':'b') +'" type="text" placeholder="'+ f.placeholder +'" value="'+ val.replace(/"/g,'&quot;') +'">';
+      html += '</label>';
+    });
+    html += '</div>';
+  }
+  else if(q.type === 'group'){
+    html += '<div class="qgroup '+ (q.layout==='row'?'row':'stack') +'" id="ans">';
+    q.fields.forEach(f => {
+      const pv = state.answers[f.id] || '';
+      if(f.kind === 'choice'){
+        html += '<div class="qgfield"><span class="qsub">'+ f.sub +'</span><div class="gchoices" data-gid="'+ f.id +'">';
+        f.options.forEach(o => {
+          html += '<button type="button" class="gopt'+ (pv === o ? ' selected' : '') +'" data-value="'+ o.replace(/"/g,'&quot;') +'">'+ o +'</button>';
+        });
+        html += '</div></div>';
+        return;
+      }
+      html += '<label class="qgfield"><span class="qsub">'+ f.sub +'</span>';
+      if(f.kind === 'numeric10'){
+        html += '<span class="qnumeric"><input class="qinput" data-gid="'+ f.id +'" type="number" inputmode="numeric" min="0" max="10" placeholder="?" value="'+ pv +'"><span class="qof">de 10</span></span>';
+      } else {
+        html += '<input class="qinput" data-gid="'+ f.id +'" type="text" autocomplete="off" placeholder="'+ (f.placeholder||'') +'" value="'+ String(pv).replace(/"/g,'&quot;') +'">';
+      }
+      html += '</label>';
+    });
+    html += '</div>';
+  }
+
+  if(q.chips){
+    html += '<div class="qchips">';
+    q.chips.forEach(c => {
+      html += '<button type="button" class="qchip" data-chip-value="'+ String(c.value).replace(/"/g,'&quot;') +'" data-chip-advance="'+ (c.advance?'1':'0') +'">'+ c.label +'</button>';
+    });
+    html += '</div>';
+  }
+
+  html += '<div class="qerror">Campo obrigatório</div>';
+
+  html += '<div class="qnav">';
+  if(state.index > 0) html += '<button class="qbtn ghost" data-action="prev">← Voltar</button>';
+  html += '<button class="qbtn" data-action="next">OK <span class="qbtn-key">ENTER</span></button>';
+  html += '</div>';
+
+  html += '</div></div>';
+  return html;
+}
+
+function render(animClass){
+  const q = currentQuestion();
+  stage.innerHTML = renderQuestion(q, animClass);
+  pendingReaction = null; // consome a reação (só aparece uma vez)
+
+  // Mobile: o teclado da pergunta anterior empurra a tela. Garante a nova no topo
+  // e NÃO dá foco automático (senão o teclado abre sozinho e esconde a pergunta).
+  const isTouch = matchMedia('(hover:none)').matches;
+  if(isTouch){
+    window.scrollTo(0, 0);
+    const c = document.querySelector('.qcard'); if(c) c.scrollTop = 0;
+    return;
+  }
+
+  // Desktop: foco no input (em grupos, foca o primeiro campo)
+  setTimeout(() => {
+    const ans = document.querySelector('.qcard #ans');
+    if(!ans) return;
+    if(ans.tagName !== 'DIV'){ ans.focus({ preventScroll:true }); return; }
+    const first = ans.querySelector('input, textarea');
+    if(first) first.focus({ preventScroll:true });
+  }, 100);
+}
+
+function transition(direction, callback){
+  busy = true;
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); // fecha o teclado antes de trocar (mobile)
+  const card = document.querySelector('.qcard');
+  if(card){
+    card.classList.remove('in');
+    card.classList.add(direction === 'next' ? 'out-up' : 'out-down');
+  }
+  setTimeout(() => {
+    callback();
+    render('in');
+    busy = false;
+  }, 350);
+}
+
+// ============== CHECKPOINT (marco de bloco · #7) ==============
+function renderCheckpoint(n){
+  const names = {1:'Quem é você',2:'Sobre o negócio',3:'Atendimento',4:'Comercial avançado',5:'Concorrentes',6:'Tráfego e momento'};
+  const lines = {1:'Já temos você e a clínica.',2:'Negócio mapeado.',3:'Atendimento raio-x feito.',4:'Comercial destrinchado.',5:'Concorrência na mira.'};
+  let dots = '';
+  for(let i=1;i<=6;i++) dots += '<span class="qcheck-dot'+(i<=n?' on':'')+'"></span>';
+  let h = '<div class="qcard in qcard-center"><div class="qcard-inner qcheck">';
+  h += '<div class="qcheck-badge">Bloco '+ n +' de 6 concluído</div>';
+  h += '<div class="qcheck-title"><span class="qcheck-tick">✓</span> '+ names[n] +'</div>';
+  if(lines[n]) h += '<div class="qcheck-line">'+ lines[n] +'</div>';
+  h += '<div class="qcheck-dots">'+ dots +'</div>';
+  h += '</div></div>';
+  return h;
+}
+function showCheckpoint(blockDone, done){
+  busy = true;
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); // fecha o teclado (mobile)
+  const card = document.querySelector('.qcard');
+  if(card){ card.classList.remove('in'); card.classList.add('out-up'); }
+  setTimeout(() => {
+    stage.innerHTML = renderCheckpoint(blockDone);
+    setTimeout(() => {
+      const cc = document.querySelector('.qcard');
+      if(cc){ cc.classList.remove('in'); cc.classList.add('out-up'); }
+      setTimeout(() => { done(); busy = false; }, 350);
+    }, 1200);
+  }, 350);
+}
+
+// ============== VALIDAÇÃO ==============
+function validateCurrent(){
+  const q = currentQuestion();
+  if(!q.required){
+    const inp = document.querySelector('.qcard #ans');
+    if(inp && q.type === 'pair'){
+      state.answers[q.id] = { a: inp.querySelector('[data-pair="a"]').value.trim(), b: inp.querySelector('[data-pair="b"]').value.trim() };
+    } else if(inp && inp.tagName !== 'DIV'){
+      state.answers[q.id] = inp.value.trim();
+    }
+    localStorage.setItem('iscaV2Answers', JSON.stringify(state.answers));
+    return true;
+  }
+
+  const input = document.querySelector('.qcard #ans');
+  if(!input) return true;
+
+  if(q.type === 'radio'){
+    const selected = input.querySelector('.qopt.selected');
+    if(!selected){ flashInvalid(); return false; }
+    state.answers[q.id] = selected.dataset.value;
+  }
+  else if(q.type === 'pair'){
+    const a = input.querySelector('[data-pair="a"]').value.trim();
+    const b = input.querySelector('[data-pair="b"]').value.trim();
+    if(!a || !b){ flashInvalid(); return false; }
+    state.answers[q.id] = { a, b };
+  }
+  else if(q.type === 'group'){
+    let ok = true;
+    q.fields.forEach(f => {
+      const el = input.querySelector('[data-gid="'+ f.id +'"]');
+      if(f.kind === 'choice'){
+        const s = el && el.querySelector('.gopt.selected');
+        if(!s) ok = false; else state.answers[f.id] = s.dataset.value;
+        return;
+      }
+      const v = (el ? el.value : '').trim();
+      if(f.kind === 'numeric10'){
+        const nn = parseInt(v, 10);
+        if(isNaN(nn) || nn < 0 || nn > 10) ok = false;
+        else state.answers[f.id] = String(nn);
+      } else {
+        if(!v) ok = false; else state.answers[f.id] = v;
+      }
+    });
+    if(!ok){ flashInvalid(); return false; }
+  }
+  else if(q.type === 'numeric10'){
+    const v = parseInt(input.value, 10);
+    if(isNaN(v) || v < 0 || v > 10){ flashInvalid(); return false; }
+    state.answers[q.id] = String(v);
+  }
+  else {
+    const v = input.value.trim();
+    if(!v){ flashInvalid(); return false; }
+    if(q.type === 'email' && !/^\S+@\S+\.\S+$/.test(v)){ flashInvalid('E-mail inválido'); return false; }
+    state.answers[q.id] = v;
+  }
+
+  localStorage.setItem('iscaV2Answers', JSON.stringify(state.answers));
+  return true;
+}
+
+function flashInvalid(msg){
+  const card = document.querySelector('.qcard');
+  if(!card) return;
+  card.classList.add('invalid');
+  if(msg){
+    const errEl = card.querySelector('.qerror');
+    if(errEl) errEl.textContent = msg;
+  }
+  setTimeout(() => card.classList.remove('invalid'), 600);
+}
+
+// ============== ENVIO PRA GOOGLE SHEETS (parcial + completo) ==============
+// Monta o payload do lead com sessão, status e em qual pergunta ele está.
+function buildLeadPayload(status, event){
+  let lastQ = '';
+  try { const cq = currentQuestion(); lastQ = (cq && (cq._dnum || cq.num)) || ''; } catch(e){}
+  if(status === 'completo') lastQ = 'COMPLETO';
+  return {
+    ...state.answers,
+    sessionId: state.sessionId,
+    status: status,        // 'parcial' | 'completo'
+    event: event,          // 'progress' | 'abandon' | 'complete'
+    lastQuestion: lastQ,
+    source: 'isca-v2-pe',
+    userAgent: navigator.userAgent
+  };
+}
+
+// ===== Rastreio de FUNIL (anônimo) =====
+// Manda um ping leve (sem nome/contato) p/ medir até onde a pessoa vai, INCLUSIVE antes
+// do WhatsApp. Vai pra aba "Funil" do Sheets (separada da base de leads). Falha em silêncio.
+//   event 'open' = abriu a página · 'step' = avançou de pergunta
+function trackFunnel(event, reachedQ){
+  if(!SHEETS_ENDPOINT) return;
+  const reached = reachedQ || currentQuestion();
+  let ord = reached ? QUESTIONS.indexOf(reached) : 0;
+  if(ord < 0) ord = 0;
+  // só envia se avançou (dedup de reload/voltar); 'open' sempre marca presença
+  if(event !== 'open' && ord <= funnelSentOrd) return;
+  if(ord > funnelSentOrd) funnelSentOrd = ord;
+
+  const clean = (reached && reached.label) ? reached.label.replace(/<[^>]+>/g, '').trim().slice(0, 70) : '';
+  const label = event === 'open' ? 'Abriu a página'
+              : (reached && reached.type === 'outro') ? 'COMPLETO'
+              : ((reached && reached.num ? ('P' + reached.num + ' · ') : '') + clean);
+
+  const body = JSON.stringify({
+    kind: 'funnel',
+    sessionId: state.sessionId,
+    event: event,
+    ord: ord,
+    label: label,
+    source: 'isca-v2-pe'
+  });
+  try {
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(SHEETS_ENDPOINT, new Blob([body], { type:'text/plain;charset=utf-8' }));
+    } else {
+      fetch(SHEETS_ENDPOINT, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: body });
+    }
+  } catch(e){ /* silencioso */ }
+}
+
+// Salva o progresso atual mesmo que o lead abandone. useBeacon=true ao sair da aba.
+function savePartial(event, useBeacon){
+  if(!SHEETS_ENDPOINT) return;
+  if(!state.answers.q3) return;                       // só vira lead quando já tem WhatsApp
+  if(localStorage.getItem('iscaV2Submitted')) return;   // já completou, nada a fazer
+  const body = JSON.stringify(buildLeadPayload('parcial', event));
+  try {
+    if(useBeacon && navigator.sendBeacon){
+      navigator.sendBeacon(SHEETS_ENDPOINT, new Blob([body], { type:'text/plain;charset=utf-8' }));
+    } else {
+      fetch(SHEETS_ENDPOINT, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: body });
+    }
+  } catch(e){ /* silencioso */ }
+}
+
+// Quando o lead fecha/sai da aba no meio: grava onde parou.
+window.addEventListener('pagehide', function(){ savePartial('abandon', true); });
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState === 'hidden') savePartial('progress', true);
+});
+
+async function submitToSheets(){
+  if(!SHEETS_ENDPOINT){
+    console.warn('[isca] SHEETS_ENDPOINT vazio. Configure em apps-script.gs');
+    return { ok:false, reason:'no-endpoint' };
+  }
+  const body = JSON.stringify(buildLeadPayload('completo', 'complete'));
+  const blob = new Blob([body], { type:'text/plain;charset=utf-8' });
+  // CRITICO: este e o UNICO envio que dispara o aviso no grupo + a msg pro lead (event:'complete'
+  // -> apps-script.gs linha 194). Usa sendBeacon, igual savePartial/trackFunnel, pra SOBREVIVER ao
+  // congelamento da aba quando o lead volta pro app (Instagram/WhatsApp) logo apos a tela "Recebemos!".
+  // fetch comum morre nesse instante e o 'complete' nunca chega no servidor -> ninguem e avisado.
+  try {
+    if(navigator.sendBeacon && navigator.sendBeacon(SHEETS_ENDPOINT, blob)){
+      localStorage.setItem('iscaV2Submitted', new Date().toISOString());
+      return { ok:true, via:'beacon' };
+    }
+    // fallback: keepalive sobrevive ao unload bem melhor que o fetch comum
+    await fetch(SHEETS_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      keepalive: true,
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: body
+    });
+    localStorage.setItem('iscaV2Submitted', new Date().toISOString());
+    return { ok:true, via:'fetch-keepalive' };
+  } catch (err) {
+    console.error('[isca] falha no submit:', err);
+    return { ok:false, reason:'network', error:err };
+  }
+}
+
+// ============== NAVIGATION ==============
+function next(){
+  if(busy) return;
+  const q = currentQuestion();
+  if(q.type !== 'intro' && q.type !== 'outro'){
+    if(!validateCurrent()) return;
+  }
+  // captura o lead no instante em que o WhatsApp (q3) é preenchido
+  if(q.id === 'q3') savePartial('progress', false);
+  if(state.index >= visibleQuestions().length - 1) return;
+
+  // captura a reação contextual da pergunta que está saindo (#8/#10)
+  const rfn = REACTIONS[q.id];
+  pendingReaction = rfn ? rfn(state.answers) : null;
+
+  // Se a próxima é a tela 'outro' (Recebemos!), dispara o submit antes
+  const nextQ = visibleQuestions()[state.index + 1];
+  trackFunnel('step', nextQ);   // rastreia até onde a pessoa foi (topo de funil incluso)
+  if(nextQ && nextQ.type === 'outro' && !localStorage.getItem('iscaV2Submitted')){
+    submitToSheets();
+  }
+
+  // marco de bloco (#7): mudou o número do bloco e o próximo é pergunta real
+  const cur = blockNum(q), nxt = blockNum(nextQ);
+  if(cur && nxt && nxt !== cur && nextQ.type !== 'outro'){
+    savePartial('progress', false);   // grava progresso a cada bloco concluído
+    showCheckpoint(cur, () => { state.index++; render('in'); });
+    return;
+  }
+
+  transition('next', () => state.index++);
+}
+function prev(){
+  if(busy) return;
+  if(state.index <= 0) return;
+  pendingReaction = null;
+  transition('prev', () => state.index--);
+}
+
+// ============== EVENT HANDLERS ==============
+stage.addEventListener('click', (e) => {
+  const action = e.target.closest('[data-action]')?.dataset.action;
+  if(action === 'next'){ next(); return; }
+  if(action === 'prev'){ prev(); return; }
+
+  // botões dentro de tela agrupada: marca só o campo clicado, não avança
+  const gopt = e.target.closest('.gopt');
+  if(gopt){
+    gopt.parentElement.querySelectorAll('.gopt').forEach(o => o.classList.remove('selected'));
+    gopt.classList.add('selected');
+    return;
+  }
+
+  // chips (ex.: "Prefiro que vocês escolham"), preenche e, se marcado, avança (#13)
+  const chip = e.target.closest('.qchip');
+  if(chip){
+    const inp = document.querySelector('.qcard #ans');
+    if(inp && inp.tagName !== 'DIV') inp.value = chip.dataset.chipValue;
+    else if(inp){
+      const pa = inp.querySelector('[data-pair="a"]');
+      if(pa){ pa.value = chip.dataset.chipValue; inp.querySelector('[data-pair="b"]').value = ''; }
+    }
+    if(chip.dataset.chipAdvance === '1') next();
+    return;
+  }
+
+  const opt = e.target.closest('.qopt');
+  if(opt){
+    document.querySelectorAll('.qopt').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    // auto-avanço nas perguntas de escolha única (#1), o "← Voltar" segue disponível na próxima tela
+    const q = currentQuestion();
+    if(q && q.type === 'radio'){
+      setTimeout(() => { if(currentQuestion() === q) next(); }, 280);
+    }
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if(e.target.tagName === 'TEXTAREA' && e.key === 'Enter' && !e.shiftKey){
+    e.preventDefault(); next(); return;
+  }
+  if(e.target.tagName === 'TEXTAREA') return;
+
+  if(e.key === 'Enter'){
+    const cq = currentQuestion();
+    // em grupos, Enter pula pro próximo campo vazio antes de avançar
+    if(cq && cq.type === 'group' && e.target.dataset && e.target.dataset.gid){
+      const inputs = [].slice.call(document.querySelectorAll('.qcard #ans [data-gid]'));
+      const empty = inputs.find(i => !i.value.trim());
+      if(empty && empty !== e.target){ e.preventDefault(); empty.focus(); return; }
+    }
+    e.preventDefault(); next();
+  }
+  if(e.key === 'ArrowUp' && e.ctrlKey){ e.preventDefault(); prev(); }
+  if(e.key === 'Escape') prev();
+
+  // shortcuts numéricos pra radio
+  const q = currentQuestion();
+  if(q && q.type === 'radio' && /^[1-9]$/.test(e.key) && e.target.tagName !== 'INPUT'){
+    const opts = document.querySelectorAll('.qopt');
+    const idx = parseInt(e.key, 10) - 1;
+    if(opts[idx]){
+      opts[idx].click();
+    }
+  }
+});
+
+// ============== LOADING ==============
+(function loader(){
+  const bar = document.getElementById('loadingBar');
+  const pct = document.getElementById('loadPercent');
+  let p = 0;
+  const interval = setInterval(() => {
+    p += Math.random() * 15 + 5;
+    if(p >= 100) p = 100;
+    bar.style.width = p + '%';
+    pct.textContent = Math.floor(p) + '%';
+    if(p >= 100){
+      clearInterval(interval);
+      setTimeout(() => {
+        document.documentElement.classList.remove('boot-loading');
+        document.getElementById('loader').classList.add('done');
+        document.body.classList.add('loaded');
+        setTimeout(() => document.getElementById('loader').remove(), 800);
+        render();
+        trackFunnel('open');   // marca o topo do funil: alguém abriu a página
+      }, 300);
+    }
+  }, 70);
+})();
+
+// ============== CUSTOM CURSOR ==============
+(function cursor(){
+  if(matchMedia('(hover:none)').matches) return;
+  const cursor = document.getElementById('cursor');
+  const dot = document.getElementById('cursorDot');
+  let cx=0, cy=0, tx=0, ty=0;
+  window.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+  function tick(){
+    cx += (tx - cx) * 0.18;
+    cy += (ty - cy) * 0.18;
+    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
+    dot.style.transform = `translate(${tx}px, ${ty}px) translate(-50%,-50%)`;
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // hover detection com event delegation
+  document.body.addEventListener('mouseover', e => {
+    if(e.target.closest('button, .qopt, .qbtn, a, input, textarea, label')) cursor.classList.add('hover');
+  });
+  document.body.addEventListener('mouseout', e => {
+    if(e.target.closest('button, .qopt, .qbtn, a, input, textarea, label')) cursor.classList.remove('hover');
+  });
+})();
+</script>
+
+</body>
+</html>
