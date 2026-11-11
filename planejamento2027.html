@@ -1000,6 +1000,33 @@ async function submitToSheets(){
   }
 }
 
+// Queda de 11/11/2026 (o servidor pedia login e depois falhou do lado do Google): o form marcou
+// "enviado" sem o servidor receber, porque sendBeacon/no-cors nao le a resposta. Quem "enviou" nessa
+// janela reenvia sozinho ao reabrir o link, ate o servidor confirmar (aqui da pra ler a resposta:
+// POST text/plain e CORS simples). So a 1a tentativa leva event 'complete', que dispara os avisos.
+const QUEDA_INICIO = '2026-11-11T15:22:30.000Z', QUEDA_FIM = '2026-11-12T03:00:00.000Z';
+function precisaReenviar(){
+  const s = localStorage.getItem('iscaV2Submitted');
+  return !!(s && s > QUEDA_INICIO && s < QUEDA_FIM && state.answers.q3 && localStorage.getItem('iscaV2Reenvio') !== 'ok');
+}
+async function reenviarAteConfirmar(n){
+  const jaTentou = localStorage.getItem('iscaV2Reenvio');
+  localStorage.setItem('iscaV2Reenvio', '1');
+  const ac = new AbortController(), t = setTimeout(() => ac.abort(), 25000);
+  let ok = false;
+  try {
+    const r = await fetch(SHEETS_ENDPOINT, {
+      method:'POST', keepalive:true, signal:ac.signal,
+      headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+      body: JSON.stringify(buildLeadPayload('completo', jaTentou ? 'retry' : 'complete'))
+    });
+    ok = (await r.json()).ok === true;
+  } catch(e){ /* sem confirmacao: tenta de novo abaixo */ }
+  clearTimeout(t);
+  if(ok){ localStorage.setItem('iscaV2Reenvio', 'ok'); return; }
+  if(n < 8) setTimeout(() => reenviarAteConfirmar(n + 1), 8000);
+}
+
 // ============== NAVIGATION ==============
 function next(){
   if(busy) return;
@@ -1125,8 +1152,11 @@ document.addEventListener('keydown', (e) => {
         document.getElementById('loader').classList.add('done');
         document.body.classList.add('loaded');
         setTimeout(() => document.getElementById('loader').remove(), 800);
+        const reenviar = precisaReenviar();
+        if(reenviar) state.index = visibleQuestions().length - 1;   // cai direto no "Recebemos"
         render();
-        trackFunnel('open');   // marca o topo do funil: alguém abriu a página
+        trackFunnel(reenviar ? 'step' : 'open');   // marca o topo do funil: alguém abriu a página
+        if(reenviar) reenviarAteConfirmar(0);
       }, 300);
     }
   }, 70);
