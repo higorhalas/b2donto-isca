@@ -11,6 +11,19 @@
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "x23mfc68mo");
 </script>
+<!-- Meta Pixel (Pixel de BM - 01 - Higor Halas). Lead = chegou no "Recebemos!"; IniciouDiagnostico = preencheu o WhatsApp -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1343670886401420');
+fbq('track', 'PageView');
+</script>
 <title>Diagnóstico + Planejamento 2027 · B2donto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1053,7 +1066,12 @@ function next(){
     if(!validateCurrent()) return;
   }
   // captura o lead no instante em que o WhatsApp (q3) é preenchido
-  if(q.id === 'q3') savePartial('progress', false);
+  if(q.id === 'q3'){
+    savePartial('progress', false);
+    try {   // conta 1x por pessoa, mesmo se voltar e avancar de novo
+      if(window.fbq && !localStorage.getItem('iscaV2FbInicio')){ fbq('trackCustom', 'IniciouDiagnostico'); localStorage.setItem('iscaV2FbInicio', '1'); }
+    } catch(e){}
+  }
   if(state.index >= visibleQuestions().length - 1) return;
 
   // captura a reação contextual da pergunta que está saindo (#8/#10)
@@ -1065,6 +1083,7 @@ function next(){
   trackFunnel('step', nextQ);   // rastreia até onde a pessoa foi (topo de funil incluso)
   if(nextQ && nextQ.type === 'outro' && !localStorage.getItem('iscaV2Submitted')){
     submitToSheets();
+    try { if(window.fbq) fbq('track', 'Lead', { content_name: 'Planejamento 2027' }); } catch(e){}
   }
 
   // marco de bloco (#7): mudou o número do bloco e o próximo é pergunta real
