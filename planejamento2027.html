@@ -415,6 +415,8 @@ textarea.qinput{resize:none; min-height:80px; line-height:1.4}
 const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycby0Ei0P9QieVBITCl45yUq6TAoe4jqYgPvn60P7CLmEav4-Fko9zfvViszIIujF1lVktA/exec';
 
 // ============== DADOS DAS PERGUNTAS ==============
+// Saída das telas de digitar: grava o texto como resposta (conta como respondida) e avança.
+const PULAR = [{ label:'Prefiro não responder →', value:'Prefiro não responder', advance:true }];
 const QUESTIONS = [
   // INTRO
   { id:'intro', type:'intro', section:'Boas-vindas',
@@ -426,7 +428,7 @@ const QUESTIONS = [
   { id:'q1',  section:'1 · Quem é você',  num:1,  type:'text',  label:'Como você se chama?',         placeholder:'Seu nome', required:true },
   { id:'q2',  section:'1 · Quem é você',  num:2,  type:'text',  label:'Qual o nome da sua clínica ou consultório?', placeholder:'Ex.: Clínica Sorriso & Cia', required:true, star:true },
   { id:'q3',  section:'1 · Quem é você',  num:3,  type:'tel',   label:'Qual seu WhatsApp pra te enviarmos o diagnóstico?', placeholder:'(41) 9 9999-0000', hint:'Com DDD. Sem WhatsApp não conseguimos te entregar a análise.', required:true },
-  { id:'q4',  section:'1 · Quem é você',  num:4,  type:'email', label:'Seu melhor e-mail',           placeholder:'voce@clinica.com.br', required:true },
+  { id:'q4',  section:'1 · Quem é você',  num:4,  type:'email', label:'Seu melhor e-mail',           placeholder:'voce@clinica.com.br', chips:PULAR, required:true },
   { id:'q5',  section:'1 · Quem é você',  num:5,  type:'text',  label:'@ do Instagram da clínica',   placeholder:'@suaclinica', hint:'Obrigatório. É a <b>base da análise</b> de presença digital.', required:true, star:true },
   { id:'q8',  section:'1 · Quem é você',  num:8,  type:'text',  label:'Em que cidade ou região você atende?', placeholder:'Ex.: Curitiba, bairro Batel', hint:'Com ela a gente encontra seu Google e seu site, sem você precisar procurar link.', required:true, star:true },
 
@@ -436,9 +438,22 @@ const QUESTIONS = [
     hint:'Pensa no procedimento que dá mais ticket / margem.',
     fields:[
       { id:'q9',  kind:'choice', sub:'Procedimento que você MAIS quer vender', options:['Implantes','Lentes / facetas','Ortodontia / alinhadores','Prótese','Harmonização orofacial','Clínica geral','Outro'] },
-      { id:'q10', kind:'choice', sub:'Ticket médio desse procedimento', options:['Até R$ 3 mil','R$ 3 a 8 mil','R$ 8 a 15 mil','Acima de R$ 15 mil'] }
+      { id:'q10', kind:'choice', sub:'Ticket médio desse procedimento', options:['Menos de R$ 3 mil','R$ 3 a 4,9 mil','R$ 5 a 7,9 mil','R$ 8 a 11,9 mil','R$ 12 a 14,9 mil','R$ 15 mil ou mais'] }
     ], required:true, star:true },
-  { id:'q11', section:'2 · Sobre o negócio', num:11, type:'textarea', label:'Quais seus principais diferenciais em relação aos concorrentes?', placeholder:'O que você faz de verdade diferente?', hint:'<b>"Atendimento humanizado" não conta</b> como diferencial. Pensa: estrutura, formação, tecnologia, garantia, processo, especialização.', required:false, star:true },
+  { id:'g_preco', section:'2 · Sobre o negócio', num:34, type:'group', layout:'stack',
+    label:'Preço: como você cobra por esse tratamento',
+    hint:'É só tocar. Não existe resposta certa.',
+    fields:[
+      { id:'q34', kind:'choice', sub:'Como você define o preço', options:['Calculo custo + margem','Sigo o preço da região','Mesma tabela há mais de 1 ano','No feeling'] },
+      { id:'q35', kind:'choice', sub:'Quando o paciente pede desconto', options:['Não dou desconto','Tenho regra fixa (ex.: à vista)','Negocio caso a caso','Quase sempre acabo dando'] }
+    ], required:true },
+  { id:'g_pag', section:'2 · Sobre o negócio', num:36, type:'group', layout:'stack',
+    label:'Pagamento: o que você oferece ao paciente',
+    fields:[
+      { id:'q36', kind:'choice', sub:'Parcelamento no cartão', options:['Não parcelo','Até 6x','Até 12x','18x ou mais'] },
+      { id:'q37', kind:'choice', sub:'Paciente sem limite no cartão: qual a saída?', options:['Boleto ou carnê próprio','Financeira parceira','Só cartão, PIX ou dinheiro'] }
+    ], required:true },
+  { id:'q11', section:'2 · Sobre o negócio', num:11, type:'textarea', label:'Quais seus principais diferenciais em relação aos concorrentes?', placeholder:'O que você faz de verdade diferente?', hint:'<b>"Atendimento humanizado" não conta</b> como diferencial. Pensa: estrutura, formação, tecnologia, garantia, processo, especialização.', chips:PULAR, required:false, star:true },
   { id:'q32', section:'2 · Sobre o negócio', num:32, type:'radio', label:'Como é feito o conteúdo do seu Instagram hoje?',
     options:['Eu mesmo(a), no celular','Alguém da equipe ou social media, sem foto e vídeo profissional','Tenho produção profissional (foto e vídeo) recente','Quase não posto'], required:true },
 
@@ -446,9 +461,7 @@ const QUESTIONS = [
   { id:'q12', section:'3 · Atendimento', num:12, type:'radio', label:'Quem responde os contatos (WhatsApp / Direct)?',
     options:['Eu mesmo(a)','Secretária / recepção','Equipe comercial','Ninguém dedicado','IA de atendimento'], required:true },
   { id:'q13', section:'3 · Atendimento', num:13, type:'radio', label:'Em quanto tempo um contato é respondido, em média?',
-    options:['Menos de 4 minutos','Mais de 4 minutos','Algumas horas','No mesmo dia','Mais de 1 dia'], required:true },
-  { id:'q14', section:'3 · Atendimento', num:14, type:'radio', label:'Como o paciente agenda?',
-    options:['WhatsApp','Ligação','Site / online'], required:true },
+    options:['Menos de 4 minutos','De 4 minutos a 1 hora','Algumas horas','No mesmo dia','Mais de 1 dia'], required:true },
   { id:'g_taxas', section:'3 · Atendimento', num:15, type:'group', layout:'row',
     label:'Suas taxas hoje <span class="grad-text">(de 0 a 10)</span>',
     hint:'Agendamento: de cada 10 que falam com vocês, quantos agendam. Comparecimento: de cada 10 que agendam, quantos aparecem.',
@@ -503,15 +516,15 @@ const QUESTIONS = [
     label:'Faturamento: onde a {clinica} está e onde quer chegar em 2027',
     hint:'Fica entre nós, é o que dimensiona o seu plano de aceleração.',
     fields:[
-      { id:'q30', kind:'choice', sub:'Faturamento médio HOJE (por mês)', options:['Até R$ 30 mil','R$ 30 a 60 mil','R$ 60 a 100 mil','R$ 100 a 200 mil','Acima de R$ 200 mil'] },
-      { id:'q31', kind:'choice', sub:'Meta de faturamento por mês em 2027', options:['Até R$ 60 mil','R$ 60 a 100 mil','R$ 100 a 200 mil','R$ 200 a 500 mil','Acima de R$ 500 mil'] }
+      { id:'q30', kind:'choice', sub:'Faturamento médio HOJE (por mês)', options:['Menos de R$ 30 mil','R$ 30 a 59 mil','R$ 60 a 99 mil','R$ 100 a 199 mil','R$ 200 mil ou mais'] },
+      { id:'q31', kind:'choice', sub:'Meta de faturamento por mês em 2027', options:['Menos de R$ 60 mil','R$ 60 a 99 mil','R$ 100 a 199 mil','R$ 200 a 499 mil','R$ 500 mil ou mais'] }
     ], required:true, star:true },
   { id:'q28', section:'6 · Tráfego e momento', num:29, type:'radio', label:'Qual a prioridade nº 1 da clínica pra 2027?',
     hint:'Penúltima etapa, seu raio-X já está quase montado.',
     options:['Atrair pacientes','Vender procedimentos de maior valor','Organizar o atendimento','Escalar com previsibilidade','Abrir unidade ou ampliar a equipe'], required:true },
   { id:'q29', section:'6 · Tráfego e momento', num:30, type:'textarea', label:'Pra fechar, {nome}: descreva o <span class="grad-text">momento atual</span> da clínica',
     placeholder:'Como está sua clínica hoje? Quais as principais dores ou desafios?',
-    hint:'É essa resposta que transforma seus números num plano de ação, capricha. Em <b>poucas horas</b> seu raio-X cai no WhatsApp.', required:true },
+    hint:'É essa resposta que transforma seus números num plano de ação, capricha. Em <b>poucas horas</b> seu raio-X cai no WhatsApp.', chips:PULAR, required:true },
 
   // OUTRO
   { id:'outro', type:'outro', section:'Pronto',
@@ -876,7 +889,8 @@ function validateCurrent(){
   else {
     const v = input.value.trim();
     if(!v){ flashInvalid(); return false; }
-    if(q.type === 'email' && !/^\S+@\S+\.\S+$/.test(v)){ flashInvalid('E-mail inválido'); return false; }
+    const pulou = (q.chips || []).some(c => c.value === v);   // "Prefiro não responder" não passa pela checagem de e-mail
+    if(q.type === 'email' && !pulou && !/^\S+@\S+\.\S+$/.test(v)){ flashInvalid('E-mail inválido'); return false; }
     state.answers[q.id] = v;
   }
 
