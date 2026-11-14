@@ -11,7 +11,7 @@
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "x23mfc68mo");
 </script>
-<!-- Meta Pixel (dataset "Higor Halas", o mesmo que recebe QUALIFIED/BAD do CRM). Lead = chegou no "Recebemos!"; IniciouDiagnostico = preencheu o WhatsApp -->
+<!-- Meta Pixel (dataset "Higor Halas", o mesmo que recebe QUALIFIED/BAD do CRM). Lead = dispara na pagina obrigado-planejamento2027 (o form redireciona pra la ao enviar); IniciouDiagnostico = preencheu o WhatsApp -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -1082,8 +1082,10 @@ function next(){
   const nextQ = visibleQuestions()[state.index + 1];
   trackFunnel('step', nextQ);   // rastreia até onde a pessoa foi (topo de funil incluso)
   if(nextQ && nextQ.type === 'outro' && !localStorage.getItem('iscaV2Submitted')){
-    submitToSheets();
-    try { if(window.fbq) fbq('track', 'Lead', { content_name: 'Planejamento 2027' }); } catch(e){}
+    submitToSheets();   // o sendBeacon sai antes da troca de pagina
+    // Lead + conversao personalizada da campanha disparam na pagina de obrigado (URL propria)
+    location.replace('/obrigado-planejamento2027');
+    return;
   }
 
   // marco de bloco (#7): mudou o número do bloco e o próximo é pergunta real
