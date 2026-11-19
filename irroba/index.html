@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Análise do site Irroba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f6f4; --surface:#ffffff; --ink:#1c1b1a; --muted:#5f5b57; --line:#e6e3df; --code:#f1efec;
+  --crit:#b42318; --crit-bg:#fef3f2; --warn:#a15c07; --warn-bg:#fffaeb;
+  --idea:#175cd3; --idea-bg:#eff8ff; --ok:#067647; --ok-bg:#ecfdf3;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141312; --surface:#1d1c1a; --ink:#f2f0ed; --muted:#a8a29c; --line:#2f2d2a; --code:#26241f;
+    --crit:#f97066; --crit-bg:#3a1714; --warn:#fdb022; --warn-bg:#33240b;
+    --idea:#84caff; --idea-bg:#0f2740; --ok:#47cd89; --ok-bg:#0c2e1f;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141312; --surface:#1d1c1a; --ink:#f2f0ed; --muted:#a8a29c; --line:#2f2d2a; --code:#26241f;
+  --crit:#f97066; --crit-bg:#3a1714; --warn:#fdb022; --warn-bg:#33240b;
+  --idea:#84caff; --idea-bg:#0f2740; --ok:#47cd89; --ok-bg:#0c2e1f;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:40px 16px 80px}
+header.top{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:32px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:10px 0 12px;letter-spacing:-.02em}
+h2{font-size:24px;line-height:1.25;margin:56px 0 8px;letter-spacing:-.01em;scroll-margin-top:16px}
+h3{font-size:18px;line-height:1.35;margin:0}
+p{margin:0 0 12px}
+.lead{font-size:17px;color:var(--muted);max-width:680px}
+.meta{font-size:14px;color:var(--muted);margin-top:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.stat b{display:block;font-size:26px;line-height:1.1;letter-spacing:-.02em}
+.stat span{font-size:13px;color:var(--muted)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+nav.toc a{font-size:14px;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px}
+nav.toc a:hover{border-color:var(--muted)}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.sum{border-radius:12px;padding:16px;border:1px solid var(--line);background:var(--surface)}
+.sum b{font-size:30px;line-height:1;display:block;margin-bottom:6px}
+.sum.crit b{color:var(--crit)} .sum.warn b{color:var(--warn)} .sum.idea b{color:var(--idea)}
+.sum p{font-size:14px;color:var(--muted);margin:0}
+.sec-intro{color:var(--muted);margin-bottom:18px}
+article.f{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;padding:20px;margin:16px 0}
+article.f.crit{border-left-color:var(--crit)} article.f.warn{border-left-color:var(--warn)} article.f.idea{border-left-color:var(--idea)}
+.fhead{display:flex;gap:12px;align-items:flex-start}
+.num{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:700}
+.crit .num{background:var(--crit-bg);color:var(--crit)} .warn .num{background:var(--warn-bg);color:var(--warn)} .idea .num{background:var(--idea-bg);color:var(--idea)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:12px;font-weight:500;border-radius:999px;padding:2px 9px;border:1px solid var(--line);color:var(--muted)}
+dl{margin:16px 0 0;display:grid;grid-template-columns:150px 1fr;gap:10px 16px}
+dt{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+dd{margin:0}
+dd ul,dd ol{margin:0;padding-left:20px}
+dd li{margin-bottom:4px}
+code{font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);border-radius:5px;padding:1px 5px;overflow-wrap:anywhere}
+.shots{display:grid;gap:12px;margin-top:16px}
+.shots.two{grid-template-columns:1fr 1fr}
+.shots.phones{grid-template-columns:repeat(auto-fit,minmax(200px,260px));justify-content:start}
+figure{margin:0}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--code)}
+figcaption{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.45}
+.callout{border-radius:10px;padding:12px 14px;font-size:14px;margin-top:14px;background:var(--code)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tablewrap{overflow-x:auto;margin-top:12px;border-radius:12px}
+.tablewrap table{min-width:680px}
+td:first-child{white-space:nowrap}
+.good{color:var(--ok);font-weight:600} .bad{color:var(--crit);font-weight:600} .mid{color:var(--warn);font-weight:600}
+ul.ok{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px}
+ul.ok li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px 12px 40px;position:relative}
+ul.ok li::before{content:"";position:absolute;left:14px;top:17px;width:14px;height:8px;border-left:2.5px solid var(--ok);border-bottom:2.5px solid var(--ok);transform:rotate(-45deg)}
+.plain{padding-left:20px} .plain li{margin-bottom:8px}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media (max-width:640px){
+  .wrap{padding-top:28px}
+  .stats{grid-template-columns:1fr 1fr}
+  .summary{grid-template-columns:1fr}
+  dl{grid-template-columns:1fr;gap:4px}
+  dd{margin-bottom:10px}
+  .shots.two{grid-template-columns:1fr}
+  article.f{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Análise de botões e experiência · irroba.com.br</div>
+  <h1>O que funciona, o que quebra e o que dá pra melhorar no site novo</h1>
+  <p class="lead">Cada botão, link e formulário do site foi clicado e conferido, no computador e no celular. Abaixo, o que precisa de correção, em ordem de impacto, com print, causa provável e sugestão de ajuste.</p>
+  <div class="meta">Testado em 18/11/2026 · computador (tela de 1440 px) e celular (iPhone 13 simulado no Chrome)</div>
+  <div class="stats">
+    <div class="stat"><b>18</b><span>páginas, cada uma nas 2 telas</span></div>
+    <div class="stat"><b>367</b><span>botões clicados um a um</span></div>
+    <div class="stat"><b>86</b><span>links diferentes conferidos</span></div>
+    <div class="stat"><b>31</b><span>testes de formulário</span></div>
+  </div>
+  <nav class="toc" aria-label="Seções">
+    <a href="#resumo">Resumo</a>
+    <a href="#corrigir">Corrigir já</a>
+    <a href="#ajustar">Ajustar</a>
+    <a href="#velocidade">Velocidade e acessibilidade</a>
+    <a href="#sugestoes">Sugestões de experiência</a>
+    <a href="#bom">O que está bom</a>
+    <a href="#metodo">Como foi testado</a>
+  </nav>
+</header>
+
+<section id="resumo">
+  <h2 style="margin-top:0">Resumo</h2>
+  <p class="sec-intro">A base está bem feita: formulários validam, nada de imagem quebrada, nenhuma página escapa da tela no celular. Os problemas se concentram em dois lugares: o caminho de compra que sai do quiz da página inicial e as páginas que ainda estão em reforma.</p>
+  <div class="summary">
+    <div class="sum crit"><b>4</b><p><strong>Corrigir já.</strong> Travam a venda ou levam o visitante pra página de erro.</p></div>
+    <div class="sum warn"><b>8</b><p><strong>Ajustar.</strong> Atrapalham o uso, mas o visitante consegue seguir.</p></div>
+    <div class="sum idea"><b>7</b><p><strong>Sugestões.</strong> Melhorias de experiência e conversão.</p></div>
+  </div>
+  <div class="callout"><strong>Se der pra fazer só uma coisa hoje:</strong> o item 1. É uma linha de código e devolve o botão de compra pro visitante mais quente do site, quem acabou de responder o quiz.</div>
+</section>
+
+<section id="corrigir">
+  <h2>Corrigir já</h2>
+  <p class="sec-intro">Problemas que fazem o visitante perder o caminho da compra ou cair numa página de erro.</p>
+
+  <article class="f crit">
+    <div class="fhead"><div class="num">1</div><div>
+      <h3>A janela do setup aberta pela página inicial vem sem o botão "Quero este setup"</h3>
+      <div class="tags"><span class="tag">Página inicial</span><span class="tag">Computador e celular</span><span class="tag">Esforço: muito baixo</span></div>
+    </div></div>
+    <dl>
+      <dt>Onde</dt><dd>Página inicial, quiz "Vamos encontrar o plano ideal para sua loja", tela de resultado, link "Ver o que inclui".</dd>
+      <dt>O que acontece</dt><dd>A janela "Escolha seu setup" abre com preço e lista de itens, mas sem nenhum botão de ação. A mesma janela, aberta pela página Planos e preços, mostra o botão "Quero este setup", que leva pro WhatsApp do comercial.</dd>
+      <dt>Por que importa</dt><dd>Quem chega nessa janela pelo quiz é o visitante mais interessado do site: respondeu as perguntas, viu o plano e quis saber do setup pago. Justo ele fica sem o próximo passo.</dd>
+      <dt>Causa provável</dt><dd>Na página inicial, o botão dispara <code>$dispatch('open-setup', { key, keys, recommended })</code> sem o campo <code>whatsapp</code>. Em Planos e preços o mesmo evento envia <code>"whatsapp": "https://wa.me/551637069792"</code>. Como o botão da janela tem <code>x-show="whatsapp"</code>, na página inicial ele some. O link escondido ainda fica montado como <code>null?text=...</code>, que aponta pra uma página 404.</dd>
+      <dt>Como corrigir</dt><dd>Enviar o <code>whatsapp</code> no <code>$dispatch</code> da página inicial, igual à página de planos. Ou, melhor, deixar o número como valor padrão dentro do componente da janela, pra nenhum outro ponto de entrada repetir o problema.</dd>
+      <dt>Como reproduzir</dt><dd><ol><li>Abrir a página inicial e responder o quiz até o resultado.</li><li>Clicar em "Ver o que inclui", ao lado do setup.</li><li>Comparar com Planos e preços, link do setup em qualquer plano.</li></ol></dd>
+    </dl>
+    <div class="shots two">
+      <figure><img src="img/setup-2-janela-home.jpg" alt="Janela Escolha seu setup aberta pela página inicial, sem botão de ação" loading="lazy"><figcaption>Aberta pela página inicial: preço e itens, nenhum botão.</figcaption></figure>
+      <figure><img src="img/setup-3-janela-planos.jpg" alt="Mesma janela aberta por Planos e preços, com o botão Quero este setup" loading="lazy"><figcaption>Aberta por Planos e preços: com o botão "Quero este setup".</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="f crit">
+    <div class="fhead"><div class="num">2</div><div>
+      <h3>O plano e o setup escolhidos não aparecem no cadastro</h3>
+      <div class="tags"><span class="tag">Quiz da página inicial e Planos e preços</span><span class="tag">Esforço: médio</span></div>
+    </div></div>
+    <dl>
+      <dt>Onde</dt><dd>Resultado do quiz, botão "Quero minha loja pronta". Também os botões "Testar 7 dias grátis" dos planos.</dd>
+      <dt>O que acontece</dt><dd>O link sai com o setup no endereço (<code>?setup=taurus</code>), mas o servidor redireciona pra <code>/conta/cadastro/plano-bronze</code> e o setup se perde no caminho. A tela de cadastro não mostra qual plano nem qual setup a pessoa escolheu, e não tem campo escondido guardando essa escolha.</dd>
+      <dt>Por que importa</dt><dd>A pessoa escolheu "loja pronta, plano Bronze, setup Taurus de R$ 2.500" e cai num cadastro genérico, sem confirmação do que está levando. Se o setup não chega no sistema, o comercial também não fica sabendo que ela queria pagar por ele.</dd>
+      <dt>Ressalva</dt><dd>O cadastro não foi concluído no teste (pra não criar conta falsa). Pode ser que o plano fique guardado na sessão do servidor. Vale o time de desenvolvimento confirmar. Mesmo que esteja guardado, mostrar "Plano Bronze + Setup Taurus" no topo do cadastro dá segurança pra quem está comprando.</dd>
+      <dt>Como corrigir</dt><dd>Manter o parâmetro <code>setup</code> no redirecionamento, exibir o resumo da escolha no cadastro (com opção de trocar) e gravar plano e setup junto com o lead.</dd>
+    </dl>
+    <div class="shots two">
+      <figure><img src="img/setup-1-resultado-quiz.jpg" alt="Resultado do quiz com plano Bronze e setup Taurus selecionados" loading="lazy"><figcaption>Escolha feita no quiz: Bronze + setup Taurus.</figcaption></figure>
+      <figure><img src="img/cadastro.jpg" alt="Tela de cadastro sem menção ao plano ou ao setup" loading="lazy"><figcaption>Onde o visitante cai: nenhuma menção ao plano ou ao setup.</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="f crit">
+    <div class="fhead"><div class="num">3</div><div>
+      <h3>"Explorar recursos" leva pra uma página em reforma (erro 503)</h3>
+      <div class="tags"><span class="tag">Página inicial</span><span class="tag">Seja um parceiro</span><span class="tag">Esforço: baixo</span></div>
+    </div></div>
+    <dl>
+      <dt>Onde</dt><dd>Página inicial, seção "Tudo o que sua operação precisa", botão "Explorar recursos" (vai pra <code>/mais-recursos</code>). O link de integrações da página Seja um parceiro (<code>/integracoes</code>) tem o mesmo problema.</dd>
+      <dt>O que acontece</dt><dd>As duas páginas respondem com código 503 e mostram "Estamos renovando esta página". A página de reforma em si é boa (oferece caminhos alternativos), mas é o botão principal de uma seção da página inicial levando a um beco.</dd>
+      <dt>Por que importa</dt><dd>O 503 é o código certo pra uma manutenção de horas. Se a reforma durar semanas, o Google entende que a página saiu do ar e tira ela das buscas.</dd>
+      <dt>Como corrigir</dt><dd>Enquanto a página não fica pronta, apontar "Explorar recursos" pra outro destino (Planos e preços, por exemplo) ou esconder o botão. Se a reforma for longa, trocar o 503 por um redirecionamento temporário (302).</dd>
+    </dl>
+    <div class="shots"><figure><img src="img/mais-recursos.jpg" alt="Página Estamos renovando esta página" loading="lazy"><figcaption>Destino do botão "Explorar recursos".</figcaption></figure></div>
+  </article>
+
+  <article class="f crit">
+    <div class="fhead"><div class="num">4</div><div>
+      <h3>7 ferramentas marcadas "Em renovação" continuam clicáveis e levam pro erro 503</h3>
+      <div class="tags"><span class="tag">Ferramentas</span><span class="tag">Esforço: baixo</span></div>
+    </div></div>
+    <dl>
+      <dt>Onde</dt><dd>Página Ferramentas. Só o Sorteador de números funciona. As outras 7 têm o selo "Em renovação", mas mantêm a seta de ação ativa.</dd>
+      <dt>O que acontece</dt><dd>O selo avisa, mas o card se comporta como se funcionasse. Quem clica cai na página "Estamos renovando".</dd>
+      <dt>Como corrigir</dt><dd>Desativar a seta nos cards em renovação (sem link, visual apagado) ou trocar por "Me avise quando voltar", com captura de e-mail. A segunda opção transforma um beco sem saída em lead.</dd>
+    </dl>
+    <div class="shots"><figure><img src="img/ferramentas.jpg" alt="Página de ferramentas com cards marcados Em renovação e seta ativa" loading="lazy"><figcaption>Selo "Em renovação" com a seta de ação ainda ativa.</figcaption></figure></div>
+  </article>
+</section>
+
+<section id="ajustar">
+  <h2>Ajustar</h2>
+  <p class="sec-intro">Não impedem o visitante de seguir, mas criam atrito ou passam impressão de descuido.</p>
+
+  <article class="f warn">
+    <div class="fhead"><div class="num">5</div><div>
+      <h3>O botão flutuante "Suporte" cobre outros botões</h3>
+      <div class="tags"><span class="tag">Todas as páginas</span><span class="tag">Celular e computador</span></div>
+    </div></div>
+    <dl>
+      <dt>O que foi medido</dt><dd><ul>
+        <li>No computador ele cobre o botão "Conhecer planos" da página inicial, 76% do link "Sobre a empresa" e 56% de "Preferências de privacidade", no rodapé.</li>
+        <li>No celular cobre até 31% de outros botões conforme a pessoa rola.</li>
+        <li>No formulário de Migre sua loja, no celular, o selo do reCAPTCHA (esquerda) e o Suporte (direita) cobrem os campos de e-mail e WhatsApp ao mesmo tempo.</li>
+      </ul>Nada fica bloqueado de vez: rolando um pouco, dá pra clicar. Mas o visitante precisa "caçar" o botão.</dd>
+      <dt>Como corrigir</dt><dd><ul>
+        <li>Dar um espaço no fim da página do tamanho do botão, pra o rodapé nunca ficar embaixo dele.</li>
+        <li>No celular, reduzir o Suporte a só o ícone.</li>
+        <li>Esconder o selo do reCAPTCHA. O Google permite, desde que o aviso de uso do reCAPTCHA apareça em texto perto do formulário.</li>
+      </ul></dd>
+    </dl>
+    <div class="shots"><figure><img src="img/suporte-desktop.jpg" alt="Botão Suporte sobre o botão Conhecer planos" loading="lazy"><figcaption>Computador: "Suporte" em cima de "Conhecer planos".</figcaption></figure></div>
+    <div class="shots phones">
+      <figure><img src="img/suporte-celular.jpg" alt="Botão Suporte sobre os cards no celular" loading="lazy"><figcaption>Celular: "Suporte" sobre os cards e o botão da seção.</figcaption></figure>
+      <figure><img src="img/migre-celular-form.jpg" alt="Selo do reCAPTCHA e botão Suporte sobre o formulário" loading="lazy"><figcaption>Migre sua loja: reCAPTCHA e Suporte sobre os campos.</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="f warn">
+    <div class="fhead"><div class="num">6</div><div>
+      <h3>Números no formato americano e rótulos crus do sistema</h3>
+      <div class="tags"><span class="tag">Planos e preços</span><span class="tag">Black Friday</span></div>
+    </div></div>
+    <dl>
+      <dt>Planos e preços</dt><dd><code>R$0.01 por excedente</code>, <code>1.75%</code>, <code>1.50%</code>, <code>1.25%</code>, <code>R$ 99.00</code> e <code>3000</code> sem ponto de milhar (enquanto a linha de cima mostra <code>15.000</code>).</dd>
+      <dt>Black Friday</dt><dd>Percentuais com ponto (<code>20.8%</code>, <code>62.9%</code>) e nomes vindos direto do sistema: <code>Shopee_payment</code>, <code>Mercadopago</code>, <code>JT EXPRESS</code>, <code>Sao Paulo</code> e <code>Parana</code> sem acento. Nos gráficos de pagamento e entrega, "Outros" fica com 49,5% e 56,8%: metade do dado não diz nada.</dd>
+      <dt>Por que importa</dt><dd>Preço é onde o visitante mais presta atenção. "R$0.01" e "1.75%" parecem erro de digitação e tiram confiança justo na página de decisão.</dd>
+      <dt>Como corrigir</dt><dd>Formatar todos os números com o padrão brasileiro (<code>Intl.NumberFormat('pt-BR')</code> no JavaScript ou o equivalente no servidor) e criar uma lista de nomes de exibição pros rótulos ("Shopee Pay", "Mercado Pago", "J&amp;T Express", "São Paulo"). No Black Friday, mostrar mais fatias ou explicar o que entra em "Outros".</dd>
+    </dl>
+    <div class="shots two">
+      <figure><img src="img/planos-tabela.jpg" alt="Tabela de planos com R$0.01 e 1.75%" loading="lazy"><figcaption>Planos e preços: "R$0.01", "1.75%", "3000".</figcaption></figure>
+      <figure><img src="img/blackfriday-rotulos.jpg" alt="Painel de Black Friday com Shopee_payment e Outros 49.5%" loading="lazy"><figcaption>Black Friday: "Shopee_payment", "20.8%", "Outros 49.5%".</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="f warn">
+    <div class="fhead"><div class="num">7</div><div>
+      <h3>Alvos de toque pequenos demais no celular</h3>
+      <div class="tags"><span class="tag">Planos e preços</span><span class="tag">Rodapé</span><span class="tag">Celular</span></div>
+    </div></div>
+    <dl>
+      <dt>O que foi medido</dt><dd>17 ícones de informação (o "i" ao lado de "Integração marketplaces e hubs", "Super APP Irroba" etc.) com 10 x 10 px. Ícones de redes sociais entre 9 e 20 px. Links de texto soltos com 15 px de altura.</dd>
+      <dt>Referência</dt><dd>A recomendação de acessibilidade (WCAG 2.2) é no mínimo 24 x 24 px. Apple e Google recomendam 44 a 48 px. Abaixo disso, a pessoa erra o toque ou nem percebe que dá pra tocar.</dd>
+      <dt>Como corrigir</dt><dd>Aumentar a área clicável sem mudar o desenho: o ícone continua pequeno, mas ganha um espaço invisível em volta (padding) até 44 px.</dd>
+    </dl>
+    <div class="shots phones"><figure><img src="img/planos-celular-icones.jpg" alt="Ícones de informação pequenos nos cards de planos" loading="lazy"><figcaption>Os ícones "i" têm 10 x 10 px.</figcaption></figure></div>
+  </article>
+
+  <article class="f warn">
+    <div class="fhead"><div class="num">8</div><div>
+      <h3>No celular, a tabela comparativa mostra só o plano Bronze</h3>
+      <div class="tags"><span class="tag">Planos e preços</span><span class="tag">Celular</span></div>
+    </div></div>
+    <dl>
+      <dt>O que acontece</dt><dd>Na seção que compara os planos, o celular exibe só a coluna do Bronze. Os outros planos não aparecem e nada indica como chegar até eles: sem seta, sem sombra na borda, sem aviso de "arraste".</dd>
+      <dt>Por que importa</dt><dd>Comparar é o motivo da tabela existir. No celular, ela vira uma lista do plano mais barato.</dd>
+      <dt>Como corrigir</dt><dd>Um seletor no topo pra escolher 2 planos e ver lado a lado (ex.: "Bronze x Gold"), ou fixar a coluna "Funcionalidade" e mostrar uma dica visual de arrastar com parte do próximo plano aparecendo.</dd>
+    </dl>
+    <div class="shots phones"><figure><img src="img/planos-celular-tabela.jpg" alt="Tabela comparativa no celular mostrando só Bronze" loading="lazy"><figcaption>Celular: só a coluna Bronze, sem pista de que existem outras.</figcaption></figure></div>
+  </article>
+
+  <article class="f warn">
+    <div class="fhead"><div class="num">9</div><div>
+      <h3>"Criar loja grátis" não aparece no cabeçalho do celular</h3>
+      <div class="tags"><span class="tag">Todas as páginas</span><span class="tag">Celular</span></div>
+    </div></div>
+    <dl>
+      <dt>O que acontece</dt><dd>No computador, o botão principal do site fica sempre visível no cabeçalho. No celular, o cabeçalho tem logo, seletor Prime/Basic e menu, mas não o botão de criar loja. Dá pra ver no print do item 5.</dd>
+      <dt>Como corrigir</dt><dd>Um botão compacto "Criar loja" ao lado do menu. Se faltar espaço, o seletor Prime/Basic pode ir pra dentro do menu, já que ele é menos usado que a ação principal.</dd>
+    </dl>
+  </article>
+
+  <article class="f warn">
+    <div class="fhead"><div class="num">10</div><div>
+      <h3>Formulário de Migre sua loja usa o texto de exemplo como rótulo</h3>
+      <div class="tags"><span class="tag">Migre sua loja</span></div>
+    </div></div>
+    <dl>
+      <dt>O que acontece</dt><dd>Os campos só têm o texto cinza de exemplo ("Digite seu nome e sobrenome"), que some quando a pessoa começa a digitar. Esse cinza sobre o fundo escuro tem contraste baixo.</dd>
+      <dt>Como corrigir</dt><dd>Rótulo fixo acima de cada campo, como já é feito na tela de cadastro (que está boa nesse ponto).</dd>
+    </dl>
+  </article>
+
+  <article class="f warn">
+    <div class="fhead"><div class="num">11</div><div>
+      <h3>Dicas "i" não abrem pelo teclado, e há erros de JavaScript no console</h3>
+      <div class="tags"><span class="tag">Planos e preços</span><span class="tag">Várias páginas</span></div>
+    </div></div>
+    <dl>
+      <dt>Dicas</dt><dd>As explicações dos ícones "i" só aparecem passando o mouse. Quem navega pelo teclado (Tab) chega no ícone e a dica não abre. Correção: abrir também no foco e no toque.</dd>
+      <dt>Erros</dt><dd>Aparece de vez em quando o erro <code>u is not a function</code> no console do navegador. No teste não teve efeito visível, mas vale o time de desenvolvimento olhar antes que vire um bug de verdade.</dd>
+    </dl>
+  </article>
+
+  <article class="f warn">
+    <div class="fhead"><div class="num">12</div><div>
+      <h3>Acabamento: círculo vazio no canto do cabeçalho</h3>
+      <div class="tags"><span class="tag">Computador</span><span class="tag">Prioridade baixa</span></div>
+    </div></div>
+    <dl>
+      <dt>O que acontece</dt><dd>Quando a página é rolada, sobra um círculo vazio à direita do botão "Criar loja grátis". Parece ser a curva do desenho do cabeçalho do topo da página que continua aparecendo no cabeçalho rolado. Aparece em Planos e preços e no Black Friday, por exemplo.</dd>
+      <dt>Como corrigir</dt><dd>Confirmar com o time de design se é intencional. Se não for, esconder essa forma no estado rolado.</dd>
+    </dl>
+    <div class="shots"><figure style="max-width:560px"><img src="img/cabecalho-circulo.jpg" alt="Cabeçalho no topo e cabeçalho rolado com círculo vazio à direita" loading="lazy"><figcaption>Em cima, o cabeçalho no topo da página. Embaixo, o cabeçalho rolado, com o círculo vazio à direita.</figcaption></figure></div>
+  </article>
+</section>
+
+<section id="velocidade">
+  <h2>Velocidade e acessibilidade</h2>
+  <p class="sec-intro">Medido no celular simulado com 4G lento e processador 4 vezes mais lento, parecido com o teste de celular do Google. Duas rodadas por página.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Página</th><th>Conteúdo principal aparece</th><th>Celular ocupado depois</th><th>Página "pula"?</th><th>Peso total</th><th>Textos com contraste baixo</th></tr></thead>
+    <tbody>
+      <tr><td>Início</td><td class="n good">1,5 s</td><td class="n bad">0,9 a 1,3 s</td><td class="n good">não</td><td class="n">1,7 MB</td><td class="n">24 no celular, 16 no computador</td></tr>
+      <tr><td>Planos e preços</td><td class="n good">1,2 s</td><td class="n bad">0,9 s</td><td class="n good">não</td><td class="n">1,3 MB</td><td class="n">75 no celular, 92 no computador</td></tr>
+      <tr><td>Black Friday</td><td class="n good">1,5 s</td><td class="n bad">0,5 a 1,2 s</td><td class="n good">não</td><td class="n">1,4 MB</td><td class="n">32 no celular, 30 no computador</td></tr>
+      <tr><td>Migre sua loja</td><td class="n good">1,5 s</td><td class="n bad">1,0 s</td><td class="n good">não</td><td class="n">2,1 MB</td><td class="n">73 no celular, 47 no computador</td></tr>
+      <tr><td>Prime</td><td class="n good">1,6 s</td><td class="n bad">1,0 a 1,2 s</td><td class="n good">não</td><td class="n">2,2 MB</td><td class="n">7 no celular, 7 no computador</td></tr>
+      <tr><td>Criar loja</td><td class="n bad">2,6 s</td><td class="n bad">1,4 a 1,8 s</td><td class="n good">não</td><td class="n">2,1 MB</td><td class="n">5 no celular, 5 no computador</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:16px"><strong>Como ler:</strong></p>
+  <ul class="plain">
+    <li><span class="good">Aparece rápido.</span> Em quase todas as páginas o conteúdo principal surge em 1,2 a 1,6 s. A meta do Google é até 2,5 s.</li>
+    <li><span class="bad">A tela de cadastro é a mais lenta.</span> Leva 2,3 a 2,6 s pra aparecer e fica até 1,8 s ocupada depois. É justo a página onde a venda acontece, então é a primeira a investigar. Ela é a que carrega mais JavaScript (1,7 MB), incluindo o reCAPTCHA.</li>
+    <li><span class="good">Não pula.</span> Nada muda de lugar enquanto carrega. Ótimo.</li>
+    <li><span class="bad">Fica ocupado.</span> Depois de aparecer, o celular passa de meio segundo a mais de um segundo processando JavaScript (a meta é até 0,2 s). Nesse intervalo, um toque pode demorar a responder. Cada página carrega de 1,1 a 1,7 MB de JavaScript, somando o código do site (jQuery e Alpine) e as ferramentas de marketing (Google Tag Manager, Hotjar, RD Station). Vale revisar quais etiquetas de marketing ainda são usadas e carregar as que ficarem só depois que a página estiver pronta.</li>
+    <li><span class="mid">Contraste.</span> Vários textos de apoio em cinza claro ficam abaixo do mínimo de leitura (4,5 pra 1). Exemplos: passos inativos do quiz (<code>#b7b3b3</code> no branco, 2,1 pra 1), texto rosa no vermelho do quiz (2,7 pra 1), itens do cabeçalho (3,8 pra 1), descrições nos cards de planos (3,9 pra 1) e o cabeçalho do Black Friday no celular (1,9 pra 1). Escurecer o cinza de apoio pra algo como <code>#6b6565</code> resolve a maioria (5,7 pra 1 no branco).</li>
+    <li><span class="mid">Teclado.</span> Na página inicial há áreas com rolagem lateral que não recebem foco pelo teclado, então quem navega com Tab não consegue rolar o conteúdo delas.</li>
+  </ul>
+  <div class="callout">Esses números são de laboratório, não do Lighthouse oficial. Pra número oficial, rodar o PageSpeed Insights do Google (no dia do teste ele atingiu o limite de uso).</div>
+</section>
+
+<section id="sugestoes">
+  <h2>Sugestões de experiência</h2>
+  <p class="sec-intro">Não são erros. São pontos onde, na nossa leitura, o site pode converter mais ou confundir menos.</p>
+
+  <article class="f idea">
+    <div class="fhead"><div class="num">A</div><div><h3>Elementos com cara de botão que não clicam</h3></div></div>
+    <p style="margin-top:12px">O caminho "Começar › Profissionalizar › Crescer › Escalar › Prime" da abertura e os cards "Marketplaces", "Pagamentos", "Logística" parecem clicáveis, mas não fazem nada. Ou viram links (cada etapa levando ao plano certo, cada card à explicação do recurso), ou perdem a aparência de botão.</p>
+  </article>
+
+  <article class="f idea">
+    <div class="fhead"><div class="num">B</div><div><h3>Cadastro pede endereço no teste grátis</h3></div></div>
+    <p style="margin-top:12px">A segunda etapa do cadastro pede CEP e endereço pra um teste de 7 dias sem cartão. Cada campo a mais nessa hora derruba a conversão. Dá pra pedir o endereço depois, quando a pessoa for configurar o frete da loja.</p>
+  </article>
+
+  <article class="f idea">
+    <div class="fhead"><div class="num">C</div><div><h3>Seletor Prime / Basic no cabeçalho</h3></div></div>
+    <p style="margin-top:12px">Os nomes não dizem o que muda, e em várias páginas (Planos e preços, Ferramentas, Mais recursos) nenhum dos dois aparece selecionado. Um visitante novo não sabe em qual lado do site está. Sugestão: nomes que falem do perfil ("Para começar" e "Para grandes operações") ou uma dica curta ao passar o mouse.</p>
+  </article>
+
+  <article class="f idea">
+    <div class="fhead"><div class="num">D</div><div><h3>A página de Black Friday troca o menu pelo do Prime</h3></div></div>
+    <p style="margin-top:12px">Na Black Friday o cabeçalho passa a mostrar "Por que Prime, Soluções, Migração..." e o botão vira "Falar com especialista". Se a página é pra todos os lojistas, quem não é perfil Prime perde o menu de sempre. Vale confirmar se é intencional.</p>
+  </article>
+
+  <article class="f idea">
+    <div class="fhead"><div class="num">E</div><div><h3>Cases sem números</h3></div></div>
+    <p style="margin-top:12px">A seção "Cresceram com a Irroba" mostra as lojas, mas não o resultado. Um número por case ("vendas 3x maiores em 12 meses", "migrou em 15 dias") é o que transforma vitrine em prova.</p>
+  </article>
+
+  <article class="f idea">
+    <div class="fhead"><div class="num">F</div><div><h3>Depoimento longo demais</h3></div></div>
+    <p style="margin-top:12px">O depoimento em destaque é um bloco grande de texto. Cortar em duas ou três linhas com "ler mais" mantém a força sem cansar quem está rolando.</p>
+  </article>
+
+  <article class="f idea">
+    <div class="fhead"><div class="num">G</div><div><h3>Seção de serviços com rolagem longa</h3></div></div>
+    <p style="margin-top:12px">A seção animada de serviços exige bastante rolagem, principalmente no celular, até liberar o resto da página. Encurtar a animação ou permitir pular evita que o visitante desista antes de chegar nos planos.</p>
+  </article>
+</section>
+
+<section id="bom">
+  <h2>O que está bom</h2>
+  <p class="sec-intro">Vale registrar, até pra não mexer no que funciona.</p>
+  <ul class="ok">
+    <li>Todos os formulários barram campo vazio e formato inválido antes de enviar.</li>
+    <li>Quem navega pelo teclado vê onde está: o foco é visível nos botões e links.</li>
+    <li>Nenhuma imagem quebrada, e todas têm texto alternativo pra leitor de tela.</li>
+    <li>Nenhuma página escapa da largura da tela no celular.</li>
+    <li>Título, descrição, um título principal por página e idioma definido: base certa pro Google.</li>
+    <li>O quiz de plano ideal na página inicial é uma ótima ideia de conversão. Só falta o botão do item 1.</li>
+    <li>A tabela comparativa no computador é clara, e as perguntas frequentes avisam o leitor de tela quando abrem e fecham.</li>
+    <li>A página "Estamos renovando" oferece caminhos alternativos, em vez de um erro seco.</li>
+    <li>A página não "pula" enquanto carrega.</li>
+  </ul>
+</section>
+
+<section id="metodo">
+  <h2>Como foi testado</h2>
+  <ul class="plain">
+    <li><strong>Navegador automatizado</strong> (Chrome) em duas telas: computador de 1440 x 900 px e celular iPhone 13 simulado.</li>
+    <li><strong>Páginas:</strong> início, Planos e preços, Prime, Black Friday, Migre sua loja, Ferramentas, Sorteador de números, Mais recursos, Seja um parceiro, Sobre a empresa, Carreiras, Fale conosco, Segunda via, Mapa do site, Termos de uso, Política de privacidade, Criar loja e Login.</li>
+    <li><strong>Botões:</strong> cada um foi clicado e o efeito registrado (abriu algo, rolou a página, navegou ou não fez nada). Os casos suspeitos foram conferidos à mão.</li>
+    <li><strong>Links:</strong> cada endereço diferente foi aberto e o código de resposta conferido, incluindo redirecionamentos e links de WhatsApp.</li>
+    <li><strong>Formulários:</strong> testados vazios e com dados inválidos, com o envio bloqueado. Nada chegou aos servidores da Irroba: nenhuma conta criada, nenhum contato enviado.</li>
+  </ul>
+  <p style="margin-top:16px"><strong>O que ficou de fora:</strong></p>
+  <ul class="plain">
+    <li>Central de ajuda (ajuda.irroba.com.br) e LinkedIn bloqueiam navegadores automatizados. Isso não quer dizer que estejam quebrados, só que não deu pra conferir por aqui.</li>
+    <li>O que acontece depois do cadastro, dentro da plataforma.</li>
+    <li>Safari e Android de verdade. O celular foi simulado no Chrome.</li>
+  </ul>
+</section>
+
+<footer>Análise feita em 18/11/2026. O site muda rápido: vale reconferir cada item antes de corrigir.</footer>
+
+</div>
+</body>
+</html>
